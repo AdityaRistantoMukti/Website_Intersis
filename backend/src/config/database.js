@@ -22,7 +22,7 @@ pool.getConnection()
   })
   .catch(err => {
     console.error('[DB] Connection failed:', err.message);
-    process.exit(1);
+    // Di lingkungan serverless (seperti Vercel), ulangi log tanpa mematikan proses
   });
 
 module.exports = pool;
