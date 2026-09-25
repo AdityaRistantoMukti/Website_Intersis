@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "isa-career-hrd-collection-2026",
+		"name": "ISA Career & HRD REST API",
+		"description": "Collection resmi REST API ISA Career & HRD Website — PT. Intersis Sejahtera Abadi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "🌐 Public Endpoints (No Auth)",
+			"item": [
+				{
+					"name": "GET Company Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/company",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "company"]
+						}
+					}
+				},
+				{
+					"name": "GET Core Values",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/core-values",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "core-values"]
+						}
+					}
+				},
+				{
+					"name": "GET Contact Recruitment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/contact",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "contact"]
+						}
+					}
+				},
+				{
+					"name": "GET Job Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/job-categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "job-categories"]
+						}
+					}
+				},
+				{
+					"name": "GET Job Vacancies (Published & Filtered)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/jobs?page=1&limit=5&q=Software",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "jobs"],
+							"query": [
+								{ "key": "page", "value": "1" },
+								{ "key": "limit", "value": "5" },
+								{ "key": "q", "value": "Software" }
+							]
+						}
+					}
+				},
+				{
+					"name": "GET Job Vacancy Detail by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/jobs/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "jobs", "1"]
+						}
+					}
+				},
+				{
+					"name": "GET Gallery (Life at ISA)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/gallery?page=1&limit=6",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "gallery"],
+							"query": [
+								{ "key": "page", "value": "1" },
+								{ "key": "limit", "value": "6" }
+							]
+						}
+					}
+				},
+				{
+					"name": "GET Benefits & Perks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/benefits",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "benefits"]
+						}
+					}
+				},
+				{
+					"name": "GET Programs (MT, Internship, OJT)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/programs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "programs"]
+						}
+					}
+				},
+				{
+					"name": "GET Program Detail by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/programs/management-trainee-2026",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "programs", "management-trainee-2026"]
+						}
+					}
+				},
+				{
+					"name": "GET FAQs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/public/faqs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "public", "faqs"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🔑 Auth & Profile",
+			"item": [
+				{
+					"name": "POST Login Administrator",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.success && jsonData.data && jsonData.data.token) {",
+									"    pm.environment.set('token', jsonData.data.token);",
+									"    console.log('Token JWT otomatis tersimpan di environment!');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"identity\": \"admin@isa.co.id\",\n  \"password\": \"Admin@ISA2026\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "GET Current User Profile (Me)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/admin/auth/me",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "auth", "me"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👥 User Management (Admin / HRD)",
+			"item": [
+				{
+					"name": "GET Users List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/admin/users?page=1&limit=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "users"]
+						}
+					}
+				},
+				{
+					"name": "POST Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+						},
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rian Pratama\",\n  \"username\": \"rian_hrd\",\n  \"email\": \"rian@isa.co.id\",\n  \"password\": \"Rian@ISA2026\",\n  \"role\": \"staff\",\n  \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "users"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "💼 Job Vacancies CRUD (Admin / HRD / Staff)",
+			"item": [
+				{
+					"name": "GET Admin Job Vacancies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/admin/jobs?page=1&limit=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "jobs"]
+						}
+					}
+				},
+				{
+					"name": "POST Create Job Vacancy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+						},
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category_id\": 1,\n  \"title\": \"DevOps & Infrastructure Engineer\",\n  \"location\": \"Gading Serpong, Tangerang\",\n  \"employment_type\": \"Full Time\",\n  \"description\": \"Bertanggung jawab atas CI/CD pipeline dan infrastruktur cloud\",\n  \"responsibilities\": \"• Mengelola server AWS & Docker\\n• Monitoring uptime 99.9%\",\n  \"requirements\": \"• Pengalaman Docker & Linux min 2 tahun\",\n  \"form_url\": \"https://forms.gle/isaDevOps2026\",\n  \"status\": \"published\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/jobs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "jobs"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📜 Activity Logs (Audit Trail)",
+			"item": [
+				{
+					"name": "GET Activity Logs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/admin/logs?page=1&limit=15",
+							"host": ["{{base_url}}"],
+							"path": ["api", "admin", "logs"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
