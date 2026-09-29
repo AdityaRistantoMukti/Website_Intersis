@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useCompany, useCoreValues } from '../../hooks/useApi';
 import { useCountUp } from '../../hooks/useScrollAnimation';
 import AboutProductsSection from '../../components/home/AboutProductsSection';
-import ProductSchematic from '../../components/home/ProductSchematic';
 import CompanyLifecycleSection from '../../components/home/CompanyLifecycleSection';
 import GlobalFootprintSection from '../../components/home/GlobalFootprintSection';
 import InteractiveHoverButton from '../../components/ui/InteractiveHoverButton';
