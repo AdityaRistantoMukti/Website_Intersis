@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect, useRef } from 'react';
 import { useCompany, useCoreValues } from '../../hooks/useApi';
 import { useCountUp } from '../../hooks/useScrollAnimation';
-import SolutionsPillarsSection from '../../components/home/SolutionsPillarsSection';
+import EngineeringBlueprintSection from '../../components/home/EngineeringBlueprintSection';
 import ProductSchematic from '../../components/home/ProductSchematic';
 import CompanyLifecycleSection from '../../components/home/CompanyLifecycleSection';
 import GlobalFootprintSection from '../../components/home/GlobalFootprintSection';
@@ -266,8 +266,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 4 PILARS OF ENGINEERING & MANUFACTURING (BENTO GRID - OPTION 1) ── */}
-      <SolutionsPillarsSection />
+      {/* ── INTERACTIVE ENGINEERING BLUEPRINT (OPTION 2) ── */}
+      <EngineeringBlueprintSection />
 
       {/* ── MITRA MANUFAKTUR AUDIO & INFOTAINMENT OTOMOTIF GLOBAL (INTERACTIVE 4-STAGE LIFECYCLE & 3D HUD) ── */}
       <CompanyLifecycleSection />
