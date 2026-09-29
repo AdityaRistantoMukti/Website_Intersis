@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import './InteractiveHoverButton.css';
 
 /**
- * InteractiveHoverButton (Inspired by Magic UI)
- * Features an expanding fluid dot on hover that floods the button background,
- * while smoothly sliding in the label text with an animated arrow.
+ * InteractiveHoverButton (Faithful to Magic UI specification)
+ * A single organic dot expands with a fluid spring curve to fully flood the button,
+ * while the initial text smoothly exits and reveals the new label with an animated arrow.
  */
 export default function InteractiveHoverButton({
   children,
@@ -13,29 +13,26 @@ export default function InteractiveHoverButton({
   to,
   onClick,
   className = '',
-  variant = 'light', // 'light' (white with dark teal flood) or 'teal' (teal with dark flood)
+  variant = 'light', // 'light' (white button, floods dark teal on dark banner) or 'teal' (teal button on light background)
   ...props
 }) {
   const content = children || text;
 
   const innerContent = (
     <>
-      {/* Expanding Fluid Ripple Dot */}
-      <div className="ihb-dot" aria-hidden="true" />
-
-      {/* Initial resting state (dot + text) */}
-      <div className="ihb-initial">
-        <span className="ihb-initial-dot" aria-hidden="true" />
-        <span className="ihb-initial-text">{content}</span>
+      {/* Resting State: A single little dot + label text */}
+      <div className="ihb-content-rest">
+        <span className="ihb-dot" aria-hidden="true" />
+        <span className="ihb-text-rest">{content}</span>
       </div>
 
-      {/* Hover reveal state (centered text + arrow) */}
-      <div className="ihb-hover" aria-hidden="true">
-        <span className="ihb-hover-text">{content}</span>
+      {/* Hover State: Absolute overlay text + animated arrow sliding in */}
+      <div className="ihb-content-hover" aria-hidden="true">
+        <span className="ihb-text-hover">{content}</span>
         <svg
-          className="ihb-hover-arrow"
-          width="16"
-          height="16"
+          className="ihb-arrow"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

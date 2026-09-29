@@ -155,15 +155,7 @@ export default function GlobalFootprintSection() {
     <section className="section global-footprint-section" id="global-trade">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header fade-up text-center" style={{ marginTop: '30px' }}>
-          <div className="footprint-pill-badge">
-            <span className="footprint-pill-dot" />
-            <span>
-              {i18n.language === 'id'
-                ? 'Jaringan Logistik Internasional'
-                : 'International Logistics Network'}
-            </span>
-          </div>
+        <div className="section-header fade-up text-center" style={{ marginTop: '30px' }}>          
           <h2 className="section-title">
             {i18n.language === 'id'
               ? 'Jangkauan Ekspor & Koridor Pasar Global'
@@ -484,7 +476,7 @@ export default function GlobalFootprintSection() {
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
               </svg>
-              {i18n.language === 'id' ? 'Pilih Hub / Koridor:' : 'Select Hub / Corridor:'}
+              {i18n.language === 'id' ? 'Koridor:' : ' Corridor:'}
             </span>
             <div className="world-map-chips-list">
               {projectedDestinations.map((d) => {

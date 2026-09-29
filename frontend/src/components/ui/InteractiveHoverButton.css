@@ -1,6 +1,6 @@
 /* ============================================================
    MAGIC UI INTERACTIVE HOVER BUTTON
-   Smooth expanding dot & sliding arrow transition
+   Faithful recreation of Magic UI's expanding liquid dot & arrow transition
    ============================================================ */
 
 .interactive-hover-btn {
@@ -10,52 +10,53 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 9999px;
-  padding: 14px 32px;
+  padding: 14px 34px;
   font-family: inherit;
-  font-size: 0.9375rem;
+  font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
   outline: none;
   border: 1px solid transparent;
   user-select: none;
-  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
   box-sizing: border-box;
   white-space: nowrap;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.28s ease;
 }
 
 .interactive-hover-btn:active {
   transform: scale(0.97);
 }
 
-/* ── Light Variant (For deep teal / dark banners) ── */
+/* ── Light Variant (White button on dark/teal banner) ── */
 .interactive-hover-btn--light {
   background-color: #FFFFFF;
   color: #004D40;
-  border-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16);
 }
 
 .interactive-hover-btn--light .ihb-dot {
-  background-color: #004D40;
+  background-color: #004D40; /* Dark rich teal flood */
 }
 
-.interactive-hover-btn--light .ihb-initial-dot {
-  background-color: #00897B;
-}
-
-.interactive-hover-btn--light .ihb-hover {
+.interactive-hover-btn--light .ihb-content-hover {
   color: #FFFFFF;
 }
 
-.interactive-hover-btn--light:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  border-color: #004D40;
+.interactive-hover-btn--light .ihb-arrow {
+  color: #2DD4BF; /* Glowing cyan-teal accent */
 }
 
-/* ── Teal Variant (For light backgrounds) ── */
+.interactive-hover-btn--light:hover {
+  transform: translateY(-2px);
+  border-color: #004D40;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* ── Teal Variant (Teal button on light background) ── */
 .interactive-hover-btn--teal {
   background-color: #00897B;
   color: #FFFFFF;
@@ -64,100 +65,101 @@
 }
 
 .interactive-hover-btn--teal .ihb-dot {
-  background-color: #004D40;
+  background-color: #00382E;
 }
 
-.interactive-hover-btn--teal .ihb-initial-dot {
-  background-color: #FFFFFF;
-}
-
-.interactive-hover-btn--teal .ihb-hover {
+.interactive-hover-btn--teal .ihb-content-hover {
   color: #FFFFFF;
 }
 
+.interactive-hover-btn--teal .ihb-arrow {
+  color: #5EEAD4;
+}
+
 .interactive-hover-btn--teal:hover {
-  box-shadow: 0 10px 28px rgba(0, 77, 64, 0.38);
+  transform: translateY(-2px);
+  border-color: #00382E;
+  box-shadow: 0 12px 30px rgba(0, 77, 64, 0.38);
 }
 
-/* ── EXPANDING LIQUID BACKGROUND DOT ── */
-.ihb-dot {
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  transform: translateY(-50%) scale(1);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.interactive-hover-btn:hover .ihb-dot {
-  transform: translateY(-50%) scale(60);
-}
-
-/* ── INITIAL RESTING STATE (Dot + Label) ── */
-.ihb-initial {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-  z-index: 2;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s ease;
-}
-
-.ihb-initial-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.ihb-initial-text {
-  letter-spacing: -0.01em;
-}
-
-.interactive-hover-btn:hover .ihb-initial {
-  transform: translateX(30px);
-  opacity: 0;
-}
-
-/* ── HOVER REVEAL STATE (Sliding in with Arrow) ── */
-.ihb-hover {
-  position: absolute;
-  inset: 0;
+/* ── 1. RESTING STATE (Dot + Label Text) ── */
+.ihb-content-rest {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  z-index: 3;
-  pointer-events: none;
-  transform: translateX(-20px);
-  opacity: 0;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s ease;
-  padding: 0 28px;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.ihb-hover-text {
-  letter-spacing: -0.01em;
-}
-
-.ihb-hover-arrow {
+/* The Magic UI Organic Dot: Scales up 95x to fully engulf the button */
+.ihb-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 0 6px rgba(0, 77, 64, 0.35);
 }
 
-.interactive-hover-btn:hover .ihb-hover {
-  transform: translateX(0);
+.interactive-hover-btn:hover .ihb-dot {
+  /* Scale 95x guarantees 427px radius coverage: 100% full fill without ANY clipping */
+  transform: scale(95);
+}
+
+.ihb-text-rest {
+  display: inline-block;
+  letter-spacing: -0.01em;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.25s ease,
+              filter 0.25s ease;
+}
+
+.interactive-hover-btn:hover .ihb-text-rest {
+  transform: translateX(45px);
+  opacity: 0;
+  filter: blur(2px);
+}
+
+/* ── 2. HOVER OVERLAY STATE (White Text + Animated Arrow) ── */
+.ihb-content-hover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: none;
+  transform: translateX(45px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.28s ease;
+  padding: 0 24px;
+}
+
+.ihb-text-hover {
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.ihb-arrow {
+  display: inline-block;
+  flex-shrink: 0;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interactive-hover-btn:hover .ihb-content-hover {
+  transform: translateX(-4px);
   opacity: 1;
 }
 
-.interactive-hover-btn:hover .ihb-hover-arrow {
-  transform: translateX(4px);
+.interactive-hover-btn:hover .ihb-arrow {
+  transform: translateX(5px);
 }
