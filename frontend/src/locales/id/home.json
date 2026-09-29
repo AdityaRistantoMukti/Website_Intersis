@@ -67,7 +67,7 @@
     "ftzDesc": "0% tarif bea masuk untuk impor bahan baku komponen elektronik serta mesin modal, menjamin efisiensi biaya produksi total.",
     "singaporeTitle": "Akses Maritim Singapura 45 Menit",
     "singaporeDesc": "Konektivitas feri kargo harian ke pelabuhan transshipment internasional Singapura untuk kecepatan logistik pengiriman ke seluruh dunia.",
-    "counterTitle": "Pemantauan Inquiry Buyer & Jejak Pasar Global",
+    "counterTitle": "Pemantauan Minat Pembeli & Jejak Pasar Global",
     "counterDesc": "Data terverifikasi resmi FlagCounter — mencatat inquiry dan kunjungan kemitraan buyer manufaktur dari Amerika Serikat, Singapura, Asia Pasifik, dan Uni Eropa secara real-time.",
     "verifiedBadge": "LIVE VERIFIED B2B BUYER INTEREST",
     "cta": "Konsultasi Rencana Manufaktur Berkeunggulan Tarif"
@@ -117,7 +117,7 @@
         "id": 1,
         "step": "01",
         "navLabel": "Design & Engineering",
-        "title": "Design & Engineering Berstandar Global",
+        "title": "Desain & Rekayasa Berstandar Global",
         "lead": "GPT didukung tim Design & Engineering berdedikasi yang berfokus pada R&D dan Electronic Manufacturing Services (EMS). Dari perancangan awal hingga manufaktur massal, kami memahami setiap kebutuhan teknis mitra.",
         "description": "Dengan tim R&D profesional, kami memberikan dukungan teknis yang fleksibel dan menyeluruh. Setiap tahapan riset dan pengembangan mempertimbangkan kelayakan produksi massal, efisiensi biaya, serta akselerasi siklus hidup produk.",
         "points": [
@@ -137,7 +137,7 @@
         "lead": "Sistem kendali mutu bertaraf otomotif internasional yang ketat di setiap titik lintasan produksi untuk memastikan keandalan jangka panjang tanpa cacat.",
         "description": "Pemeriksaan pasta solder otomatis 3D SPI, inspeksi optik otomatis 3D AOI, pengujian kelistrikan In-Circuit Testing (ICT), serta pengujian fungsional terintegrasi di lingkungan cleanroom ESD Class 100K.",
         "points": [
-          "Inline 3D SPI Solder Inspection & 3D AOI Optik",
+          "Inline 3D SPI Solder Inspection & 3D AOI",
           "In-Circuit Testing (ICT) & Functional Testing (FCT)",
           "Uji Ketahanan Suhu Thermal Shock & Burn-in Aging",
           "Protokol Anti-Statis ESD Cleanroom Class 100K"
@@ -200,7 +200,7 @@
     "technicalSpecs": "Parameter Spesifikasi Teknis",
     "keyFeatures": "Fitur Utama & Keunggulan",
     "compliance": "Sertifikasi & Standar Mutu",
-    "requestDatasheet": "Minta Lembar Data & Penawaran",
+    "requestDatasheet": "Minta Datasheet & Penawaran",
     "copySuccess": "Kode produk disalin ke clipboard!"
   }
 }

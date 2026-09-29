@@ -22,6 +22,7 @@ export default function Navbar() {
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
+    localStorage.setItem('gpt-lang', lang); // remember user's manual choice
     setLangOpen(false);
   };
 
