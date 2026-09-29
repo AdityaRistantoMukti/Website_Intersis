@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect, useRef } from 'react';
 import { useCompany, useCoreValues } from '../../hooks/useApi';
 import { useCountUp } from '../../hooks/useScrollAnimation';
-import EngineeringBlueprintSection from '../../components/home/EngineeringBlueprintSection';
+import CapabilitiesSection from '../../components/home/CapabilitiesSection';
 import ProductSchematic from '../../components/home/ProductSchematic';
 import CompanyLifecycleSection from '../../components/home/CompanyLifecycleSection';
 import GlobalFootprintSection from '../../components/home/GlobalFootprintSection';
@@ -266,8 +266,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── INTERACTIVE ENGINEERING BLUEPRINT (OPTION 2) ── */}
-      <EngineeringBlueprintSection />
+      {/* ── CAPABILITIES: ALTERNATING FEATURE ROWS (新設計) ── */}
+      <CapabilitiesSection />
 
       {/* ── MITRA MANUFAKTUR AUDIO & INFOTAINMENT OTOMOTIF GLOBAL (INTERACTIVE 4-STAGE LIFECYCLE & 3D HUD) ── */}
       <CompanyLifecycleSection />
