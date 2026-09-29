@@ -1,0 +1,206 @@
+{
+  "hero": {
+    "badge": "Business Unit of PT. Intersis Sejahtera Abadi • Batam FTZ",
+    "slides": [
+      {
+        "category": "AUTOMOTIVE ELECTRONICS MANUFACTURING",
+        "title": "Future Trends in Automotive Electronics & SMT Operations",
+        "subtitle": "Your trusted OEM/ODM automotive audio-video manufacturing partner in Batam Free Trade Zone. Delivering tariff-advantaged Android Headunits, DSPs, Class-D Amplifiers, Subwoofers, and Dashcams to global markets and the USA.",
+        "ctaPrimary": "EXPLORE PRODUCT CATALOG",
+        "ctaSecondary": "CONSULT OEM ENGINEERS",
+        "tag": "80,000 CPH SMT Placement • C/O Made in Indonesia • Batam FTZ"
+      },
+      {
+        "category": "ROBOT IN BATAM & INDUSTRIAL AUTOMATION",
+        "title": "Smart Industrial Robotics & Precision Functional Test Jigs",
+        "subtitle": "Authorized distributor for industrial robotics in Batam. Specializing in robotic material handling, precision arc welding, plasma cutting, and custom ICT/FCT functional test fixtures with sub-8.5s cycle times.",
+        "ctaPrimary": "VIEW AUTOMATION SOLUTIONS",
+        "ctaSecondary": "REQUEST CUSTOM JIG PROPOSAL",
+        "tag": "Authorized Batam Robot Distributor • FCT Cycle Time < 8.5s"
+      }
+    ],
+    "scrollDown": "Scroll down",
+    "metric1Val": "10+ Years",
+    "metric1Label": "Automotive EMS Heritage",
+    "metric2Val": "80K CPH",
+    "metric2Label": "SMT Placement Speed",
+    "metric3Val": "ISO 9001",
+    "metric3Label": "International Quality Standard"
+  },
+  "stats": {
+    "experience": "Years of EMS Reliability",
+    "experienceSub": "Trusted Automotive Electronics Partner in Batam",
+    "capacity": "SMT Placement Capacity",
+    "capacitySub": "3 High-Speed Panasonic Mounter Lines",
+    "support": "Engineering & FAE Support",
+    "supportSub": "Dedicated R&D & Field Application Engineers",
+    "quality": "ISO 9001:2015 Quality Compliance",
+    "qualitySub": "Zero-Defect Standards & ESD Cleanroom"
+  },
+  "productsCatalog": {
+    "sectionBadge": "Engineering & Products",
+    "title": "Product Portfolio & Technical Solutions",
+    "subtitle": "Automotive electronic components and industrial automation systems engineered by GPT, ready for volume OEM and Tier-1 automotive manufacturing.",
+    "searchPlaceholder": "Search model series, code (e.g. GPT-HU9800, DSP, SMT)...",
+    "allCategories": "All Categories",
+    "viewSpecs": "View Specs",
+    "inquire": "Inquire OEM",
+    "noProductsFound": "No engineering products match your search criteria.",
+    "exploreAll": "Open Complete Product Catalog",
+    "categories": {
+      "all": "All Product Lines",
+      "headunit": "Headunits & Smart Displays",
+      "audio": "Audio DSPs & Amplifiers",
+      "automation": "Automation & Industrial Robotics",
+      "dashcam": "Dashcams & ADAS Sensors",
+      "ems": "SMT & PCB Assembly"
+    }
+  },
+  "globalTrade": {
+    "sectionBadge": "Global Supply Chain Shift",
+    "title": "Seizing the Shift in Global Supply Chains",
+    "subtitle": "Mitigating international trade tensions and tariffs (US-China trade war) through Batam Free Trade Zone advantages and official Certificate of Origin (C/O) – Made in Indonesia.",
+    "tagline": "Car Audio Video & Automation Partner from Indonesia to the USA & Global Markets",
+    "coTitle": "Certificate of Origin (C/O) – Made in Indonesia",
+    "coDesc": "Official certificate of origin ensuring full compliance with U.S. and partner import regulations, eliminating or significantly lowering trade war tariffs.",
+    "ftzTitle": "0% Batam FTZ Import Duties",
+    "ftzDesc": "0% import duties and tax exemptions on raw electronic components and capital machinery, maximizing total production cost-efficiency.",
+    "singaporeTitle": "45-Minute Singapore Maritime Gateway",
+    "singaporeDesc": "Daily sea-cargo connections to Singapore’s international transshipment terminal for rapid, reliable global container shipping schedules.",
+    "counterTitle": "Live Global Buyer Inquiries & Market Telemetry",
+    "counterDesc": "Officially verified via FlagCounter telemetry — monitoring live OEM buyer visits and partnership inquiries from the USA, Singapore, Asia-Pacific, and the EU.",
+    "verifiedBadge": "LIVE VERIFIED B2B BUYER INTEREST",
+    "cta": "Consult Tariff-Advantaged Manufacturing"
+  },
+  "capabilities": {
+    "sectionBadge": "Manufacturing Capabilities",
+    "title": "Precision Infrastructure & Engineering",
+    "subtitle": "Backed by state-of-the-art facilities in the Batam Free Trade Zone for maximum global supply chain efficiency.",
+    "items": [
+      {
+        "code": "CAP-01",
+        "title": "High-Speed SMT & Automotive Electronics",
+        "desc": "Panasonic & Yamaha high-speed placement lines up to 80,000 CPH, supporting 01005 passives and fine-pitch BGAs for Headunits, DSPs, and car amplifiers."
+      },
+      {
+        "code": "CAP-02",
+        "title": "Robot in Batam — Industrial Robotics & Automation",
+        "desc": "Authorized distributor for industrial robots in Batam: robotic material handling, precision arc welding, plasma cutting, and automated line integration."
+      },
+      {
+        "code": "CAP-03",
+        "title": "Precision Functional Test Jigs (ICT/FCT)",
+        "desc": "Custom PLC-controlled pneumatic functional test fixtures engineered with rapid sub-8.5s test cycles and real-time MES cloud traceability."
+      },
+      {
+        "code": "CAP-04",
+        "title": "Batam FTZ Advantage & Certificate of Origin (C/O)",
+        "desc": "0% import duty on raw components, 45 minutes to Singapore global port, and Indonesian Certificate of Origin (C/O) for low-tariff worldwide exports."
+      }
+    ]
+  },
+  "about": {
+    "sectionBadge": "About GPT • Batam FTZ",
+    "title": "Trusted Automotive Audio & Infotainment Manufacturing Partner",
+    "subtitle": "End-to-End Automotive Electronics Manufacturing: From Conceptual Engineering, Rigorous QA Testing, High-Speed SMT, to Tariff-Free Global Supply Chains.",
+    "description1": "PT. Global Philsonic Technologies (GPT) is a dedicated automotive electronics manufacturing facility under the PT. Intersis Sejahtera Abadi group, located at Komplek Tanah Mas Blok L No.2, Batam Free Trade Zone (FTZ), Indonesia.",
+    "description2": "Our mission: To deliver high-quality, competitively priced, and tariff-advantaged products (Car Amplifiers, Subwoofers, DSPs, Android Headunits, Dashcams) and industrial automation solutions to global markets and partners—especially the USA.",
+    "highlight1Title": "Tariff Mitigation & C/O Made in Indonesia",
+    "highlight1Desc": "Mitigate US import tariff exposure with verified Certificate of Origin compliance.",
+    "highlight2Title": "Batam Free Trade Zone Benefits",
+    "highlight2Desc": "0% import duty on raw electronic materials and direct 45-minute maritime link to Singapore ports.",
+    "highlight3Title": "ISO 9001:2015 & ESD Compliance",
+    "highlight3Desc": "Audited quality control, climate-controlled cleanroom lines, and zero-defect focus.",
+    "cta": "Read Full Company Profile",
+    "lifecycle": [
+      {
+        "id": 1,
+        "step": "01",
+        "navLabel": "Design & Engineering",
+        "title": "Design & Engineering Excellence",
+        "lead": "Global Philsonic Technologies has a powerful Design & Engineering team focused on R&D and electronic manufacturing services (EMS). From initial concept to mass production, we fully understand customer requirements.",
+        "description": "With an experienced group of R&D professionals, we provide flexible and dedicated technical support. Factors relating to the product life cycle—including manufacturability, cost-efficiency, and rapid prototyping—are thoroughly optimized to accelerate time-to-market.",
+        "points": [
+          "ISO 9001 Certified Quality Standard",
+          "High-Density Circuit Design & Multilayer PCB",
+          "Structural Mechanical Tooling & Thermal Design",
+          "Embedded Software, Android OS & DSP Acoustic Algorithms"
+        ],
+        "metric": "R&D to Mass Production",
+        "metricLabel": "End-to-End Product Lifecycle"
+      },
+      {
+        "id": 2,
+        "step": "02",
+        "navLabel": "Quality & Reliability",
+        "title": "Rigorous Quality & Reliability Assurance",
+        "lead": "Automotive-grade quality assurance embedded at every critical production checkpoint to guarantee flawless long-term field reliability.",
+        "description": "Inline 3D SPI solder paste inspection, 3D optical AOI, In-Circuit Testing (ICT), and automated functional test benches operating strictly inside climate-controlled Class 100K ESD cleanrooms.",
+        "points": [
+          "Inline 3D SPI & High-Precision 3D Optical AOI",
+          "Automated In-Circuit (ICT) & Functional Testing (FCT)",
+          "Thermal Shock, Vibration & Extended Burn-in Aging",
+          "Class 100K ESD Cleanroom Protocol Compliance"
+        ],
+        "metric": "< 0.1% Defect",
+        "metricLabel": "Zero-Defect Quality Target"
+      },
+      {
+        "id": 3,
+        "step": "03",
+        "navLabel": "Manufacturing",
+        "title": "High-Speed Advanced SMT Manufacturing",
+        "lead": "State-of-the-art electronics assembly facilities in Batam Free Trade Zone equipped with high-speed Panasonic & Yamaha placement lines.",
+        "description": "Supporting micro 01005 passives and ultra fine-pitch BGA/QFN packaging. Complete turnkey box-build production, custom wire harnessing, and industrial robotics integration.",
+        "points": [
+          "High-Speed Placement Capacity up to 80,000 CPH",
+          "Micro 01005 Passives & Fine-Pitch BGA Packaging",
+          "Automotive Turnkey Box-Build & Ultrasonic Welding",
+          "Authorized Industrial Robotics Integration in Batam"
+        ],
+        "metric": "80,000 CPH",
+        "metricLabel": "SMT Line Placement Speed"
+      },
+      {
+        "id": 4,
+        "step": "04",
+        "navLabel": "Supply Chain",
+        "title": "Global Supply Chain & Tariff Mitigation",
+        "lead": "Capitalizing on Batam FTZ’s strategic corridor for tariff-free component imports and direct international maritime transshipment.",
+        "description": "0% import duties on raw electronics, a 45-minute direct ferry connection to Singapore international shipping hubs, and official Certificate of Origin (C/O) Made in Indonesia to eliminate US-China trade war tariffs.",
+        "points": [
+          "0% Batam FTZ Raw Material Import Duties",
+          "Official Certificate of Origin (C/O) – Made in Indonesia",
+          "45-Minute Daily Sea Cargo Link to Singapore Port",
+          "Vetted Long-Term Tier-1 Component Sourcing Network"
+        ],
+        "metric": "45 Minutes",
+        "metricLabel": "Transit to Singapore Port"
+      }
+    ]
+  },
+  "careerPreview": {
+    "sectionBadge": "Career Opportunities",
+    "title": "Build Your Career in Automotive Tech",
+    "subtitle": "Join our world-class engineering, production, and operations team at GPT Batam",
+    "noJobs": "No public openings at this moment. Submit your resume to join our talent pool.",
+    "viewAll": "Explore All Openings"
+  },
+  "cta": {
+    "title": "Ready to Build Your Next Electronics Hardware with GPT?",
+    "subtitle": "Discuss your OEM/ODM manufacturing, high-speed SMT assembly, or factory automation requirements with our senior engineers.",
+    "btnPartner": "Contact Engineering & Sales",
+    "btnCareer": "Explore Careers at GPT"
+  },
+  "specsModal": {
+    "title": "Technical Datasheet & Specifications",
+    "close": "Close",
+    "seriesCode": "Model Series",
+    "category": "Category",
+    "technicalSpecs": "Technical Specifications",
+    "keyFeatures": "Key Features & Capabilities",
+    "compliance": "Standards & Compliance",
+    "requestDatasheet": "Request Quotation & Full Datasheet",
+    "copySuccess": "Series code copied to clipboard!"
+  }
+}

@@ -1,0 +1,436 @@
+/* ── PRODUCT CATALOG SECTION (Industrial Engineering Blueprint) ── */
+.product-catalog-section {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 137, 123, 0.08), transparent 70%),
+    linear-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-position: center top, -1px -1px, -1px -1px;
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-16) 0;
+}
+
+/* ── TOOLBAR (Filter & Search) ── */
+.catalog-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+  background: var(--surface);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.catalog-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.catalog-search__icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--teal);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.catalog-search__input {
+  width: 100%;
+  height: 50px;
+  padding: 0 46px 0 54px !important;
+  background: var(--bg);
+  border: 1.5px solid var(--gray-300);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+.catalog-search__input:focus {
+  background: var(--white);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.15);
+  outline: none;
+}
+
+.catalog-search__clear {
+  position: absolute;
+  right: var(--space-3);
+  background: none;
+  border: none;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  z-index: 2;
+}
+
+.catalog-search__clear:hover {
+  color: var(--text);
+}
+
+/* Category Tabs */
+.catalog-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.catalog-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.catalog-tab:hover {
+  background: var(--white);
+  border-color: var(--teal-light);
+  color: var(--teal-dark);
+}
+
+.catalog-tab--active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--white);
+  box-shadow: 0 2px 8px var(--teal-glow);
+}
+
+.catalog-tab--active:hover {
+  background: var(--teal-dark);
+  border-color: var(--teal-dark);
+  color: var(--white);
+}
+
+.catalog-tab__count {
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.catalog-tab--active .catalog-tab__count {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--white);
+}
+
+/* ── PRODUCT CARDS GRID (Engineering Showcase) ── */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  user-select: none;
+  padding: 14px;
+  animation: cardFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MagicUI-style Mouse Spotlight Radial Glow */
+.catalog-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 137, 123, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.catalog-card:hover::after {
+  opacity: 1;
+}
+
+.catalog-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--teal);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 137, 123, 0.2);
+}
+
+/* Visual Stage — Nested CAD Viewport */
+.catalog-card__visual {
+  position: relative;
+  background: #090E16;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 195px;
+  padding: var(--space-3);
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+.catalog-card:hover .catalog-card__visual {
+  background-color: #060910;
+  border-color: rgba(0, 137, 123, 0.35);
+  box-shadow: inset 0 0 30px rgba(0, 137, 123, 0.1);
+}
+
+/* CAD Corner Crosshairs */
+.catalog-card__corner-marker {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  transition: border-color 0.25s ease;
+}
+.catalog-card__corner-marker--tl { top: 8px; left: 8px; border-top: 1px solid; border-left: 1px solid; }
+.catalog-card__corner-marker--tr { top: 8px; right: 8px; border-top: 1px solid; border-right: 1px solid; }
+.catalog-card__corner-marker--bl { bottom: 8px; left: 8px; border-bottom: 1px solid; border-left: 1px solid; }
+.catalog-card__corner-marker--br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.catalog-card:hover .catalog-card__corner-marker {
+  border-color: var(--teal-light);
+}
+
+.catalog-card__cad-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  font-weight: 600;
+}
+
+.product-schematic {
+  width: 100%;
+  height: auto;
+  max-height: 165px;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.catalog-card:hover .product-schematic {
+  transform: scale(1.05);
+}
+
+.catalog-card__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(11, 16, 23, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #F1F5F9;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 3;
+}
+
+/* ── CARD CONTENT AREA ── */
+.catalog-card__content {
+  padding: 16px 6px 6px 6px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.catalog-card__top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.catalog-card__category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+}
+
+.catalog-card__spec-pill {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--gray-200);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.catalog-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+  min-height: 44px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--transition-fast);
+}
+
+.catalog-card:hover .catalog-card__title {
+  color: var(--teal);
+}
+
+.catalog-card__footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.catalog-card__code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.catalog-card__code-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px var(--teal-glow);
+}
+
+.catalog-card__hover-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--teal);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.catalog-card:hover .catalog-card__hover-cue {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Empty State */
+.catalog-empty {
+  padding: var(--space-12) 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--text-muted);
+}
+
+.catalog-empty svg {
+  color: var(--gray-400);
+}
+
+/* ── CATALOG FOOTER (Explore Full Catalog) ── */
+.catalog-footer {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.catalog-footer__btn {
+  padding: 0.95rem 2.25rem !important;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ── RESPONSIVENESS ── */
+@media (max-width: 1024px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+  .catalog-toolbar {
+    padding: var(--space-3);
+  }
+  .catalog-card__actions {
+    grid-template-columns: 1fr;
+  }
+}

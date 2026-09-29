@@ -1,0 +1,709 @@
+/* ============================================================
+   GLOBAL FOOTPRINT SECTION (Option 2: 2D Interactive Vector World Map)
+   Lightweight, 60fps smooth scrolling, zero WebGL ray-marching stutter
+   ============================================================ */
+
+.global-footprint-section {
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F1F5F9 100%);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-20) 0 clamp(var(--space-16), 6vw, var(--space-24));
+  color: var(--text, #1E293B);
+  border-top: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+/* Subtle Technical Precision CAD Blueprint Dot Matrix Background */
+.global-footprint-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 137, 123, 0.08) 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ambient Radial Soft Glow behind map */
+.global-footprint-section::after {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 95vw);
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(0, 137, 123, 0.07) 0%, rgba(14, 165, 233, 0.03) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.global-footprint-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Top Pill Badge */
+.footprint-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(0, 137, 123, 0.08);
+  border: 1px solid rgba(0, 137, 123, 0.22);
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #00897B;
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.footprint-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00897B;
+  box-shadow: 0 0 8px #00897B;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.global-footprint-section .section-title {
+  color: #0F172A;
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+}
+
+.global-footprint-section .section-subtitle {
+  color: #475569;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+
+/* ── WORLD MAP CARD CONTAINER ── */
+.world-map-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px -8px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  margin-top: clamp(var(--space-6), 3vw, var(--space-10));
+  position: relative;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.world-map-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.1);
+}
+
+/* ── EXECUTIVE CLEAN MAP CONTROL & LEGEND BAR ── */
+.world-map-legend-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 14px 24px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.legend-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.origin-ping-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00897B;
+  box-shadow: 0 0 12px #00897B;
+  animation: pulseDot 1.8s infinite;
+  flex-shrink: 0;
+}
+
+.origin-label-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.origin-subtitle {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #00897B;
+  letter-spacing: 0.06em;
+}
+
+.origin-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.legend-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.legend-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7813rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.legend-hint svg {
+  color: #00897B;
+}
+
+.active-hubs-badge {
+  font-size: 0.7188rem;
+  font-weight: 700;
+  color: #0284C7;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.22);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+}
+
+/* ── WORLD MAP VIEWPORT (2:1 Ratio Standard) ── */
+.world-map-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  min-height: 340px;
+  max-height: 580px;
+  background: radial-gradient(circle at 78% 50%, rgba(0, 137, 123, 0.03) 0%, transparent 60%),
+              radial-gradient(circle at 25% 30%, rgba(2, 132, 199, 0.03) 0%, transparent 50%),
+              #FAFBFD;
+  overflow: visible;
+}
+
+/* Canvas for 2,060 Continent Dots (Rendered ONCE, 0% CPU loop) */
+.world-map-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* SVG Interactive Overlay */
+.world-map-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* Animated Trade Route Paths */
+.route-track {
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.route-stream {
+  animation: tradeRouteDash 2.5s linear infinite;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+@keyframes tradeRouteDash {
+  from {
+    stroke-dashoffset: 40;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── DESTINATION HUB NODES (GLITCH-FREE SVG STYLING) ── */
+.map-node-element {
+  outline: none;
+  cursor: pointer;
+}
+
+/* Hitbox ensures mouse never falls off the node during hover */
+.node-hitbox {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.node-outer-circle {
+  transition: r 0.2s cubic-bezier(0.16, 1, 0.3, 1), stroke-width 0.2s ease, filter 0.2s ease;
+}
+
+.node-core-dot {
+  transition: r 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-node-element:hover .node-outer-circle,
+.map-node-hovered .node-outer-circle {
+  stroke-width: 3.5px;
+  filter: drop-shadow(0 0 8px rgba(0, 137, 123, 0.65));
+}
+
+.active-selection-ring {
+  animation: ringPulse 1.8s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Batam FTZ Concentric Radar Rings */
+.radar-pulse-group circle {
+  fill: none;
+  stroke: #00897B;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.radar-ring-1 {
+  stroke-width: 1.5;
+  animation: radarWave 2.8s infinite ease-out;
+}
+
+.radar-ring-2 {
+  stroke-width: 1.2;
+  animation: radarWave 2.8s infinite ease-out 0.9s;
+}
+
+.radar-ring-3 {
+  stroke-width: 0.8;
+  animation: radarWave 2.8s infinite ease-out 1.8s;
+}
+
+@keyframes radarWave {
+  0% {
+    r: 6;
+    opacity: 0.9;
+  }
+  100% {
+    r: 32;
+    opacity: 0;
+  }
+}
+
+/* Node Micro Label */
+.node-label-group {
+  pointer-events: none;
+}
+
+.node-label-bg {
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.25));
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.map-node-element:hover .node-label-bg,
+.map-node-hovered .node-label-bg {
+  fill: #0F172A;
+}
+
+/* ── FLOATING DETAIL POPOVER CARD ── */
+.map-floating-popover {
+  position: absolute;
+  width: min(320px, 86vw);
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 20px 45px -8px rgba(15, 23, 42, 0.2), 0 4px 12px rgba(15, 23, 42, 0.08);
+  z-index: 10;
+  pointer-events: auto;
+  animation: popoverFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Placement Clamping: Left vs Right of Node */
+.map-floating-popover.popover-left {
+  transform: translate(-106%, -50%);
+}
+
+.map-floating-popover.popover-right {
+  transform: translate(16%, -50%);
+}
+
+/* Arrow Anchor */
+.map-popover__arrow {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
+
+.popover-left .map-popover__arrow {
+  right: -6px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.popover-right .map-popover__arrow {
+  left: -6px;
+  border-right: none;
+  border-top: none;
+}
+
+/* Popover Header */
+.map-popover__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.map-popover__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.map-popover__flag {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.map-popover__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.map-popover__country {
+  font-size: 0.75rem;
+  color: #64748B;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.map-popover__close {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.map-popover__close:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+  transform: scale(1.08);
+}
+
+/* Badge & Coords */
+.map-popover__badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.map-popover__badge {
+  font-size: 0.7188rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  border: 1px solid;
+  letter-spacing: 0.03em;
+}
+
+.map-popover__coords {
+  font-family: monospace;
+  font-size: 0.6875rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.map-popover__role {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.map-popover__desc {
+  font-size: 0.75rem;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.map-popover__meta {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.popover-meta-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+}
+
+.meta-label {
+  color: #64748B;
+}
+
+.meta-val {
+  color: #0F172A;
+  font-weight: 600;
+}
+
+/* ── QUICK-SELECT CORRIDOR CHIPS BAR ── */
+.world-map-corridors-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.world-map-corridors-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #475569;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.world-map-corridors-label svg {
+  color: #00897B;
+}
+
+.world-map-chips-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.world-map-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.world-map-chip:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+  color: #0F172A;
+  transform: translateY(-1px);
+}
+
+.world-map-chip--active {
+  background: #00897B !important;
+  border-color: #00897B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(0, 137, 123, 0.3) !important;
+}
+
+.world-map-chip--origin {
+  border-color: rgba(0, 137, 123, 0.4);
+}
+
+.chip-flag {
+  font-size: 1rem;
+}
+
+.chip-name {
+  font-weight: 600;
+}
+
+.chip-hq-badge {
+  font-size: 0.625rem;
+  font-weight: 800;
+  background: rgba(0, 137, 123, 0.15);
+  color: #00897B;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.world-map-chip--active .chip-hq-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+/* ── LOGISTICS TELEMETRY STATS GRID ── */
+.footprint-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: clamp(var(--space-6), 3vw, var(--space-8));
+}
+
+.footprint-stat-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 4px 15px -3px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.footprint-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+}
+
+.stat-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card-number {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.stat-card-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #334155;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.stat-card-sub {
+  font-size: 0.7188rem;
+  color: #64748B;
+  line-height: 1.4;
+}
+
+/* ── RESPONSIVE ADAPTATIONS ── */
+@media (max-width: 1024px) {
+  .footprint-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .world-map-viewport {
+    aspect-ratio: 1.8 / 1;
+    min-height: 280px;
+  }
+
+  .world-map-legend-bar {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .legend-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .legend-hint {
+    font-size: 0.7188rem;
+  }
+
+  .footprint-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .footprint-stat-card {
+    padding: 16px 18px;
+  }
+
+  .map-floating-popover {
+    position: fixed;
+    top: auto !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw;
+    max-width: 360px;
+  }
+
+  .map-popover__arrow {
+    display: none;
+  }
+}

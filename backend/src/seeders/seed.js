@@ -19,19 +19,29 @@ async function seedDatabase() {
 
   try {
     connection = await mysql.createConnection(config);
-    console.log(`[DB] Connected to MySQL database: ${config.database}`);
+    console.log(`[DB] Connected to MySQL database: '${config.database}' on '${config.host}'`);
 
-    const sqlPath = path.join(__dirname, '../../../database/seeders/seed_data.sql');
+    // Prioritaskan file export phpMyAdmin isa_career_hrd.sql jika ada, atau seed_data.sql
+    let sqlPath = path.join(__dirname, '../../../database/isa_career_hrd.sql');
     if (!fs.existsSync(sqlPath)) {
-      throw new Error(`Seed SQL file not found at: ${sqlPath}`);
+      sqlPath = path.join(__dirname, '../../../database/seeders/seed_data.sql');
     }
 
-    const sqlScript = fs.readFileSync(sqlPath, 'utf8');
+    if (!fs.existsSync(sqlPath)) {
+      throw new Error(`SQL file tidak ditemukan di: ${sqlPath}`);
+    }
+
+    console.log(`📄 Menggunakan file SQL: ${path.basename(sqlPath)}`);
+    let sqlScript = fs.readFileSync(sqlPath, 'utf8');
+
+    // Hapus perintah USE database agar eksekusi langsung masuk ke database aktif (misal: railway)
+    sqlScript = sqlScript.replace(/USE\s+`?[a-zA-Z0-9_]+`?;/gi, '');
+    sqlScript = sqlScript.replace(/CREATE\s+DATABASE\s+IF\s+NOT\s+EXISTS\s+`?[a-zA-Z0-9_]+`?;/gi, '');
 
     console.log('⚡ Executing seed SQL statements...');
     await connection.query(sqlScript);
 
-    console.log('✅ Database seeded successfully with dummy data!');
+    console.log('✅ Database seeded successfully with all tables and dummy data!');
     console.log('\n🔑 Default Logins Created:');
     console.log('  1. Administrator : admin@isa.co.id / Admin@ISA2026');
     console.log('  2. HRD Manager   : hrd@isa.co.id / Hrd@ISA2026');

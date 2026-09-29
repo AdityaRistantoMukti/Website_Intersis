@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang Kami",
+    "automation": "Otomasi",
+    "products": "Produk",
+    "gallery": "Galeri",
+    "career": "Karir",
+    "faq": "FAQ",
+    "contact": "Kontak",
+    "admin": "Admin Portal"
+  },
+  "footer": {
+    "tagline": "Solusi manufaktur elektronik otomotif terpercaya sejak 2015.",
+    "quickLinks": "Tautan Cepat",
+    "products": "Produk",
+    "contact": "Kontak",
+    "followUs": "Ikuti Kami",
+    "allRights": "Seluruh hak cipta dilindungi.",
+    "partOf": "Bagian dari"
+  },
+  "btn": {
+    "learnMore": "Selengkapnya",
+    "viewAll": "Lihat Semua",
+    "applyNow": "Lamar Sekarang",
+    "contactUs": "Hubungi Kami",
+    "seeProducts": "Lihat Produk",
+    "joinTeam": "Bergabung Bersama Kami",
+    "sendMessage": "Kirim Pesan",
+    "backToJobs": "Kembali ke Lowongan"
+  },
+  "language": "Bahasa",
+  "loading": "Memuat...",
+  "noData": "Data tidak ditemukan.",
+  "error": "Terjadi kesalahan. Silakan coba lagi."
+}

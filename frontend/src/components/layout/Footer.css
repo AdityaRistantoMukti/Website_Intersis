@@ -1,0 +1,259 @@
+/* ============================================================
+   FOOTER CSS — Enterprise Modern Industrial Footer
+   PT. Global Philsonic Technologies (Intersis Group)
+   ============================================================ */
+
+.footer {
+  background: #060A0E;
+  color: #94A3B8;
+  padding-top: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── 4-COLUMN RESPONSIVE GRID ── */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── BRAND COLUMN ── */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;  
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+}
+
+.footer__logo-badge {
+  background: #FFFFFF;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.footer__logo-img {
+  height: 200px;
+  width: 250px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.footer__logo-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #FFFFFF;
+  letter-spacing: 0.03em;
+}
+
+.footer__logo-full {
+  font-size: 0.72rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.footer__tagline {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: #94A3B8;
+  margin-bottom: 1.5rem;
+  max-width: 320px;
+}
+
+/* Social Icon Links */
+.footer__socials {
+  display: flex;
+  gap: 10px;
+}
+
+.footer__social-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94A3B8;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.footer__social-link:hover {
+  background: #00897B;
+  border-color: #00897B;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 137, 123, 0.35);
+}
+
+/* ── LINKS COLUMNS ── */
+.footer__col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__col-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer__col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #00897B;
+  border-radius: 2px;
+}
+
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__link {
+  font-size: 0.875rem;
+  color: #94A3B8;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer__link:hover {
+  color: #2DD4BF;
+  transform: translateX(4px);
+}
+
+/* ── CONTACT COLUMN ── */
+.footer__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.86rem;
+  color: #94A3B8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.footer__contact-item svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #00897B;
+}
+
+.footer__contact-item a {
+  color: #94A3B8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__contact-item a:hover {
+  color: #2DD4BF;
+}
+
+/* ── BOTTOM COPYRIGHT BAR ── */
+.footer__bottom {
+  padding: 1.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer__copy {
+  font-size: 0.825rem;
+  color: #64748B;
+  margin: 0;
+}
+
+.footer__meta-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer__meta-links .footer__link {
+  font-size: 0.825rem;
+  color: #64748B;
+}
+
+.footer__meta-links .footer__link:hover {
+  color: #2DD4BF;
+  transform: none;
+}
+
+/* ── RESPONSIVE RULES ── */
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-top: 3.5rem;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .footer__meta-links {
+    gap: 1rem;
+  }
+}

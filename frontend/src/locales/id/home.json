@@ -1,0 +1,206 @@
+{
+  "hero": {
+    "badge": "Unit Bisnis PT. Intersis Sejahtera Abadi • Batam FTZ",
+    "slides": [
+      {
+        "category": "MANUFAKTUR ELEKTRONIK OTOMOTIF",
+        "title": "Akselerasi Masa Depan Elektronik Otomotif & Manufaktur SMT",
+        "subtitle": "Mitra manufaktur OEM/ODM audio dan video otomotif terpercaya di Batam Free Trade Zone. Menghadirkan Headunit Android, Digital Sound Processor (DSP), Amplifier, dan Dashcam berkeunggulan tarif preferensial untuk pasar global dan Amerika Serikat.",
+        "ctaPrimary": "JELAJAHI KATALOG PRODUK",
+        "ctaSecondary": "KONSULTASI TEKNIK OEM",
+        "tag": "Kapasitas SMT 80.000 CPH • C/O Made in Indonesia • Batam FTZ"
+      },
+      {
+        "category": "ROBOTIKA & OTOMASI INDUSTRI BATAM",
+        "title": "Solusi Robot Industri & Jig Uji Fungsional Presisi Tinggi",
+        "subtitle": "Distributor resmi robot industri di Batam untuk penanganan material (handling), pengelasan presisi, serta perakitan custom functional test jig (ICT/FCT) terintegrasi PLC dan sistem kendali mutu MES.",
+        "ctaPrimary": "LIHAT SOLUSI OTOMASI",
+        "ctaSecondary": "PERMINTAAN PROPOSAL JIG",
+        "tag": "Distributor Robot Industri Batam • Validasi FCT Siklus < 8.5 Detik"
+      }
+    ],
+    "scrollDown": "Gulir ke bawah",
+    "metric1Val": "10+ Tahun",
+    "metric1Label": "Rekam Jejak EMS Otomotif",
+    "metric2Val": "80K CPH",
+    "metric2Label": "Kapasitas Penempatan SMT",
+    "metric3Val": "ISO 9001",
+    "metric3Label": "Standar Mutu Internasional"
+  },
+  "stats": {
+    "experience": "Tahun Keandalan EMS",
+    "experienceSub": "Mitra Manufaktur Otomotif Terpercaya di Batam",
+    "capacity": "Kapasitas Penempatan SMT",
+    "capacitySub": "3 Lini Panasonic High-Speed Mounter",
+    "support": "Dukungan Rekayasa & FAE",
+    "supportSub": "Insinyur Aplikasi & R&D Siaga Penuh",
+    "quality": "Kepatuhan Mutu ISO 9001:2015",
+    "qualitySub": "Standar Bebas Cacat & ESD Cleanroom"
+  },
+  "productsCatalog": {
+    "sectionBadge": "Katalog Rekayasa & Produk",
+    "title": "Portofolio Produk & Solusi Teknologi",
+    "subtitle": "Katalog komponen elektronik otomotif dan sistem otomasi industri rancangan insinyur GPT, siap diproduksi massal untuk kebutuhan OEM dan tier-1.",
+    "searchPlaceholder": "Cari kode produk, seri (contoh: GPT-HU9800, DSP, SMT)...",
+    "allCategories": "Semua Kategori",
+    "viewSpecs": "Lihat Spesifikasi",
+    "inquire": "Inquiry Produk",
+    "noProductsFound": "Tidak ada produk yang sesuai dengan kriteria pencarian Anda.",
+    "exploreAll": "Buka Katalog Lengkap Produk",
+    "categories": {
+      "all": "Semua Lini Produk",
+      "headunit": "Headunit & Display Pintar",
+      "audio": "Audio DSP & Amplifier",
+      "automation": "Otomasi & Robot Industri",
+      "dashcam": "Dashcam & Sensor ADAS",
+      "ems": "SMT & Perakitan PCB"
+    }
+  },
+  "globalTrade": {
+    "sectionBadge": "Peluang Rantai Pasok Global",
+    "title": "Meraih Peluang Pergeseran Rantai Pasok Global",
+    "subtitle": "Mitigasi risiko tarif perdagangan internasional (US-China trade tensions) melalui keunggulan kompetitif Kawasan Perdagangan Bebas Batam dan sertifikasi resmi Certificate of Origin (C/O) Made in Indonesia.",
+    "tagline": "Mitra Car Audio Video dari Indonesia Menuju Pasar Amerika Serikat & Dunia",
+    "coTitle": "Sertifikat Asal (C/O) Made in Indonesia",
+    "coDesc": "Legalitas asal barang resmi dari Indonesia yang memenuhi syarat akses pasar preferensial untuk meniadakan atau meminimalkan beban tarif impor di pasar Amerika Serikat.",
+    "ftzTitle": "Keunggulan Batam Free Trade Zone",
+    "ftzDesc": "0% tarif bea masuk untuk impor bahan baku komponen elektronik serta mesin modal, menjamin efisiensi biaya produksi total.",
+    "singaporeTitle": "Akses Maritim Singapura 45 Menit",
+    "singaporeDesc": "Konektivitas feri kargo harian ke pelabuhan transshipment internasional Singapura untuk kecepatan logistik pengiriman ke seluruh dunia.",
+    "counterTitle": "Pemantauan Inquiry Buyer & Jejak Pasar Global",
+    "counterDesc": "Data terverifikasi resmi FlagCounter — mencatat inquiry dan kunjungan kemitraan buyer manufaktur dari Amerika Serikat, Singapura, Asia Pasifik, dan Uni Eropa secara real-time.",
+    "verifiedBadge": "LIVE VERIFIED B2B BUYER INTEREST",
+    "cta": "Konsultasi Rencana Manufaktur Berkeunggulan Tarif"
+  },
+  "capabilities": {
+    "sectionBadge": "Kapabilitas Manufaktur",
+    "title": "Infrastruktur & Rekayasa Presisi",
+    "subtitle": "Didukung fasilitas canggih di Kawasan Perdagangan Bebas Batam untuk efisiensi rantai pasok global.",
+    "items": [
+      {
+        "code": "CAP-01",
+        "title": "Perakitan SMT & Elektronik Otomotif",
+        "desc": "Lini chip mounter Panasonic & Yamaha berkecepatan tinggi hingga 80.000 CPH, mendukung mikro 01005 dan BGA untuk Headunit, DSP akustik, dan amplifier otomotif."
+      },
+      {
+        "code": "CAP-02",
+        "title": "Robot in Batam — Robotika & Otomasi Industri",
+        "desc": "Distributor resmi robot industri di Batam untuk penanganan material (handling), pengelasan presisi (welding), dan pemotongan plasma/laser lintas kawasan industri."
+      },
+      {
+        "code": "CAP-03",
+        "title": "Jig Uji Fungsional (ICT/FCT) Presisi",
+        "desc": "Perancangan custom test jig pneumatik terintegrasi PLC dengan siklus uji fungsional di bawah 8,5 detik dan validasi data cloud MES."
+      },
+      {
+        "code": "CAP-04",
+        "title": "Kawasan Berikat Batam FTZ & Legalitas C/O",
+        "desc": "Bebas bea masuk 0% bahan baku komponen elektronik, 45 menit ke pelabuhan Singapura, dan sertifikasi Certificate of Origin (C/O) Indonesia untuk ekspor tanpa beban tarif."
+      }
+    ]
+  },
+  "about": {
+    "sectionBadge": "Tentang GPT • Batam FTZ",
+    "title": "Mitra Manufaktur Audio & Infotainment Otomotif Global",
+    "subtitle": "Solusi End-to-End Manufaktur Elektronik Otomotif: Dari Rekayasa Desain, Kendali Mutu Presisi, Perakitan SMT Berkecepatan Tinggi, hingga Rantai Pasok Bebas Tarif.",
+    "description1": "PT. Global Philsonic Technologies (GPT) adalah entitas manufaktur khusus di bawah naungan PT. Intersis Sejahtera Abadi, beroperasi di Komplek Tanah Mas Blok L No.2, Kawasan Perdagangan Bebas (FTZ) Batam, Indonesia.",
+    "description2": "Misi kami: Menghadirkan produk audio-video otomotif (Car Amplifier, Subwoofer, DSP, Android Headunit, Dashcam) dan solusi otomasi industri berkualitas tinggi, berbiaya kompetitif, dan berkeunggulan tarif impor preferensial untuk mitra global—terutama pasar Amerika Serikat (USA).",
+    "highlight1Title": "Mitigasi Tarif & C/O Made in Indonesia",
+    "highlight1Desc": "Menyediakan kepatuhan regulasi impor AS dengan Certificate of Origin resmi Indonesia.",
+    "highlight2Title": "Keuntungan Batam Free Trade Zone",
+    "highlight2Desc": "Bebas bea masuk (0% import duty) bahan baku dan 45 menit akses logistik langsung ke pelabuhan Singapura.",
+    "highlight3Title": "Kepatuhan Mutu ISO 9001:2015 & ESD",
+    "highlight3Desc": "Audit konsisten, fasilitas cleanroom anti-statis, dan target zero-defect.",
+    "cta": "Profil Perusahaan Selengkapnya",
+    "lifecycle": [
+      {
+        "id": 1,
+        "step": "01",
+        "navLabel": "Design & Engineering",
+        "title": "Design & Engineering Berstandar Global",
+        "lead": "GPT didukung tim Design & Engineering berdedikasi yang berfokus pada R&D dan Electronic Manufacturing Services (EMS). Dari perancangan awal hingga manufaktur massal, kami memahami setiap kebutuhan teknis mitra.",
+        "description": "Dengan tim R&D profesional, kami memberikan dukungan teknis yang fleksibel dan menyeluruh. Setiap tahapan riset dan pengembangan mempertimbangkan kelayakan produksi massal, efisiensi biaya, serta akselerasi siklus hidup produk.",
+        "points": [
+          "Sertifikasi Standar Mutu ISO 9001",
+          "Desain Sirkuit Skematik & PCB Multilayer",
+          "Perancangan Mekanikal & Cetakan Injeksi (Tooling)",
+          "Pengembangan Firmware MCU, Android OS & Akustik DSP"
+        ],
+        "metric": "R&D to Mass Production",
+        "metricLabel": "End-to-End Product Lifecycle"
+      },
+      {
+        "id": 2,
+        "step": "02",
+        "navLabel": "Quality & Reliability",
+        "title": "Jaminan Kualitas & Keandalan Presisi",
+        "lead": "Sistem kendali mutu bertaraf otomotif internasional yang ketat di setiap titik lintasan produksi untuk memastikan keandalan jangka panjang tanpa cacat.",
+        "description": "Pemeriksaan pasta solder otomatis 3D SPI, inspeksi optik otomatis 3D AOI, pengujian kelistrikan In-Circuit Testing (ICT), serta pengujian fungsional terintegrasi di lingkungan cleanroom ESD Class 100K.",
+        "points": [
+          "Inline 3D SPI Solder Inspection & 3D AOI Optik",
+          "In-Circuit Testing (ICT) & Functional Testing (FCT)",
+          "Uji Ketahanan Suhu Thermal Shock & Burn-in Aging",
+          "Protokol Anti-Statis ESD Cleanroom Class 100K"
+        ],
+        "metric": "< 0.1% Defect",
+        "metricLabel": "Target Standar Zero-Defect"
+      },
+      {
+        "id": 3,
+        "step": "03",
+        "navLabel": "Manufacturing",
+        "title": "Manufaktur SMT Berkecepatan Tinggi",
+        "lead": "Fasilitas perakitan modern di Kawasan Perdagangan Bebas Batam dengan lini chip mounter Panasonic & Yamaha berkecepatan tinggi.",
+        "description": "Mendukung penempatan komponen mikro presisi 01005 passives hingga ultra fine-pitch BGA/QFN. Didukung perakitan turnkey box-build lengkap, perakitan kabel harness, dan integrasi robotika industri.",
+        "points": [
+          "Kapasitas Penempatan SMT hingga 80.000 CPH",
+          "Dukungan Komponen Mikro 01005 & BGA Pitch Halus",
+          "Turnkey Box-Build Assembly & Ultrasonic Welding",
+          "Robotika Industri Penanganan Material di Batam"
+        ],
+        "metric": "80,000 CPH",
+        "metricLabel": "Kapasitas Penempatan SMT"
+      },
+      {
+        "id": 4,
+        "step": "04",
+        "navLabel": "Supply Chain",
+        "title": "Rantai Pasok & Akses Tarif Global",
+        "lead": "Memaksimalkan keunggulan geografis dan regulasi Batam FTZ untuk efisiensi rantai pasok global dan bebas hambatan tarif internasional.",
+        "description": "Bebas bea masuk bahan baku elektronik, terhubung langsung 45 menit ke pelabuhan maritim Singapura, serta didukung Certificate of Origin (C/O) Made in Indonesia untuk mitigasi tarif impor ekspor ke pasar Amerika Serikat dan dunia.",
+        "points": [
+          "0% Bea Masuk Impor Bahan Baku Batam FTZ",
+          "Sertifikat Asal Resmi (C/O) Made in Indonesia",
+          "Transit Logistik Maritim 45 Menit ke Pelabuhan Singapura",
+          "Jaringan Pengadaan Komponen Tier-1 Global Terpercaya"
+        ],
+        "metric": "45 Menit",
+        "metricLabel": "Transit ke Port Singapura"
+      }
+    ]
+  },
+  "careerPreview": {
+    "sectionBadge": "Peluang Karir",
+    "title": "Bangun Karir di Industri Teknologi Otomotif",
+    "subtitle": "Bergabunglah bersama talenta teknik dan operasional terbaik di PT. Global Philsonic Technologies",
+    "noJobs": "Saat ini belum ada lowongan publik yang terbuka. Kirimkan CV Anda untuk talent pool.",
+    "viewAll": "Lihat Semua Lowongan Kerja"
+  },
+  "cta": {
+    "title": "Siap Mengembangkan Produk Elektronik Anda Bersama GPT?",
+    "subtitle": "Konsultasikan kebutuhan produksi OEM/ODM, perakitan SMT, atau sistem otomasi pabrik Anda dengan tim insinyur kami.",
+    "btnPartner": "Hubungi Tim Penjualan & Teknik",
+    "btnCareer": "Jelajahi Karir di GPT"
+  },
+  "specsModal": {
+    "title": "Spesifikasi Teknis & Data Produk",
+    "close": "Tutup",
+    "seriesCode": "Kode Seri",
+    "category": "Kategori",
+    "technicalSpecs": "Parameter Spesifikasi Teknis",
+    "keyFeatures": "Fitur Utama & Keunggulan",
+    "compliance": "Sertifikasi & Standar Mutu",
+    "requestDatasheet": "Minta Lembar Data & Penawaran",
+    "copySuccess": "Kode produk disalin ke clipboard!"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "automation": "Automation",
+    "products": "Products",
+    "gallery": "Gallery",
+    "career": "Career",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "admin": "Admin Portal"
+  },
+  "footer": {
+    "tagline": "Trusted automotive electronics manufacturing solutions since 2015.",
+    "quickLinks": "Quick Links",
+    "products": "Products",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "allRights": "All rights reserved.",
+    "partOf": "Part of"
+  },
+  "btn": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "applyNow": "Apply Now",
+    "contactUs": "Contact Us",
+    "seeProducts": "See Products",
+    "joinTeam": "Join Our Team",
+    "sendMessage": "Send Message",
+    "backToJobs": "Back to Jobs"
+  },
+  "language": "Language",
+  "loading": "Loading...",
+  "noData": "No data found.",
+  "error": "An error occurred. Please try again."
+}
