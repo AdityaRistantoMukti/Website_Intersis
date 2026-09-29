@@ -1,0 +1,371 @@
+/* ══════════════════════════════════════════
+   About + Products Section
+   White background, editorial split layout
+   No cards, no badge glows — clean & modern
+   ══════════════════════════════════════════ */
+
+.aps-section {
+  background: #fff;
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
+}
+
+/* ── Inner wrapper: two columns ── */
+.aps-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 4rem;
+  align-items: start;
+}
+
+/* ── Divider line ── */
+.aps-divider {
+  width: 1px;
+  background: var(--gray-200);
+  align-self: stretch;
+  margin: 0;
+}
+
+/* ── Overline ── */
+.aps-overline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.6rem;
+}
+
+.aps-overline__dash {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--teal);
+}
+
+.aps-overline span:last-child {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--teal);
+  font-family: var(--font-body);
+}
+
+/* ══════════════════════
+   LEFT: About column
+   ══════════════════════ */
+.aps-about {
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.aps-heading {
+  font-size: clamp(1.65rem, 2.8vw, 2.35rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.6rem;
+}
+
+.aps-heading em {
+  font-style: normal;
+  color: var(--teal);
+}
+
+.aps-body-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.aps-body-text p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.78;
+  margin: 0;
+}
+
+/* ── Stats row (inline, no card boxes) ── */
+.aps-stats {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 1.75rem;
+}
+
+.aps-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aps-stat__value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+.aps-stat__label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* About link */
+.aps-about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--text);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  transition: color 0.2s ease, border-color 0.2s ease, gap 0.2s ease;
+}
+
+.aps-about-link:hover {
+  color: var(--teal);
+  border-color: var(--teal);
+  gap: 0.75rem;
+}
+
+/* ══════════════════════
+   RIGHT: Product Lines
+   ══════════════════════ */
+.aps-products {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Product list */
+.aps-product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.aps-product-item {
+  border-bottom: 1px solid var(--gray-200);
+  transition: background 0.2s ease;
+}
+
+.aps-product-item--active {
+  /* intentionally no background — keep it clean */
+}
+
+/* Row button */
+.aps-product-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: gap 0.25s ease;
+}
+
+.aps-product-btn:hover .aps-product-name,
+.aps-product-item--active .aps-product-name {
+  color: var(--teal);
+}
+
+.aps-product-btn:hover .aps-product-arrow,
+.aps-product-item--active .aps-product-arrow {
+  color: var(--teal);
+  transform: rotate(90deg);
+}
+
+.aps-product-num {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 22px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.aps-product-name {
+  flex: 1;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: color 0.2s ease;
+}
+
+.aps-product-arrow {
+  flex-shrink: 0;
+  color: var(--gray-400);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+              color 0.2s ease;
+}
+
+/* Expanded detail panel */
+.aps-product-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+}
+
+.aps-product-detail--open {
+  grid-template-rows: 1fr;
+}
+
+.aps-product-detail-inner {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+/* Schematic in detail */
+.aps-product-schematic {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--dark-card);
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Info text */
+.aps-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.aps-product-sku {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+  background: var(--teal-pale);
+  padding: 2px 8px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.aps-product-spec {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.aps-product-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.aps-product-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--teal);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: letter-spacing 0.2s ease;
+}
+
+.aps-product-link:hover {
+  letter-spacing: 0.02em;
+}
+
+/* ── Bottom catalog row ── */
+.aps-catalog-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.aps-catalog-count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.aps-catalog-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--text);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s, gap 0.2s;
+}
+
+.aps-catalog-link:hover {
+  color: var(--teal);
+  border-color: var(--teal);
+  gap: 0.65rem;
+}
+
+/* ══════════════════════
+   Responsive
+   ══════════════════════ */
+@media (max-width: 1024px) {
+  .aps-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem 0;
+  }
+
+  .aps-divider {
+    display: none;
+  }
+
+  .aps-about {
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 3rem;
+  }
+
+  .aps-stats {
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .aps-product-detail-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .aps-product-schematic {
+    max-width: 260px;
+  }
+
+  .aps-stats {
+    gap: 1rem 1.5rem;
+  }
+
+  .aps-heading {
+    font-size: 1.5rem;
+  }
+}
