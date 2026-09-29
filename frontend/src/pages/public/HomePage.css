@@ -932,255 +932,72 @@
   }
 }
 
-/* ── B2B ENTERPRISE CTA SECTION ── */
+/* ── B2B CTA BANNER (Clean Full-Width Strip Banner) ── */
 .cta-banner {
-  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
-  padding: clamp(var(--space-12), 5vw, var(--space-20)) 0 clamp(var(--space-16), 6vw, var(--space-24));
-  position: relative;
-  overflow: hidden;
-}
-
-/* Enterprise Curved Container Card */
-.cta-banner__card {
-  position: relative;
-  background: radial-gradient(100% 120% at 50% 0%, #00695C 0%, #004D40 45%, #002F27 100%);
-  border-radius: 28px;
-  border: 1px solid rgba(20, 184, 166, 0.35);
-  box-shadow: 0 25px 60px -12px rgba(0, 77, 64, 0.38),
-              0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px);
+  background: linear-gradient(135deg, #005F56 0%, #00897B 100%);
+  padding: clamp(var(--space-12), 4vw, var(--space-16)) 0;
   color: #FFFFFF;
-}
-
-/* Ambient Radial Soft Glow inside card */
-.cta-banner__glow {
-  position: absolute;
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(800px, 90%);
-  height: 250px;
-  background: radial-gradient(ellipse, rgba(45, 212, 191, 0.28) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Subtle Technical Circuit Watermark Grid */
-.cta-banner__circuit-pattern {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px);
-  background-size: 26px 26px;
-  pointer-events: none;
-  opacity: 0.7;
-  z-index: 1;
-}
-
-.cta-banner__body {
   position: relative;
-  z-index: 2;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Subtle ambient background glow */
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cta-banner__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  max-width: 920px;
-  margin: 0 auto;
+  justify-content: space-between;
+  gap: var(--space-8);
 }
 
-/* Top Pill Badge */
-.cta-banner__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 18px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #E6FFFA;
-  letter-spacing: 0.08em;
-  margin-bottom: var(--space-4);
-  text-transform: uppercase;
-}
-
-.cta-banner__badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #2DD4BF;
-  box-shadow: 0 0 10px #2DD4BF;
-  animation: pulseDot 1.8s infinite ease-in-out;
+.cta-banner__content {
+  max-width: 680px;
+  text-align: left;
 }
 
 .cta-banner__title {
-  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.25;
+  margin-bottom: var(--space-3);
   color: #FFFFFF !important;
-  margin-bottom: var(--space-4);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .cta-banner__subtitle {
-  font-size: clamp(1rem, 1.8vw, 1.15rem);
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.9) !important;
-  max-width: 720px;
-  margin: 0 auto var(--space-8);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92) !important;
+  margin: 0;
+  max-width: 640px;
 }
 
-/* ── 3 CORE TRUST PILLARS ── */
-.cta-banner__pillars {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-  margin-bottom: var(--space-8);
-}
-
-.cta-pillar-item {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-align: left;
-  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-}
-
-.cta-pillar-item:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.cta-pillar-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.cta-pillar-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.cta-pillar-title {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 2px;
-}
-
-.cta-pillar-desc {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1.4;
-}
-
-/* ── ACTIONS (Magic UI Button + Secondary Link) ── */
 .cta-banner__actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-bottom: var(--space-6);
+  flex-shrink: 0;
 }
 
 .cta-magic-button {
-  font-size: 1rem !important;
-  padding: 15px 34px !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
-}
-
-.cta-secondary-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(8px);
-  color: #FFFFFF;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cta-secondary-link:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: #FFFFFF;
-  transform: translateY(-2px);
-  color: #FFFFFF;
-}
-
-.cta-secondary-link svg {
-  transition: transform 0.2s ease;
-}
-
-.cta-secondary-link:hover svg {
-  transform: translateX(3px);
-}
-
-/* ── DIRECT CONTACT HOTLINE BAR ── */
-.cta-banner__contact-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding-top: var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  width: 100%;
-  max-width: 680px;
-  font-size: 0.8125rem;
-}
-
-.contact-bar-label {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-}
-
-.contact-bar-links {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.contact-pill-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #2DD4BF;
-  text-decoration: none;
-  font-weight: 600;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.8125rem;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.contact-pill-link:hover {
-  color: #FFFFFF;
-  transform: translateY(-1px);
-}
-
-.contact-pill-sep {
-  color: rgba(255, 255, 255, 0.35);
-  font-size: 0.75rem;
+  font-size: 0.95rem !important;
+  padding: 14px 32px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22) !important;
 }
 
 /* ============================================================
@@ -1625,21 +1442,24 @@
   .stats-deck__item:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .cta-banner__pillars {
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .cta-banner__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-6);
+  }
+  .cta-banner__content {
+    text-align: center;
+    max-width: 100%;
+  }
+  .cta-banner__subtitle {
+    margin: 0 auto;
   }
   .cta-banner__actions {
-    flex-direction: column;
-    width: 100%;
-  }
-  .cta-magic-button,
-  .cta-secondary-link {
-    width: 100%;
     justify-content: center;
+    width: 100%;
   }
-  .cta-banner__card {
-    padding: 32px 20px;
-    border-radius: 20px;
+  .cta-magic-button {
+    width: auto;
+    max-width: 100%;
   }
 }

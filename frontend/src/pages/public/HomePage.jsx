@@ -299,128 +299,21 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ── B2B ENTERPRISE CTA SECTION ── */}
+      {/* ── B2B CTA BANNER (Clean Full-Width 2-Column Banner) ── */}
       <section className="cta-banner" id="cta">
-        <div className="container">
-          <div className="cta-banner__card fade-up">
-            {/* Ambient Background Radial Glows & Circuit Watermark */}
-            <div className="cta-banner__glow" aria-hidden="true" />
-            <div className="cta-banner__circuit-pattern" aria-hidden="true" />
-
-            <div className="cta-banner__body">
-              {/* Badge */}
-              <div className="cta-banner__badge">
-                <span className="cta-banner__badge-dot" />
-                <span>
-                  {i18n.language === 'id'
-                    ? 'KEMITRAAN B2B & REKAYASA PRODUKSI ELEKTRONIK'
-                    : 'B2B PARTNERSHIP & ELECTRONICS MANUFACTURING'}
-                </span>
-              </div>
-
-              {/* Headline & Subtitle */}
-              <h2 className="cta-banner__title">{t('home:cta.title')}</h2>
-              <p className="cta-banner__subtitle">{t('home:cta.subtitle')}</p>
-
-              {/* 3 Core Trust Signals / Decision Pillars */}
-              <div className="cta-banner__pillars">
-                <div className="cta-pillar-item">
-                  <div className="cta-pillar-icon" style={{ background: 'rgba(20, 184, 166, 0.15)', color: '#2DD4BF' }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                    </svg>
-                  </div>
-                  <div className="cta-pillar-text">
-                    <strong className="cta-pillar-title">
-                      {i18n.language === 'id' ? 'Respon RFP < 24 Jam' : 'RFP Response < 24h'}
-                    </strong>
-                    <span className="cta-pillar-desc">
-                      {i18n.language === 'id'
-                        ? 'Tim teknik siap meninjau BOM & estimasi perakitan'
-                        : 'Engineering team reviews your BOM & assembly needs'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="cta-pillar-item">
-                  <div className="cta-pillar-icon" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8' }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                  </div>
-                  <div className="cta-pillar-text">
-                    <strong className="cta-pillar-title">
-                      {i18n.language === 'id' ? 'Kerahasiaan Desain & NDA' : 'IP & NDA Protection'}
-                    </strong>
-                    <span className="cta-pillar-desc">
-                      {i18n.language === 'id'
-                        ? 'Perlindungan paten & arsitektur sirkuit hak milik'
-                        : 'Full non-disclosure & intellectual property safety'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="cta-pillar-item">
-                  <div className="cta-pillar-icon" style={{ background: 'rgba(251, 191, 36, 0.15)', color: '#FBBF24' }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                    </svg>
-                  </div>
-                  <div className="cta-pillar-text">
-                    <strong className="cta-pillar-title">
-                      {i18n.language === 'id' ? 'Lini SMT Batam FTZ' : 'Batam FTZ SMT Plant'}
-                    </strong>
-                    <span className="cta-pillar-desc">
-                      {i18n.language === 'id'
-                        ? 'Cleanroom ISO 9001 & standar mutu ekspor dunia'
-                        : 'ISO 9001 cleanroom & export-grade production'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Actions: Magic UI Interactive Hover Button + Secondary Action */}
-              <div className="cta-banner__actions">
-                <InteractiveHoverButton
-                  to="/contact"
-                  variant="light"
-                  className="cta-magic-button"
-                >
-                  {t('home:cta.btnPartner')}
-                </InteractiveHoverButton>
-
-                <Link to="/products" className="cta-secondary-link">
-                  <span>{i18n.language === 'id' ? 'Lihat Portofolio Produk' : 'View Product Catalog'}</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </Link>
-              </div>
-
-              {/* Direct Instant Contact Bar */}
-              <div className="cta-banner__contact-bar">
-                <span className="contact-bar-label">
-                  {i18n.language === 'id' ? 'Saluran Langsung Tim Penjualan:' : 'Direct Sales Channels:'}
-                </span>
-                <div className="contact-bar-links">
-                  <a href="mailto:sales@intersis.co.id" className="contact-pill-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                      <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                    <span>sales@intersis.co.id</span>
-                  </a>
-                  <span className="contact-pill-sep" aria-hidden="true">•</span>
-                  <a href="tel:+62778462888" className="contact-pill-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                    <span>+62 (778) 462-888</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+        <div className="container cta-banner__inner">
+          <div className="cta-banner__content fade-up">
+            <h2 className="cta-banner__title">{t('home:cta.title')}</h2>
+            <p className="cta-banner__subtitle">{t('home:cta.subtitle')}</p>
+          </div>
+          <div className="cta-banner__actions fade-up">
+            <InteractiveHoverButton
+              to="/contact"
+              variant="light"
+              className="cta-magic-button"
+            >
+              {t('home:cta.btnPartner')}
+            </InteractiveHoverButton>
           </div>
         </div>
       </section>
