@@ -15,9 +15,9 @@ function StatTile({ value, suffix = '', label, sublabel, icon }) {
   const ref = useCountUp(value);
   return (
     <div className="stats-deck__item">
-      <div className="stats-deck__icon-wrap">
+      {/* <div className="stats-deck__icon-wrap">
         {icon}
-      </div>
+      </div> */}
       <div className="stats-deck__data">
         <div className="stats-deck__number">
           <span ref={ref}>0</span>

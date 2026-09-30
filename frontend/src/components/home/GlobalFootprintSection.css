@@ -80,12 +80,26 @@
   margin-bottom: var(--space-3);
 }
 
+[data-theme="dark"] .global-footprint-section {
+  background: #0B1320;
+  border-top-color: #1E2D44;
+  border-bottom-color: #1E2D44;
+}
+
+[data-theme="dark"] .global-footprint-section .section-title {
+  color: #F8FAFC;
+}
+
 .global-footprint-section .section-subtitle {
-  color: #475569;
+  color: #334155;
   max-width: 780px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.65;
+}
+
+[data-theme="dark"] .global-footprint-section .section-subtitle {
+  color: #94A3B8;
 }
 
 /* ── WORLD MAP CARD CONTAINER ── */

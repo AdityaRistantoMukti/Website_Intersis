@@ -101,6 +101,31 @@
   --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ── THEME OVERRIDES (Dark & Light) ── */
+[data-theme="dark"] {
+  --bg:            #0B1320;
+  --surface:       #111E33;
+  --gray-100:      #16243B;
+  --gray-200:      #1E2D44;
+  --gray-400:      #94A3B8;
+  --gray-600:      #CBD5E1;
+  --text:          #F8FAFC;
+  --text-muted:    #94A3B8;
+  --dark-border:   #1E2D44;
+}
+
+[data-theme="light"] {
+  --bg:            #F8FAFC;
+  --surface:       #FFFFFF;
+  --gray-100:      #F0F4F8;
+  --gray-200:      #E2E8F0;
+  --gray-400:      #94A3B8;
+  --gray-600:      #64748B;
+  --text:          #0F172A;
+  --text-muted:    #475569;
+  --dark-border:   #E2E8F0;
+}
+
 /* ── RESET & BASE ── */
 *, *::before, *::after {
   box-sizing: border-box;

@@ -154,11 +154,18 @@ export default function AboutProductsSection() {
 
         {/* ── RIGHT: Product Lines Column ── */}
         <div className="aps-products fade-up" style={{ transitionDelay: '0.08s' }}>
-
           <div className="aps-overline">
             <span className="aps-overline__dash" />
             <span>{isId ? 'LINI PRODUK UNGGULAN' : 'PRODUCT LINES'}</span>
           </div>
+
+          {/* Heading for Product Lines */}
+          <h2 className="aps-heading">
+            {isId
+              ? <>Lini Perakitan Presisi &<br /><em>Katalog Solusi OEM/ODM</em></>
+              : <>Precision Assembly Lines &<br /><em>OEM/ODM Solutions</em></>
+            }
+          </h2>
 
           {/* Product line list */}
           <ul className="aps-product-list">

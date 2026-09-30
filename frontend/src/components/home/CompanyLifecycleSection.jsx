@@ -261,7 +261,7 @@ function StageDetailContent({ stageIndex, lang }) {
       <div className="stage-variant stage-variant--disciplines">
         {disciplines.map((d) => (
           <div key={d.code} className="discipline-item">
-            <span className="discipline-item__code">{d.code}</span>
+            {/* <span className="discipline-item__code">{d.code}</span> */}
             <div className="discipline-item__body">
               <strong className="discipline-item__title">{d.title}</strong>
               <p className="discipline-item__desc">{d.desc}</p>
@@ -318,11 +318,11 @@ function StageDetailContent({ stageIndex, lang }) {
       <div className="stage-variant stage-variant--pipeline">
         {pipeline.map((item) => (
           <div key={item.step} className="quality-station">
-            <div className="quality-station__badge">{item.step}</div>
+            {/* <div className="quality-station__badge">{item.step}</div> */}
             <div className="quality-station__content">
               <div className="quality-station__header">
                 <span className="quality-station__title">{item.title}</span>
-                <span className="quality-station__tag">{item.badge}</span>
+                {/* <span className="quality-station__tag">{item.badge}</span> */}
               </div>
               <p className="quality-station__desc">{item.detail}</p>
             </div>
@@ -449,7 +449,7 @@ export default function CompanyLifecycleSection() {
       <div className="container">
         {/* Section Header */}
         <div className="section-header fade-up text-center">
-          <span className="about-interactive-eyebrow">PT GLOBAL PHILSONIC TECHNOLOGIES</span>
+          
           <h2 className="section-title section-title--light">{t('home:about.title')}</h2>
           <div className="divider" />
           <p className="section-subtitle section-subtitle--light">{t('home:about.subtitle')}</p>
@@ -499,11 +499,11 @@ export default function CompanyLifecycleSection() {
           {/* Left Column: Dynamic Technical Description */}
           <div className="lifecycle-stage__content">
             <div className="lifecycle-stage__top">
-              <div className="lifecycle-stage__phase-header">
+              {/* <div className="lifecycle-stage__phase-header">
                 <span className="lifecycle-stage__phase-badge">Phase 0{activeStep + 1}</span>
                 <span className="lifecycle-stage__phase-sep">•</span>
                 <span className="lifecycle-stage__phase-category">{stepCategories[activeStep]}</span>
-              </div>
+              </div> */}
 
               <h3 className="lifecycle-stage__title">{activeData.title}</h3>
               <p className="lifecycle-stage__lead">{activeData.lead}</p>
@@ -526,13 +526,13 @@ export default function CompanyLifecycleSection() {
               <div className="lifecycle-3d-card__sheen" aria-hidden="true" />
 
               {/* Top HUD Terminal Header */}
-              <div className="lifecycle-3d-card__hud-header">
+              {/* <div className="lifecycle-3d-card__hud-header">
                 <div className="hud-status">
                   <span className="hud-status__dot" />
                   <span className="hud-status__text">CAD / TELEMETRY HUD // STAGE 0{activeStep + 1}</span>
                 </div>
                 <span className="hud-coord">BTM 1.12° N, 104.05° E</span>
-              </div>
+              </div> */}
 
               {/* Interactive Animated Canvas */}
               <div className="lifecycle-3d-card__viewport">
@@ -571,7 +571,7 @@ export default function CompanyLifecycleSection() {
           </div>
         </div>
         {/* Actions */}
-            <div className="lifecycle-stage__actions" style={{marginTop: '3rem', justifyContent: 'center', display: 'flex'}}>
+            {/* <div className="lifecycle-stage__actions" style={{marginTop: '3rem', justifyContent: 'center', display: 'flex'}}>
               <Link to="/about" className="btn btn--primary btn--md" >
                 {t('home:about.cta')}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -582,7 +582,7 @@ export default function CompanyLifecycleSection() {
               <Link to="/contact" className="btn btn--outline-light btn--md">
                 {i18n.language === 'id' ? 'Konsultasi R&D OEM' : 'Consult OEM R&D'}
               </Link>
-            </div>
+            </div> */}
       </div>
     </section>
   );
