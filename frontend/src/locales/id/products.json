@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "kicker": "Batam FTZ Precision Plant • Solusi OEM / ODM",
+    "title": "Solusi Manufaktur Elektronik Otomotif & Otomasi Presisi",
+    "subtitle": "Katalog resmi produk siap OEM/ODM, prosesor audio DSP, modul keselamatan berkendara, jig uji otomatis, dan layanan kontrak perakitan SMT berkecepatan tinggi di Kawasan Bebas Batam (FTZ).",
+    "stats": [
+      { "value": "12+ Model", "label": "SKU Siap Produksi" },
+      { "value": "80.000 CPH", "label": "Kecepatan Lini SMT" },
+      { "value": "IATF 16949", "label": "Standar Mutu Nol Cacat" },
+      { "value": "45 Menit", "label": "Logistik Transit Singapura" }
+    ]
+  },
+  "catalog": {
+    "title": "Eksplorasi Produk & Modul Manufaktur",
+    "subtitle": "Pilih kategori untuk memfilter modul atau gunakan pencarian untuk menemukan nomor model SKU dan spesifikasi teknis.",
+    "searchPlaceholder": "Cari model SKU (mis: GPT-HU9800, DSP, Class-D, SMT)...",
+    "showingResults": "Menampilkan {{count}} dari {{total}} produk",
+    "showingFiltered": "Menampilkan {{count}} produk untuk kategori \"{{category}}\"",
+    "resetFilter": "Reset Filter",
+    "copySku": "Salin SKU",
+    "copied": "Tersalin!",
+    "viewGrid": "Tampilan Kartu",
+    "viewTable": "Tabel Spesifikasi",
+    "categories": {
+      "all": "Semua Produk",
+      "headunit": "Infotainment & Kokpit",
+      "audio": "Audio DSP & Amplifier",
+      "dashcam": "Safety & Vision Sensor",
+      "automation": "Otomasi & Test Jig",
+      "ems": "Kontrak Manufaktur EMS"
+    },
+    "btnSpecs": "Spesifikasi Lengkap",
+    "btnRfq": "Minta Penawaran (RFQ)",
+    "noResults": "Tidak ada produk yang cocok dengan pencarian Anda."
+  },
+  "table": {
+    "modelCode": "Kode Model",
+    "productName": "Nama Produk",
+    "category": "Kategori",
+    "keySpecs": "Spesifikasi Utama",
+    "voltage": "Tegangan Kerja",
+    "operatingTemp": "Suhu Kerja",
+    "actions": "Aksi"
+  },
+  "process": {
+    "kicker": "Alur Manufaktur Kustom",
+    "title": "Dari Konsep Desain Hingga Produksi Massal (OEM / ODM Journey)",
+    "subtitle": "Metodologi rekayasa terstruktur kami menjamin kualitas bebas cacat (Zero-Defect) dan efisiensi biaya produksi.",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Analisis RFQ & Review BOM",
+        "desc": "Evaluasi spesifikasi teknis, Bill of Materials (BOM), dan penawaran biaya dalam 24-48 jam kerja."
+      },
+      {
+        "step": "02",
+        "title": "Rekayasa DFM & Rapid Prototyping",
+        "desc": "Optimalisasi Design-for-Manufacturing (DFM) untuk memastikan efisiensi lini SMT dan pembuatan sampel purwarupa cepat."
+      },
+      {
+        "step": "03",
+        "title": "Tooling, Stensil & Pilot Run",
+        "desc": "Fabrikasi stensil laser elektropolis dan uji coba produksi batch awal terkontrol untuk memvalidasi toleransi mesin."
+      },
+      {
+        "step": "04",
+        "title": "Pengujian Kualitas 100% (SPI, AOI, ICT, Burn-In)",
+        "desc": "Verifikasi pasta solder 3D, inspeksi optik AOI, uji sirkuit otomatis, dan uji ketahanan termal ekstrem."
+      },
+      {
+        "step": "05",
+        "title": "Produksi Massal & Ekspor Batam FTZ",
+        "desc": "Perakitan massal berkecepatan 80.000 CPH, integrasi serialisasi barcode MES, dan pengiriman kilat 45 menit ke pelabuhan Singapura."
+      }
+    ]
+  },
+  "rfqModal": {
+    "badge": "Permintaan Penawaran B2B",
+    "title": "Request for Quotation (RFQ)",
+    "subtitle": "Kirimkan estimasi volume dan spesifikasi kebutuhan Anda untuk model:",
+    "orderScale": "Estimasi Skala Kebutuhan",
+    "scales": [
+      "Purwarupa / Sampel Pengujian (10 - 50 Unit)",
+      "Pilot Run / Uji Coba Batch (500 - 1.000 Unit)",
+      "Produksi Massal OEM/ODM (5.000+ Unit / Bulan)",
+      "Konsultasi Rekayasa & Fabrikasi Kustom"
+    ],
+    "companyName": "Nama Perusahaan / Organisasi",
+    "contactPerson": "Nama Narahubung",
+    "email": "Email Bisnis Resmi",
+    "notes": "Catatan Kustomisasi (misal: penyesuaian firmware, private labeling, protokol CAN-Bus khusus)",
+    "btnSendWa": "Kirim via WhatsApp Penjualan B2B",
+    "btnSendForm": "Lanjutkan ke Formulir Kontak Resmi",
+    "close": "Batal / Tutup"
+  },
+  "cta": {
+    "kicker": "Kemitraan Rekayasa & Manufaktur",
+    "title": "Membutuhkan Kustomisasi Khusus atau Desain Baru?",
+    "subtitle": "Tim R&D dan engineering kami siap berkolaborasi untuk perancangan skematik PCB, penyesuaian firmware CAN-Bus, hingga perakitan box-build OEM/ODM.",
+    "btnWa": "Konsultasi Cepat via WhatsApp B2B",
+    "btnForm": "Ajukan Kebutuhan Teknis (Formulir)"
+  }
+}

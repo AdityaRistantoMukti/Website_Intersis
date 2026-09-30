@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "kicker": "Batam FTZ Precision Plant • OEM / ODM Solutions",
+    "title": "Automotive Electronics & Precision Manufacturing Catalog",
+    "subtitle": "Official engineering catalog of Tier-1 standard OEM/ODM products, DSP audio processors, vision safety modules, automated test fixtures, and high-speed turnkey SMT assembly at Batam Free Trade Zone.",
+    "stats": [
+      { "value": "12+ Models", "label": "Production-Ready SKUs" },
+      { "value": "80,000 CPH", "label": "SMT Line Speed" },
+      { "value": "IATF 16949", "label": "Zero-Defect Quality Standard" },
+      { "value": "45 Mins", "label": "Express Singapore Logistics" }
+    ]
+  },
+  "catalog": {
+    "title": "Explore Products & Engineering Modules",
+    "subtitle": "Filter by engineering category or search model SKUs, key parameters, and regulatory certifications.",
+    "searchPlaceholder": "Search SKU (e.g. GPT-HU9800, DSP, Class-D, SMT)...",
+    "showingResults": "Showing {{count}} of {{total}} products",
+    "showingFiltered": "Showing {{count}} products in category \"{{category}}\"",
+    "resetFilter": "Reset Filter",
+    "copySku": "Copy SKU",
+    "copied": "Copied!",
+    "viewGrid": "Grid View",
+    "viewTable": "Specs Table",
+    "categories": {
+      "all": "All Products",
+      "headunit": "Infotainment & Cockpit",
+      "audio": "Audio DSP & Amplifiers",
+      "dashcam": "Safety & Vision Sensors",
+      "automation": "Automation & Test Jigs",
+      "ems": "Contract EMS Manufacturing"
+    },
+    "btnSpecs": "Full Specifications",
+    "btnRfq": "Request Quote (RFQ)",
+    "noResults": "No products match your search criteria."
+  },
+  "table": {
+    "modelCode": "Model Code",
+    "productName": "Product Name",
+    "category": "Category",
+    "keySpecs": "Key Specifications",
+    "voltage": "Operating Voltage",
+    "operatingTemp": "Operating Temp",
+    "actions": "Actions"
+  },
+  "process": {
+    "kicker": "Custom Manufacturing Workflow",
+    "title": "From Design Concept to Mass Production (OEM / ODM Journey)",
+    "subtitle": "Our structured engineering methodology guarantees zero-defect quality and cost-efficient production cycles.",
+    "steps": [
+      {
+        "step": "01",
+        "title": "RFQ & BOM Analysis",
+        "desc": "Technical specification review, component sourcing feasibility, and commercial quotation within 24-48 business hours."
+      },
+      {
+        "step": "02",
+        "title": "DFM Engineering & Rapid Prototyping",
+        "desc": "Design-for-Manufacturing optimization ensuring SMT placement yields and rapid turnaround prototype builds."
+      },
+      {
+        "step": "03",
+        "title": "Tooling, Stencils & Pilot Run",
+        "desc": "Electro-polished laser stencil fabrication and controlled pilot production batches to qualify machinery tolerances."
+      },
+      {
+        "step": "04",
+        "title": "100% Quality Validation (SPI, AOI, ICT, Burn-In)",
+        "desc": "3D solder paste inspection, automated optical inspection, functional in-circuit testing, and dynamic thermal burn-in."
+      },
+      {
+        "step": "05",
+        "title": "Mass Production & FTZ Global Shipping",
+        "desc": "High-speed 80K CPH assembly, real-time MES serialization, and 45-minute express transit to Singapore transshipment hub."
+      }
+    ]
+  },
+  "rfqModal": {
+    "badge": "B2B Quotation Request",
+    "title": "Request for Quotation (RFQ)",
+    "subtitle": "Submit your required production scale and technical requirements for SKU:",
+    "orderScale": "Estimated Order Scale",
+    "scales": [
+      "Prototypes / Evaluation Units (10 - 50 Units)",
+      "Pilot Run / Initial Batch (500 - 1,000 Units)",
+      "Mass OEM/ODM Production (5,000+ Units / Month)",
+      "Custom Engineering & Tooling Consultation"
+    ],
+    "companyName": "Company / Enterprise Name",
+    "contactPerson": "Contact Person Name",
+    "email": "Official Business Email",
+    "notes": "Customization Notes (e.g., custom firmware, private labeling, specific CAN-Bus protocols)",
+    "btnSendWa": "Submit via Direct B2B WhatsApp",
+    "btnSendForm": "Continue to Official Contact Form",
+    "close": "Cancel / Close"
+  },
+  "cta": {
+    "kicker": "Engineering & Manufacturing Partnership",
+    "title": "Need Custom Engineering or New Product Tooling?",
+    "subtitle": "Our R&D and manufacturing engineering team is ready to collaborate on schematic design, CAN-Bus firmware adaptation, and full OEM/ODM box-build production.",
+    "btnWa": "Direct B2B WhatsApp Consultation",
+    "btnForm": "Submit Technical Inquiry Form"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "hero": {
+    "badge": "Company Profile & Engineering Ecosystem",
+    "title": "Engineering Automotive Electronics & Global Automation",
+    "subtitle": "PT. Global Philsonic Technologies is a premier partner for high-speed precision SMT assembly, vehicle cockpit systems, DSP audio processors, and industrial automation test jigs in Batam Free Trade Zone.",
+    "breadcrumbHome": "Home",
+    "breadcrumbAbout": "About Us",
+    "statYears": "Years of Experience",
+    "statCapacity": "SMT Capacity / Hr",
+    "statArea": "Facility Area",
+    "statYield": "First-Pass Yield"
+  },
+  "narrative": {
+    "kicker": "About PT. Global Philsonic Technologies",
+    "title": "Leading Precision Electronics & Industrial Automation Partner in Southeast Asia",
+    "p1": "Strategically located in Batam Free Trade Zone (FTZ), Indonesia, PT. Global Philsonic Technologies (member of Intersis Group) delivers end-to-end Contract Electronics Manufacturing (EMS) and Original Design Manufacturing (ODM/OEM) solutions for global automotive and industrial automation clients.",
+    "p2": "Equipped with ESD-controlled Class 100K cleanrooms, high-speed SMT lines operating up to 80,000 CPH, and automated 3D AOI & X-Ray inspection, we manufacture electronic sub-assemblies with micro-tolerances that strictly adhere to IPC-A-610 Class 3 and IATF 16949 international standards.",
+    "ftzTitle": "Strategic Batam Free Trade Zone Advantages",
+    "ftz1Title": "0% Import Tariff & Duty Exemption",
+    "ftz1Desc": "Full customs duty exemption on imported semiconductor components, raw PCB materials, and capital manufacturing equipment.",
+    "ftz2Title": "45-Minute Maritime Transit to Singapore",
+    "ftz2Desc": "Daily dedicated barge connections directly linked to Singapore PSA transshipment hub for rapid, reliable worldwide container shipping.",
+    "ftz3Title": "Certificate of Origin (C/O) Made in Indonesia",
+    "ftz3Desc": "Official country-of-origin certification providing full regulatory compliance and tariff mitigation for US and global export markets."
+  },
+  "milestones": {
+    "kicker": "Milestones & Heritage",
+    "title": "A Decade-Long Journey of Engineering Excellence",
+    "subtitle": "Over ten years of continuous investment in precision manufacturing equipment, quality certifications, and global partner trust.",
+    "items": [
+      {
+        "year": "2014",
+        "title": "Establishment at Batam FTZ",
+        "desc": "Inaugurated precision electronic assembly operations with our first automated SMT lines catering to domestic and regional automotive audio demands.",
+        "badge": "Facility Inception"
+      },
+      {
+        "year": "2017",
+        "title": "SMT Expansion & ISO 9001 Accreditation",
+        "desc": "Upgraded to dual-beam high-speed SMT placement mounters, implemented an ESD Class 100K cleanroom, and achieved ISO 9001 certification.",
+        "badge": "Quality Standardization"
+      },
+      {
+        "year": "2020",
+        "title": "Automotive OEM Qualification & IATF 16949",
+        "desc": "Attained international automotive quality standard IATF 16949 and broadened operations into smart Android QLED infotainment and DSP amplifiers.",
+        "badge": "Automotive OEM Standard"
+      },
+      {
+        "year": "2023",
+        "title": "Industrial Automation Division & MES Rollout",
+        "desc": "Formed an internal automated test jig (ICT/FCT) design department and deployed cloud-integrated Manufacturing Execution Systems (MES) across all lines.",
+        "badge": "Smart Manufacturing"
+      },
+      {
+        "year": "2026",
+        "title": "Global Market Expansion & Next-Gen Tech",
+        "desc": "Export footprint established across 9+ global hubs with line upgrades supporting 01005 micro-components and turnkey box-build manufacturing.",
+        "badge": "Global Reach"
+      }
+    ]
+  },
+  "visionMission": {
+    "visionKicker": "Future Horizon",
+    "visionTitle": "Our Corporate Vision",
+    "visionDesc": "To become the leading automotive electronic and industrial automation OEM/ODM manufacturing partner in Southeast Asia, globally recognized for zero-defect quality, engineering precision, and cutting-edge innovation.",
+    "missionKicker": "Core Commitments",
+    "missionTitle": "Our Mission Statements",
+    "mission1": "Deliver world-class electronic manufacturing solutions adhering to zero-defect quality standards governed by IATF 16949.",
+    "mission2": "Design and manufacture high-precision automated test jigs that optimize client production throughput and reliability.",
+    "mission3": "Leverage Batam FTZ tariff advantages and Singapore logistics proximity to provide maximum cost efficiency and speed-to-market.",
+    "mission4": "Cultivate and empower Indonesian engineering talents to become world-class electronics and automation specialists."
+  },
+  "certifications": {
+    "kicker": "Standards & Compliance",
+    "title": "Verified Quality & Regulatory Accreditations",
+    "subtitle": "Strict adherence to globally recognized quality management, environmental safety, and manufacturing compliance standards.",
+    "items": [
+      {
+        "code": "IATF 16949:2016",
+        "name": "Automotive Quality Management System",
+        "desc": "International automotive standard for defect prevention, variation reduction, and supply chain efficiency.",
+        "status": "Fully Certified"
+      },
+      {
+        "code": "ISO 9001:2015",
+        "name": "Quality Management System",
+        "desc": "Global benchmark for consistent operational quality, customer satisfaction, and continuous process optimization.",
+        "status": "Fully Certified"
+      },
+      {
+        "code": "ISO 14001:2015",
+        "name": "Environmental Management System",
+        "desc": "Comprehensive environmental impact control, electronic waste management, and sustainable eco-friendly plant operations.",
+        "status": "Fully Certified"
+      },
+      {
+        "code": "RoHS & REACH",
+        "name": "EU Hazardous Substances Compliance",
+        "desc": "Free from lead, mercury, cadmium, and hazardous substances, qualifying all manufactured goods for direct EU/US export.",
+        "status": "100% Compliant"
+      },
+      {
+        "code": "IPC-A-610 Class 2 & 3",
+        "name": "Electronic Assemblies Acceptability Standard",
+        "desc": "The universal benchmark for high-reliability soldered electronic assemblies in automotive and industrial applications.",
+        "status": "Operational Benchmark"
+      }
+    ]
+  },
+  "facility": {
+    "kicker": "Factory Infrastructure & Equipment",
+    "title": "High-Precision Manufacturing Infrastructure in Batam",
+    "subtitle": "State-of-the-art Japanese SMT machinery and environmentally controlled cleanroom facilities ensuring unit-level consistency.",
+    "zones": [
+      {
+        "id": "cleanroom",
+        "title": "ESD Class 100K Cleanroom Production Area",
+        "highlight": "Temp 22±2°C · RH 45-65% · Dissipative Static Floor",
+        "desc": "Positive-pressure environment equipped with HEPA filtration units to prevent microscopic airborne particles and electrostatic discharge (ESD) from damaging sensitive semiconductor dies.",
+        "specs": ["99.97% HEPA Air Filtration", "24/7 Automated Temp & RH Telemetry", "ANSI/ESD S20.20 Certified ESD Protection"]
+      },
+      {
+        "id": "smt",
+        "title": "High-Speed Automated SMT Placement Lines",
+        "highlight": "80,000 CPH · 01005 Micro-Chip · 16-Layer PCB Capable",
+        "desc": "Dual-beam Panasonic & Yamaha surface mount mounters capable of placing components down to 01005 micro-packages, paired with closed-loop 3D Solder Paste Inspection.",
+        "specs": ["10-Zone Nitrogen N2 Thermal Reflow Oven", "Placement Accuracy ±0.025mm", "High-Precision Electro-Polished Laser Stencils"]
+      },
+      {
+        "id": "inspection",
+        "title": "Quality Inspection & Reliability Laboratory",
+        "highlight": "Inline 3D AOI · X-Ray BGA · Thermal Burn-in Chamber",
+        "desc": "Multi-tier non-destructive testing suites verifying solder joint fillets, concealed BGA balls, and endurance against thermal cycling (-40°C to +85°C).",
+        "specs": ["Koh Young 3D Inline AOI System", "High-Resolution 1μm 2D/3D X-Ray Inspection", "Dynamic Thermal & Vibration Burn-In Chamber"]
+      },
+      {
+        "id": "tooling",
+        "title": "Automation & Custom Test Jig Workshop",
+        "highlight": "Internal Tooling · PLC Architecture · Cloud MES Integration",
+        "desc": "In-house engineering workshop dedicated to designing, milling, and assembling automated Functional Circuit Test (FCT) jigs, In-Circuit Test (ICT) fixtures, and custom wiring looms.",
+        "specs": ["High-Precision CNC Tooling", "Omron/Mitsubishi PLC & Pneumatic Servos", "Unit-Level Barcode Serialization to Cloud MES"]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Interested in Auditing Our Batam Manufacturing Facility?",
+    "subtitle": "We welcome prospective automotive OEM/ODM partners to schedule an in-person facility tour or request a technical video conference assessment.",
+    "btnSchedule": "Schedule Facility Audit",
+    "btnContact": "Contact Our Engineering Team"
+  }
+}

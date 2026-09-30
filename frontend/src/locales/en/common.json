@@ -2,12 +2,12 @@
   "nav": {
     "home": "Home",
     "about": "About Us",
-    "automation": "Automation",
     "products": "Products",
+    "automation": "Automation",
     "gallery": "Gallery",
     "career": "Career",
-    "faq": "FAQ",
     "contact": "Contact",
+    "themeToggle": "Toggle Theme",
     "admin": "Admin Portal"
   },
   "footer": {

@@ -1,0 +1,152 @@
+{
+  "hero": {
+    "badge": "Profil Perusahaan & Ekosistem Rekayasa",
+    "title": "Membangun Keunggulan Elektronik Otomotif & Otomasi Global",
+    "subtitle": "PT. Global Philsonic Technologies adalah mitra terpercaya perakitan SMT presisi, modul kokpit kendaraan, prosesor DSP, dan mesin otomasi industri di Batam Free Trade Zone.",
+    "breadcrumbHome": "Beranda",
+    "breadcrumbAbout": "Tentang Kami",
+    "statYears": "Tahun Pengalaman",
+    "statCapacity": "Kapasitas SMT/Jam",
+    "statArea": "Luas Area Fasilitas",
+    "statYield": "First-Pass Yield"
+  },
+  "narrative": {
+    "kicker": "Tentang PT. Global Philsonic Technologies",
+    "title": "Mitra Manufaktur Elektronik Presisi & Otomasi Terdepan di Asia Tenggara",
+    "p1": "Berdiri di kawasan strategis Batam Free Trade Zone (FTZ), PT. Global Philsonic Technologies (bagian dari Intersis Group) menghadirkan solusi manufaktur kontrak terintegrasi (EMS) dan manufaktur desain orisinil (ODM/OEM) untuk industri otomotif dan otomasi global.",
+    "p2": "Dengan fasilitas cleanroom berstandar ESD, lini SMT berkecepatan tinggi hingga 80.000 CPH, serta inspeksi 3D AOI dan X-Ray otomatis, kami memproduksi modul elektronik dengan toleransi presisi tingkat tinggi yang mematuhi standar internasional IPC-A-610 dan IATF 16949.",
+    "ftzTitle": "Keunggulan Strategis Batam Free Trade Zone",
+    "ftz1Title": "Bebas Bea Masuk (0% Tariff)",
+    "ftz1Desc": "Pembebasan pajak impor untuk seluruh bahan baku komponen semikonduktor, PCB, dan mesin produksi manufaktur.",
+    "ftz2Title": "Koridor Maritim 45 Menit ke Singapura",
+    "ftz2Desc": "Koneksi logistik harian langsung ke pelabuhan transshipment global PSA Singapore untuk efisiensi ekspor ke seluruh dunia.",
+    "ftz3Title": "Certificate of Origin (C/O) Indonesia",
+    "ftz3Desc": "Sertifikasi asal produk Made in Indonesia resmi untuk kepatuhan regulasi perdagangan global dan mitigasi tarif pasar ekspor."
+  },
+  "milestones": {
+    "kicker": "Jejak Langkah & Perkembangan",
+    "title": "Perjalanan Menuju Keunggulan Rekayasa",
+    "subtitle": "Dedikasi lebih dari satu dekade dalam memperluas kapabilitas teknologi perakitan dan kepercayaan mitra global.",
+    "items": [
+      {
+        "year": "2014",
+        "title": "Pendirian Pabrik di Batam FTZ",
+        "desc": "Memulai operasional manufaktur perakitan elektronik presisi dengan lini SMT pertama untuk pasar otomotif domestik dan regional.",
+        "badge": "Inisiasi Pabrik"
+      },
+      {
+        "year": "2017",
+        "title": "Ekspansi Lini SMT & Sertifikasi ISO 9001",
+        "desc": "Peningkatan kapasitas SMT dual-beam, penerapan ruang cleanroom anti-statis (ESD Class 100K), dan perolehan akreditasi ISO 9001.",
+        "badge": "Standarisasi Mutu"
+      },
+      {
+        "year": "2020",
+        "title": "Kualifikasi OEM Otomotif & IATF 16949",
+        "desc": "Penerapan sistem manajemen mutu otomotif global IATF 16949 serta perluasan produksi ke sistem infotainment cerdas dan DSP audio.",
+        "badge": "Standar Otomotif Global"
+      },
+      {
+        "year": "2023",
+        "title": "Divisi Otomasi Industri & MES Cloud",
+        "desc": "Pembentukan divisi rekayasa jig uji otomatis (ICT/FCT) mandiri dan digitalisasi seluruh lini produksi dengan Manufacturing Execution System.",
+        "badge": "Digitalisasi Pabrik"
+      },
+      {
+        "year": "2026",
+        "title": "Jangkauan Pasar Global & Fasilitas Generasi Baru",
+        "desc": "Ekspor modul otomotif ke lebih dari 9 negara utama dunia serta modernisasi peralatan SMT generasi terbaru dengan kapabilitas chip 01005.",
+        "badge": "Ekspansi Global"
+      }
+    ]
+  },
+  "visionMission": {
+    "visionKicker": "Arah Masa Depan",
+    "visionTitle": "Visi Perusahaan",
+    "visionDesc": "Menjadi mitra manufaktur elektronik otomotif dan rekayasa otomasi industri terdepan di Asia Tenggara yang diakui secara global atas keunggulan kualitas, ketelitian presisi, dan inovasi teknologi.",
+    "missionKicker": "Tanggung Jawab & Komitmen",
+    "missionTitle": "Misi Perusahaan",
+    "mission1": "Menyediakan layanan perakitan elektronik kelas dunia dengan standar tanpa cacat (Zero-Defect) melalui proses berstandar IATF 16949.",
+    "mission2": "Mengembangkan solusi otomasi industri dan pengujian presisi tinggi yang meningkatkan efisiensi serta keandalan klien.",
+    "mission3": "Memaksimalkan keunggulan logistik Batam FTZ untuk memberikan efisiensi biaya dan kecepatan waktu pengiriman bagi mitra global.",
+    "mission4": "Membina dan memberdayakan talenta insinyur lokal Indonesia menjadi ahli teknologi elektronika berdaya saing internasional."
+  },
+  "certifications": {
+    "kicker": "Standar Kepatuhan & Sertifikasi",
+    "title": "Komitmen Kualitas yang Terverifikasi",
+    "subtitle": "Kepatuhan terhadap standar manajemen mutu, keselamatan, dan lingkungan internasional yang diaudit secara berkala.",
+    "items": [
+      {
+        "code": "IATF 16949:2016",
+        "name": "Sistem Manajemen Mutu Otomotif Global",
+        "desc": "Standar kepatuhan industri otomotif internasional untuk pencegahan cacat, pengurangan variasi, dan efisiensi rantai pasok.",
+        "status": "Tersertifikasi Penuh"
+      },
+      {
+        "code": "ISO 9001:2015",
+        "name": "Sistem Manajemen Kualitas",
+        "desc": "Standar internasional untuk manajemen operasional yang konsisten, kepuasan pelanggan, dan perbaikan berkelanjutan.",
+        "status": "Tersertifikasi Penuh"
+      },
+      {
+        "code": "ISO 14001:2015",
+        "name": "Sistem Manajemen Lingkungan",
+        "desc": "Pengendalian dampak lingkungan, pengelolaan limbah elektronik berbahaya (B3), dan operasional pabrik yang ramah lingkungan.",
+        "status": "Tersertifikasi Penuh"
+      },
+      {
+        "code": "RoHS & REACH",
+        "name": "Kepatuhan Zat Berbahaya Uni Eropa",
+        "desc": "Bebas dari timbal, merkuri, dan zat kimia terlarang untuk memenuhi syarat ekspor langsung ke pasar Eropa dan Amerika Serikat.",
+        "status": "Kepatuhan 100%"
+      },
+      {
+        "code": "IPC-A-610 Class 2 & 3",
+        "name": "Standar Keberterimaan Rakitan Elektronik",
+        "desc": "Tolak ukur internasional perakitan PCB solder presisi untuk perangkat elektronik komersial dan otomotif keandalan tinggi.",
+        "status": "Standar Operasional"
+      }
+    ]
+  },
+  "facility": {
+    "kicker": "Fasilitas & Infrastruktur Pabrik",
+    "title": "Ekosistem Produksi Presisi Tinggi di Batam",
+    "subtitle": "Dukungan mesin manufaktur mutakhir dan lingkungan produksi terkontrol untuk menjamin konsistensi kualitas setiap unit.",
+    "zones": [
+      {
+        "id": "cleanroom",
+        "title": "Ruang Cleanroom ESD Class 100K",
+        "highlight": "Kontrol Suhu 22±2°C · Kelembaban 45-65% RH · Lantai Disipatif",
+        "desc": "Lingkungan perakitan bertekanan positif dengan filtrasi HEPA untuk mencegah kontaminasi partikel debu dan pelepasan elektrostatis (ESD) yang dapat merusak komponen semikonduktor mikro.",
+        "specs": ["Filtrasi Udara HEPA 99.97%", "Sistem Monitoring Suhu & RH 24/7", "Perlindungan ESD Terverifikasi ANSI/ESD S20.20"]
+      },
+      {
+        "id": "smt",
+        "title": "Lini Perakitan SMT Kecepatan Tinggi",
+        "highlight": "80,000 CPH · 01005 Micro Chip · PCB Multilayer 16-Layer",
+        "desc": "Lini pemasangan komponen permukaan otomatis dual-beam Yamaha & Panasonic dengan presisi penempatan hingga ukuran komponen mikroskopis 01005 dan kontrol pasta solder solder 3D SPI.",
+        "specs": ["Oven Reflow 10-Zona Atmosfer Nitrogen N2", "Penempatan Chip Presisi ±0.025mm", "Stensil Laser Elektropolish Akurasi Tinggi"]
+      },
+      {
+        "id": "inspection",
+        "title": "Laboratorium Inspeksi & Pengujian Mutu",
+        "highlight": "3D AOI Inline · X-Ray BGA · Burn-in Chamber Uji Termal",
+        "desc": "Stasiun pengujian komprehensif untuk memastikan 100% integritas solder, verifikasi sambungan BGA tersembunyi, serta uji ketahanan termal siklus ekstrem (-40°C hingga +85°C).",
+        "specs": ["Koh Young 3D Inline AOI System", "Inspeksi X-Ray 2D/3D Resolusi 1μm", "Chamber Uji Getaran & Burn-In Suhu Ekstrem"]
+      },
+      {
+        "id": "tooling",
+        "title": "Workshop Otomasi & Jig Rekayasa",
+        "highlight": "Desain Mandiri · Kontrol PLC · Integrasi Cloud MES",
+        "desc": "Fasilitas rekayasa in-house untuk merancang dan memproduksi jig pengujian fungsi otomatis (FCT), jig In-Circuit Test (ICT), serta perakitan wire harness kustom secara presisi.",
+        "specs": ["Pemesinan CNC Presisi Tinggi", "Sistem Kontrol PLC & Pneumatik Presisi", "Perekaman Data Serialisasi Unit ke Cloud MES"]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Tertarik Melakukan Audit Fasilitas Pabrik Kami?",
+    "subtitle": "Kami menyambut baik kunjungan langsung calon mitra OEM/ODM ke pabrik Batam FTZ kami atau konsultasi teknis via konferensi video.",
+    "btnSchedule": "Jadwalkan Kunjungan / Audit",
+    "btnContact": "Hubungi Tim Rekayasa Kami"
+  }
+}

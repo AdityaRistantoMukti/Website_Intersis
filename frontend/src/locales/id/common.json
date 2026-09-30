@@ -2,12 +2,12 @@
   "nav": {
     "home": "Beranda",
     "about": "Tentang Kami",
-    "automation": "Otomasi & Robot",
     "products": "Produk",
+    "automation": "Otomasi",
     "gallery": "Galeri",
     "career": "Karir",
-    "faq": "FAQ",
     "contact": "Kontak",
+    "themeToggle": "Ganti Tema",
     "admin": "Admin Portal"
   },
   "footer": {
