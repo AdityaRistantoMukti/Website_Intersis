@@ -1,0 +1,259 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   CONTACT PAGE STYLES — B2B Plant RFQ & Physical Presence
+   PT. Global Philsonic Technologies (GPT)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.contact-page-header {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] .contact-page-header {
+  background: #0b1320;
+  border-bottom-color: #1e293b;
+}
+
+.contact-header-intro {
+  margin-top: 1rem;
+  max-width: 820px;
+}
+
+.contact-header-title {
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+[data-theme="dark"] .contact-header-title {
+  color: #f8fafc;
+}
+
+.contact-header-sub {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #334155;
+  font-weight: 450;
+}
+
+[data-theme="dark"] .contact-header-sub {
+  color: #94a3b8;
+}
+
+/* ── MAIN CONTACT SECTION ── */
+.contact-section {
+  padding: 3.5rem 0 5rem;
+  background: #ffffff;
+  transition: background-color 0.25s ease;
+}
+
+[data-theme="dark"] .contact-section {
+  background: #060a12;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ── LEFT COLUMN: PLANT PRESENCE & DETAILS ── */
+.contact-info-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .contact-info-card {
+  background: #0f172a;
+  border-color: #1e293b;
+}
+
+.contact-detail-block {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-detail-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(0, 137, 123, 0.1);
+  color: var(--teal, #00897b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-detail-content h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+[data-theme="dark"] .contact-detail-content h4 {
+  color: #f8fafc;
+}
+
+.contact-detail-content p,
+.contact-detail-content a {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #334155;
+  margin: 0;
+  text-decoration: none;
+  font-weight: 450;
+}
+
+[data-theme="dark"] .contact-detail-content p,
+[data-theme="dark"] .contact-detail-content a {
+  color: #94a3b8;
+}
+
+.contact-detail-content a:hover {
+  color: var(--teal, #00897b);
+}
+
+/* Map Simulation Box */
+.contact-map-box {
+  margin-top: 2rem;
+  border-radius: 12px;
+  background: #0b1320;
+  border: 1px solid #1e293b;
+  padding: 1.5rem;
+  color: #f8fafc;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-map-badge {
+  display: inline-block;
+  background: rgba(45, 212, 191, 0.15);
+  color: #2dd4bf;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+/* ── RIGHT COLUMN: RFQ FORM ── */
+.contact-form-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 2.25rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .contact-form-card {
+  background: #0f172a;
+  border-color: #1e293b;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.contact-field-full {
+  grid-column: span 2;
+}
+
+.contact-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+[data-theme="dark"] .contact-label {
+  color: #cbd5e1;
+}
+
+.contact-input,
+.contact-select,
+.contact-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .contact-input,
+[data-theme="dark"] .contact-select,
+[data-theme="dark"] .contact-textarea {
+  background: #0b1320;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+.contact-input:focus,
+.contact-select:focus,
+.contact-textarea:focus {
+  outline: none;
+  border-color: var(--teal, #00897b);
+  box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.15);
+}
+
+.contact-submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--teal, #00897b);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  margin-top: 1rem;
+}
+
+.contact-submit-btn:hover {
+  opacity: 0.92;
+}
+
+.contact-submit-btn:active {
+  transform: scale(0.99);
+}
+
+@media (max-width: 960px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-field-full {
+    grid-column: span 1;
+  }
+}
