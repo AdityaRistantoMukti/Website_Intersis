@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 export default function CategoriesModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +55,12 @@ export default function CategoriesModule() {
   };
 
   const handleDelete = async (id, catName) => {
-    if (!window.confirm(`Yakin ingin menghapus kategori '${catName}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Kategori?',
+      text: `Yakin ingin menghapus kategori '${catName}'?`,
+      confirmText: 'Ya, Hapus Kategori',
+    });
+    if (!confirmed) return;
     try {
       await api.delete(`/admin/job-categories/${id}`);
       addToast(`Kategori '${catName}' berhasil dihapus.`, 'success');

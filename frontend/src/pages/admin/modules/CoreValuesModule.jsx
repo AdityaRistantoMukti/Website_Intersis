@@ -4,7 +4,7 @@ import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
 
 export default function CoreValuesModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,12 @@ export default function CoreValuesModule() {
   };
 
   const handleDelete = async (id, title) => {
-    if (!window.confirm(`Yakin ingin menghapus nilai inti '${title}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Nilai Inti?',
+      text: `Yakin ingin menghapus nilai inti '${title}'?`,
+      confirmText: 'Ya, Hapus',
+    });
+    if (!confirmed) return;
 
     try {
       await api.delete(`/admin/core-values/${id}`);

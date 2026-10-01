@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export default function BenefitsModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
 
   const [benefits, setBenefits] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,12 @@ export default function BenefitsModule() {
   };
 
   const handleDelete = async (id, bTitle) => {
-    if (!window.confirm(`Yakin ingin menghapus benefit '${bTitle}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Benefit?',
+      text: `Yakin ingin menghapus benefit '${bTitle}'?`,
+      confirmText: 'Ya, Hapus Benefit',
+    });
+    if (!confirmed) return;
     try {
       await api.delete(`/admin/benefits/${id}`);
       addToast(`Benefit '${bTitle}' berhasil dihapus.`, 'success');

@@ -131,11 +131,18 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
 
   return (
     <div className="admin-shell">
+      {/* Mobile Drawer Backdrop */}
+      <div
+        className={`admin-sidebar-backdrop ${mobileOpen ? 'admin-sidebar-backdrop--visible' : ''}`}
+        onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
+      />
+
       {/* ── SIDEBAR ── */}
       <aside className={`admin-sidebar ${mobileOpen ? 'admin-sidebar--open' : ''}`}>
         {/* Header */}
         <div className="admin-sidebar-header">
-          <Link to="/" className="admin-sidebar-logo">
+          <Link to="/" className="admin-sidebar-logo" onClick={() => setMobileOpen(false)}>
             <img
               src="/images/logo_company.jpg"
               alt="Logo"
@@ -147,7 +154,17 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               <div className="admin-sidebar-brand-sub">GPT &bull; Internal CMS</div>
             </div>
           </Link>
-          <span className="admin-sidebar-version">v1.0</span>
+          <div className="admin-sidebar-header-right">
+            <span className="admin-sidebar-version">v1.0</span>
+            <button
+              type="button"
+              className="admin-sidebar-close-btn"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Tutup sidebar"
+            >
+              <X size={18} strokeWidth={2} />
+            </button>
+          </div>
         </div>
 
         {/* Nav Sections */}
@@ -240,7 +257,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
             {/* Server Online Badge */}
             <span className="admin-status-indicator" title="Backend Express connected on port 3000">
               <span className="admin-status-dot" />
-              <span>API Aktif</span>
+              <span className="admin-status-text">API Aktif</span>
             </span>
 
             {/* Direct Link to Public Landing Page */}
@@ -251,7 +268,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               className="admin-btn-public-preview"
               title="Buka Website Publik di Tab Baru"
             >
-              <span>Lihat Website</span>
+              <span className="admin-preview-text">Lihat Website</span>
               <ExternalLink size={13} strokeWidth={2} />
             </a>
 
@@ -259,12 +276,12 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
             <div style={{ position: 'relative' }}>
               <button
                 type="button"
-                className="admin-btn-secondary"
+                className="admin-btn-secondary admin-profile-btn"
                 style={{ padding: '6px 12px', fontSize: '0.825rem', gap: '8px', display: 'flex', alignItems: 'center' }}
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               >
                 <User size={15} strokeWidth={2} />
-                <span>{user?.name?.split(' ')[0] || 'Admin'}</span>
+                <span className="admin-profile-name">{user?.name?.split(' ')[0] || 'Admin'}</span>
                 <ChevronDown size={14} strokeWidth={2} />
               </button>
 

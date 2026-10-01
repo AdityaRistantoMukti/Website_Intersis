@@ -6,7 +6,7 @@ import { useAdminAuth } from '../../../context/AdminAuthContext';
 import LanguageTabControl from '../../../components/admin/LanguageTabControl';
 
 export default function GalleryModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
 
   const [activeSection, setActiveSection] = useState('photos');
   const [items, setItems] = useState([]);
@@ -138,7 +138,12 @@ export default function GalleryModule() {
   };
 
   const handleDelete = async (id, itemTitle) => {
-    if (!window.confirm(`Yakin ingin menghapus foto galeri '${itemTitle}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Foto Galeri?',
+      text: `Yakin ingin menghapus foto galeri '${itemTitle}'?`,
+      confirmText: 'Ya, Hapus Foto',
+    });
+    if (!confirmed) return;
 
     try {
       await api.delete(`/admin/gallery/${id}`);

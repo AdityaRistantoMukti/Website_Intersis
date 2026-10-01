@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api, { extractErrorMessage } from '../lib/api';
+import { showToast, showAlert, showConfirm } from '../utils/alert';
 
 const AdminAuthContext = createContext(null);
 
@@ -14,23 +15,10 @@ export function AdminAuthProvider({ children }) {
     }
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [toasts, setToasts] = useState([]);
 
-  // Toast notification manager
-  const addToast = useCallback((message, type = 'info', duration = 4000) => {
-    const id = Date.now() + Math.random().toString(36).substring(2, 7);
-    setToasts((prev) => [...prev, { id, message, type }]);
-
-    if (duration > 0) {
-      setTimeout(() => {
-        setToasts((prev) => prev.filter((t) => t.id !== id));
-      }, duration);
-    }
-    return id;
-  }, []);
-
-  const removeToast = useCallback((id) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
+  // Interactive SweetAlert2 Toast notification manager
+  const addToast = useCallback((message, type = 'info') => {
+    showToast(message, type);
   }, []);
 
   // Sync token changes to headers
@@ -123,37 +111,14 @@ export function AdminAuthProvider({ children }) {
     logout,
     refreshProfile,
     changePassword,
-    toasts,
     addToast,
-    removeToast,
+    showAlert,
+    showConfirm,
   };
 
   return (
     <AdminAuthContext.Provider value={value}>
       {children}
-
-      {/* Global Admin Toast Floating Container */}
-      <div className="admin-toast-container" aria-live="polite">
-        {toasts.map((toast) => (
-          <div key={toast.id} className={`admin-toast admin-toast--${toast.type}`}>
-            <span className="admin-toast__icon">
-              {toast.type === 'success' && '✓'}
-              {toast.type === 'error' && '✕'}
-              {toast.type === 'warning' && '⚠'}
-              {toast.type === 'info' && 'ℹ'}
-            </span>
-            <div className="admin-toast__message">{toast.message}</div>
-            <button
-              type="button"
-              className="admin-toast__close"
-              onClick={() => removeToast(toast.id)}
-              aria-label="Tutup notifikasi"
-            >
-              ×
-            </button>
-          </div>
-        ))}
-      </div>
     </AdminAuthContext.Provider>
   );
 }

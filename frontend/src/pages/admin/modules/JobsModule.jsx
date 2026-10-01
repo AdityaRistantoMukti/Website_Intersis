@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 export default function JobsModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
 
   const [jobs, setJobs] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -113,7 +113,12 @@ export default function JobsModule() {
   };
 
   const handleDelete = async (id, title) => {
-    if (!window.confirm(`Yakin ingin menghapus lowongan '${title}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Lowongan Karir?',
+      text: `Yakin ingin menghapus lowongan '${title}'?`,
+      confirmText: 'Ya, Hapus Lowongan',
+    });
+    if (!confirmed) return;
 
     try {
       await api.delete(`/admin/jobs/${id}`);

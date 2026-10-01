@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 export default function FaqsModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
 
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,7 +59,12 @@ export default function FaqsModule() {
   };
 
   const handleDelete = async (id, qText) => {
-    if (!window.confirm(`Yakin ingin menghapus pertanyaan FAQ '${qText}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Pertanyaan FAQ?',
+      text: `Yakin ingin menghapus pertanyaan FAQ '${qText}'?`,
+      confirmText: 'Ya, Hapus FAQ',
+    });
+    if (!confirmed) return;
     try {
       await api.delete(`/admin/faqs/${id}`);
       addToast('Pertanyaan FAQ berhasil dihapus.', 'success');

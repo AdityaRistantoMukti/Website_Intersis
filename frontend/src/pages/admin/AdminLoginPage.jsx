@@ -167,14 +167,14 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 className="admin-quick-chip"
-                onClick={() => handleQuickFill('admin@isa.co.id', 'Admin@ISA2026')}
+                onClick={() => handleQuickFill('admin@gpt.co.id', 'admin123')}
               >
                 <div>
                   <div className="admin-quick-chip__role">
                     <Shield size={14} color="#ffffff" />
                     <span>Administrator</span>
                   </div>
-                  <div className="admin-quick-chip__email">admin@isa.co.id</div>
+                  <div className="admin-quick-chip__email">admin@gpt.co.id</div>
                 </div>
                 <span className="admin-quick-chip__badge">Pilih</span>
               </button>

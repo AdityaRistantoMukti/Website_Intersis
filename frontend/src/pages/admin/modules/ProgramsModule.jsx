@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 export default function ProgramsModule() {
-  const { addToast } = useAdminAuth();
+  const { addToast, showConfirm } = useAdminAuth();
 
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -77,7 +77,12 @@ export default function ProgramsModule() {
   };
 
   const handleDelete = async (id, pTitle) => {
-    if (!window.confirm(`Yakin ingin menghapus program '${pTitle}'?`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Program?',
+      text: `Yakin ingin menghapus program '${pTitle}'?`,
+      confirmText: 'Ya, Hapus Program',
+    });
+    if (!confirmed) return;
     try {
       await api.delete(`/admin/programs/${id}`);
       addToast(`Program '${pTitle}' berhasil dihapus.`, 'success');

@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 export default function UsersModule() {
-  const { user: currentUser, addToast } = useAdminAuth();
+  const { user: currentUser, addToast, showConfirm } = useAdminAuth();
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,12 @@ export default function UsersModule() {
       addToast('Anda tidak dapat menghapus akun Anda sendiri saat sedang login.', 'warning');
       return;
     }
-    if (!window.confirm(`Yakin ingin menghapus pengguna '${userName}'? Tindakan ini tidak dapat dibatalkan.`)) return;
+    const confirmed = await showConfirm({
+      title: 'Hapus Pengguna?',
+      text: `Yakin ingin menghapus pengguna '${userName}'? Tindakan ini tidak dapat dibatalkan.`,
+      confirmText: 'Ya, Hapus Pengguna',
+    });
+    if (!confirmed) return;
 
     try {
       await api.delete(`/admin/users/${id}`);
