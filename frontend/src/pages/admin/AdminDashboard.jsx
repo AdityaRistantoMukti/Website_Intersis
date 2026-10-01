@@ -7,15 +7,12 @@ import AdminLayout from '../../components/admin/AdminLayout';
 // Submodules
 import OverviewModule from './modules/OverviewModule';
 import HomeModule from './modules/HomeModule';
-import CompanyModule from './modules/CompanyModule';
-import ContactModule from './modules/ContactModule';
-import CoreValuesModule from './modules/CoreValuesModule';
+import AboutModule from './modules/AboutModule';
+import ProductsModule from './modules/ProductsModule';
+import AutomationModule from './modules/AutomationModule';
 import GalleryModule from './modules/GalleryModule';
-import JobsModule from './modules/JobsModule';
-import CategoriesModule from './modules/CategoriesModule';
-import BenefitsModule from './modules/BenefitsModule';
-import ProgramsModule from './modules/ProgramsModule';
-import FaqsModule from './modules/FaqsModule';
+import CareerModule from './modules/CareerModule';
+import ContactModule from './modules/ContactModule';
 import UsersModule from './modules/UsersModule';
 import LogsModule from './modules/LogsModule';
 
@@ -64,24 +61,24 @@ export default function AdminDashboard() {
         return <OverviewModule onNavigateTab={handleSelectTab} />;
       case 'home':
         return <HomeModule />;
+      case 'about':
       case 'company':
-        return <CompanyModule />;
-      case 'contact':
-        return <ContactModule />;
-      case 'core-values':
-        return <CoreValuesModule />;
+        return <AboutModule />;
+      case 'products':
+        return <ProductsModule />;
+      case 'automation':
+        return <AutomationModule />;
       case 'gallery':
         return <GalleryModule />;
+      case 'career':
       case 'jobs':
-        return <JobsModule />;
       case 'categories':
-        return <CategoriesModule />;
       case 'benefits':
-        return <BenefitsModule />;
       case 'programs':
-        return <ProgramsModule />;
       case 'faqs':
-        return <FaqsModule />;
+        return <CareerModule />;
+      case 'contact':
+        return <ContactModule />;
       case 'users':
         if (!isFullAdmin) {
           return (

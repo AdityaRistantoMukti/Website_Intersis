@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useSiteSettings } from '../../hooks/useApi';
+import { getLocalizedData } from '../../lib/translator';
 import ProductSchematic from './ProductSchematic';
 import './AboutProductsSection.css';
 
@@ -96,6 +98,17 @@ export default function AboutProductsSection() {
   const { i18n } = useTranslation(['home', 'common']);
   const isId = i18n.language === 'id';
   const [activeId, setActiveId] = useState(null);
+
+  // Dynamic CMS Settings
+  const { data: dynamicSettings } = useSiteSettings('home_about_products');
+  const localized = getLocalizedData(dynamicSettings, isId ? 'id' : 'en');
+
+  const tagline = localized?.tagline || (isId ? 'TENTANG KAMI' : 'ABOUT US');
+  const heading = localized?.title || (isId
+    ? 'Mitra Manufaktur Elektronik Otomotif di Batam Free Trade Zone'
+    : 'Automotive Electronics Manufacturing Partner in Batam Free Trade Zone');
+  const narrative = localized?.narrative || (isId ? ABOUT_ID : ABOUT_EN);
+
   const activeLine = PRODUCT_LINES.find(l => l.id === activeId);
 
   return (
@@ -108,20 +121,17 @@ export default function AboutProductsSection() {
           {/* Overline */}
           <div className="aps-overline">
             <span className="aps-overline__dash" />
-            <span>{isId ? 'TENTANG KAMI' : 'ABOUT US'}</span>
+            <span>{tagline}</span>
           </div>
 
           {/* Heading */}
           <h2 className="aps-heading">
-            {isId
-              ? <>Mitra Manufaktur Elektronik Otomotif<br /><em>di Batam Free Trade Zone</em></>
-              : <>Automotive Electronics<br />Manufacturing Partner<br /><em>in Batam Free Trade Zone</em></>
-            }
+            {heading}
           </h2>
 
           {/* About paragraphs */}
           <div className="aps-body-text">
-            {(isId ? ABOUT_ID : ABOUT_EN).split('\n\n').map((para, i) => (
+            {narrative.split('\n\n').map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>

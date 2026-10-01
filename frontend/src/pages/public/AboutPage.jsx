@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { useCompany } from '../../hooks/useApi';
+import { useCompany, useSiteSettings } from '../../hooks/useApi';
+import { getLocalizedData } from '../../lib/translator';
 import './AboutPage.css';
 
 /* ── Interactive Facility Graphic Renderers ── */
@@ -83,17 +84,55 @@ function FacilityGraphicView({ zoneId }) {
 
 export default function AboutPage() {
   const { t, i18n } = useTranslation(['about', 'common']);
-  const { data: companyData } = useCompany();
   const isId = i18n.language === 'id';
+  const lang = isId ? 'id' : 'en';
+
+  const { data: companyData } = useCompany();
+
+  // Dynamic Site Settings from Admin Portal
+  const { data: rawHeaderSettings } = useSiteSettings('about_header');
+  const { data: rawNarrativeSettings } = useSiteSettings('about_narrative');
+  const { data: rawFacilitiesSettings } = useSiteSettings('about_facilities');
+  const { data: rawTimelineSettings } = useSiteSettings('about_timeline');
+  const { data: rawCertSettings } = useSiteSettings('about_certifications');
+
+  const headerSettings = getLocalizedData(rawHeaderSettings, lang);
+  const narrativeSettings = getLocalizedData(rawNarrativeSettings, lang);
+  const facilitiesSettings = getLocalizedData(rawFacilitiesSettings, lang);
+  const timelineSettings = getLocalizedData(rawTimelineSettings, lang);
+  const certSettings = getLocalizedData(rawCertSettings, lang);
 
   // Interactive state
   const [activeMilestone, setActiveMilestone] = useState(0);
   const [activeZone, setActiveZone] = useState(0);
   const [selectedCert, setSelectedCert] = useState(null);
 
-  const milestoneItems = t('about:milestones.items', { returnObjects: true }) || [];
-  const certItems = t('about:certifications.items', { returnObjects: true }) || [];
-  const facilityZones = t('about:facility.zones', { returnObjects: true }) || [];
+  const fallbackMilestones = t('about:milestones.items', { returnObjects: true }) || [];
+  const milestoneItems = (Array.isArray(timelineSettings) && timelineSettings.length > 0)
+    ? timelineSettings
+    : fallbackMilestones;
+
+  const fallbackCerts = t('about:certifications.items', { returnObjects: true }) || [];
+  const certItems = (Array.isArray(certSettings) && certSettings.length > 0)
+    ? certSettings
+    : fallbackCerts;
+
+  const fallbackZones = t('about:facility.zones', { returnObjects: true }) || [];
+  const facilityZones = (Array.isArray(facilitiesSettings) && facilitiesSettings.length > 0)
+    ? facilitiesSettings
+    : fallbackZones;
+
+  const activeDescription = isId
+    ? (companyData?.description || narrativeSettings?.p1 || t('about:narrative.p1'))
+    : (companyData?.description_en || narrativeSettings?.p1 || companyData?.description || t('about:narrative.p1'));
+
+  const activeVision = isId
+    ? (companyData?.vision || t('about:visionMission.visionDesc'))
+    : (companyData?.vision_en || companyData?.vision || t('about:visionMission.visionDesc'));
+
+  const activeMission = isId
+    ? (companyData?.mission || '')
+    : (companyData?.mission_en || companyData?.mission || '');
 
   return (
     <>
@@ -119,45 +158,45 @@ export default function AboutPage() {
 
         <div className="container about-hero__stage">
           <h1 className="about-hero__title">
-            {t('about:hero.title')}
+            {headerSettings?.title || t('about:hero.title')}
           </h1>
 
           <p className="about-hero__subtitle">
-            {t('about:hero.subtitle')}
+            {headerSettings?.subtitle || t('about:hero.subtitle')}
           </p>
 
           {/* Telemetry Stats Deck */}
           <div className="about-hero__deck">
             <div className="about-stat-card">
               <div className="about-stat-card__val">
-                <span>10</span>
-                <span className="about-stat-card__unit">+</span>
+                <span>{headerSettings?.statYears?.value || '10'}</span>
+                {!headerSettings?.statYears?.value && <span className="about-stat-card__unit">+</span>}
               </div>
-              <div className="about-stat-card__label">{t('about:hero.statYears')}</div>
+              <div className="about-stat-card__label">{headerSettings?.statYears?.label || t('about:hero.statYears')}</div>
             </div>
 
             <div className="about-stat-card">
               <div className="about-stat-card__val">
-                <span>80</span>
-                <span className="about-stat-card__unit">K CPH</span>
+                <span>{headerSettings?.statCapacity?.value || '80'}</span>
+                {!headerSettings?.statCapacity?.value && <span className="about-stat-card__unit">K CPH</span>}
               </div>
-              <div className="about-stat-card__label">{t('about:hero.statCapacity')}</div>
+              <div className="about-stat-card__label">{headerSettings?.statCapacity?.label || t('about:hero.statCapacity')}</div>
             </div>
 
             <div className="about-stat-card">
               <div className="about-stat-card__val">
-                <span>10,000</span>
-                <span className="about-stat-card__unit">m²</span>
+                <span>{headerSettings?.statArea?.value || '10,000'}</span>
+                {!headerSettings?.statArea?.value && <span className="about-stat-card__unit">m²</span>}
               </div>
-              <div className="about-stat-card__label">{t('about:hero.statArea')}</div>
+              <div className="about-stat-card__label">{headerSettings?.statArea?.label || t('about:hero.statArea')}</div>
             </div>
 
             <div className="about-stat-card">
               <div className="about-stat-card__val">
-                <span>99.8</span>
-                <span className="about-stat-card__unit">%</span>
+                <span>{headerSettings?.statYield?.value || '99.8'}</span>
+                {!headerSettings?.statYield?.value && <span className="about-stat-card__unit">%</span>}
               </div>
-              <div className="about-stat-card__label">{t('about:hero.statYield')}</div>
+              <div className="about-stat-card__label">{headerSettings?.statYield?.label || t('about:hero.statYield')}</div>
             </div>
           </div>
         </div>
@@ -168,20 +207,20 @@ export default function AboutPage() {
         <div className="container about-narrative__grid">
           <div className="about-narrative__content">
             <span className="about-kicker">{t('about:narrative.kicker')}</span>
-            <h2 className="about-heading">{t('about:narrative.title')}</h2>
+            <h2 className="about-heading">{narrativeSettings?.title || t('about:narrative.title')}</h2>
             
             <p className="about-narrative__text">
-              {companyData?.description || t('about:narrative.p1')}
+              {activeDescription}
             </p>
             <p className="about-narrative__text">
-              {t('about:narrative.p2')}
+              {narrativeSettings?.p2 || t('about:narrative.p2')}
             </p>
           </div>
 
           {/* Strategic Batam FTZ Advantage Box */}
           <div className="about-ftz-box">
             <div className="about-ftz-box__header">
-              <h3 className="about-ftz-box__title">{t('about:narrative.ftzTitle')}</h3>
+              <h3 className="about-ftz-box__title">{narrativeSettings?.ftzTitle || t('about:narrative.ftzTitle')}</h3>
               <span className="about-ftz-box__badge">BATAM FTZ HUB</span>
             </div>
 
@@ -289,7 +328,7 @@ export default function AboutPage() {
             <span className="about-kicker">{t('about:visionMission.visionKicker')}</span>
             <h3 className="vm-card__title">{t('about:visionMission.visionTitle')}</h3>
             <p className="vm-card__desc">
-              {companyData?.vision || t('about:visionMission.visionDesc')}
+              {activeVision}
             </p>
           </div>
 
@@ -304,22 +343,17 @@ export default function AboutPage() {
             <h3 className="vm-card__title">{t('about:visionMission.missionTitle')}</h3>
             
             <div className="vm-mission-list">
-              <div className="vm-mission-item">
-                <span className="vm-mission-bullet">01</span>
-                <span>{t('about:visionMission.mission1')}</span>
-              </div>
-              <div className="vm-mission-item">
-                <span className="vm-mission-bullet">02</span>
-                <span>{t('about:visionMission.mission2')}</span>
-              </div>
-              <div className="vm-mission-item">
-                <span className="vm-mission-bullet">03</span>
-                <span>{t('about:visionMission.mission3')}</span>
-              </div>
-              <div className="vm-mission-item">
-                <span className="vm-mission-bullet">04</span>
-                <span>{t('about:visionMission.mission4')}</span>
-              </div>
+              {(activeMission ? activeMission.split('\n').filter(Boolean) : [
+                t('about:visionMission.mission1'),
+                t('about:visionMission.mission2'),
+                t('about:visionMission.mission3'),
+                t('about:visionMission.mission4')
+              ]).map((m, idx) => (
+                <div key={idx} className="vm-mission-item">
+                  <span className="vm-mission-bullet">0{idx + 1}</span>
+                  <span>{m.replace(/^[0-9]+[.)]\s*/, '')}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

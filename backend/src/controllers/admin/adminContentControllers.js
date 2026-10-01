@@ -13,10 +13,10 @@ const getAdminCoreValues = async (req, res, next) => {
 
 const createCoreValue = async (req, res, next) => {
   try {
-    const { title, description, icon, sort_order, status } = req.body;
+    const { title, title_en, description, description_en, icon, sort_order, status } = req.body;
     const [result] = await pool.execute(
-      'INSERT INTO core_values (title, description, icon, sort_order, status) VALUES (?, ?, ?, ?, ?)',
-      [title, description || null, icon || null, sort_order || 0, status !== undefined ? status : 1]
+      'INSERT INTO core_values (title, title_en, description, description_en, icon, sort_order, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [title, title_en || null, description || null, description_en || null, icon || null, sort_order || 0, status !== undefined ? status : 1]
     );
     await logActivity(req.user.id, 'CREATE', 'core_values', `Membuat core value baru '${title}'`);
     return success(res, 'Core value berhasil dibuat.', { id: result.insertId, title }, 201);
@@ -26,10 +26,10 @@ const createCoreValue = async (req, res, next) => {
 const updateCoreValue = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { title, description, icon, sort_order, status } = req.body;
+    const { title, title_en, description, description_en, icon, sort_order, status } = req.body;
     await pool.execute(
-      'UPDATE core_values SET title = ?, description = ?, icon = ?, sort_order = ?, status = ? WHERE id = ?',
-      [title, description, icon, sort_order, status, id]
+      'UPDATE core_values SET title = ?, title_en = ?, description = ?, description_en = ?, icon = ?, sort_order = ?, status = ? WHERE id = ?',
+      [title, title_en || null, description, description_en || null, icon, sort_order, status, id]
     );
     await logActivity(req.user.id, 'UPDATE', 'core_values', `Memperbarui core value ID: ${id}`);
     return success(res, 'Core value berhasil diperbarui.');

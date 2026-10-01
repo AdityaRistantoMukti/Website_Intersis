@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react';
-import { Image, Plus, Edit2, Trash2, Calendar, Upload } from 'lucide-react';
+import { Image, Plus, Edit2, Trash2, Calendar, Upload, Sliders, Save } from 'lucide-react';
 import api, { getImageUrl, extractErrorMessage } from '../../../lib/api';
+import { translateContent } from '../../../lib/translator';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import LanguageTabControl from '../../../components/admin/LanguageTabControl';
 
 export default function GalleryModule() {
   const { addToast } = useAdminAuth();
 
+  const [activeSection, setActiveSection] = useState('photos');
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('all');
+
+  // Header State
+  const [headerData, setHeaderData] = useState({
+    id: {
+      title: 'Dokumentasi Fasilitas Manufaktur & Ruang Produksi Bersih',
+      subtitle: 'Telusuri fasilitas cleanroom Class 100K, lini penempatan SMT kecepatan tinggi 80.000 CPH, sistem inspeksi 3D SPI/AOI, dan laboratorium rekayasa jig otomatis kami di Batam Free Trade Zone.',
+    },
+    en: {
+      title: 'Manufacturing Facilities Documentation & Clean Production Floor',
+      subtitle: 'Explore our ESD Class 100K cleanroom, high-speed 80,000 CPH SMT placement lines, 3D SPI/AOI inspection stations, and automated test jig engineering lab in Batam Free Trade Zone.',
+    },
+  });
+  const [activeHeadLang, setActiveHeadLang] = useState('id');
+  const [savingHeader, setSavingHeader] = useState(false);
+  const [translatingHeader, setTranslatingHeader] = useState(false);
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,12 +46,52 @@ export default function GalleryModule() {
   const fetchGallery = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/admin/gallery?limit=50');
-      setItems(res.data?.data || []);
+      const [res, headRes] = await Promise.allSettled([
+        api.get('/admin/gallery?limit=50'),
+        api.get('/public/site-settings/gallery_header'),
+      ]);
+      if (res.status === 'fulfilled') {
+        setItems(res.value.data?.data || []);
+      }
+      if (headRes.status === 'fulfilled' && headRes.value.data?.data) {
+        const d = headRes.value.data.data;
+        if (d.id && d.en) {
+          setHeaderData(d);
+        } else if (d.id) {
+          setHeaderData((prev) => ({ ...prev, id: d.id, en: d.en || prev.en }));
+        }
+      }
     } catch (err) {
       addToast(extractErrorMessage(err), 'error');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSaveHeader = async () => {
+    setSavingHeader(true);
+    try {
+      await api.put('/admin/site-settings/gallery_header', headerData);
+      addToast('Header halaman galeri berhasil disimpan!', 'success');
+    } catch (err) {
+      addToast(extractErrorMessage(err), 'error');
+    } finally {
+      setSavingHeader(false);
+    }
+  };
+
+  const handleAutoTranslateHeader = async () => {
+    setTranslatingHeader(true);
+    try {
+      addToast('Menerjemahkan header galeri ke English...', 'info');
+      const translated = await translateContent(headerData.id);
+      setHeaderData((prev) => ({ ...prev, en: translated }));
+      setActiveHeadLang('en');
+      addToast('Terjemahan selesai!', 'success');
+    } catch (err) {
+      addToast('Gagal menerjemahkan: ' + extractErrorMessage(err), 'error');
+    } finally {
+      setTranslatingHeader(false);
     }
   };
 
@@ -136,28 +194,123 @@ export default function GalleryModule() {
     ? items
     : items.filter((i) => i.category === activeCategory);
 
+  const currentHead = headerData[activeHeadLang] || headerData.id;
+
   return (
     <div className="admin-gallery-module">
-      <div className="admin-card">
-        <div className="admin-card-header">
-          <div>
-            <h2 className="admin-card-title">
-              <Image size={18} />
-              <span>Galeri Fasilitas & Dokumentasi Produksi</span>
-            </h2>
-            <p className="admin-card-desc">
-              Kelola dokumentasi visual lini SMT, cleanroom, workshop jig otomatis, dan lab pengujian.
-            </p>
+      <div className="admin-card" style={{ marginBottom: '1.25rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+          Manajemen Konten Halaman Galeri & Fasilitas
+        </h2>
+        <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
+          Kelola foto fasilitas manufaktur bersih, lini SMT, ruang pengujian, serta teks header pengantar galeri.
+        </p>
+      </div>
+
+      {/* Divided Section Navigation Tabs */}
+      <div className="admin-section-nav">
+        <button
+          type="button"
+          className={`admin-section-nav-btn ${activeSection === 'photos' ? 'active' : ''}`}
+          onClick={() => setActiveSection('photos')}
+        >
+          <Image size={16} />
+          <span>1. Manajemen Foto Fasilitas ({items.length})</span>
+        </button>
+        <button
+          type="button"
+          className={`admin-section-nav-btn ${activeSection === 'header' ? 'active' : ''}`}
+          onClick={() => setActiveSection('header')}
+        >
+          <Sliders size={16} />
+          <span>2. Header Halaman Galeri</span>
+        </button>
+      </div>
+
+      {activeSection === 'header' && (
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <div>
+              <h3 className="admin-card-title">Bagian 2: Header Halaman Galeri</h3>
+              <p className="admin-card-subtitle">
+                Atur judul sambutan dan narasi pengantar dokumentasi fasilitas produksi Batam FTZ.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="admin-btn admin-btn-primary"
+              disabled={savingHeader}
+              onClick={handleSaveHeader}
+            >
+              <Save size={16} />
+              <span>{savingHeader ? 'Menyimpan...' : 'Simpan Header Galeri'}</span>
+            </button>
           </div>
-          <button
-            type="button"
-            className="admin-btn-primary"
-            onClick={handleOpenAdd}
-          >
-            <Plus size={14} />
-            <span>Unggah Foto Baru</span>
-          </button>
+
+          <LanguageTabControl
+            activeLang={activeHeadLang}
+            onSelectLang={setActiveHeadLang}
+            onTranslate={handleAutoTranslateHeader}
+            isTranslating={translatingHeader}
+          />
+
+          <div style={{ marginTop: '1.25rem' }}>
+            <div className="admin-form-group">
+              <label className="admin-label">Judul Utama Galeri ({activeHeadLang.toUpperCase()})</label>
+              <input
+                type="text"
+                className="admin-input"
+                value={currentHead.title || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setHeaderData((prev) => ({
+                    ...prev,
+                    [activeHeadLang]: { ...prev[activeHeadLang], title: val },
+                  }));
+                }}
+              />
+            </div>
+
+            <div className="admin-form-group">
+              <label className="admin-label">Subjudul Penjelasan ({activeHeadLang.toUpperCase()})</label>
+              <textarea
+                rows={3}
+                className="admin-textarea"
+                value={currentHead.subtitle || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setHeaderData((prev) => ({
+                    ...prev,
+                    [activeHeadLang]: { ...prev[activeHeadLang], subtitle: val },
+                  }));
+                }}
+              />
+            </div>
+          </div>
         </div>
+      )}
+
+      {activeSection === 'photos' && (
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <div>
+              <h2 className="admin-card-title">
+                <Image size={18} />
+                <span>Foto Fasilitas & Dokumentasi Produksi</span>
+              </h2>
+              <p className="admin-card-desc">
+                Kelola dokumentasi visual lini SMT, cleanroom, workshop jig otomatis, dan lab pengujian.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="admin-btn admin-btn-primary"
+              onClick={handleOpenAdd}
+            >
+              <Plus size={14} />
+              <span>Unggah Foto Baru</span>
+            </button>
+          </div>
 
         {/* Category Filter Pills */}
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
@@ -276,6 +429,7 @@ export default function GalleryModule() {
           </div>
         )}
       </div>
+      )}
 
       {isModalOpen && (
         <div className="admin-modal-overlay" onClick={() => setIsModalOpen(false)}>

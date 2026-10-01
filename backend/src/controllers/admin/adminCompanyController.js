@@ -8,7 +8,7 @@ const { logActivity } = require('../../utils/activityLogger');
  */
 const updateCompanyProfile = async (req, res, next) => {
   try {
-    const { title, description, vision, mission } = req.body;
+    const { title, description, vision, mission, title_en, description_en, vision_en, mission_en } = req.body;
     let about_image = req.body.about_image;
 
     if (req.file) {
@@ -19,13 +19,13 @@ const updateCompanyProfile = async (req, res, next) => {
 
     if (rows.length === 0) {
       await pool.execute(
-        'INSERT INTO company_profile (title, description, vision, mission, about_image, updated_by) VALUES (?, ?, ?, ?, ?, ?)',
-        [title, description, vision, mission, about_image, req.user.id]
+        'INSERT INTO company_profile (title, title_en, description, description_en, vision, vision_en, mission, mission_en, about_image, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [title, title_en || null, description, description_en || null, vision, vision_en || null, mission, mission_en || null, about_image, req.user.id]
       );
     } else {
       const companyId = rows[0].id;
-      let updateSql = 'UPDATE company_profile SET title = ?, description = ?, vision = ?, mission = ?, updated_by = ?';
-      let params = [title, description, vision, mission, req.user.id];
+      let updateSql = 'UPDATE company_profile SET title = ?, title_en = ?, description = ?, description_en = ?, vision = ?, vision_en = ?, mission = ?, mission_en = ?, updated_by = ?';
+      let params = [title, title_en || null, description, description_en || null, vision, vision_en || null, mission, mission_en || null, req.user.id];
 
       if (about_image) {
         updateSql += ', about_image = ?';
@@ -38,7 +38,7 @@ const updateCompanyProfile = async (req, res, next) => {
       await pool.execute(updateSql, params);
     }
 
-    await logActivity(req.user.id, 'UPDATE', 'company_profile', 'Memperbarui data profil, visi, dan misi perusahaan');
+    await logActivity(req.user.id, 'UPDATE', 'company_profile', 'Memperbarui data profil, visi, dan misi perusahaan (ID & EN)');
 
     return success(res, 'Profil perusahaan berhasil diperbarui.');
   } catch (err) {
@@ -56,6 +56,7 @@ const updateContact = async (req, res, next) => {
       email,
       phone,
       address,
+      address_en,
       instagram,
       linkedin,
       whatsapp,
@@ -71,11 +72,11 @@ const updateContact = async (req, res, next) => {
     if (rows.length === 0) {
       await pool.execute(
         `INSERT INTO contact_recruitment (
-          email, phone, address, instagram, linkedin, whatsapp,
+          email, phone, address, address_en, instagram, linkedin, whatsapp,
           maps_latitude, maps_longitude, maps_place_name, maps_url, maps_embed_url, updated_by
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
-          email, phone, address, instagram, linkedin, whatsapp,
+          email, phone, address, address_en || null, instagram, linkedin, whatsapp,
           maps_latitude || '1.1368003',
           maps_longitude || '104.0452514',
           maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES',
@@ -88,12 +89,12 @@ const updateContact = async (req, res, next) => {
       const contactId = rows[0].id;
       await pool.execute(
         `UPDATE contact_recruitment SET
-          email = ?, phone = ?, address = ?, instagram = ?, linkedin = ?, whatsapp = ?,
+          email = ?, phone = ?, address = ?, address_en = ?, instagram = ?, linkedin = ?, whatsapp = ?,
           maps_latitude = ?, maps_longitude = ?, maps_place_name = ?, maps_url = ?, maps_embed_url = ?,
           updated_by = ?
         WHERE id = ?`,
         [
-          email, phone, address, instagram, linkedin, whatsapp,
+          email, phone, address, address_en || null, instagram, linkedin, whatsapp,
           maps_latitude || '1.1368003',
           maps_longitude || '104.0452514',
           maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES',

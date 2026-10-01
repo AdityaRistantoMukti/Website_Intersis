@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect, useRef } from 'react';
 import { useCompany, useCoreValues, useSiteSettings } from '../../hooks/useApi';
 import { useCountUp } from '../../hooks/useScrollAnimation';
+import { getLocalizedData } from '../../lib/translator';
 import AboutProductsSection from '../../components/home/AboutProductsSection';
 import CompanyLifecycleSection from '../../components/home/CompanyLifecycleSection';
 import GlobalFootprintSection from '../../components/home/GlobalFootprintSection';
@@ -30,13 +31,18 @@ function StatTile({ value, suffix = '', label, sublabel, icon }) {
 /* ── Main Home Page ── */
 export default function HomePage() {
   const { t, i18n } = useTranslation(['common', 'home']);
+  const lang = i18n.language === 'en' ? 'en' : 'id';
   const { data: company } = useCompany();
   const { data: coreValues } = useCoreValues();
 
-  // Dynamic CMS Settings from Admin Portal
-  const { data: heroSettings } = useSiteSettings('home_hero');
-  const { data: statsSettings } = useSiteSettings('home_stats');
-  const { data: ctaSettings } = useSiteSettings('home_cta');
+  // Dynamic CMS Settings from Admin Portal (Localized with automatic fallback)
+  const { data: rawHeroSettings } = useSiteSettings('home_hero');
+  const { data: rawStatsSettings } = useSiteSettings('home_stats');
+  const { data: rawCtaSettings } = useSiteSettings('home_cta');
+
+  const heroSettings = getLocalizedData(rawHeroSettings, lang);
+  const statsSettings = getLocalizedData(rawStatsSettings, lang);
+  const ctaSettings = getLocalizedData(rawCtaSettings, lang);
 
   // Scroll animation observer
   useEffect(() => {
@@ -55,7 +61,7 @@ export default function HomePage() {
   // Typewriter effect for hero
   const typeRef = useRef(null);
   useEffect(() => {
-    const defaultTexts = i18n.language === 'id'
+    const defaultTexts = lang === 'id'
       ? ['Elektronik Otomotif', 'Perakitan SMT Presisi', 'Otomasi Industri', 'Partner OEM / ODM']
       : ['Automotive Electronics', 'Precision SMT Assembly', 'Industrial Automation', 'OEM / ODM Partner'];
 
@@ -82,7 +88,7 @@ export default function HomePage() {
 
     timer = setTimeout(type, 400);
     return () => clearTimeout(timer);
-  }, [i18n.language, heroSettings]);
+  }, [lang, heroSettings]);
 
   // Multi-Slide Hero Carousel State
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -277,7 +283,7 @@ export default function HomePage() {
           <div className="container">
             <div className="section-header fade-up">
               <h2 className="section-title" style={{ color: 'var(--white)' }}>
-                {i18n.language === 'id' ? 'Nilai Inti Rekayasa GPT' : 'GPT Core Engineering Values'}
+                {lang === 'id' ? 'Nilai Inti Rekayasa GPT' : 'GPT Core Engineering Values'}
               </h2>
               <div className="divider" />
             </div>
@@ -285,8 +291,12 @@ export default function HomePage() {
               {coreValues.slice(0, 6).map((cv, i) => (
                 <div className="core-value-card card card--dark fade-up" key={cv.id} style={{ transitionDelay: `${i * 0.08}s` }}>
                   <div className="core-value-card__num">0{i + 1}</div>
-                  <h3 className="core-value-card__title">{cv.title}</h3>
-                  <p className="core-value-card__desc">{cv.description}</p>
+                  <h3 className="core-value-card__title">
+                    {lang === 'en' ? (cv.title_en || cv.title) : cv.title}
+                  </h3>
+                  <p className="core-value-card__desc">
+                    {lang === 'en' ? (cv.description_en || cv.description) : cv.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -303,11 +313,11 @@ export default function HomePage() {
           </div>
           <div className="cta-banner__actions fade-up">
             <InteractiveHoverButton
-              to={ctaSettings?.button_link || "/contact"}
+              to={ctaSettings?.buttonLink || ctaSettings?.button_link || "/contact"}
               variant="light"
               className="cta-magic-button"
             >
-              {ctaSettings?.button_text || t('home:cta.btnPartner')}
+              {ctaSettings?.buttonText || ctaSettings?.button_text || t('home:cta.btnPartner')}
             </InteractiveHoverButton>
           </div>
         </div>

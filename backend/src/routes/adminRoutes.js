@@ -25,6 +25,7 @@ const {
 const { login, getProfile, changePassword } = require('../controllers/admin/authController');
 const { getUsers, getUserById, createUser, updateUser, deleteUser } = require('../controllers/admin/userController');
 const { updateCompanyProfile, updateContact, updateSiteSettings } = require('../controllers/admin/adminCompanyController');
+const { translateContent } = require('../controllers/admin/translateController');
 const { getAdminJobs, getAdminJobById, createJob, updateJob, deleteJob } = require('../controllers/admin/adminJobVacancyController');
 const {
   getAdminCoreValues, createCoreValue, updateCoreValue, deleteCoreValue,
@@ -41,6 +42,9 @@ router.post('/auth/login', authLimiter, loginValidationRules, validate, login);
 
 // ─── PROTECTED ROUTES (MEMBUTUHKAN JWT TOKEN) ───────────────────────────────
 router.use(verifyToken);
+
+// Translation Engine (Auto-Translate ID to EN)
+router.post('/translate', restrictTo('administrator', 'hrd', 'staff'), translateContent);
 
 // Profile & Password
 router.get('/auth/me', getProfile);

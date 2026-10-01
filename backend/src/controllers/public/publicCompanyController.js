@@ -8,7 +8,7 @@ const { success, error } = require('../../utils/response');
 const getCompanyProfile = async (req, res, next) => {
   try {
     const [rows] = await pool.execute(
-      'SELECT id, title, description, vision, mission, about_image, updated_at FROM company_profile LIMIT 1'
+      'SELECT id, title, title_en, description, description_en, vision, vision_en, mission, mission_en, about_image, updated_at FROM company_profile LIMIT 1'
     );
     if (rows.length === 0) {
       return success(res, 'Profil perusahaan belum diatur.', null);
@@ -26,7 +26,7 @@ const getCompanyProfile = async (req, res, next) => {
 const getCoreValues = async (req, res, next) => {
   try {
     const [rows] = await pool.execute(
-      'SELECT id, title, description, icon, sort_order FROM core_values WHERE status = 1 ORDER BY sort_order ASC, id ASC'
+      'SELECT id, title, title_en, description, description_en, icon, sort_order FROM core_values WHERE status = 1 ORDER BY sort_order ASC, id ASC'
     );
     return success(res, 'Data core values berhasil diambil.', rows);
   } catch (err) {
@@ -42,7 +42,7 @@ const getContact = async (req, res, next) => {
   try {
     const [rows] = await pool.execute(
       `SELECT
-        id, email, phone, address, instagram, linkedin, whatsapp,
+        id, email, phone, address, address_en, instagram, linkedin, whatsapp,
         maps_latitude, maps_longitude, maps_place_name, maps_url, maps_embed_url, updated_at
        FROM contact_recruitment LIMIT 1`
     );

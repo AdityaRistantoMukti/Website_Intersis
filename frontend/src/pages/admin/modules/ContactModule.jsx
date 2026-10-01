@@ -1,25 +1,53 @@
 import { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, MessageSquare, Globe, Save, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageSquare, Globe, Save, ExternalLink, Sliders } from 'lucide-react';
 import api, { extractErrorMessage } from '../../../lib/api';
+import { translateContent } from '../../../lib/translator';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import LanguageTabControl from '../../../components/admin/LanguageTabControl';
 
 export default function ContactModule() {
   const { addToast } = useAdminAuth();
-
+  const [activeSection, setActiveSection] = useState('header');
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [savingKey, setSavingKey] = useState(null);
+  const [translatingKey, setTranslatingKey] = useState(null);
 
-  const [formData, setFormData] = useState({
-    email: '',
-    phone: '',
-    whatsapp: '',
-    address: '',
-    instagram: '',
-    linkedin: '',
+  const [langMap, setLangMap] = useState({
+    header: 'id',
+    channels: 'id',
+  });
+
+  const setSectionLang = (sec, lang) => {
+    setLangMap((prev) => ({ ...prev, [sec]: lang }));
+  };
+
+  // ─── 1. HEADER STATE ───
+  const [headerData, setHeaderData] = useState({
+    id: {
+      title: 'Hubungi Sales Engineering & Konsultasi Manufaktur Batam',
+      subtitle: 'Diskusikan kebutuhan proyek perakitan SMT, integrasi sistem otomasi, atau penjadwalan audit pabrik di Batam Free Trade Zone.',
+      badgeText: 'Respons Cepat <24 Jam Kerja B2B',
+    },
+    en: {
+      title: 'Contact Sales Engineering & Manufacturing Consultation Batam',
+      subtitle: 'Discuss your SMT assembly project, factory automation integration, or schedule an on-site factory audit in Batam Free Trade Zone.',
+      badgeText: 'Prompt B2B Response <24 Business Hours',
+    },
+  });
+
+  // ─── 2. CONTACT DETAILS & SOCIALS STATE ───
+  const [contactData, setContactData] = useState({
+    email: 'sales@globalphilsonic.com',
+    phone: '+62 778 408 8888',
+    whatsapp: '+62 811 7700 888',
+    address: 'Batam Industrial Park, Jl. Mukakuning No. 12, Kawasan Perdagangan Bebas Batam, Kepulauan Riau 29433, Indonesia',
+    address_en: 'Batam Industrial Park, Mukakuning, Batam Free Trade Zone, Riau Islands 29433, Indonesia',
+    instagram: 'https://instagram.com/globalphilsonic',
+    linkedin: 'https://linkedin.com/company/global-philsonic-technologies',
     maps_latitude: '1.1368003',
     maps_longitude: '104.0452514',
     maps_place_name: 'GLOBAL PHILSONIC TECHNOLOGIES',
-    maps_url: '',
+    maps_url: 'https://www.google.com/maps/place/GLOBAL+PHILSONIC+TECHNOLOGIES/@1.137263,104.045233,435m/data=!3m1!1e3!4m6!3m5!1s0x31d98900364038b5:0xf424af624a151322!8m2!3d1.1368003!4d104.0452514!16s%2Fg%2F11z007pkw1?hl=id',
     maps_embed_url: '',
   });
 
@@ -28,22 +56,39 @@ export default function ContactModule() {
     async function fetchContact() {
       try {
         setLoading(true);
-        const res = await api.get('/public/contact');
-        const data = res.data?.data;
-        if (data && isMounted) {
-          setFormData({
-            email: data.email || '',
-            phone: data.phone || '',
-            whatsapp: data.whatsapp || '',
-            address: data.address || '',
-            instagram: data.instagram || '',
-            linkedin: data.linkedin || '',
-            maps_latitude: data.maps_latitude || '1.1368003',
-            maps_longitude: data.maps_longitude || '104.0452514',
-            maps_place_name: data.maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES',
-            maps_url: data.maps_url || '',
-            maps_embed_url: data.maps_embed_url || '',
-          });
+        const [contactRes, headRes] = await Promise.allSettled([
+          api.get('/public/contact'),
+          api.get('/public/site-settings/contact_header'),
+        ]);
+
+        if (isMounted) {
+          if (contactRes.status === 'fulfilled' && contactRes.value.data?.data) {
+            const data = contactRes.value.data.data;
+            setContactData((prev) => ({
+              ...prev,
+              email: data.email || prev.email,
+              phone: data.phone || prev.phone,
+              whatsapp: data.whatsapp || prev.whatsapp,
+              address: data.address || prev.address,
+              address_en: data.address_en || prev.address_en,
+              instagram: data.instagram || prev.instagram,
+              linkedin: data.linkedin || prev.linkedin,
+              maps_latitude: data.maps_latitude || '1.1368003',
+              maps_longitude: data.maps_longitude || '104.0452514',
+              maps_place_name: data.maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES',
+              maps_url: data.maps_url || prev.maps_url,
+              maps_embed_url: data.maps_embed_url || '',
+            }));
+          }
+
+          if (headRes.status === 'fulfilled' && headRes.value.data?.data) {
+            const d = headRes.value.data.data;
+            if (d.id && d.en) {
+              setHeaderData(d);
+            } else if (d.id) {
+              setHeaderData((prev) => ({ ...prev, id: d.id, en: d.en || prev.en }));
+            }
+          }
         }
       } catch (err) {
         addToast(extractErrorMessage(err), 'error');
@@ -55,17 +100,66 @@ export default function ContactModule() {
     return () => { isMounted = false; };
   }, [addToast]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleSaveHeader = async () => {
+    setSavingKey('contact_header');
+    try {
+      await api.put('/admin/site-settings/contact_header', headerData);
+      addToast('Header halaman kontak berhasil disimpan!', 'success');
+    } catch (err) {
+      addToast(extractErrorMessage(err), 'error');
+    } finally {
+      setSavingKey(null);
+    }
+  };
+
+  const handleSaveContactDetails = async () => {
+    setSavingKey('contact_details');
+    try {
+      await api.put('/admin/contact', contactData);
+      addToast('Informasi kontak dan Google Maps berhasil disimpan!', 'success');
+    } catch (err) {
+      addToast(extractErrorMessage(err), 'error');
+    } finally {
+      setSavingKey(null);
+    }
+  };
+
+  const handleAutoTranslateHeader = async () => {
+    setTranslatingKey('header');
+    try {
+      addToast('Menerjemahkan teks dari Bahasa Indonesia ke English...', 'info');
+      const translatedEn = await translateContent(headerData.id);
+      setHeaderData((prev) => ({ ...prev, en: translatedEn }));
+      setSectionLang('header', 'en');
+      addToast('Terjemahan selesai! Teks Bahasa Inggris telah terisi dan dapat Anda edit langsung.', 'success');
+    } catch (err) {
+      addToast('Gagal menerjemahkan: ' + extractErrorMessage(err), 'error');
+    } finally {
+      setTranslatingKey(null);
+    }
+  };
+
+  const handleAutoTranslateAddress = async () => {
+    setTranslatingKey('channels');
+    try {
+      addToast('Menerjemahkan alamat pabrik ke English...', 'info');
+      const translated = await translateContent(contactData.address);
+      setContactData((prev) => ({ ...prev, address_en: translated }));
+      setSectionLang('channels', 'en');
+      addToast('Terjemahan alamat selesai!', 'success');
+    } catch (err) {
+      addToast('Gagal menerjemahkan alamat: ' + extractErrorMessage(err), 'error');
+    } finally {
+      setTranslatingKey(null);
+    }
   };
 
   const handleUpdateCoordinates = (lat, lng) => {
     const embed = `https://maps.google.com/maps?q=${lat},${lng}+(${encodeURIComponent(
-      formData.maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES'
+      contactData.maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES'
     )})&t=m&z=17&ie=UTF8&iwloc=B&output=embed`;
 
-    setFormData((prev) => ({
+    setContactData((prev) => ({
       ...prev,
       maps_latitude: lat,
       maps_longitude: lng,
@@ -73,255 +167,352 @@ export default function ContactModule() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSaving(true);
-    try {
-      const res = await api.put('/admin/contact', formData);
-      addToast(res.data?.message || 'Informasi kontak dan peta Google Maps berhasil disimpan!', 'success');
-    } catch (err) {
-      addToast(extractErrorMessage(err), 'error');
-    } finally {
-      setSaving(false);
-    }
-  };
-
   const currentEmbedUrl =
-    formData.maps_embed_url ||
-    `https://maps.google.com/maps?q=${formData.maps_latitude || '1.1368003'},${
-      formData.maps_longitude || '104.0452514'
-    }+(${encodeURIComponent(formData.maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES')})&t=m&z=17&ie=UTF8&iwloc=B&output=embed`;
+    contactData.maps_embed_url ||
+    `https://maps.google.com/maps?q=${contactData.maps_latitude || '1.1368003'},${
+      contactData.maps_longitude || '104.0452514'
+    }+(${encodeURIComponent(contactData.maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES')})&t=m&z=17&ie=UTF8&iwloc=B&output=embed`;
 
   if (loading) {
     return (
-      <div style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
-        <div className="admin-spinner" style={{ margin: '0 auto 12px' }} />
-        <span>Memuat data kontak dan peta lokasi...</span>
+      <div className="admin-card" style={{ textAlign: 'center', padding: '3rem' }}>
+        <div className="admin-spinner" style={{ width: 28, height: 28, margin: '0 auto 1rem' }} />
+        <p style={{ color: '#94a3b8' }}>Memuat konfigurasi kontak & Google Maps...</p>
       </div>
     );
   }
 
+  const sectionsList = [
+    { id: 'header', label: '1. Header Halaman Kontak', icon: Sliders },
+    { id: 'channels', label: '2. Saluran Kontak & Alamat', icon: Phone },
+    { id: 'maps', label: '3. Lokasi Google Maps Batam', icon: MapPin },
+  ];
+
+  const currentHeadLang = langMap.header;
+  const currentHead = headerData[currentHeadLang] || headerData.id;
+
   return (
-    <div className="admin-contact-module">
-      <form onSubmit={handleSubmit}>
-        {/* ── 1. INFORMASI KONTAK RESMI ── */}
-        <div className="admin-card">
-          <div className="admin-card-header">
-            <div>
-              <h2 className="admin-card-title">
-                <Phone size={18} />
-                <span>Kontak & Saluran Komunikasi</span>
-              </h2>
-              <p className="admin-card-desc">
-                Kelola nomor WhatsApp B2B, email resmi, telepon kantor, dan akun media sosial.
-              </p>
-            </div>
-            <a
-              href="/contact"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="admin-btn-secondary"
-            >
-              <span>Lihat Halaman Kontak</span>
-              <ExternalLink size={12} />
-            </a>
-          </div>
+    <div className="admin-module">
+      <div className="admin-card" style={{ marginBottom: '1.25rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+          Manajemen Konten Halaman Kontak & Google Maps
+        </h2>
+        <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
+          Kelola judul halaman, nomor telepon B2B, WhatsApp sales engineering, alamat pabrik bilingual, dan titik koordinat peta lokasi Batam.
+        </p>
+      </div>
 
-          <div className="admin-form-grid">
-            <div className="admin-form-group">
-              <label className="admin-label">Email Resmi Sales & Engineering</label>
-              <input
-                type="email"
-                name="email"
-                className="admin-text-input"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="contact@philsonic.co.id"
-                required
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Nomor Telepon Kantor (Hunting)</label>
-              <input
-                type="text"
-                name="phone"
-                className="admin-text-input"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+62 778 480 8888"
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Nomor WhatsApp Bisnis / B2B</label>
-              <input
-                type="text"
-                name="whatsapp"
-                className="admin-text-input"
-                value={formData.whatsapp}
-                onChange={handleChange}
-                placeholder="+62 811 7700 888"
-              />
-            </div>
-
-            <div className="admin-form-group admin-form-group--full">
-              <label className="admin-label">Alamat Fisik Pabrik Batam (FTZ)</label>
-              <textarea
-                name="address"
-                className="admin-textarea"
-                rows="2"
-                value={formData.address}
-                onChange={handleChange}
-                placeholder="Cammo Industrial Park Blok B No. 8-10, Batam Center, Batam, Kepulauan Riau 29461 (Batam FTZ)"
-                required
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">URL LinkedIn Perusahaan</label>
-              <input
-                type="url"
-                name="linkedin"
-                className="admin-text-input"
-                value={formData.linkedin}
-                onChange={handleChange}
-                placeholder="https://linkedin.com/company/pt-global-philsonic-technologies"
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">URL Instagram Resmi</label>
-              <input
-                type="url"
-                name="instagram"
-                className="admin-text-input"
-                value={formData.instagram}
-                onChange={handleChange}
-                placeholder="https://instagram.com/philsonic.technologies"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* ── 2. PETA LOKASI GOOGLE MAPS ── */}
-        <div className="admin-card">
-          <div className="admin-card-header">
-            <div>
-              <h2 className="admin-card-title">
-                <MapPin size={18} />
-                <span>Pengaturan & Koordinat Google Maps</span>
-              </h2>
-              <p className="admin-card-desc">
-                Konfigurasi titik koordinat GPS, nama penanda peta, dan URL sematan Google Maps yang tampil di halaman kontak.
-              </p>
-            </div>
-          </div>
-
-          <div className="admin-form-grid" style={{ marginBottom: '1.25rem' }}>
-            <div className="admin-form-group">
-              <label className="admin-label">Nama Tempat / Pin Label</label>
-              <input
-                type="text"
-                name="maps_place_name"
-                className="admin-text-input"
-                value={formData.maps_place_name}
-                onChange={handleChange}
-                placeholder="GLOBAL PHILSONIC TECHNOLOGIES"
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Latitude (Garis Lintang)</label>
-              <input
-                type="text"
-                name="maps_latitude"
-                className="admin-text-input"
-                value={formData.maps_latitude}
-                onChange={(e) => handleUpdateCoordinates(e.target.value, formData.maps_longitude)}
-                placeholder="1.1368003"
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Longitude (Garis Bujur)</label>
-              <input
-                type="text"
-                name="maps_longitude"
-                className="admin-text-input"
-                value={formData.maps_longitude}
-                onChange={(e) => handleUpdateCoordinates(formData.maps_latitude, e.target.value)}
-                placeholder="104.0452514"
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Tautan Buka di Google Maps</label>
-              <input
-                type="url"
-                name="maps_url"
-                className="admin-text-input"
-                value={formData.maps_url}
-                onChange={handleChange}
-                placeholder="https://www.google.com/maps/place/..."
-              />
-            </div>
-
-            <div className="admin-form-group admin-form-group--full">
-              <label className="admin-label">
-                <span>URL Embed Iframe Google Maps (Opsional / Override)</span>
-                <span className="admin-label-hint">(Otomatis digenerate bila dibiarkan kosong)</span>
-              </label>
-              <input
-                type="text"
-                name="maps_embed_url"
-                className="admin-text-input"
-                value={formData.maps_embed_url}
-                onChange={handleChange}
-                placeholder="https://maps.google.com/maps?q=...&output=embed"
-              />
-            </div>
-          </div>
-
-          {/* Interactive Map Live Preview */}
-          <div style={{ marginTop: '1rem' }}>
-            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--adm-muted)', marginBottom: '8px' }}>
-              Pratinjau Langsung Peta Google Maps:
-            </div>
-            <div
-              style={{
-                width: '100%',
-                height: '280px',
-                borderRadius: '6px',
-                overflow: 'hidden',
-                border: '1px solid var(--adm-border)',
-                background: '#070d18',
-              }}
-            >
-              <iframe
-                title="Google Maps Preview"
-                src={currentEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--adm-border)' }}>
+      <div className="admin-section-nav">
+        {sectionsList.map((sec) => {
+          const Icon = sec.icon;
+          const isActive = activeSection === sec.id;
+          return (
             <button
-              type="submit"
-              className="admin-btn-primary"
-              disabled={saving}
+              key={sec.id}
+              type="button"
+              className={`admin-section-nav-btn ${isActive ? 'active' : ''}`}
+              onClick={() => setActiveSection(sec.id)}
             >
-              <Save size={14} />
-              <span>{saving ? 'Menyimpan...' : 'Simpan Kontak & Peta'}</span>
+              <Icon size={16} />
+              <span>{sec.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── SECTION 1: HEADER ── */}
+      {activeSection === 'header' && (
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <div>
+              <h3 className="admin-card-title">Bagian 1: Header Halaman Kontak</h3>
+              <p className="admin-card-subtitle">
+                Atur judul halaman, subjudul ajakan konsultasi, dan teks jaminan respons cepat.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="admin-btn admin-btn-primary"
+              disabled={savingKey === 'contact_header'}
+              onClick={handleSaveHeader}
+            >
+              <Save size={16} />
+              <span>{savingKey === 'contact_header' ? 'Menyimpan...' : 'Simpan Header'}</span>
             </button>
           </div>
+
+          <LanguageTabControl
+            activeLang={currentHeadLang}
+            onSelectLang={(lang) => setSectionLang('header', lang)}
+            onTranslate={handleAutoTranslateHeader}
+            isTranslating={translatingKey === 'header'}
+          />
+
+          <div style={{ marginTop: '1.25rem' }}>
+            <div className="admin-form-group">
+              <label className="admin-label">Judul Utama Halaman ({currentHeadLang.toUpperCase()})</label>
+              <input
+                type="text"
+                className="admin-input"
+                value={currentHead.title || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setHeaderData((prev) => ({
+                    ...prev,
+                    [currentHeadLang]: { ...prev[currentHeadLang], title: val },
+                  }));
+                }}
+              />
+            </div>
+
+            <div className="admin-form-group">
+              <label className="admin-label">Subjudul Penjelasan ({currentHeadLang.toUpperCase()})</label>
+              <textarea
+                rows={3}
+                className="admin-textarea"
+                value={currentHead.subtitle || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setHeaderData((prev) => ({
+                    ...prev,
+                    [currentHeadLang]: { ...prev[currentHeadLang], subtitle: val },
+                  }));
+                }}
+              />
+            </div>
+
+            <div className="admin-form-group">
+              <label className="admin-label">Teks Badge ({currentHeadLang.toUpperCase()})</label>
+              <input
+                type="text"
+                className="admin-input"
+                value={currentHead.badgeText || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setHeaderData((prev) => ({
+                    ...prev,
+                    [currentHeadLang]: { ...prev[currentHeadLang], badgeText: val },
+                  }));
+                }}
+              />
+            </div>
+          </div>
         </div>
-      </form>
+      )}
+
+      {/* ── SECTION 2: CHANNELS & ADDRESS ── */}
+      {activeSection === 'channels' && (
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <div>
+              <h3 className="admin-card-title">Bagian 2: Informasi Kantor & Saluran Komunikasi</h3>
+              <p className="admin-card-subtitle">
+                Atur alamat fisik pabrik Batam FTZ, email resmi, sambungan telepon, WhatsApp, dan sosial media.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="admin-btn admin-btn-primary"
+              disabled={savingKey === 'contact_details'}
+              onClick={handleSaveContactDetails}
+            >
+              <Save size={16} />
+              <span>{savingKey === 'contact_details' ? 'Menyimpan...' : 'Simpan Informasi Kontak'}</span>
+            </button>
+          </div>
+
+          <LanguageTabControl
+            activeLang={langMap.channels}
+            onSelectLang={(lang) => setSectionLang('channels', lang)}
+            onTranslate={handleAutoTranslateAddress}
+            isTranslating={translatingKey === 'channels'}
+          />
+
+          <div style={{ marginTop: '1.25rem' }}>
+            <div className="admin-form-grid admin-form-grid-2">
+              <div className="admin-form-group">
+                <label className="admin-label">Email Penawaran Resmi (RFQ)</label>
+                <input
+                  type="email"
+                  className="admin-input"
+                  value={contactData.email}
+                  onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
+                />
+              </div>
+
+              <div className="admin-form-group">
+                <label className="admin-label">Nomor Telepon Kantor / Hunting</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={contactData.phone}
+                  onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="admin-form-grid admin-form-grid-2">
+              <div className="admin-form-group">
+                <label className="admin-label">Nomor WhatsApp B2B Sales Engineering</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={contactData.whatsapp}
+                  onChange={(e) => setContactData({ ...contactData, whatsapp: e.target.value })}
+                />
+              </div>
+
+              <div className="admin-form-group">
+                <label className="admin-label">Akun LinkedIn Resmi</label>
+                <input
+                  type="url"
+                  className="admin-input"
+                  value={contactData.linkedin}
+                  onChange={(e) => setContactData({ ...contactData, linkedin: e.target.value })}
+                />
+              </div>
+            </div>
+
+            {/* Address based on selected lang */}
+            <div className="admin-form-group">
+              <label className="admin-label">
+                Alamat Lengkap Pabrik ({langMap.channels.toUpperCase()})
+              </label>
+              {langMap.channels === 'id' ? (
+                <textarea
+                  rows={3}
+                  className="admin-textarea"
+                  value={contactData.address}
+                  onChange={(e) => setContactData({ ...contactData, address: e.target.value })}
+                  placeholder="Alamat dalam Bahasa Indonesia..."
+                />
+              ) : (
+                <textarea
+                  rows={3}
+                  className="admin-textarea"
+                  value={contactData.address_en}
+                  onChange={(e) => setContactData({ ...contactData, address_en: e.target.value })}
+                  placeholder="Address in English..."
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── SECTION 3: GOOGLE MAPS ── */}
+      {activeSection === 'maps' && (
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <div>
+              <h3 className="admin-card-title">Bagian 3: Titik Lokasi Google Maps Batam</h3>
+              <p className="admin-card-subtitle">
+                Atur koordinat GPS, nama lokasi, URL link Google Maps, dan pratinjau live embed iframe.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="admin-btn admin-btn-primary"
+              disabled={savingKey === 'contact_details'}
+              onClick={handleSaveContactDetails}
+            >
+              <Save size={16} />
+              <span>{savingKey === 'contact_details' ? 'Menyimpan...' : 'Simpan Koordinat Peta'}</span>
+            </button>
+          </div>
+
+          <div style={{ marginTop: '1.25rem' }}>
+            <div className="admin-form-group">
+              <label className="admin-label">Nama Tempat Google Maps</label>
+              <input
+                type="text"
+                className="admin-input"
+                value={contactData.maps_place_name}
+                onChange={(e) => setContactData({ ...contactData, maps_place_name: e.target.value })}
+              />
+            </div>
+
+            <div className="admin-form-grid admin-form-grid-2">
+              <div className="admin-form-group">
+                <label className="admin-label">Latitude GPS</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={contactData.maps_latitude}
+                  onChange={(e) => {
+                    const lat = e.target.value;
+                    handleUpdateCoordinates(lat, contactData.maps_longitude);
+                  }}
+                />
+              </div>
+
+              <div className="admin-form-group">
+                <label className="admin-label">Longitude GPS</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={contactData.maps_longitude}
+                  onChange={(e) => {
+                    const lng = e.target.value;
+                    handleUpdateCoordinates(contactData.maps_latitude, lng);
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="admin-form-group">
+              <label className="admin-label">Link Langsung Google Maps</label>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  type="url"
+                  className="admin-input"
+                  value={contactData.maps_url}
+                  onChange={(e) => setContactData({ ...contactData, maps_url: e.target.value })}
+                  style={{ flex: 1 }}
+                />
+                {contactData.maps_url && (
+                  <a
+                    href={contactData.maps_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="admin-btn admin-btn-secondary"
+                    style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                  >
+                    <ExternalLink size={15} />
+                    <span>Uji Buka</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <div style={{ marginTop: '1.5rem' }}>
+              <label className="admin-label" style={{ marginBottom: 8, display: 'block' }}>
+                Pratinjau Peta Google Maps Live
+              </label>
+              <div
+                style={{
+                  height: 320,
+                  width: '100%',
+                  borderRadius: 8,
+                  overflow: 'hidden',
+                  border: '1px solid #1e293b',
+                  background: '#0b111d',
+                }}
+              >
+                <iframe
+                  title="Google Maps Location Preview"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  src={currentEmbedUrl}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

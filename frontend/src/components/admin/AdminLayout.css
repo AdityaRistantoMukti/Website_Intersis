@@ -713,3 +713,59 @@
     display: flex;
   }
 }
+
+/* ── Section Navigation Bar per Page (CMS Divided by Section) ── */
+.admin-section-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 6px;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  scrollbar-width: thin;
+}
+
+.admin-section-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--adm-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.admin-section-nav-btn:hover {
+  color: var(--adm-text);
+  background: var(--adm-hover);
+}
+
+.admin-section-nav-btn.active {
+  background: var(--adm-hover);
+  color: var(--adm-teal);
+  border-color: rgba(20, 184, 166, 0.3);
+}
+
+.admin-section-badge {
+  font-size: 0.6875rem;
+  font-family: monospace;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--adm-subtle);
+}
+
+.admin-section-nav-btn.active .admin-section-badge {
+  background: rgba(20, 184, 166, 0.15);
+  color: var(--adm-teal);
+}
+

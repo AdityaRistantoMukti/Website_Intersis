@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useContact } from '../../hooks/useApi';
+import { useContact, useSiteSettings } from '../../hooks/useApi';
+import { getLocalizedData } from '../../lib/translator';
 import ContactGoogleMap from '../../components/contact/ContactGoogleMap';
 import { CheckCircle2, MessageCircle, Building2, Phone, Mail, Clock } from 'lucide-react';
 import './ContactPage.css';
@@ -8,7 +9,11 @@ import './ContactPage.css';
 export default function ContactPage() {
   const { i18n } = useTranslation();
   const isId = i18n.language === 'id';
+  const lang = isId ? 'id' : 'en';
+
   const { data: contact } = useContact();
+  const { data: rawHeaderSettings } = useSiteSettings('contact_header');
+  const headerSettings = getLocalizedData(rawHeaderSettings, lang);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -29,6 +34,8 @@ export default function ContactPage() {
 
   const cleanPhone = (contact?.whatsapp_number || '+628117700899').replace(/[^0-9]/g, '');
 
+  const displayAddress = !isId ? (contact?.address_en || contact?.address) : contact?.address;
+
   return (
     <div className="contact-page">
       {/* ═══════ PAGE HEADER — Clean Minimalist Theme ═══════ */}
@@ -37,12 +44,12 @@ export default function ContactPage() {
 
         <div className="container contact-page-header__content">
           <h1 className="contact-page-header__title">
-            {isId ? `Hubungi ${contact?.company_name || 'PT. Global Philsonic Technologies'}` : `Contact ${contact?.company_name || 'PT. Global Philsonic Technologies'}`}
+            {headerSettings?.title || (isId ? `Hubungi ${contact?.company_name || 'PT. Global Philsonic Technologies'}` : `Contact ${contact?.company_name || 'PT. Global Philsonic Technologies'}`)}
           </h1>
           <p className="contact-page-header__subtitle">
-            {isId
+            {headerSettings?.subtitle || (isId
               ? 'Konsultasikan kebutuhan perakitan PCBA, pembuatan mesin uji otomatis (test jigs), atau jadwalkan factory audit di fasilitas manufaktur Batam FTZ kami.'
-              : 'Connect with our engineering sales team for PCBA turnkey assembly, custom automated test jigs, or schedule a formal factory audit at our Batam FTZ manufacturing facility.'}
+              : 'Connect with our engineering sales team for PCBA turnkey assembly, custom automated test jigs, or schedule a formal factory audit at our Batam FTZ manufacturing facility.')}
           </p>
         </div>
       </header>
@@ -66,7 +73,7 @@ export default function ContactPage() {
                   <h4>{isId ? 'Alamat Fasilitas Pabrik' : 'Manufacturing Plant Address'}</h4>
                   <p style={{ whiteSpace: 'pre-line' }}>
                     <strong>{contact?.company_name || 'PT. Global Philsonic Technologies'}</strong><br />
-                    {contact?.address || 'Cammo Industrial Park Blok B No. 8-10, Batam Center, Batam FTZ, Kepulauan Riau 29433, Indonesia'}
+                    {displayAddress || 'Batam Industrial Park, Mukakuning, Batam Free Trade Zone, Kepulauan Riau 29433, Indonesia'}
                   </p>
                 </div>
               </div>

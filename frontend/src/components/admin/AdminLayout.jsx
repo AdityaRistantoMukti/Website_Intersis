@@ -3,8 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import {
   LayoutDashboard,
+  Home,
   Sliders,
   Building2,
+  Package,
+  Cpu,
   Phone,
   ShieldCheck,
   Image,
@@ -69,7 +72,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
 
   const isFullAdmin = user?.role === 'administrator' || user?.role === 'hrd';
 
-  // Navigation Items
+  // Navigation Items Organized Per Page
   const navSections = [
     {
       title: 'UTAMA',
@@ -78,23 +81,15 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
       ],
     },
     {
-      title: 'KONTEN LANDING PAGE BISNIS',
+      title: 'KONTEN PER HALAMAN (CMS)',
       items: [
-        { key: 'home',        label: 'Beranda (Hero & Stats)', icon: Sliders },
-        { key: 'company',     label: 'Profil & Tentang Kami',  icon: Building2 },
-        { key: 'contact',     label: 'Kontak & Google Maps',   icon: Phone },
-        { key: 'core-values', label: 'Nilai Inti Rekayasa',    icon: ShieldCheck },
-        { key: 'gallery',     label: 'Galeri & Fasilitas',     icon: Image },
-      ],
-    },
-    {
-      title: 'KARIR & REKRUTMEN',
-      items: [
-        { key: 'jobs',       label: 'Lowongan Kerja',      icon: Briefcase },
-        { key: 'categories', label: 'Kategori Departemen', icon: FolderKanban },
-        { key: 'benefits',   label: 'Benefit Karyawan',    icon: Gift },
-        { key: 'programs',   label: 'Program Magang / MT', icon: GraduationCap },
-        { key: 'faqs',       label: 'Tanya Jawab (FAQ)',   icon: HelpCircle },
+        { key: 'home', label: 'Beranda (Home)', icon: Home },
+        { key: 'about', label: 'Tentang Kami (About)', icon: Building2 },
+        { key: 'products', label: 'Produk & Solusi', icon: Package },
+        { key: 'automation', label: 'Otomasi & Robotik', icon: Cpu },
+        { key: 'gallery', label: 'Galeri & Fasilitas', icon: Image },
+        { key: 'career', label: 'Karir & Rekrutmen', icon: Briefcase },
+        { key: 'contact', label: 'Kontak & Google Maps', icon: Phone },
       ],
     },
     ...(isFullAdmin
@@ -103,7 +98,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
             title: 'SISTEM & KEAMANAN',
             items: [
               { key: 'users', label: 'Pengguna Admin', icon: Users },
-              { key: 'logs',  label: 'Log Audit Trail', icon: FileText },
+              { key: 'logs', label: 'Log Audit Trail', icon: FileText },
             ],
           },
         ]
