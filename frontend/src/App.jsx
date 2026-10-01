@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Layout from './components/layout/Layout';
+import { AdminAuthProvider } from './context/AdminAuthContext';
 
 // ── Lazy load pages for code splitting ──
 const HomePage      = lazy(() => import('./pages/public/HomePage'));
@@ -58,7 +59,11 @@ const router = createBrowserRouter([
   { path: '/admin/login',   element: <Suspense fallback={<PageLoader />}><AdminLoginPage /></Suspense> },
   { path: '/admin/*',       element: <Suspense fallback={<PageLoader />}><AdminDashboard /></Suspense> },
 ]);
-
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AdminAuthProvider>
+      <RouterProvider router={router} />
+    </AdminAuthProvider>
+  );
 }
+
