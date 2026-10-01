@@ -152,12 +152,12 @@ export default function ProductsPage() {
   const [selectedRfqProduct, setSelectedRfqProduct] = useState(null);
 
   const categories = [
-    { key: 'all',        label: t('products:catalog.categories.all'),        icon: '🗂️' },
-    { key: 'headunit',   label: t('products:catalog.categories.headunit'),   icon: '🎛️' },
-    { key: 'audio',      label: t('products:catalog.categories.audio'),      icon: '🔊' },
-    { key: 'dashcam',    label: t('products:catalog.categories.dashcam'),    icon: '📷' },
-    { key: 'automation', label: t('products:catalog.categories.automation'), icon: '⚙️' },
-    { key: 'ems',        label: t('products:catalog.categories.ems'),        icon: '🏭' },
+    { key: 'all',        label: t('products:catalog.categories.all') },
+    { key: 'headunit',   label: t('products:catalog.categories.headunit') },
+    { key: 'audio',      label: t('products:catalog.categories.audio') },
+    { key: 'dashcam',    label: t('products:catalog.categories.dashcam') },
+    { key: 'automation', label: t('products:catalog.categories.automation') },
+    { key: 'ems',        label: t('products:catalog.categories.ems') },
   ];
 
   // Quick SKU copy
@@ -225,7 +225,6 @@ export default function ProductsPage() {
       desc: isId
         ? 'Evaluasi mendalam spesifikasi teknis, ketersediaan komponen, dan kalkulasi penawaran biaya resmi dalam 24-48 jam.'
         : 'Technical specification review, component sourcing validation, and cost quotation within 24-48 business hours.',
-      badge: 'Step 1'
     },
     {
       step: '02',
@@ -233,7 +232,6 @@ export default function ProductsPage() {
       desc: isId
         ? 'Optimalisasi layout Design-for-Manufacturing (DFM) untuk menjamin yield SMT maksimal dan pembuatan sampel uji fungsional.'
         : 'Design-for-Manufacturing optimization ensuring optimal SMT placement yields and functional engineering prototypes.',
-      badge: 'Step 2'
     },
     {
       step: '03',
@@ -241,7 +239,6 @@ export default function ProductsPage() {
       desc: isId
         ? 'Fabrikasi stensil laser elektropolis serta pengujian perakitan batch awal terkontrol untuk memvalidasi toleransi mesin.'
         : 'Electro-polished laser stencil fabrication and controlled pilot production batches to qualify machinery tolerances.',
-      badge: 'Step 3'
     },
     {
       step: '04',
@@ -249,7 +246,6 @@ export default function ProductsPage() {
       desc: isId
         ? 'Inspeksi pasta solder 3D, inspeksi optik otomatis AOI, validasi jalur kelistrikan ICT, dan uji ketahanan termal ekstrem.'
         : '3D solder paste inspection, automated optical inspection, in-circuit testing, and dynamic thermal burn-in validation.',
-      badge: 'Step 4'
     },
     {
       step: '05',
@@ -257,7 +253,6 @@ export default function ProductsPage() {
       desc: isId
         ? 'Perakitan massal berkecepatan 80.000 CPH, integrasi serialisasi barcode MES, dan pengiriman kilat 45 menit ke pelabuhan Singapura.'
         : 'High-speed 80K CPH assembly, real-time MES barcode serialization, and 45-minute express transit to Singapore seaport.',
-      badge: 'Step 5'
     }
   ];
 
@@ -383,9 +378,9 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          {/* Category Filter Pills with Icons */}
+          {/* Category Filter Pills (Clean text tabs, no unnecessary icons) */}
           <div className="catalog-pills" role="tablist">
-            {categories.map(({ key, label, icon }) => {
+            {categories.map(({ key, label }) => {
               const count = key === 'all'
                 ? FEATURED_PRODUCTS.length
                 : FEATURED_PRODUCTS.filter(p => p.category === key).length;
@@ -399,7 +394,6 @@ export default function ProductsPage() {
                   className={`catalog-pill${activeCategory === key ? ' catalog-pill--active' : ''}`}
                   onClick={() => setActiveCategory(key)}
                 >
-                  <span className="catalog-pill__icon" aria-hidden="true">{icon}</span>
                   <span className="catalog-pill__text">{label}</span>
                   <span className="catalog-pill__count">{count}</span>
                 </button>
@@ -449,7 +443,6 @@ export default function ProductsPage() {
         <div className="container">
           {filteredProducts.length === 0 ? (
             <div className="prod-empty-state">
-              <div className="prod-empty-state__icon">🔍</div>
               <h3 className="prod-empty-state__title">
                 {isId ? 'Produk Tidak Ditemukan' : 'No Products Found'}
               </h3>
@@ -567,7 +560,7 @@ export default function ProductsPage() {
                                 onClick={(e) => handleCopySku(e, prod.modelCode, prod.id)}
                                 title={isId ? 'Salin Kode Model' : 'Copy Model Code'}
                               >
-                                {isCopied ? '✓' : '❐'}
+                                {isCopied ? (isId ? 'Tersalin' : 'Copied') : (isId ? 'Salin' : 'Copy')}
                               </button>
                             </div>
                           </td>
@@ -634,9 +627,6 @@ export default function ProductsPage() {
       <section className="prod-workflow-section">
         <div className="container">
           <div className="prod-workflow-header">
-            <span className="prod-workflow-kicker">
-              {isId ? 'ALUR REKAYASA & FABRIKASI' : 'ENGINEERING & FABRICATION WORKFLOW'}
-            </span>
             <h2 className="prod-workflow-title">
               {isId
                 ? 'Dari Desain Konsep Hingga Produksi Massal (OEM / ODM Journey)'
@@ -654,7 +644,6 @@ export default function ProductsPage() {
               <div key={idx} className="prod-workflow-card">
                 <div className="prod-workflow-card__top">
                   <span className="prod-workflow-card__step">{st.step}</span>
-                  <span className="prod-workflow-card__badge">{st.badge}</span>
                 </div>
                 <h3 className="prod-workflow-card__title">{st.title}</h3>
                 <p className="prod-workflow-card__desc">{st.desc}</p>
@@ -673,9 +662,6 @@ export default function ProductsPage() {
           <div className="prod-cta-card">
             <div className="prod-cta-card__bg-grid" aria-hidden="true" />
             <div className="prod-cta-card__content">
-              <span className="prod-cta-kicker">
-                {isId ? 'KEMITRAAN REKAYASA & MANUFAKTUR' : 'ENGINEERING & MANUFACTURING PARTNERSHIP'}
-              </span>
               <h2 className="prod-cta-title">
                 {isId
                   ? 'Membutuhkan Kustomisasi Khusus atau Tooling Baru?'

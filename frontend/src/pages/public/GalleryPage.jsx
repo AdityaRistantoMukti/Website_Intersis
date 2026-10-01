@@ -107,24 +107,26 @@ export default function GalleryPage() {
 
   return (
     <div className="gallery-page">
-      {/* ── HEADER / BREADCRUMB ── */}
+      {/* ═══════ PAGE HEADER — Consistent Industrial Theme ═══════ */}
       <header className="gallery-page-header">
-        <div className="container">
-          <div className="prod-breadcrumb">
+        <div className="gallery-page-header__grid-bg" aria-hidden="true" />
+        <div className="gallery-page-header__glow" aria-hidden="true" />
+
+        <div className="container gallery-page-header__content">
+          <nav className="gallery-breadcrumb" aria-label="Breadcrumb">
             <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span>/</span>
-            <span className="prod-breadcrumb--active">{isId ? 'Galeri' : 'Gallery'}</span>
-          </div>
-          <div className="gallery-header-intro">
-            <h1 className="gallery-header-title">
-              {isId ? 'Galeri Fasilitas Manufaktur & Ruang Produksi' : 'Manufacturing Facilities & Production Gallery'}
-            </h1>
-            <p className="gallery-header-sub">
-              {isId
-                ? 'Jelajahi lini perakitan SMT berkecepatan tinggi, ruang bersih berstandar ESD, bengkel fabrikasi jig mekanik, dan laboratorium uji reliabilitas PT. Global Philsonic Technologies di Batam Free Trade Zone.'
-                : 'Explore high-speed SMT assembly lines, ESD-controlled cleanrooms, in-house mechanical jig tooling centers, and advanced reliability laboratories at PT. Global Philsonic Technologies Batam Free Trade Zone.'}
-            </p>
-          </div>
+            <span className="gallery-breadcrumb__sep">/</span>
+            <span className="gallery-breadcrumb__current">{isId ? 'Galeri' : 'Gallery'}</span>
+          </nav>
+
+          <h1 className="gallery-page-header__title">
+            {isId ? 'Galeri Fasilitas Manufaktur & Ruang Produksi' : 'Manufacturing Facilities & Production Gallery'}
+          </h1>
+          <p className="gallery-page-header__subtitle">
+            {isId
+              ? 'Jelajahi lini perakitan SMT berkecepatan tinggi, ruang bersih berstandar ESD, bengkel fabrikasi jig mekanik, dan laboratorium uji reliabilitas PT. Global Philsonic Technologies di Batam Free Trade Zone.'
+              : 'Explore high-speed SMT assembly lines, ESD-controlled cleanrooms, in-house mechanical jig tooling centers, and advanced reliability laboratories at PT. Global Philsonic Technologies Batam Free Trade Zone.'}
+          </p>
         </div>
       </header>
 

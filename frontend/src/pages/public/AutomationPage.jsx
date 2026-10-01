@@ -1,457 +1,711 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import RobotCanvas3D from '../../components/automation/RobotCanvas3D';
 import './AutomationPage.css';
 
-const AUTOMATION_ITEMS = [
+// ── Images from user's authentic robot assets ──
+import weldingImg from '../../assets/robot_welding.png';
+import handlingImg from '../../assets/robot_handling.png';
+import cuttingImg from '../../assets/robot_cutting.png';
+
+// ════════════════════════════════════════════════════════════════════════════
+// ROBOT PRODUCTS DATA WITH 4 SCROLLYTELLING CHAPTERS
+// ════════════════════════════════════════════════════════════════════════════
+const ROBOTS = [
   {
-    id: 'gpt-ict-4000',
-    category: 'ict',
-    categoryLabel: 'In-Circuit Test (ICT)',
-    badge: 'High-Precision Vacuum',
-    name: 'GPT-ICT-4000 Dual-Chamber Vacuum Pneumatic ICT Jig',
-    desc: 'Automated bed-of-nails fixture engineered for high-density automotive PCBA with Kelvin 4-wire resistance measurement and vacuum sealing chamber.',
-    cycleTime: '< 8.5 seconds',
-    capacity: '1,024 test probe points',
-    plc: 'Omron Sysmac NJ-Series (EtherCAT)',
-    pneumatics: 'Festo DNC Pneumatic Cylinders',
-    mesSupport: 'SECS/GEM & OPC-UA Realtime Telemetry',
-    accentColor: '#00897b',
-    svgIcon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="6" y="10" width="52" height="44" rx="4" stroke="#00897b" strokeWidth="2" strokeDasharray="4 2" />
-        <line x1="6" y1="26" x2="58" y2="26" stroke="#00897b" strokeWidth="1.5" />
-        <circle cx="16" cy="18" r="3" fill="#2dd4bf" />
-        <circle cx="26" cy="18" r="3" fill="#2dd4bf" />
-        <circle cx="36" cy="18" r="3" fill="#2dd4bf" />
-        <circle cx="48" cy="18" r="4" stroke="#f59e0b" strokeWidth="1.5" />
-        {/* Test probes */}
-        <line x1="16" y1="26" x2="16" y2="44" stroke="#e2e8f0" strokeWidth="2" strokeLinecap="round" />
-        <line x1="24" y1="26" x2="24" y2="40" stroke="#e2e8f0" strokeWidth="2" strokeLinecap="round" />
-        <line x1="32" y1="26" x2="32" y2="46" stroke="#e2e8f0" strokeWidth="2" strokeLinecap="round" />
-        <line x1="40" y1="26" x2="40" y2="42" stroke="#e2e8f0" strokeWidth="2" strokeLinecap="round" />
-        <line x1="48" y1="26" x2="48" y2="45" stroke="#e2e8f0" strokeWidth="2" strokeLinecap="round" />
-        {/* DUT PCB */}
-        <rect x="12" y="44" width="40" height="6" rx="2" fill="#10b981" />
-      </svg>
-    )
+    id: 'welding',
+    tabEn: 'Robot Welding',
+    tabId: 'Robot Welding',
+    titleEn: 'Robot Welding Series',
+    titleId: 'Seri Robot Welding',
+    image: weldingImg,
+    heroStats: [
+      { val: '6-Axis', labelEn: 'Kinematics', labelId: 'Kinematika' },
+      { val: '±0.04 mm', labelEn: 'Repeatability', labelId: 'Akurasi Ulang' },
+      { val: '2,010 mm', labelEn: 'Max Reach', labelId: 'Jangkauan Maks' },
+      { val: '20 kg', labelEn: 'Payload', labelId: 'Kapasitas Beban' },
+    ],
+    steps: [
+      {
+        kickerEn: '01 / OVERVIEW & CAPABILITY',
+        kickerId: '01 / IKHTISAR & KAPABILITAS',
+        titleEn: 'Industrial High-Speed Arc & Spot Welding Automation',
+        titleId: 'Otomasi Pengelasan Busur & Titik Presisi Kecepatan Tinggi',
+        descEn:
+          'Engineered for 24/7 demanding production lines. Our robotic welding systems eliminate weld spatter, guarantee uniform bead penetration, and achieve structural repeatability across automotive frames, heavy chassis, and aluminum enclosures.',
+        descId:
+          'Dirancang untuk lini produksi berstandar industri 24/7. Sistem pengelasan robotik kami meminimalkan percikan, menjamin penetrasi kampuh yang seragam, dan menghasilkan kekuatan struktural konsisten pada rangka otomotif, sasis baja berat, hingga housing aluminium.',
+        highlights: [
+          { en: 'Automotive & Shipyard Heavy Steel Grade', id: 'Standar Industri Otomotif & Galangan Baja' },
+          { en: 'Consistent Penetration & Low Heat Distortion', id: 'Penetrasi Seragam & Distorsi Panas Rendah' },
+          { en: 'Integrated Digital Waveform Control', id: 'Kontrol Bentuk Gelombang Digital Terintegrasi' },
+        ],
+        tags: ['MIG / MAG', 'TIG Pulse', 'Arc Welding', 'Spot Welding', 'Aluminum / SS / Carbon'],
+      },
+      {
+        kickerEn: '02 / KINEMATICS & REACH ENVELOPE',
+        kickerId: '02 / KINEMATIKA & AREA JANGKAUAN',
+        titleEn: '6-Axis Articulated Geometry for Tight Complex Seams',
+        titleId: 'Geometri Artikulasi 6-Sumbu untuk Sudut Kampuh Sempit',
+        descEn:
+          'Equipped with hollow-wrist architecture to route welding torch cables internally. The 1,440 mm to 2,010 mm hemispherical reach envelope allows uninterrupted 360° rotational seam tracking around circular pipes and recessed automotive floor pans.',
+        descId:
+          'Dilengkapi konstruksi hollow-wrist untuk perlindungan kabel internal obor las. Radius kerja hemisfer 1.440 mm hingga 2.010 mm memungkinkan penelusuran kampuh las kontinu 360° pada pipa sirkular dan kompartemen rangka sempit tanpa risiko puntiran kabel.',
+        highlights: [
+          { en: 'High-Torque AC Synchronous Servomotors', id: 'Motor Servo Sinkron Torsi Tinggi' },
+          { en: 'Backlash-Free Harmonic & RV Cycloidal Reducers', id: 'Reduser Sikloidal RV Bebas Backlash' },
+          { en: 'Dynamic Vibration Suppression Filtering', id: 'Filter Peredam Getaran Dinamis' },
+        ],
+        tags: ['Reach: 2,010 mm', 'Payload: 6 – 20 kg', 'Repeatability: ±0.04 mm', 'Hollow Wrist'],
+      },
+      {
+        kickerEn: '03 / TOOLING & PROCESS CONTROL',
+        kickerId: '03 / PERKAKAS & KONTROL PROSES',
+        titleEn: 'Precision MIG/TIG Torch, Digital Inverter & Push-Pull Feeder',
+        titleId: 'Obor Las Presisi MIG/TIG, Inverter Digital & Pengumpan Push-Pull',
+        descEn:
+          'The end-effector features an anti-spatter brass gas cup, water-cooled torch neck, and high-frequency digital arc control. Dual push-pull wire feeding guarantees smooth feeding even for soft aluminum wires with zero bird-nesting.',
+        descId:
+          'End-effector dilengkapi gas cup kuningan anti-spatter, leher obor pendingin air, dan kontrol busur digital frekuensi tinggi. Sistem pengumpan kawat push-pull ganda memastikan kelancaran kawat aluminium lunak tanpa risiko macet atau kusut.',
+        highlights: [
+          { en: 'Push-Pull Wire Feeder with Optical Encoder', id: 'Pengumpan Push-Pull dengan Encoder Optik' },
+          { en: 'Anti-Collision Breakaway Safety Mount', id: 'Dudukan Pengaman Anti-Tabrakan Breakaway' },
+          { en: 'Auto Torch Cleaner & Wire-Cutter Station', id: 'Stasiun Pembersih Obor & Pemotong Kawat Otomatis' },
+        ],
+        tags: ['Water-Cooled Torch', 'Push-Pull Feed', 'Anti-Spatter Nozzle', 'Arc Voltage Control'],
+      },
+      {
+        kickerEn: '04 / TECHNICAL SPECS & INTEGRATION',
+        kickerId: '04 / SPESIFIKASI TEKNIS & INTEGRASI',
+        titleEn: 'Fieldbus Connectivity & Full Plant Integration',
+        titleId: 'Konektivitas Fieldbus & Integrasi Penuh Sistem Pabrik',
+        descEn:
+          'Seamlessly plugs into your MES Industry 4.0 architecture via EtherCAT or PROFINET. Real-time logging of weld voltage, current, and wire consumption enables complete traceability for ISO/TS automotive compliance.',
+        descId:
+          'Terhubung langsung ke arsitektur MES Industri 4.0 pabrik Anda melalui EtherCAT atau PROFINET. Pencatatan telemetri tegangan, arus, dan konsumsi kawat secara real-time memberikan ketertelusuran penuh standar otomotif ISO/TS.',
+        specs: [
+          { labelEn: 'Number of Axes', labelId: 'Jumlah Sumbu', val: '6-Axis Articulated' },
+          { labelEn: 'Working Radius', labelId: 'Radius Kerja', val: '1,440 – 2,010 mm' },
+          { labelEn: 'Payload Capacity', labelId: 'Kapasitas Beban', val: '6 – 20 kg' },
+          { labelEn: 'Pose Repeatability', labelId: 'Akurasi Pengulangan', val: '±0.04 mm' },
+          { labelEn: 'Welding Speed', labelId: 'Kecepatan Las', val: '80 – 300 cm/min' },
+          { labelEn: 'Communication Bus', labelId: 'Protokol Komunikasi', val: 'EtherCAT / PROFINET' },
+          { labelEn: 'Protection Class', labelId: 'Kelas Perlindungan', val: 'IP54 / Anti-Spatter' },
+          { labelEn: 'Safety Standards', labelId: 'Standar Keselamatan', val: 'ISO 10218-1 / CE / E-Stop' },
+        ],
+      },
+    ],
   },
   {
-    id: 'gpt-fct-900',
-    category: 'fct',
-    categoryLabel: 'Functional Circuit Test (FCT)',
-    badge: 'Automotive Cockpit',
-    name: 'GPT-FCT-900 High-Speed Infotainment & Display FCT Station',
-    desc: 'Full-functional verification platform featuring automated HDMI 2.1 4K pattern generation, CAN-FD/LIN vehicle bus emulation, and optical touch response benchmarking.',
-    cycleTime: '< 14.0 seconds',
-    capacity: 'Dual-DUT parallel testing',
-    plc: 'Mitsubishi iQ-R Series PLC',
-    pneumatics: 'SMC Compact Guided Actuators',
-    mesSupport: 'Custom MQTT + JSON Cloud MES Bridge',
-    accentColor: '#3b82f6',
-    svgIcon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="12" width="48" height="34" rx="4" stroke="#3b82f6" strokeWidth="2" />
-        <rect x="14" y="18" width="36" height="22" rx="2" fill="#1e293b" />
-        <path d="M18 32 L26 24 L32 30 L42 20" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <line x1="24" y1="46" x2="40" y2="46" stroke="#3b82f6" strokeWidth="3" />
-        <line x1="32" y1="46" x2="32" y2="54" stroke="#3b82f6" strokeWidth="3" />
-        <rect x="20" y="54" width="24" height="4" rx="2" fill="#3b82f6" />
-      </svg>
-    )
+    id: 'handling',
+    tabEn: 'Robot Handling',
+    tabId: 'Robot Handling',
+    titleEn: 'Robot Handling Series',
+    titleId: 'Seri Robot Handling',
+    image: handlingImg,
+    heroStats: [
+      { val: '4 – 6 Axis', labelEn: 'Kinematics', labelId: 'Kinematika' },
+      { val: '±0.02 mm', labelEn: 'Repeatability', labelId: 'Akurasi Ulang' },
+      { val: '3,100 mm', labelEn: 'Max Reach', labelId: 'Jangkauan Maks' },
+      { val: '250 kg', labelEn: 'Payload', labelId: 'Kapasitas Beban' },
+    ],
+    steps: [
+      {
+        kickerEn: '01 / OVERVIEW & CAPABILITY',
+        kickerId: '01 / IKHTISAR & KAPABILITAS',
+        titleEn: 'High-Throughput Material Handling & Machine Tending',
+        titleId: 'Transfer Material & Otomasi Mesin Berkecepatan Tinggi',
+        descEn:
+          'From high-speed pick & place on surface-mount electronics to heavy palletizing of packaged goods, our handling robots run 24/7 without fatigue. Eliminate line bottlenecks and protect operators from repetitive strain injuries.',
+        descId:
+          'Dari pick & place berkecepatan tinggi pada lini perakitan elektronik hingga paletisasi muatan berat, robot handling kami beroperasi 24/7 tanpa henti. Menghilangkan bottleneck lini produksi dan menjaga keselamatan operator.',
+        highlights: [
+          { en: 'Ultra-Fast Cycle Times (< 0.37s standard motion)', id: 'Waktu Siklus Cepat (< 0,37 detik gerakan standar)' },
+          { en: 'Payloads from 3 kg up to 250 kg Industrial Range', id: 'Kapasitas Beban dari 3 kg hingga 250 kg' },
+          { en: 'Zero Fatigue 24/7 Continuous Automated Transfer', id: 'Operasional Kontinu 24/7 Tanpa Hambatan' },
+        ],
+        tags: ['Pick & Place', 'Palletizing', 'CNC Tending', 'Sorting', 'High-Speed Assembly'],
+      },
+      {
+        kickerEn: '02 / KINEMATICS & REACH ENVELOPE',
+        kickerId: '02 / KINEMATIKA & AREA JANGKAUAN',
+        titleEn: 'Expansive Work Envelope with 13,000 mm/s Axis Velocity',
+        titleId: 'Area Jangkauan Luas dengan Kecepatan Sumbu 13.000 mm/s',
+        descEn:
+          'Optimized arm link ratios enable lightning-fast point-to-point transfers across distances up to 3,100 mm. Advanced jerk-limited path planners ensure smooth acceleration curves that prevent parts from slipping out of grippers.',
+        descId:
+          'Rasio sambungan lengan yang dioptimalkan menghasilkan transfer point-to-point sangat cepat hingga jangkauan 3.100 mm. Algoritma perencanaan jalur bebas kejutan menjamin kurva akselerasi mulus agar komponen tidak bergeser dari gripper.',
+        highlights: [
+          { en: 'Advanced S-Curve Jerk-Limiting Trajectory', id: 'Trajektori S-Curve Halus Bebas Hentakan' },
+          { en: 'Massive Reach up to 3,100 mm for Multi-Station Tending', id: 'Jangkauan hingga 3.100 mm untuk Multi-Stasiun' },
+          { en: 'Heavy-Duty Reinforced Base Bearing Structure', id: 'Struktur Bantalan Base Heavy-Duty Diperkuat' },
+        ],
+        tags: ['Reach: 3,100 mm', 'Max Velocity: 13 m/s', 'Cycle Time: <0.37s', 'High Ingress IP67'],
+      },
+      {
+        kickerEn: '03 / TOOLING & PROCESS CONTROL',
+        kickerId: '03 / PERKAKAS & KONTROL PROSES',
+        titleEn: 'Adaptive Parallel Grippers, Vacuum Cups & Vision Guidance',
+        titleId: 'Gripper Paralel Adaptif, Suction Vakum & Panduan Kamera Visi',
+        descEn:
+          'Equipped with pneumatic parallel jaws, quick-change tool changers, and optional 2D/3D vision cameras. Integrated force-torque sensors detect part misalignments in real-time, preventing jamming in automated fixtures.',
+        descId:
+          'Dilengkapi rahang paralel pneumatik, pengganti alat otomatis (tool changer), dan opsi kamera 2D/3D vision. Sensor torsi-gaya terintegrasi mendeteksi posisi komponen secara real-time untuk mencegah kerusakan cetakan atau mesin.',
+        highlights: [
+          { en: 'Pneumatic Parallel Gripper with Rubber Friction Pads', id: 'Gripper Paralel Pneumatik Berbantalan Gesekan' },
+          { en: 'Venturi Vacuum Generator with Part-Presence Sensor', id: 'Generator Vakum Venturi dengan Sensor Kehadiran' },
+          { en: 'Smart 3D Vision AI Part Recognition Option', id: 'Opsi Pengenalan Objek AI Kamera 3D Pintar' },
+        ],
+        tags: ['Pneumatic Gripper', 'Vacuum Suction', 'Vision Guidance', 'Quick Tool Changer'],
+      },
+      {
+        kickerEn: '04 / TECHNICAL SPECS & INTEGRATION',
+        kickerId: '04 / SPESIFIKASI TEKNIS & INTEGRASI',
+        titleEn: 'Scalable Controllers & Industrial Fieldbus Architecture',
+        titleId: 'Pengendali Skalabel & Arsitektur Fieldbus Industri',
+        descEn:
+          'Pre-configured for plug-and-play connection with CNC lathes, milling centers, and conveyor sensors. Intuitive teach pendant interface enables rapid re-tooling in under 15 minutes for mixed-model production lines.',
+        descId:
+          'Terkonfigurasi siap pakai untuk integrasi cepat dengan mesin CNC, konveyor, dan sensor lini. Antarmuka teach pendant yang intuitif memungkinkan pergantian program produk dalam waktu kurang dari 15 menit.',
+        specs: [
+          { labelEn: 'Number of Axes', labelId: 'Jumlah Sumbu', val: '4 to 6 Axis' },
+          { labelEn: 'Working Radius', labelId: 'Radius Kerja', val: '700 – 3,100 mm' },
+          { labelEn: 'Payload Range', labelId: 'Rentang Beban', val: '3 – 250 kg' },
+          { labelEn: 'Repeatability', labelId: 'Akurasi Pengulangan', val: '±0.02 mm' },
+          { labelEn: 'Standard Cycle', labelId: 'Waktu Siklus', val: '< 0.37 s' },
+          { labelEn: 'Communication Bus', labelId: 'Protokol Komunikasi', val: 'EtherCAT / PROFINET / Modbus' },
+          { labelEn: 'Protection Class', labelId: 'Kelas Perlindungan', val: 'IP65 / IP67 (Wrist)' },
+          { labelEn: 'Vision Support', labelId: 'Dukungan Visi', val: '2D / 3D Smart Camera' },
+        ],
+      },
+    ],
   },
   {
-    id: 'gpt-eol-8200',
-    category: 'eol',
-    categoryLabel: 'End-of-Line (EOL)',
-    badge: 'EV & High-Voltage',
-    name: 'GPT-EOL-8200 Smart BMS & Power Electronics EOL Station',
-    desc: 'High-voltage insulation and safety testing station for Battery Management Systems (BMS), including thermal sensor simulation, cell balancing validation, and laser barcode logging.',
-    cycleTime: '< 18.5 seconds',
-    capacity: 'Up to 96-channel voltage cell simulation',
-    plc: 'Beckhoff TwinCAT 3 Industrial PC',
-    pneumatics: 'Festo Servopneumatic Positioning',
-    mesSupport: 'IATF 16949 Full Traceability Database',
-    accentColor: '#f59e0b',
-    svgIcon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="8" width="48" height="48" rx="6" stroke="#f59e0b" strokeWidth="2" />
-        <circle cx="32" cy="32" r="16" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3 3" />
-        <path d="M30 18 L24 34 H34 L28 48" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="16" cy="16" r="3" fill="#10b981" />
-        <circle cx="48" cy="16" r="3" fill="#ef4444" />
-      </svg>
-    )
+    id: 'cutting',
+    tabEn: 'Robot Cutting',
+    tabId: 'Robot Cutting',
+    titleEn: 'Robot Cutting Series',
+    titleId: 'Seri Robot Cutting',
+    image: cuttingImg,
+    heroStats: [
+      { val: '6-Axis', labelEn: 'Kinematics', labelId: 'Kinematika' },
+      { val: '±0.5 mm', labelEn: 'Path Accuracy', labelId: 'Akurasi Jalur' },
+      { val: '2,500 mm', labelEn: 'Max Reach', labelId: 'Jangkauan Maks' },
+      { val: '200 mm', labelEn: 'Max Plate', labelId: 'Ketebalan Maks' },
+    ],
+    steps: [
+      {
+        kickerEn: '01 / OVERVIEW & CAPABILITY',
+        kickerId: '01 / IKHTISAR & KAPABILITAS',
+        titleEn: 'Heavy Industrial Plasma, Flame & 3D Laser Profile Cutting',
+        titleId: 'Pemotongan Profil Plat Baja 3D Plasma, Api & Laser',
+        descEn:
+          'Engineered for structural steel fabrication, pressure vessel heads, and shipyard hull profiling. Handles bevel cuts up to ±45° and pierces plates up to 200 mm thickness with sharp dross-free edge quality.',
+        descId:
+          'Dirancang khusus untuk fabrikasi baja struktural, bejana tekan, dan pemotongan plat lambung kapal. Mampu melakukan pemotongan bevel miring hingga ±45° dan menembus plat hingga ketebalan 200 mm dengan tepi bersih bebas dross.',
+        highlights: [
+          { en: 'TrueHole & Beveling Accuracy for Bolt Holes', id: 'Akurasi Lubang Baut TrueHole & Beveling Mulus' },
+          { en: 'Cuts Carbon Steel, Stainless Steel, & Aluminum', id: 'Memotong Baja Karbon, Stainless Steel, & Aluminium' },
+          { en: 'Automated Kerf Compensation & Nesting CAD Import', id: 'Kompensasi Celah Otomatis & Import CAD Nesting' },
+        ],
+        tags: ['High-Def Plasma', 'Oxy-Fuel Flame', 'Fiber Laser', 'Pipe Beveling', 'Plate Piercing'],
+      },
+      {
+        kickerEn: '02 / KINEMATICS & REACH ENVELOPE',
+        kickerId: '02 / KINEMATIKA & AREA JANGKAUAN',
+        titleEn: 'Extended Reach Geometry for Large Gantry & Pipe Stations',
+        titleId: 'Geometri Jangkauan Luas untuk Gantry Besar & Pipa',
+        descEn:
+          'A long-reach 1,600 mm to 2,500 mm articulated arm mounted on gantry rails allows cutting across massive 12-meter steel plates. Continuous wrist rotation allows continuous beveling without stopping at sharp corners.',
+        descId:
+          'Lengan artikulasi jangkauan panjang 1.600 mm hingga 2.500 mm dapat dipasang pada rel gantry untuk memotong plat baja raksasa hingga panjang 12 meter. Rotasi pergelangan tanpa batas menghasilkan bevel sudut tajam tanpa henti.',
+        highlights: [
+          { en: 'Gantry Linear Rail Synchronization Ready', id: 'Sinkronisasi Siap Rel Linear Gantry' },
+          { en: 'Sealed Rotary Joints Immune to Hot Slag & Dust', id: 'Sambungan Rotari Tersegel Tahan Terak Panas & Debu' },
+          { en: 'Sub-Millimeter Contouring Accuracy Along 3D Edges', id: 'Akurasi Kontur Sub-Milimeter pada Tepi 3D' },
+        ],
+        tags: ['Reach: 2,500 mm', 'Cutting Speed: 12 m/min', 'Thickness: 1 – 200 mm', 'Anti-Spatter Seals'],
+      },
+      {
+        kickerEn: '03 / TOOLING & PROCESS CONTROL',
+        kickerId: '03 / PERKAKAS & KONTROL PROSES',
+        titleEn: 'Capacitive Torch Height Control (THC) & Safety Breakaway',
+        titleId: 'Kontrol Ketinggian Obor Kapasitif (THC) & Proteksi Tabrakan',
+        descEn:
+          'Features real-time high-speed arc voltage height sensing (THC) that adjusts nozzle elevation dynamically over warped steel plates. Magnetic breakaway torch mounts prevent catastrophic damage in case of tip-up collision.',
+        descId:
+          'Dilengkapi sensor ketinggian kapasitif & tegangan busur real-time (THC) yang menyesuaikan posisi nozzle secara dinamis di atas plat baja yang bergelombang. Dudukan magnetik breakaway mencegah kerusakan fatal jika terjadi benturan.',
+        highlights: [
+          { en: 'Capacitive & Arc Voltage THC Height Sensing', id: 'Sensor Ketinggian THC Kapasitif & Tegangan Busur' },
+          { en: 'Magnetic Collision Breakaway Sensor Shield', id: 'Pelindung Sensor Tabrakan Magnetik Breakaway' },
+          { en: 'Dual Gas Vortex Plasma Cutting Consumable Stack', id: 'Nozzle Plasma Aliran Gas Ganda Tahan Aus' },
+        ],
+        tags: ['Capacitive THC', 'Collision Breakaway', 'Vortex Gas Shield', 'Laser Guide Pointer'],
+      },
+      {
+        kickerEn: '04 / TECHNICAL SPECS & INTEGRATION',
+        kickerId: '04 / SPESIFIKASI TEKNIS & INTEGRASI',
+        titleEn: 'Direct CAD/CAM Code Execution & CNC Gantry Link',
+        titleId: 'Eksekusi Kode CAD/CAM Langsung & Tautan CNC Gantry',
+        descEn:
+          'Directly parses STEP, IGES, and DXF nested drawing files. Synchronizes motion with positioner rotators and fume extraction tables to maintain compliant workplace safety standards.',
+        descId:
+          'Mampu membaca file gambar nesting STEP, IGES, dan DXF secara langsung. Menyinkronkan gerakan dengan meja pemutar posisi (positioner) dan meja hisap asap untuk memenuhi standar keselamatan kerja internasional.',
+        specs: [
+          { labelEn: 'Number of Axes', labelId: 'Jumlah Sumbu', val: '6-Axis + Gantry Sync' },
+          { labelEn: 'Working Radius', labelId: 'Radius Kerja', val: '1,600 – 2,500 mm' },
+          { labelEn: 'Cutting Thickness', labelId: 'Ketebalan Potong', val: '1 – 200 mm (Oxy/Plasma)' },
+          { labelEn: 'Path Accuracy', labelId: 'Akurasi Jalur', val: '±0.5 mm' },
+          { labelEn: 'Cutting Velocity', labelId: 'Kecepatan Potong', val: 'Up to 12,000 mm/min' },
+          { labelEn: 'Height Sensing', labelId: 'Sensor Ketinggian', val: 'Auto THC (Arc Voltage)' },
+          { labelEn: 'Plasma Power', labelId: 'Daya Plasma', val: '60 – 400 Ampere' },
+          { labelEn: 'Collision Safety', labelId: 'Keselamatan', val: 'Breakaway + E-Stop' },
+        ],
+      },
+    ],
   },
-  {
-    id: 'gpt-disp-600',
-    category: 'dispensing',
-    categoryLabel: 'Robotic Dispensing',
-    badge: '6-Axis Conformal',
-    name: 'GPT-DISP-600 Automated Dual-Head Selective Conformal Coating Robot',
-    desc: 'Precision selective spray and needle dispensing machine for silicone/acrylic potting with UV cure inspection and laser surface height compensation.',
-    cycleTime: '< 22.0 seconds',
-    capacity: '±0.015 mm dispensing repeatability',
-    plc: 'Panasonic FP7 Modular Controller',
-    pneumatics: 'Nordson EFD Precision Fluid Valves',
-    mesSupport: 'Real-time Fluid Weight & Flow Telemetry',
-    accentColor: '#8b5cf6',
-    svgIcon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <line x1="8" y1="16" x2="56" y2="16" stroke="#8b5cf6" strokeWidth="3" />
-        <rect x="26" y="10" width="12" height="14" rx="2" fill="#8b5cf6" />
-        <line x1="32" y1="24" x2="32" y2="40" stroke="#a78bfa" strokeWidth="2.5" />
-        <circle cx="32" cy="42" r="3" fill="#ec4899" />
-        {/* Dispense drop */}
-        <path d="M32 46 C32 46 28 52 28 54 A4 4 0 0 0 36 54 C36 52 32 46 32 46 Z" fill="#ec4899" />
-        <rect x="14" y="54" width="36" height="4" rx="2" fill="#475569" />
-      </svg>
-    )
-  },
-  {
-    id: 'gpt-opt-300',
-    category: 'fct',
-    categoryLabel: 'Optical & Metrology',
-    badge: '3D Laser AOI',
-    name: 'GPT-OPT-300 Multi-Angle Solder Joint Metrology & Vision Jig',
-    desc: 'High-speed inline optical verification with 4-way telecentric lenses and coaxial lighting, detecting 0201 solder bridge, polarity, coplanarity, and tombstoning.',
-    cycleTime: '< 7.2 seconds / board',
-    capacity: 'Resolution 10 μm / pixel',
-    plc: 'Keyence KV-8000 Ultra High-Speed PLC',
-    pneumatics: 'SMC Anti-Static ESD Cylinders',
-    mesSupport: 'Hikvision / Cognex Vision MES Log',
-    accentColor: '#06b6d4',
-    svgIcon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="22" stroke="#06b6d4" strokeWidth="2" />
-        <circle cx="32" cy="32" r="14" stroke="#22d3ee" strokeWidth="1.5" />
-        <circle cx="32" cy="32" r="4" fill="#06b6d4" />
-        <line x1="32" y1="4" x2="32" y2="12" stroke="#06b6d4" strokeWidth="2" />
-        <line x1="32" y1="52" x2="32" y2="60" stroke="#06b6d4" strokeWidth="2" />
-        <line x1="4" y1="32" x2="12" y2="32" stroke="#06b6d4" strokeWidth="2" />
-        <line x1="52" y1="32" x2="60" y2="32" stroke="#06b6d4" strokeWidth="2" />
-      </svg>
-    )
-  },
-  {
-    id: 'gpt-harn-150',
-    category: 'wireharness',
-    categoryLabel: 'Wire Harness',
-    badge: '1500VDC Hipot',
-    name: 'GPT-HARN-150 Automated Wire Harness Continuity & Hipot Rig',
-    desc: 'Pneumatic clamping test console with 4-wire resistance, dielectric withstand voltage (Hipot), insulation resistance up to 10 GΩ, and automated connector lock check.',
-    cycleTime: '< 9.0 seconds',
-    capacity: '256 test pins / 128 wire pairs',
-    plc: 'Mitsubishi FX5U Compact PLC',
-    pneumatics: 'Festo Compact Clamping Cylinders',
-    mesSupport: 'Barcode Scan & Pass/Fail Direct Label Print',
-    accentColor: '#10b981',
-    svgIcon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <path d="M12 16 C24 16 24 48 36 48 C48 48 48 20 56 20" stroke="#10b981" strokeWidth="3" strokeLinecap="round" />
-        <path d="M12 28 C22 28 26 40 36 40 C44 40 48 32 56 32" stroke="#34d399" strokeWidth="2" strokeLinecap="round" />
-        <rect x="6" y="10" width="8" height="24" rx="2" fill="#1e293b" stroke="#10b981" strokeWidth="1.5" />
-        <rect x="52" y="14" width="8" height="24" rx="2" fill="#1e293b" stroke="#10b981" strokeWidth="1.5" />
-      </svg>
-    )
-  }
 ];
 
-const CAPABILITIES = [
+// ════════════════════════════════════════════════════════════════════════════
+// BATAM INDUSTRIAL AUTOMATION DATA (Clean, Minimal, Typography-Driven)
+// ════════════════════════════════════════════════════════════════════════════
+const BATAM_PILLARS = [
   {
-    title: 'In-House Precision Tooling',
-    desc: 'Haas 4-Axis CNC machining center for rapid milling of ESD Bakelite, POM-C, and acrylic test nests with ±0.01mm tolerance.',
-    icon: '⚙️'
+    titleEn: 'Precision Meets Productivity',
+    titleId: 'Presisi Tinggi & Produktivitas Maksimal',
+    descEn: 'Robots deliver consistent, repeatable quality—whether you’re welding a car frame or cutting a heavy steel plate. Their accuracy reduces errors, rework, and downtime.',
+    descId: 'Robot memberikan kualitas presisi dan repetitif yang konsisten—baik untuk pengelasan rangka otomotif maupun pemotongan pelat baja berat. Akurasi tinggi meminimalkan kesalahan, pengerjaan ulang (rework), dan downtime produksi.',
   },
   {
-    title: 'Multi-Brand PLC & Robotics',
-    desc: 'Certified firmware engineering across Omron Sysmac, Mitsubishi iQ, Siemens S7-1500, and Beckhoff TwinCAT architectures.',
-    icon: '⚡'
+    titleEn: 'Local Support in Batam',
+    titleId: 'Dukungan Teknis Lokal di Batam',
+    descEn: 'With our authorized distributor PT. Global Philsonic Technologies, you get technical support, training, spare parts, and troubleshooting assistance — all in Batam.',
+    descId: 'Bersama distributor resmi kami PT. Global Philsonic Technologies, Anda memperoleh dukungan teknis langsung, pelatihan operator bersertifikat, ketersediaan suku cadang cepat, dan pendampingan troubleshooting — semuanya berbasis langsung di Batam.',
   },
   {
-    title: 'Industry 4.0 & MES Telemetry',
-    desc: 'Direct OPC-UA, MQTT, and SECS/GEM connectivity providing real-time yield rate, CPK data, and parametric waveform logging.',
-    icon: '📊'
+    titleEn: 'Full System Integration',
+    titleId: 'Integrasi Sistem Penuh',
+    descEn: 'We deliver not only robots but also the welding power source, torches, positioners, sensors, and software. A complete ecosystem for smooth and optimized performance.',
+    descId: 'Bukan sekadar robot mandiri, kami menyuplai mesin sumber daya las (power source), obor las presisi, positioner putar, sensor cerdas, hingga perangkat lunak kontrol terintegrasi. Ekosistem lengkap untuk performa tanpa hambatan kompatibilitas.',
   },
   {
-    title: '7-Day Rapid Prototyping',
-    desc: 'Fast-track engineering design to commissioning pipeline for custom pneumatic test fixtures and functional test beds.',
-    icon: '⏱️'
-  }
+    titleEn: 'Compact to Heavy-Duty Options',
+    titleId: 'Pilihan Kompak Hingga Beban Berat',
+    descEn: 'Whether you run a small fabrication workshop or a large automotive assembly line, there’s a robot that fits your space, cycle time, and process needs.',
+    descId: 'Mulai dari bengkel fabrikasi presisi skala menengah hingga lini perakitan pabrik otomotif dan galangan kapal berat, kami memiliki varian robot yang dirancang presisi sesuai batasan ruang, target cycle time, dan kebutuhan proses Anda.',
+  },
 ];
 
+const BATAM_ADVANTAGES = [
+  {
+    titleEn: 'High Efficiency & Productivity',
+    titleId: 'Efisiensi & Produktivitas Tinggi',
+    descEn: 'Robots operate 24/7 with high precision, significantly reducing cycle time.',
+    descId: 'Robot beroperasi 24/7 tanpa henti dengan presisi tinggi, memangkas waktu siklus produksi secara signifikan.',
+  },
+  {
+    titleEn: 'Lower Operational Costs',
+    titleId: 'Biaya Operasional Lebih Rendah',
+    descEn: 'Automation reduces labor costs and eliminates expensive human errors.',
+    descId: 'Otomasi menekan biaya tenaga kerja berulang dan mengeliminasi kerugian material akibat kelalaian manual.',
+  },
+  {
+    titleEn: 'Enhanced Workplace Safety',
+    titleId: 'Keselamatan Kerja Maksimal',
+    descEn: 'Dangerous welding tasks are handled by robots, minimizing safety risks.',
+    descId: 'Tugas pengelasan bersuhu tinggi, radiasi sinar, dan bahaya fisik ditangani robot, meminimalkan risiko K3.',
+  },
+  {
+    titleEn: 'Flexible Production',
+    titleId: 'Produksi Adaptif & Fleksibel',
+    descEn: 'Easily reprogram robots for different tasks—ideal for agile manufacturing.',
+    descId: 'Pemrograman ulang cepat untuk berbagai tipe komponen—sangat ideal untuk lini produksi agile manufacturing.',
+  },
+  {
+    titleEn: 'Consistent Quality',
+    titleId: 'Kualitas Konsisten Terjamin',
+    descEn: 'Precision-built systems ensure top-tier results every single time.',
+    descId: 'Sistem rekayasa presisi tinggi menjamin hasil mutu berstandar global di setiap batch produksi.',
+  },
+];
+
+const TECH_FEATURES = [
+  {
+    titleEn: 'AI & Machine Learning Integration',
+    titleId: 'Integrasi AI & Machine Learning',
+    descEn: 'Adaptive trajectory learning, automatic welding parameter tuning, and self-correcting seam tracking for zero-defect production.',
+    descId: 'Pembelajaran lintasan adaptif, penyesuaian parameter las otomatis, dan pelacakan kampuh mandiri tanpa cacat.',
+  },
+  {
+    titleEn: 'High-Precision Welding Sensors',
+    titleId: 'Sensor Pengelasan Presisi Tinggi',
+    descEn: 'Laser optical seam finders, touch sensing, and arc voltage tracking for millimeter-accurate positioning in challenging bevel joints.',
+    descId: 'Pencari kampuh laser optik non-kontak, touch sensing, dan pelacakan tegangan busur untuk presisi milimeter.',
+  },
+  {
+    titleEn: 'IoT-Enabled Monitoring & Diagnostics',
+    titleId: 'Pemantauan & Diagnostik Berbasis IoT',
+    descEn: 'Live OEE metrics, cloud operational telemetry, heat input tracking, and proactive predictive maintenance alerts.',
+    descId: 'Metrik OEE real-time, telemetri operasional cloud, pemantauan heat input, dan peringatan servis prediktif sebelum downtime.',
+  },
+  {
+    titleEn: 'Scalable Multi-Axis Control',
+    titleId: 'Kontrol Multi-Sumbu Tersinkronisasi',
+    descEn: 'Coordinated control for up to 72 external axes including servo positioners, linear tracks, and multi-robot cells.',
+    descId: 'Kontrol terkoordinasi hingga 72 sumbu eksternal termasuk positioner putar, rel geser gantry, dan sel robot ganda.',
+  },
+];
+
+// ════════════════════════════════════════════════════════════════════════════
+// MAIN COMPONENT
+// ════════════════════════════════════════════════════════════════════════════
 export default function AutomationPage() {
   const { i18n } = useTranslation();
   const isId = i18n.language === 'id';
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [selectedMachine, setSelectedMachine] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const filterTabs = [
-    { key: 'all', label: isId ? 'Semua Mesin' : 'All Machines' },
-    { key: 'ict', label: 'In-Circuit Test (ICT)' },
-    { key: 'fct', label: 'Functional Test (FCT)' },
-    { key: 'eol', label: 'End-of-Line (EOL)' },
-    { key: 'dispensing', label: isId ? 'Otomasi Dispensing' : 'Robotic Dispensing' },
-    { key: 'wireharness', label: 'Wire Harness' }
-  ];
+  const narrativeRef = useRef(null);
+  const activeRobot = ROBOTS[activeTab];
 
-  const filteredMachines = activeFilter === 'all'
-    ? AUTOMATION_ITEMS
-    : AUTOMATION_ITEMS.filter(item => item.category === activeFilter);
+  // ── Scroll tracking to link narrative position with 3D robot pose ──
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!narrativeRef.current) return;
+      const steps = narrativeRef.current.querySelectorAll('.auto-story-step');
+      if (!steps || steps.length === 0) return;
+
+      const vh = window.innerHeight;
+      const focusY = vh * 0.42;
+
+      let detectedStep = 0;
+      steps.forEach((el, idx) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= focusY && rect.bottom >= focusY) {
+          detectedStep = idx;
+        }
+      });
+      setActiveStep(detectedStep);
+
+      // Continuous 0.0 to 3.0 progress for smooth kinematic lerping
+      const firstRect = steps[0].getBoundingClientRect();
+      const lastRect = steps[steps.length - 1].getBoundingClientRect();
+      const totalDist = lastRect.top - firstRect.top;
+      if (totalDist > 0) {
+        const currentDist = focusY - firstRect.top;
+        const prog = Math.max(0, Math.min(3, (currentDist / totalDist) * 3));
+        setScrollProgress(prog);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeTab]);
+
+  // Click-to-scroll to narrative step
+  const scrollToStep = (idx) => {
+    if (!narrativeRef.current) return;
+    const steps = narrativeRef.current.querySelectorAll('.auto-story-step');
+    if (steps[idx]) {
+      const yOffset = -120;
+      const y = steps[idx].getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  const handleTabChange = (index) => {
+    setActiveTab(index);
+    setActiveStep(0);
+    setScrollProgress(0);
+  };
 
   return (
     <div className="automation-page">
-      {/* ── HEADER / BREADCRUMB ── */}
+
+      {/* ═══════ PAGE HEADER — Always-Dark Industrial Theme ═══════ */}
       <header className="auto-page-header">
-        <div className="container">
-          <div className="prod-breadcrumb">
+        <div className="auto-page-header__grid-bg" aria-hidden="true" />
+        <div className="auto-page-header__glow" aria-hidden="true" />
+
+        <div className="container auto-page-header__content">
+          <nav className="auto-breadcrumb" aria-label="Breadcrumb">
             <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span>/</span>
-            <span className="prod-breadcrumb--active">{isId ? 'Otomasi' : 'Automation'}</span>
-          </div>
-          <div className="auto-header-intro">
-            <h1 className="auto-header-title">
-              {isId ? 'Rekayasa Mesin Otomasi & Test Jigs Presisi' : 'Industrial Automation & Custom Test Jigs'}
-            </h1>
-            <p className="auto-header-sub">
-              {isId
-                ? 'Divisi rekayasa otomasi in-house PT. Global Philsonic Technologies di Batam FTZ merancang dan memproduksi fixture uji ICT, FCT, EOL, serta robotika dispensing berstandar otomotif IATF 16949.'
-                : 'PT. Global Philsonic Technologies in-house automation engineering division designs and manufactures turn-key ICT, FCT, EOL test fixtures, and dispensing robotics built to stringent IATF 16949 automotive standards.'}
-            </p>
-          </div>
+            <span className="auto-breadcrumb__sep">/</span>
+            <span className="auto-breadcrumb__current">{isId ? 'Otomasi & Robotik' : 'Automation & Robotics'}</span>
+          </nav>
+
+          <h1 className="auto-page-header__title">
+            {isId ? 'Solusi Robot Industri & Otomasi Manufaktur' : 'Industrial Robot Solutions & Manufacturing Automation'}
+          </h1>
+          <p className="auto-page-header__subtitle">
+            {isId
+              ? 'Jelajahi simulasi 3D robot welding, handling, dan cutting berkecepatan tinggi dengan artikulasi 6-sumbu presisi untuk jalur produksi Anda.'
+              : 'Explore interactive 3D simulations of our 6-axis welding, handling, and cutting industrial robots designed for smart manufacturing.'}
+          </p>
         </div>
       </header>
 
-      {/* ── PORTFOLIO SECTION ── */}
-      <section className="auto-section">
+      {/* ═══════ ROBOT SELECTOR TABS ═══════ */}
+      <div className="auto-tabs-sticky-wrapper">
         <div className="container">
-          {/* Filter Pills */}
-          <div className="auto-filter-bar">
-            {filterTabs.map(tab => (
+          <div className="auto-tabs-nav" role="tablist">
+            {ROBOTS.map((robot, index) => (
               <button
-                key={tab.key}
-                className={`auto-filter-pill ${activeFilter === tab.key ? 'auto-filter-pill--active' : ''}`}
-                onClick={() => setActiveFilter(tab.key)}
+                key={robot.id}
+                className={`auto-tab-btn ${activeTab === index ? 'auto-tab-btn--active' : ''}`}
+                onClick={() => handleTabChange(index)}
+                role="tab"
+                aria-selected={activeTab === index}
+                id={`tab-${robot.id}`}
               >
-                {tab.label}
+                <span className="auto-tab-btn__name">{isId ? robot.tabId : robot.tabEn}</span>
               </button>
             ))}
           </div>
+        </div>
+      </div>
 
-          {/* Machine Grid */}
-          <div className="auto-grid">
-            {filteredMachines.map(machine => (
-              <article key={machine.id} className="auto-card">
-                <div className="auto-card__visual">
-                  {machine.svgIcon}
+      {/* ═══════ SCROLLYTELLING SHOWCASE: 3D VIEWPORT + PARALLAX NARRATIVE ═══════ */}
+      <section className="auto-scrolly-section">
+        <div className="container auto-scrolly-container">
+
+          {/* LEFT COLUMN: STICKY 3D ROBOT VIEWPORT */}
+          <div className="auto-scrolly-sticky">
+            <RobotCanvas3D
+              robotType={activeRobot.id}
+              activeStep={activeStep}
+              scrollProgress={scrollProgress}
+              isId={isId}
+              onStepSelect={scrollToStep}
+            />
+
+            {/* Quick Specs Quick-Bar Under 3D Canvas */}
+            <div className="auto-quick-specs">
+              {activeRobot.heroStats.map((st, i) => (
+                <div key={i} className="auto-quick-spec-item">
+                  <span className="auto-quick-spec-val">{st.val}</span>
+                  <span className="auto-quick-spec-label">{isId ? st.labelId : st.labelEn}</span>
                 </div>
-                <div className="auto-card__body">
-                  <span
-                    className="auto-card__badge"
-                    style={{
-                      background: `${machine.accentColor}18`,
-                      color: machine.accentColor,
-                      border: `1px solid ${machine.accentColor}33`
-                    }}
-                  >
-                    {machine.badge}
-                  </span>
-                  <h3 className="auto-card__title">{machine.name}</h3>
-                  <p className="auto-card__desc">{machine.desc}</p>
+              ))}
+            </div>
+          </div>
 
-                  <div className="auto-card__specs-list">
-                    <div className="auto-spec-row">
-                      <span className="auto-spec-row__k">{isId ? 'Waktu Siklus' : 'Cycle Time'}</span>
-                      <span className="auto-spec-row__v" style={{ color: '#10b981' }}>{machine.cycleTime}</span>
-                    </div>
-                    <div className="auto-spec-row">
-                      <span className="auto-spec-row__k">{isId ? 'Kapasitas Uji' : 'Test Capacity'}</span>
-                      <span className="auto-spec-row__v">{machine.capacity}</span>
-                    </div>
-                    <div className="auto-spec-row">
-                      <span className="auto-spec-row__k">{isId ? 'Kontroler PLC' : 'PLC Controller'}</span>
-                      <span className="auto-spec-row__v">{machine.plc}</span>
-                    </div>
-                    <div className="auto-spec-row">
-                      <span className="auto-spec-row__k">{isId ? 'Sistem Pneumatik' : 'Pneumatics'}</span>
-                      <span className="auto-spec-row__v">{machine.pneumatics}</span>
-                    </div>
-                    <div className="auto-spec-row">
-                      <span className="auto-spec-row__k">{isId ? 'Protokol MES' : 'MES Protocol'}</span>
-                      <span className="auto-spec-row__v">{machine.mesSupport}</span>
+          {/* RIGHT COLUMN: SCROLLING NARRATIVE STREAM */}
+          <div className="auto-scrolly-narrative" ref={narrativeRef}>
+            {activeRobot.steps.map((step, idx) => (
+              <div
+                key={idx}
+                className={`auto-story-step ${activeStep === idx ? 'auto-story-step--active' : ''}`}
+                data-step={idx}
+              >
+                {/* Step Kicker Label */}
+                <div className="auto-story-kicker">
+                  {isId ? step.kickerId : step.kickerEn}
+                </div>
+
+                {/* Section Title */}
+                <h2 className="auto-story-title">
+                  {isId ? step.titleId : step.titleEn}
+                </h2>
+
+                {/* Description */}
+                <p className="auto-story-desc">
+                  {isId ? step.descId : step.descEn}
+                </p>
+
+                {/* Bullet Highlights */}
+                {step.highlights && (
+                  <ul className="auto-story-highlights">
+                    {step.highlights.map((h, hi) => (
+                      <li key={hi}>
+                        <span>{isId ? h.id : h.en}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* Step 4 Technical Specs Table */}
+                {step.specs && (
+                  <div className="auto-story-specs-table">
+                    <div className="auto-story-specs-grid">
+                      {step.specs.map((sp, si) => (
+                        <div key={si} className="auto-story-spec-row">
+                          <span className="auto-story-spec-name">{isId ? sp.labelId : sp.labelEn}</span>
+                          <span className="auto-story-spec-data">{sp.val}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                  <div style={{ marginTop: '1.25rem', display: 'flex', gap: '8px' }}>
-                    <button
-                      onClick={() => setSelectedMachine(machine)}
-                      style={{
-                        flex: 1,
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        background: 'transparent',
-                        border: '1px solid var(--teal, #00897b)',
-                        color: 'var(--teal, #00897b)',
-                        fontSize: '0.825rem',
-                        fontWeight: 600,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s'
-                      }}
-                    >
-                      {isId ? 'Detail Teknis' : 'Technical Details'}
-                    </button>
-                    <Link
-                      to="/contact"
-                      style={{
-                        padding: '8px 14px',
-                        borderRadius: '6px',
-                        background: 'var(--teal, #00897b)',
-                        color: '#ffffff',
-                        fontSize: '0.825rem',
-                        fontWeight: 600,
-                        textDecoration: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      {isId ? 'RFQ Fixture' : 'RFQ Fixture'}
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ENGINEERING CAPABILITIES HIGHLIGHTS ── */}
-      <section className="auto-caps-section">
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3rem' }}>
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-              {isId ? 'Kapabilitas Rekayasa Otomasi In-House' : 'In-House Automation & Tooling Capabilities'}
-            </h2>
-            <p style={{ color: '#64748b', fontSize: '0.95rem' }}>
-              {isId
-                ? 'Didukung fasilitas workshop mekanik mandiri di Batam untuk memastikan kecepatan turnaround dan akurasi jig tertinggi.'
-                : 'Backed by dedicated CNC mechanical tooling workshops in Batam ensuring rapid turnaround and superior fixture accuracy.'}
-            </p>
-          </div>
-
-          <div className="auto-caps-grid">
-            {CAPABILITIES.map((cap, i) => (
-              <div key={i} className="auto-cap-item">
-                <div className="auto-cap-item__icon">{cap.icon}</div>
-                <h4>{cap.title}</h4>
-                <p>{cap.desc}</p>
+                )}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── DETAIL MODAL ── */}
-      {selectedMachine && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0,0,0,0.6)',
-            backdropFilter: 'blur(4px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '1rem'
-          }}
-          onClick={() => setSelectedMachine(null)}
-        >
-          <div
-            style={{
-              background: 'var(--navy-card, #0f172a)',
-              color: '#f8fafc',
-              border: '1px solid #334155',
-              borderRadius: '14px',
-              maxWidth: '600px',
-              width: '100%',
-              padding: '2rem',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-            }}
-            onClick={e => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-              <div>
-                <span style={{ fontSize: '0.75rem', color: selectedMachine.accentColor, fontWeight: 700, textTransform: 'uppercase' }}>
-                  {selectedMachine.categoryLabel}
-                </span>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginTop: '4px' }}>{selectedMachine.name}</h3>
-              </div>
-              <button
-                onClick={() => setSelectedMachine(null)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: '#94a3b8',
-                  fontSize: '1.5rem',
-                  cursor: 'pointer'
-                }}
-              >
-                ✕
-              </button>
-            </div>
-
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-              {selectedMachine.desc}
-            </p>
-
-            <div style={{ background: '#0b1320', padding: '1rem', borderRadius: '8px', border: '1px solid #1e293b', marginBottom: '1.5rem' }}>
-              <h4 style={{ fontSize: '0.85rem', color: '#38bdf8', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                {isId ? 'Parameter Rekayasa Sistem' : 'System Engineering Parameters'}
-              </h4>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '0.825rem' }}>
-                <div><span style={{ color: '#64748b' }}>Cycle Time:</span> <strong style={{ color: '#10b981' }}>{selectedMachine.cycleTime}</strong></div>
-                <div><span style={{ color: '#64748b' }}>Capacity:</span> <strong>{selectedMachine.capacity}</strong></div>
-                <div><span style={{ color: '#64748b' }}>PLC Architecture:</span> <strong>{selectedMachine.plc}</strong></div>
-                <div><span style={{ color: '#64748b' }}>Pneumatic System:</span> <strong>{selectedMachine.pneumatics}</strong></div>
-                <div style={{ gridColumn: 'span 2' }}><span style={{ color: '#64748b' }}>MES Telemetry:</span> <strong>{selectedMachine.mesSupport}</strong></div>
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <Link
-                to="/contact"
-                style={{
-                  flex: 1,
-                  padding: '10px',
-                  borderRadius: '8px',
-                  background: 'var(--teal, #00897b)',
-                  color: '#ffffff',
-                  textAlign: 'center',
-                  fontWeight: 700,
-                  textDecoration: 'none'
-                }}
-              >
-                {isId ? 'Hubungi Engineering Team' : 'Contact Engineering Team'}
+            {/* Actions Outside Narrative Cards */}
+            <div className="auto-narrative-actions">
+              <Link to="/contact" className="auto-btn auto-btn--primary">
+                {isId ? 'Minta Penawaran Spesifik' : 'Request RFQ & Layout Consultation'}
               </Link>
-              <button
-                onClick={() => setSelectedMachine(null)}
-                style={{
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  background: '#1e293b',
-                  color: '#e2e8f0',
-                  border: '1px solid #334155',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}
-              >
-                {isId ? 'Tutup' : 'Close'}
-              </button>
+              <Link to="/contact" className="auto-btn auto-btn--outline">
+                {isId ? 'Konsultasi Tim Ahli' : 'Talk with Robotics Engineer'}
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════ WHY CHOOSE ROBOTS IN BATAM SECTION ═══════ */}
+      <section className="auto-batam-section">
+        <div className="container">
+          <div className="auto-batam-header">
+            <h2 className="auto-batam-title">
+              {isId ? 'Why Choose Robot in Batam?' : 'Why Choose Robot in Batam?'}
+            </h2>
+            <p className="auto-batam-subtitle">
+              {isId
+                ? 'Seiring meningkatnya tuntutan industri, otomasi bukan lagi sekadar pilihan — melainkan kebutuhan mendesak. Inilah alasan pabrik-pabrik di seluruh Batam, dari Batu Ampar hingga Muka Kuning, memilih robot:'
+                : 'As industrial demands increase, automation is no longer an option — it’s a necessity. Here’s why factories across Batam, from Batu Ampar to Muka Kuning, are choosing robots:'}
+            </p>
+          </div>
+
+          {/* 4 Core Value Pillars Grid */}
+          <div className="auto-batam-grid">
+            {BATAM_PILLARS.map((pillar, idx) => (
+              <div key={idx} className="auto-batam-card">
+                <h3 className="auto-batam-card__title">
+                  {isId ? pillar.titleId : pillar.titleEn}
+                </h3>
+                <p className="auto-batam-card__desc">
+                  {isId ? pillar.descId : pillar.descEn}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* 5 Core Operational Advantages Strip */}
+          <div className="auto-impact-strip">
+            <div className="auto-impact-grid">
+              {BATAM_ADVANTAGES.map((adv, idx) => (
+                <div key={idx} className="auto-impact-card">
+                  <h4 className="auto-impact-card__title">
+                    {isId ? adv.titleId : adv.titleEn}
+                  </h4>
+                  <p className="auto-impact-card__desc">
+                    {isId ? adv.descId : adv.descEn}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      )}
+      </section>
+
+      {/* ═══════ ADVANCED ROBOTIC TECHNOLOGY FOR BATAM INDUSTRIES ═══════ */}
+      <section className="auto-tech-section">
+        <div className="container">
+          <div className="auto-tech-header">
+            <h2 className="auto-tech-title">
+              {isId ? 'Advanced Robotic Technology for Batam Industries' : 'Advanced Robotic Technology for Batam Industries'}
+            </h2>
+            <p className="auto-tech-subtitle">
+              {isId
+                ? 'Kami menghadirkan solusi otomasi kelas dunia melalui kemitraan strategis dengan brand otomasi global terkemuka. Sistem kami dilengkapi dengan:'
+                : 'We deliver world-class solutions by partnering with global automation brands. Our systems feature:'}
+            </p>
+          </div>
+
+          <div className="auto-tech-grid">
+            {TECH_FEATURES.map((tech, idx) => (
+              <div key={idx} className="auto-tech-card">
+                <h3 className="auto-tech-card__title">
+                  {isId ? tech.titleId : tech.titleEn}
+                </h3>
+                <p className="auto-tech-card__desc">
+                  {isId ? tech.descId : tech.descEn}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ DISCOVER OUR ROBOT SERIES IN BATAM ═══════ */}
+      <section className="auto-comparison-section">
+        <div className="container">
+          <div className="auto-comparison-header">
+            <h2 className="auto-comparison-title">
+              {isId ? 'Discover Our Robot Series in Batam' : 'Discover Our Robot Series in Batam'}
+            </h2>
+            <p className="auto-comparison-subtitle">
+              {isId
+                ? 'Kami menawarkan rangkaian lengkap solusi robotika untuk mengotomasi hampir setiap proses produksi:'
+                : 'We offer a complete suite of robotic solutions to automate almost every production process:'}
+            </p>
+          </div>
+
+          <div className="auto-overview-grid">
+            {ROBOTS.map((robot, index) => (
+              <div
+                key={robot.id}
+                className={`auto-overview-card ${activeTab === index ? 'auto-overview-card--active' : ''}`}
+                onClick={() => {
+                  handleTabChange(index);
+                  window.scrollTo({ top: 380, behavior: 'smooth' });
+                }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleTabChange(index);
+                    window.scrollTo({ top: 380, behavior: 'smooth' });
+                  }
+                }}
+              >
+                <img src={robot.image} alt={isId ? robot.titleId : robot.titleEn} loading="lazy" />
+                <div className="auto-overview-card__overlay">
+                  <span className="auto-overview-card__name">{isId ? robot.titleId : robot.titleEn}</span>
+                  <span className="auto-overview-card__cta">
+                    {activeTab === index
+                      ? (isId ? 'Sedang Dilihat' : 'Currently Viewing')
+                      : (isId ? 'Lihat Model 3D →' : 'View 3D Model →')
+                    }
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ BOTTOM CTA BANNER ═══════ */}
+      <section className="auto-contact-wrapper">
+        <div className="container">
+          <div className="auto-contact-bar">
+            <div className="auto-contact-bar__inner">
+              <div className="auto-contact-bar__text">
+                <h3>{isId ? 'Butuh Konsultasi Desain Otomasi Pabrik?' : 'Need Custom Automation Plant Design?'}</h3>
+                <p>
+                  {isId
+                    ? 'Tim engineering PT. Global Philsonic Technologies di Batam siap membantu studi kelayakan, simulasi siklus, dan integrasi sel robot di fasilitas Anda.'
+                    : 'Our engineering team at Batam FTZ is ready to assist with feasibility studies, cycle time simulation, and turnkey robot cell integration.'}
+                </p>
+              </div>
+              <div className="auto-contact-bar__actions">
+                <Link to="/contact" className="auto-btn auto-btn--primary">
+                  {isId ? 'Hubungi Tim Engineering' : 'Contact Engineering Team'}
+                </Link>
+                <Link to="/products" className="auto-btn auto-btn--outline">
+                  {isId ? 'Lihat Solusi Manufaktur' : 'Manufacturing Solutions'}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

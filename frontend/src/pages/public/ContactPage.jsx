@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import ContactGoogleMap from '../../components/contact/ContactGoogleMap';
 import './ContactPage.css';
 
 export default function ContactPage() {
@@ -26,24 +27,26 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page">
-      {/* ── HEADER / BREADCRUMB ── */}
+      {/* ═══════ PAGE HEADER — Consistent Industrial Theme ═══════ */}
       <header className="contact-page-header">
-        <div className="container">
-          <div className="prod-breadcrumb">
+        <div className="contact-page-header__grid-bg" aria-hidden="true" />
+        <div className="contact-page-header__glow" aria-hidden="true" />
+
+        <div className="container contact-page-header__content">
+          <nav className="contact-breadcrumb" aria-label="Breadcrumb">
             <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span>/</span>
-            <span className="prod-breadcrumb--active">{isId ? 'Kontak' : 'Contact'}</span>
-          </div>
-          <div className="contact-header-intro">
-            <h1 className="contact-header-title">
-              {isId ? 'Hubungi PT. Global Philsonic Technologies' : 'Contact PT. Global Philsonic Technologies'}
-            </h1>
-            <p className="contact-header-sub">
-              {isId
-                ? 'Konsultasikan kebutuhan perakitan PCBA, pembuatan mesin uji otomatis (test jigs), atau jadwalkan factory audit di fasilitas manufaktur Batam FTZ kami.'
-                : 'Connect with our engineering sales team for PCBA turnkey assembly, custom automated test jigs, or schedule a formal factory audit at our Batam FTZ manufacturing facility.'}
-            </p>
-          </div>
+            <span className="contact-breadcrumb__sep">/</span>
+            <span className="contact-breadcrumb__current">{isId ? 'Kontak' : 'Contact'}</span>
+          </nav>
+
+          <h1 className="contact-page-header__title">
+            {isId ? 'Hubungi PT. Global Philsonic Technologies' : 'Contact PT. Global Philsonic Technologies'}
+          </h1>
+          <p className="contact-page-header__subtitle">
+            {isId
+              ? 'Konsultasikan kebutuhan perakitan PCBA, pembuatan mesin uji otomatis (test jigs), atau jadwalkan factory audit di fasilitas manufaktur Batam FTZ kami.'
+              : 'Connect with our engineering sales team for PCBA turnkey assembly, custom automated test jigs, or schedule a formal factory audit at our Batam FTZ manufacturing facility.'}
+          </p>
         </div>
       </header>
 
@@ -59,7 +62,9 @@ export default function ContactPage() {
               </h2>
 
               <div className="contact-detail-block">
-                <div className="contact-detail-icon">🏭</div>
+                <div className="contact-detail-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 20h20M6 20V10l6-4v14M12 20V4l6-4v20"/></svg>
+                </div>
                 <div className="contact-detail-content">
                   <h4>{isId ? 'Alamat Fasilitas Pabrik' : 'Manufacturing Plant Address'}</h4>
                   <p>
@@ -71,7 +76,9 @@ export default function ContactPage() {
               </div>
 
               <div className="contact-detail-block">
-                <div className="contact-detail-icon">📞</div>
+                <div className="contact-detail-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
                 <div className="contact-detail-content">
                   <h4>{isId ? 'Telepon & Direct WhatsApp' : 'Direct Phone & WhatsApp'}</h4>
                   <p>
@@ -82,7 +89,9 @@ export default function ContactPage() {
               </div>
 
               <div className="contact-detail-block">
-                <div className="contact-detail-icon">✉️</div>
+                <div className="contact-detail-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
                 <div className="contact-detail-content">
                   <h4>{isId ? 'Email Departemen' : 'Departmental Inboxes'}</h4>
                   <p>
@@ -94,7 +103,9 @@ export default function ContactPage() {
               </div>
 
               <div className="contact-detail-block">
-                <div className="contact-detail-icon">⏱️</div>
+                <div className="contact-detail-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
                 <div className="contact-detail-content">
                   <h4>{isId ? 'Jam Kerja & Operasional' : 'Operating Hours'}</h4>
                   <p>
@@ -104,23 +115,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Batam Logistics Strategic Map Box */}
-              <div className="contact-map-box">
-                <span className="contact-map-badge">🚢 Strategic Trade Route</span>
-                <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>
-                  Batam Free Trade Zone (FTZ) Advantage
-                </h4>
-                <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.5, margin: '0 0 1rem' }}>
-                  45 Menit perjalanan feri / kargo cepat ke Pelabuhan Internasional Singapura. Bebas bea masuk bahan baku (0% Import Duty) & Certificate of Origin (C/O) Indonesia.
-                </p>
-                <div style={{ display: 'flex', gap: '8px', fontSize: '0.75rem', color: '#2dd4bf' }}>
-                  <span>✓ 0% Import Tariff</span>
-                  <span>•</span>
-                  <span>✓ Direct Singapore Feeder</span>
-                  <span>•</span>
-                  <span>✓ Bonded Warehouse</span>
-                </div>
-              </div>
+              {/* Interactive Functional Google Map of PT. Global Philsonic Technologies */}
+              <ContactGoogleMap isId={isId} />
             </div>
 
             {/* ── RIGHT COLUMN: B2B RFQ / INQUIRY FORM ── */}

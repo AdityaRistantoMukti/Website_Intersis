@@ -106,12 +106,7 @@ export default function HomePage() {
       </Helmet>
 
       {/* ── HERO SECTION (100vh Fullscreen) ── */}
-      <section
-        className="hero"
-        id="hero"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
+      <section className="hero" id="hero">
         {/* Full-Bleed Atmospheric Background Visuals */}
         <div className="hero__bg" aria-hidden="true">
           {slideImages.map((img, idx) => (
