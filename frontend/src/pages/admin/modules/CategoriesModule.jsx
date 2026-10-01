@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  FolderKanban,
+  Plus,
+  Pencil,
+  Trash2,
+  X,
+} from 'lucide-react';
 
 export default function CategoriesModule() {
   const { addToast } = useAdminAuth();
@@ -83,7 +90,10 @@ export default function CategoriesModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">📂 Kategori Departemen Karir</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FolderKanban size={20} strokeWidth={2} />
+              <span>Kategori Departemen Karir</span>
+            </h2>
             <p className="admin-card-desc">
               Kelola divisi dan departemen kerja untuk pengelompokan lowongan pekerjaan (Engineering, QA, Produksi, dsb).
             </p>
@@ -92,8 +102,10 @@ export default function CategoriesModule() {
             type="button"
             className="admin-btn-primary"
             onClick={handleOpenAdd}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            <span>+ Tambah Kategori</span>
+            <Plus size={16} strokeWidth={2} />
+            <span>Tambah Kategori</span>
           </button>
         </div>
 
@@ -134,18 +146,20 @@ export default function CategoriesModule() {
                         <button
                           type="button"
                           className="admin-btn-secondary"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleOpenEdit(c)}
                         >
-                          Edit
+                          <Pencil size={12} strokeWidth={2} />
+                          <span>Edit</span>
                         </button>
                         <button
                           type="button"
                           className="admin-btn-danger"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleDelete(c.id, c.name)}
                         >
-                          Hapus
+                          <Trash2 size={12} strokeWidth={2} />
+                          <span>Hapus</span>
                         </button>
                       </div>
                     </td>
@@ -169,7 +183,7 @@ export default function CategoriesModule() {
                 className="admin-modal-close"
                 onClick={() => setIsModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

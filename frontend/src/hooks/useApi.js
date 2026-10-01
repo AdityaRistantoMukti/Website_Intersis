@@ -46,3 +46,4 @@ export const useFaqs     = ()       => useApi('/public/faqs');
 export const useContact  = ()       => useApi('/public/contact');
 export const useCategories = ()     => useApi('/public/job-categories');
 export const useTradeDestinations = () => useApi('/public/trade-destinations');
+export const useSiteSettings = (key) => useApi(`/public/site-settings/${key}`);

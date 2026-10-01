@@ -1,6 +1,28 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
+import {
+  LayoutDashboard,
+  Sliders,
+  Building2,
+  Phone,
+  ShieldCheck,
+  Image,
+  Briefcase,
+  FolderKanban,
+  Gift,
+  GraduationCap,
+  HelpCircle,
+  Users,
+  FileText,
+  LogOut,
+  ExternalLink,
+  Key,
+  X,
+  ChevronDown,
+  User,
+  Menu,
+} from 'lucide-react';
 import './AdminLayout.css';
 
 export default function AdminLayout({ activeTab, onSelectTab, children }) {
@@ -52,26 +74,27 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
     {
       title: 'UTAMA',
       items: [
-        { key: 'overview', label: 'Ringkasan Portal', icon: '📊' },
+        { key: 'overview', label: 'Ringkasan Portal', icon: LayoutDashboard },
       ],
     },
     {
       title: 'KONTEN LANDING PAGE BISNIS',
       items: [
-        { key: 'company',     label: 'Profil & Hero Utama', icon: '🏢' },
-        { key: 'contact',     label: 'Kontak & WhatsApp',   icon: '📞' },
-        { key: 'core-values', label: 'Nilai Inti Rekayasa',  icon: '💎' },
-        { key: 'gallery',     label: 'Galeri & Fasilitas',  icon: '🖼️' },
+        { key: 'home',        label: 'Beranda (Hero & Stats)', icon: Sliders },
+        { key: 'company',     label: 'Profil & Tentang Kami',  icon: Building2 },
+        { key: 'contact',     label: 'Kontak & Google Maps',   icon: Phone },
+        { key: 'core-values', label: 'Nilai Inti Rekayasa',    icon: ShieldCheck },
+        { key: 'gallery',     label: 'Galeri & Fasilitas',     icon: Image },
       ],
     },
     {
       title: 'KARIR & REKRUTMEN',
       items: [
-        { key: 'jobs',       label: 'Lowongan Kerja',      icon: '💼' },
-        { key: 'categories', label: 'Kategori Departemen', icon: '📂' },
-        { key: 'benefits',   label: 'Benefit Karyawan',    icon: '🎁' },
-        { key: 'programs',   label: 'Program Magang / MT', icon: '🎓' },
-        { key: 'faqs',       label: 'Tanya Jawab (FAQ)',   icon: '❓' },
+        { key: 'jobs',       label: 'Lowongan Kerja',      icon: Briefcase },
+        { key: 'categories', label: 'Kategori Departemen', icon: FolderKanban },
+        { key: 'benefits',   label: 'Benefit Karyawan',    icon: Gift },
+        { key: 'programs',   label: 'Program Magang / MT', icon: GraduationCap },
+        { key: 'faqs',       label: 'Tanya Jawab (FAQ)',   icon: HelpCircle },
       ],
     },
     ...(isFullAdmin
@@ -79,8 +102,8 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
           {
             title: 'SISTEM & KEAMANAN',
             items: [
-              { key: 'users', label: 'Pengguna Admin', icon: '👥' },
-              { key: 'logs',  label: 'Log Audit Trail', icon: '📜' },
+              { key: 'users', label: 'Pengguna Admin', icon: Users },
+              { key: 'logs',  label: 'Log Audit Trail', icon: FileText },
             ],
           },
         ]
@@ -122,21 +145,26 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
             <div key={sIdx} className="admin-nav-group">
               <div className="admin-nav-group-title">{section.title}</div>
               <ul className="admin-nav-list">
-                {section.items.map((item) => (
-                  <li key={item.key}>
-                    <button
-                      type="button"
-                      className={`admin-nav-item-btn ${activeTab === item.key ? 'admin-nav-item-btn--active' : ''}`}
-                      onClick={() => {
-                        onSelectTab(item.key);
-                        setMobileOpen(false);
-                      }}
-                    >
-                      <span className="admin-nav-icon">{item.icon}</span>
-                      <span>{item.label}</span>
-                    </button>
-                  </li>
-                ))}
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.key}>
+                      <button
+                        type="button"
+                        className={`admin-nav-item-btn ${activeTab === item.key ? 'admin-nav-item-btn--active' : ''}`}
+                        onClick={() => {
+                          onSelectTab(item.key);
+                          setMobileOpen(false);
+                        }}
+                      >
+                        <span className="admin-nav-icon">
+                          <Icon size={18} strokeWidth={2} />
+                        </span>
+                        <span>{item.label}</span>
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -161,11 +189,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
             title="Keluar (Logout)"
             aria-label="Logout"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
+            <LogOut size={16} strokeWidth={2} />
           </button>
         </div>
       </aside>
@@ -181,11 +205,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle sidebar"
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
+              <Menu size={20} strokeWidth={2} />
             </button>
 
             <h1 className="admin-header-title">
@@ -209,11 +229,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               title="Buka Website Publik di Tab Baru"
             >
               <span>Lihat Website</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
+              <ExternalLink size={13} strokeWidth={2} />
             </a>
 
             {/* User Dropdown */}
@@ -221,11 +237,12 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               <button
                 type="button"
                 className="admin-btn-secondary"
-                style={{ padding: '6px 12px', fontSize: '0.825rem', gap: '8px' }}
+                style={{ padding: '6px 12px', fontSize: '0.825rem', gap: '8px', display: 'flex', alignItems: 'center' }}
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               >
-                <span>👤 {user?.name?.split(' ')[0] || 'Admin'}</span>
-                <span style={{ fontSize: '0.7rem' }}>▼</span>
+                <User size={15} strokeWidth={2} />
+                <span>{user?.name?.split(' ')[0] || 'Admin'}</span>
+                <ChevronDown size={14} strokeWidth={2} />
               </button>
 
               {profileDropdownOpen && (
@@ -254,25 +271,27 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
                   <button
                     type="button"
                     className="admin-nav-item-btn"
-                    style={{ fontSize: '0.8rem', padding: '6px 10px' }}
+                    style={{ fontSize: '0.8rem', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: '8px' }}
                     onClick={() => {
                       setProfileDropdownOpen(false);
                       setIsPassModalOpen(true);
                     }}
                   >
-                    <span>🔑 Ganti Password</span>
+                    <Key size={14} strokeWidth={2} />
+                    <span>Ganti Password</span>
                   </button>
 
                   <button
                     type="button"
                     className="admin-nav-item-btn"
-                    style={{ fontSize: '0.8rem', padding: '6px 10px', color: '#f87171' }}
+                    style={{ fontSize: '0.8rem', padding: '6px 10px', color: '#f87171', display: 'flex', alignItems: 'center', gap: '8px' }}
                     onClick={() => {
                       setProfileDropdownOpen(false);
                       handleLogout();
                     }}
                   >
-                    <span>🚪 Keluar (Logout)</span>
+                    <LogOut size={14} strokeWidth={2} />
+                    <span>Keluar (Logout)</span>
                   </button>
                 </div>
               )}
@@ -291,13 +310,16 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
         <div className="admin-modal-overlay" onClick={() => setIsPassModalOpen(false)}>
           <div className="admin-modal-box" style={{ maxWidth: '440px' }} onClick={(e) => e.stopPropagation()}>
             <div className="admin-modal-header">
-              <h3 className="admin-modal-title">🔑 Ganti Password Akun</h3>
+              <h3 className="admin-modal-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Key size={18} strokeWidth={2} />
+                <span>Ganti Password Akun</span>
+              </h3>
               <button
                 type="button"
                 className="admin-modal-close"
                 onClick={() => setIsPassModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

@@ -24,7 +24,7 @@ const {
 // Controllers
 const { login, getProfile, changePassword } = require('../controllers/admin/authController');
 const { getUsers, getUserById, createUser, updateUser, deleteUser } = require('../controllers/admin/userController');
-const { updateCompanyProfile, updateContact } = require('../controllers/admin/adminCompanyController');
+const { updateCompanyProfile, updateContact, updateSiteSettings } = require('../controllers/admin/adminCompanyController');
 const { getAdminJobs, getAdminJobById, createJob, updateJob, deleteJob } = require('../controllers/admin/adminJobVacancyController');
 const {
   getAdminCoreValues, createCoreValue, updateCoreValue, deleteCoreValue,
@@ -54,9 +54,11 @@ router.put('/users/:id', restrictTo('administrator', 'hrd'), updateUserRules, va
 router.delete('/users/:id', restrictTo('administrator', 'hrd'), deleteUser);
 
 // ─── MANAJEMEN KONTEN WEBSITE (ADMINISTRATOR, HRD, STAFF HRD) ───────────────
-// Company Profile & Contact (Singleton)
+// Company Profile, Contact & Site Settings
 router.put('/company', restrictTo('administrator', 'hrd', 'staff'), upload.single('about_image'), companyProfileRules, validate, updateCompanyProfile);
 router.put('/contact', restrictTo('administrator', 'hrd', 'staff'), contactRules, validate, updateContact);
+router.put('/site-settings/:key', restrictTo('administrator', 'hrd', 'staff'), updateSiteSettings);
+
 
 // Core Values
 router.get('/core-values', getAdminCoreValues);

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getCompanyProfile, getCoreValues, getContact } = require('../controllers/public/publicCompanyController');
+const { getCompanyProfile, getCoreValues, getContact, getSiteSettings } = require('../controllers/public/publicCompanyController');
 const { getJobCategories, getJobVacancies, getJobVacancyById } = require('../controllers/public/publicJobController');
 const { getGalleryItems } = require('../controllers/public/publicGalleryController');
 const { getBenefits } = require('../controllers/public/publicBenefitController');
@@ -12,10 +12,13 @@ const { apiLimiter } = require('../middlewares/rateLimiter');
 // Terapkan rate limiter untuk semua endpoint publik
 router.use(apiLimiter);
 
-// Company & Core Values & Contact
+// Company & Core Values & Contact & Site Settings
 router.get('/company', getCompanyProfile);
 router.get('/core-values', getCoreValues);
 router.get('/contact', getContact);
+router.get('/site-settings', getSiteSettings);
+router.get('/site-settings/:key', getSiteSettings);
+
 
 // Job Vacancies & Categories
 router.get('/job-categories', getJobCategories);

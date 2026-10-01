@@ -48,33 +48,94 @@ const updateCompanyProfile = async (req, res, next) => {
 
 /**
  * PUT /api/admin/contact
- * Update Informasi Kontak Rekrutmen (Singleton)
+ * Update Informasi Kontak & Google Maps (Singleton)
  */
 const updateContact = async (req, res, next) => {
   try {
-    const { email, phone, address, instagram, linkedin, whatsapp } = req.body;
+    const {
+      email,
+      phone,
+      address,
+      instagram,
+      linkedin,
+      whatsapp,
+      maps_latitude,
+      maps_longitude,
+      maps_place_name,
+      maps_url,
+      maps_embed_url,
+    } = req.body;
 
     const [rows] = await pool.execute('SELECT id FROM contact_recruitment LIMIT 1');
 
     if (rows.length === 0) {
       await pool.execute(
-        'INSERT INTO contact_recruitment (email, phone, address, instagram, linkedin, whatsapp, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [email, phone, address, instagram, linkedin, whatsapp, req.user.id]
+        `INSERT INTO contact_recruitment (
+          email, phone, address, instagram, linkedin, whatsapp,
+          maps_latitude, maps_longitude, maps_place_name, maps_url, maps_embed_url, updated_by
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          email, phone, address, instagram, linkedin, whatsapp,
+          maps_latitude || '1.1368003',
+          maps_longitude || '104.0452514',
+          maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES',
+          maps_url || null,
+          maps_embed_url || null,
+          req.user.id,
+        ]
       );
     } else {
       const contactId = rows[0].id;
       await pool.execute(
-        'UPDATE contact_recruitment SET email = ?, phone = ?, address = ?, instagram = ?, linkedin = ?, whatsapp = ?, updated_by = ? WHERE id = ?',
-        [email, phone, address, instagram, linkedin, whatsapp, req.user.id, contactId]
+        `UPDATE contact_recruitment SET
+          email = ?, phone = ?, address = ?, instagram = ?, linkedin = ?, whatsapp = ?,
+          maps_latitude = ?, maps_longitude = ?, maps_place_name = ?, maps_url = ?, maps_embed_url = ?,
+          updated_by = ?
+        WHERE id = ?`,
+        [
+          email, phone, address, instagram, linkedin, whatsapp,
+          maps_latitude || '1.1368003',
+          maps_longitude || '104.0452514',
+          maps_place_name || 'GLOBAL PHILSONIC TECHNOLOGIES',
+          maps_url || null,
+          maps_embed_url || null,
+          req.user.id,
+          contactId,
+        ]
       );
     }
 
-    await logActivity(req.user.id, 'UPDATE', 'contact_recruitment', 'Memperbarui informasi kontak rekrutmen');
+    await logActivity(req.user.id, 'UPDATE', 'contact_recruitment', 'Memperbarui informasi kontak dan peta lokasi Batam');
 
-    return success(res, 'Kontak rekrutmen berhasil diperbarui.');
+    return success(res, 'Kontak dan peta lokasi berhasil diperbarui.');
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = { updateCompanyProfile, updateContact };
+/**
+ * PUT /api/admin/site-settings/:key
+ * Menyimpan konfigurasi konten halaman (Home hero, stats, CTA, dll)
+ */
+const updateSiteSettings = async (req, res, next) => {
+  try {
+    const { key } = req.params;
+    const content = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+
+    await pool.execute(
+      `INSERT INTO site_settings (key_name, content_json, updated_by)
+       VALUES (?, ?, ?)
+       ON DUPLICATE KEY UPDATE content_json = ?, updated_by = ?`,
+      [key, content, req.user.id, content, req.user.id]
+    );
+
+    await logActivity(req.user.id, 'UPDATE', 'site_settings', `Memperbarui konfigurasi konten '${key}'`);
+
+    return success(res, `Pengaturan '${key}' berhasil disimpan.`);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { updateCompanyProfile, updateContact, updateSiteSettings };
+

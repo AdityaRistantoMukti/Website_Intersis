@@ -36,20 +36,56 @@ const getCoreValues = async (req, res, next) => {
 
 /**
  * GET /api/public/contact
- * Mendapatkan informasi kontak tim rekrutmen (singleton)
+ * Mendapatkan informasi kontak dan lokasi Google Maps pabrik (singleton)
  */
 const getContact = async (req, res, next) => {
   try {
     const [rows] = await pool.execute(
-      'SELECT id, email, phone, address, instagram, linkedin, whatsapp, updated_at FROM contact_recruitment LIMIT 1'
+      `SELECT
+        id, email, phone, address, instagram, linkedin, whatsapp,
+        maps_latitude, maps_longitude, maps_place_name, maps_url, maps_embed_url, updated_at
+       FROM contact_recruitment LIMIT 1`
     );
     if (rows.length === 0) {
-      return success(res, 'Kontak rekrutmen belum diatur.', null);
+      return success(res, 'Kontak belum diatur.', null);
     }
-    return success(res, 'Data kontak rekrutmen berhasil diambil.', rows[0]);
+    return success(res, 'Data kontak berhasil diambil.', rows[0]);
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = { getCompanyProfile, getCoreValues, getContact };
+/**
+ * GET /api/public/site-settings (atau /:key)
+ * Mengambil setting konten landing page
+ */
+const getSiteSettings = async (req, res, next) => {
+  try {
+    const { key } = req.params;
+    if (key) {
+      const [rows] = await pool.execute('SELECT * FROM site_settings WHERE key_name = ?', [key]);
+      if (rows.length === 0) {
+        return success(res, 'Setting tidak ditemukan.', null);
+      }
+      let content = rows[0].content_json;
+      try { content = JSON.parse(content); } catch (e) {}
+      return success(res, 'Setting berhasil diambil.', content);
+    }
+
+    const [rows] = await pool.execute('SELECT * FROM site_settings');
+    const settingsMap = {};
+    rows.forEach((r) => {
+      try {
+        settingsMap[r.key_name] = JSON.parse(r.content_json);
+      } catch (e) {
+        settingsMap[r.key_name] = r.content_json;
+      }
+    });
+    return success(res, 'Daftar settings berhasil diambil.', settingsMap);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getCompanyProfile, getCoreValues, getContact, getSiteSettings };
+

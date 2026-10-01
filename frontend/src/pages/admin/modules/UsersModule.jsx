@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  Users,
+  Plus,
+  Pencil,
+  Trash2,
+  X,
+} from 'lucide-react';
 
 export default function UsersModule() {
   const { user: currentUser, addToast } = useAdminAuth();
@@ -120,7 +127,10 @@ export default function UsersModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">👥 Manajemen Pengguna & Hak Akses Portal</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Users size={20} strokeWidth={2} />
+              <span>Manajemen Pengguna & Hak Akses Portal</span>
+            </h2>
             <p className="admin-card-desc">
               Khusus Administrator & HRD Manager: Atur akun personil internal, perizinan role, dan status akun.
             </p>
@@ -129,8 +139,10 @@ export default function UsersModule() {
             type="button"
             className="admin-btn-primary"
             onClick={handleOpenAdd}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            <span>+ Tambah Akun Baru</span>
+            <Plus size={16} strokeWidth={2} />
+            <span>Tambah Akun Baru</span>
           </button>
         </div>
 
@@ -196,19 +208,21 @@ export default function UsersModule() {
                           <button
                             type="button"
                             className="admin-btn-secondary"
-                            style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                            style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                             onClick={() => handleOpenEdit(u)}
                           >
-                            Edit
+                            <Pencil size={12} strokeWidth={2} />
+                            <span>Edit</span>
                           </button>
                           {!isSelf && (
                             <button
                               type="button"
                               className="admin-btn-danger"
-                              style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                              style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                               onClick={() => handleDelete(u.id, u.name)}
                             >
-                              Hapus
+                              <Trash2 size={12} strokeWidth={2} />
+                              <span>Hapus</span>
                             </button>
                           )}
                         </div>
@@ -234,7 +248,7 @@ export default function UsersModule() {
                 className="admin-modal-close"
                 onClick={() => setIsModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

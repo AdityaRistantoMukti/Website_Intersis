@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Building2, Save, Upload, ExternalLink } from 'lucide-react';
 import api, { getImageUrl, extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
 
@@ -16,7 +17,6 @@ export default function CompanyModule() {
   const [newImageFile, setNewImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
 
-  // Fetch current company profile
   useEffect(() => {
     let isMounted = true;
     async function fetchCompany() {
@@ -41,7 +41,6 @@ export default function CompanyModule() {
     return () => { isMounted = false; };
   }, [addToast]);
 
-  // Handle local image file selection
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -54,7 +53,6 @@ export default function CompanyModule() {
     }
   };
 
-  // Submit update
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -70,7 +68,7 @@ export default function CompanyModule() {
         formData.append('folder', 'company');
 
         const res = await api.put('/admin/company', formData);
-        addToast(res.data?.message || 'Profil perusahaan dan gambar berhasil diperbarui!', 'success');
+        addToast(res.data?.message || 'Profil perusahaan dan foto berhasil disimpan!', 'success');
       } else {
         const res = await api.put('/admin/company', {
           title,
@@ -79,10 +77,9 @@ export default function CompanyModule() {
           mission,
           about_image: currentImage,
         });
-        addToast(res.data?.message || 'Profil perusahaan berhasil diperbarui!', 'success');
+        addToast(res.data?.message || 'Profil perusahaan berhasil disimpan!', 'success');
       }
 
-      // Re-fetch to sync
       const updated = await api.get('/public/company');
       if (updated.data?.data) {
         setCurrentImage(updated.data.data.about_image || '');
@@ -110,9 +107,12 @@ export default function CompanyModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">🏢 Manajemen Profil & Hero Landing Page</h2>
+            <h2 className="admin-card-title">
+              <Building2 size={18} />
+              <span>Profil Perusahaan & Landing Page</span>
+            </h2>
             <p className="admin-card-desc">
-              Atur nama entitas bisnis, ringkasan profil utama publik, visi, misi, dan banner gambar perusahaan.
+              Kelola nama resmi perusahaan, ringkasan profil manufaktur, visi, misi, dan foto fasilitas pabrik.
             </p>
           </div>
           <a
@@ -120,100 +120,77 @@ export default function CompanyModule() {
             target="_blank"
             rel="noopener noreferrer"
             className="admin-btn-secondary"
-            style={{ fontSize: '0.8rem' }}
           >
-            Lihat di Halaman About ↗
+            <span>Lihat Halaman About</span>
+            <ExternalLink size={12} />
           </a>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="admin-form-grid">
-            {/* Entity Title */}
             <div className="admin-form-group admin-form-group--full">
-              <label className="admin-label">
-                <span>Nama Resmi Perusahaan</span>
-                <span className="admin-label-hint">(Tampil pada footer dan meta branding)</span>
-              </label>
+              <label className="admin-label">Nama Resmi Perusahaan</label>
               <input
                 type="text"
                 className="admin-text-input"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Contoh: PT. Intersis Sejahtera Abadi"
+                placeholder="PT. Global Philsonic Technologies"
                 required
               />
             </div>
 
-            {/* Description */}
             <div className="admin-form-group admin-form-group--full">
-              <label className="admin-label">
-                <span>Deskripsi Perusahaan (Publik & Landing Page)</span>
-                <span className="admin-label-hint">(Ditampilkan pada section About & beranda bisnis)</span>
-              </label>
+              <label className="admin-label">Deskripsi Utama Manufaktur (Landing Page & About)</label>
               <textarea
                 className="admin-textarea"
                 rows="4"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Tuliskan gambaran umum portofolio bisnis, sejarah, dan kapabilitas perakitan elektronik..."
+                placeholder="Tuliskan deskripsi kapabilitas perakitan presisi, fasilitas Batam FTZ, dan standar mutu..."
                 required
               />
             </div>
 
-            {/* Vision */}
             <div className="admin-form-group">
-              <label className="admin-label">
-                <span>Visi Perusahaan</span>
-              </label>
+              <label className="admin-label">Visi Perusahaan</label>
               <textarea
                 className="admin-textarea"
                 rows="4"
                 value={vision}
                 onChange={(e) => setVision(e.target.value)}
-                placeholder="Menjadi pemimpin pasar manufaktur & teknologi elektronik otomotif..."
+                placeholder="Visi jangka panjang manufaktur..."
               />
             </div>
 
-            {/* Mission */}
             <div className="admin-form-group">
-              <label className="admin-label">
-                <span>Misi Perusahaan</span>
-                <span className="admin-label-hint">(Dapat menggunakan nomor atau baris baru)</span>
-              </label>
+              <label className="admin-label">Misi Perusahaan</label>
               <textarea
                 className="admin-textarea"
                 rows="4"
                 value={mission}
                 onChange={(e) => setMission(e.target.value)}
-                placeholder="1. Mengembangkan produk teknologi bermutu tinggi...&#10;2. Menerapkan tata kelola berkelanjutan..."
+                placeholder="1. Menghasilkan perakitan presisi...&#10;2. Menerapkan standar IATF 16949..."
               />
             </div>
 
-            {/* Image Upload Zone */}
+            {/* Image upload */}
             <div className="admin-form-group admin-form-group--full">
-              <label className="admin-label">
-                <span>Gambar Utama / Banner Fasilitas Perusahaan</span>
-                <span className="admin-label-hint">(Format: JPG, PNG, WEBP &bull; Max 5 MB)</span>
-              </label>
-
+              <label className="admin-label">Foto / Banner Fasilitas Pabrik</label>
               <div className="admin-image-upload-zone">
                 <img
                   src={previewUrl || getImageUrl(currentImage) || '/images/hero-smt.jpg'}
-                  alt="Preview Profil Perusahaan"
+                  alt="Preview"
                   className="admin-image-preview-thumb"
-                  onError={(e) => {
-                    e.target.src = '/images/hero-smt.jpg';
-                  }}
+                  onError={(e) => { e.target.src = '/images/hero-smt.jpg'; }}
                 />
 
-                <div className="admin-upload-controls">
-                  <div style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: '4px' }}>
-                    {newImageFile ? newImageFile.name : (currentImage ? currentImage.split('/').pop() : 'Belum ada gambar custom')}
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '2px' }}>
+                    {newImageFile ? newImageFile.name : (currentImage ? currentImage.split('/').pop() : 'Default Image')}
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '10px' }}>
-                    {newImageFile
-                      ? `Siap diunggah (${(newImageFile.size / 1024 / 1024).toFixed(2)} MB)`
-                      : 'Unggah file gambar baru untuk mengganti foto perusahaan di landing page public'}
+                  <div style={{ fontSize: '0.75rem', color: 'var(--adm-muted)', marginBottom: '8px' }}>
+                    Format yang didukung: JPG, PNG, WEBP (Maksimal 5 MB)
                   </div>
 
                   <label className="admin-btn-file-select">
@@ -223,7 +200,8 @@ export default function CompanyModule() {
                       onChange={handleFileChange}
                       style={{ display: 'none' }}
                     />
-                    <span>📁 Pilih Foto Baru...</span>
+                    <Upload size={14} />
+                    <span>Pilih Foto Baru</span>
                   </label>
 
                   {newImageFile && (
@@ -234,9 +212,9 @@ export default function CompanyModule() {
                         setNewImageFile(null);
                         setPreviewUrl('');
                       }}
-                      style={{ marginLeft: '8px', fontSize: '0.8rem', padding: '6px 10px' }}
+                      style={{ marginLeft: '8px', padding: '4px 8px', fontSize: '0.75rem' }}
                     >
-                      Batal Ganti
+                      Batal
                     </button>
                   )}
                 </div>
@@ -244,26 +222,14 @@ export default function CompanyModule() {
             </div>
           </div>
 
-          {/* Form Actions */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid var(--admin-card-border)' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--adm-border)' }}>
             <button
               type="submit"
               className="admin-btn-primary"
               disabled={saving}
             >
-              {saving ? (
-                <>
-                  <span className="admin-spinner" />
-                  <span>Menyimpan Perubahan...</span>
-                </>
-              ) : (
-                <>
-                  <span>Simpan Perubahan Konten</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </>
-              )}
+              <Save size={14} />
+              <span>{saving ? 'Menyimpan...' : 'Simpan Profil Perusahaan'}</span>
             </button>
           </div>
         </form>

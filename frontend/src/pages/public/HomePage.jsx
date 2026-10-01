@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect, useRef } from 'react';
-import { useCompany, useCoreValues } from '../../hooks/useApi';
+import { useCompany, useCoreValues, useSiteSettings } from '../../hooks/useApi';
 import { useCountUp } from '../../hooks/useScrollAnimation';
 import AboutProductsSection from '../../components/home/AboutProductsSection';
 import CompanyLifecycleSection from '../../components/home/CompanyLifecycleSection';
@@ -15,9 +15,6 @@ function StatTile({ value, suffix = '', label, sublabel, icon }) {
   const ref = useCountUp(value);
   return (
     <div className="stats-deck__item">
-      {/* <div className="stats-deck__icon-wrap">
-        {icon}
-      </div> */}
       <div className="stats-deck__data">
         <div className="stats-deck__number">
           <span ref={ref}>0</span>
@@ -36,6 +33,11 @@ export default function HomePage() {
   const { data: company } = useCompany();
   const { data: coreValues } = useCoreValues();
 
+  // Dynamic CMS Settings from Admin Portal
+  const { data: heroSettings } = useSiteSettings('home_hero');
+  const { data: statsSettings } = useSiteSettings('home_stats');
+  const { data: ctaSettings } = useSiteSettings('home_cta');
+
   // Scroll animation observer
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -53,14 +55,18 @@ export default function HomePage() {
   // Typewriter effect for hero
   const typeRef = useRef(null);
   useEffect(() => {
-    const texts = i18n.language === 'id'
+    const defaultTexts = i18n.language === 'id'
       ? ['Elektronik Otomotif', 'Perakitan SMT Presisi', 'Otomasi Industri', 'Partner OEM / ODM']
       : ['Automotive Electronics', 'Precision SMT Assembly', 'Industrial Automation', 'OEM / ODM Partner'];
+
+    const texts = (heroSettings?.keywords && heroSettings.keywords.length > 0)
+      ? heroSettings.keywords
+      : defaultTexts;
 
     let idx = 0, charIdx = 0, deleting = false, timer;
 
     const type = () => {
-      const current = texts[idx];
+      const current = texts[idx] || '';
       if (typeRef.current) {
         typeRef.current.textContent = deleting
           ? current.slice(0, charIdx--)
@@ -76,18 +82,18 @@ export default function HomePage() {
 
     timer = setTimeout(type, 400);
     return () => clearTimeout(timer);
-  }, [i18n.language]);
-
+  }, [i18n.language, heroSettings]);
 
   // Multi-Slide Hero Carousel State
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const heroSlides = t('home:hero.slides', { returnObjects: true }) || [];
-  const slideImages = [
-    '/images/hero-smt.jpg',
-    '/images/hero-wave.jpg'
-  ];
+  const fallbackSlides = t('home:hero.slides', { returnObjects: true }) || [];
+  const heroSlides = (heroSettings?.slides && heroSettings.slides.length > 0)
+    ? heroSettings.slides
+    : fallbackSlides;
+
+  const defaultSlideImages = ['/images/hero-smt.jpg', '/images/hero-wave.jpg'];
 
   // Auto slide interval
   useEffect(() => {
@@ -97,6 +103,8 @@ export default function HomePage() {
     }, 6500);
     return () => clearInterval(timer);
   }, [isPaused, heroSlides.length]);
+
+  const slideImages = heroSlides.map((s, idx) => s.bgImage || defaultSlideImages[idx % defaultSlideImages.length]);
 
   return (
     <>
@@ -211,51 +219,44 @@ export default function HomePage() {
       <section className="stats-section" id="stats">
         <div className="container">
           <div className="stats-deck fade-up">
-            <StatTile
-              value={10}
-              suffix="+"
-              label={t('home:stats.experience')}
-              sublabel={t('home:stats.experienceSub')}
-              icon={
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-              }
-            />
-            <StatTile
-              value={80}
-              suffix="K CPH"
-              label={t('home:stats.capacity')}
-              sublabel={t('home:stats.capacitySub')}
-              icon={
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                  <rect x="2" y="2" width="20" height="20" rx="4" />
-                  <path d="M7 10h10M7 14h10" />
-                </svg>
-              }
-            />
-            <StatTile
-              value={24}
-              suffix="/7"
-              label={t('home:stats.support')}
-              sublabel={t('home:stats.supportSub')}
-              icon={
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-              }
-            />
-            <StatTile
-              value={100}
-              suffix="%"
-              label={t('home:stats.quality')}
-              sublabel={t('home:stats.qualitySub')}
-              icon={
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              }
-            />
+            {statsSettings?.stats && statsSettings.stats.length > 0 ? (
+              statsSettings.stats.map((st, i) => (
+                <StatTile
+                  key={i}
+                  value={st.val}
+                  suffix={st.suffix || ''}
+                  label={st.label}
+                  sublabel={st.sublabel}
+                />
+              ))
+            ) : (
+              <>
+                <StatTile
+                  value={10}
+                  suffix="+"
+                  label={t('home:stats.experience')}
+                  sublabel={t('home:stats.experienceSub')}
+                />
+                <StatTile
+                  value={80}
+                  suffix="K CPH"
+                  label={t('home:stats.capacity')}
+                  sublabel={t('home:stats.capacitySub')}
+                />
+                <StatTile
+                  value={24}
+                  suffix="/7"
+                  label={t('home:stats.support')}
+                  sublabel={t('home:stats.supportSub')}
+                />
+                <StatTile
+                  value={100}
+                  suffix="%"
+                  label={t('home:stats.quality')}
+                  sublabel={t('home:stats.qualitySub')}
+                />
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -297,16 +298,16 @@ export default function HomePage() {
       <section className="cta-banner" id="cta">
         <div className="container cta-banner__inner">
           <div className="cta-banner__content fade-up">
-            <h2 className="cta-banner__title">{t('home:cta.title')}</h2>
-            <p className="cta-banner__subtitle">{t('home:cta.subtitle')}</p>
+            <h2 className="cta-banner__title">{ctaSettings?.title || t('home:cta.title')}</h2>
+            <p className="cta-banner__subtitle">{ctaSettings?.subtitle || t('home:cta.subtitle')}</p>
           </div>
           <div className="cta-banner__actions fade-up">
             <InteractiveHoverButton
-              to="/contact"
+              to={ctaSettings?.button_link || "/contact"}
               variant="light"
               className="cta-magic-button"
             >
-              {t('home:cta.btnPartner')}
+              {ctaSettings?.button_text || t('home:cta.btnPartner')}
             </InteractiveHoverButton>
           </div>
         </div>

@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import api, { getImageUrl, extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  Gift,
+  Plus,
+  Pencil,
+  Trash2,
+  X,
+  Award,
+  Sparkles,
+} from 'lucide-react';
 
 export default function BenefitsModule() {
   const { addToast } = useAdminAuth();
@@ -115,7 +124,10 @@ export default function BenefitsModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">🎁 Fasilitas & Keuntungan Karyawan (Benefits & Perks)</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Gift size={20} strokeWidth={2} />
+              <span>Fasilitas & Keuntungan Karyawan (Benefits & Perks)</span>
+            </h2>
             <p className="admin-card-desc">
               Kelola daftar benefit kesehatan, asuransi, tunjangan, dan pengembangan karir yang tampil di halaman karir.
             </p>
@@ -124,8 +136,10 @@ export default function BenefitsModule() {
             type="button"
             className="admin-btn-primary"
             onClick={handleOpenAdd}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            <span>+ Tambah Benefit Baru</span>
+            <Plus size={16} strokeWidth={2} />
+            <span>Tambah Benefit Baru</span>
           </button>
         </div>
 
@@ -156,7 +170,9 @@ export default function BenefitsModule() {
                 {benefits.map((b) => (
                   <tr key={b.id}>
                     <td>
-                      <span style={{ fontSize: '1.25rem' }}>🌟</span>
+                      <span style={{ color: '#38bdf8', display: 'flex', alignItems: 'center' }}>
+                        <Award size={18} strokeWidth={2} />
+                      </span>
                     </td>
                     <td style={{ fontWeight: 700 }}>{b.title}</td>
                     <td style={{ color: '#94a3b8', fontSize: '0.85rem', maxWidth: '350px' }}>
@@ -184,18 +200,20 @@ export default function BenefitsModule() {
                         <button
                           type="button"
                           className="admin-btn-secondary"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleOpenEdit(b)}
                         >
-                          Edit
+                          <Pencil size={12} strokeWidth={2} />
+                          <span>Edit</span>
                         </button>
                         <button
                           type="button"
                           className="admin-btn-danger"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleDelete(b.id, b.title)}
                         >
-                          Hapus
+                          <Trash2 size={12} strokeWidth={2} />
+                          <span>Hapus</span>
                         </button>
                       </div>
                     </td>
@@ -219,7 +237,7 @@ export default function BenefitsModule() {
                 className="admin-modal-close"
                 onClick={() => setIsModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

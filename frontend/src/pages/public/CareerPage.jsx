@@ -233,15 +233,8 @@ export default function CareerPage() {
       {/* ═══════ PAGE HEADER ═══════ */}
       <header className="career-header">
         <div className="career-header__grid-bg" aria-hidden="true" />
-        <div className="career-header__glow" aria-hidden="true" />
 
         <div className="container career-header__content">
-          <nav className="career-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span className="career-breadcrumb__sep">/</span>
-            <span className="career-breadcrumb__current">{isId ? 'Karir' : 'Career'}</span>
-          </nav>
-
           <h1 className="career-header__title">
             {isId
               ? 'Bergabung & Berkembang Bersama Kami'

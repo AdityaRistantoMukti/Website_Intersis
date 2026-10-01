@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  HelpCircle,
+  Plus,
+  Pencil,
+  Trash2,
+  X,
+} from 'lucide-react';
 
 export default function FaqsModule() {
   const { addToast } = useAdminAuth();
@@ -88,7 +95,10 @@ export default function FaqsModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">❓ Tanya Jawab Umum (FAQ Management)</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <HelpCircle size={20} strokeWidth={2} />
+              <span>Tanya Jawab Umum (FAQ Management)</span>
+            </h2>
             <p className="admin-card-desc">
               Kelola daftar tanya jawab yang sering diajukan calon pelamar atau calon mitra bisnis di halaman publik.
             </p>
@@ -97,8 +107,10 @@ export default function FaqsModule() {
             type="button"
             className="admin-btn-primary"
             onClick={handleOpenAdd}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            <span>+ Tambah FAQ Baru</span>
+            <Plus size={16} strokeWidth={2} />
+            <span>Tambah FAQ Baru</span>
           </button>
         </div>
 
@@ -143,18 +155,20 @@ export default function FaqsModule() {
                         <button
                           type="button"
                           className="admin-btn-secondary"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleOpenEdit(f)}
                         >
-                          Edit
+                          <Pencil size={12} strokeWidth={2} />
+                          <span>Edit</span>
                         </button>
                         <button
                           type="button"
                           className="admin-btn-danger"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleDelete(f.id, f.question)}
                         >
-                          Hapus
+                          <Trash2 size={12} strokeWidth={2} />
+                          <span>Hapus</span>
                         </button>
                       </div>
                     </td>
@@ -178,7 +192,7 @@ export default function FaqsModule() {
                 className="admin-modal-close"
                 onClick={() => setIsModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

@@ -116,21 +116,8 @@ export default function AboutPage() {
       {/* ── 1. HERO BANNER WITH INDUSTRIAL TELEMETRY DECK ── */}
       <section className="about-hero">
         <div className="about-hero__bg-grid" />
-        <div className="about-hero__glow" />
 
         <div className="container about-hero__stage">
-          {/* Breadcrumb Navigation */}
-          <nav className="about-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">{t('about:hero.breadcrumbHome')}</Link>
-            <span className="about-breadcrumb__sep">/</span>
-            <span className="about-breadcrumb__current">{t('about:hero.breadcrumbAbout')}</span>
-          </nav>
-
-          <div className="about-hero__kicker">
-            <span className="about-hero__kicker-dot" />
-            <span>{t('about:hero.badge')}</span>
-          </div>
-
           <h1 className="about-hero__title">
             {t('about:hero.title')}
           </h1>

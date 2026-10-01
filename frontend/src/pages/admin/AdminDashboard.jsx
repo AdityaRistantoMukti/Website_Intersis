@@ -6,6 +6,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 
 // Submodules
 import OverviewModule from './modules/OverviewModule';
+import HomeModule from './modules/HomeModule';
 import CompanyModule from './modules/CompanyModule';
 import ContactModule from './modules/ContactModule';
 import CoreValuesModule from './modules/CoreValuesModule';
@@ -61,6 +62,8 @@ export default function AdminDashboard() {
     switch (currentTab) {
       case 'overview':
         return <OverviewModule onNavigateTab={handleSelectTab} />;
+      case 'home':
+        return <HomeModule />;
       case 'company':
         return <CompanyModule />;
       case 'contact':
@@ -83,7 +86,7 @@ export default function AdminDashboard() {
         if (!isFullAdmin) {
           return (
             <div className="admin-card" style={{ textAlign: 'center', padding: '3rem' }}>
-              <h3>⛔ Akses Dibatasi</h3>
+              <h3 style={{ color: '#f87171' }}>Akses Dibatasi</h3>
               <p style={{ color: '#94a3b8' }}>
                 Halaman Manajemen Pengguna hanya dapat diakses oleh Administrator atau HRD Manager.
               </p>
@@ -95,7 +98,7 @@ export default function AdminDashboard() {
         if (!isFullAdmin) {
           return (
             <div className="admin-card" style={{ textAlign: 'center', padding: '3rem' }}>
-              <h3>⛔ Akses Dibatasi</h3>
+              <h3 style={{ color: '#f87171' }}>Akses Dibatasi</h3>
               <p style={{ color: '#94a3b8' }}>
                 Halaman Log Aktivitas hanya dapat diakses oleh Administrator atau HRD Manager.
               </p>

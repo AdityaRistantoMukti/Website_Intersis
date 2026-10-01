@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Image, Plus, Edit2, Trash2, Calendar, Upload } from 'lucide-react';
 import api, { getImageUrl, extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
 
@@ -118,7 +119,7 @@ export default function GalleryModule() {
         addToast('Item galeri berhasil diperbarui!', 'success');
       } else {
         await api.post('/admin/gallery', formData);
-        addToast('Item galeri baru berhasil diunggah!', 'success');
+        addToast('Foto fasilitas baru berhasil diunggah!', 'success');
       }
 
       setIsModalOpen(false);
@@ -130,7 +131,6 @@ export default function GalleryModule() {
     }
   };
 
-  // Distinct categories
   const categoriesList = ['all', ...new Set(items.map((i) => i.category).filter(Boolean))];
   const filteredItems = activeCategory === 'all'
     ? items
@@ -141,9 +141,12 @@ export default function GalleryModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">🖼️ Galeri Foto Fasilitas & Dokumentasi Pabrik</h2>
+            <h2 className="admin-card-title">
+              <Image size={18} />
+              <span>Galeri Fasilitas & Dokumentasi Produksi</span>
+            </h2>
             <p className="admin-card-desc">
-              Unggah dan kelola foto lini perakitan SMT, cleanroom, workshop jig otomatis, serta kegiatan perusahaan.
+              Kelola dokumentasi visual lini SMT, cleanroom, workshop jig otomatis, dan lab pengujian.
             </p>
           </div>
           <button
@@ -151,24 +154,25 @@ export default function GalleryModule() {
             className="admin-btn-primary"
             onClick={handleOpenAdd}
           >
-            <span>+ Unggah Foto Baru</span>
+            <Plus size={14} />
+            <span>Unggah Foto Baru</span>
           </button>
         </div>
 
         {/* Category Filter Pills */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
           {categoriesList.map((cat) => (
             <button
               key={cat}
               type="button"
-              className={`admin-btn-secondary ${activeCategory === cat ? 'admin-nav-item-btn--active' : ''}`}
+              className="admin-btn-secondary"
               style={{
-                fontSize: '0.8rem',
-                padding: '5px 12px',
-                borderRadius: '9999px',
-                border: activeCategory === cat ? '1px solid #2dd4bf' : '1px solid var(--admin-input-border)',
-                background: activeCategory === cat ? 'rgba(45,212,191,0.15)' : 'transparent',
-                color: activeCategory === cat ? '#2dd4bf' : 'var(--admin-text-main)',
+                fontSize: '0.78rem',
+                padding: '4px 10px',
+                borderRadius: '4px',
+                background: activeCategory === cat ? 'var(--adm-hover)' : 'transparent',
+                borderColor: activeCategory === cat ? 'var(--adm-teal)' : 'var(--adm-border)',
+                color: activeCategory === cat ? '#ffffff' : 'var(--adm-muted)',
               }}
               onClick={() => setActiveCategory(cat)}
             >
@@ -180,29 +184,28 @@ export default function GalleryModule() {
         {loading ? (
           <div style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
             <div className="admin-spinner" style={{ margin: '0 auto 12px' }} />
-            <span>Memuat foto galeri...</span>
+            <span>Memuat foto fasilitas...</span>
           </div>
         ) : filteredItems.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
             Belum ada foto dalam kategori ini.
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
             {filteredItems.map((item) => (
               <div
                 key={item.id}
                 style={{
-                  background: 'var(--admin-card-bg)',
-                  border: '1px solid var(--admin-card-border)',
-                  borderRadius: '12px',
+                  background: 'var(--adm-card)',
+                  border: '1px solid var(--adm-border)',
+                  borderRadius: '6px',
                   overflow: 'hidden',
                   display: 'flex',
                   flexDirection: 'column',
-                  transition: 'all 0.2s',
                 }}
               >
-                {/* Thumbnail Image */}
-                <div style={{ height: '170px', position: 'relative', overflow: 'hidden', background: '#000' }}>
+                {/* Thumbnail */}
+                <div style={{ height: '160px', position: 'relative', overflow: 'hidden', background: '#000' }}>
                   <img
                     src={getImageUrl(item.image)}
                     alt={item.title}
@@ -214,55 +217,56 @@ export default function GalleryModule() {
                   <span
                     style={{
                       position: 'absolute',
-                      top: '10px',
-                      left: '10px',
-                      background: 'rgba(7, 13, 24, 0.85)',
-                      backdropFilter: 'blur(4px)',
-                      color: '#2dd4bf',
-                      fontSize: '0.72rem',
-                      fontWeight: 700,
-                      padding: '3px 8px',
-                      borderRadius: '4px',
-                      border: '1px solid rgba(45, 212, 191, 0.3)',
+                      top: '8px',
+                      left: '8px',
+                      background: 'rgba(9, 13, 22, 0.9)',
+                      color: 'var(--adm-teal)',
+                      fontSize: '0.7rem',
+                      fontWeight: 600,
+                      padding: '2px 6px',
+                      borderRadius: '3px',
+                      border: '1px solid var(--adm-border)',
                     }}
                   >
-                    {item.category || 'Galeri'}
+                    {item.category || 'Fasilitas'}
                   </span>
                 </div>
 
-                {/* Details */}
                 <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '4px' }}>
-                    📅 {item.event_date ? new Date(item.event_date).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal -'}
+                  <div style={{ fontSize: '0.72rem', color: 'var(--adm-subtle)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <Calendar size={11} />
+                    <span>{item.event_date ? new Date(item.event_date).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : '-'}</span>
                   </div>
-                  <h4 style={{ margin: '0 0 6px', fontSize: '0.95rem', fontWeight: 700, color: 'var(--admin-text-main)' }}>
+                  <h4 style={{ margin: '0 0 6px', fontSize: '0.9rem', fontWeight: 600, color: 'var(--adm-text)' }}>
                     {item.title}
                   </h4>
-                  <p style={{ margin: '0 0 1rem', fontSize: '0.825rem', color: 'var(--admin-text-muted)', flex: 1, lineHeight: 1.4 }}>
-                    {item.description || 'Tidak ada deskripsi tambahan.'}
+                  <p style={{ margin: '0 0 1rem', fontSize: '0.8rem', color: 'var(--adm-muted)', flex: 1, lineHeight: 1.4 }}>
+                    {item.description || '—'}
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--admin-card-border)', paddingTop: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--adm-border)', paddingTop: '0.65rem' }}>
                     <span className={`admin-pill ${item.status === 'active' ? 'admin-pill--success' : 'admin-pill--danger'}`}>
                       {item.status === 'active' ? 'Aktif' : 'Nonaktif'}
                     </span>
 
-                    <div style={{ display: 'flex', gap: '6px' }}>
+                    <div style={{ display: 'flex', gap: '4px' }}>
                       <button
                         type="button"
                         className="admin-btn-secondary"
-                        style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                        style={{ padding: '4px 6px' }}
                         onClick={() => handleOpenEdit(item)}
+                        title="Edit"
                       >
-                        Edit
+                        <Edit2 size={13} />
                       </button>
                       <button
                         type="button"
                         className="admin-btn-danger"
-                        style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                        style={{ padding: '4px 6px' }}
                         onClick={() => handleDelete(item.id, item.title)}
+                        title="Hapus"
                       >
-                        Hapus
+                        <Trash2 size={13} />
                       </button>
                     </div>
                   </div>
@@ -273,13 +277,12 @@ export default function GalleryModule() {
         )}
       </div>
 
-      {/* Modal Upload / Edit */}
       {isModalOpen && (
         <div className="admin-modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="admin-modal-box" onClick={(e) => e.stopPropagation()}>
             <div className="admin-modal-header">
               <h3 className="admin-modal-title">
-                {editingItem ? 'Edit Informasi Galeri' : 'Unggah Foto Galeri Baru'}
+                {editingItem ? 'Edit Informasi Foto' : 'Unggah Foto Fasilitas Baru'}
               </h3>
               <button
                 type="button"
@@ -294,20 +297,15 @@ export default function GalleryModule() {
               <div className="admin-modal-body">
                 {/* File Upload Preview */}
                 <div className="admin-form-group">
-                  <label className="admin-label">
-                    <span>File Gambar</span>
-                    <span className="admin-label-hint">(JPG, PNG, WEBP &bull; Max 5 MB)</span>
-                  </label>
+                  <label className="admin-label">File Gambar</label>
                   <div className="admin-image-upload-zone">
                     <img
                       src={previewUrl || (existingImage ? getImageUrl(existingImage) : '/images/hero-smt.jpg')}
                       alt="Preview"
                       className="admin-image-preview-thumb"
-                      onError={(e) => {
-                        e.target.src = '/images/hero-smt.jpg';
-                      }}
+                      onError={(e) => { e.target.src = '/images/hero-smt.jpg'; }}
                     />
-                    <div className="admin-upload-controls">
+                    <div style={{ flex: 1 }}>
                       <label className="admin-btn-file-select">
                         <input
                           type="file"
@@ -315,16 +313,16 @@ export default function GalleryModule() {
                           onChange={handleFileChange}
                           style={{ display: 'none' }}
                         />
-                        <span>📁 {imageFile ? 'Ganti File Gambar' : 'Pilih File Gambar...'}</span>
+                        <Upload size={14} />
+                        <span>{imageFile ? 'Ganti File Gambar' : 'Pilih Gambar'}</span>
                       </label>
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '6px' }}>
-                        {imageFile ? imageFile.name : (existingImage ? 'Menggunakan gambar saat ini' : 'Pilih gambar dari komputer')}
+                      <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', marginTop: '4px' }}>
+                        {imageFile ? imageFile.name : (existingImage ? 'Gambar saat ini digunakan' : 'Format JPG, PNG, WEBP')}
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Title */}
                 <div className="admin-form-group">
                   <label className="admin-label">Judul Foto / Fasilitas</label>
                   <input
@@ -332,13 +330,12 @@ export default function GalleryModule() {
                     className="admin-text-input"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Contoh: Lini SMT Dual-Beam Yamaha YSM20R"
+                    placeholder="High-Speed SMT Modular Placement Lines"
                     required
                   />
                 </div>
 
-                {/* Category & Date */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   <div className="admin-form-group">
                     <label className="admin-label">Kategori</label>
                     <select
@@ -346,19 +343,17 @@ export default function GalleryModule() {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     >
-                      <option value="SMT Lines">SMT Lines (Perakitan)</option>
+                      <option value="SMT Lines">SMT Lines</option>
                       <option value="Cleanroom Class 100K">Cleanroom Class 100K</option>
                       <option value="Workshop Otomasi">Workshop Otomasi & Jigs</option>
                       <option value="QA & Lab Testing">QA & Lab Testing</option>
                       <option value="Gedung & Logistik">Gedung & Logistik FTZ</option>
-                      <option value="Exhibition">Exhibition & Pameran</option>
-                      <option value="Team Building">Team Building & Internal</option>
-                      <option value="CSR">CSR & Sosial</option>
+                      <option value="Exhibition">Exhibition</option>
                     </select>
                   </div>
 
                   <div className="admin-form-group">
-                    <label className="admin-label">Tanggal Pelaksanaan / Dokumentasi</label>
+                    <label className="admin-label">Tanggal Pelaksanaan / Foto</label>
                     <input
                       type="date"
                       className="admin-text-input"
@@ -368,28 +363,26 @@ export default function GalleryModule() {
                   </div>
                 </div>
 
-                {/* Description */}
                 <div className="admin-form-group">
-                  <label className="admin-label">Keterangan / Spesifikasi</label>
+                  <label className="admin-label">Keterangan Spesifikasi Teknis</label>
                   <textarea
                     className="admin-textarea"
                     rows="3"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Deskripsi peralatan mesin, toleransi presisi, atau catatan kegiatan..."
+                    placeholder="Spesifikasi mesin atau detail kapasitas..."
                   />
                 </div>
 
-                {/* Status */}
                 <div className="admin-form-group">
-                  <label className="admin-label">Status Tampil</label>
+                  <label className="admin-label">Status</label>
                   <select
                     className="admin-select"
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
                   >
-                    <option value="active">Aktif (Tampil di Website Publik)</option>
-                    <option value="inactive">Nonaktif (Disembunyikan)</option>
+                    <option value="active">Aktif (Tampil di Website)</option>
+                    <option value="inactive">Nonaktif</option>
                   </select>
                 </div>
               </div>
@@ -407,7 +400,7 @@ export default function GalleryModule() {
                   className="admin-btn-primary"
                   disabled={submitting}
                 >
-                  {submitting ? 'Menyimpan...' : (editingItem ? 'Perbarui Galeri' : 'Unggah Sekarang')}
+                  {submitting ? 'Menyimpan...' : (editingItem ? 'Perbarui Foto' : 'Unggah Foto')}
                 </button>
               </div>
             </form>

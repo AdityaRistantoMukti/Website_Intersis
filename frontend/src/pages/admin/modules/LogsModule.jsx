@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  FileText,
+  RefreshCw,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
 
 export default function LogsModule() {
   const { addToast } = useAdminAuth();
@@ -34,7 +40,10 @@ export default function LogsModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">📜 Audit Trail & Log Aktivitas Sistem</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FileText size={20} strokeWidth={2} />
+              <span>Audit Trail & Log Aktivitas Sistem</span>
+            </h2>
             <p className="admin-card-desc">
               Pencatatan riwayat setiap aksi tambah, ubah, dan hapus konten oleh personil admin untuk keamanan dan transparansi.
             </p>
@@ -43,9 +52,10 @@ export default function LogsModule() {
             type="button"
             className="admin-btn-secondary"
             onClick={() => fetchLogs(pagination.page)}
-            style={{ fontSize: '0.85rem' }}
+            style={{ fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            ↻ Segarkan Log
+            <RefreshCw size={14} strokeWidth={2} />
+            <span>Segarkan Log</span>
           </button>
         </div>
 
@@ -125,18 +135,20 @@ export default function LogsModule() {
                   className="admin-btn-secondary"
                   disabled={pagination.page <= 1}
                   onClick={() => setPagination((prev) => ({ ...prev, page: prev.page - 1 }))}
-                  style={{ padding: '6px 12px' }}
+                  style={{ padding: '6px 12px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                 >
-                  ← Sebelumnya
+                  <ChevronLeft size={14} />
+                  <span>Sebelumnya</span>
                 </button>
                 <button
                   type="button"
                   className="admin-btn-secondary"
                   disabled={pagination.page >= pagination.totalPages}
                   onClick={() => setPagination((prev) => ({ ...prev, page: prev.page + 1 }))}
-                  style={{ padding: '6px 12px' }}
+                  style={{ padding: '6px 12px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                 >
-                  Selanjutnya →
+                  <span>Selanjutnya</span>
+                  <ChevronRight size={14} />
                 </button>
               </div>
             </div>

@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  Briefcase,
+  Plus,
+  Search,
+  Pencil,
+  Trash2,
+  MapPin,
+  ExternalLink,
+  X,
+} from 'lucide-react';
 
 export default function JobsModule() {
   const { addToast } = useAdminAuth();
@@ -140,7 +150,10 @@ export default function JobsModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">💼 Lowongan Kerja & Rekrutmen Karir</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Briefcase size={20} strokeWidth={2} />
+              <span>Lowongan Kerja & Rekrutmen Karir</span>
+            </h2>
             <p className="admin-card-desc">
               Kelola posisi rekrutmen, kualifikasi teknis, departemen kerja, dan status publikasi di website.
             </p>
@@ -149,8 +162,10 @@ export default function JobsModule() {
             type="button"
             className="admin-btn-primary"
             onClick={handleOpenAdd}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            <span>+ Buat Lowongan Baru</span>
+            <Plus size={16} strokeWidth={2} />
+            <span>Buat Lowongan Baru</span>
           </button>
         </div>
 
@@ -165,8 +180,9 @@ export default function JobsModule() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button type="submit" className="admin-btn-secondary" style={{ padding: '0 12px' }}>
-              Cari
+            <button type="submit" className="admin-btn-secondary" style={{ padding: '0 12px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Search size={14} />
+              <span>Cari</span>
             </button>
           </form>
 
@@ -230,9 +246,10 @@ export default function JobsModule() {
                           href={job.form_url}
                           target="_blank"
                           rel="noreferrer"
-                          style={{ fontSize: '0.72rem', color: '#38bdf8', textDecoration: 'none' }}
+                          style={{ fontSize: '0.72rem', color: '#38bdf8', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}
                         >
-                          🔗 Form Pendaftaran Eksternal
+                          <ExternalLink size={11} strokeWidth={2} />
+                          <span>Form Pendaftaran Eksternal</span>
                         </a>
                       )}
                     </td>
@@ -240,7 +257,12 @@ export default function JobsModule() {
                       <span className="admin-pill admin-pill--info">{job.category_name || 'Umum'}</span>
                     </td>
                     <td style={{ fontSize: '0.85rem' }}>{job.employment_type}</td>
-                    <td style={{ fontSize: '0.85rem', color: '#94a3b8' }}>📍 {job.location || 'Batam'}</td>
+                    <td style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        <MapPin size={12} strokeWidth={2} />
+                        {job.location || 'Batam'}
+                      </span>
+                    </td>
                     <td>
                       <span className={`admin-pill ${
                         job.status === 'published' ? 'admin-pill--success' :
@@ -255,18 +277,20 @@ export default function JobsModule() {
                         <button
                           type="button"
                           className="admin-btn-secondary"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleOpenEdit(job)}
                         >
-                          Edit
+                          <Pencil size={12} strokeWidth={2} />
+                          <span>Edit</span>
                         </button>
                         <button
                           type="button"
                           className="admin-btn-danger"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleDelete(job.id, job.title)}
                         >
-                          Hapus
+                          <Trash2 size={12} strokeWidth={2} />
+                          <span>Hapus</span>
                         </button>
                       </div>
                     </td>
@@ -291,7 +315,7 @@ export default function JobsModule() {
                 className="admin-modal-close"
                 onClick={() => setIsModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

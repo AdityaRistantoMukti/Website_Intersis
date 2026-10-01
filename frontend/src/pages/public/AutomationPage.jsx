@@ -428,15 +428,8 @@ export default function AutomationPage() {
       {/* ═══════ PAGE HEADER — Always-Dark Industrial Theme ═══════ */}
       <header className="auto-page-header">
         <div className="auto-page-header__grid-bg" aria-hidden="true" />
-        <div className="auto-page-header__glow" aria-hidden="true" />
 
         <div className="container auto-page-header__content">
-          <nav className="auto-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span className="auto-breadcrumb__sep">/</span>
-            <span className="auto-breadcrumb__current">{isId ? 'Otomasi & Robotik' : 'Automation & Robotics'}</span>
-          </nav>
-
           <h1 className="auto-page-header__title">
             {isId ? 'Solusi Robot Industri & Otomasi Manufaktur' : 'Industrial Robot Solutions & Manufacturing Automation'}
           </h1>

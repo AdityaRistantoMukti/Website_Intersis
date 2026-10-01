@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import api, { getImageUrl, extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import {
+  GraduationCap,
+  Plus,
+  ExternalLink,
+  Pencil,
+  Trash2,
+  X,
+} from 'lucide-react';
 
 export default function ProgramsModule() {
   const { addToast } = useAdminAuth();
@@ -119,7 +127,10 @@ export default function ProgramsModule() {
       <div className="admin-card">
         <div className="admin-card-header">
           <div>
-            <h2 className="admin-card-title">🎓 Program Magang & Pelatihan Khusus (Internship / MT)</h2>
+            <h2 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <GraduationCap size={20} strokeWidth={2} />
+              <span>Program Magang & Pelatihan Khusus (Internship / MT)</span>
+            </h2>
             <p className="admin-card-desc">
               Kelola inisiatif program vokasi, magang bersertifikat, dan program percepatan karir bagi talenta muda.
             </p>
@@ -128,8 +139,10 @@ export default function ProgramsModule() {
             type="button"
             className="admin-btn-primary"
             onClick={handleOpenAdd}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            <span>+ Tambah Program Baru</span>
+            <Plus size={16} strokeWidth={2} />
+            <span>Tambah Program Baru</span>
           </button>
         </div>
 
@@ -186,9 +199,10 @@ export default function ProgramsModule() {
                           href={p.registration_url}
                           target="_blank"
                           rel="noreferrer"
-                          style={{ color: '#2dd4bf', textDecoration: 'none', fontSize: '0.8rem' }}
+                          style={{ color: '#2dd4bf', textDecoration: 'none', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                         >
-                          🔗 Form Pendaftaran
+                          <ExternalLink size={12} strokeWidth={2} />
+                          <span>Form Pendaftaran</span>
                         </a>
                       ) : '—'}
                     </td>
@@ -202,18 +216,20 @@ export default function ProgramsModule() {
                         <button
                           type="button"
                           className="admin-btn-secondary"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleOpenEdit(p)}
                         >
-                          Edit
+                          <Pencil size={12} strokeWidth={2} />
+                          <span>Edit</span>
                         </button>
                         <button
                           type="button"
                           className="admin-btn-danger"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                           onClick={() => handleDelete(p.id, p.title)}
                         >
-                          Hapus
+                          <Trash2 size={12} strokeWidth={2} />
+                          <span>Hapus</span>
                         </button>
                       </div>
                     </td>
@@ -237,7 +253,7 @@ export default function ProgramsModule() {
                 className="admin-modal-close"
                 onClick={() => setIsModalOpen(false)}
               >
-                ✕
+                <X size={16} strokeWidth={2} />
               </button>
             </div>
 

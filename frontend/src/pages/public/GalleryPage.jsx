@@ -110,15 +110,8 @@ export default function GalleryPage() {
       {/* ═══════ PAGE HEADER — Consistent Industrial Theme ═══════ */}
       <header className="gallery-page-header">
         <div className="gallery-page-header__grid-bg" aria-hidden="true" />
-        <div className="gallery-page-header__glow" aria-hidden="true" />
 
         <div className="container gallery-page-header__content">
-          <nav className="gallery-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span className="gallery-breadcrumb__sep">/</span>
-            <span className="gallery-breadcrumb__current">{isId ? 'Galeri' : 'Gallery'}</span>
-          </nav>
-
           <h1 className="gallery-page-header__title">
             {isId ? 'Galeri Fasilitas Manufaktur & Ruang Produksi' : 'Manufacturing Facilities & Production Gallery'}
           </h1>

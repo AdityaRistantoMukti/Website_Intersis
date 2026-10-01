@@ -277,16 +277,8 @@ export default function ProductsPage() {
       {/* ── 1. ELEGAN MANUFACTURING HERO SECTION ── */}
       <section className="prod-hero">
         <div className="prod-hero__grid-bg" aria-hidden="true" />
-        <div className="prod-hero__glow" aria-hidden="true" />
 
         <div className="container prod-hero__content">
-          {/* Breadcrumb Navigation */}
-          <nav className="prod-hero__breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">{isId ? 'Beranda' : 'Home'}</Link>
-            <span className="prod-hero__breadcrumb-sep">/</span>
-            <span className="prod-hero__breadcrumb-current">{isId ? 'Katalog Produk' : 'Products Catalog'}</span>
-          </nav>          
-
           {/* Main Title & Concise Explanation (Fokus 1 Konteks: Produk & Manufaktur) */}
           <h1 className="prod-hero__title">
             {isId

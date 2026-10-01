@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 
-const LAT = 1.1368003;
-const LNG = 104.0452514;
-const PLACE_NAME = 'GLOBAL PHILSONIC TECHNOLOGIES';
-const GMAPS_URL =
+const DEFAULT_LAT = 1.1368003;
+const DEFAULT_LNG = 104.0452514;
+const DEFAULT_PLACE = 'GLOBAL PHILSONIC TECHNOLOGIES';
+const DEFAULT_GMAPS_URL =
   'https://www.google.com/maps/place/GLOBAL+PHILSONIC+TECHNOLOGIES/@1.137263,104.045233,435m/data=!3m1!1e3!4m6!3m5!1s0x31d98900364038b5:0xf424af624a151322!8m2!3d1.1368003!4d104.0452514!16s%2Fg%2F11z007pkw1?hl=id';
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${LAT},${LNG}`;
 
-export default function ContactGoogleMap({ isId = true }) {
+export default function ContactGoogleMap({ contact, isId = true }) {
   // 'm' = Roadmap, 'k' = Satellite / Hybrid
   const [mapType, setMapType] = useState('m');
   const [zoom, setZoom] = useState(17);
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const lat = contact?.maps_latitude ? parseFloat(contact.maps_latitude) : DEFAULT_LAT;
+  const lng = contact?.maps_longitude ? parseFloat(contact.maps_longitude) : DEFAULT_LNG;
+  const placeName = contact?.maps_place_name || contact?.company_name || DEFAULT_PLACE;
+  const gmapsUrl = contact?.maps_url || `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+
   const handleCopyCoords = async () => {
     try {
-      await navigator.clipboard.writeText(`${LAT}, ${LNG}`);
+      await navigator.clipboard.writeText(`${lat}, ${lng}`);
       setCopied(true);
       setTimeout(() => setCopied(false), 2400);
     } catch {
-      // Fallback if clipboard API not permitted
       setCopied(true);
       setTimeout(() => setCopied(false), 2400);
     }
@@ -35,9 +39,9 @@ export default function ContactGoogleMap({ isId = true }) {
   };
 
   // Google Maps standard embed query
-  const embedUrl = `https://maps.google.com/maps?q=${LAT},${LNG}+(${encodeURIComponent(
-    PLACE_NAME
-  )})&t=${mapType}&z=${zoom}&ie=UTF8&iwloc=B&output=embed`;
+  const embedUrl = contact?.maps_embed_url && !contact.maps_embed_url.includes('example')
+    ? contact.maps_embed_url
+    : `https://maps.google.com/maps?q=${lat},${lng}+(${encodeURIComponent(placeName)})&t=${mapType}&z=${zoom}&ie=UTF8&iwloc=B&output=embed`;
 
   return (
     <div className="contact-gmap-card">
@@ -59,10 +63,10 @@ export default function ContactGoogleMap({ isId = true }) {
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
-            <span>PT. Global Philsonic Technologies</span>
+            <span>{placeName}</span>
           </div>
           <p className="contact-gmap-address">
-            Cammo Industrial Park Blok B No. 8-10, Batam Center (FTZ)
+            {contact?.address || 'Cammo Industrial Park Blok B No. 8-10, Batam Center (FTZ)'}
           </p>
         </div>
 
@@ -135,7 +139,7 @@ export default function ContactGoogleMap({ isId = true }) {
       {/* ── QUICK ACTION TOOLBAR ── */}
       <div className="contact-gmap-actions">
         <a
-          href={GMAPS_URL}
+          href={gmapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="contact-gmap-btn contact-gmap-btn--primary"
@@ -149,7 +153,7 @@ export default function ContactGoogleMap({ isId = true }) {
         </a>
 
         <a
-          href={DIRECTIONS_URL}
+          href={directionsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="contact-gmap-btn"
