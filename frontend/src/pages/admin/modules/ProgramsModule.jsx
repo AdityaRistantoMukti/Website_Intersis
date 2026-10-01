@@ -199,7 +199,7 @@ export default function ProgramsModule() {
                           href={p.registration_url}
                           target="_blank"
                           rel="noreferrer"
-                          style={{ color: '#2dd4bf', textDecoration: 'none', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                          style={{ color: 'var(--adm-text)', textDecoration: 'underline', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                         >
                           <ExternalLink size={12} strokeWidth={2} />
                           <span>Form Pendaftaran</span>

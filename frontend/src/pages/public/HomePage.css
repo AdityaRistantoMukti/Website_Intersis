@@ -423,13 +423,13 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #00897B, #26A69A, transparent);
+  background: linear-gradient(90deg, transparent, #FFFFFF, #CBD5E1, transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .stats-deck__item:hover {
-  background: rgba(0, 137, 123, 0.08);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .stats-deck__item:hover::before {
@@ -440,22 +440,22 @@
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: rgba(0, 137, 123, 0.12);
-  border: 1px solid rgba(0, 137, 123, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2DD4BF;
+  color: #FFFFFF;
   margin-bottom: 1.25rem;
   transition: all 0.25s ease;
 }
 
 .stats-deck__item:hover .stats-deck__icon-wrap {
-  background: rgba(0, 137, 123, 0.25);
-  border-color: rgba(38, 166, 154, 0.6);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
   color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(0, 137, 123, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .stats-deck__data {
@@ -479,7 +479,7 @@
 .stats-deck__suffix {
   font-size: clamp(1.15rem, 1.4vw, 1.45rem);
   font-weight: 700;
-  color: #2DD4BF;
+  color: #CBD5E1;
   letter-spacing: normal;
 }
 
@@ -934,13 +934,13 @@
 
 /* ── B2B CTA BANNER (Clean Full-Width Strip Banner) ── */
 .cta-banner {
-  background: linear-gradient(135deg, #005F56 0%, #00897B 100%);
+  background: #09090b;
   padding: clamp(var(--space-12), 4vw, var(--space-16)) 0;
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Subtle ambient background glow */
@@ -1067,9 +1067,9 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(45, 212, 191, 0.12);
-  border: 1px solid rgba(45, 212, 191, 0.3);
-  color: #2DD4BF;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #F8FAFC;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.725rem;
   font-weight: 700;
@@ -1082,8 +1082,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #2DD4BF;
-  box-shadow: 0 0 6px #2DD4BF;
+  background: #FFFFFF;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
 .trade-seal {
@@ -1144,8 +1144,9 @@
   width: 38px;
   height: 38px;
   border-radius: var(--radius);
-  background: rgba(45, 212, 191, 0.1);
-  color: #2DD4BF;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1324,11 +1325,11 @@
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.675rem;
   font-weight: 700;
-  color: #2DD4BF;
-  background: rgba(45, 212, 191, 0.1);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
   padding: 2px 6px;
   border-radius: 3px;
-  border: 1px solid rgba(45, 212, 191, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .telemetry-flag-link {
@@ -1366,7 +1367,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: #2DD4BF;
+  color: #E2E8F0;
   font-size: 0.7rem;
   font-weight: 600;
 }

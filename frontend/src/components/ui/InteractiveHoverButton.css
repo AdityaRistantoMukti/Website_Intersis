@@ -39,7 +39,7 @@
 }
 
 .interactive-hover-btn--light .ihb-dot {
-  background-color: #004D40; /* Dark rich teal flood */
+  background-color: #09090b; /* Dark neutral flood */
 }
 
 .interactive-hover-btn--light .ihb-content-hover {
@@ -47,25 +47,25 @@
 }
 
 .interactive-hover-btn--light .ihb-arrow {
-  color: #2DD4BF; /* Glowing cyan-teal accent */
+  color: #FFFFFF;
 }
 
 .interactive-hover-btn--light:hover {
   transform: translateY(-2px);
-  border-color: #004D40;
+  border-color: #09090b;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
 }
 
-/* ── Teal Variant (Teal button on light background) ── */
+/* ── Monochrome Variant ── */
 .interactive-hover-btn--teal {
-  background-color: #00897B;
+  background-color: #18181b;
   color: #FFFFFF;
-  border-color: #00897B;
-  box-shadow: 0 4px 18px rgba(0, 137, 123, 0.28);
+  border-color: #27272a;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
 }
 
 .interactive-hover-btn--teal .ihb-dot {
-  background-color: #00382E;
+  background-color: #000000;
 }
 
 .interactive-hover-btn--teal .ihb-content-hover {
@@ -73,13 +73,13 @@
 }
 
 .interactive-hover-btn--teal .ihb-arrow {
-  color: #5EEAD4;
+  color: #FFFFFF;
 }
 
 .interactive-hover-btn--teal:hover {
   transform: translateY(-2px);
-  border-color: #00382E;
-  box-shadow: 0 12px 30px rgba(0, 77, 64, 0.38);
+  border-color: #000000;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
 }
 
 /* ── 1. RESTING STATE (Dot + Label Text) ── */

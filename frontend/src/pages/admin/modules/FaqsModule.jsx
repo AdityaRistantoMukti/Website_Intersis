@@ -138,7 +138,7 @@ export default function FaqsModule() {
               <tbody>
                 {faqs.map((f) => (
                   <tr key={f.id}>
-                    <td style={{ color: '#2dd4bf', fontWeight: 700 }}>#{f.sort_order}</td>
+                    <td style={{ color: 'var(--adm-text)', fontWeight: 700 }}>#{f.sort_order}</td>
                     <td style={{ fontWeight: 600, color: 'var(--admin-text-main)', maxWidth: '300px' }}>
                       {f.question}
                     </td>

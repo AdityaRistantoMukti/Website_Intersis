@@ -333,7 +333,7 @@ export default function AboutModule() {
   return (
     <div className="admin-module">
       <div className="admin-card" style={{ marginBottom: '1.25rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--adm-text)', marginBottom: '0.35rem' }}>
           Manajemen Konten Halaman Tentang Kami (About Us)
         </h2>
         <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
@@ -421,7 +421,7 @@ export default function AboutModule() {
               />
             </div>
 
-            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#e2e8f0', margin: '1.5rem 0 1rem' }}>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)', margin: '1.5rem 0 1rem' }}>
               4 Metrik Telemetri Pabrik
             </h4>
             <div className="admin-form-grid admin-form-grid-2">

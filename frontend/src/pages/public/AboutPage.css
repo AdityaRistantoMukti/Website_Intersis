@@ -3,22 +3,26 @@
    PT. Global Philsonic Technologies (GPT)
    ══════════════════════════════════════════════════════════════════════════ */
 
+:root {
+  --teal-bright: #ffffff;
+}
+
 /* ── HERO BANNER ── */
 .about-hero {
   position: relative;
-  background: radial-gradient(circle at 80% 20%, #162a45 0%, #0b1320 60%, #060a12 100%);
+  background: radial-gradient(circle at 80% 20%, #18181b 0%, #09090b 60%, #050507 100%);
   color: #ffffff;
   padding: 8.5rem 0 5rem;
   overflow: hidden;
-  border-bottom: 1px solid rgba(45, 212, 191, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .about-hero__bg-grid {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(45, 212, 191, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 212, 191, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 36px 36px;
   pointer-events: none;
 }
@@ -29,7 +33,7 @@
   right: -80px;
   width: 480px;
   height: 480px;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, rgba(14, 165, 233, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -59,7 +63,7 @@
 }
 
 .about-breadcrumb a:hover {
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
 }
 
 .about-breadcrumb__sep {
@@ -68,7 +72,7 @@
 }
 
 .about-breadcrumb__current {
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
   font-weight: 600;
 }
 
@@ -80,16 +84,16 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
   margin-bottom: 1rem;
 }
 
 .about-hero__kicker-dot {
   width: 7px;
   height: 7px;
-  background: var(--teal-bright, #2dd4bf);
+  background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--teal-bright, #2dd4bf);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
 .about-hero__title {
@@ -135,13 +139,13 @@
   left: 20px;
   right: 20px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--teal-bright, #2dd4bf), transparent);
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
   opacity: 0.5;
 }
 
 .about-stat-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(45, 212, 191, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .about-stat-card__val {
@@ -157,7 +161,7 @@
 
 .about-stat-card__unit {
   font-size: 1.15rem;
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
   font-weight: 700;
 }
 
@@ -307,7 +311,7 @@
 }
 
 .about-section-header .about-kicker {
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
 }
 
 .about-section-header .about-heading {
@@ -343,13 +347,13 @@
 
 .timeline-btn:hover {
   background: rgba(30, 41, 59, 0.8);
-  border-color: rgba(45, 212, 191, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .timeline-btn--active {
-  background: linear-gradient(145deg, rgba(14, 165, 233, 0.15) 0%, rgba(45, 212, 191, 0.15) 100%);
-  border-color: var(--teal-bright, #2dd4bf);
-  box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 .timeline-btn__year {
@@ -362,7 +366,7 @@
 }
 
 .timeline-btn--active .timeline-btn__year {
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
 }
 
 .timeline-btn__badge {
@@ -404,7 +408,7 @@
 .timeline-card__badge-year {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
 }
 
 .timeline-card__badge-sub {
@@ -434,7 +438,7 @@
   gap: 6px;
   font-size: 0.775rem;
   font-weight: 700;
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
   background: rgba(45, 212, 191, 0.1);
   padding: 5px 12px;
   border-radius: 20px;
@@ -656,10 +660,10 @@
 }
 
 .facility-tab-btn--active {
-  background: var(--teal, #00897b);
-  border-color: var(--teal-bright, #2dd4bf);
-  color: #ffffff;
-  box-shadow: 0 0 14px rgba(45, 212, 191, 0.3);
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #09090b;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.2);
 }
 
 .facility-stage {
@@ -682,7 +686,7 @@
 
 .facility-stage__highlight {
   display: inline-block;
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
   font-weight: 600;
@@ -711,13 +715,13 @@
 }
 
 .facility-spec-icon {
-  color: var(--teal-bright, #2dd4bf);
+  color: var(--teal-bright, #ffffff);
 }
 
 /* Facility Visual Graphic */
 .facility-graphic {
-  background: #060a12;
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 2rem;
   display: flex;
@@ -734,7 +738,7 @@
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(circle at center, rgba(45, 212, 191, 0.15) 1px, transparent 1px);
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 18px 18px;
   opacity: 0.6;
 }
@@ -743,11 +747,11 @@
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: var(--teal-bright, #2dd4bf);
-  background: rgba(45, 212, 191, 0.1);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
   padding: 6px 14px;
   border-radius: 20px;
-  border: 1px solid rgba(45, 212, 191, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 1rem;
   position: relative;
   z-index: 2;
@@ -756,7 +760,8 @@
 /* ── B2B CALL TO ACTION BANNER ── */
 .about-cta {
   padding: 5.5rem 0;
-  background: linear-gradient(135deg, #0b1320 0%, #004d40 100%);
+  background: #09090b;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
   position: relative;
 }

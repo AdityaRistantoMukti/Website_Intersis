@@ -155,7 +155,7 @@
 }
 
 .footer__link:hover {
-  color: #2DD4BF;
+  color: #FFFFFF;
   transform: translateX(4px);
 }
 
@@ -179,7 +179,7 @@
 .footer__contact-item svg {
   flex-shrink: 0;
   margin-top: 3px;
-  color: #00897B;
+  color: #A1A1AA;
 }
 
 .footer__contact-item a {
@@ -189,7 +189,7 @@
 }
 
 .footer__contact-item a:hover {
-  color: #2DD4BF;
+  color: #FFFFFF;
 }
 
 /* ── BOTTOM COPYRIGHT BAR ── */
@@ -220,7 +220,7 @@
 }
 
 .footer__meta-links .footer__link:hover {
-  color: #2DD4BF;
+  color: #FFFFFF;
   transform: none;
 }
 

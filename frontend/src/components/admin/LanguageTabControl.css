@@ -5,8 +5,8 @@
   flex-wrap: wrap;
   gap: 12px;
   padding: 10px 14px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(51, 65, 85, 0.45);
+  background: var(--adm-card-inner);
+  border: 1.5px solid var(--adm-border-visible);
   border-radius: 8px;
   margin-bottom: 18px;
 }
@@ -19,18 +19,18 @@
 
 .admin-lang-control__label {
   font-size: 0.8125rem;
-  font-weight: 600;
-  color: #94a3b8;
+  font-weight: 700;
+  color: var(--adm-muted);
   letter-spacing: 0.02em;
 }
 
 .admin-lang-control__tabs {
   display: inline-flex;
   align-items: center;
-  background: #09101d;
+  background: var(--adm-input-bg);
   padding: 3px;
   border-radius: 6px;
-  border: 1px solid #1e293b;
+  border: 1.5px solid var(--adm-border-visible);
   gap: 2px;
 }
 
@@ -42,39 +42,41 @@
   border-radius: 4px;
   background: transparent;
   border: none;
-  color: #64748b;
+  color: var(--adm-muted);
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .admin-lang-pill:hover {
-  color: #e2e8f0;
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--adm-text);
+  background: var(--adm-hover);
 }
 
 .admin-lang-pill--active {
-  background: #1e293b;
-  color: #2dd4bf;
-  font-weight: 600;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: var(--adm-accent);
+  color: var(--adm-accent-text);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .admin-lang-code {
   display: inline-block;
-  padding: 1px 4px;
+  padding: 1px 5px;
   font-size: 0.6875rem;
-  font-weight: 700;
+  font-weight: 800;
   font-family: monospace;
-  background: rgba(45, 212, 191, 0.1);
-  color: #2dd4bf;
+  background: var(--adm-tag-bg);
+  color: var(--adm-tag-text);
   border-radius: 3px;
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  border: 1px solid var(--adm-border);
 }
 
 .admin-lang-pill--active .admin-lang-code {
-  background: rgba(45, 212, 191, 0.2);
+  background: var(--adm-bg);
+  color: var(--adm-text);
+  border-color: var(--adm-border-visible);
 }
 
 .admin-lang-name {
@@ -85,24 +87,23 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
-  background: rgba(45, 212, 191, 0.08);
-  border: 1px solid rgba(45, 212, 191, 0.3);
-  color: #2dd4bf;
+  background: var(--adm-card-inner);
+  border: 1.5px solid var(--adm-border-visible);
+  color: var(--adm-text);
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .admin-translate-btn:hover:not(:disabled) {
-  background: rgba(45, 212, 191, 0.18);
-  border-color: #2dd4bf;
-  color: #ffffff;
+  background: var(--adm-hover);
+  border-color: var(--adm-text);
 }
 
 .admin-translate-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }

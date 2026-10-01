@@ -2,11 +2,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-teal: #00897B;
-  --color-teal-dark: #005F56;
-  --color-teal-light: #26A69A;
-  --color-teal-pale: #E0F2F1;
-  --color-teal-glow: rgba(0, 137, 123, 0.3);
+  --color-teal: #18181b;
+  --color-teal-dark: #09090b;
+  --color-teal-light: #71717a;
+  --color-teal-pale: #f4f4f5;
+  --color-teal-glow: rgba(255, 255, 255, 0.12);
 
   --color-isa-red: #E31E24;
   --color-isa-red-dark: #B01419;
@@ -26,12 +26,13 @@
 
 /* ── CSS VARIABLES ── */
 :root {
-  /* GPT Primary — Teal */
-  --teal:          #00897B;
-  --teal-dark:     #005F56;
-  --teal-light:    #26A69A;
-  --teal-pale:     #E0F2F1;
-  --teal-glow:     rgba(0, 137, 123, 0.3);
+  /* GPT Primary — Monochrome High Contrast */
+  --teal:          #18181b;
+  --teal-dark:     #09090b;
+  --teal-light:    #71717a;
+  --teal-pale:     #f4f4f5;
+  --teal-glow:     rgba(255, 255, 255, 0.12);
+  --teal-bright:   #ffffff;
 
   /* ISA Parent Accent — Red */
   --isa-red:       #E31E24;
@@ -39,31 +40,31 @@
   --isa-red-pale:  #FDE8E8;
 
   /* Professional Dark */
-  --dark:          #0D1117;
-  --dark-card:     #161B22;
-  --dark-mid:      #21262D;
-  --dark-border:   #30363D;
+  --dark:          #09090b;
+  --dark-card:     #18181b;
+  --dark-mid:      #202024;
+  --dark-border:   #27272a;
 
   /* Neutrals */
   --white:         #FFFFFF;
-  --bg:            #F6F8FA;
-  --surface:       #FFFFFF;
-  --gray-100:      #F0F6FF;
-  --gray-200:      #EAEEF2;
-  --gray-400:      #8B949E;
-  --gray-600:      #57606A;
-  --text:          #1C2128;
-  --text-muted:    #57606A;
+  --bg:            #09090b;
+  --surface:       #18181b;
+  --gray-100:      #121215;
+  --gray-200:      #27272a;
+  --gray-400:      #a1a1aa;
+  --gray-600:      #e4e4e7;
+  --text:          #fafafa;
+  --text-muted:    #a1a1aa;
 
   /* Accent — Gold */
   --gold:          #D4A017;
   --gold-light:    #F5C842;
 
   /* Functional */
-  --success:       #10B981;
+  --success:       #ffffff;
   --warning:       #F59E0B;
   --danger:        #EF4444;
-  --info:          #3B82F6;
+  --info:          #94a3b8;
 
   /* Typography */
   --font-heading:  'Poppins', sans-serif;
@@ -90,11 +91,11 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow:     0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
-  --shadow-md:  0 10px 15px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.05);
-  --shadow-lg:  0 20px 25px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.04);
-  --shadow-teal: 0 8px 25px rgba(0, 137, 123, 0.25);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.1);
+  --shadow:     0 4px 6px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.1);
+  --shadow-md:  0 10px 15px rgba(0,0,0,.25), 0 4px 6px rgba(0,0,0,.15);
+  --shadow-lg:  0 20px 25px rgba(0,0,0,.35), 0 10px 10px rgba(0,0,0,.15);
+  --shadow-teal: 0 8px 25px rgba(0, 0, 0, 0.2);
 
   /* Transitions */
   --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -103,27 +104,39 @@
 
 /* ── THEME OVERRIDES (Dark & Light) ── */
 [data-theme="dark"] {
-  --bg:            #0B1320;
-  --surface:       #111E33;
-  --gray-100:      #16243B;
-  --gray-200:      #1E2D44;
-  --gray-400:      #94A3B8;
-  --gray-600:      #CBD5E1;
-  --text:          #F8FAFC;
-  --text-muted:    #94A3B8;
-  --dark-border:   #1E2D44;
+  --bg:            #09090b;
+  --surface:       #121215;
+  --gray-100:      #18181b;
+  --gray-200:      #27272a;
+  --gray-400:      #a1a1aa;
+  --gray-600:      #e4e4e7;
+  --text:          #fafafa;
+  --text-muted:    #a1a1aa;
+  --dark-border:   #27272a;
+  --teal:          #ffffff;
+  --teal-dark:     #e4e4e7;
+  --teal-light:    #a1a1aa;
+  --teal-pale:     #27272a;
+  --teal-glow:     rgba(255, 255, 255, 0.15);
+  --teal-bright:   #ffffff;
 }
 
 [data-theme="light"] {
-  --bg:            #F8FAFC;
-  --surface:       #FFFFFF;
-  --gray-100:      #F0F4F8;
-  --gray-200:      #E2E8F0;
-  --gray-400:      #94A3B8;
-  --gray-600:      #64748B;
-  --text:          #0F172A;
-  --text-muted:    #475569;
-  --dark-border:   #E2E8F0;
+  --bg:            #f4f4f5;
+  --surface:       #ffffff;
+  --gray-100:      #f4f4f5;
+  --gray-200:      #e4e4e7;
+  --gray-400:      #71717a;
+  --gray-600:      #52525b;
+  --text:          #09090b;
+  --text-muted:    #52525b;
+  --dark-border:   #cbd5e1;
+  --teal:          #09090b;
+  --teal-dark:     #18181b;
+  --teal-light:    #52525b;
+  --teal-pale:     #e4e4e7;
+  --teal-glow:     rgba(0, 0, 0, 0.08);
+  --teal-bright:   #09090b;
 }
 
 /* ── RESET & BASE ── */

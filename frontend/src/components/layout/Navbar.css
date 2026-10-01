@@ -117,8 +117,8 @@
 
 .navbar__link--active {
   color: #FFFFFF;
-  background: rgba(0, 137, 123, 0.25);
-  border: 1px solid rgba(0, 137, 123, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   font-weight: 600;
 }
 
@@ -175,8 +175,8 @@
 
 .theme-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(45, 212, 191, 0.4);
-  color: var(--teal-bright, #2DD4BF);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
   transform: translateY(-1px);
 }
 
@@ -250,8 +250,8 @@
 }
 
 .lang-switcher__option--active {
-  background: rgba(0, 137, 123, 0.2);
-  color: #2DD4BF;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
   font-weight: 600;
 }
 
@@ -366,6 +366,6 @@
   .navbar__mobile-link:hover,
   .navbar__mobile-link--active {
     color: #FFFFFF;
-    background: rgba(0, 137, 123, 0.22);
+    background: rgba(255, 255, 255, 0.12);
   }
 }

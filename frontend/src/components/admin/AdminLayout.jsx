@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import {
@@ -25,6 +25,8 @@ import {
   ChevronDown,
   User,
   Menu,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import './AdminLayout.css';
 
@@ -34,6 +36,20 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
+  // Dark & Light Mode State
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('gpt-theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('gpt-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   // Change Password Modal
   const [isPassModalOpen, setIsPassModalOpen] = useState(false);
@@ -209,10 +225,22 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
           </div>
 
           <div className="admin-header-right">
+            {/* Dark & Light Theme Switcher */}
+            <button
+              type="button"
+              className="admin-theme-toggle-btn"
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Ganti ke Mode Terang (Light Mode)' : 'Ganti ke Mode Gelap (Dark Mode)'}
+              aria-label="Toggle dark/light mode"
+            >
+              {theme === 'dark' ? <Sun size={15} strokeWidth={2} /> : <Moon size={15} strokeWidth={2} />}
+              <span className="admin-theme-toggle-label">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+            </button>
+
             {/* Server Online Badge */}
             <span className="admin-status-indicator" title="Backend Express connected on port 3000">
               <span className="admin-status-dot" />
-              <span>Backend API Aktif</span>
+              <span>API Aktif</span>
             </span>
 
             {/* Direct Link to Public Landing Page */}
@@ -247,10 +275,10 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
                     right: 0,
                     top: '115%',
                     width: '210px',
-                    background: '#0b1320',
-                    border: '1px solid #334155',
-                    borderRadius: '10px',
-                    boxShadow: '0 10px 25px -5px rgba(0,0,0,0.5)',
+                    background: 'var(--adm-card)',
+                    border: '1.5px solid var(--adm-border-visible)',
+                    borderRadius: '8px',
+                    boxShadow: 'var(--adm-shadow)',
                     padding: '8px',
                     zIndex: 100,
                     display: 'flex',
@@ -258,9 +286,9 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
                     gap: '4px',
                   }}
                 >
-                  <div style={{ padding: '6px 10px', borderBottom: '1px solid #1e293b', marginBottom: '4px' }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#f1f5f9' }}>{user?.name}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>{user?.email}</div>
+                  <div style={{ padding: '6px 10px', borderBottom: '1px solid var(--adm-border)', marginBottom: '4px' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--adm-text)' }}>{user?.name}</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--adm-muted)' }}>{user?.email}</div>
                   </div>
 
                   <button

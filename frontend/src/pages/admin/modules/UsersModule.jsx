@@ -172,7 +172,7 @@ export default function UsersModule() {
                 {users.map((u) => {
                   const isSelf = u.id === currentUser.id;
                   return (
-                    <tr key={u.id} style={{ background: isSelf ? 'rgba(45,212,191,0.05)' : undefined }}>
+                    <tr key={u.id} style={{ background: isSelf ? 'var(--adm-accent-bg)' : undefined }}>
                       <td>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <div className="admin-user-avatar" style={{ width: '28px', height: '28px', fontSize: '0.75rem' }}>
@@ -181,7 +181,7 @@ export default function UsersModule() {
                           <div>
                             <span style={{ fontWeight: 600 }}>{u.name}</span>
                             {isSelf && (
-                              <span style={{ marginLeft: '6px', fontSize: '0.7rem', color: '#2dd4bf', fontWeight: 700 }}>
+                              <span style={{ marginLeft: '6px', fontSize: '0.7rem', color: 'var(--adm-text)', fontWeight: 700 }}>
                                 (Anda)
                               </span>
                             )}

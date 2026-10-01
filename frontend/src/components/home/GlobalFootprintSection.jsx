@@ -220,15 +220,15 @@ export default function GlobalFootprintSection() {
               <defs>
                 {/* Gradient for Trade Arcs */}
                 <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#00897B" stopOpacity="0.8" />
-                  <stop offset="60%" stopColor="#0D9488" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#0284C7" stopOpacity="0.8" />
+                  <stop offset="0%" stopColor="#71717a" stopOpacity="0.8" />
+                  <stop offset="60%" stopColor="#a1a1aa" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#e4e4e7" stopOpacity="0.8" />
                 </linearGradient>
 
                 <linearGradient id="activeRouteGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#00897B" stopOpacity="1" />
-                  <stop offset="50%" stopColor="#14B8A6" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#38BDF8" stopOpacity="1" />
+                  <stop offset="0%" stopColor="#a1a1aa" stopOpacity="1" />
+                  <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#cbd5e1" stopOpacity="1" />
                 </linearGradient>
 
                 {/* Glow Filter */}

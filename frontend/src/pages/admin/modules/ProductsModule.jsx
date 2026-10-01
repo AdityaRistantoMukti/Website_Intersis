@@ -196,7 +196,7 @@ export default function ProductsModule() {
   return (
     <div className="admin-module">
       <div className="admin-card" style={{ marginBottom: '1.25rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--adm-text)', marginBottom: '0.35rem' }}>
           Manajemen Konten Halaman Produk & Solusi
         </h2>
         <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
@@ -283,7 +283,7 @@ export default function ProductsModule() {
               />
             </div>
 
-            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#e2e8f0', margin: '1.5rem 0 1rem' }}>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)', margin: '1.5rem 0 1rem' }}>
               4 Kartu Badge Kapabilitas
             </h4>
             <div className="admin-form-grid admin-form-grid-2">
@@ -396,7 +396,7 @@ export default function ProductsModule() {
                     padding: '1.15rem',
                   }}
                 >
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#2dd4bf', fontFamily: 'monospace' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--adm-text)', fontFamily: 'monospace' }}>
                     KEY: {cat.key}
                   </span>
                   <div className="admin-form-group" style={{ marginTop: '0.5rem' }}>
@@ -517,7 +517,7 @@ export default function ProductsModule() {
               />
             </div>
 
-            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#e2e8f0', margin: '1.5rem 0 1rem' }}>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)', margin: '1.5rem 0 1rem' }}>
               5 Langkah Alur Proses Rekayasa & Manufaktur
             </h4>
             <div className="admin-form-grid admin-form-grid-2">
@@ -531,7 +531,7 @@ export default function ProductsModule() {
                     padding: '1.15rem',
                   }}
                 >
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#2dd4bf', fontFamily: 'monospace' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--adm-text)', fontFamily: 'monospace' }}>
                     LANGKAH {st.step}
                   </span>
                   <div className="admin-form-group" style={{ marginTop: '0.5rem' }}>

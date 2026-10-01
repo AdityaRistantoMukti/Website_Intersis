@@ -42,12 +42,12 @@
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.775rem;
   font-weight: 700;
-  color: #2DD4BF;
+  color: #FFFFFF;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: var(--space-3);
-  background: rgba(45, 212, 191, 0.08);
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 4px 14px;
   border-radius: var(--radius-full);
 }
@@ -101,7 +101,7 @@
 }
 
 .lifecycle-node:focus-visible {
-  outline: 2px solid #2DD4BF;
+  outline: 2px solid #FFFFFF;
   border-radius: var(--radius-md);
 }
 
@@ -152,19 +152,19 @@
 }
 
 .lifecycle-node--active .lifecycle-node__circle {
-  background: #2DD4BF;
-  border-color: #2DD4BF;
-  box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.25), 0 0 24px rgba(45, 212, 191, 0.5);
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2), 0 0 24px rgba(255, 255, 255, 0.4);
   transform: scale(1.15);
 }
 
 .lifecycle-node--active .lifecycle-node__number {
-  color: #040810;
+  color: #09090b;
   font-weight: 900;
 }
 
 .lifecycle-node--active .lifecycle-node__label {
-  color: #2DD4BF;
+  color: #FFFFFF;
   font-weight: 800;
 }
 
@@ -172,7 +172,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1.5px solid #2DD4BF;
+  border: 1.5px solid #FFFFFF;
   animation: nodePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
   pointer-events: none;
 }
@@ -198,9 +198,9 @@
 
 .lifecycle-connector__fill {
   height: 100%;
-  background: linear-gradient(90deg, #10B981, #2DD4BF);
+  background: linear-gradient(90deg, #52525b, #FFFFFF);
   border-radius: var(--radius-full);
-  box-shadow: 0 0 10px rgba(45, 212, 191, 0.7);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -247,7 +247,7 @@
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #2DD4BF;
+  color: #FFFFFF;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -322,7 +322,7 @@
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.675rem;
   font-weight: 800;
-  color: #2DD4BF;
+  color: #FFFFFF;
   letter-spacing: 0.06em;
 }
 
@@ -472,15 +472,15 @@
 
 .supply-advantage-item:hover {
   background: rgba(15, 23, 42, 0.95);
-  border-color: rgba(45, 212, 191, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .supply-advantage-item__num {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #2DD4BF;
-  background: rgba(45, 212, 191, 0.12);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
   width: 26px;
   height: 26px;
   display: flex;
@@ -530,8 +530,8 @@
 
 .btn--outline-light:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: #2DD4BF;
-  color: #2DD4BF;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
 }
 
 /* ── RIGHT COLUMN: 3D-TILT HUD TERMINAL CARD ── */
@@ -669,9 +669,9 @@
 
 .stage-tag--active,
 .stage-tag--teal {
-  color: #2DD4BF;
-  border-color: rgba(45, 212, 191, 0.3);
-  background: rgba(45, 212, 191, 0.1);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .stage-tag--green {
@@ -736,8 +736,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #2DD4BF;
-  box-shadow: 0 0 6px #2DD4BF;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
 .card-footer-name {

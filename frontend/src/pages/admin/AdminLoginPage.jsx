@@ -171,7 +171,7 @@ export default function AdminLoginPage() {
               >
                 <div>
                   <div className="admin-quick-chip__role">
-                    <Shield size={14} color="#14b8a6" />
+                    <Shield size={14} color="#ffffff" />
                     <span>Administrator</span>
                   </div>
                   <div className="admin-quick-chip__email">admin@isa.co.id</div>

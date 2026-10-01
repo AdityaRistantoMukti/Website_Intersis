@@ -1412,7 +1412,8 @@
 [data-theme="dark"] .rfq-field input:focus,
 [data-theme="dark"] .rfq-field select:focus,
 [data-theme="dark"] .rfq-field textarea:focus {
-  border-color: var(--teal-bright, #2dd4bf);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
 }
 
 /* Redesigned RFQ Footer Button Layout */

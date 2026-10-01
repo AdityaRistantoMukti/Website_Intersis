@@ -298,7 +298,7 @@ export default function HomeModule() {
     <div className="admin-module">
       {/* Header Info */}
       <div className="admin-card" style={{ marginBottom: '1.25rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--adm-text)', marginBottom: '0.35rem' }}>
           Manajemen Konten Halaman Beranda (Home)
         </h2>
         <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
@@ -358,7 +358,7 @@ export default function HomeModule() {
 
           <div style={{ marginTop: '1.25rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#e2e8f0' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)' }}>
                 Slide Hero ({currentHero.slides?.length || 0} slide aktif dalam {currentHeroLang.toUpperCase()})
               </h4>
               <button
@@ -397,7 +397,7 @@ export default function HomeModule() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#2dd4bf' }}>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--adm-text)' }}>
                     Slide #{idx + 1}
                   </span>
                   {currentHero.slides.length > 1 && (
@@ -580,7 +580,7 @@ export default function HomeModule() {
                     padding: '1.25rem',
                   }}
                 >
-                  <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: '#2dd4bf', marginBottom: '0.75rem', textTransform: 'uppercase' }}>
+                  <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--adm-text)', marginBottom: '0.75rem', textTransform: 'uppercase' }}>
                     Metrik: {key}
                   </h4>
                   <div className="admin-form-grid admin-form-grid-2">
@@ -741,7 +741,7 @@ export default function HomeModule() {
               />
             </div>
 
-            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#e2e8f0', margin: '1.5rem 0 1rem' }}>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)', margin: '1.5rem 0 1rem' }}>
               4 Poin Highlight Produk Unggulan
             </h4>
             <div className="admin-form-grid admin-form-grid-2">
@@ -870,7 +870,7 @@ export default function HomeModule() {
                     padding: '1.15rem',
                   }}
                 >
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#2dd4bf', fontFamily: 'monospace' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--adm-text)', fontFamily: 'monospace' }}>
                     TAHAP {stage.step}
                   </span>
                   <div className="admin-form-group" style={{ marginTop: '0.5rem' }}>

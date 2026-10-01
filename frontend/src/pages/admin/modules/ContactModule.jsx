@@ -194,7 +194,7 @@ export default function ContactModule() {
   return (
     <div className="admin-module">
       <div className="admin-card" style={{ marginBottom: '1.25rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.35rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--adm-text)', marginBottom: '0.35rem' }}>
           Manajemen Konten Halaman Kontak & Google Maps
         </h2>
         <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>

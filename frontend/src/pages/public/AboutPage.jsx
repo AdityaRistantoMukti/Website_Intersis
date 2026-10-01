@@ -14,13 +14,13 @@ function FacilityGraphicView({ zoneId }) {
         <div className="facility-graphic__radar-grid" />
         <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
           {/* Cleanroom Chamber & Airflow Arrows */}
-          <rect x="15" y="15" width="110" height="70" rx="8" fill="#0B1320" stroke="#2DD4BF" strokeWidth="1.8" />
-          <line x1="25" y1="28" x2="115" y2="28" stroke="rgba(45, 212, 191, 0.4)" strokeWidth="1" strokeDasharray="3 3" />
+          <rect x="15" y="15" width="110" height="70" rx="8" fill="#18181b" stroke="#e4e4e7" strokeWidth="1.5" />
+          <line x1="25" y1="28" x2="115" y2="28" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" strokeDasharray="3 3" />
           {/* HEPA filter vents */}
-          <path d="M 35 15 L 35 25 M 70 15 L 70 25 M 105 15 L 105 25" stroke="#38BDF8" strokeWidth="2" />
+          <path d="M 35 15 L 35 25 M 70 15 L 70 25 M 105 15 L 105 25" stroke="#a1a1aa" strokeWidth="2" />
           {/* ESD Ground Icon */}
-          <circle cx="70" cy="55" r="14" fill="rgba(45, 212, 191, 0.15)" stroke="#2DD4BF" strokeWidth="1.5" />
-          <path d="M 70 47 L 70 63 M 64 53 L 76 53 M 66 59 L 74 59" stroke="#2DD4BF" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="70" cy="55" r="14" fill="rgba(255, 255, 255, 0.08)" stroke="#e4e4e7" strokeWidth="1.5" />
+          <path d="M 70 47 L 70 63 M 64 53 L 76 53 M 66 59 L 74 59" stroke="#e4e4e7" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
         <span className="facility-graphic__badge">HEPA 99.97% · ESD PROTECTED</span>
       </div>
@@ -33,14 +33,14 @@ function FacilityGraphicView({ zoneId }) {
         <div className="facility-graphic__radar-grid" />
         <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
           {/* SMT Feeder & Head */}
-          <rect x="20" y="55" width="100" height="30" rx="4" fill="#0F172A" stroke="#2DD4BF" strokeWidth="1.5" />
-          <path d="M 30 70 L 50 70 M 60 70 L 80 70 M 90 70 L 110 70" stroke="#38BDF8" strokeWidth="2.5" />
+          <rect x="20" y="55" width="100" height="30" rx="4" fill="#18181b" stroke="#e4e4e7" strokeWidth="1.5" />
+          <path d="M 30 70 L 50 70 M 60 70 L 80 70 M 90 70 L 110 70" stroke="#a1a1aa" strokeWidth="2.5" />
           {/* High-Speed Mounter Head Nozzles */}
-          <rect x="50" y="20" width="40" height="18" rx="3" fill="#0B1320" stroke="#2DD4BF" strokeWidth="1.5" />
-          <line x1="60" y1="38" x2="60" y2="52" stroke="#2DD4BF" strokeWidth="2" />
-          <line x1="80" y1="38" x2="80" y2="52" stroke="#2DD4BF" strokeWidth="2" />
-          <circle cx="60" cy="52" r="3" fill="#38BDF8" />
-          <circle cx="80" cy="52" r="3" fill="#38BDF8" />
+          <rect x="50" y="20" width="40" height="18" rx="3" fill="#27272a" stroke="#e4e4e7" strokeWidth="1.5" />
+          <line x1="60" y1="38" x2="60" y2="52" stroke="#e4e4e7" strokeWidth="2" />
+          <line x1="80" y1="38" x2="80" y2="52" stroke="#e4e4e7" strokeWidth="2" />
+          <circle cx="60" cy="52" r="3" fill="#ffffff" />
+          <circle cx="80" cy="52" r="3" fill="#ffffff" />
         </svg>
         <span className="facility-graphic__badge">DUAL-BEAM 80,000 CPH</span>
       </div>
@@ -53,13 +53,13 @@ function FacilityGraphicView({ zoneId }) {
         <div className="facility-graphic__radar-grid" />
         <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
           {/* 3D Optical Scanner Beam */}
-          <polygon points="70,18 35,70 105,70" fill="rgba(45, 212, 191, 0.12)" stroke="rgba(45, 212, 191, 0.4)" strokeWidth="1" strokeDasharray="3 2" />
-          <circle cx="70" cy="18" r="6" fill="#0B1320" stroke="#2DD4BF" strokeWidth="2" />
+          <polygon points="70,18 35,70 105,70" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1" strokeDasharray="3 2" />
+          <circle cx="70" cy="18" r="6" fill="#18181b" stroke="#e4e4e7" strokeWidth="2" />
           {/* PCB Surface */}
-          <rect x="25" y="70" width="90" height="12" rx="2" fill="#0F172A" stroke="#38BDF8" strokeWidth="1.5" />
-          <circle cx="50" cy="76" r="2.5" fill="#2DD4BF" />
-          <circle cx="70" cy="76" r="2.5" fill="#2DD4BF" />
-          <circle cx="90" cy="76" r="2.5" fill="#2DD4BF" />
+          <rect x="25" y="70" width="90" height="12" rx="2" fill="#27272a" stroke="#a1a1aa" strokeWidth="1.5" />
+          <circle cx="50" cy="76" r="2.5" fill="#ffffff" />
+          <circle cx="70" cy="76" r="2.5" fill="#ffffff" />
+          <circle cx="90" cy="76" r="2.5" fill="#ffffff" />
         </svg>
         <span className="facility-graphic__badge">3D AOI & INLINE X-RAY</span>
       </div>
@@ -72,10 +72,10 @@ function FacilityGraphicView({ zoneId }) {
       <div className="facility-graphic__radar-grid" />
       <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
         {/* CNC / Jig Fixture */}
-        <rect x="25" y="20" width="90" height="60" rx="6" fill="#0F172A" stroke="#2DD4BF" strokeWidth="1.5" />
+        <rect x="25" y="20" width="90" height="60" rx="6" fill="#18181b" stroke="#e4e4e7" strokeWidth="1.5" />
         {/* Test probes */}
-        <path d="M 45 40 L 45 60 M 60 35 L 60 60 M 75 40 L 75 60 M 90 35 L 90 60" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" />
-        <rect x="40" y="60" width="55" height="10" rx="2" fill="#0B1320" stroke="rgba(45, 212, 191, 0.6)" strokeWidth="1" />
+        <path d="M 45 40 L 45 60 M 60 35 L 60 60 M 75 40 L 75 60 M 90 35 L 90 60" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" />
+        <rect x="40" y="60" width="55" height="10" rx="2" fill="#27272a" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
       </svg>
       <span className="facility-graphic__badge">ICT / FCT TEST FIXTURES</span>
     </div>

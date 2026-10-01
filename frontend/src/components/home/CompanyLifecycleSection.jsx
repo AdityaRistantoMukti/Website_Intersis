@@ -13,18 +13,18 @@ function StageVisual({ stageIndex }) {
           {/* Background Technical Grid */}
           <defs>
             <pattern id="cadGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(45, 212, 191, 0.08)" strokeWidth="0.8" />
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="0.8" />
             </pattern>
             <linearGradient id="traceGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2DD4BF" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#2DD4BF" stopOpacity="1" />
-              <stop offset="100%" stopColor="#0EA5E9" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="#FFFFFF" stopOpacity="1" />
+              <stop offset="100%" stopColor="#94A3B8" stopOpacity="0.2" />
             </linearGradient>
           </defs>
           <rect width="100%" height="100%" fill="url(#cadGrid)" />
 
           {/* Circuit Traces */}
-          <g className="cad-traces" stroke="rgba(45, 212, 191, 0.4)" strokeWidth="1.8" fill="none">
+          <g className="cad-traces" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1.8" fill="none">
             <path d="M 40 40 L 120 40 L 150 70 L 150 110" />
             <path d="M 40 80 L 100 80 L 130 110 L 150 110" />
             <path d="M 40 160 L 110 160 L 140 130 L 150 130" />
@@ -37,26 +37,26 @@ function StageVisual({ stageIndex }) {
           </g>
 
           {/* Animated Electron Energy Pulses */}
-          <circle cx="120" cy="40" r="3" fill="#2DD4BF" className="cad-pulse cad-pulse--1" />
-          <circle cx="100" cy="80" r="3" fill="#2DD4BF" className="cad-pulse cad-pulse--2" />
-          <circle cx="280" cy="70" r="3" fill="#38BDF8" className="cad-pulse cad-pulse--3" />
-          <circle cx="290" cy="150" r="3" fill="#38BDF8" className="cad-pulse cad-pulse--4" />
+          <circle cx="120" cy="40" r="3" fill="#FFFFFF" className="cad-pulse cad-pulse--1" />
+          <circle cx="100" cy="80" r="3" fill="#FFFFFF" className="cad-pulse cad-pulse--2" />
+          <circle cx="280" cy="70" r="3" fill="#CBD5E1" className="cad-pulse cad-pulse--3" />
+          <circle cx="290" cy="150" r="3" fill="#CBD5E1" className="cad-pulse cad-pulse--4" />
 
           {/* Central MCU Processor */}
           <g transform="translate(150, 70)">
-            <rect x="0" y="0" width="100" height="100" rx="8" fill="#0B1320" stroke="#2DD4BF" strokeWidth="2" />
-            <rect x="12" y="12" width="76" height="76" rx="4" fill="#0F1B2D" stroke="rgba(45, 212, 191, 0.3)" strokeWidth="1" />
+            <rect x="0" y="0" width="100" height="100" rx="8" fill="#18181b" stroke="#FFFFFF" strokeWidth="2" />
+            <rect x="12" y="12" width="76" height="76" rx="4" fill="#27272a" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1" />
             <text x="50" y="44" fill="#FFFFFF" fontSize="11" fontWeight="800" textAnchor="middle" letterSpacing="0.08em">GPT-CORE</text>
-            <text x="50" y="60" fill="#2DD4BF" fontSize="9" fontWeight="700" textAnchor="middle" letterSpacing="0.05em">64-BIT DSP</text>
-            <text x="50" y="74" fill="rgba(255,255,255,0.5)" fontSize="7" textAnchor="middle">AUTONOMOUS</text>
+            <text x="50" y="60" fill="#FFFFFF" fontSize="9" fontWeight="700" textAnchor="middle" letterSpacing="0.05em">64-BIT DSP</text>
+            <text x="50" y="74" fill="rgba(255,255,255,0.7)" fontSize="7" textAnchor="middle">AUTONOMOUS</text>
 
             {/* Micro Pins */}
             {[10, 25, 40, 55, 70, 85].map((pos) => (
               <g key={pos}>
-                <rect x={pos - 3} y="-5" width="6" height="5" fill="#2DD4BF" />
-                <rect x={pos - 3} y="100" width="6" height="5" fill="#2DD4BF" />
-                <rect x="-5" y={pos - 3} width="5" height="6" fill="#2DD4BF" />
-                <rect x="100" y={pos - 3} width="5" height="6" fill="#2DD4BF" />
+                <rect x={pos - 3} y="-5" width="6" height="5" fill="#E4E4E7" />
+                <rect x={pos - 3} y="100" width="6" height="5" fill="#E4E4E7" />
+                <rect x="-5" y={pos - 3} width="5" height="6" fill="#E4E4E7" />
+                <rect x="100" y={pos - 3} width="5" height="6" fill="#E4E4E7" />
               </g>
             ))}
           </g>
@@ -143,24 +143,24 @@ function StageVisual({ stageIndex }) {
 
           {/* Feeder Tape Reels */}
           {[60, 95, 130, 165, 200, 235, 270, 305, 340].map((x) => (
-            <circle key={x} cx={x} cy="50" r="9" fill="#1E293B" stroke="#38BDF8" strokeWidth="1.2" />
+            <circle key={x} cx={x} cy="50" r="9" fill="#18181b" stroke="#CBD5E1" strokeWidth="1.2" />
           ))}
 
           {/* PCB Panel in Staging */}
-          <rect x="80" y="90" width="240" height="80" rx="4" fill="#064E3B" stroke="#10B981" strokeWidth="1.5" />
+          <rect x="80" y="90" width="240" height="80" rx="4" fill="#18181b" stroke="#FFFFFF" strokeWidth="1.5" />
           {/* Array of placed components */}
           {[100, 130, 160, 190, 220, 250, 280].map((x) => (
             <g key={x}>
-              <rect x={x} y="105" width="16" height="12" rx="1.5" fill="#0F172A" stroke="#2DD4BF" strokeWidth="1" />
-              <rect x={x} y="130" width="16" height="18" rx="2" fill="#1E293B" stroke="#94A3B8" strokeWidth="1" />
+              <rect x={x} y="105" width="16" height="12" rx="1.5" fill="#27272a" stroke="#FFFFFF" strokeWidth="1" />
+              <rect x={x} y="130" width="16" height="18" rx="2" fill="#27272a" stroke="#94A3B8" strokeWidth="1" />
             </g>
           ))}
 
           {/* SMT Placement Head Gantry (Moving Assembly) */}
           <g className="smt-head">
-            <line x1="175" y1="20" x2="175" y2="120" stroke="#38BDF8" strokeWidth="2.5" />
-            <rect x="155" y="65" width="40" height="30" rx="4" fill="#0B1320" stroke="#38BDF8" strokeWidth="2" />
-            <polygon points="170,95 180,95 175,115" fill="#38BDF8" />
+            <line x1="175" y1="20" x2="175" y2="120" stroke="#CBD5E1" strokeWidth="2.5" />
+            <rect x="155" y="65" width="40" height="30" rx="4" fill="#18181b" stroke="#CBD5E1" strokeWidth="2" />
+            <polygon points="170,95 180,95 175,115" fill="#CBD5E1" />
             <circle cx="175" cy="115" r="4" fill="#F8FAFC" className="smt-sparkle" />
           </g>
 
@@ -187,35 +187,35 @@ function StageVisual({ stageIndex }) {
       <svg viewBox="0 0 400 240" className="stage-svg" aria-label="Batam to Singapore Maritime Corridor">
         <defs>
           <radialGradient id="radarSweep" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#2DD4BF" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#2DD4BF" stopOpacity="0" />
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
           </radialGradient>
         </defs>
 
         {/* Radar Rings */}
-        <circle cx="200" cy="120" r="100" fill="none" stroke="rgba(45, 212, 191, 0.12)" strokeWidth="1" />
-        <circle cx="200" cy="120" r="65" fill="none" stroke="rgba(45, 212, 191, 0.18)" strokeWidth="1" />
-        <circle cx="200" cy="120" r="30" fill="none" stroke="rgba(45, 212, 191, 0.25)" strokeWidth="1" />
-        <line x1="200" y1="10" x2="200" y2="230" stroke="rgba(45, 212, 191, 0.1)" strokeWidth="1" />
-        <line x1="90" y1="120" x2="310" y2="120" stroke="rgba(45, 212, 191, 0.1)" strokeWidth="1" />
+        <circle cx="200" cy="120" r="100" fill="none" stroke="rgba(255, 255, 255, 0.12)" strokeWidth="1" />
+        <circle cx="200" cy="120" r="65" fill="none" stroke="rgba(255, 255, 255, 0.18)" strokeWidth="1" />
+        <circle cx="200" cy="120" r="30" fill="none" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" />
+        <line x1="200" y1="10" x2="200" y2="230" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="1" />
+        <line x1="90" y1="120" x2="310" y2="120" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="1" />
 
         {/* Trade Route Vector (Batam -> Singapore) */}
-        <path d="M 120 160 Q 180 110 270 70" fill="none" stroke="#2DD4BF" strokeWidth="2.5" strokeDasharray="5 4" className="radar-route" />
+        <path d="M 120 160 Q 180 110 270 70" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeDasharray="5 4" className="radar-route" />
 
         {/* Batam FTZ Node */}
         <g transform="translate(120, 160)">
-          <circle cx="0" cy="0" r="8" fill="#0B1320" stroke="#2DD4BF" strokeWidth="2" />
-          <circle cx="0" cy="0" r="4" fill="#2DD4BF" className="radar-ping" />
+          <circle cx="0" cy="0" r="8" fill="#18181b" stroke="#FFFFFF" strokeWidth="2" />
+          <circle cx="0" cy="0" r="4" fill="#FFFFFF" className="radar-ping" />
           <text x="-12" y="22" fill="#F8FAFC" fontSize="10" fontWeight="800">BATAM FTZ</text>
-          <text x="-12" y="33" fill="#2DD4BF" fontSize="7.5" fontWeight="600" fontFamily="monospace">1.12° N, 104.05° E</text>
+          <text x="-12" y="33" fill="#E4E4E7" fontSize="7.5" fontWeight="600" fontFamily="monospace">1.12° N, 104.05° E</text>
         </g>
 
         {/* Singapore Transshipment Port Node */}
         <g transform="translate(270, 70)">
-          <circle cx="0" cy="0" r="8" fill="#0B1320" stroke="#38BDF8" strokeWidth="2" />
-          <circle cx="0" cy="0" r="4" fill="#38BDF8" />
+          <circle cx="0" cy="0" r="8" fill="#18181b" stroke="#CBD5E1" strokeWidth="2" />
+          <circle cx="0" cy="0" r="4" fill="#CBD5E1" />
           <text x="12" y="3" fill="#F8FAFC" fontSize="10" fontWeight="800">SINGAPORE PORT</text>
-          <text x="12" y="14" fill="#38BDF8" fontSize="7.5" fontWeight="600" fontFamily="monospace">45-MIN TRANSIT</text>
+          <text x="12" y="14" fill="#CBD5E1" fontSize="7.5" fontWeight="600" fontFamily="monospace">45-MIN TRANSIT</text>
         </g>
 
         {/* Fast Cargo Ship Icon */}
@@ -225,10 +225,10 @@ function StageVisual({ stageIndex }) {
 
         {/* C/O Indonesia Seal Stamp */}
         <g transform="translate(280, 140)">
-          <circle cx="35" cy="35" r="32" fill="rgba(45, 212, 191, 0.1)" stroke="#2DD4BF" strokeWidth="1.5" />
-          <circle cx="35" cy="35" r="27" fill="none" stroke="rgba(45, 212, 191, 0.4)" strokeWidth="1" strokeDasharray="3 2" />
+          <circle cx="35" cy="35" r="32" fill="rgba(255, 255, 255, 0.1)" stroke="#FFFFFF" strokeWidth="1.5" />
+          <circle cx="35" cy="35" r="27" fill="none" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" strokeDasharray="3 2" />
           <text x="35" y="30" fill="#F8FAFC" fontSize="8" fontWeight="800" textAnchor="middle">C/O INDONESIA</text>
-          <text x="35" y="42" fill="#2DD4BF" fontSize="7" fontWeight="700" textAnchor="middle">0% TARIFF HUB</text>
+          <text x="35" y="42" fill="#FFFFFF" fontSize="7" fontWeight="700" textAnchor="middle">0% TARIFF HUB</text>
         </g>
       </svg>
 

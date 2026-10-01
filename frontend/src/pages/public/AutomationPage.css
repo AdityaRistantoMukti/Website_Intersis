@@ -582,7 +582,7 @@
 
 .auto-overview-card__tag {
   font-size: 0.72rem;
-  color: #2dd4bf;
+  color: #ffffff;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -605,7 +605,7 @@
 }
 
 .auto-overview-card:hover .auto-overview-card__cta {
-  color: #2dd4bf;
+  color: #ffffff;
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
