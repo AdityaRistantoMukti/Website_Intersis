@@ -16,6 +16,17 @@ import { translateContent } from '../../../lib/translator';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
 import LanguageTabControl from '../../../components/admin/LanguageTabControl';
 
+const AVAILABLE_ENDPOINTS = [
+  { value: '/contact', label: '/contact (Halaman Kontak & RFQ)' },
+  { value: '/products', label: '/products (Katalog Produk & Solusi)' },
+  { value: '/about', label: '/about (Tentang Kami & Profil Pabrik)' },
+  { value: '/automation', label: '/automation (Otomasi & Robotika Batam)' },
+  { value: '/gallery', label: '/gallery (Galeri Fasilitas & Lini SMT)' },
+  { value: '/career', label: '/career (Karir & Rekrutmen)' },
+  { value: '#products-catalog', label: '#products-catalog (Katalog di Beranda)' },
+  { value: '#stats', label: '#stats (Statistik Telemetri Beranda)' },
+];
+
 export default function HomeModule() {
   const { addToast } = useAdminAuth();
   const [activeSection, setActiveSection] = useState('hero');
@@ -474,10 +485,9 @@ export default function HomeModule() {
                   </div>
 
                   <div className="admin-form-group">
-                    <label className="admin-label">URL / Link Tombol</label>
-                    <input
-                      type="text"
-                      className="admin-input"
+                    <label className="admin-label">Halaman Tujuan (Endpoint)</label>
+                    <select
+                      className="admin-select"
                       value={slide.actionLink || '/contact'}
                       onChange={(e) => {
                         const val = e.target.value;
@@ -489,7 +499,11 @@ export default function HomeModule() {
                           return { ...prev, id: { ...prev.id, slides: copyId }, en: { ...prev.en, slides: copyEn } };
                         });
                       }}
-                    />
+                    >
+                      {AVAILABLE_ENDPOINTS.map((ep) => (
+                        <option key={ep.value} value={ep.value}>{ep.label}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -1113,10 +1127,9 @@ export default function HomeModule() {
               </div>
 
               <div className="admin-form-group">
-                <label className="admin-label">URL / Link Tombol</label>
-                <input
-                  type="text"
-                  className="admin-input"
+                <label className="admin-label">Halaman Tujuan (Endpoint)</label>
+                <select
+                  className="admin-select"
                   value={currentCta.buttonLink || '/contact'}
                   onChange={(e) => {
                     const val = e.target.value;
@@ -1126,7 +1139,11 @@ export default function HomeModule() {
                       en: { ...prev.en, buttonLink: val },
                     }));
                   }}
-                />
+                >
+                  {AVAILABLE_ENDPOINTS.map((ep) => (
+                    <option key={ep.value} value={ep.value}>{ep.label}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>

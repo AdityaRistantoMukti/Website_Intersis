@@ -177,24 +177,6 @@ export default function ContactGoogleMap({ contact, isId = true }) {
           <span>{copied ? (isId ? 'Koordinat Tersalin!' : 'Copied!') : (isId ? 'Salin Koordinat' : 'Copy Coords')}</span>
         </button>
       </div>
-
-      {/* ── LOGISTICAL CONNECTIVITY STRIP ── */}
-      <div className="contact-gmap-meta">
-        <div className="contact-gmap-meta-item">
-          <span className="contact-gmap-meta-label">Batam FTZ:</span>
-          <span className="contact-gmap-meta-val">{isId ? '0% Bea Masuk' : '0% Import Duty'}</span>
-        </div>
-        <div className="contact-gmap-meta-sep">•</div>
-        <div className="contact-gmap-meta-item">
-          <span className="contact-gmap-meta-label">Ferry Port:</span>
-          <span className="contact-gmap-meta-val">~10 min (Singapore Link)</span>
-        </div>
-        <div className="contact-gmap-meta-sep">•</div>
-        <div className="contact-gmap-meta-item">
-          <span className="contact-gmap-meta-label">Airport (BTH):</span>
-          <span className="contact-gmap-meta-val">~15 min</span>
-        </div>
-      </div>
     </div>
   );
 }

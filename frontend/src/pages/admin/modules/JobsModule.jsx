@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
+import { translateContent } from '../../../lib/translator';
 import {
   Briefcase,
   Plus,
@@ -10,6 +11,9 @@ import {
   MapPin,
   ExternalLink,
   X,
+  Sparkles,
+  Globe,
+  Languages,
 } from 'lucide-react';
 
 export default function JobsModule() {
@@ -28,17 +32,23 @@ export default function JobsModule() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [modalLangTab, setModalLangTab] = useState('id');
+  const [translating, setTranslating] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
     title: '',
+    title_en: '',
     category_id: '',
-    employment_type: 'FullTime',
+    employment_type: 'Full Time',
     location: 'Batam FTZ Plant',
     status: 'published',
     description: '',
+    description_en: '',
     responsibilities: '',
+    responsibilities_en: '',
     requirements: '',
+    requirements_en: '',
     form_url: '',
   });
 
@@ -76,15 +86,20 @@ export default function JobsModule() {
 
   const handleOpenAdd = () => {
     setEditingJob(null);
+    setModalLangTab('id');
     setFormData({
       title: '',
+      title_en: '',
       category_id: categories[0]?.id || '',
-      employment_type: 'FullTime',
+      employment_type: 'Full Time',
       location: 'Batam FTZ Plant',
       status: 'published',
       description: '',
+      description_en: '',
       responsibilities: '',
+      responsibilities_en: '',
       requirements: '',
+      requirements_en: '',
       form_url: '',
     });
     setIsModalOpen(true);
@@ -95,20 +110,56 @@ export default function JobsModule() {
       const res = await api.get(`/admin/jobs/${job.id}`);
       const full = res.data?.data || job;
       setEditingJob(full);
+      setModalLangTab('id');
       setFormData({
         title: full.title || '',
+        title_en: full.title_en || '',
         category_id: full.category_id || '',
-        employment_type: full.employment_type || 'FullTime',
+        employment_type: full.employment_type || 'Full Time',
         location: full.location || '',
         status: full.status || 'published',
         description: full.description || '',
+        description_en: full.description_en || '',
         responsibilities: full.responsibilities || '',
+        responsibilities_en: full.responsibilities_en || '',
         requirements: full.requirements || '',
+        requirements_en: full.requirements_en || '',
         form_url: full.form_url || '',
       });
       setIsModalOpen(true);
     } catch (err) {
       addToast(extractErrorMessage(err), 'error');
+    }
+  };
+
+  const handleAutoTranslate = async () => {
+    if (!formData.title && !formData.description && !formData.requirements) {
+      addToast('Silakan isi informasi dalam Bahasa Indonesia terlebih dahulu sebelum menerjemahkan.', 'warning');
+      return;
+    }
+
+    try {
+      setTranslating(true);
+      const res = await translateContent({
+        title: formData.title,
+        description: formData.description,
+        responsibilities: formData.responsibilities,
+        requirements: formData.requirements,
+      });
+
+      setFormData((prev) => ({
+        ...prev,
+        title_en: res.title || prev.title_en,
+        description_en: res.description || prev.description_en,
+        responsibilities_en: res.responsibilities || prev.responsibilities_en,
+        requirements_en: res.requirements || prev.requirements_en,
+      }));
+      setModalLangTab('en');
+      addToast('Konten lowongan berhasil diterjemahkan otomatis ke Bahasa Inggris!', 'success');
+    } catch (err) {
+      addToast('Gagal menerjemahkan: ' + extractErrorMessage(err), 'error');
+    } finally {
+      setTranslating(false);
     }
   };
 
@@ -363,8 +414,8 @@ export default function JobsModule() {
                       value={formData.employment_type}
                       onChange={(e) => setFormData({ ...formData, employment_type: e.target.value })}
                     >
-                      <option value="FullTime">Full Time</option>
-                      <option value="PartTime">Part Time</option>
+                      <option value="Full Time">Full Time</option>
+                      <option value="Part Time">Part Time</option>
                       <option value="Internship">Internship (Magang)</option>
                       <option value="Contract">Kontrak</option>
                       <option value="OJT">On-the-Job Training (OJT)</option>
@@ -410,41 +461,189 @@ export default function JobsModule() {
                   </div>
                 </div>
 
-                {/* Description */}
-                <div className="admin-form-group">
-                  <label className="admin-label">Ringkasan Pekerjaan (Overview)</label>
-                  <textarea
-                    className="admin-textarea"
-                    rows="3"
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    placeholder="Gambaran umum tanggung jawab posisi..."
-                  />
+                {/* Language Switcher Tabs & Auto Translate Button */}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    background: 'var(--admin-card-bg, #111827)',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid var(--admin-border-color, #1e293b)',
+                    margin: '16px 0 14px',
+                    flexWrap: 'wrap',
+                    gap: '8px',
+                  }}
+                >
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setModalLangTab('id')}
+                      style={{
+                        padding: '6px 14px',
+                        borderRadius: '6px',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        border: '1px solid',
+                        cursor: 'pointer',
+                        background: modalLangTab === 'id' ? '#000000' : 'transparent',
+                        color: modalLangTab === 'id' ? '#ffffff' : '#94a3b8',
+                        borderColor: modalLangTab === 'id' ? '#000000' : 'var(--admin-border-color, #334155)',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      🇮🇩 Bahasa Indonesia (Utama)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setModalLangTab('en')}
+                      style={{
+                        padding: '6px 14px',
+                        borderRadius: '6px',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        border: '1px solid',
+                        cursor: 'pointer',
+                        background: modalLangTab === 'en' ? '#000000' : 'transparent',
+                        color: modalLangTab === 'en' ? '#ffffff' : '#94a3b8',
+                        borderColor: modalLangTab === 'en' ? '#000000' : 'var(--admin-border-color, #334155)',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      🇬🇧 English (Situs Global)
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleAutoTranslate}
+                    disabled={translating}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '6px 12px',
+                      fontSize: '0.78rem',
+                      fontWeight: 600,
+                      borderRadius: '6px',
+                      background: 'rgba(56, 189, 248, 0.12)',
+                      color: '#38bdf8',
+                      border: '1px solid rgba(56, 189, 248, 0.3)',
+                      cursor: translating ? 'not-allowed' : 'pointer',
+                    }}
+                  >
+                    <Sparkles size={14} />
+                    <span>{translating ? 'Menerjemahkan...' : 'Otomatis Translate ke English'}</span>
+                  </button>
                 </div>
 
-                {/* Responsibilities */}
-                <div className="admin-form-group">
-                  <label className="admin-label">Tanggung Jawab Utama (Responsibilities)</label>
-                  <textarea
-                    className="admin-textarea"
-                    rows="3"
-                    value={formData.responsibilities}
-                    onChange={(e) => setFormData({ ...formData, responsibilities: e.target.value })}
-                    placeholder="• Mengoperasikan lini SMT Yamaha&#10;• Melakukan kalibrasi feeder..."
-                  />
-                </div>
+                {modalLangTab === 'id' ? (
+                  <>
+                    {/* Title ID */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">
+                        Judul Posisi Lowongan (ID) <span style={{ color: '#ef4444' }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="admin-text-input"
+                        value={formData.title}
+                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                        placeholder="Contoh: Senior SMT Process Engineer / QA Inspector"
+                        required
+                      />
+                    </div>
 
-                {/* Requirements */}
-                <div className="admin-form-group">
-                  <label className="admin-label">Kualifikasi & Persyaratan (Requirements)</label>
-                  <textarea
-                    className="admin-textarea"
-                    rows="3"
-                    value={formData.requirements}
-                    onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
-                    placeholder="• Pendidikan min. D3/S1 Teknik Elektro&#10;• Pengalaman 2 tahun di industri manufaktur..."
-                  />
-                </div>
+                    {/* Description ID */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">Ringkasan Pekerjaan (Overview - ID)</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows="3"
+                        value={formData.description}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        placeholder="Gambaran umum tanggung jawab posisi..."
+                      />
+                    </div>
+
+                    {/* Responsibilities ID */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">Tanggung Jawab Utama (Responsibilities - ID)</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows="3"
+                        value={formData.responsibilities}
+                        onChange={(e) => setFormData({ ...formData, responsibilities: e.target.value })}
+                        placeholder="• Mengoperasikan lini SMT Yamaha&#10;• Melakukan kalibrasi feeder..."
+                      />
+                    </div>
+
+                    {/* Requirements ID */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">Kualifikasi & Persyaratan (Requirements - ID)</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows="3"
+                        value={formData.requirements}
+                        onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
+                        placeholder="• Pendidikan min. D3/S1 Teknik Elektro&#10;• Pengalaman 2 tahun di industri manufaktur..."
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Title EN */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">
+                        Job Position Title (EN) <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>(Ditampilkan saat pengunjung memilih bahasa English)</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="admin-text-input"
+                        value={formData.title_en}
+                        onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
+                        placeholder="e.g. Senior SMT Process Engineer / QA Inspector"
+                      />
+                    </div>
+
+                    {/* Description EN */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">Job Overview (EN)</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows="3"
+                        value={formData.description_en}
+                        onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
+                        placeholder="General overview of the position responsibilities..."
+                      />
+                    </div>
+
+                    {/* Responsibilities EN */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">Key Responsibilities (EN)</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows="3"
+                        value={formData.responsibilities_en}
+                        onChange={(e) => setFormData({ ...formData, responsibilities_en: e.target.value })}
+                        placeholder="• Operate Yamaha SMT high-speed lines&#10;• Perform feeder calibration..."
+                      />
+                    </div>
+
+                    {/* Requirements EN */}
+                    <div className="admin-form-group">
+                      <label className="admin-label">Qualifications & Requirements (EN)</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows="3"
+                        value={formData.requirements_en}
+                        onChange={(e) => setFormData({ ...formData, requirements_en: e.target.value })}
+                        placeholder="• Min. Diploma / Bachelor's in Electrical Engineering&#10;• 2 years experience in manufacturing..."
+                      />
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="admin-modal-footer">

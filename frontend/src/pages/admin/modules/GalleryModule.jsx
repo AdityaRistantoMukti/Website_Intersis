@@ -326,11 +326,14 @@ export default function GalleryModule() {
               className="admin-btn-secondary"
               style={{
                 fontSize: '0.78rem',
-                padding: '4px 10px',
-                borderRadius: '4px',
-                background: activeCategory === cat ? 'var(--adm-hover)' : 'transparent',
-                borderColor: activeCategory === cat ? 'var(--adm-teal)' : 'var(--adm-border)',
+                padding: '6px 12px',
+                borderRadius: '6px',
+                background: activeCategory === cat ? '#000000' : 'transparent',
+                borderColor: activeCategory === cat ? '#000000' : 'var(--adm-border)',
                 color: activeCategory === cat ? '#ffffff' : 'var(--adm-muted)',
+                fontWeight: activeCategory === cat ? 700 : 500,
+                boxShadow: activeCategory === cat ? '0 2px 6px rgba(0,0,0,0.2)' : 'none',
+                cursor: 'pointer',
               }}
               onClick={() => setActiveCategory(cat)}
             >
@@ -372,22 +375,6 @@ export default function GalleryModule() {
                       e.target.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80';
                     }}
                   />
-                  <span
-                    style={{
-                      position: 'absolute',
-                      top: '8px',
-                      left: '8px',
-                      background: 'rgba(9, 13, 22, 0.9)',
-                      color: 'var(--adm-teal)',
-                      fontSize: '0.7rem',
-                      fontWeight: 600,
-                      padding: '2px 6px',
-                      borderRadius: '3px',
-                      border: '1px solid var(--adm-border)',
-                    }}
-                  >
-                    {item.category || 'Fasilitas'}
-                  </span>
                 </div>
 
                 <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>

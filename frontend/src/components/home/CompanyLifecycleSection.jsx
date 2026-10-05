@@ -565,7 +565,7 @@ export default function CompanyLifecycleSection() {
                   <span className="card-footer-dot" />
                   <span className="card-footer-name">PT Global Philsonic Technologies</span>
                 </div>
-                <span className="card-footer-loc">Batam, Kepulauan Riau — Indonesia</span>
+                <span className="card-footer-loc">Batam, Kepulauan Riau, Indonesia</span>
               </div>
             </div>
           </div>

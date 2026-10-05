@@ -65,7 +65,7 @@ async function migrateEn() {
             },
             {
               title: "Solusi Cerdas Headunit, Audio DSP & Otomasi Batam",
-              subtitle: "Fasilitas cleanroom Class 100K terintegrasi di Batam Free Trade Zone — mitra Tier-1 perakitan OEM/ODM global.",
+              subtitle: "Fasilitas cleanroom Class 100K terintegrasi di Batam Free Trade Zone, mitra Tier-1 perakitan OEM/ODM global.",
               actionText: "Lihat Produk & Spesifikasi",
               actionLink: "/products"
             }
@@ -82,7 +82,7 @@ async function migrateEn() {
             },
             {
               title: "Smart Automotive Headunits, DSP Audio & Automation Batam",
-              subtitle: "Integrated Class 100K cleanroom facility in Batam Free Trade Zone — trusted global Tier-1 OEM/ODM partner.",
+              subtitle: "Integrated Class 100K cleanroom facility in Batam Free Trade Zone, trusted global Tier-1 OEM/ODM partner.",
               actionText: "Explore Products & Specs",
               actionLink: "/products"
             }

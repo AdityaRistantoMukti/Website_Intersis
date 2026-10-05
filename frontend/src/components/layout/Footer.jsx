@@ -18,9 +18,9 @@ export default function Footer() {
   const quickLinks = [
     { label: t('nav.home'),       to: '/' },
     { label: t('nav.about'),      to: '/about' },
+    { label: t('nav.products'),   to: '/products' },
     { label: t('nav.automation'), to: '/automation' },
     { label: t('nav.gallery'),    to: '/gallery' },
-    { label: t('nav.career'),     to: '/career' },
     { label: t('nav.contact'),    to: '/contact' },
   ];
 
@@ -111,7 +111,6 @@ export default function Footer() {
           </p>
           <div className="footer__meta-links">
             <Link to="/about" className="footer__link">{t('nav.about')}</Link>
-            <Link to="/career" className="footer__link">{t('nav.career')}</Link>
             <Link to="/contact" className="footer__link">{t('nav.contact')}</Link>
           </div>
         </div>

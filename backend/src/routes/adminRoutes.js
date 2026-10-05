@@ -34,6 +34,7 @@ const {
   getAdminBenefits, createBenefit, updateBenefit, deleteBenefit,
   getAdminPrograms, createProgram, updateProgram, deleteProgram,
   getAdminFaqs, createFaq, updateFaq, deleteFaq,
+  getAdminProducts, createProduct, updateProduct, deleteProduct,
   getActivityLogs,
 } = require('../controllers/admin/adminContentControllers');
 
@@ -109,5 +110,15 @@ router.delete('/faqs/:id', restrictTo('administrator', 'hrd', 'staff'), deleteFa
 
 // ─── AUDIT TRAIL / LOG AKTIVITAS (ADMINISTRATOR & HRD) ──────────────────────
 router.get('/logs', restrictTo('administrator', 'hrd'), getActivityLogs);
+
+// ─── TELEMETRY & RFQ INQUIRIES STATS ──────────────────────────────────────────
+const { getTelemetryStats } = require('../controllers/telemetryController');
+router.get('/telemetry', restrictTo('administrator', 'hrd', 'staff'), getTelemetryStats);
+
+// ─── MANAJEMEN PRODUK (CATALOG PRODUK GPT) ───────────────────────────────────
+router.get('/products',          getAdminProducts);
+router.post('/products',         restrictTo('administrator', 'hrd', 'staff'), upload.fields([{ name: 'image', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), createProduct);
+router.put('/products/:id',      restrictTo('administrator', 'hrd', 'staff'), upload.fields([{ name: 'image', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), updateProduct);
+router.delete('/products/:id',   restrictTo('administrator', 'hrd', 'staff'), deleteProduct);
 
 module.exports = router;

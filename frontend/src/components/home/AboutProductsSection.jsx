@@ -77,7 +77,7 @@ const PRODUCT_LINES = [
 
 const ABOUT_ID = `PT. Global Philsonic Technologies (GPT) adalah produsen perakitan audio dan video otomotif yang berlokasi di Kawasan Perdagangan Bebas Batam, Indonesia. Kami berkomitmen menghadirkan solusi inovatif, berkualitas tinggi, dan efisien biaya bagi setiap mitra bisnis kami.
 
-Dengan mengadopsi teknologi mutakhir bertaraf internasional, kami menyediakan layanan menyeluruh mulai dari desain, rekayasa, manufaktur, pengujian fungsional, hingga perakitan produk akhir — semuanya berorientasi pada kebutuhan spesifik pelanggan. Jaringan pemasok global kami yang telah terjalin lama memungkinkan kami menawarkan harga pengadaan terbaik di setiap proyek.
+Dengan mengadopsi teknologi mutakhir bertaraf internasional, kami menyediakan layanan menyeluruh mulai dari desain, rekayasa, manufaktur, pengujian fungsional, hingga perakitan produk akhir, semuanya berorientasi pada kebutuhan spesifik pelanggan. Jaringan pemasok global kami yang telah terjalin lama memungkinkan kami menawarkan harga pengadaan terbaik di setiap proyek.
 
 Kami adalah mitra terpercaya bagi perusahaan dari berbagai skala, dengan komitmen penuh untuk memberikan layanan, dukungan teknis, dan kualitas terbaik di setiap tahap kemitraan.`;
 
@@ -85,7 +85,7 @@ const ABOUT_EN = `PT. Global Philsonic Technologies (GPT) is a dedicated automot
 
 We focus on international advanced technologies and provide customer-oriented design, engineering, manufacturing, functional test, and finished product assembly services. Our global network of long-term suppliers allows us to offer the best possible procurement prices on every project.
 
-We are a trusted partner for companies of all sizes — committed to delivering the best possible service, technical support, and quality at every stage of the partnership.`;
+We are a trusted partner for companies of all sizes, committed to delivering the best possible service, technical support, and quality at every stage of the partnership.`;
 
 const STATS = [
   { value: '10+', label_id: 'Tahun Pengalaman', label_en: 'Years Experience' },
@@ -136,7 +136,7 @@ export default function AboutProductsSection() {
             ))}
           </div>
 
-          {/* Stats row — inline, no cards */}
+          {/* Stats row : inline, no cards */}
           <div className="aps-stats">
             {STATS.map((s, i) => (
               <div key={i} className="aps-stat">
@@ -215,7 +215,6 @@ export default function AboutProductsSection() {
                       </div>
                       {/* Info */}
                       <div className="aps-product-info">
-                        <code className="aps-product-sku">{line.sku}</code>
                         <p className="aps-product-spec">
                           {isId ? line.spec_id : line.spec_en}
                         </p>

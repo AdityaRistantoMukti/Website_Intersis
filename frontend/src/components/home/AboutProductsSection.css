@@ -431,6 +431,20 @@
     flex-wrap: wrap;
     gap: 1.25rem 2rem;
   }
+
+  .aps-section {
+    padding-top: clamp(3.5rem, 8vw, 5rem);
+    padding-bottom: clamp(3.5rem, 8vw, 5rem);
+  }
+
+  .aps-about .aps-overline {
+    margin-top: 1rem;
+  }
+
+  .aps-products {
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
 }
 
 @media (max-width: 600px) {

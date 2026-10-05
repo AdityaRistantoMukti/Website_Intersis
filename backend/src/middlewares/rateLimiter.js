@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
  */
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 menit
-  max: 150,
+  max: process.env.NODE_ENV === 'production' ? 150 : 1000, // lebih longgar saat development
   standardHeaders: true,
   legacyHeaders: false,
   message: {

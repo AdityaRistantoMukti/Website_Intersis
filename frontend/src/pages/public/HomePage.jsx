@@ -115,7 +115,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>PT. Global Philsonic Technologies — Automotive Electronics & Industrial Automation</title>
+        <title>PT. Global Philsonic Technologies | Automotive Electronics & Industrial Automation</title>
         <meta name="description" content="Leading OEM/ODM manufacturer in Batam Free Trade Zone. High-speed SMT assembly, automotive smart headunits, digital sound processors, dashcams, and automated testing jigs." />
       </Helmet>
 
@@ -190,14 +190,14 @@ export default function HomePage() {
 
                   <div className="hero__actions">
                     <a href="#products-catalog" className="btn btn--hero-primary btn--lg">
-                      {slide.ctaPrimary}
+                      {slide.ctaPrimary || slide.actionText || (lang === 'id' ? 'JELAJAHI KATALOG PRODUK' : 'EXPLORE PRODUCT CATALOG')}
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
                       </svg>
                     </a>
                     <Link to="/contact" className="btn btn--hero-secondary btn--lg">
-                      {slide.ctaSecondary}
+                      {slide.ctaSecondary || (lang === 'id' ? 'KONSULTASI TEKNIK OEM' : 'OEM TECHNICAL INQUIRY')}
                     </Link>
                   </div>
 
@@ -277,8 +277,8 @@ export default function HomePage() {
       <GlobalFootprintSection />
 
 
-      {/* ── CORE VALUES (from API - No AI Slop Badge) ── */}
-      {coreValues && coreValues.length > 0 && (
+      {/* ── CORE VALUES (from API) ── */}
+      {/* {coreValues && coreValues.length > 0 && (
         <section className="section core-values-section section--dark" id="values">
           <div className="container">
             <div className="section-header fade-up">
@@ -302,7 +302,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* ── B2B CTA BANNER (Clean Full-Width 2-Column Banner) ── */}
       <section className="cta-banner" id="cta">

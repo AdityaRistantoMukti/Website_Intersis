@@ -422,6 +422,36 @@ export default function ContactModule() {
           </div>
 
           <div style={{ marginTop: '1.25rem' }}>
+            {/* Tips Singkat Cara Mendapatkan Koordinat GPS & Link Maps */}
+            <div
+              style={{
+                background: 'var(--adm-card-inner, rgba(0, 0, 0, 0.03))',
+                border: '1px solid var(--adm-border-visible, var(--adm-border))',
+                borderRadius: '8px',
+                padding: '14px 16px',
+                marginBottom: '1.25rem',
+                fontSize: '0.85rem',
+                color: 'var(--adm-text)',
+                lineHeight: 1.6,
+              }}
+            >
+              <div style={{ fontWeight: 700, color: 'var(--adm-text)', marginBottom: '8px' }}>
+                Cara Cepat Mendapatkan Koordinat GPS & Link Google Maps:
+              </div>
+              <ol style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--adm-text)' }}>
+                <li style={{ marginBottom: '4px' }}>Buka <strong>Google Maps</strong> di browser dan cari lokasi gedung / pabrik Anda.</li>
+                <li style={{ marginBottom: '4px' }}>
+                  <strong>Klik kanan</strong> tepat pada titik lokasi di peta. Angka paling atas yang muncul adalah koordinat (contoh:{' '}
+                  <code style={{ background: 'var(--adm-card)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--adm-border)', color: 'var(--adm-text)' }}>
+                    1.1368003, 104.0452514
+                  </code>
+                  ).
+                </li>
+                <li style={{ marginBottom: '4px' }}>Klik angka tersebut untuk menyalin. Angka di depan koma adalah <strong>Latitude</strong>, dan angka di belakang koma adalah <strong>Longitude</strong>.</li>
+                <li>Untuk <strong>Link Langsung</strong>, klik tombol <strong>Bagikan (Share)</strong> di panel Google Maps, lalu pilih <strong>Salin Tautan</strong> dan tempelkan ke kolom Link Langsung.</li>
+              </ol>
+            </div>
+
             <div className="admin-form-group">
               <label className="admin-label">Nama Tempat Google Maps</label>
               <input

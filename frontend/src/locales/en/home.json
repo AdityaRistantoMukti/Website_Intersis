@@ -68,7 +68,7 @@
     "singaporeTitle": "45-Minute Singapore Maritime Gateway",
     "singaporeDesc": "Daily sea-cargo connections to Singapore’s international transshipment terminal for rapid, reliable global container shipping schedules.",
     "counterTitle": "Live Global Buyer Inquiries & Market Telemetry",
-    "counterDesc": "Officially verified via FlagCounter telemetry — monitoring live OEM buyer visits and partnership inquiries from the USA, Singapore, Asia-Pacific, and the EU.",
+    "counterDesc": "Officially verified via FlagCounter telemetry, monitoring live OEM buyer visits and partnership inquiries from the USA, Singapore, Asia-Pacific, and the EU.",
     "verifiedBadge": "LIVE VERIFIED B2B BUYER INTEREST",
     "cta": "Consult Tariff-Advantaged Manufacturing"
   },
@@ -84,7 +84,7 @@
       },
       {
         "code": "CAP-02",
-        "title": "Robot in Batam — Industrial Robotics & Automation",
+        "title": "Robot in Batam: Industrial Robotics & Automation",
         "desc": "Authorized distributor for industrial robots in Batam: robotic material handling, precision arc welding, plasma cutting, and automated line integration."
       },
       {
@@ -104,7 +104,7 @@
     "title": "Trusted Automotive Audio & Infotainment Manufacturing Partner",
     "subtitle": "End-to-End Automotive Electronics Manufacturing: From Conceptual Engineering, Rigorous QA Testing, High-Speed SMT, to Tariff-Free Global Supply Chains.",
     "description1": "PT. Global Philsonic Technologies (GPT) is a dedicated automotive electronics manufacturing facility under the PT. Intersis Sejahtera Abadi group, located at Komplek Tanah Mas Blok L No.2, Batam Free Trade Zone (FTZ), Indonesia.",
-    "description2": "Our mission: To deliver high-quality, competitively priced, and tariff-advantaged products (Car Amplifiers, Subwoofers, DSPs, Android Headunits, Dashcams) and industrial automation solutions to global markets and partners—especially the USA.",
+    "description2": "Our mission: To deliver high-quality, competitively priced, and tariff-advantaged products (Car Amplifiers, Subwoofers, DSPs, Android Headunits, Dashcams) and industrial automation solutions to global markets and partners, especially the USA.",
     "highlight1Title": "Tariff Mitigation & C/O Made in Indonesia",
     "highlight1Desc": "Mitigate US import tariff exposure with verified Certificate of Origin compliance.",
     "highlight2Title": "Batam Free Trade Zone Benefits",
@@ -119,7 +119,7 @@
         "navLabel": "Design & Engineering",
         "title": "Design & Engineering Excellence",
         "lead": "Global Philsonic Technologies has a powerful Design & Engineering team focused on R&D and electronic manufacturing services (EMS). From initial concept to mass production, we fully understand customer requirements.",
-        "description": "With an experienced group of R&D professionals, we provide flexible and dedicated technical support. Factors relating to the product life cycle—including manufacturability, cost-efficiency, and rapid prototyping—are thoroughly optimized to accelerate time-to-market.",
+        "description": "With an experienced group of R&D professionals, we provide flexible and dedicated technical support. Factors relating to the product life cycle, including manufacturability, cost-efficiency, and rapid prototyping, are thoroughly optimized to accelerate time-to-market.",
         "points": [
           "ISO 9001 Certified Quality Standard",
           "High-Density Circuit Design & Multilayer PCB",
@@ -179,18 +179,10 @@
       }
     ]
   },
-  "careerPreview": {
-    "sectionBadge": "Career Opportunities",
-    "title": "Build Your Career in Automotive Tech",
-    "subtitle": "Join our world-class engineering, production, and operations team at GPT Batam",
-    "noJobs": "No public openings at this moment. Submit your resume to join our talent pool.",
-    "viewAll": "Explore All Openings"
-  },
   "cta": {
-    "title": "Ready to Build Your Next Electronics Hardware with GPT?",
-    "subtitle": "Discuss your OEM/ODM manufacturing, high-speed SMT assembly, or factory automation requirements with our senior engineers.",
-    "btnPartner": "Contact Engineering & Sales",
-    "btnCareer": "Explore Careers at GPT"
+    "title": "Let Us Know Your Questions & Manufacturing Needs",
+    "subtitle": "We listen, react and propose the Lean Manufacturing business model that works best for you. Benefit from our extensive expertise in automotive electronics manufacturing.",
+    "btnPartner": "Contact Sales & Engineering"
   },
   "specsModal": {
     "title": "Technical Datasheet & Specifications",

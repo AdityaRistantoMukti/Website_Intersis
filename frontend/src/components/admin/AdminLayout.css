@@ -976,7 +976,10 @@ div[style*="rgba(15, 23, 42"] {
   background: var(--adm-hover);
 }
 
-/* ── SweetAlert2 Monochrome Theme Integration ── */
+/* ── SweetAlert2 Color-Coded Alert System ──────────────────────────────────── */
+/* Palette: success=green, error=red, warning=amber, info=blue, question=purple */
+/* NO glow, NO badge, NO emojis - clean icon-based alerts                       */
+
 .swal2-container {
   z-index: 10000 !important;
 }
@@ -990,47 +993,50 @@ div[style*="rgba(15, 23, 42"] {
     left: 12px !important;
     padding: 0 !important;
   }
-  .swal2-monochrome-toast {
+  .swal2-adm-toast {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
 }
 
-.swal2-monochrome-toast {
-  border: 1.5px solid var(--adm-border-visible) !important;
+/* ── Toast base ── */
+.swal2-adm-toast {
+  border: 1px solid var(--adm-border-visible) !important;
+  border-left: 4px solid currentColor !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18) !important;
   padding: 0.75rem 1rem !important;
   font-family: inherit !important;
   font-size: 0.875rem !important;
+  font-weight: 500 !important;
 }
 
-.swal2-monochrome-modal {
-  border: 1.5px solid var(--adm-border-visible) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35) !important;
+/* ── Modal base ── */
+.swal2-adm-modal {
+  border: 1px solid var(--adm-border-visible) !important;
+  border-top: 3px solid currentColor !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24) !important;
   font-family: inherit !important;
 }
 
-.swal2-monochrome-confirm-btn {
-  background: var(--adm-accent) !important;
-  color: var(--adm-accent-text) !important;
-  border: 1.5px solid var(--adm-accent) !important;
+/* ── Buttons ── */
+.swal2-adm-confirm {
   border-radius: 6px !important;
   font-weight: 600 !important;
   font-size: 0.875rem !important;
   padding: 0.6rem 1.35rem !important;
   box-shadow: none !important;
   cursor: pointer !important;
-  transition: opacity 0.15s ease !important;
+  transition: filter 0.15s ease !important;
 }
 
-.swal2-monochrome-confirm-btn:hover {
-  opacity: 0.9 !important;
+.swal2-adm-confirm:hover {
+  filter: brightness(0.88) !important;
 }
 
-.swal2-monochrome-cancel-btn {
+.swal2-adm-cancel {
   background: var(--adm-card-inner) !important;
   color: var(--adm-text) !important;
   border: 1.5px solid var(--adm-border-visible) !important;
@@ -1040,70 +1046,75 @@ div[style*="rgba(15, 23, 42"] {
   padding: 0.6rem 1.35rem !important;
   box-shadow: none !important;
   cursor: pointer !important;
-  transition: all 0.15s ease !important;
+  transition: background 0.15s ease !important;
 }
 
-.swal2-monochrome-cancel-btn:hover {
+.swal2-adm-cancel:hover {
   background: var(--adm-hover) !important;
-  border-color: var(--adm-text) !important;
 }
 
+/* ── Color-coded icons — SUCCESS (green) ── */
+.swal2-icon.swal2-success {
+  border-color: #22c55e !important;
+  color: #22c55e !important;
+}
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #22c55e !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+/* ── Color-coded icons — ERROR (red) ── */
+.swal2-icon.swal2-error {
+  border-color: #ef4444 !important;
+  color: #ef4444 !important;
+}
+.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+  background-color: #ef4444 !important;
+}
+
+/* ── Color-coded icons — WARNING (amber) ── */
+.swal2-icon.swal2-warning {
+  border-color: #f59e0b !important;
+  color: #f59e0b !important;
+}
+
+/* ── Color-coded icons — INFO (blue) ── */
+.swal2-icon.swal2-info {
+  border-color: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+
+/* ── Color-coded icons — QUESTION (purple) ── */
+.swal2-icon.swal2-question {
+  border-color: #8b5cf6 !important;
+  color: #8b5cf6 !important;
+}
+
+/* Timer progress bar — neutral, no glow */
 .swal2-timer-progress-bar {
-  background: var(--adm-text) !important;
+  height: 3px !important;
+  opacity: 0.85 !important;
 }
 
-/* SweetAlert2 monochrome animated icons */
-[data-theme='dark'] .swal2-icon.swal2-success {
-  border-color: #f4f4f5 !important;
-  color: #f4f4f5 !important;
-}
-[data-theme='dark'] .swal2-icon.swal2-success [class^='swal2-success-line'] {
-  background-color: #f4f4f5 !important;
-}
-[data-theme='dark'] .swal2-icon.swal2-success .swal2-success-ring {
-  border: 0.25em solid rgba(244, 244, 245, 0.3) !important;
-}
-[data-theme='dark'] .swal2-icon.swal2-error {
-  border-color: #f4f4f5 !important;
-  color: #f4f4f5 !important;
-}
-[data-theme='dark'] .swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
-  background-color: #f4f4f5 !important;
-}
-[data-theme='dark'] .swal2-icon.swal2-warning {
-  border-color: #f4f4f5 !important;
-  color: #f4f4f5 !important;
-}
-[data-theme='dark'] .swal2-icon.swal2-info {
-  border-color: #f4f4f5 !important;
-  color: #f4f4f5 !important;
+/* Ensure no glow box-shadows on icons anywhere */
+.swal2-icon {
+  box-shadow: none !important;
 }
 
-[data-theme='light'] .swal2-icon.swal2-success {
-  border-color: #09090b !important;
-  color: #09090b !important;
+/* Title & text typography */
+.swal2-adm-modal .swal2-title {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
 }
-[data-theme='light'] .swal2-icon.swal2-success [class^='swal2-success-line'] {
-  background-color: #09090b !important;
+.swal2-adm-modal .swal2-html-container,
+.swal2-adm-modal .swal2-content {
+  font-size: 0.9rem !important;
+  opacity: 0.85 !important;
 }
-[data-theme='light'] .swal2-icon.swal2-success .swal2-success-ring {
-  border: 0.25em solid rgba(9, 9, 11, 0.3) !important;
-}
-[data-theme='light'] .swal2-icon.swal2-error {
-  border-color: #09090b !important;
-  color: #09090b !important;
-}
-[data-theme='light'] .swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
-  background-color: #09090b !important;
-}
-[data-theme='light'] .swal2-icon.swal2-warning {
-  border-color: #09090b !important;
-  color: #09090b !important;
-}
-[data-theme='light'] .swal2-icon.swal2-info {
-  border-color: #09090b !important;
-  color: #09090b !important;
-}
+
+
 
 /* ── Responsive Queries (Mobile, Tablet, Desktop) ── */
 @media (max-width: 900px) {

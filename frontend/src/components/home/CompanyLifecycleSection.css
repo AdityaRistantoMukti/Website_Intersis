@@ -540,6 +540,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 3.5rem;
 }
 
 .lifecycle-3d-card {
@@ -849,7 +850,16 @@
 
 @media (max-width: 768px) {
   .about-interactive-section {
-    padding: var(--space-14) 0;
+    padding: clamp(4rem, 9vw, 5.5rem) 0 clamp(4.5rem, 10vw, 6rem);
+  }
+
+  .about-interactive-section .section-header {
+    margin-top: 1.25rem;
+    margin-bottom: var(--space-8);
+  }
+
+  .lifecycle-stage__visual-wrap {
+    margin-bottom: 2.5rem;
   }
 
   .lifecycle-stepper {

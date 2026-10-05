@@ -139,8 +139,8 @@ export default function AboutPage() {
       <Helmet>
         <title>
           {isId
-            ? 'Tentang Kami — PT. Global Philsonic Technologies (GPT) Batam'
-            : 'About Us — PT. Global Philsonic Technologies (GPT) Batam'}
+            ? 'Tentang Kami | PT. Global Philsonic Technologies (GPT) Batam'
+            : 'About Us | PT. Global Philsonic Technologies (GPT) Batam'}
         </title>
         <meta
           name="description"

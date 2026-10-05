@@ -202,7 +202,8 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  min-width: 170px;
+  min-width: 160px;
+  max-width: calc(100vw - 16px); /* never overflow viewport */
   background: #0F172A;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
@@ -308,6 +309,8 @@
 }
 
 /* ── RESPONSIVE RULES ── */
+
+/* ── Tablet & below: hide desktop links, show hamburger ── */
 @media (max-width: 1024px) {
   .navbar__links {
     display: none;
@@ -369,3 +372,215 @@
     background: rgba(255, 255, 255, 0.12);
   }
 }
+
+/* ── Small tablets / large phones (≤640px) ── */
+@media (max-width: 640px) {
+  .navbar {
+    height: 66px;
+  }
+
+  .navbar__inner {
+    gap: 8px;
+  }
+
+  .navbar__actions {
+    gap: 8px;
+  }
+
+  /* Hide long subtitle, keep GPT name */
+  .navbar__logo-sub {
+    display: none;
+  }
+
+  .navbar__mobile {
+    top: 66px;
+    max-height: calc(100vh - 66px);
+  }
+}
+
+/* ── Mid-range phones (≤480px) ── */
+@media (max-width: 480px) {
+  .navbar {
+    height: 60px;
+  }
+
+  .navbar__inner {
+    gap: 6px;
+    /* Tight horizontal padding handled via .container override below */
+  }
+
+  .navbar__logo {
+    gap: 8px;
+  }
+
+  /* Make logo badge + image smaller */
+  .navbar__logo-badge {
+    height: 32px;
+    padding: 3px 6px;
+  }
+
+  .navbar__logo-img {
+    height: 22px;
+  }
+
+  .navbar__logo-gpt {
+    font-size: 0.9rem;
+  }
+
+  .navbar__actions {
+    gap: 6px;
+  }
+
+  .theme-toggle-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lang-switcher__btn {
+    padding: 5px 9px;
+    font-size: 0.75rem;
+  }
+
+  .navbar__hamburger {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navbar__mobile {
+    top: 60px;
+    max-height: calc(100vh - 60px);
+    padding: var(--space-3) var(--space-4) var(--space-4);
+  }
+}
+
+/* ── Small phones (≤360px) — logo text fully hidden ── */
+@media (max-width: 360px) {
+  .navbar {
+    height: 56px;
+  }
+
+  .navbar__inner {
+    gap: 4px;
+  }
+
+  /* Hide GPT name — show only logo badge image */
+  .navbar__logo-meta {
+    display: none;
+  }
+
+  .navbar__logo-badge {
+    height: 30px;
+    padding: 3px 5px;
+  }
+
+  .navbar__logo-img {
+    height: 20px;
+  }
+
+  .navbar__actions {
+    gap: 4px;
+  }
+
+  .theme-toggle-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .theme-toggle-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .lang-switcher__btn {
+    padding: 4px 8px;
+    font-size: 0.72rem;
+    gap: 4px;
+  }
+
+  .lang-switcher__chevron {
+    display: none; /* hide chevron arrow to save space */
+  }
+
+  .navbar__hamburger {
+    width: 32px;
+    height: 32px;
+    gap: 4px;
+  }
+
+  .navbar__hamburger-bar {
+    width: 16px;
+  }
+
+  .navbar__mobile {
+    top: 56px;
+    max-height: calc(100vh - 56px);
+    padding: var(--space-3) var(--space-3) var(--space-4);
+  }
+}
+
+/* ── Tiny phones (≤300px) — ultra compact ── */
+@media (max-width: 300px) {
+  .navbar {
+    height: 52px;
+  }
+
+  .navbar__inner {
+    gap: 3px;
+  }
+
+  .navbar__logo-badge {
+    height: 28px;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+
+  .navbar__logo-img {
+    height: 18px;
+  }
+
+  .navbar__actions {
+    gap: 3px;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+  }
+
+  .theme-toggle-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .lang-switcher__btn {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+    gap: 2px;
+    border-radius: 4px;
+  }
+
+  .navbar__hamburger {
+    width: 28px;
+    height: 28px;
+    gap: 3px;
+    border-radius: 4px;
+  }
+
+  .navbar__hamburger-bar {
+    width: 14px;
+  }
+
+  .navbar__mobile {
+    top: 52px;
+    max-height: calc(100vh - 52px);
+    padding: var(--space-2) var(--space-2) var(--space-3);
+  }
+
+  .navbar__mobile-link {
+    font-size: 0.875rem;
+    padding: 9px 12px;
+  }
+}
+

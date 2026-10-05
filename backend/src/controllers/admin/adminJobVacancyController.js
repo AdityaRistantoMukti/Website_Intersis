@@ -48,6 +48,7 @@ const getAdminJobs = async (req, res, next) => {
         v.category_id,
         c.name AS category_name,
         v.title,
+        v.title_en,
         v.location,
         v.employment_type,
         v.form_url,
@@ -118,11 +119,15 @@ const createJob = async (req, res, next) => {
     const {
       category_id,
       title,
+      title_en,
       location,
       employment_type,
       description,
+      description_en,
       responsibilities,
+      responsibilities_en,
       requirements,
+      requirements_en,
       form_url,
       status,
     } = req.body;
@@ -133,19 +138,24 @@ const createJob = async (req, res, next) => {
     const [result] = await pool.execute(
       `
       INSERT INTO job_vacancies (
-        category_id, title, location, employment_type,
-        description, responsibilities, requirements, form_url,
+        category_id, title, title_en, location, employment_type,
+        description, description_en, responsibilities, responsibilities_en,
+        requirements, requirements_en, form_url,
         status, published_at, created_by
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       [
         category_id,
         title,
+        title_en || null,
         location || null,
         employment_type,
         description || null,
+        description_en || null,
         responsibilities || null,
+        responsibilities_en || null,
         requirements || null,
+        requirements_en || null,
         form_url || null,
         jobStatus,
         publishedAt,
@@ -178,11 +188,15 @@ const updateJob = async (req, res, next) => {
     const {
       category_id,
       title,
+      title_en,
       location,
       employment_type,
       description,
+      description_en,
       responsibilities,
+      responsibilities_en,
       requirements,
+      requirements_en,
       form_url,
       status,
     } = req.body;
@@ -196,7 +210,6 @@ const updateJob = async (req, res, next) => {
 
     let publishedAtUpdate = '';
     let closedAtUpdate = '';
-    let extraParams = [];
 
     // Kelola perubahan status publikasi
     if (status && status !== currentStatus) {
@@ -212,11 +225,15 @@ const updateJob = async (req, res, next) => {
       UPDATE job_vacancies SET
         category_id = ?,
         title = ?,
+        title_en = ?,
         location = ?,
         employment_type = ?,
         description = ?,
+        description_en = ?,
         responsibilities = ?,
+        responsibilities_en = ?,
         requirements = ?,
+        requirements_en = ?,
         form_url = ?,
         status = ?
         ${publishedAtUpdate}
@@ -226,11 +243,15 @@ const updateJob = async (req, res, next) => {
       [
         category_id,
         title,
+        title_en || null,
         location,
         employment_type,
         description,
+        description_en || null,
         responsibilities,
+        responsibilities_en || null,
         requirements,
+        requirements_en || null,
         form_url,
         status,
         id,

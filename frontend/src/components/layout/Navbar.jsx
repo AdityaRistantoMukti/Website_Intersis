@@ -40,13 +40,13 @@ export default function Navbar() {
     setLangOpen(false);
   };
 
-  // Nav links: Home, Products, Automation, Gallery, Career, Contact (all united)
+  // Nav links: Home, About Us, Products (Assembly Capabilities), Automation, Gallery, Contact
   const navLinks = [
     { to: '/',           label: t('nav.home') },
+    { to: '/about',      label: t('nav.about') },
     { to: '/products',   label: t('nav.products') },
     { to: '/automation', label: t('nav.automation') },
     { to: '/gallery',    label: t('nav.gallery') },
-    { to: '/career',     label: t('nav.career') },
     { to: '/contact',    label: t('nav.contact') },
   ];
 

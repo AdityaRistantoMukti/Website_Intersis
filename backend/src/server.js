@@ -25,8 +25,9 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Izinkan request tanpa origin (seperti Postman, curl, atau mobile apps)
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Izinkan request tanpa origin, allowedOrigins, atau IP jaringan lokal LAN (HP/Tablet)
+    const isLocalNetwork = /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+)(:\d+)?$/.test(origin);
+    if (!origin || allowedOrigins.includes(origin) || isLocalNetwork) {
       callback(null, true);
     } else {
       callback(new Error(`CORS Error: Origin '${origin}' tidak diizinkan.`));

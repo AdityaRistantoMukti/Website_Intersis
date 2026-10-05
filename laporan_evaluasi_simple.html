@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Laporan Evaluasi & Rekomendasi Improvement Website GPT</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 20mm 18mm 20mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: #111111;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 255mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #000000;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 23pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.25;
+      letter-spacing: 0.5px;
+      margin-bottom: 14pt;
+    }
+
+    h2 {
+      font-size: 13.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1.5px solid #000000;
+      padding-bottom: 5pt;
+      margin-top: 0;
+      margin-bottom: 12pt;
+    }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      margin-top: 10pt;
+      margin-bottom: 5pt;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 8.5pt;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 8.5pt;
+      padding-left: 18pt;
+    }
+
+    li {
+      margin-bottom: 4pt;
+      text-align: justify;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6pt;
+      margin-bottom: 6pt;
+      font-size: 8.5pt;
+      line-height: 1.35;
+    }
+
+    th, td {
+      border: 1px solid #333333;
+      padding: 5.5pt 6.5pt;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8pt;
+      letter-spacing: 0.3px;
+    }
+
+    /* Cover Page Styling */
+    .cover-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 110px;
+      padding-bottom: 40px;
+      flex-grow: 1;
+    }
+
+    .cover-divider {
+      width: 100%;
+      height: 3.5px;
+      background-color: #000000;
+      margin: 18pt 0;
+    }
+
+    .cover-sub {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11.5pt;
+      line-height: 1.5;
+      color: #222222;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cover-desc {
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #333333;
+      margin-top: 22pt;
+      text-align: justify;
+    }
+
+    .cover-footer {
+      margin-top: 140px;
+      padding-top: 12pt;
+      border-top: 1px solid #000000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      display: flex;
+      justify-content: space-between;
+      color: #222222;
+    }
+
+    .highlight-box {
+      border: 1px solid #000000;
+      padding: 9pt 11pt;
+      margin: 10pt 0;
+      background: #fafafa;
+      font-size: 9.5pt;
+      line-height: 1.5;
+    }
+
+    .footer-line {
+      margin-top: auto;
+      padding-top: 5pt;
+      border-top: 1px solid #cccccc;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      color: #666666;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .content-area {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HALAMAN 1: COVER UTAMA ==================== -->
+  <div class="page page-break">
+    <div class="cover-container">
+      <div class="cover-sub">PT. GLOBAL PHILSONIC TECHNOLOGIES (GPT) &bull; BATAM FTZ</div>
+      <div class="cover-divider"></div>
+      <h1>Laporan Evaluasi & Rekomendasi Improvement Website GPT</h1>
+      <div class="cover-sub" style="font-size: 10.5pt; color: #444444; margin-top: 6pt;">
+        Kajian Teknis Rekayasa Web, Koreksi Positioning Model Bisnis Perakitan Manufaktur (EMS/OEM/ODM), dan Rencana Peningkatan Sistem Digital
+      </div>
+
+      <div class="cover-desc">
+        Dokumen ini menyajikan hasil evaluasi dan pemahaman mendalam mengenai profil bisnis PT. Global Philsonic Technologies serta kondisi website referensi saat ini (<code>globalphilsonics.com/isa</code>). Di dalamnya terangkum analisis kekurangan sistem eksisting, rumusan rekomendasi perbaikan berbasis tabel komparatif, serta kesimpulan strategis sebagai fondasi perancangan website baru yang representatif bagi calon mitra industri global.
+      </div>
+
+      <div class="cover-footer">
+        <div><strong>Disusun Oleh:</strong> Tim Rekayasa Web & Sistem Informasi</div>
+        <div><strong>Entitas:</strong> PT. Global Philsonic Technologies</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 2: PEMAHAMAN PT GPT & WEBSITE EKSISTING ==================== -->
+  <div class="page page-break">
+    <div class="content-area">
+      <h2>I. PEMAHAMAN PROFIL PT GPT & EVALUASI WEBSITE EKSISTING</h2>
+
+      <h3>1. Pemahaman Hakiki Model Bisnis PT GPT (Jasa Perakitan, Bukan Ritel)</h3>
+      <p>
+        Berdasarkan kajian operasional, <strong>PT. Global Philsonic Technologies (GPT)</strong> yang berlokasi strategis di Kawasan Perdagangan Bebas Batam (Batam Free Trade Zone) secara fundamental adalah <strong>perusahaan penyedia Jasa Manufaktur Elektronika Kontrak (Electronics Manufacturing Services / EMS, OEM, dan ODM)</strong>. Perusahaan ini berfokus pada layanan manufaktur terpadu untuk industri otomotif dan audio-elektronik, bukan entitas perdagangan eceran (ritel) barang jadi.
+      </p>
+      <p>
+        Kekuatan utama (core competency) PT GPT bertumpu pada kapabilitas perakitan presisi tinggi, meliputi:
+      </p>
+      <ul>
+        <li><strong>Lini Perakitan SMT (Surface Mount Technology) Berkecepatan Tinggi:</strong> Penempatan komponen mikro presisi pada papan sirkuit (PCBA) dengan akurasi ketat.</li>
+        <li><strong>Perakitan Box-Build & Integrasi Sistem:</strong> Penggabungan mekanikal, perakitan kabel (wiring harness), instalasi modul audio/video, hingga pengemasan akhir produk.</li>
+        <li><strong>Standar Kendali Mutu Otomotif (Quality Assurance):</strong> Penerapan audit mutu internasional (berkiblat pada standar IATF 16949 / ISO 9001) dengan serangkaian pengujian fungsional, uji keandalan suhu, dan uji akustik.</li>
+        <li><strong>Keunggulan Logistik Batam FTZ:</strong> Fasilitas bebas bea masuk dan kemudahan ekspor-impor yang memposisikan PT GPT sebagai mitra ideal bagi prinsipal industri multinasional.</li>
+      </ul>
+
+      <h3>2. Analisis & Evaluasi Kondisi Website Referensi Saat Ini</h3>
+      <p>
+        Peninjauan komprehensif terhadap website referensi (<code>https://www.globalphilsonics.com/isa/</code>) mengidentifikasi sejumlah kelemahan substansial yang melatarbelakangi perlunya perombakan total:
+      </p>
+      <ul>
+        <li><strong>Kekeliruan Positioning Konten (Etalase Toko Ritel):</strong> Website lama menyajikan item produk (seperti <em>Android Headunit, Amplifier, Subwoofer, DSP</em>) menyerupai etalase katalog ritel komersial (B2C). Hal ini mengaburkan identitas perusahaan di mata calon klien industri B2B yang mencari kapasitas pabrik dan jasa perakitan kontrak.</li>
+        <li><strong>Ketiadaan Informasi Kapabilitas & Fasilitas Pabrik:</strong> Tidak tersedia informasi transparan mengenai kapasitas lini mesin, standar cleanroom, peralatan inspeksi otomatis (AOI/ICT), maupun alur proses manufaktur yang dibutuhkan calon mitra saat melakukan pra-audit vendor.</li>
+        <li><strong>Keterbatasan Performa & Infrastruktur Usang:</strong> Sistem eksisting menggunakan tumpukan CMS konvensional (WordPress + page builder) dengan beban file berat (>2,5 MB). Hal ini menimbulkan waktu muat lambat dan kerentanan keamanan plugin eksternal.</li>
+        <li><strong>Tidak Adanya Saluran Konversi Kemitraan B2B:</strong> Website hanya menyediakan formulir kontak umum tanpa adanya fasilitas permohonan penawaran proyek terstruktur (<em>Request for Quote / RFQ</em>) yang menjadi standar interaksi bisnis manufaktur.</li>
+      </ul>
+    </div>
+
+    <div class="footer-line">
+      <div>Laporan Evaluasi & Rekomendasi Improvement Website GPT</div>
+      <div>Halaman 2 dari 4</div>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 3: TABEL REKOMENDASI & IMPROVEMENT ==================== -->
+  <div class="page page-break">
+    <div class="content-area">
+      <h2>II. REKOMENDASI & USULAN IMPROVEMENT WEBSITE</h2>
+      <p>
+        Guna menjawab kelemahan di atas dan menyelaraskan kehadiran digital dengan kapasitas riil pabrik, berikut adalah matriks rekomendasi dan rencana improvement sistem website baru yang diusulkan:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 4%; text-align: center;">No</th>
+            <th style="width: 17%;">Area / Aspek</th>
+            <th style="width: 26%;">Kondisi Saat Ini (Website Eksisting)</th>
+            <th style="width: 29%;">Rekomendasi Usulan Improvement</th>
+            <th style="width: 24%;">Manfaat & Target Dampak</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center;"><strong>1</strong></td>
+            <td><strong>Positioning Bisnis & Penyajian Konten</strong></td>
+            <td>Katalog produk bergaya ritel eceran; mengaburkan identitas jasa perakitan manufaktur.</td>
+            <td>Mentransformasi katalog menjadi <strong>Showcase Kapabilitas Perakitan (EMS/OEM/ODM)</strong> dengan rincian spesifikasi kapasitas pabrik.</td>
+            <td>Mempertegas citra B2B dan menarik klien korporat otomotif serta elektronik global.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>2</strong></td>
+            <td><strong>Konsep Desain & Citra Visual</strong></td>
+            <td>Tampilan template standar CMS yang kaku dan kurang mencerminkan teknologi manufaktur modern.</td>
+            <td>Menerapkan <strong>Modern Dark Industrial Aesthetic</strong> dengan tipografi modern, kartu kaca (glassmorphism), dan tata letak presisi.</td>
+            <td>Meningkatkan impresi profesionalitas, kredibilitas, dan daya saing di hadapan investor asing.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>3</strong></td>
+            <td><strong>Beranda & Interaktivitas Hero</strong></td>
+            <td>Banner gambar statis sederhana tanpa penyampaian *value proposition* yang kuat.</td>
+            <td>Membangun <strong>Hero Section Dinamis</strong> dilengkapi animasi teks kapabilitas, ringkasan statistik pabrik, dan tombol aksi (CTA) cepat.</td>
+            <td>Menangkap perhatian pengambil keputusan dalam 3 detik pertama kunjungan situs.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>4</strong></td>
+            <td><strong>Transparansi Fasilitas Produksi</strong></td>
+            <td>Foto pabrik minim, tidak memperlihatkan zona kerja dan alur penjaminan mutu.</td>
+            <td>Menampilkan visualisasi <strong>Zona Fasilitas (Cleanroom SMT, Assembly, Testing Lab)</strong> disertai alur proses terverifikasi.</td>
+            <td>Memudahkan calon klien melakukan evaluasi teknis awal sebelum kunjungan audit fisik.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>5</strong></td>
+            <td><strong>Showcase Otomasi & Rekayasa</strong></td>
+            <td>Tidak ada pemaparan detail mengenai sistem otomasi dan keahlian akustik/elektronik.</td>
+            <td>Menyediakan modul khusus <strong>Automation & Engineering Showcase</strong> untuk mendemonstrasikan keunggulan mesin uji presisi.</td>
+            <td>Membuktikan kompetensi rekayasa tingkat tinggi (engineering excellence) yang dimiliki PT GPT.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>6</strong></td>
+            <td><strong>Saluran Konversi Prospek Bisnis</strong></td>
+            <td>Hanya formulir kontak statis; tidak ada panduan spesifikasi tender bagi calon klien.</td>
+            <td>Mengintegrasikan <strong>Interactive Request for Quote (RFQ) Modal</strong> terhubung langsung ke notifikasi cepat tim marketing.</td>
+            <td>Mempercepat akuisisi prospek proyek baru dan menyaring data kebutuhan tender secara rapi.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>7</strong></td>
+            <td><strong>Aksesibilitas Multi-Bahasa</strong></td>
+            <td>Hanya satu bahasa (Inggris terbatas) tanpa opsi lokalisasi yang fleksibel.</td>
+            <td>Menerapkan fitur <strong>Bilingual Switcher (Bahasa Indonesia & English)</strong> secara instan di seluruh komponen halaman.</td>
+            <td>Memfasilitasi komunikasi inklusif dengan klien domestik maupun prinsipal multinasional.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>8</strong></td>
+            <td><strong>Arsitektur Sistem & Manajemen (CMS)</strong></td>
+            <td>Sistem WordPress berat dengan risiko keamanan plugin dan pengelolaan yang lambat.</td>
+            <td>Mengembangkan web berbasis <strong>Single Page Application (SPA) modern</strong> dilengkapi <strong>Admin CMS mandiri</strong> terproteksi.</td>
+            <td>Kecepatan akses super cepat (&lt;1 detik), sistem aman, serta pembaruan data internal yang mandiri.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-line">
+      <div>Laporan Evaluasi & Rekomendasi Improvement Website GPT</div>
+      <div>Halaman 3 dari 4</div>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 4: KESIMPULAN ==================== -->
+  <div class="page">
+    <div class="content-area">
+      <h2>III. KESIMPULAN & ARAH STRATEGIS</h2>
+
+      <p>
+        Berdasarkan rangkaian analisis mendalam terhadap model bisnis PT GPT dan evaluasi teknis terhadap website referensi eksisting, dapat ditarik beberapa poin kesimpulan strategis sebagai berikut:
+      </p>
+
+      <ol>
+        <li>
+          <strong>Urgensi Reposisi Digital Menuju Jasa Perakitan Manufaktur:</strong> Website eksisting memerlukan reposisi mendasar dari tampilan katalog ritel komersial menjadi etalase profesional bagi <strong>Jasa Manufaktur & Perakitan Kontrak (EMS/OEM/ODM)</strong>. Perubahan ini krusial agar profil PT. Global Philsonic Technologies di Batam FTZ dipahami secara tepat oleh kalangan industri, prinsipal otomotif, dan mitra korporat berskala internasional.
+        </li>
+        <li>
+          <strong>Optimalisasi Jalur Transaksi Melalui Sistem RFQ Terstruktur:</strong> Penggantian mekanisme kontak konvensional dengan formulir <em>Request for Quote (RFQ)</em> interaktif akan merevolusi efisiensi perolehan tender bisnis. Calon klien dapat langsung memasukkan parameter proyek, volume perkiraan, dan berkas spesifikasi teknis, sehingga tim pemasaran dan engineering dapat menindaklanjutinya dengan cepat dan akurat.
+        </li>
+        <li>
+          <strong>Standar Visual & Teknologi Bertaraf Internasional:</strong> Penerapan estetika modern industri (Dark Industrial), transparansi fasilitas produksi, showcase otomasi rekayasa, serta dukungan multi-bahasa (ID/EN) akan mempertegas reputasi keandalan dan disiplin mutu berstandar IATF 16949 / ISO 9001 yang menjadi tolok ukur industri manufaktur dunia.
+        </li>
+        <li>
+          <strong>Efisiensi Arsitektur & Kemandirian Operasional:</strong> Peralihan dari CMS lama yang rentan menuju arsitektur web modern yang ringan, cepat, dan aman serta dilengkapi portal admin CMS mandiri akan menjamin kinerja situs tetap optimal tanpa ketergantungan biaya lisensi plugin pihak ketiga dan minim risiko keamanan siber.
+        </li>
+      </ol>
+
+      <div class="highlight-box" style="margin-top: 14pt;">
+        <strong>Pernyataan Penutup:</strong><br>
+        Rencana perbaikan website ini bukan sekadar pembaruan estetika antarmuka, melainkan sebuah instrumen digital strategis untuk mempertegas kredibilitas PT. Global Philsonic Technologies sebagai mitra manufaktur perakitan terdepan di Asia Tenggara yang andal, berteknologi tinggi, dan siap melayani rantai pasok industri global.
+      </div>
+
+      <div style="margin-top: 45pt; text-align: right; font-family: Arial, Helvetica, sans-serif; font-size: 10pt;">
+        Batam, 5 Oktober 2026<br><br><br><br>
+        <strong>Tim Rekayasa Web & Sistem Informasi</strong><br>
+        PT. Global Philsonic Technologies
+      </div>
+    </div>
+
+    <div class="footer-line">
+      <div>Laporan Evaluasi & Rekomendasi Improvement Website GPT</div>
+      <div>Halaman 4 dari 4</div>
+    </div>
+  </div>
+
+</body>
+</html>

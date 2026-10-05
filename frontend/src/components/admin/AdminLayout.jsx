@@ -150,12 +150,11 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               onError={(e) => { e.target.style.display = 'none'; }}
             />
             <div>
-              <div className="admin-sidebar-brand-name">PT. INTERSIS</div>
-              <div className="admin-sidebar-brand-sub">GPT &bull; Internal CMS</div>
+              <div className="admin-sidebar-brand-name">PT GPT</div>
+              <div className="admin-sidebar-brand-sub">Internal CMS</div>
             </div>
           </Link>
           <div className="admin-sidebar-header-right">
-            <span className="admin-sidebar-version">v1.0</span>
             <button
               type="button"
               className="admin-sidebar-close-btn"
@@ -253,12 +252,6 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               {theme === 'dark' ? <Sun size={15} strokeWidth={2} /> : <Moon size={15} strokeWidth={2} />}
               <span className="admin-theme-toggle-label">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
             </button>
-
-            {/* Server Online Badge */}
-            <span className="admin-status-indicator" title="Backend Express connected on port 3000">
-              <span className="admin-status-dot" />
-              <span className="admin-status-text">API Aktif</span>
-            </span>
 
             {/* Direct Link to Public Landing Page */}
             <a

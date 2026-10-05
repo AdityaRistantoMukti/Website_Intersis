@@ -274,14 +274,14 @@ const BATAM_PILLARS = [
   {
     titleEn: 'Precision Meets Productivity',
     titleId: 'Presisi Tinggi & Produktivitas Maksimal',
-    descEn: 'Robots deliver consistent, repeatable quality—whether you’re welding a car frame or cutting a heavy steel plate. Their accuracy reduces errors, rework, and downtime.',
-    descId: 'Robot memberikan kualitas presisi dan repetitif yang konsisten—baik untuk pengelasan rangka otomotif maupun pemotongan pelat baja berat. Akurasi tinggi meminimalkan kesalahan, pengerjaan ulang (rework), dan downtime produksi.',
+    descEn: 'Robots deliver consistent, repeatable quality, whether you’re welding a car frame or cutting a heavy steel plate. Their accuracy reduces errors, rework, and downtime.',
+    descId: 'Robot memberikan kualitas presisi dan repetitif yang konsisten, baik untuk pengelasan rangka otomotif maupun pemotongan pelat baja berat. Akurasi tinggi meminimalkan kesalahan, pengerjaan ulang (rework), dan downtime produksi.',
   },
   {
     titleEn: 'Local Support in Batam',
     titleId: 'Dukungan Teknis Lokal di Batam',
-    descEn: 'With our authorized distributor PT. Global Philsonic Technologies, you get technical support, training, spare parts, and troubleshooting assistance — all in Batam.',
-    descId: 'Bersama distributor resmi kami PT. Global Philsonic Technologies, Anda memperoleh dukungan teknis langsung, pelatihan operator bersertifikat, ketersediaan suku cadang cepat, dan pendampingan troubleshooting — semuanya berbasis langsung di Batam.',
+    descEn: 'With our authorized distributor PT. Global Philsonic Technologies, you get technical support, training, spare parts, and troubleshooting assistance, all in Batam.',
+    descId: 'Bersama distributor resmi kami PT. Global Philsonic Technologies, Anda memperoleh dukungan teknis langsung, pelatihan operator bersertifikat, ketersediaan suku cadang cepat, dan pendampingan troubleshooting, semuanya berbasis langsung di Batam.',
   },
   {
     titleEn: 'Full System Integration',
@@ -319,8 +319,8 @@ const BATAM_ADVANTAGES = [
   {
     titleEn: 'Flexible Production',
     titleId: 'Produksi Adaptif & Fleksibel',
-    descEn: 'Easily reprogram robots for different tasks—ideal for agile manufacturing.',
-    descId: 'Pemrograman ulang cepat untuk berbagai tipe komponen—sangat ideal untuk lini produksi agile manufacturing.',
+    descEn: 'Easily reprogram robots for different tasks, ideal for agile manufacturing.',
+    descId: 'Pemrograman ulang cepat untuk berbagai tipe komponen, sangat ideal untuk lini produksi agile manufacturing.',
   },
   {
     titleEn: 'Consistent Quality',
@@ -425,7 +425,7 @@ export default function AutomationPage() {
   return (
     <div className="automation-page">
 
-      {/* ═══════ PAGE HEADER — Always-Dark Industrial Theme ═══════ */}
+      {/* ═══════ PAGE HEADER : Always-Dark Industrial Theme ═══════ */}
       <header className="auto-page-header">
         <div className="auto-page-header__grid-bg" aria-hidden="true" />
 
@@ -559,8 +559,8 @@ export default function AutomationPage() {
             </h2>
             <p className="auto-batam-subtitle">
               {isId
-                ? 'Seiring meningkatnya tuntutan industri, otomasi bukan lagi sekadar pilihan — melainkan kebutuhan mendesak. Inilah alasan pabrik-pabrik di seluruh Batam, dari Batu Ampar hingga Muka Kuning, memilih robot:'
-                : 'As industrial demands increase, automation is no longer an option — it’s a necessity. Here’s why factories across Batam, from Batu Ampar to Muka Kuning, are choosing robots:'}
+                ? 'Seiring meningkatnya tuntutan industri, otomasi bukan lagi sekadar pilihan, melainkan kebutuhan mendesak. Inilah alasan pabrik-pabrik di seluruh Batam, dari Batu Ampar hingga Muka Kuning, memilih robot:'
+                : 'As industrial demands increase, automation is no longer an option, it’s a necessity. Here’s why factories across Batam, from Batu Ampar to Muka Kuning, are choosing robots:'}
             </p>
           </div>
 

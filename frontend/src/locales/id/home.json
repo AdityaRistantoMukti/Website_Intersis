@@ -68,7 +68,7 @@
     "singaporeTitle": "Akses Maritim Singapura 45 Menit",
     "singaporeDesc": "Konektivitas feri kargo harian ke pelabuhan transshipment internasional Singapura untuk kecepatan logistik pengiriman ke seluruh dunia.",
     "counterTitle": "Pemantauan Minat Pembeli & Jejak Pasar Global",
-    "counterDesc": "Data terverifikasi resmi FlagCounter — mencatat inquiry dan kunjungan kemitraan buyer manufaktur dari Amerika Serikat, Singapura, Asia Pasifik, dan Uni Eropa secara real-time.",
+    "counterDesc": "Data terverifikasi resmi FlagCounter, mencatat inquiry dan kunjungan kemitraan buyer manufaktur dari Amerika Serikat, Singapura, Asia Pasifik, dan Uni Eropa secara real-time.",
     "verifiedBadge": "LIVE VERIFIED B2B BUYER INTEREST",
     "cta": "Konsultasi Rencana Manufaktur Berkeunggulan Tarif"
   },
@@ -84,7 +84,7 @@
       },
       {
         "code": "CAP-02",
-        "title": "Robot in Batam — Robotika & Otomasi Industri",
+        "title": "Robot in Batam: Robotika & Otomasi Industri",
         "desc": "Distributor resmi robot industri di Batam untuk penanganan material (handling), pengelasan presisi (welding), dan pemotongan plasma/laser lintas kawasan industri."
       },
       {
@@ -104,7 +104,7 @@
     "title": "Mitra Manufaktur Audio & Infotainment Otomotif Global",
     "subtitle": "Solusi End-to-End Manufaktur Elektronik Otomotif: Dari Rekayasa Desain, Kendali Mutu Presisi, Perakitan SMT Berkecepatan Tinggi, hingga Rantai Pasok Bebas Tarif.",
     "description1": "PT. Global Philsonic Technologies (GPT) adalah entitas manufaktur khusus di bawah naungan PT. Intersis Sejahtera Abadi, beroperasi di Komplek Tanah Mas Blok L No.2, Kawasan Perdagangan Bebas (FTZ) Batam, Indonesia.",
-    "description2": "Misi kami: Menghadirkan produk audio-video otomotif (Car Amplifier, Subwoofer, DSP, Android Headunit, Dashcam) dan solusi otomasi industri berkualitas tinggi, berbiaya kompetitif, dan berkeunggulan tarif impor preferensial untuk mitra global—terutama pasar Amerika Serikat (USA).",
+    "description2": "Misi kami: Menghadirkan produk audio-video otomotif (Car Amplifier, Subwoofer, DSP, Android Headunit, Dashcam) dan solusi otomasi industri berkualitas tinggi, berbiaya kompetitif, dan berkeunggulan tarif impor preferensial untuk mitra global, terutama pasar Amerika Serikat (USA).",
     "highlight1Title": "Mitigasi Tarif & C/O Made in Indonesia",
     "highlight1Desc": "Menyediakan kepatuhan regulasi impor AS dengan Certificate of Origin resmi Indonesia.",
     "highlight2Title": "Keuntungan Batam Free Trade Zone",
@@ -179,18 +179,10 @@
       }
     ]
   },
-  "careerPreview": {
-    "sectionBadge": "Peluang Karir",
-    "title": "Bangun Karir di Industri Teknologi Otomotif",
-    "subtitle": "Bergabunglah bersama talenta teknik dan operasional terbaik di PT. Global Philsonic Technologies",
-    "noJobs": "Saat ini belum ada lowongan publik yang terbuka. Kirimkan CV Anda untuk talent pool.",
-    "viewAll": "Lihat Semua Lowongan Kerja"
-  },
   "cta": {
-    "title": "Siap Mengembangkan Produk Elektronik Anda Bersama GPT?",
-    "subtitle": "Konsultasikan kebutuhan produksi OEM/ODM, perakitan SMT, atau sistem otomasi pabrik Anda dengan tim insinyur kami.",
-    "btnPartner": "Hubungi Tim Penjualan & Teknik",
-    "btnCareer": "Jelajahi Karir di GPT"
+    "title": "Sampaikan Pertanyaan & Kebutuhan Manufaktur Anda",
+    "subtitle": "Kami mendengarkan, merespons, dan mengusulkan model bisnis Lean Manufacturing yang paling sesuai untuk Anda. Dapatkan manfaat maksimal dari keahlian kami di bidang perakitan elektronik manufaktur.",
+    "btnPartner": "Hubungi Tim Penjualan & Rekayasa"
   },
   "specsModal": {
     "title": "Spesifikasi Teknis & Data Produk",

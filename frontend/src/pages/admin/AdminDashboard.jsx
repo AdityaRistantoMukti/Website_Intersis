@@ -111,7 +111,7 @@ export default function AdminDashboard() {
   return (
     <>
       <Helmet>
-        <title>Dashboard Admin — PT. Intersis Sejahtera Abadi / GPT</title>
+        <title>Dashboard Admin | PT GPT</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 

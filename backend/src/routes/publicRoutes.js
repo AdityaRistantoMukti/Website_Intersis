@@ -7,6 +7,8 @@ const { getGalleryItems } = require('../controllers/public/publicGalleryControll
 const { getBenefits } = require('../controllers/public/publicBenefitController');
 const { getPrograms, getProgramBySlug } = require('../controllers/public/publicProgramController');
 const { getFaqs } = require('../controllers/public/publicFaqController');
+const { getProducts } = require('../controllers/public/publicProductController');
+const { recordVisit, submitRfq } = require('../controllers/telemetryController');
 const { apiLimiter } = require('../middlewares/rateLimiter');
 
 // Terapkan rate limiter untuk semua endpoint publik
@@ -19,6 +21,9 @@ router.get('/contact', getContact);
 router.get('/site-settings', getSiteSettings);
 router.get('/site-settings/:key', getSiteSettings);
 
+// Telemetry & RFQ Inquiries
+router.post('/telemetry/visit', recordVisit);
+router.post('/rfq', submitRfq);
 
 // Job Vacancies & Categories
 router.get('/job-categories', getJobCategories);
@@ -37,5 +42,8 @@ router.get('/programs/:slugOrId', getProgramBySlug);
 
 // FAQs
 router.get('/faqs', getFaqs);
+
+// Products Catalog
+router.get('/products', getProducts);
 
 module.exports = router;

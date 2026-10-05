@@ -10,7 +10,7 @@ const GALLERY_DATA = [
     categoryLabel: 'SMT Production',
     title: 'High-Speed SMT Modular Placement Lines',
     desc: 'High-precision dual-beam Yamaha YSM20R mounters capable of 80,000 CPH, placing 0201 passives, fine-pitch BGA, and automotive microcontrollers with high accuracy.',
-    location: 'Batam Plant 1 — Bay A',
+    location: 'Batam Plant 1, Bay A',
     spec: '80,000 CPH | 0201 to 55mm ICs | Dual Track Conveyor',
     img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80'
   },
@@ -20,7 +20,7 @@ const GALLERY_DATA = [
     categoryLabel: 'SMT Production',
     title: '10-Zone Nitrogen Convection Reflow Oven',
     desc: 'Automotive grade reflow soldering with real-time KIC thermal profiling, O2 ppm control (<100 ppm), ensuring zero-voiding on critical power electronics.',
-    location: 'Batam Plant 1 — Bay B',
+    location: 'Batam Plant 1, Bay B',
     spec: '10 Heated Zones | Dual Cooling | N2 Controlled Atmosphere',
     img: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80'
   },
@@ -30,7 +30,7 @@ const GALLERY_DATA = [
     categoryLabel: 'Cleanroom Facility',
     title: 'ISO Class 8 (100K) Static-Controlled Cleanroom',
     desc: 'Dedicated dust-free environment with continuous ESD floor grounding, positive air pressure, HEPA filtration, and strict temperature/humidity stability for optical & ADAS assembly.',
-    location: 'Batam Plant 2 — Cleanroom Wing',
+    location: 'Batam Plant 2, Cleanroom Wing',
     spec: 'Class 100,000 (ISO 8) | Temp 22±2°C | Humidity 50±5% RH',
     img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=80'
   },
@@ -40,7 +40,7 @@ const GALLERY_DATA = [
     categoryLabel: 'Quality & Reliability',
     title: '3D Solder Paste Inspection (SPI) & 3D AOI Station',
     desc: 'Inline 3D moiré fringe metrology measuring solder volume, height, and offset down to micron level before reflow, preventing downstream defects at the source.',
-    location: 'Batam Plant 1 — Quality Gate',
+    location: 'Batam Plant 1, Quality Gate',
     spec: 'Dual Projector 3D SPI | 0.5 μm Z-resolution | 100% Inline',
     img: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1000&q=80'
   },
@@ -50,7 +50,7 @@ const GALLERY_DATA = [
     categoryLabel: 'Automation Workshop',
     title: 'In-House CNC Mechanical Tooling & Jig Fabrication',
     desc: 'Haas 4-axis machining centers and precision drill presses crafting custom ESD-safe Bakelite and POM-C test fixtures, pneumatic vacuum chambers, and press-fit nests.',
-    location: 'Batam Plant 1 — Tooling Center',
+    location: 'Batam Plant 1, Tooling Center',
     spec: 'Haas VF-2 CNC | ±0.01mm Tolerance | ESD Bakelite Milling',
     img: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=1000&q=80'
   },
@@ -60,7 +60,7 @@ const GALLERY_DATA = [
     categoryLabel: 'Quality & Reliability',
     title: 'High-Resolution 2D/3D X-Ray Non-Destructive Inspection',
     desc: '160 kV microfocus open-tube X-ray inspection for detecting solder voids under BGA balls, QFN pads, wire bond integrity, and internal barrel fill in multi-layer PCBAs.',
-    location: 'Batam Plant 2 — NDT Lab',
+    location: 'Batam Plant 2, NDT Lab',
     spec: '160 kV Microfocus Tube | Geometric Magnification 2000x',
     img: 'https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&w=1000&q=80'
   },
@@ -70,7 +70,7 @@ const GALLERY_DATA = [
     categoryLabel: 'Quality & Reliability',
     title: 'Environmental Thermal Shock & Burn-In Chamber',
     desc: 'Rapid temperature cycling from -40°C to +125°C under continuous operational electrical load to stress-test solder joint durability and automotive electronics endurance.',
-    location: 'Batam Plant 2 — Reliability Wing',
+    location: 'Batam Plant 2, Reliability Wing',
     spec: '-50°C to +150°C | Transfer Time < 10s | 1,000 Cycle Testing',
     img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1000&q=80'
   },
@@ -80,7 +80,7 @@ const GALLERY_DATA = [
     categoryLabel: 'Plant & Facilities',
     title: 'Batam Free Trade Zone Plant & Bonded Logistics Staging',
     desc: 'Strategic manufacturing hub situated 45 minutes by fast sea freight from Singapore global port, featuring temperature-controlled component storage and bonded customs clearance.',
-    location: 'Batam FTZ — Batam Center',
+    location: 'Batam FTZ, Batam Center',
     spec: '10,000 m² Facility | Bonded Customs Direct | 24/7 Operations',
     img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80'
   }
@@ -107,7 +107,7 @@ export default function GalleryPage() {
 
   return (
     <div className="gallery-page">
-      {/* ═══════ PAGE HEADER — Consistent Industrial Theme ═══════ */}
+      {/* ═══════ PAGE HEADER : Consistent Industrial Theme ═══════ */}
       <header className="gallery-page-header">
         <div className="gallery-page-header__grid-bg" aria-hidden="true" />
 
@@ -157,15 +157,15 @@ export default function GalleryPage() {
                       e.target.style.display = 'none';
                     }}
                   />
-                  <span className="gallery-card__badge-overlay">{item.categoryLabel}</span>
                   <div className="gallery-card__zoom-hint">🔍</div>
                 </div>
                 <div className="gallery-card__content">
                   <h3 className="gallery-card__title">{item.title}</h3>
                   <p className="gallery-card__desc">{item.desc}</p>
                   <div className="gallery-card__meta">
-                    <span className="gallery-card__location">📍 {item.location}</span>
-                    <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Klik untuk detail</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--teal, #00897b)', fontWeight: 600 }}>
+                      {isId ? 'Klik untuk detail spesifikasi →' : 'Click for technical specs →'}
+                    </span>
                   </div>
                 </div>
               </article>
@@ -187,7 +187,6 @@ export default function GalleryPage() {
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--teal, #00897b)', textTransform: 'uppercase' }}>
                   {activeModalItem.categoryLabel}
                 </span>
-                <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>📍 {activeModalItem.location}</span>
               </div>
               <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.75rem', color: '#ffffff' }}>
                 {activeModalItem.title}

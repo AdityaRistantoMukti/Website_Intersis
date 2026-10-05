@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useContact, useSiteSettings } from '../../hooks/useApi';
 import { getLocalizedData } from '../../lib/translator';
+import api from '../../lib/api';
 import ContactGoogleMap from '../../components/contact/ContactGoogleMap';
 import { CheckCircle2, MessageCircle, Building2, Phone, Mail, Clock } from 'lucide-react';
 import './ContactPage.css';
@@ -25,11 +26,20 @@ export default function ContactPage() {
     message: ''
   });
 
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      setSubmitting(true);
+      await api.post('/public/rfq', formData);
+    } catch (err) {
+      console.warn('Could not record RFQ to database:', err);
+    } finally {
+      setSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   const cleanPhone = (contact?.whatsapp_number || '+628117700899').replace(/[^0-9]/g, '');
@@ -38,7 +48,7 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page">
-      {/* ═══════ PAGE HEADER — Clean Minimalist Theme ═══════ */}
+      {/* ═══════ PAGE HEADER : Clean Minimalist Theme ═══════ */}
       <header className="contact-page-header">
         <div className="contact-page-header__grid-bg" aria-hidden="true" />
 

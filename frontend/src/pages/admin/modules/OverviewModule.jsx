@@ -1,5 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Briefcase, Image, Award, Users, ArrowUpRight, Server, HardDrive, ShieldCheck, Activity } from 'lucide-react';
+import {
+  Briefcase,
+  Image,
+  Package,
+  Users,
+  ArrowUpRight,
+  Activity,
+  Globe,
+  Send,
+} from 'lucide-react';
 import api from '../../../lib/api';
 import { useAdminAuth } from '../../../context/AdminAuthContext';
 
@@ -8,9 +17,16 @@ export default function OverviewModule({ onNavigateTab }) {
   const [stats, setStats] = useState({
     jobsCount: 0,
     galleryCount: 0,
-    coreValuesCount: 0,
-    benefitsCount: 0,
+    productsCount: 0,
     usersCount: 0,
+  });
+  const [telemetry, setTelemetry] = useState({
+    totalVisits: 0,
+    uniqueVisitors: 0,
+    activeNow: 0,
+    countryStats: [],
+    totalRfqs: 0,
+    recentRfqs: [],
   });
   const [recentLogs, setRecentLogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,20 +37,21 @@ export default function OverviewModule({ onNavigateTab }) {
     async function fetchDashboardStats() {
       setLoading(true);
       try {
-        const [jobsRes, galleryRes, coreRes, benefitsRes] = await Promise.allSettled([
+        const [jobsRes, galleryRes, productsRes] = await Promise.allSettled([
           api.get('/public/jobs'),
           api.get('/public/gallery'),
-          api.get('/public/core-values'),
-          api.get('/public/benefits'),
+          api.get('/public/products'),
         ]);
 
         let uCount = 0;
         let logsData = [];
+        let telemetryData = null;
 
-        if (user?.role === 'administrator' || user?.role === 'hrd') {
-          const [usersRes, logsRes] = await Promise.allSettled([
+        if (user?.role === 'administrator' || user?.role === 'hrd' || user?.role === 'staff') {
+          const [usersRes, logsRes, telRes] = await Promise.allSettled([
             api.get('/admin/users'),
             api.get('/admin/logs?limit=5'),
+            api.get('/admin/telemetry'),
           ]);
           if (usersRes.status === 'fulfilled') {
             uCount = usersRes.value.data?.data?.length || 0;
@@ -42,16 +59,21 @@ export default function OverviewModule({ onNavigateTab }) {
           if (logsRes.status === 'fulfilled') {
             logsData = logsRes.value.data?.data || [];
           }
+          if (telRes.status === 'fulfilled') {
+            telemetryData = telRes.value.data?.data;
+          }
         }
 
         if (isMounted) {
           setStats({
             jobsCount: jobsRes.status === 'fulfilled' ? (jobsRes.value.data?.pagination?.totalItems || jobsRes.value.data?.data?.length || 0) : 0,
             galleryCount: galleryRes.status === 'fulfilled' ? (galleryRes.value.data?.pagination?.totalItems || galleryRes.value.data?.data?.length || 0) : 0,
-            coreValuesCount: coreRes.status === 'fulfilled' ? (coreRes.value.data?.data?.length || 0) : 0,
-            benefitsCount: benefitsRes.status === 'fulfilled' ? (benefitsRes.value.data?.data?.length || 0) : 0,
+            productsCount: productsRes.status === 'fulfilled' ? (productsRes.value.data?.data?.length || 0) : 0,
             usersCount: uCount,
           });
+          if (telemetryData) {
+            setTelemetry(telemetryData);
+          }
           setRecentLogs(logsData);
         }
       } catch (err) {
@@ -89,13 +111,13 @@ export default function OverviewModule({ onNavigateTab }) {
           </div>
         </div>
 
-        <div className="admin-metric-card" onClick={() => onNavigateTab('core-values')} style={{ cursor: 'pointer' }}>
+        <div className="admin-metric-card" onClick={() => onNavigateTab('products')} style={{ cursor: 'pointer' }}>
           <div>
-            <div className="admin-metric-val">{loading ? '...' : stats.coreValuesCount}</div>
-            <div className="admin-metric-label">Nilai Inti Rekayasa</div>
+            <div className="admin-metric-val">{loading ? '...' : stats.productsCount}</div>
+            <div className="admin-metric-label">Total Produk Terdaftar</div>
           </div>
           <div className="admin-metric-icon">
-            <Award size={18} />
+            <Package size={18} />
           </div>
         </div>
 
@@ -177,42 +199,130 @@ export default function OverviewModule({ onNavigateTab }) {
             <button
               type="button"
               className="admin-btn-secondary"
-              onClick={() => onNavigateTab('core-values')}
+              onClick={() => onNavigateTab('products')}
               style={{ justifyContent: 'space-between', padding: '10px 12px' }}
             >
-              <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Nilai Inti Rekayasa</span>
+              <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Katalog Produk SKU</span>
               <ArrowUpRight size={14} color="#94a3b8" />
             </button>
           </div>
         </div>
 
-        {/* System Info */}
+        {/* Visitor Telemetry & RFQ Inquiries */}
         <div className="admin-card" style={{ marginBottom: 0 }}>
           <div className="admin-card-header">
             <div>
-              <h3 className="admin-card-title">Status Sistem & Basis Data</h3>
-              <p className="admin-card-desc">Informasi lingkungan runtime backend</p>
+              <h3 className="admin-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Activity size={18} />
+                <span>Statistik Pengunjung & Formulir RFQ</span>
+              </h3>
+              <p className="admin-card-desc">Monitoring kunjungan website dan permintaan penawaran B2B</p>
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.825rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--adm-input-bg)', borderRadius: '6px', border: '1px solid var(--adm-border)' }}>
-              <span style={{ color: 'var(--adm-muted)' }}>REST API Server</span>
-              <span style={{ fontFamily: 'monospace', fontWeight: 600 }}>Node.js / Express (Port 3000)</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginBottom: '14px' }}>
+            {/* Total Visitors */}
+            <div style={{ padding: '10px 12px', background: 'var(--adm-card-inner)', borderRadius: '8px', border: '1px solid var(--adm-border-visible)' }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Total Kunjungan</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--adm-text)', marginTop: '2px' }}>
+                {telemetry.totalVisits || 0}
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', marginTop: '2px' }}>
+                {telemetry.uniqueVisitors || 0} pengguna unik
+              </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--adm-input-bg)', borderRadius: '6px', border: '1px solid var(--adm-border)' }}>
-              <span style={{ color: 'var(--adm-muted)' }}>Database Engine</span>
-              <span style={{ fontFamily: 'monospace', fontWeight: 600 }}>MySQL 3306 (isa_career_hrd)</span>
+
+            {/* Live Active Now */}
+            <div style={{ padding: '10px 12px', background: 'var(--adm-card-inner)', borderRadius: '8px', border: '1px solid var(--adm-border-visible)' }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Sedang Online</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--adm-text)', marginTop: '2px' }}>
+                {telemetry.activeNow || 1}
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', marginTop: '2px' }}>
+                Sesi aktif (5 mnt)
+              </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--adm-input-bg)', borderRadius: '6px', border: '1px solid var(--adm-border)' }}>
-              <span style={{ color: 'var(--adm-muted)' }}>Role Pengguna</span>
-              <span className="admin-pill admin-pill--info">{user?.role?.toUpperCase()}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', background: 'var(--adm-input-bg)', borderRadius: '6px', border: '1px solid var(--adm-border)' }}>
-              <span style={{ color: 'var(--adm-muted)' }}>Lokasi Pabrik</span>
-              <span style={{ fontWeight: 600 }}>Batam Free Trade Zone (FTZ)</span>
+
+            {/* Total RFQ Inquiries */}
+            <div style={{ padding: '10px 12px', background: 'var(--adm-card-inner)', borderRadius: '8px', border: '1px solid var(--adm-border-visible)' }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Form RFQ Kontak</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--adm-text)', marginTop: '2px' }}>
+                {telemetry.totalRfqs || 0}
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--adm-muted)', marginTop: '2px' }}>
+                leads masuk
+              </div>
             </div>
           </div>
+
+          {/* Country Breakdown */}
+          {telemetry.countryStats && telemetry.countryStats.length > 0 ? (
+            <div style={{ padding: '12px', background: 'var(--adm-card-inner)', borderRadius: '8px', border: '1px solid var(--adm-border)' }}>
+              <div style={{ fontSize: '0.76rem', fontWeight: 600, color: 'var(--adm-muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Globe size={13} />
+                <span>Pengunjung Berdasarkan Negara:</span>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {telemetry.countryStats.map((cs) => (
+                  <span
+                    key={cs.country_code}
+                    style={{
+                      fontSize: '0.75rem',
+                      padding: '4px 9px',
+                      background: 'var(--adm-card)',
+                      border: '1px solid var(--adm-border-visible)',
+                      borderRadius: '6px',
+                      color: 'var(--adm-text)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                    }}
+                  >
+                    <strong>{cs.country_code}</strong> {cs.country_name} : <span style={{ fontWeight: 700, color: 'var(--adm-text)' }}>{cs.visit_count}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div style={{ fontSize: '0.78rem', color: 'var(--adm-muted)', fontStyle: 'italic', padding: '6px 0' }}>
+              Belum ada data geolokasi negara yang tercatat.
+            </div>
+          )}
+
+          {/* Recent RFQ Inquiries Preview */}
+          {telemetry.recentRfqs && telemetry.recentRfqs.length > 0 && (
+            <div style={{ marginTop: '12px', paddingTop: '10px', borderTop: '1px solid var(--adm-border)' }}>
+              <div style={{ fontSize: '0.76rem', fontWeight: 600, color: 'var(--adm-muted)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Send size={12} />
+                <span>Permintaan RFQ Kontak Terbaru:</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                {telemetry.recentRfqs.slice(0, 2).map((rfq) => (
+                  <div
+                    key={rfq.id}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: '0.78rem',
+                      padding: '8px 10px',
+                      background: 'var(--adm-card-inner)',
+                      borderRadius: '6px',
+                      border: '1px solid var(--adm-border)',
+                    }}
+                  >
+                    <div>
+                      <strong style={{ color: 'var(--adm-text)' }}>{rfq.full_name}</strong> <span style={{ color: 'var(--adm-muted)' }}>({rfq.company_name})</span>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--adm-muted)', marginTop: '2px' }}>{rfq.corporate_email} &bull; {rfq.inquiry_type}</div>
+                    </div>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--adm-muted)', whiteSpace: 'nowrap' }}>
+                      {new Date(rfq.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

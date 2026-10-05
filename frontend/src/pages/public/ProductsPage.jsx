@@ -1,11 +1,37 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { FEATURED_PRODUCTS } from '../../data/featuredProducts';
+import api, { getImageUrl } from '../../lib/api';
+import { useSiteSettings } from '../../hooks/useApi';
+import { getLocalizedData } from '../../lib/translator';
 import ProductSchematic from '../../components/home/ProductSchematic';
 import ProductSpecsModal from '../../components/home/ProductSpecsModal';
 import './ProductsPage.css';
+
+/**
+ * Transform API response row (snake_case) → frontend shape used by components
+ */
+function transformProduct(row) {
+  return {
+    id:          String(row.id),
+    modelCode:   row.model_code,
+    category:    row.category,
+    badge:       row.badge,
+    badgeColor:  row.badge_color,
+    image:       row.image || null,
+    gallery:     Array.isArray(row.gallery)
+                   ? row.gallery
+                   : (typeof row.gallery === 'string' ? JSON.parse(row.gallery) : []),
+    title:       { id: row.title_id, en: row.title_en },
+    shortDesc:   { id: row.short_desc_id || '', en: row.short_desc_en || '' },
+    specs:       Array.isArray(row.specs)       ? row.specs       : (typeof row.specs === 'string' ? JSON.parse(row.specs) : []),
+    fullSpecs:   typeof row.full_specs === 'object' && row.full_specs
+                   ? row.full_specs
+                   : (row.full_specs ? JSON.parse(row.full_specs) : {}),
+    diagramType: row.diagram_type || 'infotainment',
+  };
+}
 
 /* ── Interactive RFQ Quotation Modal ── */
 function RfqModal({ product, onClose, isId }) {
@@ -140,6 +166,37 @@ function RfqModal({ product, onClose, isId }) {
 export default function ProductsPage() {
   const { t, i18n } = useTranslation(['products', 'common']);
   const isId = i18n.language === 'id';
+  const currentLang = isId ? 'id' : 'en';
+
+  // ── Dynamic CMS Settings from Admin Portal ──
+  const { data: rawHeaderSettings } = useSiteSettings('products_header');
+  const { data: rawRfqSettings } = useSiteSettings('products_rfq');
+  const { data: rawCatSettings } = useSiteSettings('products_categories');
+
+  const headerSettings = getLocalizedData(rawHeaderSettings, currentLang);
+  const rfqSettings = getLocalizedData(rawRfqSettings, currentLang);
+  const catSettings = getLocalizedData(rawCatSettings, currentLang);
+
+  // ── API Products State ──
+  const [allProducts, setAllProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    api.get('/public/products')
+      .then(res => {
+        if (isMounted) {
+          setAllProducts((res.data?.data || []).map(transformProduct));
+        }
+      })
+      .catch(() => {
+        // Silently fail — page renders with empty state
+      })
+      .finally(() => {
+        if (isMounted) setProductsLoading(false);
+      });
+    return () => { isMounted = false; };
+  }, []);
 
   // Filters & View State
   const [activeCategory, setActiveCategory] = useState('all');
@@ -151,14 +208,28 @@ export default function ProductsPage() {
   const [selectedSpecsProduct, setSelectedSpecsProduct] = useState(null);
   const [selectedRfqProduct, setSelectedRfqProduct] = useState(null);
 
-  const categories = [
+  const rawCategories = useMemo(() => [
     { key: 'all',        label: t('products:catalog.categories.all') },
     { key: 'headunit',   label: t('products:catalog.categories.headunit') },
     { key: 'audio',      label: t('products:catalog.categories.audio') },
     { key: 'dashcam',    label: t('products:catalog.categories.dashcam') },
     { key: 'automation', label: t('products:catalog.categories.automation') },
     { key: 'ems',        label: t('products:catalog.categories.ems') },
-  ];
+  ], [t]);
+
+  // Hanya tampilkan kategori yang memiliki produk terdaftar (kategori kosong disembunyikan)
+  const categories = useMemo(() => {
+    return rawCategories.filter(
+      (c) => c.key === 'all' || allProducts.some((p) => p.category === c.key)
+    );
+  }, [rawCategories, allProducts]);
+
+  // Otomatis reset ke 'all' jika kategori yang aktif sudah tidak memiliki produk
+  useEffect(() => {
+    if (activeCategory !== 'all' && !categories.some((c) => c.key === activeCategory)) {
+      setActiveCategory('all');
+    }
+  }, [categories, activeCategory]);
 
   // Quick SKU copy
   const handleCopySku = (e, code, id) => {
@@ -176,7 +247,7 @@ export default function ProductsPage() {
 
   // Filtered products logic
   const filteredProducts = useMemo(() => {
-    return FEATURED_PRODUCTS.filter((prod) => {
+    return allProducts.filter((prod) => {
       const matchCat = activeCategory === 'all' || prod.category === activeCategory;
       if (!matchCat) return false;
 
@@ -185,37 +256,58 @@ export default function ProductsPage() {
       const title = (prod.title[isId ? 'id' : 'en'] || prod.title.en).toLowerCase();
       const code = prod.modelCode.toLowerCase();
       const desc = (prod.shortDesc[isId ? 'id' : 'en'] || prod.shortDesc.en).toLowerCase();
-      const specsMatch = prod.specs.some(
+      const specsMatch = (prod.specs || []).some(
         (s) => s.label.toLowerCase().includes(q) || s.value.toLowerCase().includes(q)
       );
 
       return title.includes(q) || code.includes(q) || desc.includes(q) || specsMatch;
     });
-  }, [activeCategory, searchQuery, isId]);
+  }, [activeCategory, searchQuery, isId, allProducts]);
 
-  // Stat chips data
-  const heroStats = [
-    {
-      value: '12+ Model',
-      label: isId ? 'SKU Siap Produksi' : 'Production-Ready SKUs',
-      sub: isId ? 'Turnkey OEM / ODM' : 'Turnkey OEM / ODM'
-    },
-    {
-      value: '80.000 CPH',
-      label: isId ? 'Kecepatan Lini SMT' : 'SMT Line Capacity',
-      sub: isId ? 'Yamaha & Panasonic Lines' : 'Yamaha & Panasonic Lines'
-    },
-    {
-      value: 'IATF 16949',
-      label: isId ? 'Standar Mutu Nol Cacat' : 'Zero-Defect Standard',
-      sub: isId ? '& ISO 9001:2015' : '& ISO 9001:2015'
-    },
-    {
-      value: '45 Menit',
-      label: isId ? 'Logistik Bebas Pajak' : 'Duty-Free Logistics',
-      sub: isId ? 'Batam FTZ ke Singapura' : 'Batam FTZ to Singapore'
-    }
-  ];
+  // Stat chips data dengan jumlah produk dinamis sesuai database
+  const heroChips = useMemo(() => {
+    const defaultChips = [
+      {
+        value: '12+ Model',
+        label: isId ? 'SKU Siap Produksi' : 'Production-Ready SKUs',
+        sub: isId ? 'Turnkey OEM / ODM' : 'Turnkey OEM / ODM'
+      },
+      {
+        value: '80.000 CPH',
+        label: isId ? 'Kecepatan Lini SMT' : 'SMT Line Capacity',
+        sub: isId ? 'Yamaha & Panasonic Lines' : 'Yamaha & Panasonic Lines'
+      },
+      {
+        value: 'IATF 16949',
+        label: isId ? 'Standar Mutu Nol Cacat' : 'Zero-Defect Standard',
+        sub: isId ? '& ISO 9001:2015' : '& ISO 9001:2015'
+      },
+      {
+        value: '45 Menit',
+        label: isId ? 'Logistik Bebas Pajak' : 'Duty-Free Logistics',
+        sub: isId ? 'Batam FTZ ke Singapura' : 'Batam FTZ to Singapore'
+      }
+    ];
+
+    const baseChips = (headerSettings?.chips && headerSettings.chips.length === 4)
+      ? headerSettings.chips
+      : defaultChips;
+
+    // Hitung label dinamis jumlah produk terdaftar
+    const countVal = productsLoading
+      ? '...'
+      : `${allProducts.length}${allProducts.length >= 10 ? '+' : ''} ${isId ? 'Model' : 'Models'}`;
+
+    return baseChips.map((st, idx) => {
+      if (idx === 0) {
+        return {
+          ...st,
+          value: countVal,
+        };
+      }
+      return st;
+    });
+  }, [headerSettings, allProducts.length, productsLoading, isId]);
 
   // Process workflow steps
   const processSteps = [
@@ -261,8 +353,8 @@ export default function ProductsPage() {
       <Helmet>
         <title>
           {isId
-            ? 'Produk & Solusi Rekayasa Manufaktur — PT. Global Philsonic Technologies'
-            : 'Products & Manufacturing Solutions — PT. Global Philsonic Technologies'}
+            ? 'Produk & Solusi Rekayasa Manufaktur | PT. Global Philsonic Technologies'
+            : 'Products & Manufacturing Solutions | PT. Global Philsonic Technologies'}
         </title>
         <meta
           name="description"
@@ -281,19 +373,19 @@ export default function ProductsPage() {
         <div className="container prod-hero__content">
           {/* Main Title & Concise Explanation (Fokus 1 Konteks: Produk & Manufaktur) */}
           <h1 className="prod-hero__title">
-            {isId
+            {headerSettings?.title || (isId
               ? 'Solusi Manufaktur Elektronik Otomotif & Otomasi Presisi'
-              : 'Automotive Electronics & Precision Manufacturing Catalog'}
+              : 'Automotive Electronics & Precision Manufacturing Catalog')}
           </h1>
           <p className="prod-hero__subtitle">
-            {isId
+            {headerSettings?.subtitle || (isId
               ? 'Katalog resmi produk siap OEM/ODM standar Tier-1, prosesor audio DSP, perangkat keselamatan berkendara, mesin jig uji otomatis, dan layanan kontrak perakitan SMT berkecepatan tinggi di Kawasan Bebas Batam (FTZ).'
-              : 'Official engineering catalog of Tier-1 standard OEM/ODM products, DSP audio processors, in-vehicle safety sensors, automated test fixtures, and high-speed turnkey SMT assembly at Batam Free Trade Zone.'}
+              : 'Official engineering catalog of Tier-1 standard OEM/ODM products, DSP audio processors, in-vehicle safety sensors, automated test fixtures, and high-speed turnkey SMT assembly at Batam Free Trade Zone.')}
           </p>
 
           {/* 4 Industrial Highlights / Capability Stat Chips */}
           <div className="prod-hero__stats">
-            {heroStats.map((st, idx) => (
+            {heroChips.map((st, idx) => (
               <div key={idx} className="prod-hero__stat-card">
                 <span className="prod-hero__stat-val">{st.value}</span>
                 <span className="prod-hero__stat-label">{st.label}</span>
@@ -374,8 +466,8 @@ export default function ProductsPage() {
           <div className="catalog-pills" role="tablist">
             {categories.map(({ key, label }) => {
               const count = key === 'all'
-                ? FEATURED_PRODUCTS.length
-                : FEATURED_PRODUCTS.filter(p => p.category === key).length;
+                ? allProducts.length
+                : allProducts.filter(p => p.category === key).length;
 
               return (
                 <button
@@ -398,8 +490,8 @@ export default function ProductsPage() {
             <div className="catalog-active-bar__info">
               <span className="catalog-active-bar__count">
                 {isId
-                  ? `Menampilkan ${filteredProducts.length} dari ${FEATURED_PRODUCTS.length} produk`
-                  : `Showing ${filteredProducts.length} of ${FEATURED_PRODUCTS.length} products`}
+                  ? `Menampilkan ${filteredProducts.length} dari ${allProducts.length} produk`
+                  : `Showing ${filteredProducts.length} of ${allProducts.length} products`}
               </span>
               {activeCategory !== 'all' && (
                 <span className="catalog-active-bar__tag">
@@ -433,7 +525,19 @@ export default function ProductsPage() {
       {/* ── 3. PRODUCT CATALOG (GRID OR TABLE VIEW) ── */}
       <section className="prod-catalog-section">
         <div className="container">
-          {filteredProducts.length === 0 ? (
+          {productsLoading ? (
+            /* ── LOADING SKELETON ── */
+            <div className="products-grid">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="product-card" style={{ opacity: 0.5 }}>
+                  <div style={{ height: 160, background: 'var(--color-border, #1e293b)', borderRadius: 8, marginBottom: 16, animation: 'pulse 1.5s ease-in-out infinite' }} />
+                  <div style={{ height: 12, background: 'var(--color-border, #1e293b)', borderRadius: 4, marginBottom: 8, width: '40%' }} />
+                  <div style={{ height: 18, background: 'var(--color-border, #1e293b)', borderRadius: 4, marginBottom: 8 }} />
+                  <div style={{ height: 14, background: 'var(--color-border, #1e293b)', borderRadius: 4, width: '85%' }} />
+                </div>
+              ))}
+            </div>
+          ) : filteredProducts.length === 0 ? (
             <div className="prod-empty-state">
               <h3 className="prod-empty-state__title">
                 {isId ? 'Produk Tidak Ditemukan' : 'No Products Found'}
@@ -459,13 +563,38 @@ export default function ProductsPage() {
 
                 return (
                   <div key={prod.id} className="product-card">
-                    {/* Visual Schematic Diagram with CAD Corner Crosshairs */}
+                    {/* Visual Product Image OR CAD Schematic with CAD Corner Crosshairs */}
                     <div className="product-card__schematic">
                       <div className="schematic-corner tl" aria-hidden="true">+</div>
                       <div className="schematic-corner tr" aria-hidden="true">+</div>
                       <div className="schematic-corner bl" aria-hidden="true">+</div>
                       <div className="schematic-corner br" aria-hidden="true">+</div>
-                      <ProductSchematic type={prod.diagramType} />
+                      {prod.image ? (
+                        <>
+                          <img
+                            src={getImageUrl(prod.image)}
+                            alt={title}
+                            className="product-card__real-img"
+                            loading="lazy"
+                          />
+                          {prod.gallery?.length > 0 && (
+                            <span style={{
+                              position: 'absolute', bottom: 8, right: 8,
+                              fontSize: '0.68rem', fontWeight: 600,
+                              background: 'rgba(15, 23, 42, 0.85)',
+                              backdropFilter: 'blur(4px)',
+                              color: 'var(--color-primary, #14b8a6)',
+                              border: '1px solid rgba(20, 184, 166, 0.3)',
+                              padding: '2px 7px', borderRadius: 12,
+                              display: 'flex', alignItems: 'center', gap: 4, zIndex: 2
+                            }}>
+                              +{prod.gallery.length} Foto
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <ProductSchematic type={prod.diagramType} />
+                      )}
                     </div>
 
                     {/* Card Header: Gray SKU + Text Copy Button (No Category Badge) */}
@@ -576,12 +705,12 @@ export default function ProductsPage() {
                           </td>
                           <td className="td-voltage">
                             <span className="table-metric-badge">
-                              {prod.fullSpecs?.operatingVoltage || '—'}
+                              {prod.fullSpecs?.operatingVoltage || '-'}
                             </span>
                           </td>
                           <td className="td-temp">
                             <span className="table-metric-badge">
-                              {prod.fullSpecs?.operatingTemp || '—'}
+                              {prod.fullSpecs?.operatingTemp || '-'}
                             </span>
                           </td>
                           <td className="td-actions">
@@ -620,26 +749,26 @@ export default function ProductsPage() {
         <div className="container">
           <div className="prod-workflow-header">
             <h2 className="prod-workflow-title">
-              {isId
+              {rfqSettings?.workflowTitle || (isId
                 ? 'Dari Desain Konsep Hingga Produksi Massal (OEM / ODM Journey)'
-                : 'From Concept Design to Mass Production (OEM / ODM Journey)'}
+                : 'From Concept Design to Mass Production (OEM / ODM Journey)')}
             </h2>
             <p className="prod-workflow-subtitle">
-              {isId
+              {rfqSettings?.workflowSubtitle || (isId
                 ? 'Metodologi rekayasa terstruktur kami menjamin kualitas bebas cacat (Zero-Defect), kepatuhan regulasi otomotif, dan efisiensi biaya manufaktur.'
-                : 'Our structured engineering methodology guarantees zero-defect quality, automotive regulatory compliance, and maximum cost efficiency.'}
+                : 'Our structured engineering methodology guarantees zero-defect quality, automotive regulatory compliance, and maximum cost efficiency.')}
             </p>
           </div>
 
           <div className="prod-workflow-grid">
-            {processSteps.map((st, idx) => (
+            {((rfqSettings?.steps && rfqSettings.steps.length > 0) ? rfqSettings.steps : processSteps).map((st, idx) => (
               <div key={idx} className="prod-workflow-card">
                 <div className="prod-workflow-card__top">
                   <span className="prod-workflow-card__step">{st.step}</span>
                 </div>
                 <h3 className="prod-workflow-card__title">{st.title}</h3>
                 <p className="prod-workflow-card__desc">{st.desc}</p>
-                {idx < processSteps.length - 1 && (
+                {idx < ((rfqSettings?.steps && rfqSettings.steps.length > 0) ? rfqSettings.steps : processSteps).length - 1 && (
                   <div className="prod-workflow-card__connector" aria-hidden="true" />
                 )}
               </div>
@@ -655,14 +784,14 @@ export default function ProductsPage() {
             <div className="prod-cta-card__bg-grid" aria-hidden="true" />
             <div className="prod-cta-card__content">
               <h2 className="prod-cta-title">
-                {isId
+                {rfqSettings?.rfqTitle || (isId
                   ? 'Membutuhkan Kustomisasi Khusus atau Tooling Baru?'
-                  : 'Need Custom Engineering or New Product Tooling?'}
+                  : 'Need Custom Engineering or New Product Tooling?')}
               </h2>
               <p className="prod-cta-desc">
-                {isId
+                {rfqSettings?.rfqSubtitle || (isId
                   ? 'Tim R&D dan engineering kami di Batam FTZ siap berkolaborasi untuk perancangan skematik PCB, penyesuaian firmware CAN-Bus, hingga perakitan turnkey box-build standar ekspor global.'
-                  : 'Our engineering & R&D team at Batam FTZ is ready to collaborate on schematic design, CAN-Bus firmware customization, and turnkey box-build assembly for global export.'}
+                  : 'Our engineering & R&D team at Batam FTZ is ready to collaborate on schematic design, CAN-Bus firmware customization, and turnkey box-build assembly for global export.')}
               </p>
 
               <div className="prod-cta-actions">
@@ -675,7 +804,7 @@ export default function ProductsPage() {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
                   </svg>
-                  <span>{isId ? 'Konsultasi Cepat via WhatsApp B2B' : 'Direct B2B WhatsApp Consultation'}</span>
+                  <span>{rfqSettings?.rfqButton || (isId ? 'Konsultasi Cepat via WhatsApp B2B' : 'Direct B2B WhatsApp Consultation')}</span>
                 </a>
 
                 <Link to="/contact" className="btn prod-cta-btn-form">

@@ -1,6 +1,19 @@
 import axios from 'axios';
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+function resolveApiBaseUrl() {
+  const envUrl = import.meta.env.VITE_API_URL;
+  // If explicitly configured for production (not localhost)
+  if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+    return envUrl;
+  }
+  // If running on local network (e.g. smartphone connecting via Wi-Fi IP)
+  if (typeof window !== 'undefined' && window.location.hostname && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return `http://${window.location.hostname}:3000/api`;
+  }
+  return envUrl || 'http://localhost:3000/api';
+}
+
+export const API_BASE_URL = resolveApiBaseUrl();
 export const UPLOAD_BASE_URL = API_BASE_URL.replace(/\/api\/?$/, '');
 
 const api = axios.create({

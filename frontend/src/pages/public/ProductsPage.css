@@ -293,7 +293,8 @@
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 12px;
+  margin-bottom: 0.5rem;
   scrollbar-width: thin;
 }
 
@@ -311,8 +312,9 @@
   color: #475569;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
   user-select: none;
+  margin-bottom: 4px;
 }
 
 [data-theme="dark"] .catalog-pill {
@@ -323,24 +325,26 @@
 
 .catalog-pill:hover {
   background: #e2e8f0;
-  color: #0f172a;
+  color: #475569; /* Warna teks tidak berubah saat hover */
 }
 
 [data-theme="dark"] .catalog-pill:hover {
   background: #16243b;
-  color: #ffffff;
+  color: #94a3b8; /* Warna teks tidak berubah saat hover */
 }
 
-.catalog-pill--active {
+.catalog-pill--active,
+.catalog-pill--active:hover {
   background: var(--teal, #00897b);
   border-color: var(--teal, #00897b);
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
-[data-theme="dark"] .catalog-pill--active {
+[data-theme="dark"] .catalog-pill--active,
+[data-theme="dark"] .catalog-pill--active:hover {
   background: var(--teal, #00897b);
   border-color: var(--teal, #00897b);
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .catalog-pill__count {
@@ -518,6 +522,17 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.product-card__real-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-card__real-img {
+  transform: scale(1.05);
 }
 
 .schematic-corner {
@@ -1573,5 +1588,34 @@
     width: 100%;
     text-align: center;
     justify-content: center;
+  }
+
+  /* Direct B2B WhatsApp CTA Button Mobile Layout Fix */
+  .prod-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    gap: 0.85rem;
+  }
+
+  .prod-cta-btn-wa,
+  .prod-cta-btn-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    box-sizing: border-box;
+  }
+
+  .prod-cta-btn-wa span,
+  .prod-cta-btn-form span {
+    text-align: center;
+    word-break: normal;
   }
 }

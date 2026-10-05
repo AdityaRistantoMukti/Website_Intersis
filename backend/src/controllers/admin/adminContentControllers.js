@@ -1,6 +1,24 @@
+const fs = require('fs');
+const path = require('path');
 const pool = require('../../config/database');
 const { success, paginated, error } = require('../../utils/response');
 const { logActivity } = require('../../utils/activityLogger');
+
+const deleteFileIfLocal = (filePath) => {
+  if (!filePath || typeof filePath !== 'string') return;
+  if (filePath.startsWith('/uploads/')) {
+    const relativePart = filePath.replace(/^\/uploads\//, '');
+    const absolutePath = path.join(__dirname, '../../../uploads', relativePart);
+    if (fs.existsSync(absolutePath)) {
+      try {
+        fs.unlinkSync(absolutePath);
+        console.log(`[FILE CLEANUP] Deleted local file: ${absolutePath}`);
+      } catch (err) {
+        console.error(`[FILE CLEANUP ERROR] Failed to delete file ${absolutePath}:`, err.message);
+      }
+    }
+  }
+};
 
 // ─── 1. CORE VALUES ─────────────────────────────────────────────────────────
 
@@ -121,6 +139,10 @@ const updateGalleryItem = async (req, res, next) => {
 const deleteGalleryItem = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const [rows] = await pool.execute('SELECT image FROM gallery WHERE id = ?', [id]);
+    if (rows.length > 0 && rows[0].image) {
+      deleteFileIfLocal(rows[0].image);
+    }
     await pool.execute('DELETE FROM gallery WHERE id = ?', [id]);
     await logActivity(req.user.id, 'DELETE', 'gallery', `Menghapus galeri ID: ${id}`);
     return success(res, 'Item galeri berhasil dihapus.');
@@ -361,15 +383,48 @@ const deleteFaq = async (req, res, next) => {
 const getActivityLogs = async (req, res, next) => {
   try {
     const page = Math.max(1, parseInt(req.query.page || '1'));
-    const limit = Math.max(1, Math.min(100, parseInt(req.query.limit || '15')));
+    const limit = Math.max(1, Math.min(100, parseInt(req.query.limit || '20')));
     const offset = (page - 1) * limit;
 
-    const [countRows] = await pool.execute('SELECT COUNT(*) AS total FROM activity_logs');
+    const { q, action, startDate, endDate } = req.query;
+
+    let whereConditions = ['1=1'];
+    let queryParams = [];
+
+    if (action) {
+      whereConditions.push('l.action = ?');
+      queryParams.push(action);
+    }
+
+    if (q) {
+      whereConditions.push('(l.description LIKE ? OR l.module LIKE ? OR u.name LIKE ? OR u.username LIKE ?)');
+      const search = `%${q}%`;
+      queryParams.push(search, search, search, search);
+    }
+
+    if (startDate) {
+      whereConditions.push('DATE(l.created_at) >= ?');
+      queryParams.push(startDate);
+    }
+
+    if (endDate) {
+      whereConditions.push('DATE(l.created_at) <= ?');
+      queryParams.push(endDate);
+    }
+
+    const whereClause = whereConditions.join(' AND ');
+
+    const countSql = `
+      SELECT COUNT(*) AS total
+      FROM activity_logs l
+      LEFT JOIN users u ON l.user_id = u.id
+      WHERE ${whereClause}
+    `;
+    const [countRows] = await pool.execute(countSql, queryParams);
     const totalItems = countRows[0].total;
     const totalPages = Math.ceil(totalItems / limit);
 
-    const [logs] = await pool.execute(
-      `
+    const dataSql = `
       SELECT 
         l.id,
         l.user_id,
@@ -382,11 +437,13 @@ const getActivityLogs = async (req, res, next) => {
         l.created_at
       FROM activity_logs l
       LEFT JOIN users u ON l.user_id = u.id
+      WHERE ${whereClause}
       ORDER BY l.created_at DESC, l.id DESC
       LIMIT ? OFFSET ?
-      `,
-      [limit, offset]
-    );
+    `;
+
+    queryParams.push(limit, offset);
+    const [logs] = await pool.execute(dataSql, queryParams);
 
     return paginated(res, 'Daftar activity log berhasil diambil.', logs, {
       page,
@@ -397,6 +454,208 @@ const getActivityLogs = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+
+// ─── 8. PRODUCTS ──────────────────────────────────────────────────────────────
+
+const getAdminProducts = async (req, res, next) => {
+  try {
+    const [rows] = await pool.execute(
+      `SELECT id, model_code, category, badge, badge_color, image, gallery,
+              title_id, title_en, short_desc_id, short_desc_en,
+              specs, full_specs, diagram_type, status, sort_order
+       FROM products ORDER BY sort_order ASC, id ASC`
+    );
+    const parsed = rows.map(row => ({
+      ...row,
+      specs:      row.specs      ? (typeof row.specs      === 'string' ? JSON.parse(row.specs)      : row.specs)      : [],
+      full_specs: row.full_specs ? (typeof row.full_specs === 'string' ? JSON.parse(row.full_specs) : row.full_specs) : {},
+      gallery:    row.gallery    ? (typeof row.gallery    === 'string' ? JSON.parse(row.gallery)    : row.gallery)    : [],
+    }));
+    return success(res, 'Daftar produk berhasil diambil.', parsed);
+  } catch (err) { next(err); }
+};
+
+const createProduct = async (req, res, next) => {
+  try {
+    const {
+      model_code, category, badge, badge_color,
+      title_id, title_en, short_desc_id, short_desc_en,
+      specs, full_specs, diagram_type, status, sort_order,
+      existing_gallery,
+    } = req.body;
+
+    const coverFile = req.files?.image?.[0] || req.file;
+    const galleryFiles = req.files?.gallery || [];
+
+    // Parse existing gallery if passed as JSON string
+    let parsedExistingGallery = [];
+    if (existing_gallery) {
+      try {
+        parsedExistingGallery = typeof existing_gallery === 'string' ? JSON.parse(existing_gallery) : existing_gallery;
+      } catch (e) {
+        parsedExistingGallery = [];
+      }
+    }
+
+    const newGalleryPaths = galleryFiles.map(f => `/uploads/${req.body.folder || 'products'}/${f.filename}`);
+    const combinedGallery = [...parsedExistingGallery, ...newGalleryPaths];
+    const galleryJson = combinedGallery.length > 0 ? JSON.stringify(combinedGallery) : null;
+
+    let image = null;
+    if (coverFile) {
+      image = `/uploads/${req.body.folder || 'products'}/${coverFile.filename}`;
+    } else if (req.body.image) {
+      image = req.body.image;
+    } else if (combinedGallery.length > 0) {
+      image = combinedGallery[0];
+    }
+
+    let specsJson = null;
+    if (specs) {
+      specsJson = typeof specs === 'string' ? specs : JSON.stringify(specs);
+    }
+    let fullSpecsJson = null;
+    if (full_specs) {
+      fullSpecsJson = typeof full_specs === 'string' ? full_specs : JSON.stringify(full_specs);
+    }
+
+    const [result] = await pool.execute(
+      `INSERT INTO products
+         (model_code, category, badge, badge_color, image, gallery,
+          title_id, title_en, short_desc_id, short_desc_en,
+          specs, full_specs, diagram_type, status, sort_order)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        model_code, category || 'headunit',
+        badge || null, badge_color || null, image, galleryJson,
+        title_id, title_en,
+        short_desc_id || null, short_desc_en || null,
+        specsJson, fullSpecsJson,
+        diagram_type || 'infotainment',
+        status !== undefined ? Number(status) : 1,
+        sort_order || 0,
+      ]
+    );
+
+    await logActivity(req.user.id, 'CREATE', 'products', `Membuat produk baru '${model_code}'`);
+    return success(res, 'Produk berhasil dibuat.', { id: result.insertId, model_code, image, gallery: combinedGallery }, 201);
+  } catch (err) { next(err); }
+};
+
+const updateProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      model_code, category, badge, badge_color,
+      title_id, title_en, short_desc_id, short_desc_en,
+      specs, full_specs, diagram_type, status, sort_order,
+      remove_image, existing_gallery,
+    } = req.body;
+
+    const coverFile = req.files?.image?.[0] || req.file;
+    const galleryFiles = req.files?.gallery || [];
+
+    let parsedExistingGallery = [];
+    if (existing_gallery !== undefined) {
+      try {
+        parsedExistingGallery = typeof existing_gallery === 'string' ? JSON.parse(existing_gallery) : existing_gallery;
+      } catch (e) {
+        parsedExistingGallery = [];
+      }
+    }
+
+    const newGalleryPaths = galleryFiles.map(f => `/uploads/${req.body.folder || 'products'}/${f.filename}`);
+    const combinedGallery = [...parsedExistingGallery, ...newGalleryPaths];
+    const galleryJson = (existing_gallery !== undefined || galleryFiles.length > 0)
+      ? (combinedGallery.length > 0 ? JSON.stringify(combinedGallery) : null)
+      : undefined;
+
+    let specsJson = null;
+    if (specs) {
+      specsJson = typeof specs === 'string' ? specs : JSON.stringify(specs);
+    }
+    let fullSpecsJson = null;
+    if (full_specs) {
+      fullSpecsJson = typeof full_specs === 'string' ? full_specs : JSON.stringify(full_specs);
+    }
+
+    let extraUpdates = '';
+    let params = [
+      model_code, category || 'headunit',
+      badge || null, badge_color || null,
+      title_id, title_en,
+      short_desc_id || null, short_desc_en || null,
+      specsJson, fullSpecsJson,
+      diagram_type || 'infotainment',
+      status !== undefined ? Number(status) : 1,
+      sort_order || 0,
+    ];
+
+    if (coverFile) {
+      const imagePath = `/uploads/${req.body.folder || 'products'}/${coverFile.filename}`;
+      extraUpdates += ', image = ?';
+      params.push(imagePath);
+    } else if (remove_image === 'true' || remove_image === '1') {
+      extraUpdates += ', image = NULL';
+    } else if (req.body.image !== undefined) {
+      extraUpdates += ', image = ?';
+      params.push(req.body.image || null);
+    }
+
+    if (galleryJson !== undefined) {
+      extraUpdates += ', gallery = ?';
+      params.push(galleryJson);
+    }
+
+    params.push(id);
+
+    await pool.execute(
+      `UPDATE products SET
+         model_code = ?, category = ?, badge = ?, badge_color = ?,
+         title_id = ?, title_en = ?,
+         short_desc_id = ?, short_desc_en = ?,
+         specs = ?, full_specs = ?,
+         diagram_type = ?, status = ?, sort_order = ?
+         ${extraUpdates}
+       WHERE id = ?`,
+      params
+    );
+
+    await logActivity(req.user.id, 'UPDATE', 'products', `Memperbarui produk ID: ${id} (${model_code})`);
+    return success(res, 'Produk berhasil diperbarui.');
+  } catch (err) { next(err); }
+};
+
+const deleteProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    // Fetch product first to delete associated image files from disk
+    const [rows] = await pool.execute('SELECT image, gallery FROM products WHERE id = ?', [id]);
+    if (rows.length > 0) {
+      const prod = rows[0];
+      if (prod.image) {
+        deleteFileIfLocal(prod.image);
+      }
+      if (prod.gallery) {
+        try {
+          const galleryArr = typeof prod.gallery === 'string' ? JSON.parse(prod.gallery) : prod.gallery;
+          if (Array.isArray(galleryArr)) {
+            galleryArr.forEach(imgPath => deleteFileIfLocal(imgPath));
+          }
+        } catch (e) {
+          // ignore parse errors
+        }
+      }
+    }
+
+    await pool.execute('DELETE FROM products WHERE id = ?', [id]);
+    await logActivity(req.user.id, 'DELETE', 'products', `Menghapus produk ID: ${id}`);
+    return success(res, 'Produk berhasil dihapus.');
+  } catch (err) { next(err); }
+};
+
+
 module.exports = {
   getAdminCoreValues, createCoreValue, updateCoreValue, deleteCoreValue,
   getAdminGallery, createGalleryItem, updateGalleryItem, deleteGalleryItem,
@@ -404,5 +663,6 @@ module.exports = {
   getAdminBenefits, createBenefit, updateBenefit, deleteBenefit,
   getAdminPrograms, createProgram, updateProgram, deleteProgram,
   getAdminFaqs, createFaq, updateFaq, deleteFaq,
+  getAdminProducts, createProduct, updateProduct, deleteProduct,
   getActivityLogs,
 };

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../../lib/api';
 import ProductSchematic from './ProductSchematic';
 import './ProductSpecsModal.css';
 
@@ -68,6 +69,20 @@ export default function ProductSpecsModal({ product, onClose }) {
   const title = product.title[isId ? 'id' : 'en'] || product.title.en;
   const desc = product.shortDesc[isId ? 'id' : 'en'] || product.shortDesc.en;
 
+  // Collect all photos: cover first, then gallery items
+  const allImages = useMemo(() => {
+    const list = [];
+    if (product.image) list.push(product.image);
+    if (Array.isArray(product.gallery)) {
+      product.gallery.forEach(img => {
+        if (img && !list.includes(img)) list.push(img);
+      });
+    }
+    return list;
+  }, [product.image, product.gallery]);
+
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
   return (
     <div className="specs-modal-overlay" onClick={onClose} role="dialog" aria-modal="true">
       <div className="specs-modal" onClick={(e) => e.stopPropagation()}>
@@ -102,14 +117,93 @@ export default function ProductSpecsModal({ product, onClose }) {
         <div className="specs-modal__body">
           <p className="specs-modal__desc">{desc}</p>
 
-          {/* Schematic Diagram Preview */}
+          {/* Schematic Diagram or Physical Photo Gallery Preview */}
           <div className="specs-modal__section">
-            <h3 className="specs-modal__section-title">
-              {isId ? 'Diagram Skematik & Arsitektur Perangkat' : 'Device Architecture & Schematic Diagram'}
-            </h3>
-            <div className="specs-modal__schematic-box">
-              <ProductSchematic type={product.diagramType} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <h3 className="specs-modal__section-title" style={{ margin: 0 }}>
+                {allImages.length > 0
+                  ? (isId ? 'Galeri Foto & Tampilan Produk' : 'Product Photo Gallery & Views')
+                  : (isId ? 'Diagram Skematik & Arsitektur Perangkat' : 'Device Architecture & Schematic Diagram')}
+              </h3>
+              {allImages.length > 1 && (
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-primary, #14b8a6)', fontWeight: 600 }}>
+                  {activeImageIndex + 1} / {allImages.length} {isId ? 'Sudut Foto' : 'Views'}
+                </span>
+              )}
             </div>
+
+            <div className="specs-modal__schematic-box" style={{ position: 'relative', overflow: 'hidden' }}>
+              {allImages.length > 0 ? (
+                <img
+                  src={getImageUrl(allImages[activeImageIndex] || allImages[0])}
+                  alt={`${title} - View ${activeImageIndex + 1}`}
+                  style={{
+                    maxHeight: '230px',
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    margin: '0 auto',
+                    display: 'block',
+                    borderRadius: '8px',
+                    transition: 'all 0.25s ease'
+                  }}
+                />
+              ) : (
+                <ProductSchematic type={product.diagramType} />
+              )}
+            </div>
+
+            {/* Interactive Thumbnail Carousel Strip */}
+            {allImages.length > 1 && (
+              <div style={{
+                display: 'flex',
+                gap: '8px',
+                marginTop: '10px',
+                overflowX: 'auto',
+                paddingBottom: '4px'
+              }}>
+                {allImages.map((img, idx) => {
+                  const isActive = idx === activeImageIndex;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setActiveImageIndex(idx)}
+                      style={{
+                        position: 'relative',
+                        width: '64px',
+                        height: '52px',
+                        borderRadius: '6px',
+                        overflow: 'hidden',
+                        padding: 0,
+                        cursor: 'pointer',
+                        background: '#090d16',
+                        border: isActive ? '2px solid var(--color-primary, #14b8a6)' : '1px solid rgba(255,255,255,0.12)',
+                        boxShadow: isActive ? '0 0 10px rgba(20, 184, 166, 0.4)' : 'none',
+                        transition: 'all 0.2s ease',
+                        flexShrink: 0
+                      }}
+                      title={`${isId ? 'Lihat foto' : 'View photo'} #${idx + 1}`}
+                    >
+                      <img
+                        src={getImageUrl(img)}
+                        alt={`Thumb #${idx + 1}`}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      />
+                      {idx === 0 && (
+                        <span style={{
+                          position: 'absolute', top: 2, left: 2,
+                          fontSize: '0.55rem', fontWeight: 700,
+                          background: '#eab308', color: '#000',
+                          padding: '1px 3px', borderRadius: 2
+                        }}>
+                          MAIN
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Technical Specifications Table */}

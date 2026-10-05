@@ -6,6 +6,9 @@ import {
   RefreshCw,
   ChevronLeft,
   ChevronRight,
+  Search,
+  Calendar,
+  FilterX,
 } from 'lucide-react';
 
 export default function LogsModule() {
@@ -15,10 +18,22 @@ export default function LogsModule() {
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({ page: 1, limit: 20, totalItems: 0, totalPages: 1 });
 
+  // Filters
+  const [searchQuery, setSearchQuery] = useState('');
+  const [actionFilter, setActionFilter] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
   const fetchLogs = async (page = 1) => {
     try {
       setLoading(true);
-      const res = await api.get(`/admin/logs?page=${page}&limit=20`);
+      const params = { page, limit: 20 };
+      if (searchQuery.trim()) params.q = searchQuery.trim();
+      if (actionFilter) params.action = actionFilter;
+      if (startDate) params.startDate = startDate;
+      if (endDate) params.endDate = endDate;
+
+      const res = await api.get('/admin/logs', { params });
       setLogs(res.data?.data || []);
       if (res.data?.pagination) {
         setPagination(res.data.pagination);
@@ -33,7 +48,21 @@ export default function LogsModule() {
   useEffect(() => {
     fetchLogs(pagination.page);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagination.page]);
+  }, [pagination.page, actionFilter, startDate, endDate]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setPagination((prev) => ({ ...prev, page: 1 }));
+    fetchLogs(1);
+  };
+
+  const handleResetFilters = () => {
+    setSearchQuery('');
+    setActionFilter('');
+    setStartDate('');
+    setEndDate('');
+    setPagination((prev) => ({ ...prev, page: 1 }));
+  };
 
   return (
     <div className="admin-logs-module">
@@ -57,6 +86,100 @@ export default function LogsModule() {
             <RefreshCw size={14} strokeWidth={2} />
             <span>Segarkan Log</span>
           </button>
+        </div>
+
+        {/* Toolbar: Search & Filter by Date / Action */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            marginBottom: '1.25rem',
+            background: 'transparent',
+            padding: 0,
+            border: 'none',
+          }}
+        >
+          {/* Keyword Search */}
+          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '6px', flex: '1', minWidth: '220px' }}>
+            <input
+              type="text"
+              className="admin-text-input"
+              placeholder="Cari deskripsi, user, atau modul..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ fontSize: '0.85rem' }}
+            />
+            <button
+              type="submit"
+              className="admin-btn-secondary"
+              style={{ padding: '0 12px', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.85rem' }}
+            >
+              <Search size={14} />
+              <span>Cari</span>
+            </button>
+          </form>
+
+          {/* Action Filter */}
+          <select
+            className="admin-select"
+            value={actionFilter}
+            onChange={(e) => {
+              setActionFilter(e.target.value);
+              setPagination((prev) => ({ ...prev, page: 1 }));
+            }}
+            style={{ width: 'auto', minWidth: '130px', fontSize: '0.85rem' }}
+          >
+            <option value="">Semua Aksi</option>
+            <option value="CREATE">CREATE (Tambah)</option>
+            <option value="UPDATE">UPDATE (Ubah)</option>
+            <option value="DELETE">DELETE (Hapus)</option>
+          </select>
+
+          {/* Date Filter: Start Date */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--adm-muted)' }}>Dari:</span>
+            <input
+              type="date"
+              className="admin-text-input"
+              value={startDate}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                setPagination((prev) => ({ ...prev, page: 1 }));
+              }}
+              style={{ fontSize: '0.82rem', padding: '6px 8px' }}
+            />
+          </div>
+
+          {/* Date Filter: End Date */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--adm-muted)' }}>Sampai:</span>
+            <input
+              type="date"
+              className="admin-text-input"
+              value={endDate}
+              onChange={(e) => {
+                setEndDate(e.target.value);
+                setPagination((prev) => ({ ...prev, page: 1 }));
+              }}
+              style={{ fontSize: '0.82rem', padding: '6px 8px' }}
+            />
+          </div>
+
+          {/* Reset Filters */}
+          {(searchQuery || actionFilter || startDate || endDate) && (
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="admin-btn-secondary"
+              title="Reset Semua Filter"
+              style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: '#f87171' }}
+            >
+              <FilterX size={14} />
+              <span>Reset</span>
+            </button>
+          )}
         </div>
 
         {loading ? (

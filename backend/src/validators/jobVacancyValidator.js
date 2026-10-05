@@ -20,6 +20,12 @@ const jobVacancyRules = [
   body('employment_type')
     .notEmpty()
     .withMessage('Tipe pekerjaan (Employment Type) wajib diisi.')
+    .customSanitizer((val) => {
+      if (!val) return val;
+      if (val === 'FullTime') return 'Full Time';
+      if (val === 'PartTime') return 'Part Time';
+      return val;
+    })
     .isIn(['Full Time', 'Part Time', 'Internship', 'Contract', 'OJT'])
     .withMessage('Tipe pekerjaan harus salah satu dari: Full Time, Part Time, Internship, Contract, OJT.'),
   body('description')

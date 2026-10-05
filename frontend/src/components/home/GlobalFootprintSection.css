@@ -678,6 +678,15 @@
 }
 
 @media (max-width: 768px) {
+  .global-footprint-section {
+    padding-top: clamp(4rem, 8vw, 5.5rem);
+    padding-bottom: clamp(4rem, 8vw, 5.5rem);
+  }
+
+  .global-footprint-section .section-header {
+    margin-top: 1.25rem;
+  }
+
   .world-map-viewport {
     aspect-ratio: 1.8 / 1;
     min-height: 280px;
