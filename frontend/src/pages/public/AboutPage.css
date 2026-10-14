@@ -221,67 +221,6 @@
   color: #cbd5e1;
 }
 
-/* FTZ Strategic Pillars */
-.about-ftz-pillars {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 2.25rem;
-  padding-top: 2rem;
-  border-top: 1px solid #e4e4e7;
-}
-
-[data-theme="dark"] .about-ftz-pillars {
-  border-top-color: #27272a;
-}
-
-.about-ftz-pillar {
-  display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
-}
-
-.about-ftz-pillar__num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #09090b;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  padding: 4px 10px;
-  border-radius: 6px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-[data-theme="dark"] .about-ftz-pillar__num {
-  color: #ffffff;
-  background: #18181b;
-  border-color: #27272a;
-}
-
-.about-ftz-pillar__title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #09090b;
-  margin: 0 0 0.25rem;
-}
-
-[data-theme="dark"] .about-ftz-pillar__title {
-  color: #ffffff;
-}
-
-.about-ftz-pillar__desc {
-  font-size: 0.925rem;
-  line-height: 1.55;
-  color: #52525b;
-  margin: 0;
-}
-
-[data-theme="dark"] .about-ftz-pillar__desc {
-  color: #a1a1aa;
-}
-
 /* Showcase Photo Card in Right Column */
 .about-showcase-column {
   display: flex;
@@ -421,101 +360,86 @@
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
-/* ── Merged Operational & Telemetry Metrics Deck in Narrative ── */
-.about-narrative__stats-container {
-  margin-top: 4rem;
+/* ── Operational & Telemetry Metrics Strip in Narrative (Clean Typography, No Boxes) ── */
+.about-narrative__stats-strip {
+  margin-top: 4.5rem;
   padding-top: 3.5rem;
   border-top: 1px solid #e4e4e7;
 }
 
-[data-theme="dark"] .about-narrative__stats-container {
+[data-theme="dark"] .about-narrative__stats-strip {
   border-top-color: #27272a;
 }
 
-.about-narrative__stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+.about-narrative__stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.about-narrative__stat-card {
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  border-radius: 14px;
-  padding: 1.75rem 1.5rem;
+.about-stat-item {
+  flex: 1;
   text-align: center;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
+  background: transparent !important;
+  border: none !important;
+  padding: 0.5rem 1rem;
+  transition: transform 0.25s ease;
 }
 
-[data-theme="dark"] .about-narrative__stat-card {
-  background: #121215;
-  border-color: #27272a;
+.about-stat-item:hover {
+  transform: translateY(-3px);
 }
 
-.about-narrative__stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 20%;
-  right: 20%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #09090b, transparent);
-  opacity: 0.6;
-}
-
-[data-theme="dark"] .about-narrative__stat-card::before {
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-}
-
-.about-narrative__stat-card:hover {
-  transform: translateY(-4px);
-  border-color: #09090b;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="dark"] .about-narrative__stat-card:hover {
-  border-color: #ffffff;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
-}
-
-.about-narrative__stat-val {
-  font-size: 2.25rem;
+.about-stat-item__val {
+  font-size: clamp(2.4rem, 3.6vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: #09090b;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 3px;
+  line-height: 1;
 }
 
-[data-theme="dark"] .about-narrative__stat-val {
+[data-theme="dark"] .about-stat-item__val {
   color: #ffffff;
 }
 
-.about-narrative__stat-unit {
-  font-size: 1.25rem;
+.about-stat-item__unit {
+  font-size: clamp(1.2rem, 1.6vw, 1.6rem);
   font-weight: 700;
-  color: #09090b;
+  color: #71717a;
 }
 
-[data-theme="dark"] .about-narrative__stat-unit {
-  color: #ffffff;
+[data-theme="dark"] .about-stat-item__unit {
+  color: #a1a1aa;
 }
 
-.about-narrative__stat-label {
-  font-size: 0.8125rem;
+.about-stat-item__label {
+  font-size: 0.825rem;
   font-weight: 700;
   color: #52525b;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  margin: 0;
 }
 
-[data-theme="dark"] .about-narrative__stat-label {
+[data-theme="dark"] .about-stat-item__label {
   color: #a1a1aa;
+}
+
+.about-stat-divider {
+  width: 1px;
+  height: 52px;
+  background: #e4e4e7;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .about-stat-divider {
+  background: #27272a;
 }
 
 /* ── 3. VISION, MISSION & CORPORATE VALUES ── */
@@ -1234,8 +1158,14 @@
 
 /* ── RESPONSIVE MEDIA QUERIES ── */
 @media (max-width: 1024px) {
-  .about-narrative__stats-grid {
+  .about-stat-divider {
+    display: none;
+  }
+
+  .about-narrative__stats-row {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1.5rem;
   }
 
   .about-narrative__grid,
@@ -1260,8 +1190,9 @@
     padding: 7.5rem 0 4.5rem;
   }
 
-  .about-narrative__stats-grid {
+  .about-narrative__stats-row {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .about-values-deck {

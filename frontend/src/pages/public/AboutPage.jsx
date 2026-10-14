@@ -208,33 +208,6 @@ export default function AboutPage() {
             <p className="about-narrative__text">
               {narrativeSettings?.p2 || t('about:narrative.p2')}
             </p>
-
-            {/* Strategic Pillars in FTZ */}
-            <div className="about-ftz-pillars">
-              <div className="about-ftz-pillar">
-                <div className="about-ftz-pillar__num">01</div>
-                <div>
-                  <h4 className="about-ftz-pillar__title">{t('about:narrative.ftz1Title')}</h4>
-                  <p className="about-ftz-pillar__desc">{t('about:narrative.ftz1Desc')}</p>
-                </div>
-              </div>
-
-              <div className="about-ftz-pillar">
-                <div className="about-ftz-pillar__num">02</div>
-                <div>
-                  <h4 className="about-ftz-pillar__title">{t('about:narrative.ftz2Title')}</h4>
-                  <p className="about-ftz-pillar__desc">{t('about:narrative.ftz2Desc')}</p>
-                </div>
-              </div>
-
-              <div className="about-ftz-pillar">
-                <div className="about-ftz-pillar__num">03</div>
-                <div>
-                  <h4 className="about-ftz-pillar__title">{t('about:narrative.ftz3Title')}</h4>
-                  <p className="about-ftz-pillar__desc">{t('about:narrative.ftz3Desc')}</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Company Leadership Showcase Photo */}
@@ -288,39 +261,45 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* ── Merged Operational & Telemetry Metrics Deck ── */}
-        <div className="container about-narrative__stats-container">
-          <div className="about-narrative__stats-grid">
-            <div className="about-narrative__stat-card">
-              <div className="about-narrative__stat-val">
+        {/* ── Operational & Telemetry Metrics Strip (Clean Typography, No Boxes) ── */}
+        <div className="container about-narrative__stats-strip">
+          <div className="about-narrative__stats-row">
+            <div className="about-stat-item">
+              <div className="about-stat-item__val">
                 <span>{headerSettings?.statYears?.value || '10'}</span>
-                <span className="about-narrative__stat-unit">+</span>
+                <span className="about-stat-item__unit">+</span>
               </div>
-              <div className="about-narrative__stat-label">{headerSettings?.statYears?.label || t('about:hero.statYears')}</div>
+              <div className="about-stat-item__label">{headerSettings?.statYears?.label || t('about:hero.statYears')}</div>
             </div>
 
-            <div className="about-narrative__stat-card">
-              <div className="about-narrative__stat-val">
+            <div className="about-stat-divider" />
+
+            <div className="about-stat-item">
+              <div className="about-stat-item__val">
                 <span>{headerSettings?.statCapacity?.value || '80'}</span>
-                <span className="about-narrative__stat-unit">K CPH</span>
+                <span className="about-stat-item__unit">K CPH</span>
               </div>
-              <div className="about-narrative__stat-label">{headerSettings?.statCapacity?.label || t('about:hero.statCapacity')}</div>
+              <div className="about-stat-item__label">{headerSettings?.statCapacity?.label || t('about:hero.statCapacity')}</div>
             </div>
 
-            <div className="about-narrative__stat-card">
-              <div className="about-narrative__stat-val">
+            <div className="about-stat-divider" />
+
+            <div className="about-stat-item">
+              <div className="about-stat-item__val">
                 <span>{headerSettings?.statArea?.value || '10,000'}</span>
-                <span className="about-narrative__stat-unit">m²</span>
+                <span className="about-stat-item__unit">m²</span>
               </div>
-              <div className="about-narrative__stat-label">{headerSettings?.statArea?.label || t('about:hero.statArea')}</div>
+              <div className="about-stat-item__label">{headerSettings?.statArea?.label || t('about:hero.statArea')}</div>
             </div>
 
-            <div className="about-narrative__stat-card">
-              <div className="about-narrative__stat-val">
+            <div className="about-stat-divider" />
+
+            <div className="about-stat-item">
+              <div className="about-stat-item__val">
                 <span>{headerSettings?.statYield?.value || '99.8'}</span>
-                <span className="about-narrative__stat-unit">%</span>
+                <span className="about-stat-item__unit">%</span>
               </div>
-              <div className="about-narrative__stat-label">{headerSettings?.statYield?.label || t('about:hero.statYield')}</div>
+              <div className="about-stat-item__label">{headerSettings?.statYield?.label || t('about:hero.statYield')}</div>
             </div>
           </div>
         </div>
