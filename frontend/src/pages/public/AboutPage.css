@@ -375,6 +375,8 @@
 
 /* ── 2. NARRATIVE & WHO WE ARE SECTION ── */
 .about-narrative {
+  position: relative;
+  overflow: hidden;
   padding: 6.5rem 0;
   background: #ffffff;
   color: #09090b;
@@ -388,11 +390,164 @@
   border-bottom: 1px solid #27272a;
 }
 
+/* Technical Blueprint & Coordinates Watermark Background */
+.about-narrative__tech-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.about-narrative__tech-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #09090b;
+  opacity: 0.65;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 20%, transparent 80%);
+}
+
+[data-theme="dark"] .about-narrative__tech-svg {
+  color: #ffffff;
+  opacity: 0.45;
+}
+
+.about-narrative__tech-watermark {
+  position: absolute;
+  right: 2.5%;
+  top: 14%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #09090b;
+  opacity: 0.07;
+  user-select: none;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .about-narrative__tech-watermark {
+  color: #ffffff;
+  opacity: 0.12;
+}
+
+.about-narrative__tech-coords {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.about-narrative__tech-code {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
 .about-narrative__grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 4rem;
-  align-items: flex-start;
+  align-items: center;
+}
+
+/* ── Scroll-Reveal Entrance Transitions ── */
+.about-narrative .about-kicker,
+.about-narrative .about-heading,
+.about-narrative .about-narrative__manifesto,
+.about-narrative .about-narrative__text,
+.about-narrative .about-showcase-column,
+.about-narrative .about-stat-item,
+.about-narrative .about-stat-divider {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Staggered triggers when section enters viewport */
+.about-narrative.about-narrative--revealed .about-kicker {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.05s;
+}
+
+.about-narrative.about-narrative--revealed .about-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
+}
+
+.about-narrative.about-narrative--revealed .about-narrative__manifesto {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+.about-narrative.about-narrative--revealed .about-narrative__text:nth-of-type(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+.about-narrative.about-narrative--revealed .about-narrative__text:nth-of-type(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.45s;
+}
+
+.about-narrative.about-narrative--revealed .about-showcase-column {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-item:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.45s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-divider:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.5s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-item:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-divider:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-item:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.65s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-divider:nth-child(6) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.7s;
+}
+
+.about-narrative.about-narrative--revealed .about-stat-item:nth-child(7) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.75s;
 }
 
 .about-kicker {
@@ -478,32 +633,54 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  perspective: 1000px;
 }
 
 .about-company-photo-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.14);
   border: 1px solid #e4e4e7;
-  transition: all 0.35s ease;
+  transition: transform 0.15s ease-out, box-shadow 0.35s ease, border-color 0.35s ease;
   background: #18181b;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 [data-theme="dark"] .about-company-photo-card {
   border-color: #27272a;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.65);
 }
 
 .about-company-photo-card:hover {
-  transform: translateY(-4px);
   border-color: #71717a;
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.24);
+}
+
+[data-theme="dark"] .about-company-photo-card:hover {
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.8);
+}
+
+/* 3D Sheen Glare Effect */
+.about-company-card__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.about-company-photo-card:hover .about-company-card__glare {
+  opacity: 1;
 }
 
 .about-company-photo-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 3.15;
   overflow: hidden;
   background: #18181b;
 }
@@ -513,11 +690,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-company-photo-card:hover .about-company-photo {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 .about-company-photo-overlay {
@@ -525,11 +702,54 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(9, 9, 11, 0.05) 0%,
-    rgba(9, 9, 11, 0.4) 45%,
-    rgba(9, 9, 11, 0.92) 100%
+    rgba(9, 9, 11, 0.15) 0%,
+    rgba(9, 9, 11, 0.4) 40%,
+    rgba(9, 9, 11, 0.94) 100%
   );
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Live Status Pill */
+.about-company-status-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.about-company-status-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
+  animation: companyPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes companyPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
 }
 
 .about-company-photo-caption {
@@ -537,25 +757,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.75rem;
+  padding: 1.85rem;
   color: #ffffff;
   z-index: 2;
-}
-
-.about-company-photo-tag {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
-  font-size: 0.725rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  margin-bottom: 0.65rem;
-  text-transform: uppercase;
 }
 
 .about-company-photo-title {
@@ -567,49 +771,10 @@
 }
 
 .about-company-photo-sub {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: #d4d4d8;
   margin: 0;
   line-height: 1.45;
-}
-
-/* Trust Badges Strip */
-.about-trust-strip {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
-.about-trust-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-size: 0.785rem;
-  font-weight: 700;
-  color: #18181b;
-  letter-spacing: 0.04em;
-}
-
-[data-theme="dark"] .about-trust-badge {
-  background: #18181b;
-  border-color: #27272a;
-  color: #f4f4f5;
-}
-
-.about-trust-badge__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #09090b;
-}
-
-[data-theme="dark"] .about-trust-badge__dot {
-  background: #ffffff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 /* ── Operational & Telemetry Metrics Strip in Narrative (Clean Typography, No Boxes) ── */

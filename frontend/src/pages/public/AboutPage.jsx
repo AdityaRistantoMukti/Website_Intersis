@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
@@ -95,6 +95,47 @@ export default function AboutPage() {
   const [activeMilestone, setActiveMilestone] = useState(0);
   const [activeZone, setActiveZone] = useState(0);
 
+  // Scroll reveal observer for narrative section
+  const narrativeSectionRef = useRef(null);
+  const [isNarrativeVisible, setIsNarrativeVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsNarrativeVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (narrativeSectionRef.current) {
+      observer.observe(narrativeSectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Lightweight 3D perspective tilt on showcase photo card
+  const [cardTilt, setCardTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
+  const handleCardMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    const glareX = (x / rect.width) * 100;
+    const glareY = (y / rect.height) * 100;
+    setCardTilt({ rotateX, rotateY, glareX, glareY });
+  };
+  const handleCardMouseLeave = () => {
+    setCardTilt({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
+  };
+
   const fallbackMilestones = t('about:milestones.items', { returnObjects: true }) || [];
   const milestoneItems = (Array.isArray(timelineSettings) && timelineSettings.length > 0)
     ? timelineSettings
@@ -151,8 +192,7 @@ export default function AboutPage() {
           }
         />
       </Helmet>
-
-      {/* ── 1. HERO SECTION: INSPIRATION DESIGN (CENTERED HEADLINE + 5-COLUMN BENTO GALLERY) ── */}
+      
       <section className="about-hero">
         <div className="container about-hero__inner">
           {/* Top: Centered Header Typography (No breadcrumb, no button) */}
@@ -307,7 +347,29 @@ export default function AboutPage() {
       </section>
 
       {/* ── 2. COMPANY PROFILE & STRATEGIC BATAM ADVANTAGES ── */}
-      <section id="profile-section" className="about-narrative">
+      <section
+        id="profile-section"
+        ref={narrativeSectionRef}
+        className={`about-narrative ${isNarrativeVisible ? 'about-narrative--revealed' : ''}`}
+      >
+        {/* Subtle Technical Blueprint & Coordinates Watermark Background */}
+        <div className="about-narrative__tech-bg" aria-hidden="true">
+          <svg className="about-narrative__tech-svg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="techGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.6" strokeOpacity="0.07" />
+                <circle cx="60" cy="0" r="1.5" fill="currentColor" fillOpacity="0.12" />
+                <circle cx="0" cy="60" r="1.5" fill="currentColor" fillOpacity="0.12" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#techGrid)" />
+          </svg>
+          <div className="about-narrative__tech-watermark">
+            <span className="about-narrative__tech-coords">LAT 1°07'49.4"N · LNG 104°03'10.4"E</span>
+            <span className="about-narrative__tech-code">PRECISION SMT MANUFACTURING · BATAM FTZ</span>
+          </div>
+        </div>
+
         <div className="container about-narrative__grid">
           <div className="about-narrative__content">
             <span className="about-kicker">{t('about:narrative.kicker')}</span>
@@ -333,9 +395,22 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Company Leadership Showcase Photo */}
+          {/* Company Leadership Showcase Photo with 3D Tilt */}
           <div className="about-showcase-column">
-            <div className="about-company-photo-card">
+            <div
+              className="about-company-photo-card"
+              onMouseMove={handleCardMouseMove}
+              onMouseLeave={handleCardMouseLeave}
+              style={{
+                transform: `perspective(1000px) rotateX(${cardTilt.rotateX}deg) rotateY(${cardTilt.rotateY}deg)`,
+              }}
+            >
+              <div
+                className="about-company-card__glare"
+                style={{
+                  background: `radial-gradient(circle at ${cardTilt.glareX}% ${cardTilt.glareY}%, rgba(255,255,255,0.16) 0%, transparent 65%)`,
+                }}
+              />
               <div className="about-company-photo-wrap">
                 <img
                   src={narrativeSettings?.image
@@ -348,10 +423,14 @@ export default function AboutPage() {
                   }}
                 />
                 <div className="about-company-photo-overlay" />
+                
+                {/* Subtle manufacturing status indicator */}
+                <div className="about-company-status-badge">
+                  <span className="about-company-status-dot" />
+                  <span>{isId ? 'PUSAT MANUFAKTUR BATAM FTZ' : 'BATAM FTZ MANUFACTURING HUB'}</span>
+                </div>
+
                 <div className="about-company-photo-caption">
-                  <span className="about-company-photo-tag">
-                    {narrativeSettings?.photoTag || (isId ? 'MANAJEMEN & ENGINEERING EKSEKUTIF' : 'EXECUTIVE MANAGEMENT & ENGINEERING')}
-                  </span>
                   <h3 className="about-company-photo-title">
                     {narrativeSettings?.photoTitle || "PT. Global Philsonic Technologies"}
                   </h3>
@@ -359,26 +438,6 @@ export default function AboutPage() {
                     {narrativeSettings?.photoSub || (isId ? "Pusat Rekayasa Manufaktur Elektronik Otomotif & Perakitan SMT Presisi" : "Automotive Electronics Engineering & Precision SMT Assembly Hub")}
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Quick Trust Badges Strip */}
-            <div className="about-trust-strip">
-              <div className="about-trust-badge">
-                <span className="about-trust-badge__dot" />
-                <span>IATF 16949:2016</span>
-              </div>
-              <div className="about-trust-badge">
-                <span className="about-trust-badge__dot" />
-                <span>ISO 9001:2015</span>
-              </div>
-              <div className="about-trust-badge">
-                <span className="about-trust-badge__dot" />
-                <span>IPC-A-610 CLASS 3</span>
-              </div>
-              <div className="about-trust-badge">
-                <span className="about-trust-badge__dot" />
-                <span>BATAM FTZ 0% TARIFF</span>
               </div>
             </div>
           </div>
