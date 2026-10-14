@@ -10,7 +10,24 @@
     "statArea": "Facility Area",
     "statYield": "First-Pass Yield",
     "btnExplore": "Explore Company Profile",
-    "btnContact": "OEM/ODM Partnership Inquiries"
+    "btnContact": "OEM/ODM Partnership Inquiries",
+    "bento": {
+      "card1Title": "Precision 01005 SMT Assembly",
+      "card1Sub": "Micron-Tolerance Component Placement",
+      "card2Val": "99.8%",
+      "card2Label": "First-Pass Yield IATF 16949 Standard",
+      "card3Val": "80,000+ CPH",
+      "card3Label": "High-Speed SMT Capacity & ESD Class 100K",
+      "card4Title": "Trusted Tier-1 Manufacturing Partner",
+      "card4Desc": "Accelerating global supply chains with 0% tariff advantage in Batam FTZ.",
+      "card4Btn": "Schedule Facility Audit",
+      "card5Val": "10+ Years",
+      "card5Label": "Dedicated Zero-Defect Quality & 3D AOI",
+      "card6Title": "IATF 16949",
+      "card6Sub": "ISO 9001 · ISO 14001 · ESD S20.20",
+      "card7Title": "In-House Jig & Automation Engineering",
+      "card7Sub": "Functional Test & Precision Fixtures"
+    }
   },
   "narrative": {
     "kicker": "About PT. Global Philsonic Technologies",

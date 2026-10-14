@@ -10,7 +10,24 @@
     "statArea": "Luas Area Fasilitas",
     "statYield": "First-Pass Yield",
     "btnExplore": "Jelajahi Profil Perusahaan",
-    "btnContact": "Hubungi Kemitraan OEM/ODM"
+    "btnContact": "Hubungi Kemitraan OEM/ODM",
+    "bento": {
+      "card1Title": "Presisi SMT Chip 01005",
+      "card1Sub": "Penempatan Komponen Toleransi Mikron",
+      "card2Val": "99.8%",
+      "card2Label": "First-Pass Yield Berstandar IATF 16949",
+      "card3Val": "80,000+ CPH",
+      "card3Label": "Kapasitas Perakitan Lini SMT Otomatis & ESD Class 100K",
+      "card4Title": "Mitra Manufaktur Tier-1 Terpercaya",
+      "card4Desc": "Mendukung efisiensi rantai pasok global & pembebasan bea masuk di Batam FTZ.",
+      "card4Btn": "Jadwalkan Kunjungan",
+      "card5Val": "10+ Tahun",
+      "card5Label": "Dedikasi Mutu Tanpa Cacat & Inspeksi 3D AOI",
+      "card6Title": "IATF 16949",
+      "card6Sub": "ISO 9001 · ISO 14001 · ESD S20.20",
+      "card7Title": "Engineering & Otomasi Mandiri",
+      "card7Sub": "Riset & Jig Uji Fungsional Presisi"
+    }
   },
   "narrative": {
     "kicker": "Tentang PT. Global Philsonic Technologies",

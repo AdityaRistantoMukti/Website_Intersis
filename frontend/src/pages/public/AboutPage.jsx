@@ -152,34 +152,176 @@ export default function AboutPage() {
         />
       </Helmet>
 
-      {/* ── 1. HERO SECTION: LARGE BUILDING BACKGROUND WITH BALANCED LIGHTER OVERLAY ── */}
-      <section
-        className="about-hero"
-        style={{
-          backgroundImage: `url(${heroBgImage})`,
-        }}
-      >
-        {/* Balanced translucent overlay for clear building visibility */}
-        <div className="about-hero__overlay" />
-        <div className="about-hero__grid-pattern" />
+      {/* ── 1. HERO SECTION: INSPIRATION DESIGN (CENTERED HEADLINE + 5-COLUMN BENTO GALLERY) ── */}
+      <section className="about-hero">
+        <div className="container about-hero__inner">
+          {/* Top: Centered Header Typography */}
+          <div className="about-hero__header">
+            {/* Breadcrumb Navigation - Centered */}
+            <nav aria-label="Breadcrumb" className="about-hero__breadcrumb">
+              <Link to="/">{t('about:hero.breadcrumbHome')}</Link>
+              <span className="about-hero__breadcrumb-sep">/</span>
+              <span className="about-hero__breadcrumb-current">{t('about:hero.breadcrumbAbout')}</span>
+            </nav>
 
-        <div className="container about-hero__content-wrap">
-          {/* Breadcrumb Navigation - Centered */}
-          <nav aria-label="Breadcrumb" className="about-hero__breadcrumb">
-            <Link to="/">{t('about:hero.breadcrumbHome')}</Link>
-            <span className="about-hero__breadcrumb-sep">/</span>
-            <span className="about-hero__breadcrumb-current">{t('about:hero.breadcrumbAbout')}</span>
-          </nav>
+            {/* Major Headline */}
+            <h1 className="about-hero__title">
+              {headerSettings?.title || (isId
+                ? 'Membangun Keunggulan Elektronik Otomotif & Manufaktur Presisi Global'
+                : 'Engineering Automotive Electronics & Global Precision Manufacturing')}
+            </h1>
 
-          {/* Major Title - Centered & Clean without badges */}
-          <h1 className="about-hero__title">
-            {headerSettings?.title || t('about:hero.title')}
-          </h1>
+            {/* Subtitle */}
+            <p className="about-hero__lead">
+              {headerSettings?.subtitle || t('about:hero.subtitle')}
+            </p>
 
-          {/* Subtitle - Centered */}
-          <p className="about-hero__lead">
-            {headerSettings?.subtitle || t('about:hero.subtitle')}
-          </p>
+            {/* Centered CTA Pill Button */}
+            <div className="about-hero__cta-wrap">
+              <Link to="/contact" className="about-hero__cta-pill">
+                <span>{isId ? 'Jadwalkan Kunjungan / Audit Pabrik' : 'Schedule Factory Audit'}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Bottom: 5-Column Staggered Bento Mosaic */}
+          <div className="about-bento-grid">
+            {/* Column 1: Stack of 2 Rounded Cards */}
+            <div className="about-bento-col about-bento-col--1">
+              {/* Card 1A: SMT Photo */}
+              <div className="about-bento-card about-bento-card--photo-sm">
+                <img
+                  src="/images/about/facility-smt.jpg"
+                  alt="Lini Perakitan SMT Presisi"
+                  className="about-bento-card__bg-img"
+                  loading="lazy"
+                />
+                <div className="about-bento-card__overlay" />
+                <div className="about-bento-card__caption">
+                  <h4 className="about-bento-card__caption-title">
+                    {t('about:hero.bento.card1Title')}
+                  </h4>
+                  <p className="about-bento-card__caption-sub">
+                    {t('about:hero.bento.card1Sub')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 1B: Stat 99.8% */}
+              <div className="about-bento-card about-bento-card--stat">
+                <div className="about-bento-stat__num">
+                  {t('about:hero.bento.card2Val')}
+                </div>
+                <div className="about-bento-stat__label">
+                  {t('about:hero.bento.card2Label')}
+                </div>
+              </div>
+            </div>
+
+            {/* Column 2: Extra Tall Cleanroom Card */}
+            <div className="about-bento-col about-bento-col--2">
+              <div className="about-bento-card about-bento-card--photo-tall">
+                <img
+                  src="/images/about/facility-cleanroom.jpg"
+                  alt="Fasilitas Cleanroom ESD Class 100K"
+                  className="about-bento-card__bg-img"
+                  loading="lazy"
+                />
+                <div className="about-bento-card__overlay about-bento-card__overlay--gradient" />
+                <div className="about-bento-card__caption about-bento-card__caption--bottom">
+                  <div className="about-bento-stat__num about-bento-stat__num--white">
+                    {t('about:hero.bento.card3Val')}
+                  </div>
+                  <p className="about-bento-card__caption-desc">
+                    {t('about:hero.bento.card3Label')}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 3: Center Focal Card with Call to Action */}
+            <div className="about-bento-col about-bento-col--3">
+              <div className="about-bento-card about-bento-card--focal">
+                <div className="about-bento-focal__content">
+                  <div className="about-bento-focal__badge">Batam FTZ 0% Tariff</div>
+                  <h3 className="about-bento-focal__title">
+                    {t('about:hero.bento.card4Title')}
+                  </h3>
+                  <p className="about-bento-focal__desc">
+                    {t('about:hero.bento.card4Desc')}
+                  </p>
+                  <Link to="/contact" className="about-bento-focal__btn">
+                    <span>{t('about:hero.bento.card4Btn')}</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 4: Extra Tall 3D AOI & X-Ray Lab Card */}
+            <div className="about-bento-col about-bento-col--4">
+              <div className="about-bento-card about-bento-card--photo-tall">
+                <img
+                  src="/images/about/facility-inspection.jpg"
+                  alt="Laboratorium Inspeksi Mutu 3D AOI"
+                  className="about-bento-card__bg-img"
+                  loading="lazy"
+                />
+                <div className="about-bento-card__overlay about-bento-card__overlay--gradient" />
+                <div className="about-bento-card__caption about-bento-card__caption--bottom">
+                  <div className="about-bento-stat__num about-bento-stat__num--white">
+                    {t('about:hero.bento.card5Val')}
+                  </div>
+                  <p className="about-bento-card__caption-desc">
+                    {t('about:hero.bento.card5Label')}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 5: Stack of 2 Rounded Cards */}
+            <div className="about-bento-col about-bento-col--5">
+              {/* Card 5A: IATF Typography Badge Card */}
+              <div className="about-bento-card about-bento-card--badge">
+                <div className="about-bento-badge__decor">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                  </svg>
+                </div>
+                <div className="about-bento-badge__title">
+                  {t('about:hero.bento.card6Title')}
+                </div>
+                <div className="about-bento-badge__sub">
+                  {t('about:hero.bento.card6Sub')}
+                </div>
+              </div>
+
+              {/* Card 5B: Team Engineering Photo */}
+              <div className="about-bento-card about-bento-card--photo-sm">
+                <img
+                  src="/images/about/about-team.jpg"
+                  alt="Tim Engineering PT. Global Philsonic Technologies"
+                  className="about-bento-card__bg-img"
+                  loading="lazy"
+                />
+                <div className="about-bento-card__overlay" />
+                <div className="about-bento-card__caption">
+                  <h4 className="about-bento-card__caption-title">
+                    {t('about:hero.bento.card7Title')}
+                  </h4>
+                  <p className="about-bento-card__caption-sub">
+                    {t('about:hero.bento.card7Sub')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
