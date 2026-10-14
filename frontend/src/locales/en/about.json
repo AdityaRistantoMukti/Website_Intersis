@@ -8,7 +8,9 @@
     "statYears": "Years of Experience",
     "statCapacity": "SMT Capacity / Hr",
     "statArea": "Facility Area",
-    "statYield": "First-Pass Yield"
+    "statYield": "First-Pass Yield",
+    "btnExplore": "Explore Company Profile",
+    "btnContact": "OEM/ODM Partnership Inquiries"
   },
   "narrative": {
     "kicker": "About PT. Global Philsonic Technologies",

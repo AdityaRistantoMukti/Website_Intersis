@@ -8,7 +8,9 @@
     "statYears": "Tahun Pengalaman",
     "statCapacity": "Kapasitas SMT/Jam",
     "statArea": "Luas Area Fasilitas",
-    "statYield": "First-Pass Yield"
+    "statYield": "First-Pass Yield",
+    "btnExplore": "Jelajahi Profil Perusahaan",
+    "btnContact": "Hubungi Kemitraan OEM/ODM"
   },
   "narrative": {
     "kicker": "Tentang PT. Global Philsonic Technologies",

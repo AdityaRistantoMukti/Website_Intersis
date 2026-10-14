@@ -1,192 +1,305 @@
 /* ══════════════════════════════════════════════════════════════════════════
    ABOUT PAGE STYLES — Enterprise Automotive & Industrial Aesthetics
-   PT. Global Philsonic Technologies (GPT)
-   Monochrome Theme (Black / White / Gray) — Pure High-Contrast
+   PT. Global Philsonic Technologies (GPT) Batam
+   Strict Monochrome Theme (Obsidian / Graphite / White / Silver)
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── 1. HERO BANNER ── */
+/* ── 1. REDESIGNED HERO SECTION (GRAND BUILDING BACKGROUND + DARK OVERLAYS) ── */
 .about-hero {
   position: relative;
-  background: linear-gradient(135deg, #070d18 0%, #0d1728 55%, #091322 100%);
+  min-height: 84vh;
+  display: flex;
+  align-items: center;
+  background-color: #09090b;
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
   color: #ffffff;
-  padding: 6.5rem 0 3.5rem;
+  padding: 8.5rem 0 4.5rem;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.about-hero__bg-grid {
+/* Layered Dark Architectural Overlays for Contrast & Readability */
+.about-hero__dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.72) 0%,
+    rgba(9, 9, 11, 0.78) 40%,
+    rgba(9, 9, 11, 0.92) 80%,
+    #09090b 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-hero__vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-hero__grid-pattern {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
+  z-index: 1;
 }
 
-.about-hero__glow {
-  position: absolute;
-  top: -15%;
-  right: -5%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-  filter: blur(60px);
-  pointer-events: none;
-}
-
-.about-hero__stage {
+.about-hero__content-wrap {
   position: relative;
   z-index: 2;
+  width: 100%;
 }
 
-.about-breadcrumb {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.825rem;
-  color: #94a3b8;
-  margin-bottom: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.about-breadcrumb a {
-  color: #cbd5e1;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.about-breadcrumb a:hover {
-  color: #ffffff;
-}
-
-.about-breadcrumb__sep {
-  opacity: 0.4;
-  font-size: 0.75rem;
-}
-
-.about-breadcrumb__current {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.about-hero__kicker {
+/* Breadcrumb Navigation */
+.about-hero__breadcrumb {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-size: 0.8125rem;
+  color: #a1a1aa;
+  margin-bottom: 1.5rem;
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-hero__breadcrumb a {
+  color: #d4d4d8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.about-hero__breadcrumb a:hover {
+  color: #ffffff;
+}
+
+.about-hero__breadcrumb-sep {
+  opacity: 0.4;
+  font-size: 0.75rem;
+}
+
+.about-hero__breadcrumb-current {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Hero Kicker Badge */
+.about-hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #ffffff;
-  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(6px);
 }
 
 .about-hero__kicker-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
 }
 
-.about-hero__title {
-  font-size: clamp(2rem, 4vw, 3.25rem);
+/* Main Hero Title */
+.about-hero__main-title {
+  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
   color: #ffffff;
-  max-width: 820px;
+  max-width: 960px;
   margin-bottom: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
 }
 
-.about-hero__subtitle {
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
+.about-hero__title-tag {
+  display: inline-block;
+  background: #ffffff;
+  color: #09090b;
+  font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.about-hero__title-divider {
+  color: #71717a;
+  font-weight: 300;
+}
+
+.about-hero__title-heading {
+  color: #ffffff;
+}
+
+/* Subtitle */
+.about-hero__lead {
+  font-size: clamp(1.025rem, 1.35vw, 1.2rem);
   line-height: 1.65;
-  color: #cbd5e1;
-  max-width: 720px;
-  margin-bottom: 2.75rem;
+  color: #d4d4d8;
+  max-width: 820px;
+  margin-bottom: 2.25rem;
 }
 
-/* Hero Telemetry Cards Deck */
-.about-hero__deck {
+/* Action CTA Buttons in Hero */
+.about-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.about-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.925rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.about-hero__btn--primary {
+  background: #ffffff;
+  color: #09090b;
+  border: 1px solid #ffffff;
+}
+
+.about-hero__btn--primary:hover {
+  background: #e4e4e7;
+  border-color: #e4e4e7;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+.about-hero__btn--secondary {
+  background: rgba(24, 24, 27, 0.65);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.about-hero__btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Integrated Telemetry & Operational Metrics Strip */
+.about-hero__telemetry {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
+  width: 100%;
 }
 
-.about-stat-card {
-  background: rgba(24, 24, 27, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.about-metric-card {
+  background: rgba(18, 18, 21, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-  padding: 1.25rem 1.5rem;
+  padding: 1.4rem 1.6rem;
   position: relative;
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.about-stat-card::after {
+.about-metric-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 20px;
   right: 20px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-  opacity: 0.6;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  opacity: 0.7;
 }
 
-.about-stat-card:hover {
+.about-metric-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-.about-stat-card__val {
-  font-size: 2rem;
+.about-metric-card__value {
+  font-size: 2.15rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
   display: flex;
   align-items: baseline;
   gap: 3px;
 }
 
-.about-stat-card__unit {
+.about-metric-card__unit {
   font-size: 1.15rem;
   color: #ffffff;
   font-weight: 700;
 }
 
-.about-stat-card__label {
+.about-metric-card__label {
   font-size: 0.8125rem;
   font-weight: 600;
   color: #a1a1aa;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
-/* ── 2. NARRATIVE & COMPANY SHOWCASE PHOTO SECTION ── */
+/* ── 2. NARRATIVE & WHO WE ARE SECTION ── */
 .about-narrative {
-  padding: 6rem 0;
+  padding: 6.5rem 0;
   background: #ffffff;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+  color: #09090b;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  border-bottom: 1px solid #e4e4e7;
 }
 
 [data-theme="dark"] .about-narrative {
   background: #09090b;
+  color: #ffffff;
   border-bottom: 1px solid #27272a;
 }
 
 .about-narrative__grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 3.5rem;
-  align-items: center;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: flex-start;
 }
 
 .about-kicker {
@@ -196,7 +309,7 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #52525b;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 [data-theme="dark"] .about-kicker {
@@ -204,7 +317,7 @@
 }
 
 .about-heading {
-  font-size: clamp(1.85rem, 2.75vw, 2.5rem);
+  font-size: clamp(1.9rem, 2.75vw, 2.5rem);
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -216,45 +329,149 @@
   color: #ffffff;
 }
 
+/* Corporate Manifesto Quote Box */
+.about-narrative__manifesto {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f4f4f5;
+  border-left: 4px solid #09090b;
+  margin-bottom: 2rem;
+}
+
+[data-theme="dark"] .about-narrative__manifesto {
+  background: #18181b;
+  border-left: 4px solid #ffffff;
+}
+
+.about-narrative__quote-icon {
+  flex-shrink: 0;
+  color: #71717a;
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .about-narrative__quote-icon {
+  color: #a1a1aa;
+}
+
+.about-narrative__manifesto p {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: #18181b;
+  margin: 0;
+  font-style: italic;
+}
+
+[data-theme="dark"] .about-narrative__manifesto p {
+  color: #f4f4f5;
+}
+
 .about-narrative__text {
   font-size: 1.025rem;
-  line-height: 1.7;
+  line-height: 1.75;
   color: #52525b;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 [data-theme="dark"] .about-narrative__text {
   color: #cbd5e1;
 }
 
-/* Company Facility Showcase Photo Card */
+/* FTZ Strategic Pillars */
+.about-ftz-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2.25rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e4e4e7;
+}
+
+[data-theme="dark"] .about-ftz-pillars {
+  border-top-color: #27272a;
+}
+
+.about-ftz-pillar {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.about-ftz-pillar__num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #09090b;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  padding: 4px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .about-ftz-pillar__num {
+  color: #ffffff;
+  background: #18181b;
+  border-color: #27272a;
+}
+
+.about-ftz-pillar__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #09090b;
+  margin: 0 0 0.25rem;
+}
+
+[data-theme="dark"] .about-ftz-pillar__title {
+  color: #ffffff;
+}
+
+.about-ftz-pillar__desc {
+  font-size: 0.925rem;
+  line-height: 1.55;
+  color: #52525b;
+  margin: 0;
+}
+
+[data-theme="dark"] .about-ftz-pillar__desc {
+  color: #a1a1aa;
+}
+
+/* Showcase Photo Card in Right Column */
+.about-showcase-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .about-company-photo-card {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
   border: 1px solid #e4e4e7;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
+  background: #18181b;
 }
 
 [data-theme="dark"] .about-company-photo-card {
   border-color: #27272a;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
 }
 
 .about-company-photo-card:hover {
   transform: translateY(-4px);
-  border-color: #a1a1aa;
-}
-
-[data-theme="dark"] .about-company-photo-card:hover {
   border-color: #71717a;
 }
 
 .about-company-photo-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #18181b;
 }
@@ -277,8 +494,8 @@
   background: linear-gradient(
     180deg,
     rgba(9, 9, 11, 0.05) 0%,
-    rgba(9, 9, 11, 0.4) 50%,
-    rgba(9, 9, 11, 0.9) 100%
+    rgba(9, 9, 11, 0.4) 45%,
+    rgba(9, 9, 11, 0.92) 100%
   );
   pointer-events: none;
 }
@@ -288,7 +505,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem;
+  padding: 1.75rem;
   color: #ffffff;
   z-index: 2;
 }
@@ -299,33 +516,263 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
-  font-size: 0.7rem;
+  font-size: 0.725rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   padding: 4px 10px;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
 }
 
 .about-company-photo-title {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
   letter-spacing: -0.01em;
 }
 
 .about-company-photo-sub {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #d4d4d8;
   margin: 0;
   line-height: 1.45;
 }
 
-/* ── 3. INTERACTIVE MILESTONES TIMELINE ── */
+/* Trust Badges Strip */
+.about-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.about-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: #18181b;
+  letter-spacing: 0.04em;
+}
+
+[data-theme="dark"] .about-trust-badge {
+  background: #18181b;
+  border-color: #27272a;
+  color: #f4f4f5;
+}
+
+.about-trust-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #09090b;
+}
+
+[data-theme="dark"] .about-trust-badge__dot {
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* ── 3. VISION, MISSION & CORPORATE VALUES ── */
+.about-vm {
+  padding: 6.5rem 0;
+  background: #09090b;
+  color: #ffffff;
+  border-bottom: 1px solid #27272a;
+}
+
+/* Lab & R&D Feature Panorama */
+.about-vm__panorama {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  max-height: 380px;
+  margin-bottom: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+.about-vm__panorama-img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-vm__panorama-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.1) 0%,
+    rgba(9, 9, 11, 0.6) 50%,
+    rgba(9, 9, 11, 0.95) 100%
+  );
+  pointer-events: none;
+}
+
+.about-vm__panorama-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.25rem;
+  z-index: 2;
+}
+
+.about-vm__panorama-kicker {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+.about-vm__panorama-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.about-vm__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.vm-card {
+  border-radius: 16px;
+  padding: 2.75rem;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: #121215;
+  border: 1px solid #27272a;
+}
+
+.vm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  border-color: #3f3f46;
+}
+
+.vm-card__header {
+  margin-bottom: 1.25rem;
+}
+
+.vm-card__kicker {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #a1a1aa;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.vm-card__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.vm-card__desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #d4d4d8;
+  margin: 0;
+}
+
+.vm-mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: 1rem;
+}
+
+.vm-mission-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d4d4d8;
+}
+
+.vm-mission-bullet {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #09090b;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Core Values Strip */
+.about-values-deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.about-value-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: all 0.25s ease;
+}
+
+.about-value-card:hover {
+  border-color: #ffffff;
+  transform: translateY(-3px);
+  background: #1c1c20;
+}
+
+.about-value-card__idx {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #71717a;
+  margin-bottom: 0.75rem;
+}
+
+.about-value-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+}
+
+.about-value-card__desc {
+  font-size: 0.885rem;
+  line-height: 1.55;
+  color: #a1a1aa;
+  margin: 0;
+}
+
+/* ── 4. INTERACTIVE MILESTONES TIMELINE ── */
 .about-milestones {
-  padding: 6rem 0;
+  padding: 6.5rem 0;
   background: #09090b;
   color: #ffffff;
   position: relative;
@@ -428,7 +875,7 @@
   grid-template-columns: auto 1fr;
   gap: 2.5rem;
   align-items: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .timeline-card__badge-wrap {
@@ -473,126 +920,28 @@
   margin: 0;
 }
 
-/* ── 4. VISION & MISSION SECTION (Monochrome & Bare Icons) ── */
-.about-vm {
-  padding: 6rem 0;
-  background: #ffffff;
-  transition: background-color 0.25s ease;
+.timeline-card__image-wrap {
+  margin-top: 1.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  max-width: 520px;
 }
 
-[data-theme="dark"] .about-vm {
-  background: #09090b;
-  border-bottom: 1px solid #27272a;
-}
-
-.about-vm__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-}
-
-.vm-card {
-  border-radius: 16px;
-  padding: 2.75rem;
-  position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-}
-
-[data-theme="dark"] .vm-card {
-  background: #121215;
-  border: 1px solid #27272a;
-}
-
-.vm-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="dark"] .vm-card:hover {
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-  border-color: #3f3f46;
-}
-
-/* Bare Icon without container box */
-.vm-card__icon {
-  display: inline-flex;
-  align-items: center;
-  color: #09090b;
-  margin-bottom: 1.25rem;
-}
-
-[data-theme="dark"] .vm-card__icon {
-  color: #ffffff;
-}
-
-.vm-card__icon svg {
-  width: 32px;
-  height: 32px;
-}
-
-.vm-card__title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #09090b;
-  margin-bottom: 1rem;
-}
-
-[data-theme="dark"] .vm-card__title {
-  color: #ffffff;
-}
-
-.vm-card__desc {
-  font-size: 1rem;
-  line-height: 1.65;
-  color: #52525b;
-}
-
-[data-theme="dark"] .vm-card__desc {
-  color: #cbd5e1;
-}
-
-.vm-mission-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.vm-mission-item {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  font-size: 0.925rem;
-  line-height: 1.55;
-  color: #3f3f46;
-}
-
-[data-theme="dark"] .vm-mission-item {
-  color: #d4d4d8;
-}
-
-/* Bullet without circular container box */
-.vm-mission-bullet {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.825rem;
-  font-weight: 700;
-  color: #71717a;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-[data-theme="dark"] .vm-mission-bullet {
-  color: #a1a1aa;
+.timeline-card__img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  display: block;
 }
 
 /* ── 5. CERTIFICATIONS & REGULATORY COMPLIANCE ── */
 .about-certs {
-  padding: 6rem 0;
-  background: #f8fafc;
+  padding: 6.5rem 0;
+  background: #ffffff;
   border-top: 1px solid #e4e4e7;
   border-bottom: 1px solid #e4e4e7;
+  color: #09090b;
   transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
@@ -600,6 +949,7 @@
   background: #09090b;
   border-top-color: #27272a;
   border-bottom-color: #27272a;
+  color: #ffffff;
 }
 
 .about-certs .about-heading {
@@ -643,17 +993,56 @@
 
 .cert-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
   border-color: #09090b;
 }
 
 [data-theme="dark"] .cert-card:hover {
   border-color: #ffffff;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
 }
 
-.cert-card__top {
-  margin-bottom: 0.5rem;
+.cert-card__image-wrap {
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f4f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  border: 1px solid #e4e4e7;
+  padding: 0.75rem;
+}
+
+[data-theme="dark"] .cert-card__image-wrap {
+  background: #18181b;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.cert-card__icon-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.cert-card__code-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #09090b;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+[data-theme="dark"] .cert-card__code-badge {
+  color: #ffffff;
+  background: #27272a;
+  border-color: #3f3f46;
 }
 
 .cert-card__name {
@@ -679,9 +1068,26 @@
   color: #a1a1aa;
 }
 
-/* ── 6. FACTORY INFRASTRUCTURE & MACHINE SPECS TOUR (REAL PHOTOS) ── */
+.cert-card__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: #09090b;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e4e4e7;
+}
+
+[data-theme="dark"] .cert-card__status {
+  color: #ffffff;
+  border-top-color: #27272a;
+}
+
+/* ── 6. FACTORY INFRASTRUCTURE TOUR ── */
 .about-facility {
-  padding: 6rem 0;
+  padding: 6.5rem 0;
   background: #09090b;
   color: #ffffff;
   border-bottom: 1px solid #27272a;
@@ -736,16 +1142,7 @@
   font-size: 1.65rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.facility-stage__highlight {
-  display: inline-block;
-  color: #e4e4e7;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .facility-stage__desc {
@@ -774,13 +1171,13 @@
   flex-shrink: 0;
 }
 
-/* Real High-Resolution Facility Photo Card */
+/* Facility Photo Card */
 .facility-photo-card {
   position: relative;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
   background: #18181b;
 }
 
@@ -816,24 +1213,23 @@
 
 .facility-photo-badge {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  top: 1rem;
+  left: 1rem;
   font-size: 0.725rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  color: #ffffff;
-  background: rgba(9, 9, 11, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.08em;
+  color: #09090b;
+  background: #ffffff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 2;
+  text-transform: uppercase;
 }
 
-/* ── 7. B2B CALL TO ACTION BANNER (HIGH CONTRAST BUTTONS) ── */
+/* ── 7. CORPORATE CTA BANNER ── */
 .about-cta {
-  padding: 5.5rem 0;
+  padding: 6rem 0;
   background: #09090b;
   border-top: 1px solid #27272a;
   color: #ffffff;
@@ -848,7 +1244,7 @@
 }
 
 .about-cta__title {
-  font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+  font-size: clamp(1.85rem, 2.6vw, 2.45rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
@@ -868,7 +1264,6 @@
   flex-shrink: 0;
 }
 
-/* Explicit high-contrast button styling */
 .about-cta__actions .btn--primary {
   background: #ffffff !important;
   color: #09090b !important;
@@ -901,7 +1296,7 @@
 
 /* ── RESPONSIVE MEDIA QUERIES ── */
 @media (max-width: 1024px) {
-  .about-hero__deck {
+  .about-hero__telemetry {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -912,6 +1307,10 @@
     gap: 2.5rem;
   }
 
+  .about-values-deck {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .timeline-bar {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -919,10 +1318,15 @@
 
 @media (max-width: 768px) {
   .about-hero {
-    padding: 7rem 0 3.5rem;
+    min-height: auto;
+    padding: 7.5rem 0 3.5rem;
   }
 
-  .about-hero__deck {
+  .about-hero__telemetry {
+    grid-template-columns: 1fr;
+  }
+
+  .about-values-deck {
     grid-template-columns: 1fr;
   }
 
