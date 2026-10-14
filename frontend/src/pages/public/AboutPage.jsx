@@ -152,106 +152,34 @@ export default function AboutPage() {
         />
       </Helmet>
 
-      {/* ── 1. REDESIGNED HERO SECTION: LARGE BUILDING BACKGROUND WITH DARK OVERLAY ── */}
+      {/* ── 1. HERO SECTION: LARGE BUILDING BACKGROUND WITH BALANCED LIGHTER OVERLAY ── */}
       <section
         className="about-hero"
         style={{
           backgroundImage: `url(${heroBgImage})`,
         }}
       >
-        {/* Layered dark architectural overlays for depth & text contrast */}
-        <div className="about-hero__dark-overlay" />
-        <div className="about-hero__vignette-overlay" />
+        {/* Balanced translucent overlay for clear building visibility */}
+        <div className="about-hero__overlay" />
         <div className="about-hero__grid-pattern" />
 
         <div className="container about-hero__content-wrap">
-          {/* Breadcrumb Navigation */}
+          {/* Breadcrumb Navigation - Centered */}
           <nav aria-label="Breadcrumb" className="about-hero__breadcrumb">
             <Link to="/">{t('about:hero.breadcrumbHome')}</Link>
             <span className="about-hero__breadcrumb-sep">/</span>
             <span className="about-hero__breadcrumb-current">{t('about:hero.breadcrumbAbout')}</span>
           </nav>
 
-          {/* Section Kicker Badge */}
-          <div className="about-hero__kicker">
-            <span className="about-hero__kicker-dot" />
-            <span>{headerSettings?.badge || (isId ? 'PROFIL PERUSAHAAN & EKOSISTEM ENGINEERING' : 'COMPANY PROFILE & ENGINEERING ECOSYSTEM')}</span>
-          </div>
-
-          {/* Major Title */}
-          <h1 className="about-hero__main-title">
-            <span className="about-hero__title-tag">{isId ? 'TENTANG KAMI' : 'ABOUT US'}</span>
-            <span className="about-hero__title-divider">·</span>
-            <span className="about-hero__title-heading">
-              {headerSettings?.title || t('about:hero.title')}
-            </span>
+          {/* Major Title - Centered & Clean without badges */}
+          <h1 className="about-hero__title">
+            {headerSettings?.title || t('about:hero.title')}
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle - Centered */}
           <p className="about-hero__lead">
             {headerSettings?.subtitle || t('about:hero.subtitle')}
           </p>
-
-          {/* Hero Action CTA Buttons */}
-          <div className="about-hero__actions">
-            <button
-              type="button"
-              onClick={scrollToProfile}
-              className="about-hero__btn about-hero__btn--primary"
-            >
-              <span>{t('about:hero.btnExplore') || (isId ? 'Jelajahi Profil Perusahaan' : 'Explore Company Profile')}</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <polyline points="19 12 12 19 5 12" />
-              </svg>
-            </button>
-
-            <Link
-              to="/contact"
-              className="about-hero__btn about-hero__btn--secondary"
-            >
-              <span>{t('about:hero.btnContact') || (isId ? 'Hubungi Kemitraan OEM/ODM' : 'OEM/ODM Inquiries')}</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-          </div>
-
-          {/* Integrated Telemetry & Operational Metrics Strip */}
-          <div className="about-hero__telemetry">
-            <div className="about-metric-card">
-              <div className="about-metric-card__value">
-                <span>{headerSettings?.statYears?.value || '10'}</span>
-                <span className="about-metric-card__unit">+</span>
-              </div>
-              <div className="about-metric-card__label">{headerSettings?.statYears?.label || t('about:hero.statYears')}</div>
-            </div>
-
-            <div className="about-metric-card">
-              <div className="about-metric-card__value">
-                <span>{headerSettings?.statCapacity?.value || '80'}</span>
-                <span className="about-metric-card__unit">K CPH</span>
-              </div>
-              <div className="about-metric-card__label">{headerSettings?.statCapacity?.label || t('about:hero.statCapacity')}</div>
-            </div>
-
-            <div className="about-metric-card">
-              <div className="about-metric-card__value">
-                <span>{headerSettings?.statArea?.value || '10,000'}</span>
-                <span className="about-metric-card__unit">m²</span>
-              </div>
-              <div className="about-metric-card__label">{headerSettings?.statArea?.label || t('about:hero.statArea')}</div>
-            </div>
-
-            <div className="about-metric-card">
-              <div className="about-metric-card__value">
-                <span>{headerSettings?.statYield?.value || '99.8'}</span>
-                <span className="about-metric-card__unit">%</span>
-              </div>
-              <div className="about-metric-card__label">{headerSettings?.statYield?.label || t('about:hero.statYield')}</div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -356,6 +284,43 @@ export default function AboutPage() {
                 <span className="about-trust-badge__dot" />
                 <span>BATAM FTZ 0% TARIFF</span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Merged Operational & Telemetry Metrics Deck ── */}
+        <div className="container about-narrative__stats-container">
+          <div className="about-narrative__stats-grid">
+            <div className="about-narrative__stat-card">
+              <div className="about-narrative__stat-val">
+                <span>{headerSettings?.statYears?.value || '10'}</span>
+                <span className="about-narrative__stat-unit">+</span>
+              </div>
+              <div className="about-narrative__stat-label">{headerSettings?.statYears?.label || t('about:hero.statYears')}</div>
+            </div>
+
+            <div className="about-narrative__stat-card">
+              <div className="about-narrative__stat-val">
+                <span>{headerSettings?.statCapacity?.value || '80'}</span>
+                <span className="about-narrative__stat-unit">K CPH</span>
+              </div>
+              <div className="about-narrative__stat-label">{headerSettings?.statCapacity?.label || t('about:hero.statCapacity')}</div>
+            </div>
+
+            <div className="about-narrative__stat-card">
+              <div className="about-narrative__stat-val">
+                <span>{headerSettings?.statArea?.value || '10,000'}</span>
+                <span className="about-narrative__stat-unit">m²</span>
+              </div>
+              <div className="about-narrative__stat-label">{headerSettings?.statArea?.label || t('about:hero.statArea')}</div>
+            </div>
+
+            <div className="about-narrative__stat-card">
+              <div className="about-narrative__stat-val">
+                <span>{headerSettings?.statYield?.value || '99.8'}</span>
+                <span className="about-narrative__stat-unit">%</span>
+              </div>
+              <div className="about-narrative__stat-label">{headerSettings?.statYield?.label || t('about:hero.statYield')}</div>
             </div>
           </div>
         </div>
