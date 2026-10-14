@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Layout from './components/layout/Layout';
 import { AdminAuthProvider } from './context/AdminAuthContext';
+import { BrandingProvider } from './context/BrandingContext';
 
 // ── Lazy load pages for code splitting ──
 const HomePage      = lazy(() => import('./pages/public/HomePage'));
@@ -62,7 +63,9 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <AdminAuthProvider>
-      <RouterProvider router={router} />
+      <BrandingProvider>
+        <RouterProvider router={router} />
+      </BrandingProvider>
     </AdminAuthProvider>
   );
 }

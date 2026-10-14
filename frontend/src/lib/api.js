@@ -66,6 +66,10 @@ export function getImageUrl(path) {
   if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:') || path.startsWith('blob:')) {
     return path;
   }
+  // Frontend public static assets (e.g. /images/..., /assets/...)
+  if (path.startsWith('/images/') || path.startsWith('images/')) {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
   return `${UPLOAD_BASE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
 }
 

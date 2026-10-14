@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import RobotCanvas3D from '../../components/automation/RobotCanvas3D';
 import './AutomationPage.css';
 
@@ -326,7 +327,7 @@ const BATAM_ADVANTAGES = [
     titleEn: 'Consistent Quality',
     titleId: 'Kualitas Konsisten Terjamin',
     descEn: 'Precision-built systems ensure top-tier results every single time.',
-    descId: 'Sistem rekayasa presisi tinggi menjamin hasil mutu berstandar global di setiap batch produksi.',
+    descId: 'Sistem engineering presisi tinggi menjamin hasil mutu berstandar global di setiap batch produksi.',
   },
 ];
 
@@ -424,19 +425,34 @@ export default function AutomationPage() {
 
   return (
     <div className="automation-page">
+      <Helmet>
+        <title>
+          {isId
+            ? 'Otomasi Industri & Solusi Robotik | PT. Global Philsonic Technologies'
+            : 'Industrial Automation & Robotics Solutions | PT. Global Philsonic Technologies'}
+        </title>
+        <meta
+          name="description"
+          content={
+            isId
+              ? 'Solusi integrasi otomasi industri cerdas, lengan robotik 6-axis, pengelasan presisi, dan sistem fabrikasi terintegrasi Batam FTZ.'
+              : 'Smart industrial automation solutions, 6-axis robotic arms, precision welding, and integrated fabrication systems in Batam FTZ.'
+          }
+        />
+      </Helmet>
 
-      {/* ═══════ PAGE HEADER : Always-Dark Industrial Theme ═══════ */}
+      {/* ═══════ PAGE HEADER : Clean Monochrome Industrial Theme ═══════ */}
       <header className="auto-page-header">
         <div className="auto-page-header__grid-bg" aria-hidden="true" />
 
         <div className="container auto-page-header__content">
           <h1 className="auto-page-header__title">
-            {isId ? 'Solusi Robot Industri & Otomasi Manufaktur' : 'Industrial Robot Solutions & Manufacturing Automation'}
+            {isId ? 'Teknologi Otomasi di Lini Perakitan' : 'Precision Automation in Assembly Line'}
           </h1>
           <p className="auto-page-header__subtitle">
             {isId
-              ? 'Jelajahi simulasi 3D robot welding, handling, dan cutting berkecepatan tinggi dengan artikulasi 6-sumbu presisi untuk jalur produksi Anda.'
-              : 'Explore interactive 3D simulations of our 6-axis welding, handling, and cutting industrial robots designed for smart manufacturing.'}
+              ? 'Simulasi penerapan teknologi robotika industri 6-sumbu untuk mendukung akurasi perakitan dan standar mutu nol-cacat di fasilitas manufaktur PT. Global Philsonic Technologies.'
+              : 'Simulation of 6-axis industrial robotics supporting assembly accuracy and zero-defect quality standards at PT. Global Philsonic Technologies.'}
           </p>
         </div>
       </header>
@@ -461,88 +477,86 @@ export default function AutomationPage() {
         </div>
       </div>
 
-      {/* ═══════ SCROLLYTELLING SHOWCASE: 3D VIEWPORT + PARALLAX NARRATIVE ═══════ */}
-      <section className="auto-scrolly-section">
-        <div className="container auto-scrolly-container">
+      {/* ═══════ 2-COLUMN SIMULATION STAGE: 3D PROCESS VIEWPORT + REFINED NARRATIVE ═══════ */}
+      <section className="auto-showcase-section">
+        <div className="container auto-showcase-grid">
 
-          {/* LEFT COLUMN: STICKY 3D ROBOT VIEWPORT */}
-          <div className="auto-scrolly-sticky">
-            <RobotCanvas3D
-              robotType={activeRobot.id}
-              activeStep={activeStep}
-              scrollProgress={scrollProgress}
-              isId={isId}
-              onStepSelect={scrollToStep}
-            />
-
-            {/* Quick Specs Quick-Bar Under 3D Canvas */}
-            <div className="auto-quick-specs">
-              {activeRobot.heroStats.map((st, i) => (
-                <div key={i} className="auto-quick-spec-item">
-                  <span className="auto-quick-spec-val">{st.val}</span>
-                  <span className="auto-quick-spec-label">{isId ? st.labelId : st.labelEn}</span>
-                </div>
-              ))}
+          {/* LEFT COLUMN: 3D PROCESS SIMULATION VIEWPORT */}
+          <div className="auto-showcase-canvas-col">
+            <div className="auto-showcase-canvas-wrap">
+              <RobotCanvas3D
+                robotType={activeRobot.id}
+                isId={isId}
+              />
             </div>
           </div>
 
-          {/* RIGHT COLUMN: SCROLLING NARRATIVE STREAM */}
-          <div className="auto-scrolly-narrative" ref={narrativeRef}>
-            {activeRobot.steps.map((step, idx) => (
-              <div
-                key={idx}
-                className={`auto-story-step ${activeStep === idx ? 'auto-story-step--active' : ''}`}
-                data-step={idx}
-              >
-                {/* Step Kicker Label */}
-                <div className="auto-story-kicker">
-                  {isId ? step.kickerId : step.kickerEn}
-                </div>
+          {/* RIGHT COLUMN: REFINED NARRATIVE & PROCESS INTEGRATION */}
+          <div className="auto-showcase-info-col">
+            <span className="auto-kicker-clean">
+              {isId ? 'KAPABILITAS OTOMASI MANUFAKTUR • BATAM FTZ' : 'MANUFACTURING AUTOMATION CAPABILITY • BATAM FTZ'}
+            </span>
 
-                {/* Section Title */}
-                <h2 className="auto-story-title">
-                  {isId ? step.titleId : step.titleEn}
-                </h2>
+            <h2 className="auto-showcase-heading">
+              {isId ? 'Dukungan Presisi di Lini Perakitan' : 'Precision-Assisted Assembly Infrastructure'}
+            </h2>
 
-                {/* Description */}
-                <p className="auto-story-desc">
-                  {isId ? step.descId : step.descEn}
-                </p>
+            <p className="auto-showcase-lead">
+              {isId
+                ? 'Dalam mewujudkan standar perakitan elektronik otomotif kelas dunia, PT. Global Philsonic Technologies mengintegrasikan sistem robotika cerdas secara langsung di lintasan perakitan pabrik kami di Batam FTZ.'
+                : 'To achieve world-class automotive electronics assembly standards, PT. Global Philsonic Technologies integrates smart industrial robotics directly into our manufacturing lines at Batam FTZ.'}
+            </p>
 
-                {/* Bullet Highlights */}
-                {step.highlights && (
-                  <ul className="auto-story-highlights">
-                    {step.highlights.map((h, hi) => (
-                      <li key={hi}>
-                        <span>{isId ? h.id : h.en}</span>
-                      </li>
-                    ))}
-                  </ul>
+            <p className="auto-showcase-desc">
+              {isId
+                ? 'Kehadiran fasilitas otomasi ini berperan penting sebagai pendukung akurasi tinggi bagi tim teknisi dan insinyur kami—membantu proses pengerjaan sambungan mikro, pengelasan sasis heatsink, dan perakitan mekanikal agar memenuhi standar toleransi ketat industri dengan jaminan mutu nol cacat (Zero-Defect).'
+                : 'This precision automation infrastructure empowers our engineering and production teams—supporting micro-level connections, chassis welding, and mechanical assembly with 24/7 consistency and zero-defect tolerance.'}
+            </p>
+
+            {/* Active Process Role Card */}
+            <div className="auto-process-role-card">
+              <h3 className="auto-process-role-title">
+                {isId ? `Peran Operasional: ${activeRobot.tabId}` : `Operational Role: ${activeRobot.tabEn}`}
+              </h3>
+              <p className="auto-process-role-text">
+                {activeRobot.id === 'welding' && (
+                  isId
+                    ? 'Membantu proses pengelasan presisi pada sasis aluminium dan heatsink perangkat audio-video otomotif, menghasilkan penetrasi kampuh yang seragam, kuat, dan minim distorsi termal.'
+                    : 'Assisting precision welding on aluminum chassis and audio-video heatsinks, delivering uniform seam penetration, structural integrity, and minimal heat distortion.'
                 )}
-
-                {/* Step 4 Technical Specs Table */}
-                {step.specs && (
-                  <div className="auto-story-specs-table">
-                    <div className="auto-story-specs-grid">
-                      {step.specs.map((sp, si) => (
-                        <div key={si} className="auto-story-spec-row">
-                          <span className="auto-story-spec-name">{isId ? sp.labelId : sp.labelEn}</span>
-                          <span className="auto-story-spec-data">{sp.val}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                {activeRobot.id === 'handling' && (
+                  isId
+                    ? 'Membantu pemindahan modul sirkuit PCBA sensitif dan perakitan housing box-build berkecepatan tinggi secara steril, aman, dan presisi tanpa risiko benturan fisik maupun kontaminasi manual.'
+                    : 'Assisting high-speed transfer of sensitive PCBA modules and box-build assembly with zero physical impact risk or manual ESD contamination.'
                 )}
+                {activeRobot.id === 'cutting' && (
+                  isId
+                    ? 'Membantu fabrikasi dan pemotongan plat logam berakurasi tinggi untuk pembuatan fixture uji fungsional (test jig) dan komponen penunjang perakitan dengan akurasi kontur sub-milimeter.'
+                    : 'Assisting high-precision metal plate fabrication and custom test jig fixture manufacturing with sub-millimeter contour accuracy.'
+                )}
+              </p>
+            </div>
+
+            {/* Clean Monochrome Specs Table */}
+            <div className="auto-specs-clean-table">
+              <div className="auto-spec-clean-row">
+                <span className="auto-spec-clean-label">{isId ? 'Konfigurasi Kinematika' : 'Kinematic Configuration'}</span>
+                <span className="auto-spec-clean-value">6-Axis Articulated Geometry</span>
               </div>
-            ))}
+              <div className="auto-spec-clean-row">
+                <span className="auto-spec-clean-label">{isId ? 'Presisi Pengulangan' : 'Repeatability Tolerance'}</span>
+                <span className="auto-spec-clean-value">{activeRobot.heroStats[1]?.val || '±0.04 mm'}</span>
+              </div>
+              <div className="auto-spec-clean-row">
+                <span className="auto-spec-clean-label">{isId ? 'Lingkungan Kerja' : 'Operational Environment'}</span>
+                <span className="auto-spec-clean-value">{isId ? 'Lini Perakitan & Fasilitas Terkendali ESD' : 'Assembly Lines & ESD Cleanroom'}</span>
+              </div>
+            </div>
 
-            {/* Actions Outside Narrative Cards */}
-            <div className="auto-narrative-actions">
-              <Link to="/contact" className="auto-btn auto-btn--primary">
-                {isId ? 'Minta Penawaran Spesifik' : 'Request RFQ & Layout Consultation'}
-              </Link>
-              <Link to="/contact" className="auto-btn auto-btn--outline">
-                {isId ? 'Konsultasi Tim Ahli' : 'Talk with Robotics Engineer'}
+            {/* Minimalist Action Link */}
+            <div className="auto-showcase-actions">
+              <Link to="/contact" className="auto-showcase-btn">
+                {isId ? 'Konsultasi Spesifikasi Perakitan' : 'Consult Assembly Specifications'}
               </Link>
             </div>
           </div>
@@ -550,17 +564,17 @@ export default function AutomationPage() {
         </div>
       </section>
 
-      {/* ═══════ WHY CHOOSE ROBOTS IN BATAM SECTION ═══════ */}
+      {/* ═══════ OPERATIONAL ADVANTAGES OF AUTOMATED MANUFACTURING SECTION ═══════ */}
       <section className="auto-batam-section">
         <div className="container">
           <div className="auto-batam-header">
             <h2 className="auto-batam-title">
-              {isId ? 'Why Choose Robot in Batam?' : 'Why Choose Robot in Batam?'}
+              {isId ? 'Keunggulan Penerapan Otomasi di Fasilitas Batam' : 'Operational Advantages of Automated Manufacturing in Batam'}
             </h2>
             <p className="auto-batam-subtitle">
               {isId
-                ? 'Seiring meningkatnya tuntutan industri, otomasi bukan lagi sekadar pilihan, melainkan kebutuhan mendesak. Inilah alasan pabrik-pabrik di seluruh Batam, dari Batu Ampar hingga Muka Kuning, memilih robot:'
-                : 'As industrial demands increase, automation is no longer an option, it’s a necessity. Here’s why factories across Batam, from Batu Ampar to Muka Kuning, are choosing robots:'}
+                ? 'Penerapan integrasi sistem robotika di lintasan perakitan Batam FTZ kami menjamin efisiensi tinggi, keselamatan operasional, dan kepatuhan mutu nol-cacat:'
+                : 'Integrating industrial robotic automation directly into our Batam FTZ assembly lines delivers high operational efficiency, enhanced safety, and zero-defect compliance:'}
             </p>
           </div>
 
@@ -596,17 +610,17 @@ export default function AutomationPage() {
         </div>
       </section>
 
-      {/* ═══════ ADVANCED ROBOTIC TECHNOLOGY FOR BATAM INDUSTRIES ═══════ */}
+      {/* ═══════ INTEGRATED AUTOMATION TECHNOLOGY SECTION ═══════ */}
       <section className="auto-tech-section">
         <div className="container">
           <div className="auto-tech-header">
             <h2 className="auto-tech-title">
-              {isId ? 'Advanced Robotic Technology for Batam Industries' : 'Advanced Robotic Technology for Batam Industries'}
+              {isId ? 'Teknologi Otomasi Terintegrasi di Lini Pabrik' : 'Integrated Automation Technology at Our Plant'}
             </h2>
             <p className="auto-tech-subtitle">
               {isId
-                ? 'Kami menghadirkan solusi otomasi kelas dunia melalui kemitraan strategis dengan brand otomasi global terkemuka. Sistem kami dilengkapi dengan:'
-                : 'We deliver world-class solutions by partnering with global automation brands. Our systems feature:'}
+                ? 'Kami menerapkan teknologi otomasi presisi tinggi dengan standar industri manufaktur internasional yang dilengkapi dengan:'
+                : 'We implement high-precision automation technologies meeting international manufacturing standards, featuring:'}
             </p>
           </div>
 
@@ -625,17 +639,17 @@ export default function AutomationPage() {
         </div>
       </section>
 
-      {/* ═══════ DISCOVER OUR ROBOT SERIES IN BATAM ═══════ */}
+      {/* ═══════ OUR PRECISION ROBOTICS INFRASTRUCTURE ═══════ */}
       <section className="auto-comparison-section">
         <div className="container">
           <div className="auto-comparison-header">
             <h2 className="auto-comparison-title">
-              {isId ? 'Discover Our Robot Series in Batam' : 'Discover Our Robot Series in Batam'}
+              {isId ? 'Fasilitas Robotika Presisi Kami' : 'Our Precision Robotics Infrastructure'}
             </h2>
             <p className="auto-comparison-subtitle">
               {isId
-                ? 'Kami menawarkan rangkaian lengkap solusi robotika untuk mengotomasi hampir setiap proses produksi:'
-                : 'We offer a complete suite of robotic solutions to automate almost every production process:'}
+                ? 'Pilihan unit robotika industri yang dioperasikan untuk mendukung fleksibilitas proses perakitan komponen:'
+                : 'Industrial robotics units operated to support flexible component assembly processes:'}
             </p>
           </div>
 

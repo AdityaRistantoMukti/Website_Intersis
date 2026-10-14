@@ -5,6 +5,7 @@ const { verifyToken, restrictTo } = require('../middlewares/authMiddleware');
 const { authLimiter } = require('../middlewares/rateLimiter');
 const upload = require('../middlewares/uploadMiddleware');
 const validate = require('../validators/validate');
+const { deleteFileIfLocal } = require('../utils/fileCleanup');
 
 // Validators
 const { loginValidationRules, changePasswordRules } = require('../validators/authValidator');
@@ -64,6 +65,40 @@ router.put('/company', restrictTo('administrator', 'hrd', 'staff'), upload.singl
 router.put('/contact', restrictTo('administrator', 'hrd', 'staff'), contactRules, validate, updateContact);
 router.put('/site-settings/:key', restrictTo('administrator', 'hrd', 'staff'), updateSiteSettings);
 
+// Generic file upload endpoint (Favicon, Logo, Media) with automatic cleanup of replaced files
+router.post('/upload', restrictTo('administrator', 'hrd', 'staff'), upload.single('file'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: 'Tidak ada file yang diunggah.' });
+  }
+
+  // Best Practice Cleanup: If replacing an existing uploaded file, delete old file to save disk space
+  if (req.body.previous_url) {
+    deleteFileIfLocal(req.body.previous_url);
+  }
+
+  const subFolder = req.file.destination ? path.basename(req.file.destination) : (req.body.folder || 'general');
+  const fileUrl = `/uploads/${subFolder}/${req.file.filename}`;
+  return res.json({
+    success: true,
+    message: 'File berhasil diunggah.',
+    data: {
+      url: fileUrl,
+      filename: req.file.filename,
+      size: req.file.size,
+    },
+  });
+});
+
+// Explicit delete endpoint for uploaded assets
+router.delete('/upload', restrictTo('administrator', 'hrd', 'staff'), (req, res) => {
+  const { file_url } = req.body;
+  if (!file_url) {
+    return res.status(400).json({ success: false, message: 'file_url wajib disertakan.' });
+  }
+  deleteFileIfLocal(file_url);
+  return res.json({ success: true, message: 'File tidak terpakai berhasil dihapus dari server.' });
+});
+
 
 // Core Values
 router.get('/core-values', getAdminCoreValues);
@@ -111,9 +146,20 @@ router.delete('/faqs/:id', restrictTo('administrator', 'hrd', 'staff'), deleteFa
 // ─── AUDIT TRAIL / LOG AKTIVITAS (ADMINISTRATOR & HRD) ──────────────────────
 router.get('/logs', restrictTo('administrator', 'hrd'), getActivityLogs);
 
-// ─── TELEMETRY & RFQ INQUIRIES STATS ──────────────────────────────────────────
-const { getTelemetryStats } = require('../controllers/telemetryController');
+// ─── TELEMETRY & RFQ INQUIRIES STATS & MANAGEMENT ───────────────────────────
+const {
+  getTelemetryStats,
+  getAdminRfqs,
+  updateAdminRfq,
+  deleteAdminRfq,
+  testEmailDelivery,
+} = require('../controllers/telemetryController');
+
 router.get('/telemetry', restrictTo('administrator', 'hrd', 'staff'), getTelemetryStats);
+router.get('/rfq', restrictTo('administrator', 'hrd', 'staff'), getAdminRfqs);
+router.patch('/rfq/:id', restrictTo('administrator', 'hrd', 'staff'), updateAdminRfq);
+router.delete('/rfq/:id', restrictTo('administrator', 'hrd'), deleteAdminRfq);
+router.post('/email/test', restrictTo('administrator', 'hrd', 'staff'), testEmailDelivery);
 
 // ─── MANAJEMEN PRODUK (CATALOG PRODUK GPT) ───────────────────────────────────
 router.get('/products',          getAdminProducts);

@@ -4,80 +4,73 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useCompany, useSiteSettings } from '../../hooks/useApi';
 import { getLocalizedData } from '../../lib/translator';
+import { getImageUrl } from '../../lib/api';
 import './AboutPage.css';
 
-/* ── Interactive Facility Graphic Renderers ── */
-function FacilityGraphicView({ zoneId }) {
-  if (zoneId === 'cleanroom') {
-    return (
-      <div className="facility-graphic">
-        <div className="facility-graphic__radar-grid" />
-        <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
-          {/* Cleanroom Chamber & Airflow Arrows */}
-          <rect x="15" y="15" width="110" height="70" rx="8" fill="#18181b" stroke="#e4e4e7" strokeWidth="1.5" />
-          <line x1="25" y1="28" x2="115" y2="28" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" strokeDasharray="3 3" />
-          {/* HEPA filter vents */}
-          <path d="M 35 15 L 35 25 M 70 15 L 70 25 M 105 15 L 105 25" stroke="#a1a1aa" strokeWidth="2" />
-          {/* ESD Ground Icon */}
-          <circle cx="70" cy="55" r="14" fill="rgba(255, 255, 255, 0.08)" stroke="#e4e4e7" strokeWidth="1.5" />
-          <path d="M 70 47 L 70 63 M 64 53 L 76 53 M 66 59 L 74 59" stroke="#e4e4e7" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-        <span className="facility-graphic__badge">HEPA 99.97% · ESD PROTECTED</span>
-      </div>
-    );
-  }
+/* ── Real High-Resolution Manufacturing Facility Photos (Offline Local Root Assets) ── */
+const FACILITY_ZONE_IMAGES = {
+  cleanroom: {
+    src: '/images/about/facility-cleanroom.jpg',
+    alt: 'Ruang Cleanroom Berstandar ESD Class 100K PT. Global Philsonic Technologies',
+    badge: 'HEPA 99.97% · ESD PROTECTED',
+  },
+  smt: {
+    src: '/images/about/facility-smt.jpg',
+    alt: 'Lini Perakitan SMT Berkecepatan Tinggi 80.000 CPH',
+    badge: 'DUAL-BEAM 80,000 CPH',
+  },
+  inspection: {
+    src: '/images/about/facility-inspection.jpg',
+    alt: 'Laboratorium Inspeksi Optik 3D AOI & Inline X-Ray',
+    badge: '3D AOI & INLINE X-RAY',
+  },
+  tooling: {
+    src: '/images/about/facility-tooling.jpg',
+    alt: 'Workshop Otomasi & Jig Engineering ICT/FCT Test Fixtures',
+    badge: 'ICT / FCT TEST FIXTURES',
+  },
+};
 
-  if (zoneId === 'smt') {
-    return (
-      <div className="facility-graphic">
-        <div className="facility-graphic__radar-grid" />
-        <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
-          {/* SMT Feeder & Head */}
-          <rect x="20" y="55" width="100" height="30" rx="4" fill="#18181b" stroke="#e4e4e7" strokeWidth="1.5" />
-          <path d="M 30 70 L 50 70 M 60 70 L 80 70 M 90 70 L 110 70" stroke="#a1a1aa" strokeWidth="2.5" />
-          {/* High-Speed Mounter Head Nozzles */}
-          <rect x="50" y="20" width="40" height="18" rx="3" fill="#27272a" stroke="#e4e4e7" strokeWidth="1.5" />
-          <line x1="60" y1="38" x2="60" y2="52" stroke="#e4e4e7" strokeWidth="2" />
-          <line x1="80" y1="38" x2="80" y2="52" stroke="#e4e4e7" strokeWidth="2" />
-          <circle cx="60" cy="52" r="3" fill="#ffffff" />
-          <circle cx="80" cy="52" r="3" fill="#ffffff" />
-        </svg>
-        <span className="facility-graphic__badge">DUAL-BEAM 80,000 CPH</span>
-      </div>
-    );
-  }
+function FacilityPhotoView({ zoneId, zone }) {
+  const fallback = FACILITY_ZONE_IMAGES[zoneId] || FACILITY_ZONE_IMAGES.cleanroom;
+  const imageSrc = zone?.image ? getImageUrl(zone.image) : fallback.src;
+  const imageAlt = zone?.imageAlt || zone?.name || fallback.alt;
+  const imageBadge = zone?.imageBadge || fallback.badge;
 
-  if (zoneId === 'inspection') {
-    return (
-      <div className="facility-graphic">
-        <div className="facility-graphic__radar-grid" />
-        <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
-          {/* 3D Optical Scanner Beam */}
-          <polygon points="70,18 35,70 105,70" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1" strokeDasharray="3 2" />
-          <circle cx="70" cy="18" r="6" fill="#18181b" stroke="#e4e4e7" strokeWidth="2" />
-          {/* PCB Surface */}
-          <rect x="25" y="70" width="90" height="12" rx="2" fill="#27272a" stroke="#a1a1aa" strokeWidth="1.5" />
-          <circle cx="50" cy="76" r="2.5" fill="#ffffff" />
-          <circle cx="70" cy="76" r="2.5" fill="#ffffff" />
-          <circle cx="90" cy="76" r="2.5" fill="#ffffff" />
-        </svg>
-        <span className="facility-graphic__badge">3D AOI & INLINE X-RAY</span>
-      </div>
-    );
-  }
-
-  // Automation / Tooling
   return (
-    <div className="facility-graphic">
-      <div className="facility-graphic__radar-grid" />
-      <svg width="140" height="100" viewBox="0 0 140 100" fill="none" style={{ position: 'relative', zIndex: 2 }}>
-        {/* CNC / Jig Fixture */}
-        <rect x="25" y="20" width="90" height="60" rx="6" fill="#18181b" stroke="#e4e4e7" strokeWidth="1.5" />
-        {/* Test probes */}
-        <path d="M 45 40 L 45 60 M 60 35 L 60 60 M 75 40 L 75 60 M 90 35 L 90 60" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" />
-        <rect x="40" y="60" width="55" height="10" rx="2" fill="#27272a" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
-      </svg>
-      <span className="facility-graphic__badge">ICT / FCT TEST FIXTURES</span>
+    <div className="facility-photo-card">
+      <div className="facility-photo-wrap">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="facility-photo"
+          loading="lazy"
+          onError={(e) => {
+            e.target.src = fallback.src || '/images/hero-smt.jpg';
+          }}
+        />
+        <div className="facility-photo-overlay" />
+        {imageBadge && (
+          <div style={{
+            position: 'absolute',
+            top: '1rem',
+            left: '1rem',
+            zIndex: 3,
+            background: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(13, 148, 136, 0.4)',
+            color: '#2dd4bf',
+            padding: '4px 10px',
+            borderRadius: '6px',
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            backdropFilter: 'blur(6px)'
+          }}>
+            {imageBadge}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -92,12 +85,23 @@ export default function AboutPage() {
   // Dynamic Site Settings from Admin Portal
   const { data: rawHeaderSettings } = useSiteSettings('about_header');
   const { data: rawNarrativeSettings } = useSiteSettings('about_narrative');
+  const { data: rawVmSettings } = useSiteSettings('about_vision_mission');
   const { data: rawFacilitiesSettings } = useSiteSettings('about_facilities');
   const { data: rawTimelineSettings } = useSiteSettings('about_timeline');
   const { data: rawCertSettings } = useSiteSettings('about_certifications');
 
-  const headerSettings = getLocalizedData(rawHeaderSettings, lang);
-  const narrativeSettings = getLocalizedData(rawNarrativeSettings, lang);
+  const headerSettings = {
+    ...(rawHeaderSettings && typeof rawHeaderSettings === 'object' ? rawHeaderSettings : {}),
+    ...getLocalizedData(rawHeaderSettings, lang),
+  };
+  const narrativeSettings = {
+    ...(rawNarrativeSettings && typeof rawNarrativeSettings === 'object' ? rawNarrativeSettings : {}),
+    ...getLocalizedData(rawNarrativeSettings, lang),
+  };
+  const vmSettings = {
+    ...(rawVmSettings && typeof rawVmSettings === 'object' ? rawVmSettings : {}),
+    ...getLocalizedData(rawVmSettings, lang),
+  };
   const facilitiesSettings = getLocalizedData(rawFacilitiesSettings, lang);
   const timelineSettings = getLocalizedData(rawTimelineSettings, lang);
   const certSettings = getLocalizedData(rawCertSettings, lang);
@@ -105,7 +109,6 @@ export default function AboutPage() {
   // Interactive state
   const [activeMilestone, setActiveMilestone] = useState(0);
   const [activeZone, setActiveZone] = useState(0);
-  const [selectedCert, setSelectedCert] = useState(null);
 
   const fallbackMilestones = t('about:milestones.items', { returnObjects: true }) || [];
   const milestoneItems = (Array.isArray(timelineSettings) && timelineSettings.length > 0)
@@ -153,7 +156,14 @@ export default function AboutPage() {
       </Helmet>
 
       {/* ── 1. HERO BANNER WITH INDUSTRIAL TELEMETRY DECK ── */}
-      <section className="about-hero">
+      <section
+        className="about-hero"
+        style={headerSettings?.bg_image ? {
+          backgroundImage: `linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.94)), url(${getImageUrl(headerSettings.bg_image)})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        } : undefined}
+      >
         <div className="about-hero__bg-grid" />
 
         <div className="container about-hero__stage">
@@ -217,48 +227,32 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Strategic Batam FTZ Advantage Box */}
-          <div className="about-ftz-box">
-            <div className="about-ftz-box__header">
-              <h3 className="about-ftz-box__title">{narrativeSettings?.ftzTitle || t('about:narrative.ftzTitle')}</h3>
-              <span className="about-ftz-box__badge">BATAM FTZ HUB</span>
-            </div>
-
-            <div className="about-ftz-list">
-              <div className="about-ftz-item">
-                <div className="about-ftz-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                </div>
-                <div className="about-ftz-item__content">
-                  <h4>{t('about:narrative.ftz1Title')}</h4>
-                  <p>{t('about:narrative.ftz1Desc')}</p>
-                </div>
-              </div>
-
-              <div className="about-ftz-item">
-                <div className="about-ftz-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                </div>
-                <div className="about-ftz-item__content">
-                  <h4>{t('about:narrative.ftz2Title')}</h4>
-                  <p>{t('about:narrative.ftz2Desc')}</p>
-                </div>
-              </div>
-
-              <div className="about-ftz-item">
-                <div className="about-ftz-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                </div>
-                <div className="about-ftz-item__content">
-                  <h4>{t('about:narrative.ftz3Title')}</h4>
-                  <p>{t('about:narrative.ftz3Desc')}</p>
-                </div>
+          {/* Company Facility Showcase Photo */}
+          <div className="about-company-photo-card">
+            <div className="about-company-photo-wrap">
+              <img
+                src={narrativeSettings?.image
+                  ? getImageUrl(narrativeSettings.image)
+                  : (companyData?.about_image || companyData?.image
+                    ? getImageUrl(companyData.about_image || companyData.image)
+                    : "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80")}
+                alt={narrativeSettings?.photoTitle || "Fasilitas Manufaktur PT. Global Philsonic Technologies Batam"}
+                className="about-company-photo"
+                onError={(e) => {
+                  e.target.src = '/images/hero-smt.jpg';
+                }}
+              />
+              <div className="about-company-photo-overlay" />
+              <div className="about-company-photo-caption">
+                {narrativeSettings?.photoTag && (
+                  <span className="about-company-photo-tag">{narrativeSettings.photoTag}</span>
+                )}
+                <h3 className="about-company-photo-title">
+                  {narrativeSettings?.photoTitle || companyData?.title || "PT. Global Philsonic Technologies"}
+                </h3>
+                <p className="about-company-photo-sub">
+                  {narrativeSettings?.photoSub || (isId ? "Pusat Manufaktur Elektronik Otomotif & Perakitan SMT Presisi" : "Automotive Electronics & Precision SMT Assembly Hub")}
+                </p>
               </div>
             </div>
           </div>
@@ -301,12 +295,20 @@ export default function AboutPage() {
               <div className="timeline-card__content">
                 <h3>{milestoneItems[activeMilestone].title}</h3>
                 <p>{milestoneItems[activeMilestone].desc}</p>
-                <div className="timeline-card__tag">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>VERIFIED MILESTONE ACCOMPLISHMENT</span>
-                </div>
+                {(() => {
+                  const m = milestoneItems[activeMilestone];
+                  const mImg = m?.image || `/images/about/milestone-${m?.year || (activeMilestone === 0 ? '2014' : activeMilestone === 1 ? '2017' : activeMilestone === 2 ? '2020' : activeMilestone === 3 ? '2023' : '2026')}.jpg`;
+                  return (
+                    <div className="timeline-card__image-wrap" style={{ marginTop: '1.25rem', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', maxWidth: '500px' }}>
+                      <img 
+                        src={getImageUrl(mImg)} 
+                        alt={m.title}
+                        style={{ width: '100%', maxHeight: '240px', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           )}
@@ -315,45 +317,43 @@ export default function AboutPage() {
 
       {/* ── 4. VISION & MISSION CARDS ── */}
       <section className="about-vm">
-        <div className="container about-vm__grid">
-          {/* Vision */}
-          <div className="vm-card vm-card--vision">
-            <div className="vm-card__icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-              </svg>
+        <div className="container">
+          {vmSettings?.image && (
+            <div style={{ marginBottom: '2.5rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '340px' }}>
+              <img 
+                src={getImageUrl(vmSettings.image)} 
+                alt="Visi & Misi PT. Global Philsonic Technologies" 
+                style={{ width: '100%', maxHeight: '340px', objectFit: 'cover', display: 'block' }}
+                onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
+              />
             </div>
-            <span className="about-kicker">{t('about:visionMission.visionKicker')}</span>
-            <h3 className="vm-card__title">{t('about:visionMission.visionTitle')}</h3>
-            <p className="vm-card__desc">
-              {activeVision}
-            </p>
-          </div>
+          )}
+          <div className="about-vm__grid">
+            {/* Vision */}
+            <div className="vm-card vm-card--vision">
+              <h3 className="vm-card__title">{t('about:visionMission.visionTitle')}</h3>
+              <p className="vm-card__desc">
+                {activeVision}
+              </p>
+            </div>
 
-          {/* Mission */}
-          <div className="vm-card vm-card--mission">
-            <div className="vm-card__icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-              </svg>
-            </div>
-            <span className="about-kicker">{t('about:visionMission.missionKicker')}</span>
-            <h3 className="vm-card__title">{t('about:visionMission.missionTitle')}</h3>
-            
-            <div className="vm-mission-list">
-              {(activeMission ? activeMission.split('\n').filter(Boolean) : [
-                t('about:visionMission.mission1'),
-                t('about:visionMission.mission2'),
-                t('about:visionMission.mission3'),
-                t('about:visionMission.mission4')
-              ]).map((m, idx) => (
-                <div key={idx} className="vm-mission-item">
-                  <span className="vm-mission-bullet">0{idx + 1}</span>
-                  <span>{m.replace(/^[0-9]+[.)]\s*/, '')}</span>
-                </div>
-              ))}
+            {/* Mission */}
+            <div className="vm-card vm-card--mission">     
+              <h3 className="vm-card__title">{t('about:visionMission.missionTitle')}</h3>
+              
+              <div className="vm-mission-list">
+                {(activeMission ? activeMission.split('\n').filter(Boolean) : [
+                  t('about:visionMission.mission1'),
+                  t('about:visionMission.mission2'),
+                  t('about:visionMission.mission3'),
+                  t('about:visionMission.mission4')
+                ]).map((m, idx) => (
+                  <div key={idx} className="vm-mission-item">
+                    <span className="vm-mission-bullet">0{idx + 1}</span>
+                    <span>{m.replace(/^[0-9]+[.)]\s*/, '')}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -364,26 +364,39 @@ export default function AboutPage() {
         <div className="container">
           <div className="about-section-header">
             <span className="about-kicker">{t('about:certifications.kicker')}</span>
-            <h2 className="about-heading" style={{ color: '#0B1320' }}>
+            <h2 className="about-heading">
               {t('about:certifications.title')}
             </h2>
-            <p style={{ color: '#64748B' }}>{t('about:certifications.subtitle')}</p>
+            <p className="about-subtitle">{t('about:certifications.subtitle')}</p>
           </div>
 
           <div className="certs-grid">
-            {certItems.map((cert) => (
-              <div key={cert.code} className="cert-card">
-                <div className="cert-card__top">
-                  <span className="cert-card__badge">{cert.code}</span>
-                  <h3 className="cert-card__name">{cert.name}</h3>
-                  <p className="cert-card__desc">{cert.desc}</p>
+            {certItems.map((cert, idx) => {
+              const defaultCert = cert.code?.includes('16949') ? '/images/about/cert-iatf-16949.svg'
+                : cert.code?.includes('9001') ? '/images/about/cert-iso-9001.svg'
+                : cert.code?.includes('14001') ? '/images/about/cert-iso-14001.svg'
+                : '/images/about/cert-ansi-esd.svg';
+              const certImg = cert.image ? getImageUrl(cert.image) : defaultCert;
+
+              return (
+                <div key={cert.code || idx} className="cert-card">
+                  {certImg && (
+                    <div className="cert-card__image-wrap" style={{ marginBottom: '1.25rem', borderRadius: '8px', overflow: 'hidden', background: 'rgba(15, 23, 42, 0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '120px', border: '1px solid rgba(255,255,255,0.08)', padding: '0.75rem' }}>
+                      <img 
+                        src={certImg} 
+                        alt={cert.name || cert.title}
+                        style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+                        onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
+                      />
+                    </div>
+                  )}
+                  <div className="cert-card__top">
+                    <h3 className="cert-card__name">{cert.name || cert.title}</h3>
+                    <p className="cert-card__desc">{cert.desc}</p>
+                  </div>
                 </div>
-                <div className="cert-card__status">
-                  <span className="cert-card__status-dot" />
-                  <span>{cert.status}</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -418,7 +431,7 @@ export default function AboutPage() {
             <div className="facility-stage">
               <div className="facility-stage__info">
                 <h3>{facilityZones[activeZone].title}</h3>
-                <div className="facility-stage__highlight">{facilityZones[activeZone].highlight}</div>
+                {/* <div className="facility-stage__highlight">{facilityZones[activeZone].highlight}</div> */}
                 <p className="facility-stage__desc">{facilityZones[activeZone].desc}</p>
 
                 <div className="facility-specs-list">
@@ -433,8 +446,8 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Graphic Representation */}
-              <FacilityGraphicView zoneId={facilityZones[activeZone].id} />
+              {/* Real Facility Photo View */}
+              <FacilityPhotoView zoneId={facilityZones[activeZone].id} zone={facilityZones[activeZone]} />
             </div>
           )}
         </div>

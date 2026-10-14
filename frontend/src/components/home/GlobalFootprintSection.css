@@ -516,6 +516,66 @@
   font-weight: 600;
 }
 
+/* ── Dark Mode Adaptations for Popover ── */
+[data-theme="dark"] .map-floating-popover {
+  background: #121215;
+  border-color: #27272a;
+  box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .map-popover__arrow {
+  background: #121215;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .map-popover__name {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .map-popover__country {
+  color: #a1a1aa !important;
+}
+
+[data-theme="dark"] .map-popover__close {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .map-popover__close:hover {
+  background: #27272a;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .map-popover__badge-row {
+  border-bottom-color: #27272a;
+}
+
+[data-theme="dark"] .map-popover__coords {
+  color: #a1a1aa;
+}
+
+[data-theme="dark"] .map-popover__role {
+  color: #e4e4e7;
+}
+
+[data-theme="dark"] .map-popover__desc {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .map-popover__meta {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .popover-meta-item .meta-label {
+  color: #a1a1aa;
+}
+
+[data-theme="dark"] .popover-meta-item .meta-val {
+  color: #ffffff;
+}
+
 /* ── QUICK-SELECT CORRIDOR CHIPS BAR ── */
 .world-map-corridors-bar {
   display: flex;

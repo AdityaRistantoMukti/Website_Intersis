@@ -30,4 +30,19 @@ const authLimiter = rateLimit({
   },
 });
 
-module.exports = { apiLimiter, authLimiter };
+/**
+ * Rate Limiter Ketat untuk Pengiriman Formulir RFQ / Kontak (Anti-Flood Protection)
+ * Membatasi maksimal 5 permohonan per 15 menit per IP (mencegah spam flooding & beban database berlebih).
+ */
+const rfqSubmissionLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 menit
+  max: process.env.NODE_ENV === 'production' ? 5 : (parseInt(process.env.RFQ_RATE_LIMIT_MAX) || 15),
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: 'Terlalu banyak permintaan penawaran dalam waktu singkat dari perangkat Anda. Mohon tunggu beberapa saat sebelum mencoba kembali.',
+  },
+});
+
+module.exports = { apiLimiter, authLimiter, rfqSubmissionLimiter };

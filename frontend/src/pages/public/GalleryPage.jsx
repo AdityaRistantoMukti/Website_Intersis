@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import './GalleryPage.css';
 
 const GALLERY_DATA = [
@@ -107,6 +108,22 @@ export default function GalleryPage() {
 
   return (
     <div className="gallery-page">
+      <Helmet>
+        <title>
+          {isId
+            ? 'Galeri Fasilitas & Lini Produksi SMT | PT. Global Philsonic Technologies'
+            : 'Facilities & SMT Production Gallery | PT. Global Philsonic Technologies'}
+        </title>
+        <meta
+          name="description"
+          content={
+            isId
+              ? 'Dokumentasi visual fasilitas manufaktur canggih PT. GPT Batam: lini SMT Yamaha, Cleanroom Class 100K, workshop otomasi, dan laboratorium pengujian mutu.'
+              : 'Visual tour of PT. GPT Batam advanced facilities: Yamaha SMT lines, Class 100K Cleanroom, automation workshop, and QA testing laboratories.'
+          }
+        />
+      </Helmet>
+
       {/* ═══════ PAGE HEADER : Consistent Industrial Theme ═══════ */}
       <header className="gallery-page-header">
         <div className="gallery-page-header__grid-bg" aria-hidden="true" />

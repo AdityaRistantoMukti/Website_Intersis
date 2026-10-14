@@ -414,7 +414,7 @@ export default function CompanyLifecycleSection() {
   const activeData = steps[activeStep] || steps[0] || {};
 
   const stepCategories = i18n.language === 'id'
-    ? ['Rekayasa R&D & Desain', 'Kendali Mutu Presisi', 'Fasilitas Manufaktur SMT', 'Logistik & Regulasi Ekspor']
+    ? ['Engineering R&D & Desain', 'Kendali Mutu Presisi', 'Fasilitas Manufaktur SMT', 'Logistik & Regulasi Ekspor']
     : ['R&D & Engineering', 'Precision Quality Control', 'SMT Manufacturing Plant', 'Logistics & Export Trade'];
 
   // Interactive 3D Card Parallax Tilt on Mouse Move

@@ -1,6 +1,7 @@
 const pool = require('../../config/database');
 const { success, error } = require('../../utils/response');
 const { logActivity } = require('../../utils/activityLogger');
+const { deleteFileIfLocal } = require('../../utils/fileCleanup');
 
 /**
  * PUT /api/admin/company
@@ -15,7 +16,11 @@ const updateCompanyProfile = async (req, res, next) => {
       about_image = `/uploads/${req.body.folder || 'company'}/${req.file.filename}`;
     }
 
-    const [rows] = await pool.execute('SELECT id FROM company_profile LIMIT 1');
+    const [rows] = await pool.execute('SELECT id, about_image FROM company_profile LIMIT 1');
+
+    if (req.file && rows.length > 0 && rows[0].about_image) {
+      deleteFileIfLocal(rows[0].about_image);
+    }
 
     if (rows.length === 0) {
       await pool.execute(
@@ -122,6 +127,29 @@ const updateSiteSettings = async (req, res, next) => {
   try {
     const { key } = req.params;
     const content = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+
+    // Best Practice Asset Cleanup: If updating site_branding, check if old files need to be deleted
+    if (key === 'site_branding') {
+      try {
+        const [oldRows] = await pool.execute('SELECT content_json FROM site_settings WHERE key_name = ?', [key]);
+        if (oldRows.length > 0 && oldRows[0].content_json) {
+          const oldData = typeof oldRows[0].content_json === 'string' ? JSON.parse(oldRows[0].content_json) : oldRows[0].content_json;
+          const newData = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+
+          // If new logo is different and old logo was an uploaded file, delete old file
+          if (oldData.logo_url && newData.logo_url && oldData.logo_url !== newData.logo_url && oldData.logo_url.startsWith('/uploads/')) {
+            deleteFileIfLocal(oldData.logo_url);
+          }
+
+          // If new favicon is different and old favicon was an uploaded file, delete old file
+          if (oldData.favicon_url && newData.favicon_url && oldData.favicon_url !== newData.favicon_url && oldData.favicon_url.startsWith('/uploads/')) {
+            deleteFileIfLocal(oldData.favicon_url);
+          }
+        }
+      } catch (err) {
+        console.error('[SITE BRANDING CLEANUP ERROR]', err.message);
+      }
+    }
 
     await pool.execute(
       `INSERT INTO site_settings (key_name, content_json, updated_by)

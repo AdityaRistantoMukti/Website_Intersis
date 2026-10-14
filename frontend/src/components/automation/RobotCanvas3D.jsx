@@ -71,6 +71,54 @@ const THEMES = {
   },
 };
 
+// ════════════════════════════════════════════════════════════════════════════
+// PANDUAN EDIT MANUAL POSISI MEJA KERJA (WORKSTATION CONFIGURATION)
+// Anda dapat mengedit posisi meja (X, Y, Z) secara manual di objek ini:
+// - x : Menggeser ke Kiri (-) atau Kanan (+)
+// - y : Ketinggian meja dari lantai (0 = tepat di atas lantai)
+// - z : Jarak maju ke depan robot (semakin besar angkanya, semakin jauh ke depan)
+// ════════════════════════════════════════════════════════════════════════════
+// PANDUAN EDIT MANUAL POSISI MEJA & JARAK NUNDUK ROBOT (WORKSTATION CONFIG)
+// Anda dapat mengedit posisi meja dan sudut nunduk robot langsung di objek ini:
+//
+// 1. Posisi Meja:
+//    - x : Geser meja ke Kiri (-) atau Kanan (+)
+//    - y : Ketinggian dari lantai (0 = lantai)
+//    - z : Jarak meja ke depan robot (semakin besar semakin jauh ke depan)
+//
+// 2. Jarak Nunduk & Ketinggian Lengan Robot:
+//    - pitchDown    : Sudut nunduk kepala tool/nozel/gripper (sendi J5) saat menyentuh meja.
+//                     Semakin besar nilainya (misal 1.25 s/d 1.35), kepala robot semakin menunduk tegak lurus ke bawah.
+//    - armReachDown : Seberapa rendah lengan bahu/siku turun mendekati meja (sendi J2).
+//                     Semakin besar nilainya (misal 0.85 s/d 1.05), seluruh lengan semakin turun mendekati meja.
+//    - armLiftUp    : (Khusus Handling) Seberapa tinggi lengan naik saat mengangkat & membawa barang di udara.
+//                     Semakin kecil nilainya (misal 0.40), lengan naik lebih tinggi.
+//    - pitchLift    : (Khusus Handling) Sudut nunduk kepala gripper saat berada di udara.
+// ════════════════════════════════════════════════════════════════════════════
+export const WORKSTATION_CONFIG = {
+  welding: {
+    table: { x: -0.1, y: 0, z: 3.30 },
+    tableHeight: 0.65,
+    pitchDown: 1.25,      // <-- ATUR SUDUT NUNDUK NOZEL LAS DI SINI (0.90 - 1.35)
+    armReachDown: 0.90,   // <-- ATUR KEDALAMAN LENGAN TURUN DI SINI (0.50 - 0.75)
+  },
+  handling: {
+    pickTable: { x: -1.65, y: 0, z: 3.50 },
+    placeTable: { x: 1.65, y: 0, z: 3.50 },
+    tableHeight: 0.65,
+    pitchDown: 1.32,      // <-- 1. SUDUT NUNDUK GRIPPER SAAT MENJEPIT DI MEJA (0.90 - 1.40)
+    armReachDown: 1.07,   // <-- 2. KEDALAMAN LENGAN TURUN MENJEPIT KE MEJA (0.70 - 1.20)
+    armLiftUp: 0.50,      // <-- 3. KETINGGIAN LENGAN NAIK SAAT MEMBAWA BARANG (0.35 - 0.70)
+    pitchLift: 1.15,      // <-- 4. SUDUT NUNDUK GRIPPER SAAT NAIK DI UDARA (0.80 - 1.30)
+  },
+  cutting: {
+    table: { x: 0.35, y: 0, z: 3.85 },
+    tableHeight: 0.65,
+    pitchDown: 2,      // <-- ATUR SUDUT NUNDUK NOZEL LASER DI SINI (0.90 - 1.35)
+    armReachDown: 1.00,   // <-- ATUR KEDALAMAN NOZEL TURUN KE PLAT DI SINI (0.45 - 0.70)
+  },
+};
+
 export default function RobotCanvas3D({
   robotType = 'welding',
   activeStep = 0,
@@ -180,7 +228,7 @@ export default function RobotCanvas3D({
 
     // 2. Camera
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.set(5.2, 3.8, 6.0);
+    camera.position.set(5.8, 3.8, 6.4);
     stateRef.current.camera = camera;
 
     // 3. OrbitControls
@@ -188,9 +236,9 @@ export default function RobotCanvas3D({
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
     controls.minDistance = 3.5;
-    controls.maxDistance = 12.0;
+    controls.maxDistance = 14.0;
     controls.maxPolarAngle = Math.PI / 2 + 0.05; // Don't flip below floor
-    controls.target.set(0, 2.0, 0);
+    controls.target.set(0, 1.3, 1.2);
     stateRef.current.controls = controls;
 
     // 4. Lighting Rig
@@ -886,21 +934,21 @@ export default function RobotCanvas3D({
       torchMount.position.y = 0.1;
       toolGroup.add(torchMount);
 
-      // Gooseneck angled pipe (3 segments)
+      // Gooseneck angled pipe — pitched downward toward workpiece
       const pipe1 = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.06, 0.06, 0.3, 12),
+        new THREE.CylinderGeometry(0.06, 0.06, 0.32, 12),
         machinedSteelMat
       );
-      pipe1.position.set(0, 0.28, 0.05);
-      pipe1.rotation.x = 0.35;
+      pipe1.position.set(0, 0.28, 0.08);
+      pipe1.rotation.x = 0.55;
       toolGroup.add(pipe1);
 
       const pipe2 = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.055, 0.055, 0.35, 12),
+        new THREE.CylinderGeometry(0.055, 0.055, 0.36, 12),
         machinedSteelMat
       );
-      pipe2.position.set(0, 0.52, 0.18);
-      pipe2.rotation.x = 0.6;
+      pipe2.position.set(0, 0.52, 0.26);
+      pipe2.rotation.x = 0.95;
       toolGroup.add(pipe2);
 
       // Ceramic heat insulator ring
@@ -908,8 +956,8 @@ export default function RobotCanvas3D({
         new THREE.CylinderGeometry(0.075, 0.075, 0.08, 16),
         new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.2 })
       );
-      insulator.position.set(0, 0.68, 0.28);
-      insulator.rotation.x = 0.6;
+      insulator.position.set(0, 0.66, 0.38);
+      insulator.rotation.x = 0.95;
       toolGroup.add(insulator);
 
       // Brass/Copper gas cup shroud
@@ -917,22 +965,22 @@ export default function RobotCanvas3D({
         new THREE.CylinderGeometry(0.045, 0.07, 0.25, 16),
         new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.35, metalness: 0.8 })
       );
-      gasCup.position.set(0, 0.82, 0.37);
-      gasCup.rotation.x = 0.6;
+      gasCup.position.set(0, 0.78, 0.49);
+      gasCup.rotation.x = 0.95;
       toolGroup.add(gasCup);
 
-      // Contact tip (copper wire guide)
+      // Contact tip (copper wire guide pointing straight down to seam)
       const contactTip = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.015, 0.02, 0.12, 8),
+        new THREE.CylinderGeometry(0.015, 0.02, 0.14, 8),
         new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.2, metalness: 0.9 })
       );
-      contactTip.position.set(0, 0.96, 0.45);
-      contactTip.rotation.x = 0.6;
+      contactTip.position.set(0, 0.88, 0.58);
+      contactTip.rotation.x = 0.95;
       toolGroup.add(contactTip);
 
       // Dynamic Arc Flash Light
       arcLightObj = new THREE.PointLight(0x38bdf8, 0, 4);
-      arcLightObj.position.set(0, 1.05, 0.5);
+      arcLightObj.position.set(0, 0.94, 0.63);
       toolGroup.add(arcLightObj);
 
       // Glowing electrode tip
@@ -940,7 +988,7 @@ export default function RobotCanvas3D({
         new THREE.SphereGeometry(0.035, 12, 12),
         new THREE.MeshBasicMaterial({ color: 0x67e8f9 })
       );
-      tipGlow.position.set(0, 1.02, 0.49);
+      tipGlow.position.set(0, 0.94, 0.63);
       toolGroup.add(tipGlow);
 
       // Welding spark particles
@@ -1023,22 +1071,6 @@ export default function RobotCanvas3D({
       toolGroup.add(rightJawGroup);
 
       gripperJawsObj = { left: leftJawGroup, right: rightJawGroup };
-
-      // Workpiece (Machined aluminum component held in gripper)
-      const workpiece = new THREE.Mesh(
-        new THREE.BoxGeometry(0.24, 0.28, 0.2),
-        createMat({ color: 0xe2e8f0, roughness: 0.2, metalness: 0.9 })
-      );
-      workpiece.position.set(0, 0.45, 0);
-      toolGroup.add(workpiece);
-
-      // Laser alignment sensor beam
-      const laserGeo = new THREE.CylinderGeometry(0.008, 0.008, 1.2, 8);
-      const laserMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.5 });
-      const laserBeam = new THREE.Mesh(laserGeo, laserMat);
-      laserBeam.position.set(0, 1.1, 0);
-      toolGroup.add(laserBeam);
-
     } else if (robotType === 'cutting') {
       // ── PLASMA / FIBER LASER CUTTING HEAD ──
       const headBody = new THREE.Mesh(
@@ -1067,41 +1099,40 @@ export default function RobotCanvas3D({
       thcRing.position.y = 0.48;
       toolGroup.add(thcRing);
 
-      // Conical nozzle shroud
+      // Conical nozzle shroud pointing straight down
       const nozzle = new THREE.Mesh(
-        new THREE.ConeGeometry(0.12, 0.35, 24),
+        new THREE.ConeGeometry(0.1, 0.28, 24),
         new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.25, metalness: 0.9 })
       );
-      nozzle.position.y = 0.65;
+      nozzle.position.y = 0.52;
       nozzle.rotation.x = Math.PI; // point down
       toolGroup.add(nozzle);
 
-      // Concentrated laser / plasma beam cone
-      const beamGeo = new THREE.ConeGeometry(0.12, 1.4, 16, 1, true);
+      // Concentrated laser / plasma beam (focused ray pointing down to plate)
+      const beamGeo = new THREE.CylinderGeometry(0.012, 0.035, 0.45, 16);
       const beamMat = new THREE.MeshBasicMaterial({
         color: 0xef4444,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.85,
         blending: THREE.AdditiveBlending,
-        side: THREE.DoubleSide,
       });
       const beam = new THREE.Mesh(beamGeo, beamMat);
-      beam.position.y = 1.4;
+      beam.position.y = 0.88;
       toolGroup.add(beam);
       laserBeamObj = beam;
 
-      // Hot cutting point light
-      arcLightObj = new THREE.PointLight(0xef4444, 2.5, 3.5);
-      arcLightObj.position.set(0, 1.8, 0);
+      // Hot cutting arc point light at the contact point
+      arcLightObj = new THREE.PointLight(0xef4444, 3.0, 3.5);
+      arcLightObj.position.set(0, 1.1, 0);
       toolGroup.add(arcLightObj);
 
-      // Target surface glow ring
+      // Target surface glow ring right at the cut puddle
       const targetGlow = new THREE.Mesh(
-        new THREE.RingGeometry(0.04, 0.18, 24),
-        new THREE.MeshBasicMaterial({ color: 0xffedd5, side: THREE.DoubleSide, transparent: true, opacity: 0.8 })
+        new THREE.RingGeometry(0.02, 0.14, 24),
+        new THREE.MeshBasicMaterial({ color: 0xfef08a, side: THREE.DoubleSide, transparent: true, opacity: 0.95 })
       );
       targetGlow.rotation.x = Math.PI / 2;
-      targetGlow.position.y = 1.95;
+      targetGlow.position.y = 1.1;
       toolGroup.add(targetGlow);
     }
 
@@ -1109,6 +1140,315 @@ export default function RobotCanvas3D({
     j5Group.add(j6Group);
 
     scene.add(robotRoot);
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // WORKSTATION & WORKPIECE FIXTURES BASED ON ROBOT TYPE
+    // ══════════════════════════════════════════════════════════════════════════
+    const workstationGroup = new THREE.Group();
+    let dynamicWorkpiece = null;
+    let moltenWeldBead = null;
+    let cuttingKerfObj = null;
+
+    if (robotType === 'welding') {
+      // 1. HEAVY-DUTY MODULAR WELDING FIXTURE TABLE
+      // Positioned cleanly outside the base ring as defined in WORKSTATION_CONFIG
+      const cfg = WORKSTATION_CONFIG.welding;
+      const tableGroup = new THREE.Group();
+      tableGroup.position.set(cfg.table.x, cfg.table.y, cfg.table.z);
+
+      // 4 Table Legs (Tubular structural steel)
+      const legGeo = new THREE.CylinderGeometry(0.065, 0.065, cfg.tableHeight - 0.03, 16);
+      const legHalfH = (cfg.tableHeight - 0.03) / 2;
+      const legPositions = [
+        [-0.85, legHalfH, -0.45],
+        [0.85, legHalfH, -0.45],
+        [-0.85, legHalfH, 0.45],
+        [0.85, legHalfH, 0.45],
+      ];
+      legPositions.forEach(([lx, ly, lz]) => {
+        const leg = new THREE.Mesh(legGeo, motorBlackMat);
+        leg.position.set(lx, ly, lz);
+        leg.castShadow = true;
+        tableGroup.add(leg);
+
+        const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.03, 16), machinedSteelMat);
+        foot.position.set(lx, 0.015, lz);
+        tableGroup.add(foot);
+      });
+
+      // Bottom brace rails
+      const braceX = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.05, 0.05), motorBlackMat);
+      braceX.position.set(0, 0.18, 0);
+      tableGroup.add(braceX);
+
+      // Heavy modular tabletop plate (ground precision steel)
+      const tabletop = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.06, 1.05), machinedSteelMat);
+      tabletop.position.y = cfg.tableHeight;
+      tabletop.castShadow = true;
+      tabletop.receiveShadow = true;
+      tableGroup.add(tabletop);
+
+      // Grid of clamping holes on the modular tabletop
+      const holeMat = motorBlackMat;
+      for (let hx = -0.8; hx <= 0.8; hx += 0.2) {
+        for (let hz = -0.35; hz <= 0.35; hz += 0.2) {
+          const hole = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.065, 8), holeMat);
+          hole.position.set(hx, cfg.tableHeight, hz);
+          tableGroup.add(hole);
+        }
+      }
+
+      // 2 Quick Toggle Clamps holding the workpiece
+      [-0.65, 0.65].forEach((cx) => {
+        const clampBase = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.14, 0.12), motorBlackMat);
+        clampBase.position.set(cx, cfg.tableHeight + 0.1, 0.28);
+        const clampArm = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.22), chromePistonMat);
+        clampArm.position.set(cx, cfg.tableHeight + 0.17, 0.18);
+        const clampLever = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.16, 8), warningYellowMat);
+        clampLever.rotation.x = -0.5;
+        clampLever.position.set(cx, cfg.tableHeight + 0.23, 0.3);
+        tableGroup.add(clampBase, clampArm, clampLever);
+      });
+
+      // ── WORKPIECE: AUTOMOTIVE AUDIO AMPLIFIER / HEATSINK HOUSING ──
+      const workpieceGroup = new THREE.Group();
+      workpieceGroup.position.set(0, cfg.tableHeight + 0.11, 0);
+
+      // Main Aluminum Casing
+      const chassisMat = createMat({ color: 0x94a3b8, roughness: 0.22, metalness: 0.88 });
+      const chassis = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.16, 0.44), chassisMat);
+      chassis.castShadow = true;
+      chassis.receiveShadow = true;
+      workpieceGroup.add(chassis);
+
+      // Heat dissipation fins along sides
+      const finMat = createMat({ color: 0x64748b, roughness: 0.3, metalness: 0.85 });
+      for (let f = 0; f < 5; f++) {
+        const finFront = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.012, 0.018), finMat);
+        finFront.position.set(0, 0.05 - f * 0.024, 0.23);
+        workpieceGroup.add(finFront);
+
+        const finBack = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.012, 0.018), finMat);
+        finBack.position.set(0, 0.05 - f * 0.024, -0.23);
+        workpieceGroup.add(finBack);
+      }
+
+      // V-Groove Weld Seam channel across top
+      const groove = new THREE.Mesh(
+        new THREE.BoxGeometry(0.92, 0.015, 0.028),
+        motorBlackMat
+      );
+      groove.position.set(0, 0.081, 0);
+      workpieceGroup.add(groove);
+
+      // Active incandescent molten puddle (tracks the torch tip in animation loop)
+      const puddleGeo = new THREE.SphereGeometry(0.04, 16, 16);
+      const puddleMat = new THREE.MeshBasicMaterial({ color: 0xffedd5 });
+      const puddleMesh = new THREE.Mesh(puddleGeo, puddleMat);
+      puddleMesh.position.set(0, 0.085, 0);
+      workpieceGroup.add(puddleMesh);
+
+      // Glowing Molten Weld Bead trail across the seam
+      const beadGeo = new THREE.BoxGeometry(0.92, 0.022, 0.025);
+      const beadMat = new THREE.MeshBasicMaterial({
+        color: 0xf97316,
+        transparent: true,
+        opacity: 0.85,
+      });
+      const beadMesh = new THREE.Mesh(beadGeo, beadMat);
+      beadMesh.position.set(0, 0.086, 0);
+      workpieceGroup.add(beadMesh);
+      moltenWeldBead = { seam: beadMesh, puddle: puddleMesh };
+
+      tableGroup.add(workpieceGroup);
+      workstationGroup.add(tableGroup);
+
+    } else if (robotType === 'handling') {
+      // 2. DUAL-STATION ASSEMBLY WORKSTATION (IN-FEED PICK BUFFER & AUDIO BOX-BUILD CHASSIS)
+      const cfg = WORKSTATION_CONFIG.handling;
+
+      // Pick Station (Left: Infeed Component Feeder Tray)
+      const pickTable = new THREE.Group();
+      pickTable.position.set(cfg.pickTable.x, cfg.pickTable.y, cfg.pickTable.z);
+
+      const pStand = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, cfg.tableHeight - 0.03, 16), motorBlackMat);
+      pStand.position.y = (cfg.tableHeight - 0.03) / 2;
+      const pTop = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.06, 0.62), machinedSteelMat);
+      pTop.position.y = cfg.tableHeight;
+      const pGuide1 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.08, 0.5), warningYellowMat);
+      pGuide1.position.set(-0.25, cfg.tableHeight + 0.06, 0);
+      const pGuide2 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.08, 0.5), warningYellowMat);
+      pGuide2.position.set(0.25, cfg.tableHeight + 0.06, 0);
+
+      // LED Indicator Light (Green = Pick Ready)
+      const pLed = new THREE.Mesh(new THREE.SphereGeometry(0.03, 12, 12), new THREE.MeshBasicMaterial({ color: 0x10b981 }));
+      pLed.position.set(0, cfg.tableHeight + 0.05, 0.26);
+
+      pickTable.add(pStand, pTop, pGuide1, pGuide2, pLed);
+      workstationGroup.add(pickTable);
+
+      // Place Station (Right: Audio Box-Build Chassis Station)
+      const placeTable = new THREE.Group();
+      placeTable.position.set(cfg.placeTable.x, cfg.placeTable.y, cfg.placeTable.z);
+
+      const plStand = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, cfg.tableHeight - 0.03, 16), motorBlackMat);
+      plStand.position.y = (cfg.tableHeight - 0.03) / 2;
+      const plTop = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.06, 0.72), machinedSteelMat);
+      plTop.position.y = cfg.tableHeight;
+
+      // Audio Unit Chassis Housing Box (Machined Anodized Titanium Grey - Bright contrast)
+      const chassisMat = createMat({ color: 0x64748b, roughness: 0.3, metalness: 0.85 });
+      const housing = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.12, 0.50), chassisMat);
+      housing.position.y = cfg.tableHeight + 0.08;
+
+      // Socket Interior Bevel (Brushed Aluminum Socket - clear contrast against PCB)
+      const cavityMat = createMat({ color: 0x334155, roughness: 0.35, metalness: 0.75 });
+      const cavity = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.08, 0.38), cavityMat);
+      cavity.position.y = cfg.tableHeight + 0.10;
+
+      // 4 Precision Golden Alignment Pins at corners
+      const pinMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.2, metalness: 0.9 });
+      [[-0.24, -0.16], [0.24, -0.16], [-0.24, 0.16], [0.24, 0.16]].forEach(([px, pz]) => {
+        const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.05, 8), pinMat);
+        pin.position.set(px, cfg.tableHeight + 0.14, pz);
+        placeTable.add(pin);
+      });
+
+      // LED Indicator Light (Blue = Assembly Active)
+      const plLed = new THREE.Mesh(new THREE.SphereGeometry(0.03, 12, 12), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
+      plLed.position.set(0, cfg.tableHeight + 0.05, 0.31);
+
+      // Dedicated Inspection Spotlight shining down on the placed board
+      const placeSpot = new THREE.PointLight(0xe0f2fe, 2.2, 3.0);
+      placeSpot.position.set(0, cfg.tableHeight + 0.70, 0);
+      placeTable.add(plStand, plTop, housing, cavity, plLed, placeSpot);
+      workstationGroup.add(placeTable);
+
+      // ── WORKPIECE: VIBRANT HIGH-TECH EMERALD PCBA ELECTRONICS MODULE ──
+      const pcbaGroup = new THREE.Group();
+
+      // Vibrant Emerald High-Tech PCB Board (Bright & High Contrast)
+      const pcbMat = new THREE.MeshStandardMaterial({
+        color: 0x10b981, // Vibrant Emerald Green
+        roughness: 0.25,
+        metalness: 0.25,
+      });
+      const pcbBoard = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.028, 0.32), pcbMat);
+      pcbBoard.castShadow = true;
+      pcbaGroup.add(pcbBoard);
+
+      // Bright Gold Circuit Traces across the PCB surface
+      const traceMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.2, metalness: 0.95 });
+      const trace1 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.003, 0.01), traceMat);
+      trace1.position.set(0, 0.016, -0.06);
+      const trace2 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.003, 0.01), traceMat);
+      trace2.position.set(0, 0.016, 0.06);
+      const trace3 = new THREE.Mesh(new THREE.BoxGeometry(0.01, 0.003, 0.22), traceMat);
+      trace3.position.set(-0.12, 0.016, 0);
+      pcbaGroup.add(trace1, trace2, trace3);
+
+      // IC CPU Chip with bright silver heat-spreader cap
+      const cpuBase = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.02, 0.14), motorBlackMat);
+      cpuBase.position.set(0, 0.02, 0);
+      const cpuCap = new THREE.Mesh(
+        new THREE.BoxGeometry(0.11, 0.008, 0.11),
+        new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.15, metalness: 0.95 })
+      );
+      cpuCap.position.set(0, 0.032, 0);
+      pcbaGroup.add(cpuBase, cpuCap);
+
+      // Cylindrical Solid Capacitors with reflective silver finish
+      const capMat = createMat({ color: 0xe2e8f0, roughness: 0.15, metalness: 0.98 });
+      for (let c = 0; c < 4; c++) {
+        const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.07, 16), capMat);
+        cap.position.set(-0.16 + (c % 2) * 0.08, 0.045, -0.09 + Math.floor(c / 2) * 0.08);
+        cap.castShadow = true;
+        pcbaGroup.add(cap);
+      }
+
+      // Bright Gold Edge Connector Strip
+      const goldEdge = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.018, 0.045), traceMat);
+      goldEdge.position.set(0, 0.016, 0.14);
+      pcbaGroup.add(goldEdge);
+
+      // Glowing Cyan SMD Status LED on the board
+      const smdLed = new THREE.Mesh(
+        new THREE.BoxGeometry(0.025, 0.012, 0.025),
+        new THREE.MeshBasicMaterial({ color: 0x38bdf8 })
+      );
+      smdLed.position.set(0.16, 0.02, -0.10);
+      pcbaGroup.add(smdLed);
+
+      pcbaGroup.position.set(cfg.pickTable.x, cfg.tableHeight + 0.06, cfg.pickTable.z); // Starts at Pick Table
+      workstationGroup.add(pcbaGroup);
+      dynamicWorkpiece = pcbaGroup;
+
+    } else if (robotType === 'cutting') {
+      // 3. INDUSTRIAL SLATTED CUTTING BED WORKSTATION
+      const cfg = WORKSTATION_CONFIG.cutting;
+      const cutTable = new THREE.Group();
+      cutTable.position.set(cfg.table.x, cfg.table.y, cfg.table.z);
+
+      // Heavy box frame
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(1.85, cfg.tableHeight - 0.1, 1.35), motorBlackMat);
+      frame.position.y = (cfg.tableHeight - 0.1) / 2;
+      cutTable.add(frame);
+
+      // Slag hopper chute at bottom
+      const hopper = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.16, 1.1), machinedSteelMat);
+      hopper.position.y = 0.12;
+      cutTable.add(hopper);
+
+      // 12 Serrated Steel Slats (Cutting Bed Grate)
+      const slatMat = createMat({ color: 0x475569, roughness: 0.6, metalness: 0.7 });
+      for (let s = 0; s < 12; s++) {
+        const slatZ = -0.55 + s * 0.1;
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.08, 0.014), slatMat);
+        slat.position.set(0, cfg.tableHeight - 0.05, slatZ);
+        slat.castShadow = true;
+        cutTable.add(slat);
+      }
+
+      // ── WORKPIECE: HEAVY GAUGE INDUSTRIAL STEEL PLATE ──
+      const plateMat = createMat({ color: 0x334155, roughness: 0.45, metalness: 0.85 });
+      const plate = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.035, 0.95), plateMat);
+      plate.position.set(0, cfg.tableHeight + 0.01, 0);
+      plate.castShadow = true;
+      cutTable.add(plate);
+
+      // Glowing Incandescent Cutting Kerf Path (Laser/Plasma cut trace on the plate)
+      const kerfMat = new THREE.MeshBasicMaterial({
+        color: 0xfbbf24,
+        transparent: true,
+        opacity: 0.9,
+      });
+
+      // Active incandescent molten puddle under the laser
+      const cutPuddle = new THREE.Mesh(
+        new THREE.RingGeometry(0.015, 0.08, 16),
+        new THREE.MeshBasicMaterial({ color: 0xffedd5, side: THREE.DoubleSide })
+      );
+      cutPuddle.rotation.x = -Math.PI / 2;
+      cutPuddle.position.set(0, cfg.tableHeight + 0.03, 0);
+      cutTable.add(cutPuddle);
+
+      // Cut path (bracket profile)
+      const kerfLine1 = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.038, 0.015), kerfMat);
+      kerfLine1.position.set(0, cfg.tableHeight + 0.015, -0.15);
+      const kerfLine2 = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.038, 0.3), kerfMat);
+      kerfLine2.position.set(0.35, cfg.tableHeight + 0.015, 0);
+      const kerfLine3 = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.038, 0.015), kerfMat);
+      kerfLine3.position.set(0, cfg.tableHeight + 0.015, 0.15);
+
+      const kerfGroup = new THREE.Group();
+      kerfGroup.add(kerfLine1, kerfLine2, kerfLine3);
+      cutTable.add(kerfGroup);
+      cuttingKerfObj = { kerf: kerfGroup, puddle: cutPuddle };
+
+      workstationGroup.add(cutTable);
+    }
+
+    scene.add(workstationGroup);
 
     // Save references to joints for animation loop
     stateRef.current.joints = {
@@ -1126,7 +1466,7 @@ export default function RobotCanvas3D({
     stateRef.current.arcLight = arcLightObj;
 
     // ══════════════════════════════════════════════════════════════════════════
-    // ANIMATION & KINEMATICS RENDER LOOP
+    // ANIMATION & KINEMATICS RENDER LOOP — EXTENDED REACH & WORKPIECE CONTACT
     // ══════════════════════════════════════════════════════════════════════════
     let animationFrameId;
     let clock = new THREE.Clock();
@@ -1138,42 +1478,148 @@ export default function RobotCanvas3D({
       const elapsed = clock.getElapsedTime();
       const s = stateRef.current;
 
-      // 1. Calculate Target Pose based on active step or continuous scrollProgress
-      const poses = POSES[s.robotType] || POSES.welding;
-      const stepIdx = Math.max(0, Math.min(3, s.activeStep));
+      let targetJ1 = 0;
+      let targetJ2 = 0;
+      let targetJ3 = 0;
+      let targetJ4 = 0;
+      let targetJ5 = 0;
+      let targetJ6 = 0;
 
-      // Calculate interpolation between poses if scrollProgress is available
-      let targetJ1 = poses[stepIdx].j1;
-      let targetJ2 = poses[stepIdx].j2;
-      let targetJ3 = poses[stepIdx].j3;
-      let targetJ4 = poses[stepIdx].j4;
-      let targetJ5 = poses[stepIdx].j5;
-      let targetJ6 = poses[stepIdx].j6;
+      if (s.robotType === 'welding') {
+        // Continuous Seam-Welding Simulation Cycle
+        const cfg = WORKSTATION_CONFIG.welding;
+        const cycle = (elapsed * 0.7) % (Math.PI * 2);
+        const wave = Math.sin(cycle);
+        const t = (wave + 1) * 0.5;
 
-      // Optional scrollProgress interpolation
-      if (s.scrollProgress !== undefined && s.scrollProgress !== null) {
-        const clampedProg = Math.max(0, Math.min(3, s.scrollProgress));
-        const idxLow = Math.floor(clampedProg);
-        const idxHigh = Math.min(3, idxLow + 1);
-        const frac = clampedProg - idxLow;
+        // Kinematics dynamically controlled by WORKSTATION_CONFIG.welding
+        targetJ1 = 0.05 + wave * 0.10;
+        targetJ2 = cfg.armReachDown; // Kedalaman lengan turun
+        targetJ3 = 0.88;
+        targetJ4 = 0.0;
+        targetJ5 = cfg.pitchDown;    // Sudut nunduk nozel las
+        targetJ6 = -0.15;
 
-        const p1 = poses[idxLow] || poses[0];
-        const p2 = poses[idxHigh] || poses[3];
+        // Synchronized weld seam and molten puddle on workpiece
+        const seamX = -0.38 + t * 0.76;
+        const isArcOn = Math.sin(elapsed * 1.6) > -0.55;
 
-        targetJ1 = THREE.MathUtils.lerp(p1.j1, p2.j1, frac);
-        targetJ2 = THREE.MathUtils.lerp(p1.j2, p2.j2, frac);
-        targetJ3 = THREE.MathUtils.lerp(p1.j3, p2.j3, frac);
-        targetJ4 = THREE.MathUtils.lerp(p1.j4, p2.j4, frac);
-        targetJ5 = THREE.MathUtils.lerp(p1.j5, p2.j5, frac);
-        targetJ6 = THREE.MathUtils.lerp(p1.j6, p2.j6, frac);
+        if (s.arcLight) {
+          s.arcLight.intensity = isArcOn ? 2.5 + Math.random() * 2.5 : 0.2;
+          s.arcLight.color.setHex(Math.random() > 0.35 ? 0x38bdf8 : 0xf97316);
+        }
+
+        if (moltenWeldBead) {
+          if (moltenWeldBead.puddle) {
+            moltenWeldBead.puddle.position.x = seamX;
+            moltenWeldBead.puddle.visible = isArcOn;
+          }
+          if (moltenWeldBead.seam) {
+            moltenWeldBead.seam.material.opacity = isArcOn ? 0.75 + Math.random() * 0.25 : 0.4;
+          }
+        }
+
+        if (s.sparkParticles && s.sparkParticles.geometry) {
+          const positions = s.sparkParticles.geometry.attributes.position.array;
+          const vels = s.sparkParticles.userData.velocities;
+          for (let i = 0; i < vels.length; i++) {
+            if (isArcOn) {
+              positions[i * 3] += vels[i].x;
+              positions[i * 3 + 1] += vels[i].y;
+              positions[i * 3 + 2] += vels[i].z;
+              vels[i].y -= 0.002;
+              vels[i].life -= 0.04;
+
+              if (vels[i].life <= 0) {
+                positions[i * 3] = (Math.random() - 0.5) * 0.05;
+                positions[i * 3 + 1] = 0.94;
+                positions[i * 3 + 2] = 0.63 + (Math.random() - 0.5) * 0.05;
+                vels[i].x = (Math.random() - 0.5) * 0.04;
+                vels[i].y = Math.random() * 0.05 + 0.01;
+                vels[i].z = (Math.random() - 0.5) * 0.04;
+                vels[i].life = 1.0;
+              }
+            } else {
+              positions[i * 3] = 0;
+              positions[i * 3 + 1] = 0.94;
+              positions[i * 3 + 2] = 0.63;
+            }
+          }
+          s.sparkParticles.geometry.attributes.position.needsUpdate = true;
+        }
+
+      } else if (s.robotType === 'handling') {
+        // Continuous 4-Stage Pick-and-Place Cycle
+        const cfg = WORKSTATION_CONFIG.handling;
+        const cycle = (elapsed * 0.52) % (Math.PI * 2);
+        const wave = Math.sin(cycle); // -1 (Pick/Left) to +1 (Place/Right)
+        const movingToPlace = Math.cos(cycle) >= 0; // True: bergerak ke kanan (bawa barang), False: kembali ke kiri (kosong)
+
+        // Swing J1 aligned to pick & place tables
+        targetJ1 = wave * 0.44;
+
+        // Transisi halus ketinggian lengan & sudut nunduk:
+        // Saat berada dekat stasiun (|wave| > 0.45), lengan mulai nunduk/turun ke meja
+        const stationFactor = Math.min(1.0, Math.max(0.0, (Math.abs(wave) - 0.45) / 0.35));
+        const smoothDip = Math.pow(stationFactor, 1.8);
+
+        const armDown = cfg.armReachDown;
+        const armUp = cfg.armLiftUp ?? 0.50;
+        targetJ2 = THREE.MathUtils.lerp(armUp, armDown, smoothDip);
+
+        const pitchD = cfg.pitchDown;
+        const pitchU = cfg.pitchLift ?? 1.15;
+        targetJ5 = THREE.MathUtils.lerp(pitchU, pitchD, smoothDip);
+
+        targetJ3 = THREE.MathUtils.lerp(0.55, 0.82, smoothDip);
+        targetJ4 = 0.0;
+        targetJ6 = wave * 0.12;
+
+        // Gripper clamps module during carry phase
+        const isGripping = movingToPlace && wave > -0.78 && wave < 0.78;
+        if (s.gripperJaws) {
+          const targetJawOffset = isGripping ? 0.12 : 0.25;
+          s.gripperJaws.left.position.x += (-targetJawOffset - s.gripperJaws.left.position.x) * 0.14;
+          s.gripperJaws.right.position.x += (targetJawOffset - s.gripperJaws.right.position.x) * 0.14;
+        }
+
+      } else if (s.robotType === 'cutting') {
+        // Continuous Plate Bevel/Profile Cutting Simulation Cycle
+        const cfg = WORKSTATION_CONFIG.cutting;
+        const cycle = (elapsed * 0.65) % (Math.PI * 2);
+        const wave = Math.sin(cycle);
+        const waveCos = Math.cos(cycle);
+
+        // Sub-millimeter contour tracing across plate
+        targetJ1 = 0.08 + wave * 0.10;
+        targetJ2 = cfg.armReachDown + waveCos * 0.02; // Kedalaman nozel turun ke plat
+        targetJ3 = 0.64 - wave * 0.02;
+        targetJ4 = wave * 0.08;
+        targetJ5 = cfg.pitchDown; // Sudut nunduk nozel laser/plasma
+        targetJ6 = waveCos * 0.15;
+
+        if (s.laserBeam) {
+          s.laserBeam.material.opacity = 0.75 + Math.sin(elapsed * 25) * 0.2;
+        }
+        if (s.arcLight) {
+          s.arcLight.intensity = 3.2 + Math.random() * 1.5;
+        }
+
+        // Synchronize incandescent kerf trace and cut puddle on the plate
+        if (cuttingKerfObj) {
+          if (cuttingKerfObj.puddle) {
+            cuttingKerfObj.puddle.position.x = wave * 0.35;
+            cuttingKerfObj.puddle.position.z = waveCos * 0.15;
+          }
+          if (cuttingKerfObj.kerf) {
+            cuttingKerfObj.kerf.children.forEach((c) => {
+              if (c.material) c.material.opacity = 0.65 + Math.sin(elapsed * 12) * 0.3;
+            });
+          }
+        }
       }
 
-      // Add gentle idle breathing movement to arm when idle
-      const breath = Math.sin(elapsed * 1.5) * 0.015;
-      targetJ2 += breath;
-      targetJ3 -= breath * 0.8;
-
-      // 2. Smoothly Lerp Joint Angles (Damped Spring feel)
+      // 2. Smoothly Lerp Joint Angles (Damped spring feel)
       const lerpSpeed = 0.07;
       s.currentPose.j1 += (targetJ1 - s.currentPose.j1) * lerpSpeed;
       s.currentPose.j2 += (targetJ2 - s.currentPose.j2) * lerpSpeed;
@@ -1182,7 +1628,7 @@ export default function RobotCanvas3D({
       s.currentPose.j5 += (targetJ5 - s.currentPose.j5) * lerpSpeed;
       s.currentPose.j6 += (targetJ6 - s.currentPose.j6) * lerpSpeed;
 
-      // Apply to 3D scene objects (Anthropomorphic pitch axes on X, azimuth on Y)
+      // Apply to 3D scene objects
       if (s.joints) {
         s.joints.j1.rotation.y = s.currentPose.j1;
         s.joints.j2.rotation.x = s.currentPose.j2;
@@ -1192,85 +1638,33 @@ export default function RobotCanvas3D({
         s.joints.j6.rotation.y = s.currentPose.j6;
       }
 
-      // 3. Tool specific animations
-      if (s.robotType === 'welding') {
-        // Spark particles & arc flicker when active (Step 2 or near it)
-        const isActionActive = s.activeStep === 2 || (s.scrollProgress >= 1.5 && s.scrollProgress <= 2.5);
-        if (s.arcLight) {
-          s.arcLight.intensity = isActionActive ? 1.5 + Math.random() * 2.5 : 0.2;
-          s.arcLight.color.setHex(Math.random() > 0.4 ? 0x38bdf8 : 0xf97316);
-        }
+      // Synchronize handling workpiece (PCBA) with absolute accuracy
+      if (s.robotType === 'handling' && dynamicWorkpiece && s.toolGroup) {
+        const cfg = WORKSTATION_CONFIG.handling;
+        const cycle = (elapsed * 0.52) % (Math.PI * 2);
+        const wave = Math.sin(cycle);
+        const movingToPlace = Math.cos(cycle) >= 0;
 
-        if (s.sparkParticles && s.sparkParticles.geometry) {
-          const positions = s.sparkParticles.geometry.attributes.position.array;
-          const vels = s.sparkParticles.userData.velocities;
-          for (let i = 0; i < vels.length; i++) {
-            if (isActionActive) {
-              positions[i * 3] += vels[i].x;
-              positions[i * 3 + 1] += vels[i].y;
-              positions[i * 3 + 2] += vels[i].z;
-              vels[i].y -= 0.002; // gravity
-              vels[i].life -= 0.03;
-
-              if (vels[i].life <= 0) {
-                positions[i * 3] = 0;
-                positions[i * 3 + 1] = 1.05;
-                positions[i * 3 + 2] = 0.5;
-                vels[i].x = (Math.random() - 0.5) * 0.04;
-                vels[i].y = Math.random() * 0.05 + 0.01;
-                vels[i].z = (Math.random() - 0.5) * 0.04;
-                vels[i].life = 1.0;
-              }
-            } else {
-              positions[i * 3] = 0;
-              positions[i * 3 + 1] = 1.05;
-              positions[i * 3 + 2] = 0.5;
-            }
-          }
-          s.sparkParticles.geometry.attributes.position.needsUpdate = true;
+        if (movingToPlace && wave >= -0.78 && wave <= 0.78) {
+          // Sedang dijepit & dibawa di udara: 100% menempel persis di ujung capit gripper!
+          s.toolGroup.updateMatrixWorld(true);
+          const gripPos = new THREE.Vector3();
+          s.toolGroup.localToWorld(gripPos.set(0, 0.44, 0));
+          dynamicWorkpiece.position.copy(gripPos);
+          dynamicWorkpiece.rotation.set(0, s.currentPose.j1, 0);
+        } else if (wave > 0.78 || (!movingToPlace && wave > -0.30)) {
+          // Sudah ditaruh / mendarat di dalam casing chassis audio meja kanan (jelas terlihat di atas soket)
+          dynamicWorkpiece.position.set(cfg.placeTable.x, cfg.tableHeight + 0.145, cfg.placeTable.z);
+          dynamicWorkpiece.rotation.set(0, 0, 0);
+        } else {
+          // Berada di meja pick kiri siap untuk diambil
+          dynamicWorkpiece.position.set(cfg.pickTable.x, cfg.tableHeight + 0.06, cfg.pickTable.z);
+          dynamicWorkpiece.rotation.set(0, 0, 0);
         }
-      } else if (s.robotType === 'handling') {
-        // Gripper open / close animation
-        if (s.gripperJaws) {
-          const isGrip = s.activeStep === 2 || s.activeStep === 3;
-          const targetJawOffset = isGrip ? 0.14 : 0.24;
-          s.gripperJaws.left.position.x += (-targetJawOffset - s.gripperJaws.left.position.x) * 0.1;
-          s.gripperJaws.right.position.x += (targetJawOffset - s.gripperJaws.right.position.x) * 0.1;
-        }
-      } else if (s.robotType === 'cutting') {
-        // Laser beam opacity pulse
-        if (s.laserBeam) {
-          const isCutting = s.activeStep === 2;
-          s.laserBeam.material.opacity = isCutting ? 0.7 + Math.sin(elapsed * 20) * 0.2 : 0.25;
-        }
-        if (s.arcLight) {
-          s.arcLight.intensity = s.activeStep === 2 ? 3.0 + Math.random() * 1.5 : 0.6;
-        }
-      }
-
-      // 4. Auto-rotation turntable if enabled
-      if (s.autoRotate && s.controls) {
-        s.controls.autoRotate = true;
-        s.controls.autoRotateSpeed = 1.8;
-      } else if (s.controls) {
-        s.controls.autoRotate = false;
       }
 
       s.controls.update();
       renderer.render(scene, camera);
-
-      // 5. Update UI Telemetry periodically (every 100ms)
-      if (elapsed - lastTelemetryUpdate > 0.1) {
-        lastTelemetryUpdate = elapsed;
-        setTelemetry({
-          j1: Math.round(THREE.MathUtils.radToDeg(s.currentPose.j1)),
-          j2: Math.round(THREE.MathUtils.radToDeg(s.currentPose.j2)),
-          j3: Math.round(THREE.MathUtils.radToDeg(s.currentPose.j3)),
-          j4: Math.round(THREE.MathUtils.radToDeg(s.currentPose.j4)),
-          j5: Math.round(THREE.MathUtils.radToDeg(s.currentPose.j5)),
-          j6: Math.round(THREE.MathUtils.radToDeg(s.currentPose.j6)),
-        });
-      }
     };
 
     animationFrameId = requestAnimationFrame(animate);
@@ -1307,118 +1701,15 @@ export default function RobotCanvas3D({
     };
   }, [robotType]);
 
-  const currentTheme = THEMES[robotType] || THEMES.welding;
-
-  const STEPS_NAV = useMemo(() => [
-    { idx: 0, labelEn: '01 Overview', labelId: '01 Ikhtisar' },
-    { idx: 1, labelEn: '02 Kinematics', labelId: '02 Kinematika' },
-    { idx: 2, labelEn: '03 Precision Tool', labelId: '03 Perkakas Presisi' },
-    { idx: 3, labelEn: '04 Tech Specs', labelId: '04 Spesifikasi' },
-  ], []);
-
   return (
     <div className="robot-3d-viewport">
       {/* 3D Canvas Mount Point */}
       <div className="robot-3d-canvas-container" ref={mountRef}>
         {!webGLSupported && (
           <div className="robot-3d-fallback">
-            <div className="robot-3d-fallback__badge">WebGL Disabled</div>
             <p>{isId ? 'Rendering 3D membutuhkan WebGL browser aktif.' : '3D preview requires an active WebGL browser.'}</p>
           </div>
         )}
-      </div>
-
-      {/* Floating Side Pose / Step Quick Selector */}
-      <div className="robot-3d-hud-steps" role="tablist">
-        {STEPS_NAV.map((step) => (
-          <button
-            key={step.idx}
-            className={`robot-3d-step-btn ${activeStep === step.idx ? 'robot-3d-step-btn--active' : ''}`}
-            onClick={() => onStepSelect && onStepSelect(step.idx)}
-            title={isId ? step.labelId : step.labelEn}
-          >
-            <span className="robot-3d-step-dot" />
-            <span className="robot-3d-step-text">{isId ? step.labelId : step.labelEn}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Floating Bottom Telemetry & Controls Toolbar */}
-      <div className="robot-3d-hud-bottom">
-        {/* Real-time Joint Angle Degrees Readout */}
-        <div className="robot-3d-telemetry">
-          <div className="robot-3d-telemetry-item">
-            <span className="robot-3d-telemetry-label">J1</span>
-            <span className="robot-3d-telemetry-val">{telemetry.j1}°</span>
-          </div>
-          <div className="robot-3d-telemetry-item">
-            <span className="robot-3d-telemetry-label">J2</span>
-            <span className="robot-3d-telemetry-val">{telemetry.j2}°</span>
-          </div>
-          <div className="robot-3d-telemetry-item">
-            <span className="robot-3d-telemetry-label">J3</span>
-            <span className="robot-3d-telemetry-val">{telemetry.j3}°</span>
-          </div>
-          <div className="robot-3d-telemetry-item">
-            <span className="robot-3d-telemetry-label">J4</span>
-            <span className="robot-3d-telemetry-val">{telemetry.j4}°</span>
-          </div>
-          <div className="robot-3d-telemetry-item">
-            <span className="robot-3d-telemetry-label">J5</span>
-            <span className="robot-3d-telemetry-val">{telemetry.j5}°</span>
-          </div>
-          <div className="robot-3d-telemetry-item">
-            <span className="robot-3d-telemetry-label">J6</span>
-            <span className="robot-3d-telemetry-val">{telemetry.j6}°</span>
-          </div>
-        </div>
-
-        {/* Viewport Control Actions */}
-        <div className="robot-3d-controls-bar">
-          <button
-            className={`robot-3d-btn ${autoRotate ? 'robot-3d-btn--active' : ''}`}
-            onClick={() => setAutoRotate(!autoRotate)}
-            title={isId ? 'Putar Otomatis' : 'Auto Rotate'}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
-            </svg>
-            <span>{isId ? 'Putar' : 'Rotate'}</span>
-          </button>
-
-          <button
-            className={`robot-3d-btn ${wireframe ? 'robot-3d-btn--active' : ''}`}
-            onClick={() => setWireframe(!wireframe)}
-            title={isId ? 'Mode Rangka (Wireframe)' : 'Wireframe Mode'}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-              <line x1="12" y1="22.08" x2="12" y2="12" />
-            </svg>
-            <span>{isId ? 'Rangka' : 'Wireframe'}</span>
-          </button>
-
-          <button
-            className="robot-3d-btn"
-            onClick={handleResetCamera}
-            title={isId ? 'Reset Posisi Kamera' : 'Reset Camera View'}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
-            </svg>
-            <span>Reset</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Drag & Scroll Guide Hint Overlay */}
-      <div className="robot-3d-hint">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2v20M17 5l-5-3-5 3M17 19l-5 3-5-3" />
-        </svg>
-        <span>{isId ? 'Scroll untuk gerak robot • Drag kursor untuk rotasi 360°' : 'Scroll to pose • Drag to orbit 360°'}</span>
       </div>
     </div>
   );

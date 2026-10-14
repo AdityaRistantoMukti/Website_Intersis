@@ -335,16 +335,34 @@
 
 .catalog-pill--active,
 .catalog-pill--active:hover {
-  background: var(--teal, #00897b);
-  border-color: var(--teal, #00897b);
+  background: #09090b !important;
+  border-color: #09090b !important;
+  color: #ffffff !important;
+}
+
+.catalog-pill--active .catalog-pill__text {
+  color: #ffffff !important;
+}
+
+.catalog-pill--active .catalog-pill__count {
+  background: rgba(255, 255, 255, 0.25) !important;
   color: #ffffff !important;
 }
 
 [data-theme="dark"] .catalog-pill--active,
 [data-theme="dark"] .catalog-pill--active:hover {
-  background: var(--teal, #00897b);
-  border-color: var(--teal, #00897b);
-  color: #ffffff !important;
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #09090b !important;
+}
+
+[data-theme="dark"] .catalog-pill--active .catalog-pill__text {
+  color: #09090b !important;
+}
+
+[data-theme="dark"] .catalog-pill--active .catalog-pill__count {
+  background: rgba(0, 0, 0, 0.14) !important;
+  color: #09090b !important;
 }
 
 .catalog-pill__count {
@@ -353,11 +371,6 @@
   padding: 1px 6px;
   border-radius: 10px;
   font-weight: 700;
-}
-
-.catalog-pill--active .catalog-pill__count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
 }
 
 .catalog-active-bar {

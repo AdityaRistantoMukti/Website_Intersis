@@ -315,16 +315,28 @@ p { line-height: 1.7; color: var(--text-muted); }
 
 .btn--primary {
   background: var(--teal);
-  color: var(--white);
+  color: #ffffff;
   border-color: var(--teal);
+}
+
+[data-theme="dark"] .btn--primary {
+  background: #ffffff;
+  color: #09090b;
+  border-color: #ffffff;
 }
 
 .btn--primary:hover {
   background: var(--teal-dark);
   border-color: var(--teal-dark);
-  color: var(--white);
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: var(--shadow-teal);
+}
+
+[data-theme="dark"] .btn--primary:hover {
+  background: #e4e4e7;
+  color: #09090b;
+  border-color: #e4e4e7;
 }
 
 .btn--secondary {

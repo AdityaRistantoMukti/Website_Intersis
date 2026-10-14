@@ -32,13 +32,13 @@
     "experienceSub": "Mitra Manufaktur Otomotif Terpercaya di Batam",
     "capacity": "Kapasitas Penempatan SMT",
     "capacitySub": "3 Lini Panasonic High-Speed Mounter",
-    "support": "Dukungan Rekayasa & FAE",
+    "support": "Dukungan Engineering & FAE",
     "supportSub": "Insinyur Aplikasi & R&D Siaga Penuh",
     "quality": "Kepatuhan Mutu ISO 9001:2015",
     "qualitySub": "Standar Bebas Cacat & ESD Cleanroom"
   },
   "productsCatalog": {
-    "sectionBadge": "Katalog Rekayasa & Produk",
+    "sectionBadge": "Katalog Engineering & Produk",
     "title": "Portofolio Produk & Solusi Teknologi",
     "subtitle": "Katalog komponen elektronik otomotif dan sistem otomasi industri rancangan insinyur GPT, siap diproduksi massal untuk kebutuhan OEM dan tier-1.",
     "searchPlaceholder": "Cari kode produk, seri (contoh: GPT-HU9800, DSP, SMT)...",
@@ -74,7 +74,7 @@
   },
   "capabilities": {
     "sectionBadge": "Kapabilitas Manufaktur",
-    "title": "Infrastruktur & Rekayasa Presisi",
+    "title": "Infrastruktur & Engineering Presisi",
     "subtitle": "Didukung fasilitas canggih di Kawasan Perdagangan Bebas Batam untuk efisiensi rantai pasok global.",
     "items": [
       {
@@ -102,7 +102,7 @@
   "about": {
     "sectionBadge": "Tentang GPT • Batam FTZ",
     "title": "Mitra Manufaktur Audio & Infotainment Otomotif Global",
-    "subtitle": "Solusi End-to-End Manufaktur Elektronik Otomotif: Dari Rekayasa Desain, Kendali Mutu Presisi, Perakitan SMT Berkecepatan Tinggi, hingga Rantai Pasok Bebas Tarif.",
+    "subtitle": "Solusi End-to-End Manufaktur Elektronik Otomotif: Dari Engineering Desain, Kendali Mutu Presisi, Perakitan SMT Berkecepatan Tinggi, hingga Rantai Pasok Bebas Tarif.",
     "description1": "PT. Global Philsonic Technologies (GPT) adalah entitas manufaktur khusus di bawah naungan PT. Intersis Sejahtera Abadi, beroperasi di Komplek Tanah Mas Blok L No.2, Kawasan Perdagangan Bebas (FTZ) Batam, Indonesia.",
     "description2": "Misi kami: Menghadirkan produk audio-video otomotif (Car Amplifier, Subwoofer, DSP, Android Headunit, Dashcam) dan solusi otomasi industri berkualitas tinggi, berbiaya kompetitif, dan berkeunggulan tarif impor preferensial untuk mitra global, terutama pasar Amerika Serikat (USA).",
     "highlight1Title": "Mitigasi Tarif & C/O Made in Indonesia",
@@ -117,7 +117,7 @@
         "id": 1,
         "step": "01",
         "navLabel": "Design & Engineering",
-        "title": "Desain & Rekayasa Berstandar Global",
+        "title": "Desain & Engineering Berstandar Global",
         "lead": "GPT didukung tim Design & Engineering berdedikasi yang berfokus pada R&D dan Electronic Manufacturing Services (EMS). Dari perancangan awal hingga manufaktur massal, kami memahami setiap kebutuhan teknis mitra.",
         "description": "Dengan tim R&D profesional, kami memberikan dukungan teknis yang fleksibel dan menyeluruh. Setiap tahapan riset dan pengembangan mempertimbangkan kelayakan produksi massal, efisiensi biaya, serta akselerasi siklus hidup produk.",
         "points": [
@@ -182,7 +182,7 @@
   "cta": {
     "title": "Sampaikan Pertanyaan & Kebutuhan Manufaktur Anda",
     "subtitle": "Kami mendengarkan, merespons, dan mengusulkan model bisnis Lean Manufacturing yang paling sesuai untuk Anda. Dapatkan manfaat maksimal dari keahlian kami di bidang perakitan elektronik manufaktur.",
-    "btnPartner": "Hubungi Tim Penjualan & Rekayasa"
+    "btnPartner": "Hubungi Tim Penjualan & Engineering"
   },
   "specsModal": {
     "title": "Spesifikasi Teknis & Data Produk",

@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useBranding } from '../../context/BrandingContext';
+import { getImageUrl } from '../../lib/api';
 import './Footer.css';
 
 export default function Footer() {
+  const { branding } = useBranding();
   const { t } = useTranslation('common');
   const year = new Date().getFullYear();
 
@@ -33,9 +36,10 @@ export default function Footer() {
             <Link to="/" className="footer__logo" aria-label="PT Global Philsonic Technologies Home">
               <div className="footer__logo-badge">
                 <img
-                  src="/images/logo_company.jpg"
-                  alt="PT Global Philsonic Technologies"
+                  src={branding?.logo_url ? getImageUrl(branding.logo_url) : '/images/logo_company.jpg'}
+                  alt={branding?.site_name || 'PT Global Philsonic Technologies'}
                   className="footer__logo-img"
+                  onError={(e) => { e.target.src = '/images/logo_company.jpg'; }}
                 />
               </div>
               

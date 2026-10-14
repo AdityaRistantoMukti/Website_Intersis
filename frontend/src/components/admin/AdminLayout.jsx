@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
+import { useBranding } from '../../context/BrandingContext';
+import { getImageUrl } from '../../lib/api';
 import {
   LayoutDashboard,
+  Globe,
   Home,
   Sliders,
   Building2,
@@ -32,6 +35,7 @@ import './AdminLayout.css';
 
 export default function AdminLayout({ activeTab, onSelectTab, children }) {
   const { user, logout, changePassword, addToast } = useAdminAuth();
+  const { branding } = useBranding();
   const navigate = useNavigate();
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -94,6 +98,7 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
       title: 'UTAMA',
       items: [
         { key: 'overview', label: 'Ringkasan Portal', icon: LayoutDashboard },
+        { key: 'branding', label: 'Logo & Favicon URL', icon: Globe },
       ],
     },
     {
@@ -144,10 +149,10 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
         <div className="admin-sidebar-header">
           <Link to="/" className="admin-sidebar-logo" onClick={() => setMobileOpen(false)}>
             <img
-              src="/images/logo_company.jpg"
+              src={branding?.logo_url ? getImageUrl(branding.logo_url) : '/images/logo_company.jpg'}
               alt="Logo"
               className="admin-sidebar-logo-img"
-              onError={(e) => { e.target.style.display = 'none'; }}
+              onError={(e) => { e.target.src = '/images/logo_company.jpg'; }}
             />
             <div>
               <div className="admin-sidebar-brand-name">PT GPT</div>

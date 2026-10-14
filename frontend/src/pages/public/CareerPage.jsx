@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import api from '../../lib/api';
 import './CareerPage.css';
 
@@ -503,6 +504,22 @@ export default function CareerPage() {
 
   return (
     <div className="career-page">
+      <Helmet>
+        <title>
+          {isId
+            ? 'Karir & Lowongan Kerja Engineering | PT. Global Philsonic Technologies'
+            : 'Careers & Engineering Job Openings | PT. Global Philsonic Technologies'}
+        </title>
+        <meta
+          name="description"
+          content={
+            isId
+              ? 'Temukan peluang karir manufaktur elektronik, operator SMT, teknisi otomasi, dan engineer di PT. Global Philsonic Technologies Batam.'
+              : 'Explore career opportunities in electronics manufacturing, SMT operations, robotics automation, and engineering at PT. Global Philsonic Technologies Batam.'
+          }
+        />
+      </Helmet>
+
       {/* ═══════ PAGE HEADER ═══════ */}
       <header className="career-header">
         <div className="career-header__grid-bg" aria-hidden="true" />

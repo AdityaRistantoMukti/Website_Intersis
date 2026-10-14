@@ -45,7 +45,7 @@
   "process": {
     "kicker": "Alur Manufaktur Kustom",
     "title": "Dari Konsep Desain Hingga Produksi Massal (OEM / ODM Journey)",
-    "subtitle": "Metodologi rekayasa terstruktur kami menjamin kualitas bebas cacat (Zero-Defect) dan efisiensi biaya produksi.",
+    "subtitle": "Metodologi engineering terstruktur kami menjamin kualitas bebas cacat (Zero-Defect) dan efisiensi biaya produksi.",
     "steps": [
       {
         "step": "01",
@@ -54,7 +54,7 @@
       },
       {
         "step": "02",
-        "title": "Rekayasa DFM & Rapid Prototyping",
+        "title": "Engineering DFM & Rapid Prototyping",
         "desc": "Optimalisasi Design-for-Manufacturing (DFM) untuk memastikan efisiensi lini SMT dan pembuatan sampel purwarupa cepat."
       },
       {
@@ -83,7 +83,7 @@
       "Purwarupa / Sampel Pengujian (10 - 50 Unit)",
       "Pilot Run / Uji Coba Batch (500 - 1.000 Unit)",
       "Produksi Massal OEM/ODM (5.000+ Unit / Bulan)",
-      "Konsultasi Rekayasa & Fabrikasi Kustom"
+      "Konsultasi Engineering & Fabrikasi Kustom"
     ],
     "companyName": "Nama Perusahaan / Organisasi",
     "contactPerson": "Nama Narahubung",
@@ -94,7 +94,7 @@
     "close": "Batal / Tutup"
   },
   "cta": {
-    "kicker": "Kemitraan Rekayasa & Manufaktur",
+    "kicker": "Kemitraan Engineering & Manufaktur",
     "title": "Membutuhkan Kustomisasi Khusus atau Desain Baru?",
     "subtitle": "Tim R&D dan engineering kami siap berkolaborasi untuk perancangan skematik PCB, penyesuaian firmware CAN-Bus, hingga perakitan box-build OEM/ODM.",
     "btnWa": "Konsultasi Cepat via WhatsApp B2B",

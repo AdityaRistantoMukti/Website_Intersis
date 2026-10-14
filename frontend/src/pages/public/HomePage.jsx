@@ -283,7 +283,7 @@ export default function HomePage() {
           <div className="container">
             <div className="section-header fade-up">
               <h2 className="section-title" style={{ color: 'var(--white)' }}>
-                {lang === 'id' ? 'Nilai Inti Rekayasa GPT' : 'GPT Core Engineering Values'}
+                {lang === 'id' ? 'Nilai Inti Engineering GPT' : 'GPT Core Engineering Values'}
               </h2>
               <div className="divider" />
             </div>

@@ -225,7 +225,7 @@ export default function ProductSpecsModal({ product, onClose }) {
                       {isId ? 'Parameter Spesifikasi' : 'Specification Parameter'}
                     </th>
                     <th className="specs-modal__th-val">
-                      {isId ? 'Nilai / Standar Rekayasa' : 'Engineering Standard / Value'}
+                      {isId ? 'Nilai / Standar Engineering' : 'Engineering Standard / Value'}
                     </th>
                   </tr>
                 </thead>

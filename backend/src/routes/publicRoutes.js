@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getCompanyProfile, getCoreValues, getContact, getSiteSettings } = require('../controllers/public/publicCompanyController');
+const { getCompanyProfile, getCoreValues, getContact, getSiteSettings, getTradeDestinations } = require('../controllers/public/publicCompanyController');
 const { getJobCategories, getJobVacancies, getJobVacancyById } = require('../controllers/public/publicJobController');
 const { getGalleryItems } = require('../controllers/public/publicGalleryController');
 const { getBenefits } = require('../controllers/public/publicBenefitController');
@@ -9,21 +9,22 @@ const { getPrograms, getProgramBySlug } = require('../controllers/public/publicP
 const { getFaqs } = require('../controllers/public/publicFaqController');
 const { getProducts } = require('../controllers/public/publicProductController');
 const { recordVisit, submitRfq } = require('../controllers/telemetryController');
-const { apiLimiter } = require('../middlewares/rateLimiter');
+const { apiLimiter, rfqSubmissionLimiter } = require('../middlewares/rateLimiter');
 
 // Terapkan rate limiter untuk semua endpoint publik
 router.use(apiLimiter);
 
-// Company & Core Values & Contact & Site Settings
+// Company & Core Values & Contact & Site Settings & Trade Hubs
 router.get('/company', getCompanyProfile);
 router.get('/core-values', getCoreValues);
 router.get('/contact', getContact);
+router.get('/trade-destinations', getTradeDestinations);
 router.get('/site-settings', getSiteSettings);
 router.get('/site-settings/:key', getSiteSettings);
 
 // Telemetry & RFQ Inquiries
 router.post('/telemetry/visit', recordVisit);
-router.post('/rfq', submitRfq);
+router.post('/rfq', rfqSubmissionLimiter, submitRfq);
 
 // Job Vacancies & Categories
 router.get('/job-categories', getJobCategories);

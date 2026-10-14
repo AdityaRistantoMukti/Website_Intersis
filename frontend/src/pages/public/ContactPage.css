@@ -576,22 +576,39 @@
   width: 100%;
   padding: 14px;
   border-radius: 8px;
-  background: var(--teal, #00897b);
-  color: #ffffff;
+  background: #09090b;
+  color: #ffffff !important;
   font-size: 0.95rem;
   font-weight: 700;
-  border: none;
+  border: 1px solid #09090b;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: all 0.2s ease;
   margin-top: 1rem;
 }
 
 .contact-submit-btn:hover {
-  opacity: 0.92;
+  background: #27272a;
+  border-color: #27272a;
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }
 
 .contact-submit-btn:active {
   transform: scale(0.99);
+}
+
+[data-theme="dark"] .contact-submit-btn {
+  background: #ffffff !important;
+  color: #09090b !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .contact-submit-btn:hover {
+  background: #e4e4e7 !important;
+  color: #09090b !important;
+  border-color: #e4e4e7 !important;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 960px) {

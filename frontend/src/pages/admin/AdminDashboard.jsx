@@ -6,6 +6,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 
 // Submodules
 import OverviewModule from './modules/OverviewModule';
+import BrandingModule from './modules/BrandingModule';
 import HomeModule from './modules/HomeModule';
 import AboutModule from './modules/AboutModule';
 import ProductsModule from './modules/ProductsModule';
@@ -59,6 +60,8 @@ export default function AdminDashboard() {
     switch (currentTab) {
       case 'overview':
         return <OverviewModule onNavigateTab={handleSelectTab} />;
+      case 'branding':
+        return <BrandingModule />;
       case 'home':
         return <HomeModule />;
       case 'about':

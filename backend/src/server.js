@@ -46,9 +46,29 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
-// Serve file statis untuk folder uploads
+// Serve file statis untuk folder uploads dan images
 const uploadsPath = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadsPath));
+
+// Fallback jika file tersimpan di general tetapi direquest pada subfolder lain (misal /uploads/about/:filename)
+app.use('/uploads/:folder/:filename', (req, res, next) => {
+  const { folder, filename } = req.params;
+  const targetFolder = folder === 'about' ? 'general' : 'about';
+  const altPath = path.join(uploadsPath, targetFolder, filename);
+  if (require('fs').existsSync(altPath)) {
+    return res.sendFile(altPath);
+  }
+  next();
+});
+
+// Fallback serve static images jika diakses langsung melalui backend port 3000
+const backendImagesPath = path.join(__dirname, '../uploads/images');
+const frontendImagesPath = path.join(__dirname, '../../frontend/public/images');
+if (require('fs').existsSync(backendImagesPath)) {
+  app.use('/images', express.static(backendImagesPath));
+} else if (require('fs').existsSync(frontendImagesPath)) {
+  app.use('/images', express.static(frontendImagesPath));
+}
 
 // ─── 2. ROUTES ───────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {

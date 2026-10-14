@@ -1,5 +1,6 @@
 const pool = require('../config/database');
 const { success, error } = require('../utils/response');
+const { sendRfqNotification, sendTestEmail } = require('../utils/emailService');
 
 const COUNTRY_NAMES = {
   ID: 'Indonesia',
@@ -73,9 +74,11 @@ const recordVisit = async (req, res, next) => {
   }
 };
 
+const { evaluateRfqSpam } = require('../utils/spamDetector');
+
 /**
  * POST /api/public/rfq
- * Submit B2B RFQ inquiry from Contact page
+ * Submit B2B RFQ inquiry from Contact page or Products page
  */
 const submitRfq = async (req, res, next) => {
   try {
@@ -87,6 +90,8 @@ const submitRfq = async (req, res, next) => {
       inquiryType,
       volume,
       message,
+      fax_number, // Honeypot field
+      website_url, // Alternative honeypot field
     } = req.body;
 
     if (!fullName || !corporateEmail || !companyName || !phone) {
@@ -97,6 +102,32 @@ const submitRfq = async (req, res, next) => {
       req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
       req.socket.remoteAddress ||
       '127.0.0.1';
+
+    // Silent Drop for Automated Bot Crawlers (Honeypot Triggered)
+    // Instantly return HTTP 201 without running MySQL queries or SMTP connections to protect DB pool
+    if ((fax_number && String(fax_number).trim().length > 0) || (website_url && String(website_url).trim().length > 0)) {
+      console.warn(`[Anti-Spam Security] Honeypot triggered by bot from IP ${rawIp}. Silently dropped to conserve DB pool.`);
+      return success(
+        res,
+        'Permintaan penawaran RFQ berhasil dikirimkan.',
+        { id: 0 },
+        201
+      );
+    }
+
+    // Evaluate submission quality and bot traps
+    const spamAssessment = evaluateRfqSpam({
+      fullName,
+      corporateEmail,
+      companyName,
+      phone,
+      message,
+      honeypot: fax_number || website_url || '',
+    });
+
+    const finalStatus = spamAssessment.isSpam ? 'spam' : 'new';
+    const spamScore = spamAssessment.spamScore;
+    const spamReason = spamAssessment.primaryReason || null;
 
     const countryCode = (
       req.headers['cf-ipcountry'] ||
@@ -109,8 +140,8 @@ const submitRfq = async (req, res, next) => {
     const [result] = await pool.execute(
       `INSERT INTO rfq_inquiries (
         full_name, corporate_email, company_name, phone,
-        inquiry_type, volume, message, country_code, country_name, ip_address
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        inquiry_type, volume, message, country_code, country_name, ip_address, status, spam_score, spam_reason
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         fullName,
         corporateEmail,
@@ -122,8 +153,32 @@ const submitRfq = async (req, res, next) => {
         countryCode,
         countryName,
         rawIp,
+        finalStatus,
+        spamScore,
+        spamReason,
       ]
     );
+
+    // Only send notification & auto-reply if verified legitimate (NOT spam)
+    if (!spamAssessment.isSpam) {
+      sendRfqNotification({
+        id: result.insertId,
+        fullName,
+        corporateEmail,
+        companyName,
+        phone,
+        inquiryType,
+        volume,
+        message,
+        countryCode,
+        countryName,
+        rawIp,
+      }).catch((emailErr) => {
+        console.warn('[Telemetry] Asynchronous email alert warning:', emailErr.message);
+      });
+    } else {
+      console.log(`[RFQ Anti-Spam] Auto-flagged inquiry #${result.insertId} as '${finalStatus}' (Score: ${spamScore}, Reason: ${spamReason})`);
+    }
 
     return success(
       res,
@@ -176,7 +231,7 @@ const getTelemetryStats = async (req, res, next) => {
     const totalRfqs = rfqCountRows[0].total_rfqs || 0;
 
     const [recentRfqs] = await pool.execute(
-      `SELECT id, full_name, corporate_email, company_name, phone, inquiry_type, volume, created_at 
+      `SELECT id, full_name, corporate_email, company_name, phone, inquiry_type, volume, status, created_at 
        FROM rfq_inquiries 
        ORDER BY created_at DESC 
        LIMIT 5`
@@ -195,8 +250,113 @@ const getTelemetryStats = async (req, res, next) => {
   }
 };
 
+/**
+ * GET /api/admin/rfq
+ * List all RFQ inquiries with optional status filtering
+ */
+const getAdminRfqs = async (req, res, next) => {
+  try {
+    const { status, search } = req.query;
+
+    let query = `SELECT * FROM rfq_inquiries WHERE 1=1`;
+    const params = [];
+
+    if (status && status !== 'all') {
+      query += ` AND status = ?`;
+      params.push(status);
+    }
+
+    if (search) {
+      query += ` AND (full_name LIKE ? OR company_name LIKE ? OR corporate_email LIKE ? OR phone LIKE ?)`;
+      const searchWild = `%${search}%`;
+      params.push(searchWild, searchWild, searchWild, searchWild);
+    }
+
+    query += ` ORDER BY created_at DESC LIMIT 100`;
+
+    const [rows] = await pool.execute(query, params);
+    return success(res, 'RFQ inquiries retrieved', rows);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * PATCH /api/admin/rfq/:id
+ * Update status or notes of an RFQ inquiry
+ */
+const updateAdminRfq = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status, notes } = req.body;
+
+    const updates = [];
+    const params = [];
+
+    if (status !== undefined) {
+      updates.push('status = ?');
+      params.push(status);
+    }
+
+    if (notes !== undefined) {
+      updates.push('notes = ?');
+      params.push(notes);
+    }
+
+    if (updates.length === 0) {
+      return error(res, 'Tidak ada data untuk diperbarui.', 400);
+    }
+
+    params.push(id);
+    await pool.execute(
+      `UPDATE rfq_inquiries SET ${updates.join(', ')} WHERE id = ?`,
+      params
+    );
+
+    return success(res, 'Status RFQ berhasil diperbarui');
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * DELETE /api/admin/rfq/:id
+ * Delete an RFQ inquiry
+ */
+const deleteAdminRfq = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await pool.execute('DELETE FROM rfq_inquiries WHERE id = ?', [id]);
+    return success(res, 'Data RFQ berhasil dihapus');
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * POST /api/admin/email/test
+ * Test SMTP server credentials and connectivity
+ */
+const testEmailDelivery = async (req, res, next) => {
+  try {
+    const { targetEmail, config } = req.body;
+    if (!targetEmail) {
+      return error(res, 'Alamat email tujuan uji coba wajib diisi.', 400);
+    }
+
+    const result = await sendTestEmail(targetEmail, config);
+    return success(res, 'Email uji coba berhasil dikirimkan!', result);
+  } catch (err) {
+    return error(res, `Gagal mengirim email uji coba: ${err.message}`, 400);
+  }
+};
+
 module.exports = {
   recordVisit,
   submitRfq,
   getTelemetryStats,
+  getAdminRfqs,
+  updateAdminRfq,
+  deleteAdminRfq,
+  testEmailDelivery,
 };

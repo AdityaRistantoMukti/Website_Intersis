@@ -87,5 +87,26 @@ const getSiteSettings = async (req, res, next) => {
   }
 };
 
-module.exports = { getCompanyProfile, getCoreValues, getContact, getSiteSettings };
+/**
+ * GET /api/public/trade-destinations
+ * Mengambil data rute koridor perdagangan global (home map section)
+ */
+const getTradeDestinations = async (req, res, next) => {
+  try {
+    const [rows] = await pool.execute("SELECT content_json FROM site_settings WHERE key_name = 'home_trade_destinations' LIMIT 1");
+    if (rows.length > 0 && rows[0].content_json) {
+      try {
+        const parsed = JSON.parse(rows[0].content_json);
+        return success(res, 'Data rute koridor ekspor global berhasil diambil.', parsed);
+      } catch (e) {
+        return success(res, 'Data rute koridor ekspor global berhasil diambil.', rows[0].content_json);
+      }
+    }
+    return success(res, 'Rute koridor perdagangan default aktif.', null);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getCompanyProfile, getCoreValues, getContact, getSiteSettings, getTradeDestinations };
 

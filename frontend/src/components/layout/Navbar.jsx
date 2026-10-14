@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useBranding } from '../../context/BrandingContext';
+import { getImageUrl } from '../../lib/api';
 import './Navbar.css';
 
 export default function Navbar() {
+  const { branding } = useBranding();
   const { t, i18n } = useTranslation('common');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -57,9 +60,10 @@ export default function Navbar() {
         <Link to="/" className="navbar__logo" aria-label="PT Global Philsonic Technologies Home">
           <div className="navbar__logo-badge">
             <img
-              src="/images/logo_company.jpg"
-              alt="PT Global Philsonic Technologies"
+              src={branding?.logo_url ? getImageUrl(branding.logo_url) : '/images/logo_company.jpg'}
+              alt={branding?.site_name || 'PT Global Philsonic Technologies'}
               className="navbar__logo-img"
+              onError={(e) => { e.target.src = '/images/logo_company.jpg'; }}
             />
           </div>
           <div className="navbar__logo-meta">

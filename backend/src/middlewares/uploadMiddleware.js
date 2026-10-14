@@ -25,14 +25,17 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|webp|svg/;
+  const allowedTypes = /jpeg|jpg|png|webp|svg|ico/;
   const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimeType = allowedTypes.test(file.mimetype);
+  const mimeType = allowedTypes.test(file.mimetype) ||
+    file.mimetype === 'image/x-icon' ||
+    file.mimetype === 'image/vnd.microsoft.icon' ||
+    file.mimetype === 'image/ico';
 
-  if (extName && mimeType) {
+  if (extName && (mimeType || path.extname(file.originalname).toLowerCase() === '.ico')) {
     return cb(null, true);
   }
-  cb(new Error('Format file tidak didukung! Hanya diperbolehkan file gambar (JPG, PNG, WEBP, SVG).'));
+  cb(new Error('Format file tidak didukung! Hanya diperbolehkan file gambar (JPG, PNG, WEBP, SVG, ICO).'));
 };
 
 const upload = multer({

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useContact, useSiteSettings } from '../../hooks/useApi';
 import { getLocalizedData } from '../../lib/translator';
 import api from '../../lib/api';
@@ -7,10 +9,29 @@ import ContactGoogleMap from '../../components/contact/ContactGoogleMap';
 import { CheckCircle2, MessageCircle, Building2, Phone, Mail, Clock } from 'lucide-react';
 import './ContactPage.css';
 
+const INQUIRY_OPTIONS = {
+  'smt-pcba': { id: 'SMT PCBA High-Volume Assembly', en: 'SMT PCBA High-Volume Assembly' },
+  'test-jigs': { id: 'Custom ICT / FCT / EOL Test Jigs', en: 'Custom ICT / FCT / EOL Test Jigs' },
+  'box-build': { id: 'Turnkey Box-Build & Final Enclosure', en: 'Turnkey Box-Build & Final Enclosure' },
+  'conformal-coating': { id: 'Robotic Conformal Coating & Potting', en: 'Robotic Conformal Coating & Potting' },
+  'plant-audit': { id: 'Factory Audit / Client Visit Request', en: 'Factory Audit / Client Visit Request' },
+  'other': { id: 'Kebutuhan Teknis Lainnya', en: 'Other Technical Inquiry' },
+};
+
+const VOLUME_OPTIONS = {
+  proto: { id: 'Prototype / NPI (< 500 pcs)', en: 'Prototype / NPI (< 500 pcs)' },
+  pilot: { id: 'Pilot Run (500 - 5.000 pcs)', en: 'Pilot Run (500 - 5,000 pcs)' },
+  mass: { id: 'Produksi Massal (> 10.000 pcs / bulan)', en: 'Mass Production (> 10,000 pcs / month)' },
+  custom: { id: 'Mesin Otomasi / Fixture Khusus', en: 'Automation Machine / Custom Fixtures' },
+};
+
 export default function ContactPage() {
   const { i18n } = useTranslation();
   const isId = i18n.language === 'id';
   const lang = isId ? 'id' : 'en';
+
+  const [searchParams] = useSearchParams();
+  const skuParam = searchParams.get('sku');
 
   const { data: contact } = useContact();
   const { data: rawHeaderSettings } = useSiteSettings('contact_header');
@@ -23,14 +44,81 @@ export default function ContactPage() {
     phone: '',
     inquiryType: 'smt-pcba',
     volume: 'pilot',
-    message: ''
+    fax_number: '', // Honeypot field for bot detection
+    message: skuParam
+      ? (isId ? `Permintaan penawaran spesifikasi untuk model produk: ${skuParam}` : `Inquiry for product model SKU: ${skuParam}`)
+      : ''
   });
+
+  useEffect(() => {
+    if (skuParam && !formData.message) {
+      setFormData(prev => ({
+        ...prev,
+        message: isId ? `Permintaan penawaran spesifikasi untuk model produk: ${skuParam}` : `Inquiry for product model SKU: ${skuParam}`
+      }));
+    }
+  }, [skuParam, isId]);
 
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState(null);
+
+  const cleanPhone = (contact?.whatsapp || contact?.whatsapp_number || '+628117700888').replace(/[^0-9]/g, '');
+
+  const buildWhatsAppMessage = () => {
+    const compName = contact?.company_name || 'PT. Global Philsonic Technologies';
+    const inquiryLabel = INQUIRY_OPTIONS[formData.inquiryType]?.[lang] || formData.inquiryType;
+    const volumeLabel = VOLUME_OPTIONS[formData.volume]?.[lang] || formData.volume;
+    const msgDetails = formData.message?.trim() || '-';
+
+    const textLines = isId ? [
+      `Halo Tim Sales & Engineering ${compName},`,
+      '',
+      `Saya telah mengisi formulir Permintaan Penawaran (RFQ) melalui website:`,
+      `• Nama Lengkap: ${formData.fullName.trim() || '-'}`,
+      `• Perusahaan: ${formData.companyName.trim() || '-'}`,
+      `• Email Korporat: ${formData.corporateEmail.trim() || '-'}`,
+      `• Nomor Telepon / WA: ${formData.phone.trim() || '-'}`,
+      `• Kategori Kebutuhan: ${inquiryLabel}`,
+      `• Estimasi Volume: ${volumeLabel}`,
+      `• Rincian Kebutuhan / Pesan:`,
+      `${msgDetails}`,
+      '',
+      `Mohon informasi penawaran dan tindak lanjut dari tim Engineering. Terima kasih.`
+    ] : [
+      `Hello Sales & Engineering Team ${compName},`,
+      '',
+      `I have submitted an official RFQ inquiry through the website:`,
+      `• Full Name: ${formData.fullName.trim() || '-'}`,
+      `• Company: ${formData.companyName.trim() || '-'}`,
+      `• Corporate Email: ${formData.corporateEmail.trim() || '-'}`,
+      `• Phone / WhatsApp: ${formData.phone.trim() || '-'}`,
+      `• Inquiry Scope: ${inquiryLabel}`,
+      `• Target Volume: ${volumeLabel}`,
+      `• Project Specifications / Message:`,
+      `${msgDetails}`,
+      '',
+      `Please review and follow up with our technical inquiry. Thank you.`
+    ];
+
+    return textLines.join('\n');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormError(null);
+
+    // Validate phone number digits length
+    const phoneDigits = (formData.phone || '').replace(/\D/g, '');
+    if (phoneDigits.length < 9 || phoneDigits.length > 16) {
+      setFormError(
+        isId
+          ? 'Mohon masukkan nomor telepon atau WhatsApp yang valid (minimal 9 digit angka).'
+          : 'Please provide a valid phone or WhatsApp number (minimum 9 digits).'
+      );
+      return;
+    }
+
     try {
       setSubmitting(true);
       await api.post('/public/rfq', formData);
@@ -39,15 +127,32 @@ export default function ContactPage() {
     } finally {
       setSubmitting(false);
       setSubmitted(true);
+      // Direct redirect / open WhatsApp with all filled details included
+      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
+      window.open(waUrl, '_blank');
     }
   };
-
-  const cleanPhone = (contact?.whatsapp_number || '+628117700899').replace(/[^0-9]/g, '');
 
   const displayAddress = !isId ? (contact?.address_en || contact?.address) : contact?.address;
 
   return (
     <div className="contact-page">
+      <Helmet>
+        <title>
+          {isId
+            ? 'Kontak & Permintaan RFQ | PT. Global Philsonic Technologies'
+            : 'Contact & RFQ Inquiries | PT. Global Philsonic Technologies'}
+        </title>
+        <meta
+          name="description"
+          content={
+            isId
+              ? 'Hubungi tim engineering sales PT. Global Philsonic Technologies untuk konsultasi perakitan PCBA, otomasi manufaktur, atau jadwalkan audit fasilitas Batam FTZ.'
+              : 'Contact PT. Global Philsonic Technologies engineering team for turnkey PCBA assembly, automation manufacturing, or schedule a Batam FTZ audit.'
+          }
+        />
+      </Helmet>
+
       {/* ═══════ PAGE HEADER : Clean Minimalist Theme ═══════ */}
       <header className="contact-page-header">
         <div className="contact-page-header__grid-bg" aria-hidden="true" />
@@ -98,7 +203,7 @@ export default function ContactPage() {
                     <strong>Office:</strong> {contact?.phone || '+62 778 468 899'}<br />
                     <strong>WhatsApp RFQ:</strong>{' '}
                     <a href={`https://wa.me/${cleanPhone}`} target="_blank" rel="noreferrer">
-                      {contact?.whatsapp_number || '+62 811-7700-899'}
+                      {contact?.whatsapp || contact?.whatsapp_number || '+62 811-7700-888'}
                     </a>
                   </p>
                 </div>
@@ -167,9 +272,9 @@ export default function ContactPage() {
                       ? `Terima kasih, Bapak/Ibu ${formData.fullName} dari ${formData.companyName || 'perusahaan Anda'}. Proposal teknis dan estimasi biaya awal akan segera kami proses.`
                       : `Thank you, ${formData.fullName} from ${formData.companyName || 'your company'}. Our engineering team is currently assessing your project parameters.`}
                   </p>
-                  <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a
-                      href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Halo Sales PT. Global Philsonic Technologies, saya telah mengirimkan form RFQ di website atas nama ${formData.fullName} (${formData.companyName}). Mohon dapat ditindaklanjuti.`)}`}
+                      href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(buildWhatsAppMessage())}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -186,7 +291,7 @@ export default function ContactPage() {
                       }}
                     >
                       <MessageCircle size={16} strokeWidth={2} />
-                      <span>WhatsApp Fast-Track Follow Up</span>
+                      <span>{isId ? 'Buka Kembali di WhatsApp' : 'Open in WhatsApp'}</span>
                     </a>
                     <button
                       onClick={() => setSubmitted(false)}
@@ -206,6 +311,38 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="contact-form-grid">
+                  {/* Invisible honeypot field to trap bots */}
+                  <div style={{ display: 'none' }} aria-hidden="true">
+                    <label htmlFor="fax_number">Fax Number</label>
+                    <input
+                      id="fax_number"
+                      type="text"
+                      name="fax_number"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formData.fax_number || ''}
+                      onChange={e => setFormData({ ...formData, fax_number: e.target.value })}
+                    />
+                  </div>
+
+                  {formError && (
+                    <div
+                      className="contact-field-full"
+                      style={{
+                        padding: '10px 14px',
+                        background: 'rgba(239, 68, 68, 0.1)',
+                        border: '1.5px solid #ef4444',
+                        borderRadius: 8,
+                        color: '#ef4444',
+                        fontSize: '0.85rem',
+                        fontWeight: 600,
+                        marginBottom: 10,
+                      }}
+                    >
+                      {formError}
+                    </div>
+                  )}
+
                   <div>
                     <label className="contact-label">{isId ? 'Nama Lengkap *' : 'Full Name *'}</label>
                     <input
@@ -296,8 +433,10 @@ export default function ContactPage() {
                   </div>
 
                   <div className="contact-field-full">
-                    <button type="submit" className="contact-submit-btn">
-                      {isId ? 'Kirim Permintaan RFQ' : 'Submit Engineering RFQ'}
+                    <button type="submit" className="contact-submit-btn" disabled={submitting}>
+                      {submitting
+                        ? (isId ? 'Mengirim Data...' : 'Submitting Data...')
+                        : (isId ? 'Kirim Permintaan RFQ & Hubungkan ke WhatsApp' : 'Submit Engineering RFQ & Proceed to WhatsApp')}
                     </button>
                   </div>
                 </form>

@@ -77,7 +77,7 @@ const PRODUCT_LINES = [
 
 const ABOUT_ID = `PT. Global Philsonic Technologies (GPT) adalah produsen perakitan audio dan video otomotif yang berlokasi di Kawasan Perdagangan Bebas Batam, Indonesia. Kami berkomitmen menghadirkan solusi inovatif, berkualitas tinggi, dan efisien biaya bagi setiap mitra bisnis kami.
 
-Dengan mengadopsi teknologi mutakhir bertaraf internasional, kami menyediakan layanan menyeluruh mulai dari desain, rekayasa, manufaktur, pengujian fungsional, hingga perakitan produk akhir, semuanya berorientasi pada kebutuhan spesifik pelanggan. Jaringan pemasok global kami yang telah terjalin lama memungkinkan kami menawarkan harga pengadaan terbaik di setiap proyek.
+Dengan mengadopsi teknologi mutakhir bertaraf internasional, kami menyediakan layanan menyeluruh mulai dari desain, engineering, manufaktur, pengujian fungsional, hingga perakitan produk akhir, semuanya berorientasi pada kebutuhan spesifik pelanggan. Jaringan pemasok global kami yang telah terjalin lama memungkinkan kami menawarkan harga pengadaan terbaik di setiap proyek.
 
 Kami adalah mitra terpercaya bagi perusahaan dari berbagai skala, dengan komitmen penuh untuk memberikan layanan, dukungan teknis, dan kualitas terbaik di setiap tahap kemitraan.`;
 

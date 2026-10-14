@@ -1,6 +1,6 @@
 {
   "hero": {
-    "badge": "Profil Perusahaan & Ekosistem Rekayasa",
+    "badge": "Profil Perusahaan & Ekosistem Engineering",
     "title": "Membangun Keunggulan Elektronik Otomotif & Otomasi Global",
     "subtitle": "PT. Global Philsonic Technologies adalah mitra terpercaya perakitan SMT presisi, modul kokpit kendaraan, prosesor DSP, dan mesin otomasi industri di Batam Free Trade Zone.",
     "breadcrumbHome": "Beranda",
@@ -25,7 +25,7 @@
   },
   "milestones": {
     "kicker": "Jejak Langkah & Perkembangan",
-    "title": "Perjalanan Menuju Keunggulan Rekayasa",
+    "title": "Perjalanan Menuju Keunggulan Engineering",
     "subtitle": "Dedikasi lebih dari satu dekade dalam memperluas kapabilitas teknologi perakitan dan kepercayaan mitra global.",
     "items": [
       {
@@ -49,7 +49,7 @@
       {
         "year": "2023",
         "title": "Divisi Otomasi Industri & MES Cloud",
-        "desc": "Pembentukan divisi rekayasa jig uji otomatis (ICT/FCT) mandiri dan digitalisasi seluruh lini produksi dengan Manufacturing Execution System.",
+        "desc": "Pembentukan divisi engineering jig uji otomatis (ICT/FCT) mandiri dan digitalisasi seluruh lini produksi dengan Manufacturing Execution System.",
         "badge": "Digitalisasi Pabrik"
       },
       {
@@ -63,7 +63,7 @@
   "visionMission": {
     "visionKicker": "Arah Masa Depan",
     "visionTitle": "Visi Perusahaan",
-    "visionDesc": "Menjadi mitra manufaktur elektronik otomotif dan rekayasa otomasi industri terdepan di Asia Tenggara yang diakui secara global atas keunggulan kualitas, ketelitian presisi, dan inovasi teknologi.",
+    "visionDesc": "Menjadi mitra manufaktur elektronik otomotif dan engineering otomasi industri terdepan di Asia Tenggara yang diakui secara global atas keunggulan kualitas, ketelitian presisi, dan inovasi teknologi.",
     "missionKicker": "Tanggung Jawab & Komitmen",
     "missionTitle": "Misi Perusahaan",
     "mission1": "Menyediakan layanan perakitan elektronik kelas dunia dengan standar tanpa cacat (Zero-Defect) melalui proses berstandar IATF 16949.",
@@ -136,9 +136,9 @@
       },
       {
         "id": "tooling",
-        "title": "Workshop Otomasi & Jig Rekayasa",
+        "title": "Workshop Otomasi & Jig Engineering",
         "highlight": "Desain Mandiri · Kontrol PLC · Integrasi Cloud MES",
-        "desc": "Fasilitas rekayasa in-house untuk merancang dan memproduksi jig pengujian fungsi otomatis (FCT), jig In-Circuit Test (ICT), serta perakitan wire harness kustom secara presisi.",
+        "desc": "Fasilitas engineering in-house untuk merancang dan memproduksi jig pengujian fungsi otomatis (FCT), jig In-Circuit Test (ICT), serta perakitan wire harness kustom secara presisi.",
         "specs": ["Pemesinan CNC Presisi Tinggi", "Sistem Kontrol PLC & Pneumatik Presisi", "Perekaman Data Serialisasi Unit ke Cloud MES"]
       }
     ]
@@ -147,6 +147,6 @@
     "title": "Tertarik Melakukan Audit Fasilitas Pabrik Kami?",
     "subtitle": "Kami menyambut baik kunjungan langsung calon mitra OEM/ODM ke pabrik Batam FTZ kami atau konsultasi teknis via konferensi video.",
     "btnSchedule": "Jadwalkan Kunjungan / Audit",
-    "btnContact": "Hubungi Tim Rekayasa Kami"
+    "btnContact": "Hubungi Tim Engineering Kami"
   }
 }

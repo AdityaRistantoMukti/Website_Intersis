@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import api, { getImageUrl } from '../../lib/api';
-import { useSiteSettings } from '../../hooks/useApi';
+import { useSiteSettings, useContact } from '../../hooks/useApi';
 import { getLocalizedData } from '../../lib/translator';
 import ProductSchematic from '../../components/home/ProductSchematic';
 import ProductSpecsModal from '../../components/home/ProductSpecsModal';
@@ -34,7 +34,7 @@ function transformProduct(row) {
 }
 
 /* ── Interactive RFQ Quotation Modal ── */
-function RfqModal({ product, onClose, isId }) {
+function RfqModal({ product, onClose, isId, contact }) {
   const [scale, setScale] = useState('Prototipe / Sampel Uji (10 - 50 Unit)');
   const [company, setCompany] = useState('');
   const [name, setName] = useState('');
@@ -47,10 +47,41 @@ function RfqModal({ product, onClose, isId }) {
 
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
-    const message = `Halo Sales & Engineering PT. Global Philsonic Technologies,%0A%0ASaya tertarik meminta penawaran (RFQ) resmi untuk:%0A• SKU Model: ${product.modelCode}%0A• Produk: ${productTitle}%0A• Skala Kebutuhan: ${scale}%0A• Perusahaan: ${company || '-'}%0A• Kontak: ${name || '-'}%0A• Email: ${email || '-'}%0A• Catatan Spesifikasi: ${notes || '-'}`;
-    
-    // Direct WhatsApp B2B Sales
-    window.open(`https://wa.me/628117700888?text=${message}`, '_blank');
+    const targetPhone = (contact?.whatsapp || contact?.whatsapp_number || '+628117700888').replace(/[^0-9]/g, '');
+    const companyName = contact?.company_name || 'PT. Global Philsonic Technologies';
+
+    const textLines = isId ? [
+      `Halo Tim Sales & Engineering ${companyName},`,
+      '',
+      `Saya tertarik meminta penawaran (RFQ) resmi untuk produk berikut:`,
+      `• SKU Model: ${product.modelCode}`,
+      `• Nama Produk: ${productTitle}`,
+      `• Estimasi Volume: ${scale}`,
+      `• Perusahaan: ${company.trim() || '-'}`,
+      `• Nama Narahubung: ${name.trim() || '-'}`,
+      `• Email Bisnis: ${email.trim() || '-'}`,
+      `• Catatan Spesifikasi / Kebutuhan Khusus:`,
+      `${notes.trim() || '-'}`,
+      '',
+      `Mohon informasi penawaran harga dan ketersediaan teknis lebih lanjut. Terima kasih.`
+    ] : [
+      `Hello Sales & Engineering Team ${companyName},`,
+      '',
+      `I would like to request an official quotation (RFQ) for the following product:`,
+      `• Model SKU: ${product.modelCode}`,
+      `• Product Name: ${productTitle}`,
+      `• Estimated Scale: ${scale}`,
+      `• Company: ${company.trim() || '-'}`,
+      `• Contact Person: ${name.trim() || '-'}`,
+      `• Business Email: ${email.trim() || '-'}`,
+      `• Technical Specifications / Notes:`,
+      `${notes.trim() || '-'}`,
+      '',
+      `Please provide quotation details and technical review. Thank you.`
+    ];
+
+    const message = textLines.join('\n');
+    window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
     onClose();
   };
 
@@ -88,7 +119,7 @@ function RfqModal({ product, onClose, isId }) {
                 <option value="Produksi Massal Kontrak (5.000+ Unit / Bulan)">
                   {isId ? 'Produksi Massal OEM/ODM (5.000+ Unit / Bulan)' : 'Mass OEM/ODM Production (5,000+ Units / Month)'}
                 </option>
-                <option value="Kustomisasi Rekayasa Khusus / Tooling Baru">
+                <option value="Kustomisasi Engineering Khusus / Tooling Baru">
                   {isId ? 'Kustomisasi Desain Baru / Tooling Khusus' : 'Custom Engineering & New Tooling'}
                 </option>
               </select>
@@ -172,6 +203,8 @@ export default function ProductsPage() {
   const { data: rawHeaderSettings } = useSiteSettings('products_header');
   const { data: rawRfqSettings } = useSiteSettings('products_rfq');
   const { data: rawCatSettings } = useSiteSettings('products_categories');
+  const { data: contact } = useContact();
+  const cleanContactPhone = (contact?.whatsapp || contact?.whatsapp_number || '+628117700888').replace(/[^0-9]/g, '');
 
   const headerSettings = getLocalizedData(rawHeaderSettings, currentLang);
   const rfqSettings = getLocalizedData(rawRfqSettings, currentLang);
@@ -320,7 +353,7 @@ export default function ProductsPage() {
     },
     {
       step: '02',
-      title: isId ? 'Rekayasa DFM & Rapid Prototyping' : 'DFM Engineering & Prototyping',
+      title: isId ? 'Engineering DFM & Rapid Prototyping' : 'DFM Engineering & Prototyping',
       desc: isId
         ? 'Optimalisasi layout Design-for-Manufacturing (DFM) untuk menjamin yield SMT maksimal dan pembuatan sampel uji fungsional.'
         : 'Design-for-Manufacturing optimization ensuring optimal SMT placement yields and functional engineering prototypes.',
@@ -353,7 +386,7 @@ export default function ProductsPage() {
       <Helmet>
         <title>
           {isId
-            ? 'Produk & Solusi Rekayasa Manufaktur | PT. Global Philsonic Technologies'
+            ? 'Produk & Solusi Engineering Manufaktur | PT. Global Philsonic Technologies'
             : 'Products & Manufacturing Solutions | PT. Global Philsonic Technologies'}
         </title>
         <meta
@@ -755,7 +788,7 @@ export default function ProductsPage() {
             </h2>
             <p className="prod-workflow-subtitle">
               {rfqSettings?.workflowSubtitle || (isId
-                ? 'Metodologi rekayasa terstruktur kami menjamin kualitas bebas cacat (Zero-Defect), kepatuhan regulasi otomotif, dan efisiensi biaya manufaktur.'
+                ? 'Metodologi engineering terstruktur kami menjamin kualitas bebas cacat (Zero-Defect), kepatuhan regulasi otomotif, dan efisiensi biaya manufaktur.'
                 : 'Our structured engineering methodology guarantees zero-defect quality, automotive regulatory compliance, and maximum cost efficiency.')}
             </p>
           </div>
@@ -796,7 +829,7 @@ export default function ProductsPage() {
 
               <div className="prod-cta-actions">
                 <a
-                  href="https://wa.me/628117700888?text=Halo%20Engineering%20PT.%20Global%20Philsonic%20Technologies,%20saya%20ingin%20berkonsultasi%20mengenai%20kebutuhan%20OEM/ODM."
+                  href={`https://wa.me/${cleanContactPhone}?text=${encodeURIComponent(isId ? 'Halo Engineering PT. Global Philsonic Technologies, saya ingin berkonsultasi mengenai kebutuhan OEM/ODM.' : 'Hello Engineering Team PT. Global Philsonic Technologies, I would like to consult on OEM/ODM manufacturing requirements.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn prod-cta-btn-wa"
@@ -835,6 +868,7 @@ export default function ProductsPage() {
           product={selectedRfqProduct}
           onClose={() => setSelectedRfqProduct(null)}
           isId={isId}
+          contact={contact}
         />
       )}
     </div>

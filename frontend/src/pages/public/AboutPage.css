@@ -1,40 +1,37 @@
 /* ══════════════════════════════════════════════════════════════════════════
    ABOUT PAGE STYLES — Enterprise Automotive & Industrial Aesthetics
    PT. Global Philsonic Technologies (GPT)
+   Monochrome Theme (Black / White / Gray) — Pure High-Contrast
    ══════════════════════════════════════════════════════════════════════════ */
 
-:root {
-  --teal-bright: #ffffff;
-}
-
-/* ── HERO BANNER ── */
+/* ── 1. HERO BANNER ── */
 .about-hero {
   position: relative;
-  background: radial-gradient(circle at 80% 20%, #18181b 0%, #09090b 60%, #050507 100%);
+  background: linear-gradient(135deg, #070d18 0%, #0d1728 55%, #091322 100%);
   color: #ffffff;
-  padding: 8.5rem 0 5rem;
+  padding: 6.5rem 0 3.5rem;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .about-hero__bg-grid {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 36px 36px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
   pointer-events: none;
 }
 
 .about-hero__glow {
   position: absolute;
-  top: -120px;
-  right: -80px;
-  width: 480px;
-  height: 480px;
+  top: -15%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-  border-radius: 50%;
+  filter: blur(60px);
   pointer-events: none;
 }
 
@@ -63,7 +60,7 @@
 }
 
 .about-breadcrumb a:hover {
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
 }
 
 .about-breadcrumb__sep {
@@ -72,7 +69,7 @@
 }
 
 .about-breadcrumb__current {
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -84,7 +81,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
@@ -122,10 +119,10 @@
 }
 
 .about-stat-card {
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(24, 24, 27, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   position: relative;
@@ -140,12 +137,12 @@
   right: 20px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #ffffff, transparent);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .about-stat-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .about-stat-card__val {
@@ -161,28 +158,34 @@
 
 .about-stat-card__unit {
   font-size: 1.15rem;
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
   font-weight: 700;
 }
 
 .about-stat-card__label {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: #a1a1aa;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
-/* ── NARRATIVE & STRATEGIC ADVANTAGE SECTION ── */
+/* ── 2. NARRATIVE & COMPANY SHOWCASE PHOTO SECTION ── */
 .about-narrative {
   padding: 6rem 0;
   background: #ffffff;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] .about-narrative {
+  background: #09090b;
+  border-bottom: 1px solid #27272a;
 }
 
 .about-narrative__grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 4rem;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 3.5rem;
   align-items: center;
 }
 
@@ -192,8 +195,12 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--teal, #00897b);
+  color: #52525b;
   margin-bottom: 0.75rem;
+}
+
+[data-theme="dark"] .about-kicker {
+  color: #a1a1aa;
 }
 
 .about-heading {
@@ -201,106 +208,137 @@
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #0b1320;
+  color: #09090b;
   margin-bottom: 1.5rem;
+}
+
+[data-theme="dark"] .about-heading {
+  color: #ffffff;
 }
 
 .about-narrative__text {
   font-size: 1.025rem;
   line-height: 1.7;
-  color: #475569;
+  color: #52525b;
   margin-bottom: 1.25rem;
 }
 
-/* Batam FTZ Advantage Box */
-.about-ftz-box {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 2.25rem;
+[data-theme="dark"] .about-narrative__text {
+  color: #cbd5e1;
+}
+
+/* Company Facility Showcase Photo Card */
+.about-company-photo-card {
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e4e4e7;
+  transition: all 0.3s ease;
 }
 
-.about-ftz-box__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.75rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e2e8f0;
+[data-theme="dark"] .about-company-photo-card {
+  border-color: #27272a;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
-.about-ftz-box__title {
-  font-size: 1.125rem;
-  font-weight: 800;
-  color: #0b1320;
+.about-company-photo-card:hover {
+  transform: translateY(-4px);
+  border-color: #a1a1aa;
 }
 
-.about-ftz-box__badge {
-  background: rgba(0, 137, 123, 0.1);
-  color: var(--teal, #00897b);
-  font-size: 0.75rem;
+[data-theme="dark"] .about-company-photo-card:hover {
+  border-color: #71717a;
+}
+
+.about-company-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: #18181b;
+}
+
+.about-company-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-company-photo-card:hover .about-company-photo {
+  transform: scale(1.04);
+}
+
+.about-company-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.05) 0%,
+    rgba(9, 9, 11, 0.4) 50%,
+    rgba(9, 9, 11, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+.about-company-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.about-company-photo-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.7rem;
   font-weight: 700;
+  letter-spacing: 0.1em;
   padding: 4px 10px;
-  border-radius: 12px;
-  letter-spacing: 0.04em;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 0.5rem;
 }
 
-.about-ftz-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.about-ftz-item {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.about-ftz-icon {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--teal, #00897b);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.about-ftz-item__content h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #0b1320;
+.about-company-photo-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff;
   margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
 }
 
-.about-ftz-item__content p {
+.about-company-photo-sub {
   font-size: 0.85rem;
-  line-height: 1.55;
-  color: #64748b;
+  color: #d4d4d8;
   margin: 0;
+  line-height: 1.45;
 }
 
-/* ── INTERACTIVE MILESTONES TIMELINE ── */
+/* ── 3. INTERACTIVE MILESTONES TIMELINE ── */
 .about-milestones {
   padding: 6rem 0;
-  background: #0b1320;
+  background: #09090b;
   color: #ffffff;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid #27272a;
+  border-bottom: 1px solid #27272a;
 }
 
 .about-milestones::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(45, 212, 191, 0.08) 0%, transparent 60%);
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -311,15 +349,16 @@
 }
 
 .about-section-header .about-kicker {
-  color: var(--teal-bright, #ffffff);
+  color: #a1a1aa;
 }
 
 .about-section-header .about-heading {
   color: #ffffff;
 }
 
-.about-section-header p {
-  color: #94a3b8;
+.about-section-header p,
+.about-subtitle {
+  color: #a1a1aa;
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -334,8 +373,8 @@
 }
 
 .timeline-btn {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #18181b;
+  border: 1px solid #27272a;
   border-radius: 12px;
   padding: 1.25rem 1rem;
   cursor: pointer;
@@ -346,33 +385,33 @@
 }
 
 .timeline-btn:hover {
-  background: rgba(30, 41, 59, 0.8);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #27272a;
+  border-color: #52525b;
 }
 
 .timeline-btn--active {
-  background: rgba(255, 255, 255, 0.12);
+  background: #27272a;
   border-color: #ffffff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.12);
 }
 
 .timeline-btn__year {
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #94a3b8;
+  color: #71717a;
   margin-bottom: 0.25rem;
   transition: color 0.2s ease;
 }
 
 .timeline-btn--active .timeline-btn__year {
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
 }
 
 .timeline-btn__badge {
   font-size: 0.725rem;
   font-weight: 700;
-  color: #cbd5e1;
+  color: #d4d4d8;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   display: block;
@@ -380,8 +419,8 @@
 
 /* Timeline Showcase Card */
 .timeline-card {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(45, 212, 191, 0.25);
+  background: #121215;
+  border: 1px solid #27272a;
   border-radius: 16px;
   padding: 2.5rem;
   position: relative;
@@ -400,22 +439,24 @@
   width: 120px;
   height: 120px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #0b1320 0%, #16243b 100%);
-  border: 1px solid rgba(45, 212, 191, 0.4);
+  background: #18181b;
+  border: 1px solid #3f3f46;
   flex-shrink: 0;
 }
 
 .timeline-card__badge-year {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
 }
 
 .timeline-card__badge-sub {
   font-size: 0.7rem;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: #a1a1aa;
   letter-spacing: 0.1em;
+  text-align: center;
+  padding: 0 6px;
 }
 
 .timeline-card__content h3 {
@@ -428,27 +469,20 @@
 .timeline-card__content p {
   font-size: 1.05rem;
   line-height: 1.65;
-  color: #cbd5e1;
-  margin-bottom: 1.25rem;
+  color: #d4d4d8;
+  margin: 0;
 }
 
-.timeline-card__tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.775rem;
-  font-weight: 700;
-  color: var(--teal-bright, #ffffff);
-  background: rgba(45, 212, 191, 0.1);
-  padding: 5px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(45, 212, 191, 0.3);
-}
-
-/* ── VISION & MISSION SECTION ── */
+/* ── 4. VISION & MISSION SECTION (Monochrome & Bare Icons) ── */
 .about-vm {
   padding: 6rem 0;
   background: #ffffff;
+  transition: background-color 0.25s ease;
+}
+
+[data-theme="dark"] .about-vm {
+  background: #09090b;
+  border-bottom: 1px solid #27272a;
 }
 
 .about-vm__grid {
@@ -462,54 +496,61 @@
   padding: 2.75rem;
   position: relative;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
 }
 
-.vm-card--vision {
-  background: linear-gradient(145deg, #f0fdf4 0%, #ffffff 100%);
-  border: 1px solid #b2dfdb;
-}
-
-.vm-card--mission {
-  background: linear-gradient(145deg, #f0f9ff 0%, #ffffff 100%);
-  border: 1px solid #bae6fd;
+[data-theme="dark"] .vm-card {
+  background: #121215;
+  border: 1px solid #27272a;
 }
 
 .vm-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
 }
 
+[data-theme="dark"] .vm-card:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  border-color: #3f3f46;
+}
+
+/* Bare Icon without container box */
 .vm-card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  color: #09090b;
+  margin-bottom: 1.25rem;
 }
 
-.vm-card--vision .vm-card__icon {
-  background: rgba(0, 137, 123, 0.12);
-  color: var(--teal, #00897b);
+[data-theme="dark"] .vm-card__icon {
+  color: #ffffff;
 }
 
-.vm-card--mission .vm-card__icon {
-  background: rgba(2, 132, 199, 0.12);
-  color: #0284c7;
+.vm-card__icon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .vm-card__title {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #0b1320;
+  color: #09090b;
   margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .vm-card__title {
+  color: #ffffff;
 }
 
 .vm-card__desc {
   font-size: 1rem;
   line-height: 1.65;
-  color: #475569;
+  color: #52525b;
+}
+
+[data-theme="dark"] .vm-card__desc {
+  color: #cbd5e1;
 }
 
 .vm-mission-list {
@@ -525,30 +566,56 @@
   align-items: flex-start;
   font-size: 0.925rem;
   line-height: 1.55;
-  color: #334155;
+  color: #3f3f46;
 }
 
+[data-theme="dark"] .vm-mission-item {
+  color: #d4d4d8;
+}
+
+/* Bullet without circular container box */
 .vm-mission-bullet {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(2, 132, 199, 0.15);
-  color: #0284c7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: #71717a;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
-/* ── CERTIFICATIONS & QUALITY STANDARDS ── */
+[data-theme="dark"] .vm-mission-bullet {
+  color: #a1a1aa;
+}
+
+/* ── 5. CERTIFICATIONS & REGULATORY COMPLIANCE ── */
 .about-certs {
   padding: 6rem 0;
   background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  border-top: 1px solid #e4e4e7;
+  border-bottom: 1px solid #e4e4e7;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] .about-certs {
+  background: #09090b;
+  border-top-color: #27272a;
+  border-bottom-color: #27272a;
+}
+
+.about-certs .about-heading {
+  color: #09090b;
+}
+
+[data-theme="dark"] .about-certs .about-heading {
+  color: #ffffff;
+}
+
+.about-certs .about-subtitle {
+  color: #71717a;
+}
+
+[data-theme="dark"] .about-certs .about-subtitle {
+  color: #a1a1aa;
 }
 
 .certs-grid {
@@ -559,9 +626,9 @@
 
 .cert-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e4e4e7;
   border-radius: 14px;
-  padding: 1.75rem;
+  padding: 2rem;
   transition: all 0.25s ease;
   position: relative;
   display: flex;
@@ -569,67 +636,55 @@
   justify-content: space-between;
 }
 
+[data-theme="dark"] .cert-card {
+  background: #121215;
+  border-color: #27272a;
+}
+
 .cert-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-  border-color: var(--teal, #00897b);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  border-color: #09090b;
+}
+
+[data-theme="dark"] .cert-card:hover {
+  border-color: #ffffff;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
 }
 
 .cert-card__top {
-  margin-bottom: 1.25rem;
-}
-
-.cert-card__badge {
-  display: inline-block;
-  background: #f1f5f9;
-  color: #0284c7;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 6px;
-  margin-bottom: 0.75rem;
-}
-
-.cert-card__name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0b1320;
   margin-bottom: 0.5rem;
 }
 
-.cert-card__desc {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: #64748b;
-}
-
-.cert-card__status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
+.cert-card__name {
+  font-size: 1.15rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #059669;
-  border-top: 1px solid #f1f5f9;
-  padding-top: 1rem;
+  color: #09090b;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
 }
 
-.cert-card__status-dot {
-  width: 6px;
-  height: 6px;
-  background: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #10b981;
+[data-theme="dark"] .cert-card__name {
+  color: #ffffff;
 }
 
-/* ── FACTORY INFRASTRUCTURE TOUR ── */
+.cert-card__desc {
+  font-size: 0.885rem;
+  line-height: 1.6;
+  color: #71717a;
+  margin: 0;
+}
+
+[data-theme="dark"] .cert-card__desc {
+  color: #a1a1aa;
+}
+
+/* ── 6. FACTORY INFRASTRUCTURE & MACHINE SPECS TOUR (REAL PHOTOS) ── */
 .about-facility {
   padding: 6rem 0;
-  background: #0b1320;
+  background: #09090b;
   color: #ffffff;
+  border-bottom: 1px solid #27272a;
 }
 
 .facility-nav {
@@ -642,8 +697,8 @@
 }
 
 .facility-tab-btn {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #18181b;
+  border: 1px solid #27272a;
   color: #cbd5e1;
   padding: 10px 20px;
   border-radius: 30px;
@@ -655,7 +710,7 @@
 }
 
 .facility-tab-btn:hover {
-  background: rgba(30, 41, 59, 0.9);
+  background: #27272a;
   color: #ffffff;
 }
 
@@ -663,16 +718,16 @@
   background: #ffffff;
   border-color: #ffffff;
   color: #09090b;
-  box-shadow: 0 0 14px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.2);
 }
 
 .facility-stage {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #121215;
+  border: 1px solid #27272a;
   border-radius: 16px;
   padding: 2.5rem;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
 }
@@ -686,7 +741,7 @@
 
 .facility-stage__highlight {
   display: inline-block;
-  color: var(--teal-bright, #ffffff);
+  color: #e4e4e7;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
   font-weight: 600;
@@ -696,7 +751,7 @@
 .facility-stage__desc {
   font-size: 0.975rem;
   line-height: 1.65;
-  color: #cbd5e1;
+  color: #d4d4d8;
   margin-bottom: 1.75rem;
 }
 
@@ -711,57 +766,76 @@
   align-items: center;
   gap: 10px;
   font-size: 0.875rem;
-  color: #f1f5f9;
+  color: #f4f4f5;
 }
 
 .facility-spec-icon {
-  color: var(--teal-bright, #ffffff);
+  color: #ffffff;
+  flex-shrink: 0;
 }
 
-/* Facility Visual Graphic */
-.facility-graphic {
-  background: #09090b;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 260px;
-  text-align: center;
+/* Real High-Resolution Facility Photo Card */
+.facility-photo-card {
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  background: #18181b;
+}
+
+.facility-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
   overflow: hidden;
 }
 
-.facility-graphic__radar-grid {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 18px 18px;
-  opacity: 0.6;
+.facility-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.facility-graphic__badge {
-  font-size: 0.75rem;
+.facility-photo-card:hover .facility-photo {
+  transform: scale(1.05);
+}
+
+.facility-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.1) 0%,
+    rgba(9, 9, 11, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.facility-photo-badge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.725rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(9, 9, 11, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 6px 14px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 1rem;
-  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   z-index: 2;
 }
 
-/* ── B2B CALL TO ACTION BANNER ── */
+/* ── 7. B2B CALL TO ACTION BANNER (HIGH CONTRAST BUTTONS) ── */
 .about-cta {
   padding: 5.5rem 0;
   background: #09090b;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #27272a;
   color: #ffffff;
   position: relative;
 }
@@ -792,6 +866,37 @@
   display: flex;
   gap: 1rem;
   flex-shrink: 0;
+}
+
+/* Explicit high-contrast button styling */
+.about-cta__actions .btn--primary {
+  background: #ffffff !important;
+  color: #09090b !important;
+  border: 1px solid #ffffff !important;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.about-cta__actions .btn--primary:hover {
+  background: #e4e4e7 !important;
+  color: #09090b !important;
+  border-color: #e4e4e7 !important;
+  transform: translateY(-2px);
+}
+
+.about-cta__actions .btn--outline {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.about-cta__actions .btn--outline:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }
 
 /* ── RESPONSIVE MEDIA QUERIES ── */

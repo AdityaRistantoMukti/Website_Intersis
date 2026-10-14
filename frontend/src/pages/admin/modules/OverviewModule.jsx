@@ -205,6 +205,16 @@ export default function OverviewModule({ onNavigateTab }) {
               <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Katalog Produk SKU</span>
               <ArrowUpRight size={14} color="#94a3b8" />
             </button>
+
+            <button
+              type="button"
+              className="admin-btn-secondary"
+              onClick={() => onNavigateTab('branding')}
+              style={{ justifyContent: 'space-between', padding: '10px 12px', gridColumn: '1 / -1' }}
+            >
+              <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>🌐 Logo & Favicon Tab URL</span>
+              <ArrowUpRight size={14} color="#94a3b8" />
+            </button>
           </div>
         </div>
 

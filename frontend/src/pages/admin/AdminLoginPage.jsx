@@ -3,10 +3,13 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { User, Lock, Eye, EyeOff, ArrowLeft, AlertCircle, Shield, Briefcase, FileText } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
+import { useBranding } from '../../context/BrandingContext';
+import { getImageUrl } from '../../lib/api';
 import './AdminLoginPage.css';
 
 export default function AdminLoginPage() {
   const { login, isAuthenticated, isLoading } = useAdminAuth();
+  const { branding } = useBranding();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,13 +66,13 @@ export default function AdminLoginPage() {
         <div className="admin-login-header">
           <Link to="/" className="admin-login-logo-wrap">
             <img
-              src="/images/logo_company.jpg"
+              src={branding?.logo_url ? getImageUrl(branding.logo_url) : '/images/logo_company.jpg'}
               alt="GPT Logo"
               className="admin-login-logo-img"
               onError={(e) => { e.target.style.display = 'none'; }}
             />
             <div className="admin-login-logo-titles">
-              <span className="admin-login-logo-brand">PT. GLOBAL PHILSONIC TECHNOLOGIES</span>
+              <span className="admin-login-logo-brand">{branding?.site_name || 'PT. GLOBAL PHILSONIC TECHNOLOGIES'}</span>
               <span className="admin-login-logo-sub">Batam FTZ &bull; Management Portal</span>
             </div>
           </Link>
