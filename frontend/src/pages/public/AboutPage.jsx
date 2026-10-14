@@ -155,15 +155,8 @@ export default function AboutPage() {
       {/* ── 1. HERO SECTION: INSPIRATION DESIGN (CENTERED HEADLINE + 5-COLUMN BENTO GALLERY) ── */}
       <section className="about-hero">
         <div className="container about-hero__inner">
-          {/* Top: Centered Header Typography */}
+          {/* Top: Centered Header Typography (No breadcrumb, no button) */}
           <div className="about-hero__header">
-            {/* Breadcrumb Navigation - Centered */}
-            <nav aria-label="Breadcrumb" className="about-hero__breadcrumb">
-              <Link to="/">{t('about:hero.breadcrumbHome')}</Link>
-              <span className="about-hero__breadcrumb-sep">/</span>
-              <span className="about-hero__breadcrumb-current">{t('about:hero.breadcrumbAbout')}</span>
-            </nav>
-
             {/* Major Headline */}
             <h1 className="about-hero__title">
               {headerSettings?.title || (isId
@@ -175,19 +168,9 @@ export default function AboutPage() {
             <p className="about-hero__lead">
               {headerSettings?.subtitle || t('about:hero.subtitle')}
             </p>
-
-            {/* Centered CTA Pill Button */}
-            <div className="about-hero__cta-wrap">
-              <Link to="/contact" className="about-hero__cta-pill">
-                <span>{isId ? 'Jadwalkan Kunjungan / Audit Pabrik' : 'Schedule Factory Audit'}</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </Link>
-            </div>
           </div>
 
-          {/* Bottom: 5-Column Staggered Bento Mosaic */}
+          {/* Bottom: 5-Column Staggered Bento Mosaic with Entrance Animation */}
           <div className="about-bento-grid">
             {/* Column 1: Stack of 2 Rounded Cards */}
             <div className="about-bento-col about-bento-col--1">
@@ -242,7 +225,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Column 3: Center Focal Card with Call to Action */}
+            {/* Column 3: Center Focal Card */}
             <div className="about-bento-col about-bento-col--3">
               <div className="about-bento-card about-bento-card--focal">
                 <div className="about-bento-focal__content">
@@ -253,12 +236,10 @@ export default function AboutPage() {
                   <p className="about-bento-focal__desc">
                     {t('about:hero.bento.card4Desc')}
                   </p>
-                  <Link to="/contact" className="about-bento-focal__btn">
-                    <span>{t('about:hero.bento.card4Btn')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </Link>
+                  <div className="about-bento-focal__tagline">
+                    <span className="about-bento-focal__dot" />
+                    <span>IATF 16949 & ISO Certified</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -289,7 +270,7 @@ export default function AboutPage() {
               {/* Card 5A: IATF Typography Badge Card */}
               <div className="about-bento-card about-bento-card--badge">
                 <div className="about-bento-badge__decor">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     <path d="M9 12l2 2 4-4"/>
                   </svg>
