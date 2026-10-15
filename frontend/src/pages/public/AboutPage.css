@@ -9,7 +9,7 @@
   position: relative;
   background-color: #ffffff;
   color: #09090b;
-  padding: 5.25rem 0 3.25rem;
+  padding: 7.75rem 0 3.75rem;
   overflow: hidden;
   border-bottom: 1px solid #e4e4e7;
   transition: background-color 0.25s ease, color 0.25s ease;
@@ -26,11 +26,11 @@
   margin: 0 auto;
 }
 
-/* Hero Top Centered Header - Compact & Raised Up */
+/* Hero Top Centered Header - Compact & Raised Up with Spacious Top Margin */
 .about-hero__header {
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 1.5rem;
+  margin: 1.25rem auto 2.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -459,7 +459,7 @@
 /* ── Scroll-Reveal Entrance Transitions ── */
 .about-narrative .about-kicker,
 .about-narrative .about-heading,
-.about-narrative .about-narrative__manifesto,
+.about-narrative .about-narrative__quote,
 .about-narrative .about-narrative__text,
 .about-narrative .about-showcase-column,
 .about-narrative .about-stat-item,
@@ -484,7 +484,7 @@
   transition-delay: 0.15s;
 }
 
-.about-narrative.about-narrative--revealed .about-narrative__manifesto {
+.about-narrative.about-narrative--revealed .about-narrative__quote {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.25s;
@@ -577,43 +577,40 @@
   color: #ffffff;
 }
 
-/* Corporate Manifesto Quote Box */
-.about-narrative__manifesto {
+/* Corporate Manifesto Pull-Quote (No Container Box, Pure Typography & Accent) */
+.about-narrative__quote {
   display: flex;
   gap: 1.25rem;
   align-items: flex-start;
-  padding: 1.5rem;
-  border-radius: 12px;
-  background: #f4f4f5;
-  border-left: 4px solid #09090b;
+  padding: 0.5rem 0 0.5rem 0.25rem;
   margin-bottom: 2rem;
-}
-
-[data-theme="dark"] .about-narrative__manifesto {
-  background: #18181b;
-  border-left: 4px solid #ffffff;
+  position: relative;
 }
 
 .about-narrative__quote-icon {
   flex-shrink: 0;
   color: #71717a;
-  margin-top: 2px;
+  margin-top: 4px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.85;
 }
 
 [data-theme="dark"] .about-narrative__quote-icon {
   color: #a1a1aa;
 }
 
-.about-narrative__manifesto p {
-  font-size: 1.05rem;
+.about-narrative__quote-text {
+  font-size: 1.15rem;
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.6;
   color: #18181b;
   margin: 0;
   font-style: italic;
+  letter-spacing: -0.01em;
 }
 
-[data-theme="dark"] .about-narrative__manifesto p {
+[data-theme="dark"] .about-narrative__quote-text {
   color: #f4f4f5;
 }
 
@@ -708,48 +705,6 @@
   );
   pointer-events: none;
   z-index: 1;
-}
-
-/* Subtle Live Status Pill */
-.about-company-status-badge {
-  position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(9, 9, 11, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #ffffff;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.about-company-status-dot {
-  width: 6.5px;
-  height: 6.5px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
-  animation: companyPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes companyPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.4;
-    transform: scale(0.8);
-  }
 }
 
 .about-company-photo-caption {
@@ -932,7 +887,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
-  margin-bottom: 3.5rem;
+  margin-bottom: 0;
 }
 
 .vm-card {
@@ -1006,52 +961,9 @@
   margin-top: 2px;
 }
 
-/* Core Values Strip */
-.about-values-deck {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-.about-value-card {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-radius: 12px;
-  padding: 1.75rem;
-  transition: all 0.25s ease;
-}
-
-.about-value-card:hover {
-  border-color: #ffffff;
-  transform: translateY(-3px);
-  background: #1c1c20;
-}
-
-.about-value-card__idx {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #71717a;
-  margin-bottom: 0.75rem;
-}
-
-.about-value-card__title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 0.5rem;
-}
-
-.about-value-card__desc {
-  font-size: 0.885rem;
-  line-height: 1.55;
-  color: #a1a1aa;
-  margin: 0;
-}
-
-/* ── 4. INTERACTIVE MILESTONES TIMELINE ── */
+/* ── 4. MODERN TRACING BEAM TIMELINE (SKIPER UI INSPIRATION) ── */
 .about-milestones {
-  padding: 6.5rem 0;
+  padding: 7rem 0 7.5rem;
   background: #09090b;
   color: #ffffff;
   position: relative;
@@ -1064,7 +976,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.05) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -1072,6 +984,10 @@
   text-align: center;
   max-width: 680px;
   margin: 0 auto 3.5rem;
+}
+
+.about-section-header--center {
+  margin: 0 auto 4.5rem;
 }
 
 .about-section-header .about-kicker {
@@ -1089,282 +1005,276 @@
   line-height: 1.6;
 }
 
-/* Timeline Horizontal Bar */
-.timeline-bar {
+/* Tracing Beam Container */
+.timeline-beam-container {
+  position: relative;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+/* Continuous Center Glowing Tracing Track */
+.timeline-beam-track {
+  position: absolute;
+  left: 50%;
+  top: 40px;
+  bottom: 60px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.timeline-beam-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 20%,
+    rgba(255, 255, 255, 0.9) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.timeline-beam-glow {
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
+}
+
+/* Alternating Milestone Rows */
+.timeline-stream {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.timeline-node-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.75rem;
-  position: relative;
-  margin-bottom: 2.5rem;
-}
-
-.timeline-btn {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-radius: 12px;
-  padding: 1.25rem 1rem;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.25s ease;
-  color: #ffffff;
-  position: relative;
-}
-
-.timeline-btn:hover {
-  background: #27272a;
-  border-color: #52525b;
-}
-
-.timeline-btn--active {
-  background: #27272a;
-  border-color: #ffffff;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.12);
-}
-
-.timeline-btn__year {
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #71717a;
-  margin-bottom: 0.25rem;
-  transition: color 0.2s ease;
-}
-
-.timeline-btn--active .timeline-btn__year {
-  color: #ffffff;
-}
-
-.timeline-btn__badge {
-  font-size: 0.725rem;
-  font-weight: 700;
-  color: #d4d4d8;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  display: block;
-}
-
-/* Timeline Showcase Card */
-.timeline-card {
-  background: #121215;
-  border: 1px solid #27272a;
-  border-radius: 16px;
-  padding: 2.5rem;
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 1fr 64px 1fr;
   align-items: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  gap: 2rem;
+  position: relative;
 }
 
-.timeline-card__badge-wrap {
+.timeline-node-row--left .timeline-card-wrapper {
+  grid-column: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timeline-node-row--left .timeline-node-anchor {
+  grid-column: 2;
+}
+
+.timeline-node-row--right .timeline-card-wrapper {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.timeline-node-row--right .timeline-node-anchor {
+  grid-column: 2;
+}
+
+/* Center Halo Node Anchor with Radar Pulse */
+.timeline-node-anchor {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 16px;
-  background: #18181b;
-  border: 1px solid #3f3f46;
-  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
 }
 
-.timeline-card__badge-year {
-  font-size: 2rem;
+.timeline-node-pulse {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  animation: radarPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes radarPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.15;
+  }
+}
+
+.timeline-node-core {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #09090b;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
+}
+
+.timeline-node-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.timeline-node-year-chip {
+  position: absolute;
+  bottom: -20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
   font-weight: 800;
-  color: #ffffff;
-}
-
-.timeline-card__badge-sub {
-  font-size: 0.7rem;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: #a1a1aa;
-  letter-spacing: 0.1em;
-  text-align: center;
-  padding: 0 6px;
+  background: #18181b;
+  border: 1px solid #27272a;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+  z-index: 3;
 }
 
-.timeline-card__content h3 {
-  font-size: 1.5rem;
-  font-weight: 800;
+/* Bento Milestone Card */
+.timeline-card-wrapper {
+  width: 100%;
+}
+
+.timeline-bento-card {
+  background: #121215;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  text-align: left;
+  width: 100%;
+  max-width: 480px;
+}
+
+.timeline-bento-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 255, 255, 0.08);
+}
+
+.timeline-bento-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.timeline-bento-card__badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #ffffff;
-  margin-bottom: 0.75rem;
+  padding: 4px 11px;
+  border-radius: 6px;
 }
 
-.timeline-card__content p {
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: #d4d4d8;
+.timeline-bento-card__era {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #71717a;
+}
+
+.timeline-bento-card__title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: #ffffff;
   margin: 0;
 }
 
-.timeline-card__image-wrap {
-  margin-top: 1.5rem;
-  border-radius: 10px;
+.timeline-bento-card__desc {
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.timeline-bento-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  max-width: 520px;
+  margin-top: 0.25rem;
+  background: #18181b;
 }
 
-.timeline-card__img {
+.timeline-bento-card__img {
   width: 100%;
-  max-height: 240px;
+  height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── 5. CERTIFICATIONS & REGULATORY COMPLIANCE ── */
-.about-certs {
-  padding: 6.5rem 0;
-  background: #ffffff;
-  border-top: 1px solid #e4e4e7;
-  border-bottom: 1px solid #e4e4e7;
-  color: #09090b;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+.timeline-bento-card:hover .timeline-bento-card__img {
+  transform: scale(1.06);
 }
 
-[data-theme="dark"] .about-certs {
-  background: #09090b;
-  border-top-color: #27272a;
-  border-bottom-color: #27272a;
-  color: #ffffff;
+.timeline-bento-card__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(9, 9, 11, 0.75) 100%);
+  pointer-events: none;
 }
 
-.about-certs .about-heading {
-  color: #09090b;
+/* Responsive Timeline on Mobile & Tablet */
+@media (max-width: 860px) {
+  .timeline-beam-track {
+    left: 28px;
+    transform: none;
+  }
+
+  .timeline-node-row {
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+  }
+
+  .timeline-node-row--left .timeline-card-wrapper,
+  .timeline-node-row--right .timeline-card-wrapper {
+    grid-column: 2;
+    justify-content: flex-start;
+  }
+
+  .timeline-node-row--left .timeline-node-anchor,
+  .timeline-node-row--right .timeline-node-anchor {
+    grid-column: 1;
+  }
 }
 
-[data-theme="dark"] .about-certs .about-heading {
-  color: #ffffff;
-}
-
-.about-certs .about-subtitle {
-  color: #71717a;
-}
-
-[data-theme="dark"] .about-certs .about-subtitle {
-  color: #a1a1aa;
-}
-
-.certs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.cert-card {
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
-  border-radius: 14px;
-  padding: 2rem;
-  transition: all 0.25s ease;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-[data-theme="dark"] .cert-card {
-  background: #121215;
-  border-color: #27272a;
-}
-
-.cert-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
-  border-color: #09090b;
-}
-
-[data-theme="dark"] .cert-card:hover {
-  border-color: #ffffff;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-}
-
-.cert-card__image-wrap {
-  margin-bottom: 1.25rem;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #f4f4f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  border: 1px solid #e4e4e7;
-  padding: 0.75rem;
-}
-
-[data-theme="dark"] .cert-card__image-wrap {
-  background: #18181b;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.cert-card__icon-img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-.cert-card__code-badge {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: #09090b;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  padding: 3px 8px;
-  border-radius: 4px;
-  margin-bottom: 0.75rem;
-}
-
-[data-theme="dark"] .cert-card__code-badge {
-  color: #ffffff;
-  background: #27272a;
-  border-color: #3f3f46;
-}
-
-.cert-card__name {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #09090b;
-  margin-bottom: 0.75rem;
-  line-height: 1.35;
-}
-
-[data-theme="dark"] .cert-card__name {
-  color: #ffffff;
-}
-
-.cert-card__desc {
-  font-size: 0.885rem;
-  line-height: 1.6;
-  color: #71717a;
-  margin: 0;
-}
-
-[data-theme="dark"] .cert-card__desc {
-  color: #a1a1aa;
-}
-
-.cert-card__status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.785rem;
-  font-weight: 700;
-  color: #09090b;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e4e4e7;
-}
-
-[data-theme="dark"] .cert-card__status {
-  color: #ffffff;
-  border-top-color: #27272a;
-}
-
-/* ── 6. FACTORY INFRASTRUCTURE TOUR ── */
+/* ── 5. FACTORY INFRASTRUCTURE TOUR ── */
 .about-facility {
   padding: 6.5rem 0;
   background: #09090b;
@@ -1372,13 +1282,14 @@
   border-bottom: 1px solid #27272a;
 }
 
+/* Facility Navigation - No horizontal scroll, wrapping center buttons */
 .facility-nav {
   display: flex;
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  margin-bottom: 2.5rem;
-  scrollbar-width: thin;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 2.75rem;
 }
 
 .facility-tab-btn {

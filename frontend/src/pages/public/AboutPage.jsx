@@ -73,7 +73,6 @@ export default function AboutPage() {
   const { data: rawVmSettings } = useSiteSettings('about_vision_mission');
   const { data: rawFacilitiesSettings } = useSiteSettings('about_facilities');
   const { data: rawTimelineSettings } = useSiteSettings('about_timeline');
-  const { data: rawCertSettings } = useSiteSettings('about_certifications');
 
   const headerSettings = {
     ...(rawHeaderSettings && typeof rawHeaderSettings === 'object' ? rawHeaderSettings : {}),
@@ -89,10 +88,8 @@ export default function AboutPage() {
   };
   const facilitiesSettings = getLocalizedData(rawFacilitiesSettings, lang);
   const timelineSettings = getLocalizedData(rawTimelineSettings, lang);
-  const certSettings = getLocalizedData(rawCertSettings, lang);
 
   // Interactive state
-  const [activeMilestone, setActiveMilestone] = useState(0);
   const [activeZone, setActiveZone] = useState(0);
 
   // Scroll reveal observer for narrative section
@@ -140,11 +137,6 @@ export default function AboutPage() {
   const milestoneItems = (Array.isArray(timelineSettings) && timelineSettings.length > 0)
     ? timelineSettings
     : fallbackMilestones;
-
-  const fallbackCerts = t('about:certifications.items', { returnObjects: true }) || [];
-  const certItems = (Array.isArray(certSettings) && certSettings.length > 0)
-    ? certSettings
-    : fallbackCerts;
 
   const fallbackZones = t('about:facility.zones', { returnObjects: true }) || [];
   const facilityZones = (Array.isArray(facilitiesSettings) && facilitiesSettings.length > 0)
@@ -375,12 +367,12 @@ export default function AboutPage() {
             <span className="about-kicker">{t('about:narrative.kicker')}</span>
             <h2 className="about-heading">{narrativeSettings?.title || t('about:narrative.title')}</h2>
             
-            {/* Corporate Manifesto Highlight */}
-            <div className="about-narrative__manifesto">
+            {/* Corporate Manifesto Pull-Quote (No Container Box) */}
+            <div className="about-narrative__quote">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="about-narrative__quote-icon">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
-              <p>
+              <p className="about-narrative__quote-text">
                 {isId
                   ? 'Mendedikasikan kapabilitas engineering presisi tinggi dan infrastruktur cerdas kelas dunia untuk mempercepat rantai pasok elektronik otomotif global dari Batam FTZ.'
                   : 'Dedicated to delivering high-precision engineering and world-class intelligent infrastructure to accelerate the global automotive electronics supply chain from Batam FTZ.'}
@@ -423,12 +415,6 @@ export default function AboutPage() {
                   }}
                 />
                 <div className="about-company-photo-overlay" />
-                
-                {/* Subtle manufacturing status indicator */}
-                <div className="about-company-status-badge">
-                  <span className="about-company-status-dot" />
-                  <span>{isId ? 'PUSAT MANUFAKTUR BATAM FTZ' : 'BATAM FTZ MANUFACTURING HUB'}</span>
-                </div>
 
                 <div className="about-company-photo-caption">
                   <h3 className="about-company-photo-title">
@@ -546,152 +532,75 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Core Values Strip */}
-          <div className="about-values-deck">
-            <div className="about-value-card">
-              <div className="about-value-card__idx">01</div>
-              <h4 className="about-value-card__title">{isId ? 'Presisi Mikron' : 'Micron Precision'}</h4>
-              <p className="about-value-card__desc">
-                {isId
-                  ? 'Penempatan komponen mikro hingga 01005 dengan toleransi akurasi tinggi dan pengawasan pasta solder 3D SPI.'
-                  : 'Placement of micro components down to 01005 with high accuracy tolerances and 3D SPI solder paste monitoring.'}
-              </p>
-            </div>
-
-            <div className="about-value-card">
-              <div className="about-value-card__idx">02</div>
-              <h4 className="about-value-card__title">{isId ? 'Kepatuhan Nol-Cacat' : 'Zero-Defect Quality'}</h4>
-              <p className="about-value-card__desc">
-                {isId
-                  ? 'Audit berkala dan kepatuhan sistem mutu IATF 16949, ISO 9001, serta standar inspeksi IPC-A-610 Class 3.'
-                  : 'Continuous audit compliance with IATF 16949, ISO 9001, and IPC-A-610 Class 3 optical verification.'}
-              </p>
-            </div>
-
-            <div className="about-value-card">
-              <div className="about-value-card__idx">03</div>
-              <h4 className="about-value-card__title">{isId ? 'Kecepatan & Efisiensi' : 'Velocity & Agility'}</h4>
-              <p className="about-value-card__desc">
-                {isId
-                  ? 'Didukung pembebasan bea masuk Batam FTZ dan jalur pengiriman ekspres harian 45 menit ke pelabuhan Singapura.'
-                  : 'Backed by Batam FTZ tariff exemptions and daily 45-minute express transit to Singapore seaport hubs.'}
-              </p>
-            </div>
-
-            <div className="about-value-card">
-              <div className="about-value-card__idx">04</div>
-              <h4 className="about-value-card__title">{isId ? 'Integritas Kemitraan' : 'Partnership Trust'}</h4>
-              <p className="about-value-card__desc">
-                {isId
-                  ? 'Perlindungan ketat terhadap hak kekayaan intelektual (IP), transparansi sistem MES, dan kemitraan jangka panjang.'
-                  : 'Strict intellectual property (IP) protection, real-time MES traceability, and lasting B2B partnerships.'}
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* ── 4. INTERACTIVE MILESTONE TIMELINE (SEJARAH PERUSAHAAN) ── */}
+      {/* ── 4. MODERN TRACING BEAM TIMELINE (SKIPER UI INSPIRATION) ── */}
       <section className="about-milestones">
         <div className="container">
-          <div className="about-section-header">
+          <div className="about-section-header about-section-header--center">
             <span className="about-kicker">{t('about:milestones.kicker')}</span>
             <h2 className="about-heading">{t('about:milestones.title')}</h2>
-            <p>{t('about:milestones.subtitle')}</p>
+            <p className="about-subtitle">{t('about:milestones.subtitle')}</p>
           </div>
 
-          {/* Timeline Year Navigation Bar */}
-          <div className="timeline-bar" role="tablist">
-            {milestoneItems.map((item, idx) => (
-              <button
-                key={item.year}
-                type="button"
-                className={`timeline-btn${activeMilestone === idx ? ' timeline-btn--active' : ''}`}
-                onClick={() => setActiveMilestone(idx)}
-                role="tab"
-                aria-selected={activeMilestone === idx}
-              >
-                <div className="timeline-btn__year">{item.year}</div>
-                <span className="timeline-btn__badge">{item.badge}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Active Milestone Card */}
-          {milestoneItems[activeMilestone] && (
-            <div className="timeline-card">
-              <div className="timeline-card__badge-wrap">
-                <span className="timeline-card__badge-year">{milestoneItems[activeMilestone].year}</span>
-                <span className="timeline-card__badge-sub">{milestoneItems[activeMilestone].badge}</span>
-              </div>
-              <div className="timeline-card__content">
-                <h3>{milestoneItems[activeMilestone].title}</h3>
-                <p>{milestoneItems[activeMilestone].desc}</p>
-                {(() => {
-                  const m = milestoneItems[activeMilestone];
-                  const mImg = m?.image || `/images/about/milestone-${m?.year || (activeMilestone === 0 ? '2014' : activeMilestone === 1 ? '2017' : activeMilestone === 2 ? '2020' : activeMilestone === 3 ? '2023' : '2026')}.jpg`;
-                  return (
-                    <div className="timeline-card__image-wrap">
-                      <img 
-                        src={getImageUrl(mImg)} 
-                        alt={m.title}
-                        className="timeline-card__img"
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                      />
-                    </div>
-                  );
-                })()}
-              </div>
+          <div className="timeline-beam-container">
+            {/* Center Glowing Progress Beam Track */}
+            <div className="timeline-beam-track" aria-hidden="true">
+              <div className="timeline-beam-line" />
+              <div className="timeline-beam-glow" />
             </div>
-          )}
-        </div>
-      </section>
 
-      {/* ── 5. CERTIFICATIONS & REGULATORY COMPLIANCE ── */}
-      <section className="about-certs">
-        <div className="container">
-          <div className="about-section-header">
-            <span className="about-kicker">{t('about:certifications.kicker')}</span>
-            <h2 className="about-heading">
-              {t('about:certifications.title')}
-            </h2>
-            <p className="about-subtitle">{t('about:certifications.subtitle')}</p>
-          </div>
+            {/* Alternating Staggered Stream of Milestones */}
+            <div className="timeline-stream">
+              {milestoneItems.map((item, idx) => {
+                const isEven = idx % 2 === 0;
+                const fallbackYear = idx === 0 ? '2014' : idx === 1 ? '2017' : idx === 2 ? '2020' : idx === 3 ? '2023' : '2026';
+                const mImg = item?.image || `/images/about/milestone-${item?.year || fallbackYear}.jpg`;
 
-          <div className="certs-grid">
-            {certItems.map((cert, idx) => {
-              const defaultCert = cert.code?.includes('16949') ? '/images/about/cert-iatf-16949.svg'
-                : cert.code?.includes('9001') ? '/images/about/cert-iso-9001.svg'
-                : cert.code?.includes('14001') ? '/images/about/cert-iso-14001.svg'
-                : '/images/about/cert-ansi-esd.svg';
-              const certImg = cert.image ? getImageUrl(cert.image) : defaultCert;
-
-              return (
-                <div key={cert.code || idx} className="cert-card">
-                  {certImg && (
-                    <div className="cert-card__image-wrap">
-                      <img 
-                        src={certImg} 
-                        alt={cert.name || cert.title}
-                        className="cert-card__icon-img"
-                        onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
-                      />
+                return (
+                  <div
+                    key={item.year || idx}
+                    className={`timeline-node-row ${isEven ? 'timeline-node-row--left' : 'timeline-node-row--right'}`}
+                  >
+                    {/* Glowing Center Node Anchor */}
+                    <div className="timeline-node-anchor">
+                      <div className="timeline-node-pulse" />
+                      <div className="timeline-node-core">
+                        <span className="timeline-node-dot" />
+                      </div>
+                      <span className="timeline-node-year-chip">{item.year}</span>
                     </div>
-                  )}
-                  <div className="cert-card__top">
-                    <div className="cert-card__code-badge">{cert.code}</div>
-                    <h3 className="cert-card__name">{cert.name || cert.title}</h3>
-                    <p className="cert-card__desc">{cert.desc}</p>
+
+                    {/* Modern Bento Milestone Card */}
+                    <div className="timeline-card-wrapper">
+                      <div className="timeline-bento-card">
+                        <div className="timeline-bento-card__header">
+                          <span className="timeline-bento-card__badge">{item.badge}</span>
+                          <span className="timeline-bento-card__era">ERA {item.year}</span>
+                        </div>
+
+                        <h3 className="timeline-bento-card__title">{item.title}</h3>
+                        <p className="timeline-bento-card__desc">{item.desc}</p>
+
+                        <div className="timeline-bento-card__media">
+                          <img
+                            src={getImageUrl(mImg)}
+                            alt={item.title}
+                            className="timeline-bento-card__img"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.currentTarget.parentElement.style.display = 'none';
+                            }}
+                          />
+                          <div className="timeline-bento-card__media-overlay" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="cert-card__status">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    <span>{cert.status || (isId ? 'Tersertifikasi Penuh' : 'Fully Certified')}</span>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
