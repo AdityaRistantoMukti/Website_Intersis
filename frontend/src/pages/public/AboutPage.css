@@ -1417,13 +1417,20 @@
   text-transform: uppercase;
 }
 
-/* ── 7. CORPORATE CTA BANNER ── */
+/* ── 7. CORPORATE CTA BANNER (THEME ADAPTIVE: LIGHT = WHITE, DARK = BLACK) ── */
 .about-cta {
   padding: 6rem 0;
-  background: #09090b;
-  border-top: 1px solid #27272a;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #09090b;
+  border-top: 1px solid #e4e4e7;
   position: relative;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] .about-cta {
+  background-color: #09090b;
+  color: #ffffff;
+  border-top: 1px solid #27272a;
 }
 
 .about-cta__inner {
@@ -1437,15 +1444,25 @@
   font-size: clamp(1.85rem, 2.6vw, 2.45rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #09090b;
   margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .about-cta__title {
+  color: #ffffff;
 }
 
 .about-cta__subtitle {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: #cbd5e1;
+  color: #3f3f46; /* High contrast dark charcoal on white background */
   max-width: 600px;
+  margin: 0;
+}
+
+[data-theme="dark"] .about-cta__subtitle {
+  color: #d4d4d8; /* High contrast light slate on black background */
 }
 
 .about-cta__actions {
@@ -1454,34 +1471,71 @@
   flex-shrink: 0;
 }
 
+/* Light Mode: Primary Button (Solid Deep Obsidian Black, White Text) */
 .about-cta__actions .btn--primary {
-  background: #ffffff !important;
-  color: #09090b !important;
-  border: 1px solid #ffffff !important;
+  background: #09090b !important;
+  color: #ffffff !important;
+  border: 1.5px solid #09090b !important;
   font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
 }
 
 .about-cta__actions .btn--primary:hover {
-  background: #e4e4e7 !important;
-  color: #09090b !important;
-  border-color: #e4e4e7 !important;
+  background: #27272a !important;
+  color: #ffffff !important;
+  border-color: #27272a !important;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
 }
 
+/* Light Mode: Outline Button (Crisp Black Border, Black Text, Inverts on Hover) */
 .about-cta__actions .btn--outline {
-  background: transparent !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  font-weight: 600;
+  background: #ffffff !important;
+  color: #09090b !important;
+  border: 1.5px solid #09090b !important;
+  font-weight: 700;
   transition: all 0.2s ease;
 }
 
 .about-cta__actions .btn--outline:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-color: #ffffff !important;
+  background: #09090b !important;
   color: #ffffff !important;
+  border-color: #09090b !important;
   transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Dark Mode: Primary Button (Solid Pure White, Black Text) */
+[data-theme="dark"] .about-cta__actions .btn--primary {
+  background: #ffffff !important;
+  color: #09090b !important;
+  border: 1.5px solid #ffffff !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .about-cta__actions .btn--primary:hover {
+  background: #f4f4f5 !important;
+  color: #09090b !important;
+  border-color: #f4f4f5 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25);
+}
+
+/* Dark Mode: Outline Button (Crisp White Border, White Text, Inverts on Hover) */
+[data-theme="dark"] .about-cta__actions .btn--outline {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1.5px solid #ffffff !important;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .about-cta__actions .btn--outline:hover {
+  background: #ffffff !important;
+  color: #09090b !important;
+  border-color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
 }
 
 /* ── RESPONSIVE MEDIA QUERIES ── */
