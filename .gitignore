@@ -15,8 +15,9 @@ build/
 *.local
 
 # ─── File Uploads (Media / User Uploads) ──────
-backend/uploads/*
-!backend/uploads/.gitkeep
+# Diizinkan agar foto produk, galeri, dan aset media asli tampil di Railway/Cloud
+# backend/uploads/*
+# !backend/uploads/.gitkeep
 backend/generate_pdf.js
 backend/test_api_runner.js
 # ─── Database Specific Rules ───────────────────
