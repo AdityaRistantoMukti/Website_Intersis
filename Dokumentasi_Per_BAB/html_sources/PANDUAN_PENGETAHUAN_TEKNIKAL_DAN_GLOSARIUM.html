@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>PANDUAN PENGETAHUAN TEKNIS & GLOSARIUM KONTEN WEBSITE</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 3px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 8px 0;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .title-box {
+      border-bottom: 2px solid #000000;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    .badge {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+      display: inline-block;
+      background: #000000;
+      color: #ffffff;
+      padding: 3px 8px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height: 1.25;
+      margin: 6px 0 4px 0;
+    }
+    .title-sub {
+      font-size: 10pt;
+      font-style: italic;
+      color: #333333;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+    }
+    .meta-table td.label {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 25%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #000000;
+      padding-bottom: 4px;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 10px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 12px 0;
+      padding-left: 22px;
+    }
+    li {
+      margin-bottom: 6px;
+      text-align: justify;
+    }
+    .callout {
+      border: 1.5px solid #000000;
+      background: #fafafa;
+      padding: 12px 14px;
+      margin: 14px 0;
+      page-break-inside: avoid;
+    }
+    .callout-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    table.data-table th {
+      background: #f0f0f0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+    }
+    .term-card {
+      border: 1px solid #cccccc;
+      border-left: 4px solid #000000;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .term-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 10pt;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    .term-desc {
+      font-size: 9.5pt;
+      color: #222222;
+      line-height: 1.45;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    .footer-note {
+      margin-top: 30px;
+      border-top: 1px solid #000000;
+      padding-top: 8px;
+      font-size: 8.5pt;
+      font-style: italic;
+      text-align: center;
+      color: #555555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-header">
+    <span>DOKUMEN PANDUAN TEKNIS MAGANG</span>
+    <span>PT. GLOBAL PHILSONIC TECHNOLOGIES / INTERSIS GROUP</span>
+    <span>OKTOBER 2026</span>
+  </div>
+
+  <div class="title-box">
+    <div class="badge">MANUAL PENGETAHUAN & PANDUAN SIDANG / PRESENTASI</div>
+    <h1>PANDUAN PENGETAHUAN TEKNIS & GLOSARIUM KONTEN WEBSITE</h1>
+    <div class="title-sub">
+      Panduan Komprehensif Terminologi Manufaktur Elektronik, Status Keaslian Data (Real vs Benchmark), Serta Logika & Justifikasi Pengembangannya untuk Presentasi Proyek Magang (Batch Pelatihan 20 Hari).
+    </div>
+  </div>
+
+  <table class="meta-table">
+    <tr>
+      <td class="label">Nama Pembuat / Peserta</td>
+      <td>Aditya Ristanto Mukti (Program Pelatihan & Magang Web Development)</td>
+      <td class="label">Durasi Pengerjaan</td>
+      <td>20 Hari Kerja (Sprint Full-Stack)</td>
+    </tr>
+    <tr>
+      <td class="label">Entitas Industri</td>
+      <td>PT. Intersis Sejahtera Abadi & PT. Global Philsonic Technologies (Batam FTZ)</td>
+      <td class="label">Teknologi Stack</td>
+      <td>React (Vite) + Tailwind/CSS + Node.js Express + MySQL (Railway Cloud)</td>
+    </tr>
+  </table>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <h2>BAGIAN I: STATUS KEASLIAN DATA (REAL DATA VS BENCHMARK) & ALASANNYA</h2>
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+
+  <p>
+    Salah satu pertanyaan paling penting yang mungkin diajukan oleh atasan, mentor, pembimbing lapangan, atau penguji pelatihan adalah: <strong><em>"Data di website ini apakah riil milik perusahaan atau data dummy? Dan dari mana sumbernya?"</em></strong>. Berikut adalah penjelasan terperinci yang dapat Anda gunakan sebagai acuan resmi.
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Kategori Data</th>
+        <th style="width: 25%;">Status Keaslian</th>
+        <th>Penjelasan & Dasar Pengambilan Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Katalog Produk (19 Model)</strong></td>
+        <td><strong>100% DATA REAL</strong><br>(Asli Perusahaan)</td>
+        <td>
+          Seluruh 19 produk yang tampil di katalog (Amplifier, Processor DSP, Subwoofer, Tweeter, Speaker Coaxial) adalah <strong>data produk riil PT. Intersis Sejahtera Abadi</strong>. Data ini dimigrasikan langsung dari database sistem perusahaan (phpMyAdmin) ke MySQL Railway Cloud, lengkap dengan kode SKU riil (seperti <em>IPA-60.4, DPS-60.4, IS-1004</em>), spesifikasi daya (RMS Watt), respons frekuensi, impedansi, rasio S/N, dan dimensi fisik.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Lowongan Karir (6 Posisi)</strong></td>
+        <td><strong>REALISTIS / PERUSAHAAN</strong></td>
+        <td>
+          Posisi kerja yang ditampilkan mencerminkan struktur kebutuhan nyata pabrik manufaktur elektronik perakitan SMT (SMT Process Engineer, Quality Inspector, Production Supervisor, HR & GA, Teknisi Mesin Otomasi, Warehouse Logistics).
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Spesifikasi SMT & Mesin Manufaktur</strong></td>
+        <td><strong>INDUSTRY BENCHMARK</strong><br>(Standar Acuan Industri)</td>
+        <td>
+          Parameter perakitan SMT (seperti mounter Yamaha YSM20R, kapasitas 80.000 CPH, oven reflow nitrogen 10 zona, 3D SPI, dan 3D AOI) diambil berdasarkan <strong>standar acuan industri perakitan elektronik otomotif kelas dunia (Tier-1 EMS Benchmark)</strong> yang berlaku di kawasan industri Batam Free Trade Zone.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Jalur Koridor Ekspor & Logistik</strong></td>
+        <td><strong>OPERASIONAL BATAM FTZ</strong></td>
+        <td>
+          Jalur kargo laut ekspres 45 menit ke Pelabuhan PSA Singapura, fasilitas kepabeanan bebas bea Batam FTZ, dan pengiriman JIT (Just-in-Time) adalah <strong>fakta keunggulan logistik riil</strong> dari lokasi operasional PT. Global Philsonic Technologies di Pulau Batam.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">ALASAN & JAWABAN JIKA DITANYA ATASAN MENGENAI DATA BENCHMARK MANUFAKTUR</div>
+    <p>Jika atasan bertanya mengapa ada data spesifikasi mesin atau parameter teknis tertentu di website, Anda dapat menjawab dengan percaya diri:</p>
+    <ol>
+      <li><strong>Membangun Citra & Daya Tawar Komersial B2B Tingkat Global:</strong> Klien manufaktur skala besar (OEM otomotif seperti Honda, Toyota, Hyundai, atau buyer luar negeri) mencari mitra perakitan yang memiliki kepastian toleransi presisi (mikron), sertifikasi IATF 16949, dan ruang Cleanroom berstandar ESD. Menampilkan standar acuan ini membuat profil perusahaan langsung dipandang kredibel dan berkelas internasional.</li>
+      <li><strong>Keterbatasan Akses & Kerahasiaan Data Mesin Fisik:</strong> Mengingat waktu pengerjaan magang yang terbatas (20 hari kerja) serta adanya perjanjian kerahasiaan (*Non-Disclosure Agreement* / NDA) terkait nomor seri dan tata letak mesin internal, data mesin disusun berdasarkan *Industry Standard Best Practices* perakitan elektronik presisi.</li>
+      <li><strong>Arsitektur Sepenuhnya Dinamis (CMS Ready):</strong> Seluruh teks, angka kapasitas, foto fasilitas, dan sertifikasi telah terhubung ke **CMS Dashboard Admin**. Apabila manajemen pabrik ingin memperbarui spesifikasi dengan data audit fisik lini mesin terbaru, data dapat diubah dalam hitungan detik tanpa harus mengedit kode program sama sekali.</li>
+    </ol>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <h2>BAGIAN II: HUBUNGAN ANTARA PT. INTERSIS DAN PT. GLOBAL PHILSONIC</h2>
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+
+  <p>
+    Di website ini terlihat dua nama perusahaan yang saling terhubung: <strong>PT. Intersis Sejahtera Abadi</strong> dan <strong>PT. Global Philsonic Technologies (GPT)</strong>. Berikut adalah kedudukan dan fungsi masing-masing entitas dalam grup:
+  </p>
+
+  <ul>
+    <li>
+      <strong>PT. Intersis Sejahtera Abadi:</strong> Berperan sebagai prinsipal, distributor utama, dan pemegang merek audio mobil premium ternama di Indonesia (Intersis Group). Fokus pada riset pasar, jaringan purna jual nasional, dan pengembangan lini produk jadi.
+    </li>
+    <li>
+      <strong>PT. Global Philsonic Technologies (GPT):</strong> Berperan sebagai *manufacturing plant* (pabrik perakitan rekayasa presisi tinggi) yang berlokasi strategis di <strong>Kawasan Perdagangan Bebas Batam (Batam Free Trade Zone)</strong>. Pabrik ini memegang sertifikasi manufaktur otomotif, memproduksi modul PCBA, dan melayani kontrak OEM/ODM untuk pasar ekspor global ke Singapura, Asia Pasifik, Amerika Utara, dan Eropa.
+    </li>
+    <li>
+      <strong>Sinergi Keduanya:</strong> Dengan memposisikan website ini di bawah naungan PT. Global Philsonic Technologies (Intersis Group), perusahaan memperoleh manfaat ganda: merek produk audio lokal yang kuat di dalam negeri, didukung fasilitas perakitan modern berskala internasional di Batam yang bebas pajak dan dekat dengan gerbang pelabuhan dunia.
+    </li>
+  </ul>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <h2>BAGIAN III: KAMUS LENGKAP ISTILAH TEKNIKAL PADA SETIAP HALAMAN</h2>
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+
+  <p>
+    Berikut adalah glosarium istilah-istilah teknikal yang ada di setiap halaman website, disajikan dengan penjelasan bahasa awam yang ringkas dan mudah dipahami:
+  </p>
+
+  <h3>1. Halaman Beranda (Home Page)</h3>
+
+  <div class="term-card">
+    <div class="term-title">SMT (Surface Mount Technology)</div>
+    <div class="term-desc">
+      Teknologi perakitan sirkuit elektronik modern di mana komponen-komponen (seperti chip IC, resistor, dan kapasitor) langsung ditempel dan disolder di atas permukaan papan sirkuit (PCB). Jauh lebih cepat, ringkas, dan presisi dibanding cara kuno (*Through-Hole*) yang melubangi papan.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">PCBA (Printed Circuit Board Assembly)</div>
+    <div class="term-desc">
+      Papan PCB yang sudah selesai dipasangi seluruh komponen elektronik dan selesai disolder sehingga menjadi sebuah modul sirkuit pintar yang berfungsi (misalnya papan motherboard audio mobil).
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">80.000 CPH (Components Per Hour)</div>
+    <div class="term-desc">
+      Satuan kecepatan mesin perakitan *Pick and Place*. Angka 80.000 CPH berarti mesin otomatis tersebut mampu mengambil dan menempelkan 80.000 butir komponen elektronik ke papan PCB hanya dalam waktu 1 jam.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Toleransi Mikron (&mu;m) & Komponen 0201</div>
+    <div class="term-desc">
+      Ukuran komponen elektronik pasif terkecil saat ini berukuran kode `0201`, yaitu hanya 0.6 mm x 0.3 mm (sebutir debu pasir). Memasang komponen sekecil ini memerlukan akurasi mesin tingkat mikron (1 mikron = 0.001 milimeter) agar kaki-kakinya menempel sempurna dan tidak bergeser.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">OEM (Original Equipment Manufacturer) & ODM (Original Design Manufacturer)</div>
+    <div class="term-desc">
+      <strong>OEM:</strong> Pabrik memproduksi barang berdasarkan desain dan skema dari klien (klien tinggal bawa desain, pabrik yang cetak dan rakit).<br>
+      <strong>ODM:</strong> Pabrik merancang sendiri sirkuit dan bodi produknya dari nol, klien tinggal memilih dan menempelkan logo/merek mereka.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Box-Build Turnkey Integration</div>
+    <div class="term-desc">
+      Layanan perakitan produk secara menyeluruh dari hulu ke hilir. Pabrik tidak hanya merakit papan PCB, tetapi juga memasukkannya ke dalam casing logam/plastik bodi produk, memasang kabel internal, tombol, melakukan pengujian fungsi, hingga mengemas dalam kardus siap jual.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">IATF 16949</div>
+    <div class="term-desc">
+      Sertifikasi standar sistem manajemen mutu internasional yang paling ketat di dunia khusus industri komponen otomotif. Standar ini mewajibkan pabrik memiliki sistem pencegahan cacat (*zero defect*) dan audit proses yang jauh lebih ketat dibanding ISO 9001 biasa.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Logistik Maritim 45 Menit ke Pelabuhan PSA Singapura</div>
+    <div class="term-desc">
+      Letak geografis Batam sangat dekat dengan pelabuhan internasional PSA Singapura (hanya sekitar 45 menit via jalur kapal kargo cepat). Ini memungkinkan produk elektronik yang baru selesai dirakit di Batam langsung diekspor ke kapal kontainer dunia di Singapura pada hari yang sama.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">JIT (Just-In-Time) Logistics Delivery</div>
+    <div class="term-desc">
+      Metode rantai pasok modern di mana barang dikirim tepat waktu saat lini perakitan pabrik pelanggan membutuhkannya, sehingga pelanggan tidak perlu menyewa gudang penampungan besar yang boros biaya.
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h3>2. Halaman Tentang Kami (About Us)</h3>
+
+  <div class="term-card">
+    <div class="term-title">Batam Free Trade Zone (FTZ) & Insentif Fiskal</div>
+    <div class="term-desc">
+      Kawasan Perdagangan Bebas Batam yang memberikan insentif pembebasan Pajak Pertambahan Nilai (PPN 0%), pembebasan Bea Masuk komponen impor, dan pembebasan Pajak Penjualan Barang Mewah (PPnBM). Hal ini membuat biaya produksi manufaktur di Batam sangat kompetitif dibanding negara tetangga.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Cleanroom Class 100K (ISO Class 8)</div>
+    <div class="term-desc">
+      Ruang produksi bertekanan udara positif dengan filter udara HEPA yang bebas debu. Batas "Class 100K" artinya maksimal hanya terdapat 100.000 partikel debu mikro per kaki kubik udara. Ruang ini wajib dilengkapi lantai anti-statis (ESD) agar listrik statis dari tubuh manusia tidak merusak chip komputer mikro pada PCB.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">DFM (Design for Manufacturability) Review</div>
+    <div class="term-desc">
+      Pemeriksaan teknis oleh insinyur sebelum PCB diproduksi massal untuk memastikan desain jalur sirkuit dari klien aman disolder mesin, tidak rawan korslet, dan efisien dari segi biaya produksi.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Yield Rate 99.8% (First Pass Yield)</div>
+    <div class="term-desc">
+      Tingkat efisiensi mutu perakitan. Nilai 99.8% berarti dari setiap 1.000 unit sirkuit yang dirakit, sebanyak 998 unit langsung lulus tes fungsi sempurna pada pengetesan pertama tanpa perlu perbaikan ulang (*zero-defect engineering*).
+    </div>
+  </div>
+
+  <h3>3. Halaman Produk (Products Page)</h3>
+
+  <div class="term-card">
+    <div class="term-title">Amplifier Class-D Full-Bridge</div>
+    <div class="term-desc">
+      Tipe penguat audio paling modern dengan efisiensi daya listrik sangat tinggi (mencapai 85% - 92%). Berbeda dengan amplifier Class-AB lawas yang cepat panas, Class-D mengubah sinyal menjadi pulsa gelombang *PWM (Pulse Width Modulation)* sehingga menghasilkan daya bas yang bertenaga besar dengan panas yang sangat rendah.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">DSP (Digital Signal Processor) 32-Bit / 64-Bit</div>
+    <div class="term-desc">
+      Mikroprosesor komputer cerdas khusus pengolah suara audio digital. Berfungsi mengatur *Time Alignment* (waktu tempuh suara agar suara dari semua speaker mobil sampai ke telinga pengemudi bersamaan), *Parametric Equalizer*, dan *Crossover* pemisah nada bas dan treble secara presisi via software komputer.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">CAN-Bus Controller Integration</div>
+    <div class="term-desc">
+      Protokol jaringan komputer internal pada mobil modern. Memungkinkan sistem amplifier/DSP terhubung dengan tombol audio di setir mobil, sensor radar parkir, dan layar head unit dasbor mobil tanpa merusak instalasi kabel asli mobil.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Signal-to-Noise Ratio (SNR > 95 dB)</div>
+    <div class="term-desc">
+      Perbandingan antara kekuatan suara musik murni dengan desis kebisingan (*noise*) internal alat. Angka di atas 95 dB menjamin audio mobil terdengar sangat jernih dan bening bahkan saat volume disetel tinggi.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">THD (Total Harmonic Distortion < 0.05%)</div>
+    <div class="term-desc">
+      Tingkat cacat distorsi nada suara. Semakin mendekati nol persen, suara vokal manusia dan alat musik akan terdengar sangat natural dan tidak pecah (*anti-clipping*).
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h3>4. Halaman Galeri Mesin & Fasilitas Pengujian (Gallery Page)</h3>
+
+  <div class="term-card">
+    <div class="term-title">3D SPI (Solder Paste Inspection) Moiré Fringe Metrology</div>
+    <div class="term-desc">
+      Kamera pemindai laser 3 dimensi yang memeriksa pasta timah yang dicetak di atas PCB sebelum komponen ditempelkan. Mesin ini mengukur volume, tinggi, dan luas pasta timah dalam hitungan detik untuk mencegah cacat solder kering atau timah meluber yang bisa menyebabkan korslet.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">3D AOI (Automated Optical Inspection)</div>
+    <div class="term-desc">
+      Mesin inspeksi visual otomatis beresolusi sangat tinggi yang memindai PCB setelah keluar dari oven solder. Menggunakan AI dan pemindaian multi-sudut untuk memastikan semua komponen tidak terbalik, tidak bergeser (*misalignment*), dan tersolder sempurna.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">10-Zone Nitrogen Convection Reflow Oven</div>
+    <div class="term-desc">
+      Terowongan oven pemanas khusus solder dengan 10 zona suhu bertahap (pemanasan awal, pelelehan, dan pendinginan cepat). Diisi gas Nitrogen berkemurnian tinggi ($O_2 < 100 \text{ ppm}$) agar timah tidak bereaksi dengan oksigen (oksidasi) saat meleleh, menghasilkan sambungan solder yang mengkilap dan anti-retak.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">X-Ray Non-Destructive Testing (160 kV Microfocus Tube)</div>
+    <div class="term-desc">
+      Mesin rontgen sinar-X untuk melihat kualitas solderan di bagian bawah chip BGA (*Ball Grid Array*) yang tertutup rapat oleh badan chip dan tidak dapat dilihat oleh kamera biasa. Mendeteksi rongga udara (*voiding*) di dalam bola timah solder.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Environmental Thermal Shock Chamber (-40°C hingga +125°C)</div>
+    <div class="term-desc">
+      Kamar pengujian ketahanan ekstrem. Sirkuit elektronik dipindah dari suhu dingin beku $-40^\circ\text{C}$ ke suhu panas mendidih $+125^\circ\text{C}$ hanya dalam waktu kurang dari 10 detik sambil dialiri listrik. Ini membuktikan bahwa produk audio otomotif tahan banting dan tidak rusak saat mobil diparkir di bawah terik matahari ekstrem maupun musim salju.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">In-House CNC Fixture & Tooling Workshop</div>
+    <div class="term-desc">
+      Bengkel permesinan CNC mandiri di dalam pabrik untuk memotong dan mengebor dudukan jig uji (*test fixture*) dari bahan isolator anti-statis Bakelite dan POM-C, sehingga pabrik tidak perlu mengantre lama memesan jig uji dari pihak ketiga.
+    </div>
+  </div>
+
+  <h3>5. Halaman Otomasi Robotik (Automation Page)</h3>
+
+  <div class="term-card">
+    <div class="term-title">Industrial Articulated Robot Arm (6-Axis)</div>
+    <div class="term-desc">
+      Lengan robot industri modern dengan 6 sendi putar independen. Fleksibel meniru gerakan tangan manusia untuk proses pengelasan presisi (*welding*), pemotongan laser (*cutting*), dan pemindahan produk (*handling*) selama 24 jam nonstop dengan konsistensi 100%.
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-title">Palletizing & Automated Vision Sorting</div>
+    <div class="term-desc">
+      Sistem konveyor pintar di mana kamera sensor membaca kode QR pada kardus produk, lalu lengan robot otomatis mengelompokkan dan menyusun kardus ke atas palet gudang sesuai tujuan negara ekspor masing-masing tanpa kesalahan manusia (*human-error free*).
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <h2>BAGIAN IV: PERTANYAAN UMUM SAAT PRESENTASI (Q&A SIMULATION)</h2>
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+
+  <div class="callout">
+    <div class="callout-title">Q1: "Mengapa kamu membuat website dengan teknologi React + Vite bukan WordPress atau template HTML biasa?"</div>
+    <p><strong>Jawaban:</strong> Karena perusahaan ini berorientasi pada kemitraan B2B manufaktur global, website membutuhkan arsitektur modern berkecepatan tinggi (*Single Page Application* / SPA), transisi animasi mulus tanpa reload halaman, dukungan multi-bahasa instan (ID / EN), antarmuka interaktif 3D di halaman otomasi, dan sistem keamanan REST API yang terpisah antara sisi publik dan panel admin.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">Q2: "Bagaimana cara membuktikan kalau data produk ini bukan produk fiktif buatanmu?"</div>
+    <p><strong>Jawaban:</strong> Produk ini adalah katalog asli PT. Intersis Sejahtera Abadi yang terdaftar di pasar otomotif Indonesia (seperti tipe *Intersis IPA-60.4, DSP-60.4*, dll). Data ini memiliki spesifikasi teknis riil seperti impedansi 4 ohm, frekuensi respons 20Hz-20kHz, dan buku panduan teknis yang sesuai dengan barang fisik di gudang.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">Q3: "Apa fungsi FlagCounter di bagian bawah halaman?"</div>
+    <p><strong>Jawaban:</strong> FlagCounter adalah widget telemetri pengunjung pihak ketiga (*third-party independent verification*) yang mencatat negara asal pengunjung website. Bagi klien B2B internasional, widget ini memberikan transparansi bahwa website ini benar-benar dikunjungi oleh mitra bisnis dari berbagai belahan dunia (AS, Singapura, Eropa, dan Asia Pasifik).</p>
+  </div>
+
+  <div class="footer-note">
+    Dokumen ini disusun untuk melengkapi pertanggungjawaban teknis Proyek Pelatihan & Magang Web Development 2026.<br>
+    PT. Global Philsonic Technologies / PT. Intersis Sejahtera Abadi &bull; Seluruh Hak Cipta Dilindungi Undang-Undang.
+  </div>
+
+</body>
+</html>
