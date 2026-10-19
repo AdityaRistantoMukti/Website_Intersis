@@ -189,16 +189,58 @@ export default function HomePage() {
                   </p>
 
                   <div className="hero__actions">
-                    <a href="#products-catalog" className="btn btn--hero-primary btn--lg">
-                      {slide.ctaPrimary || slide.actionText || (lang === 'id' ? 'JELAJAHI KATALOG PRODUK' : 'EXPLORE PRODUCT CATALOG')}
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </a>
-                    <Link to="/contact" className="btn btn--hero-secondary btn--lg">
-                      {slide.ctaSecondary || (lang === 'id' ? 'KONSULTASI TEKNIK OEM' : 'OEM TECHNICAL INQUIRY')}
-                    </Link>
+                    {(() => {
+                      const primaryLink = (slide.actionLink && slide.actionLink !== '#products-catalog')
+                        ? slide.actionLink
+                        : '/products';
+                      const primaryText = slide.actionText || slide.ctaPrimary || (lang === 'id' ? 'JELAJAHI KATALOG PRODUK' : 'EXPLORE PRODUCT CATALOG');
+
+                      const isPrimaryContact = primaryLink.includes('/contact');
+                      const secondaryLink = slide.secondaryLink || (isPrimaryContact ? '/products' : '/contact');
+                      const secondaryText = slide.ctaSecondary || (isPrimaryContact
+                        ? (lang === 'id' ? 'LIHAT KATALOG PRODUK' : 'VIEW PRODUCT CATALOG')
+                        : (lang === 'id' ? 'KONSULTASI TEKNIK RFQ' : 'ENGINEERING RFQ INQUIRY'));
+
+                      const renderBtn = (to, text, isPrimary) => {
+                        const btnClass = `btn ${isPrimary ? 'btn--hero-primary' : 'btn--hero-secondary'} btn--lg`;
+                        const arrowIcon = isPrimary ? (
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        ) : null;
+
+                        if (to.startsWith('http')) {
+                          return (
+                            <a href={to} target="_blank" rel="noopener noreferrer" className={btnClass}>
+                              {text}
+                              {arrowIcon}
+                            </a>
+                          );
+                        }
+                        if (to.startsWith('#')) {
+                          return (
+                            <a href={to} className={btnClass}>
+                              {text}
+                              {arrowIcon}
+                            </a>
+                          );
+                        }
+                        return (
+                          <Link to={to} className={btnClass}>
+                            {text}
+                            {arrowIcon}
+                          </Link>
+                        );
+                      };
+
+                      return (
+                        <>
+                          {renderBtn(primaryLink, primaryText, true)}
+                          {renderBtn(secondaryLink, secondaryText, false)}
+                        </>
+                      );
+                    })()}
                   </div>
 
                   {slide.tag && (
