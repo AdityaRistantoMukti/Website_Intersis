@@ -1970,12 +1970,29 @@
   }
 
   .facility-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     gap: 0.5rem;
-    margin-bottom: 1.75rem;
+    padding: 4px 1rem 8px 1rem;
+    margin: 0 -1rem 1.75rem -1rem;
+  }
+
+  .facility-nav::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   .facility-tab-btn {
-    padding: 7px 12px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 7px 14px;
     font-size: 0.78rem;
     border-radius: 20px;
   }

@@ -191,29 +191,58 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* ── LIGHTBOX MODAL ── */}
+      {/* ── LIGHTBOX SPECIFICATION MODAL ── */}
       {activeModalItem && (
-        <div className="gallery-modal-overlay" onClick={() => setActiveModalItem(null)}>
+        <div
+          className="gallery-modal-overlay"
+          onClick={() => setActiveModalItem(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="gallery-modal-title"
+        >
           <div className="gallery-modal-content" onClick={e => e.stopPropagation()}>
             <div className="gallery-modal-img-wrap">
-              <img src={activeModalItem.img} alt={activeModalItem.title} />
-              <button className="gallery-modal-close" onClick={() => setActiveModalItem(null)}>✕</button>
+              <img
+                src={activeModalItem.img}
+                alt={activeModalItem.title}
+                className="gallery-modal-img"
+              />
+              <button
+                type="button"
+                className="gallery-modal-close"
+                onClick={() => setActiveModalItem(null)}
+                aria-label={isId ? 'Tutup detail' : 'Close detail'}
+              >
+                ✕
+              </button>
             </div>
             <div className="gallery-modal-body">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--teal, #00897b)', textTransform: 'uppercase' }}>
+              <div className="gallery-modal-meta">
+                <span className="gallery-modal-category">
                   {activeModalItem.categoryLabel}
                 </span>
+                {activeModalItem.location && (
+                  <span className="gallery-modal-location">
+                    📍 {activeModalItem.location}
+                  </span>
+                )}
               </div>
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.75rem', color: '#ffffff' }}>
+              <h2 id="gallery-modal-title" className="gallery-modal-title">
                 {activeModalItem.title}
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+              <p className="gallery-modal-desc">
                 {activeModalItem.desc}
               </p>
-              <div style={{ background: '#0b1320', padding: '10px 14px', borderRadius: '8px', border: '1px solid #1e293b', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{isId ? 'Spesifikasi Inti:' : 'Key Specs:'}</span>
-                <span style={{ fontSize: '0.825rem', color: '#38bdf8', fontWeight: 600 }}>{activeModalItem.spec}</span>
+              <div className="gallery-modal-spec-card">
+                <div className="gallery-modal-spec-label">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                  </svg>
+                  <span>{isId ? 'Spesifikasi & Parameter Inti:' : 'Key Technical Specs & Parameters:'}</span>
+                </div>
+                <div className="gallery-modal-spec-value">
+                  {activeModalItem.spec}
+                </div>
               </div>
             </div>
           </div>

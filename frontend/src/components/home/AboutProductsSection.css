@@ -468,7 +468,8 @@
 
 @media (max-width: 480px) {
   .aps-inner {
-    padding: 0;
+    padding: 0 1.25rem;
+    box-sizing: border-box;
   }
 
   .aps-stat__value {
@@ -486,6 +487,9 @@
 }
 
 @media (max-width: 360px) {
+  .aps-inner {
+    padding: 0 1rem;
+  }
   .aps-heading {
     font-size: 1.2rem;
   }

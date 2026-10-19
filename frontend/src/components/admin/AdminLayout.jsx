@@ -251,11 +251,11 @@ export default function AdminLayout({ activeTab, onSelectTab, children }) {
               type="button"
               className="admin-theme-toggle-btn"
               onClick={toggleTheme}
-              title={theme === 'dark' ? 'Ganti ke Mode Terang (Light Mode)' : 'Ganti ke Mode Gelap (Dark Mode)'}
+              title={theme === 'dark' ? 'Mode Gelap (Aktif) — Klik untuk ganti ke Terang' : 'Mode Terang (Aktif) — Klik untuk ganti ke Gelap'}
               aria-label="Toggle dark/light mode"
             >
-              {theme === 'dark' ? <Sun size={15} strokeWidth={2} /> : <Moon size={15} strokeWidth={2} />}
-              <span className="admin-theme-toggle-label">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+              {theme === 'dark' ? <Moon size={15} strokeWidth={2} /> : <Sun size={15} strokeWidth={2} />}
+              <span className="admin-theme-toggle-label">{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</span>
             </button>
 
             {/* Direct Link to Public Landing Page */}

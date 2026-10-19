@@ -89,7 +89,7 @@
     "contactPerson": "Nama Narahubung",
     "email": "Email Bisnis Resmi",
     "notes": "Catatan Kustomisasi (misal: penyesuaian firmware, private labeling, protokol CAN-Bus khusus)",
-    "btnSendWa": "Kirim via WhatsApp Penjualan B2B",
+    "btnSendWa": "Kirim via WhatsApp Penjualan",
     "btnSendForm": "Lanjutkan ke Formulir Kontak Resmi",
     "close": "Batal / Tutup"
   },
@@ -97,7 +97,7 @@
     "kicker": "Kemitraan Engineering & Manufaktur",
     "title": "Membutuhkan Kustomisasi Khusus atau Desain Baru?",
     "subtitle": "Tim R&D dan engineering kami siap berkolaborasi untuk perancangan skematik PCB, penyesuaian firmware CAN-Bus, hingga perakitan box-build OEM/ODM.",
-    "btnWa": "Konsultasi Cepat via WhatsApp B2B",
+    "btnWa": "Konsultasi Cepat via WhatsApp",
     "btnForm": "Ajukan Kebutuhan Teknis (Formulir)"
   }
 }

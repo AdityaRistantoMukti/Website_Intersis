@@ -17,6 +17,7 @@ function projectCoord(lat, lng) {
 
 export default function GlobalFootprintSection() {
   const { i18n } = useTranslation(['home', 'common']);
+  const isId = i18n.language === 'id';
   const canvasRef = useRef(null);
   const mapViewportRef = useRef(null);
 
@@ -501,56 +502,56 @@ export default function GlobalFootprintSection() {
         {/* ── LOGISTICS TELEMETRY METRIC STATS ── */}
         <div className="footprint-stats-grid fade-up" style={{ gap: 20 }}>
           <div className="footprint-stat-card">
-            <div className="stat-card-icon" style={{ background: 'rgba(0, 137, 123, 0.1)', color: '#00897B' }}>
+            <div className="stat-card-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
             <div className="stat-card-content">
-              <h3 className="stat-card-number">45 Mnt</h3>
-              <p className="stat-card-title">Transit ke Pelabuhan PSA Singapore</p>
-              <span className="stat-card-sub">Akses kargo maritim ekspres harian dari Batam</span>
+              <h3 className="stat-card-number">{isId ? '45 Mnt' : '45 Min'}</h3>
+              <p className="stat-card-title">{isId ? 'Transit ke Pelabuhan PSA Singapore' : 'Transit to PSA Singapore Port'}</p>
+              <span className="stat-card-sub">{isId ? 'Akses kargo maritim ekspres harian dari Batam' : 'Daily express maritime cargo access from Batam'}</span>
             </div>
           </div>
 
           <div className="footprint-stat-card">
-            <div className="stat-card-icon" style={{ background: 'rgba(2, 132, 199, 0.1)', color: '#0284C7' }}>
+            <div className="stat-card-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
               </svg>
             </div>
             <div className="stat-card-content">
               <h3 className="stat-card-number">100%</h3>
-              <p className="stat-card-title">Ketepatan Pengiriman JIT (Just-In-Time)</p>
-              <span className="stat-card-sub">Menjamin kelancaran lini perakitan OEM global</span>
+              <p className="stat-card-title">{isId ? 'Ketepatan Pengiriman JIT (Just-In-Time)' : 'JIT (Just-In-Time) On-Time Delivery'}</p>
+              <span className="stat-card-sub">{isId ? 'Menjamin kelancaran lini perakitan OEM global' : 'Ensuring seamless global OEM assembly lines'}</span>
             </div>
           </div>
 
           <div className="footprint-stat-card">
-            <div className="stat-card-icon" style={{ background: 'rgba(217, 119, 6, 0.1)', color: '#D97706' }}>
+            <div className="stat-card-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
             <div className="stat-card-content">
               <h3 className="stat-card-number">IATF 16949</h3>
-              <p className="stat-card-title">Sertifikasi Otomotif Internasional</p>
-              <span className="stat-card-sub">Kualifikasi industri standar Uni Eropa, AS, & Jepang</span>
+              <p className="stat-card-title">{isId ? 'Sertifikasi Otomotif Internasional' : 'International Automotive Certification'}</p>
+              <span className="stat-card-sub">{isId ? 'Kualifikasi industri standar Uni Eropa, AS, & Jepang' : 'Industry standard qualification for EU, US & Japan'}</span>
             </div>
           </div>
 
           <div className="footprint-stat-card">
-            <div className="stat-card-icon" style={{ background: 'rgba(124, 58, 237, 0.1)', color: '#7C3AED' }}>
+            <div className="stat-card-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
               </svg>
             </div>
             <div className="stat-card-content">
-              <h3 className="stat-card-number">3 Benua</h3>
-              <p className="stat-card-title">Jangkauan Ekspor Rantai Pasok</p>
-              <span className="stat-card-sub">Koridor aktif Asia-Pasifik, Amerika Utara, & Eropa</span>
+              <h3 className="stat-card-number">{isId ? '3 Benua' : '3 Continents'}</h3>
+              <p className="stat-card-title">{isId ? 'Jangkauan Ekspor Rantai Pasok' : 'Global Supply Chain Export Reach'}</p>
+              <span className="stat-card-sub">{isId ? 'Koridor aktif Asia-Pasifik, Amerika Utara, & Eropa' : 'Active corridors in Asia-Pacific, North America & Europe'}</span>
             </div>
           </div>
         </div>

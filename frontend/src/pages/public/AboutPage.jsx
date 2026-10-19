@@ -344,7 +344,7 @@ export default function AboutPage() {
         ref={narrativeSectionRef}
         className={`about-narrative ${isNarrativeVisible ? 'about-narrative--revealed' : ''}`}
       >
-        {/* Subtle Technical Blueprint & Coordinates Watermark Background */}
+        {/* Subtle Technical Blueprint Grid Background */}
         <div className="about-narrative__tech-bg" aria-hidden="true">
           <svg className="about-narrative__tech-svg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -356,10 +356,6 @@ export default function AboutPage() {
             </defs>
             <rect width="100%" height="100%" fill="url(#techGrid)" />
           </svg>
-          <div className="about-narrative__tech-watermark">
-            <span className="about-narrative__tech-coords">LAT 1°07'49.4"N · LNG 104°03'10.4"E</span>
-            <span className="about-narrative__tech-code">PRECISION SMT MANUFACTURING · BATAM FTZ</span>
-          </div>
         </div>
 
         <div className="container about-narrative__grid">
@@ -486,9 +482,6 @@ export default function AboutPage() {
             />
             <div className="about-vm__panorama-overlay" />
             <div className="about-vm__panorama-caption">
-              <span className="about-vm__panorama-kicker">
-                {isId ? 'FASILITAS RISET & TEKNOLOGI PERAKITAN MIKRON' : 'R&D FACILITIES & MICRON PRECISION ASSEMBLY'}
-              </span>
               <h3 className="about-vm__panorama-title">
                 {isId
                   ? 'Standar Mutu Nol-Cacat (Zero-Defect) & Presisi Mikron Berkelanjutan'

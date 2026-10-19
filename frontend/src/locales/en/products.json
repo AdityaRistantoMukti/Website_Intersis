@@ -89,7 +89,7 @@
     "contactPerson": "Contact Person Name",
     "email": "Official Business Email",
     "notes": "Customization Notes (e.g., custom firmware, private labeling, specific CAN-Bus protocols)",
-    "btnSendWa": "Submit via Direct B2B WhatsApp",
+    "btnSendWa": "Submit via Direct WhatsApp",
     "btnSendForm": "Continue to Official Contact Form",
     "close": "Cancel / Close"
   },
@@ -97,7 +97,7 @@
     "kicker": "Engineering & Manufacturing Partnership",
     "title": "Need Custom Engineering or New Product Tooling?",
     "subtitle": "Our R&D and manufacturing engineering team is ready to collaborate on schematic design, CAN-Bus firmware adaptation, and full OEM/ODM box-build production.",
-    "btnWa": "Direct B2B WhatsApp Consultation",
+    "btnWa": "Direct WhatsApp Consultation",
     "btnForm": "Submit Technical Inquiry Form"
   }
 }

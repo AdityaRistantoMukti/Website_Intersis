@@ -694,13 +694,18 @@
 }
 
 .stat-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  background: transparent !important;
+  color: #334155;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+[data-theme="dark"] .stat-card-icon {
+  color: #cbd5e1;
 }
 
 .stat-card-content {

@@ -91,16 +91,21 @@ export default function Navbar() {
 
         {/* Right Actions: Theme Toggle + Language Selector + Mobile Toggle */}
         <div className="navbar__actions">
-          {/* Dark / Light Mode Toggle Button (Bulan / Bintang) */}
+          {/* Dark / Light Mode Toggle Button (Menampilkan mode yang sedang aktif) */}
           <button
             type="button"
             className="theme-toggle-btn"
             onClick={() => setIsDark(!isDark)}
-            aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            title={isDark ? (i18n.language === 'id' ? "Ganti ke Mode Terang" : "Switch to Light Mode") : (i18n.language === 'id' ? "Ganti ke Mode Gelap" : "Switch to Dark Mode")}
+            aria-label={isDark ? "Dark Mode (Active)" : "Light Mode (Active)"}
+            title={isDark ? (i18n.language === 'id' ? "Mode Gelap (Aktif) — Klik untuk ganti ke Terang" : "Dark Mode (Active) — Click to switch to Light") : (i18n.language === 'id' ? "Mode Terang (Aktif) — Klik untuk ganti ke Gelap" : "Light Mode (Active) — Click to switch to Dark")}
           >
             {isDark ? (
-              /* Sun / Radiant Star icon when in Dark mode */
+              /* Crescent Moon icon when in Dark mode (Mode Gelap sedang aktif) */
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="theme-toggle-icon theme-toggle-icon--moon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            ) : (
+              /* Sun / Radiant Star icon when in Light mode (Mode Terang sedang aktif) */
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="theme-toggle-icon theme-toggle-icon--sun">
                 <circle cx="12" cy="12" r="5" />
                 <line x1="12" y1="1" x2="12" y2="3" />
@@ -111,11 +116,6 @@ export default function Navbar() {
                 <line x1="21" y1="12" x2="23" y2="12" />
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              /* Crescent Moon icon when in Light mode */
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="theme-toggle-icon theme-toggle-icon--moon">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
           </button>
