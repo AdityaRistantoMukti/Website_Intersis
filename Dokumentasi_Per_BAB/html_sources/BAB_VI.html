@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB VI: Dokumentasi Arsitektur Codebase & Modularitas Sistem</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB VI</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB VI</div>
+    <h1>Dokumentasi Arsitektur Codebase & Modularitas Sistem</h1>
+    <div class="chapter-sub">Struktur Direktori Monorepo, Separation of Concerns, & Fail-Safe Fallbacks</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>6.1 Struktur Direktori Proyek (Monorepo Workspace)</h2>
+  <p>
+    Saya menata seluruh berkas proyek dalam struktur direktori yang bersih dan terisolasi antara logika server dan logika klien di dalam workspace <code>website_intersis</code>:
+  </p>
+  <pre>
+website_intersis/
+|-- backend/                  # Server-side REST API (Node.js &amp; Express)
+|   |-- src/
+|   |   |-- config/           # Konfigurasi pool koneksi database MySQL (db.js)
+|   |   |-- controllers/      # Logika pemrosesan bisnis (Admin &amp; Public controllers)
+|   |   |-- middlewares/      # Interceptor HTTP (Auth, ErrorHandler, RateLimiter, Upload)
+|   |   |-- routes/           # Pemetaan rute URL ke controller (Admin &amp; Public routes)
+|   |   |-- scripts/          # Skrip bantu pemeliharaan dan seeding bilingual
+|   |   |-- seeders/          # Skrip inisialisasi data dummy dan data master awal
+|   |   |-- utils/            # Fungsi utilitas (Response formatter, Slugify, FileCleanup)
+|   |   |-- validators/       # Aturan validasi payload input (express-validator)
+|   |   +-- server.js         # Entry point server Express utama
+|   |-- uploads/              # Penyimpanan lokal aset media berkas terunggah
+|   |-- .env                  # Variabel lingkungan server (Port, DB credentials, JWT Secret)
+|   +-- package.json          # Dependensi pustaka backend
+|
+|-- frontend/                 # Client-side SPA (React.js &amp; Vite)
+|   |-- src/
+|   |   |-- assets/           # Berkas statis gambar, logo dummy, dan diagram
+|   |   |-- components/       # Komponen antarmuka atomik (Layout, Navbar, Footer, Automation)
+|   |   |-- context/          # State global (LanguageContext, AdminAuthContext, BrandingContext)
+|   |   |-- data/             # Data statis awal dan fallback data katalog produk
+|   |   |-- hooks/            # Custom React Hooks pembantu interaksi data
+|   |   |-- locales/          # Kamus terjemahan teks antarmuka (Indonesian &amp; English)
+|   |   |-- pages/            # Komponen halaman (Public Pages &amp; Admin Portal Pages)
+|   |   |-- utils/            # Helper format mata uang, tanggal, dan sanitasi teks
+|   |   |-- App.jsx           # Registrasi routing browser dan Suspense fallback
+|   |   |-- index.css         # Design system, variabel token, dan utilitas global
+|   |   +-- main.jsx          # Titik masuk rendering React ke DOM
+|   |-- public/               # Aset publik langsung (favicon, robots.txt)
+|   |-- index.html            # Berkas HTML utama aplikasi SPA
+|   |-- vite.config.js        # Konfigurasi bundling Vite dan reverse proxy dev server
+|   +-- package.json          # Dependensi pustaka frontend
+|
++-- database/                 # Berkas skrip DDL SQL, relasi ERD, dan dokumentasi skema</pre>
+
+  <h2>6.2 Pola Perancangan (Design Patterns) yang Diterapkan</h2>
+  <ul>
+    <li><strong>Separation of Concerns (SoC):</strong> Setiap direktori memiliki tanggung jawab tunggal. Lapisan rute (Routes) tidak memuat query database; lapisan kontrol (Controller) tidak mendefinisikan aturan parsing regex (ditangani Validator); dan lapisan tampilan (React Pages) murni menangani antarmuka pengguna.</li>
+    <li><strong>Layered Controller-Service Architecture:</strong> Controller menerima permintaan, memvalidasi parameter, mengeksekusi operasi basis data melalui abstraksi koneksi terpusat, dan mengembalikan respons terstandarisasi.</li>
+    <li><strong>Singleton Configuration Pattern:</strong> Objek koneksi basis data pada <code>config/db.js</code> dibuat sekali dan digunakan kembali di seluruh aplikasi melalui mekanisme pooling, mencegah lonjakan konsumsi memori server.</li>
+    <li><strong>Fail-Safe Fallback:</strong> Pada komponen frontend publik, jika server backend mengalami latensi atau gangguan koneksi, antarmuka tetap menyajikan data cadangan terverifikasi dari modul <code>data/</code> sehingga pengguna tidak pernah melihat layar putih kosong.</li>
+  </ul>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

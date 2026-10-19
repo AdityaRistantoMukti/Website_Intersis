@@ -368,3 +368,62 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Mobile Devices (≤ 480px) ── */
+@media (max-width: 480px) {
+  .gallery-page-header {
+    padding: 4.75rem 0 1.75rem;
+  }
+
+  .gallery-page-header__title,
+  [data-theme="light"] .gallery-page-header__title {
+    font-size: clamp(1.35rem, 5.8vw, 1.75rem);
+    letter-spacing: -0.02em;
+  }
+
+  .gallery-page-header__subtitle,
+  [data-theme="light"] .gallery-page-header__subtitle {
+    font-size: 0.85rem;
+  }
+
+  .gallery-section {
+    padding: 2rem 0 3rem;
+  }
+
+  .gallery-filter-bar {
+    gap: 6px;
+    margin-bottom: 1.75rem;
+  }
+
+  .gallery-filter-pill {
+    padding: 6px 12px;
+    font-size: 0.775rem;
+  }
+
+  .gallery-card {
+    border-radius: 10px;
+  }
+
+  .gallery-modal-content {
+    border-radius: 10px;
+    max-width: 96vw;
+  }
+}
+
+/* ── Small & Foldable Phones (≤ 360px & down to 300px) ── */
+@media (max-width: 360px) {
+  .gallery-page-header {
+    padding: 4.25rem 0 1.5rem;
+  }
+
+  .gallery-page-header__title,
+  [data-theme="light"] .gallery-page-header__title {
+    font-size: 1.25rem;
+  }
+
+  .gallery-filter-pill {
+    padding: 5px 9px;
+    font-size: 0.72rem;
+  }
+}
+

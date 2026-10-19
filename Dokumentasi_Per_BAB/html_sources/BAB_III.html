@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB III: Dokumentasi Alur Website Bekerja (Flowchart & System Flow)</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB III</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB III</div>
+    <h1>Dokumentasi Alur Website Bekerja (Flowchart & System Flow)</h1>
+    <div class="chapter-sub">User Journey Publik, Siklus Rekrutmen HRD, dan HTTP Request Middleware Lifecycle</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>3.1 Alur Pengguna Publik (Visitor, Industrial Client, &amp; Job Seeker)</h2>
+  <p>
+    Saya merancang alur interaksi pengguna publik agar intuitif, informatif, dan memiliki hierarki yang jelas sesuai dengan target audiens perusahaan:
+  </p>
+  <pre>
+[ Pengunjung Membuka Website ]
+             |
+             v
+[ Inisialisasi Aplikasi React ] ---&gt; [ Cek LocalStorage Bahasa ] ---&gt; Terapkan ID atau EN
+             |
+             |---&gt; [ Menu Home ] -------&gt; Tinjau Profil Singkat, Keunggulan FTZ, &amp; Metrik Industri
+             |
+             |---&gt; [ Menu About ] ------&gt; Eksplorasi Visi-Misi, Sejarah, Filosofi, Fasilitas SMT
+             |
+             |---&gt; [ Menu Automation ] -&gt; Inspeksi Robot Welding, Handling, &amp; Cutting (Model 3D)
+             |                                   |
+             |                                   v
+             |                        [ Tombol Konsultasi Teknis ] ---&gt; [ WhatsApp Engineering ]
+             |
+             |---&gt; [ Menu Products ] ---&gt; Filter Kategori (Headunit, Audio DSP, Dashcam, SMT EMS)
+             |                                   |
+             |                                   v
+             |                        [ Klik Detail / Request RFQ ] --&gt; [ Buka Modal Formulir RFQ ]
+             |                                                                   |
+             |                                                                   v
+             |                                                        [ Kirim RFQ ke Backend API ]
+             |
+             +---&gt; [ Menu Career ] -----&gt; Filter Lowongan (FullTime, Magang, Kontrak)
+                                                 |
+                                                 v
+                                      [ Pilih Lowongan Pekerjaan ]
+                                                 |
+                                                 v
+                                      [ Baca Persyaratan &amp; Benefit ]
+                                                 |
+                                                 v
+                                      [ Klik 'Apply Now' ] ---&gt; Pengalihan ke Google Form Rekrutmen</pre>
+
+  <h2>3.2 Alur Pengguna Internal / Administratif (Admin &amp; HRD Portal)</h2>
+  <p>
+    Alur kerja internal dirancang untuk memudahkan staf HRD dan administrator dalam memelihara konten website tanpa memerlukan bantuan teknis pemrograman:
+  </p>
+  <pre>
+[ Admin Mengakses /admin/login ]
+             |
+             v
+[ Form Input: Username &amp; Password ] ---&gt; [ Submit via POST /api/admin/auth/login ]
+                                                        |
+                                                        v
+                                           [ Backend Verifikasi Kredensial ]
+                                                        |
+                                    +-------------------+-------------------+
+                                    | Gagal                                 | Sukses
+                                    v                                       v
+                       [ Error: Kredensial Salah ]             [ Terbitkan Token JWT &amp; Profil ]
+                                                                            |
+                                                                            v
+                                                               [ Simpan di State / LocalStorage ]
+                                                                            |
+                                                                            v
+                                                               [ Render AdminDashboard Layout ]
+                                                                            |
+                          +-------------------------+-----------------------+-------------------------+
+                          v                         v                                                 v
+                [ Kelola Lowongan ]       [ Kelola Konten &amp; Media ]                               [ Manajemen User ]
+                          |                         |                                                 |
+                          v                         v                                                 v
+               - Buat Lowongan Baru      - Update Visi Misi Perusahaan                            - Tambah Staf HRD Baru
+               - Ubah Status (Draft/     - Edit Kontak &amp; Alamat                                   - Reset Password Akun
+                 Published/Closed)       - Unggah Gambar Galeri Baru                              - Nonaktifkan User
+               - Atur Tautan Form        - Edit Spesifikasi Produk                                  (Khusus Admin)
+                          |                         |                                                 |
+                          +-------------------------+-------------------------------------------------+
+                                                    |
+                                                    v
+                                     [ Catat Log ke tabel activity_logs ]
+                                                    |
+                                                    v
+                                  [ Perubahan Tampil Instan di Publik ]</pre>
+
+  <h2>3.3 Siklus Hidup Permintaan HTTP (HTTP Request &amp; Middleware Lifecycle)</h2>
+  <p>
+    Setiap transaksi data antara antarmuka React dan server Express melalui tahapan pemrosesan sistematis sebagai berikut:
+  </p>
+  <ol>
+    <li><strong>Client Dispatch:</strong> Antarmuka frontend mengirimkan permintaan asinkron (menggunakan Axios atau Fetch API) dengan payload JSON atau Form-Data multipart.</li>
+    <li><strong>Security &amp; Rate Limiter:</strong> Permintaan masuk disambut oleh middleware keamanan <code>helmet()</code>, kebijakan CORS, dan rate limiter IP. Permintaan yang melampaui ambang batas langsung ditolak dengan kode status HTTP 429.</li>
+    <li><strong>Authentication Guard:</strong> Pada rute terproteksi, <code>verifyToken</code> mengekstrak token Bearer dari header. Jika token valid, objek user didekodekan dan disimpan di <code>req.user</code>. Jika tidak valid atau kedaluwarsa, server mengembalikan status HTTP 401.</li>
+    <li><strong>Authorization Filter:</strong> Middleware <code>restrictTo(roles)</code> mencocokkan role user pada <code>req.user.role</code>. Akses ditolak dengan status HTTP 403 jika role tidak memenuhi wewenang.</li>
+    <li><strong>Payload Validation:</strong> Skema validasi <code>express-validator</code> memeriksa tipe data, panjang string, dan pola regex. Jika ada anomali, middleware <code>validate</code> memutus eksekusi dan mengembalikan daftar rincian error dengan status HTTP 400.</li>
+    <li><strong>Controller Execution:</strong> Controller memanggil koneksi pool MySQL, menjalankan query SQL berparameter (Prepared Statements), memproses transformasi bilingual, dan menyusun objek data.</li>
+    <li><strong>Centralized Error Handling:</strong> Apabila terjadi pengecualian (runtime exception atau kendala database), error diteruskan ke middleware <code>errorHandler</code> untuk dicatat ke log server dan dikembalikan kepada klien dalam format JSON yang aman tanpa membocorkan kredensial sistem.</li>
+  </ol>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

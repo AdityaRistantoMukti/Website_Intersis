@@ -977,7 +977,7 @@
   }
 
   .auto-tabs-sticky-wrapper {
-    top: 56px;
+    top: 66px;
   }
 
   .auto-batam-section,
@@ -1035,3 +1035,85 @@
     gap: 10px;
   }
 }
+
+/* ── Mobile Devices (≤ 480px) ── */
+@media (max-width: 480px) {
+  .auto-page-header {
+    padding: 4.75rem 0 1.75rem;
+  }
+
+  .auto-page-title {
+    font-size: clamp(1.35rem, 5.8vw, 1.75rem);
+    letter-spacing: -0.02em;
+  }
+
+  .auto-page-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .auto-tabs-sticky-wrapper {
+    top: 60px;
+  }
+
+  .auto-tabs-nav {
+    gap: 6px;
+    padding: 6px 0;
+  }
+
+  .auto-tab-btn {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    border-radius: 8px;
+  }
+
+  .auto-batam-title,
+  .auto-tech-title {
+    font-size: 1.35rem;
+  }
+
+  .auto-quick-specs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .auto-story-step {
+    padding: 1.25rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .auto-impact-strip {
+    padding: 1.25rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .auto-contact-bar__inner {
+    padding: 1.25rem 0.85rem;
+    border-radius: 12px;
+  }
+}
+
+/* ── Small & Foldable Phones (≤ 360px & down to 300px) ── */
+@media (max-width: 360px) {
+  .auto-page-header {
+    padding: 4.25rem 0 1.5rem;
+  }
+
+  .auto-page-title {
+    font-size: 1.25rem;
+  }
+
+  .auto-tabs-sticky-wrapper {
+    top: 56px;
+  }
+
+  .auto-tab-btn {
+    padding: 5px 9px;
+    font-size: 0.72rem;
+  }
+
+  .auto-batam-title,
+  .auto-tech-title {
+    font-size: 1.2rem;
+  }
+}
+

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB IX: Dokumentasi Rules, Standard, & Tipe Penulisan Code</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB IX</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB IX</div>
+    <h1>Dokumentasi Rules, Standard, & Tipe Penulisan Code</h1>
+    <div class="chapter-sub">Konvensi Penamaan Naming Standard, Prepared Statements SQL, & Async Error Handling</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>9.1 Konvensi Penamaan (Naming Conventions)</h2>
+  <p>
+    Untuk menjaga konsistensi, keterbacaan, dan kemudahan kolaborasi jangka panjang, saya menetapkan aturan penamaan baku di seluruh repositori:
+  </p>
+  <ul>
+    <li><strong>Variabel &amp; Fungsi JavaScript:</strong> Menggunakan format <code>camelCase</code>. Nama fungsi harus menggunakan kata kerja deskriptif yang mencerminkan tugasnya.<br>
+      <em>Contoh:</em> <code>getJobVacancies</code>, <code>calculateTotalExperience</code>, <code>isTokenExpired</code>.
+    </li>
+    <li><strong>Komponen React (.jsx):</strong> Menggunakan format <code>PascalCase</code> sesuai standar resmi ekosistem React.<br>
+      <em>Contoh:</em> <code>Navbar.jsx</code>, <code>JobCard.jsx</code>, <code>AutomationPage.jsx</code>, <code>RobotCanvas3D.jsx</code>.
+    </li>
+    <li><strong>Berkas Controller &amp; Helper:</strong> Menggunakan format <code>camelCase.js</code>.<br>
+      <em>Contoh:</em> <code>publicJobController.js</code>, <code>authMiddleware.js</code>, <code>fileCleanup.js</code>.
+    </li>
+    <li><strong>Kolom &amp; Tabel Database MySQL:</strong> Menggunakan format <code>snake_case</code> dengan huruf kecil seluruhnya.<br>
+      <em>Contoh:</em> <code>job_vacancies</code>, <code>category_id</code>, <code>employment_type</code>, <code>created_at</code>.
+    </li>
+    <li><strong>Variabel Lingkungan (Environment Variables):</strong> Menggunakan format <code>SCREAMING_SNAKE_CASE</code>.<br>
+      <em>Contoh:</em> <code>PORT</code>, <code>DB_HOST</code>, <code>JWT_SECRET</code>, <code>NODE_ENV</code>.
+    </li>
+  </ul>
+
+  <h2>9.2 Standar Penanganan Kesalahan (Error Handling Pattern)</h2>
+  <p>
+    Saya mewajibkan setiap operasi I/O asinkron (asynchronous database query atau file system access) dibungkus dalam blok kontrol <code>try...catch</code> dengan alur penanganan terpadu:
+  </p>
+  <pre>
+// Standar Penulisan Controller Asinkron:
+exports.getJobVacancyById = async (req, res, next) =&gt; {
+  try {
+    const { id } = req.params;
+    
+    // 1. Eksekusi query menggunakan prepared statement aman
+    const [rows] = await db.query(
+      'SELECT * FROM job_vacancies WHERE id = ? AND status = "published"',
+      [id]
+    );
+
+    // 2. Evaluasi keberadaan data
+    if (rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Lowongan pekerjaan tidak ditemukan atau sudah ditutup.'
+      });
+    }
+
+    // 3. Kembalikan data dengan status 200 OK
+    return res.status(200).json({
+      success: true,
+      data: rows[0]
+    });
+  } catch (error) {
+    // 4. Teruskan galat internal ke middleware terpusat
+    next(error);
+  }
+};</pre>
+
+  <h2>9.3 Standar Sanitasi Data &amp; Proteksi SQL Injection</h2>
+  <p>
+    Saya memberlakukan aturan mutlak bahwa <strong>tidak ada parameter masukan dari pengguna yang boleh langsung digabungkan (string concatenation) ke dalam perintah SQL</strong>. Seluruh query wajib menggunakan fitur <em>Prepared Statements</em> dengan placeholder tanda tanya (<code>?</code>) yang disediakan oleh pustaka <code>mysql2/promise</code>. Hal ini menjamin sistem 100% aman dari ancaman manipulasi SQL Injection.
+  </p>
+
+  <h2>9.4 Format Respons API Seragam (Standardized JSON Envelope)</h2>
+  <p>
+    Semua rute API wajib mengembalikan respons terbungkus (envelope) dengan properti boolean <code>success</code> di tingkat akar. Dengan aturan ini, komponen frontend dapat melakukan pengecekan kondisi secara elegan:
+  </p>
+  <pre>
+// Pada sisi Frontend:
+const response = await api.get('/jobs');
+if (response.data.success) {
+  setJobList(response.data.data);
+} else {
+  displayNotification(response.data.message);
+}</pre>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

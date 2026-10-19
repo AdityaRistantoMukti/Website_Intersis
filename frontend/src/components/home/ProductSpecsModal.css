@@ -378,6 +378,23 @@
 }
 
 @media (max-width: 640px) {
+  .specs-modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .specs-modal {
+    border-radius: 10px;
+    max-height: 92vh;
+  }
+
+  .specs-modal__header {
+    padding: 1rem 1.15rem;
+  }
+
+  .specs-modal__body {
+    padding: 1rem 1.15rem;
+  }
+
   .specs-modal__th-param,
   .specs-modal__th-val {
     padding: 8px 10px;
@@ -400,6 +417,7 @@
 
   .specs-modal__footer {
     flex-direction: column-reverse;
+    padding: 1rem 1.15rem;
   }
 
   .specs-modal__btn-secondary,
@@ -408,3 +426,31 @@
     text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .specs-modal-overlay {
+    padding: 0.35rem;
+  }
+
+  .specs-modal {
+    max-height: 96vh;
+    border-radius: 8px;
+  }
+
+  .specs-modal__header {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .specs-modal__body {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .specs-modal__title {
+    font-size: 1rem;
+  }
+
+  .specs-modal__footer {
+    padding: 0.75rem 0.85rem;
+  }
+}
+

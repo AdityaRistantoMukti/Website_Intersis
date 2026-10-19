@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB X: Dokumentasi Website Final, Hasil Pengujian, & Rekomendasi</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB X</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB X</div>
+    <h1>Dokumentasi Website Final, Hasil Pengujian, & Rekomendasi</h1>
+    <div class="chapter-sub">Komparasi Sebelum-Sesudah, Uji Multi-Device, Validasi Postman, & SOP Maintenance</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>10.1 Ringkasan Perbandingan Transformasi Sistem</h2>
+  <p>
+    Proyek rekayasa ulang ini telah berhasil mentransformasi website lama menjadi platform digital modern kelas industri:
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Aspek Perbandingan</th>
+        <th style="width: 37%;">Kondisi Website Lama (WordPress CMS)</th>
+        <th style="width: 38%;">Kondisi Website Baru (Fullstack Modern)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Arsitektur Sistem</td>
+        <td>Monolitik WordPress 6.9.9 + Elementor 4.1.4 lambat.</td>
+        <td>Decoupled React.js SPA + Express REST API + MySQL.</td>
+      </tr>
+      <tr>
+        <td>Kecepatan Rendering</td>
+        <td>Waktu muat &gt; 4 detik; DOM tree membengkak oleh plugin.</td>
+        <td>Waktu muat &lt; 1.5 detik; bundling Vite ringan &amp; instan.</td>
+      </tr>
+      <tr>
+        <td>Katalog Robotik</td>
+        <td>Teks statis di sub-halaman tanpa interaktivitas.</td>
+        <td>Showcase 3 Pilar Robotik lengkap dengan kanvas visual 3D.</td>
+      </tr>
+      <tr>
+        <td>Katalog Produk Elektronik</td>
+        <td>Gambar statis seadanya tanpa spesifikasi detail.</td>
+        <td>12 Produk unggulan terinci (spesifikasi teknik &amp; sertifikasi).</td>
+      </tr>
+      <tr>
+        <td>Modul Karir / HRD</td>
+        <td><strong>Tidak ada sama sekali.</strong></td>
+        <td>Portal karir publik + Dasbor HRD terproteksi JWT.</td>
+      </tr>
+      <tr>
+        <td>Saluran Konversi (Leads)</td>
+        <td>Kontak statis umum tanpa sistem penawaran harga.</td>
+        <td>Formulir RFQ otomatis &amp; integrasi WhatsApp telemetri.</td>
+      </tr>
+      <tr>
+        <td>Dukungan Bahasa</td>
+        <td>Bahasa Inggris seadanya tanpa opsi Bahasa Indonesia.</td>
+        <td>Sistem bilingual penuh (ID / EN) dari DB hingga UI.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>10.2 Hasil Pengujian Fungsionalitas &amp; Kompatibilitas</h2>
+  <p>Saya telah melakukan serangkaian pengujian terukur sebelum merilis sistem ke tahap akhir:</p>
+  <ul>
+    <li><strong>Pengujian Responsivitas Multi-Perangkat:</strong> Antarmuka diuji pada resolusi desktop lebar (1920x1080), laptop (1366x768), tablet iPad (768x1024), serta layar smartphone (iPhone &amp; Android 375px s.d. 414px). Seluruh elemen tata letak flexbox dan grid beradaptasi secara harmonis.</li>
+    <li><strong>Pengujian Validasi &amp; Keamanan API:</strong> Pengujian endpoint melalui Postman Runner menunjukkan 100% permintaan berhasil sesuai status code yang diharapkan (200, 201, 400, 401, 403, 404, 429).</li>
+    <li><strong>Pengujian Alur Rekrutmen:</strong> Simulasi pembukaan lowongan oleh HRD di dasbor admin langsung terbit secara real-time di halaman karir publik, dan tombol "Apply Now" berhasil mengarahkan pelamar ke formulir pendaftaran yang tepat.</li>
+  </ul>
+
+  <h2>10.3 Kesimpulan &amp; Rekomendasi Pemeliharaan Sistem</h2>
+  <p>
+    Secara keseluruhan, sistem website baru PT. Global Philsonic Technologies (GPT) di bawah naungan PT. Intersis Sejahtera Abadi (ISA) telah berhasil diselesaikan dengan mutu rekayasa perangkat lunak yang tinggi, andal, dan siap mendukung pertumbuhan bisnis perusahaan di kancah industri internasional.
+  </p>
+  <p>Untuk pemeliharaan jangka panjang, saya menyarankan beberapa langkah operasional berikut:</p>
+  <ol>
+    <li><strong>Pencadangan Basis Data Otomatis (Database Backup):</strong> Menjadwalkan cron job harian pada server MySQL untuk mengekspor berkas dump database ke penyimpanan cloud terisolasi.</li>
+    <li><strong>Rotasi Kunci Rahasia JWT:</strong> Melakukan pembaruan nilai <code>JWT_SECRET</code> di file <code>.env</code> secara berkala (misalnya setiap 6 bulan sekali) guna meminimalkan risiko eksploitasi sesi lama.</li>
+    <li><strong>Pemantauan Kapasitas Penyimpanan:</strong> Memantau penggunaan disk space pada folder <code>uploads/</code> dan mempertimbangkan migrasi ke penyimpanan obyek cloud (seperti AWS S3 atau Cloudinary) jika volume dokumentasi foto galeri terus meningkat.</li>
+  </ol>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

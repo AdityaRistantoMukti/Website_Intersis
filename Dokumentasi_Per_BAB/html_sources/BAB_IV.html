@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB IV: Dokumentasi Backend & Perancangan Database Relasional</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB IV</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB IV</div>
+    <h1>Dokumentasi Backend & Perancangan Database Relasional</h1>
+    <div class="chapter-sub">Arsitektur MySQL 3NF, Skema Tabel, Relasi ERD, Singleton Pattern, & Dukungan Bilingual</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>4.1 Pemilihan Database Engine &amp; Karakteristik Teknis</h2>
+  <p>
+    Saya memilih <strong>MySQL (InnoDB Engine)</strong> sebagai sistem manajemen basis data relasional utama. Pilihan ini didasarkan pada kepatuhan penuh terhadap prinsip ACID (Atomicity, Consistency, Isolation, Durability), dukungan native Foreign Key Constraints untuk menjaga integritas data, serta efisiensi indexing B-Tree yang sangat handal untuk pembacaan katalog produk dan lowongan kerja. Seluruh tabel menggunakan konfigurasi character set <code>utf8mb4</code> dan collation <code>utf8mb4_unicode_ci</code> guna mendukung penyimpanan karakter multi-bahasa, simbol teknik otomotif, dan tanda baca internasional.
+  </p>
+
+  <h2>4.2 Skema Tabel &amp; Kamus Data (Data Dictionary)</h2>
+  <p>Berikut adalah tabel-tabel utama yang saya rancang dan operasikan pada database <code>isa_career_hrd</code>:</p>
+
+  <h3>A. Tabel <code>users</code> (Akun Manajemen Internal)</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Nama Kolom</th>
+        <th style="width: 20%;">Tipe Data</th>
+        <th style="width: 15%;">Atribut</th>
+        <th style="width: 45%;">Keterangan &amp; Nilai Standar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>id</code></td>
+        <td>INT</td>
+        <td>PK, Auto Increment</td>
+        <td>Identifikator unik akun pengguna internal.</td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td>VARCHAR(100)</td>
+        <td>NOT NULL</td>
+        <td>Nama lengkap pengguna / staf administrasi.</td>
+      </tr>
+      <tr>
+        <td><code>username</code></td>
+        <td>VARCHAR(50)</td>
+        <td>NOT NULL, UNIQUE</td>
+        <td>Username untuk otentikasi login sistem.</td>
+      </tr>
+      <tr>
+        <td><code>email</code></td>
+        <td>VARCHAR(100)</td>
+        <td>NOT NULL, UNIQUE</td>
+        <td>Alamat email resmi untuk notifikasi dan audit.</td>
+      </tr>
+      <tr>
+        <td><code>password</code></td>
+        <td>VARCHAR(255)</td>
+        <td>NOT NULL</td>
+        <td>Hash kata sandi terenkripsi menggunakan algoritma bcrypt (salt rounds: 10).</td>
+      </tr>
+      <tr>
+        <td><code>role</code></td>
+        <td>ENUM</td>
+        <td>NOT NULL</td>
+        <td>Tingkat akses: 'administrator', 'hrd', 'staff'.</td>
+      </tr>
+      <tr>
+        <td><code>status</code></td>
+        <td>ENUM</td>
+        <td>DEFAULT 'active'</td>
+        <td>Status akun: 'active' atau 'inactive'.</td>
+      </tr>
+      <tr>
+        <td><code>created_at / updated_at</code></td>
+        <td>TIMESTAMP</td>
+        <td>CURRENT_TIMESTAMP</td>
+        <td>Waktu pembuatan akun dan pembaruan terakhir.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>B. Tabel <code>job_vacancies</code> (Daftar Lowongan Kerja)</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Nama Kolom</th>
+        <th style="width: 20%;">Tipe Data</th>
+        <th style="width: 15%;">Atribut</th>
+        <th style="width: 45%;">Keterangan &amp; Relasi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>id</code></td>
+        <td>INT</td>
+        <td>PK, Auto Increment</td>
+        <td>Identifikator unik lowongan.</td>
+      </tr>
+      <tr>
+        <td><code>category_id</code></td>
+        <td>INT</td>
+        <td>FK, NOT NULL</td>
+        <td>Relasi foreign key ke <code>job_categories(id)</code> (ON DELETE RESTRICT).</td>
+      </tr>
+      <tr>
+        <td><code>title / title_en</code></td>
+        <td>VARCHAR(150)</td>
+        <td>NOT NULL / NULL</td>
+        <td>Judul posisi pekerjaan versi Bahasa Indonesia dan Inggris.</td>
+      </tr>
+      <tr>
+        <td><code>location</code></td>
+        <td>VARCHAR(100)</td>
+        <td>DEFAULT 'Batam'</td>
+        <td>Penempatan kerja (contoh: Batam Free Trade Zone).</td>
+      </tr>
+      <tr>
+        <td><code>employment_type</code></td>
+        <td>ENUM</td>
+        <td>NOT NULL</td>
+        <td>Tipe kerja: 'FullTime', 'PartTime', 'Internship', 'Contract', 'OJT'.</td>
+      </tr>
+      <tr>
+        <td><code>description / description_en</code></td>
+        <td>TEXT</td>
+        <td>NULL</td>
+        <td>Uraian umum posisi dan ikhtisar divisi kerja.</td>
+      </tr>
+      <tr>
+        <td><code>responsibilities / responsibilities_en</code></td>
+        <td>TEXT</td>
+        <td>NOT NULL</td>
+        <td>Daftar rincian tugas dan tanggung jawab harian karyawan.</td>
+      </tr>
+      <tr>
+        <td><code>requirements / requirements_en</code></td>
+        <td>TEXT</td>
+        <td>NOT NULL</td>
+        <td>Syarat kualifikasi teknis, latar pendidikan, dan pengalaman.</td>
+      </tr>
+      <tr>
+        <td><code>form_url</code></td>
+        <td>VARCHAR(500)</td>
+        <td>NULL</td>
+        <td>Tautan formulir pendaftaran daring (Google Form / Portal Seleksi).</td>
+      </tr>
+      <tr>
+        <td><code>status</code></td>
+        <td>ENUM</td>
+        <td>DEFAULT 'draft'</td>
+        <td>Status siklus lowongan: 'draft', 'published', 'closed'.</td>
+      </tr>
+      <tr>
+        <td><code>created_by</code></td>
+        <td>INT</td>
+        <td>FK, NULL</td>
+        <td>Relasi foreign key ke <code>users(id)</code> untuk audit pembuat data.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>C. Tabel <code>products</code> (Katalog Elektronik &amp; Robotik Otomasi)</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Nama Kolom</th>
+        <th style="width: 20%;">Tipe Data</th>
+        <th style="width: 15%;">Atribut</th>
+        <th style="width: 45%;">Keterangan &amp; Format Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>id</code></td>
+        <td>INT</td>
+        <td>PK, Auto Increment</td>
+        <td>Identifikator unik produk.</td>
+      </tr>
+      <tr>
+        <td><code>model_code</code></td>
+        <td>VARCHAR(100)</td>
+        <td>NOT NULL</td>
+        <td>Nomor model manufaktur (contoh: GPT-HU9800 PRO, GPT-ROBOT-WELD).</td>
+      </tr>
+      <tr>
+        <td><code>category</code></td>
+        <td>ENUM</td>
+        <td>NOT NULL</td>
+        <td>Kategori lini: 'headunit', 'audio', 'dashcam', 'automation', 'ems'.</td>
+      </tr>
+      <tr>
+        <td><code>title_id / title_en</code></td>
+        <td>TEXT</td>
+        <td>NOT NULL</td>
+        <td>Nama komersial produk dalam bahasa Indonesia dan Inggris.</td>
+      </tr>
+      <tr>
+        <td><code>short_desc_id / short_desc_en</code></td>
+        <td>TEXT</td>
+        <td>NULL</td>
+        <td>Ringkasan fitur unggulan produk untuk kartu ringkasan.</td>
+      </tr>
+      <tr>
+        <td><code>specs</code></td>
+        <td>LONGTEXT</td>
+        <td>NULL</td>
+        <td>JSON array berisi 4 spesifikasi ringkas [{"label": "...", "value": "..."}].</td>
+      </tr>
+      <tr>
+        <td><code>full_specs</code></td>
+        <td>LONGTEXT</td>
+        <td>NULL</td>
+        <td>JSON object spesifikasi teknik lengkap (tegangan, suhu kerja, DAC, sertifikasi).</td>
+      </tr>
+      <tr>
+        <td><code>diagram_type</code></td>
+        <td>VARCHAR(50)</td>
+        <td>DEFAULT 'infotainment'</td>
+        <td>Penentu diagram arsitektur visual pada antarmuka frontend.</td>
+      </tr>
+      <tr>
+        <td><code>status / sort_order</code></td>
+        <td>TINYINT(1) / INT</td>
+        <td>DEFAULT 1 / 0</td>
+        <td>Status aktif dan urutan prioritas penampilan produk.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4.3 Entitas Pendukung &amp; Singleton Pattern</h2>
+  <p>Untuk kebutuhan master data lainnya, saya merancang beberapa tabel pendukung:</p>
+  <ul>
+    <li><code>company_profile</code> &amp; <code>contact_recruitment</code>: Menerapkan <strong>Singleton Pattern</strong> (hanya menyimpan 1 baris rekaman tunggal ID 1). Endpoint hanya melayani pembacaan (GET) dan pengkinian (PUT), mencegah duplikasi data profil.</li>
+    <li><code>core_values</code>: Menyimpan 4 pilar filosofi kerja dengan dukungan bilingual dan penanda ikon visual.</li>
+    <li><code>gallery</code>: Menyimpan dokumentasi visual kegiatan operasional pabrik dengan referensi user pengunggah.</li>
+    <li><code>benefits</code> &amp; <code>programs</code>: Mengelola informasi fasilitas tunjangan kerja dan program magang vokasi di Batam.</li>
+    <li><code>activity_logs</code>: Menyimpan rekam jejak setiap aksi mutasi data (CREATE, UPDATE, DELETE, LOGIN) untuk kebutuhan audit internal kepatuhan ISO 9001.</li>
+  </ul>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

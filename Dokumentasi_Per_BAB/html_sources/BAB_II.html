@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB II: Dokumentasi Spesifikasi API (RESTful Endpoints)</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB II</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB II</div>
+    <h1>Dokumentasi Spesifikasi API (RESTful Endpoints)</h1>
+    <div class="chapter-sub">Katalog Endpoint Publik & Administratif, Format JSON Envelope, JWT & Rate Limiter</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>2.1 Arsitektur &amp; Standar Respons RESTful API</h2>
+  <p>
+    Saya merancang antarmuka Application Programming Interface (API) berbasis arsitektur RESTful yang memanfaatkan protokol HTTP dan format payload JSON. Seluruh endpoint mengembalikan struktur respons yang seragam untuk mempermudah integrasi dan penanganan kesalahan pada sisi klien:
+  </p>
+  <pre>
+// Format Respons Sukses:
+{
+  "success": true,
+  "message": "Data berhasil diambil",
+  "data": { ... },
+  "meta": { "total": 12, "page": 1, "limit": 10 } // Opsional jika paginasi
+}
+
+// Format Respons Gagal / Error:
+{
+  "success": false,
+  "message": "Deskripsi kesalahan yang terjadi",
+  "errors": [ { "field": "email", "message": "Format email tidak valid" } ] // Opsional
+}</pre>
+
+  <h2>2.2 Mekanisme Keamanan, Autentikasi, &amp; Rate Limiting</h2>
+  <p>Untuk menjaga keandalan dan keamanan data perusahaan, saya menerapkan standar keamanan berlapis:</p>
+  <ul>
+    <li><strong>JSON Web Token (JWT):</strong> Endpoint administratif dilindungi dengan verifikasi token JWT melalui header HTTP <code>Authorization: Bearer [token]</code>. Token memiliki masa berlaku terbatas dan diverifikasi oleh middleware <code>verifyToken</code>.</li>
+    <li><strong>Role-Based Access Control (RBAC):</strong> Sistem membatasi hak akses pengguna ke dalam tiga tingkatan melalui middleware <code>restrictTo(...)</code>:
+      <ul>
+        <li><code>administrator</code>: Hak akses penuh ke seluruh modul, pengaturan sistem, dan manajemen user.</li>
+        <li><code>hrd</code>: Mengelola lowongan kerja, data pelamar, konten perusahaan, dan akun staf.</li>
+        <li><code>staff</code>: Mengelola operasional entri konten website publik (read, create, update terbatas).</li>
+      </ul>
+    </li>
+    <li><strong>Rate Limiting:</strong> Saya memasang limitasi permintaan menggunakan <code>express-rate-limit</code> guna menangkal serangan brute-force dan Denial of Service (DoS):
+      <ul>
+        <li><code>apiLimiter</code>: Maksimum 200 permintaan per jendela 15 menit untuk endpoint publik.</li>
+        <li><code>authLimiter</code>: Maksimum 5 percobaan login gagal per 15 menit per alamat IP.</li>
+        <li><code>rfqSubmissionLimiter</code>: Maksimum 10 pengiriman RFQ per 1 jam per alamat IP.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>2.3 Katalog Endpoint Publik (Read-Only &amp; Interaksi Klien)</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 12%;">Method</th>
+        <th style="width: 33%;">Endpoint URL</th>
+        <th style="width: 55%;">Deskripsi Fungsi &amp; Parameter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/company</code></td>
+        <td>Mengambil data profil perusahaan, visi, misi, deskripsi bilingual, dan tautan gambar banner.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/core-values</code></td>
+        <td>Mengambil daftar 4 pilar nilai inti perusahaan (SMT Precision, IATF 16949, Smart Jigs, FTZ).</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/contact</code></td>
+        <td>Mengambil informasi kontak resmi recruitment dan perusahaan (email, alamat, telepon, media sosial).</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/trade-destinations</code></td>
+        <td>Mengambil data hub ekspor logistik Batam FTZ (Singapore, USA, Japan, Europe, China).</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/site-settings</code></td>
+        <td>Mengambil konfigurasi visual situs (logo URL, favicon, nomor telepon darurat, status operasional).</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/telemetry/visit</code></td>
+        <td>Mencatat log kunjungan pengunjung secara anonim untuk statistik performa antarmuka.</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/rfq</code></td>
+        <td>Menerima pengiriman formulir RFQ dari calon klien industri. Memeriksa validitas email dan nomor telepon.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/job-categories</code></td>
+        <td>Mengambil daftar kategori divisi pekerjaan yang memiliki status aktif.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/jobs</code></td>
+        <td>Mengambil daftar lowongan kerja berstatus 'published' dengan query params: category, type, search, page.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/jobs/:id</code></td>
+        <td>Mengambil detail lengkap lowongan kerja (tanggung jawab, persyaratan, batas waktu lamaran).</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/benefits</code></td>
+        <td>Mengambil daftar fasilitas dan kompensasi kerja yang ditawarkan kepada karyawan.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/programs</code></td>
+        <td>Mengambil program pembinaan karir (Internship/Magang, Management Trainee, On-the-Job Training).</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/programs/:slugOrId</code></td>
+        <td>Mengambil detail spesifik program magang atau pelatihan berdasarkan slug URL atau ID.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/faqs</code></td>
+        <td>Mengambil daftar pertanyaan yang sering diajukan (FAQ) seputar proses rekrutmen.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/gallery</code></td>
+        <td>Mengambil galeri dokumentasi foto kegiatan fasilitas kerja, perakitan, dan lingkungan pabrik.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/products</code></td>
+        <td>Mengambil katalog 12 produk elektronik manufaktur GPT dengan filter parameter category.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2.4 Katalog Endpoint Administratif (Protected Admin Routes)</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 12%;">Method</th>
+        <th style="width: 33%;">Endpoint URL</th>
+        <th style="width: 25%;">Role Diizinkan</th>
+        <th style="width: 30%;">Keterangan Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/admin/auth/login</code></td>
+        <td>Publik (Rate Limited)</td>
+        <td>Autentikasi admin; mengembalikan token JWT dan profil.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/admin/auth/me</code></td>
+        <td>Semua Role Terdaftar</td>
+        <td>Verifikasi validitas token sesi dan identitas user.</td>
+      </tr>
+      <tr>
+        <td><code>PUT</code></td>
+        <td><code>/api/admin/auth/change-password</code></td>
+        <td>Semua Role Terdaftar</td>
+        <td>Mengganti password akun user aktif setelah validasi lama.</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/admin/translate</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Mesin bantu terjemahan otomatis konten ID ke EN.</td>
+      </tr>
+      <tr>
+        <td><code>GET / POST</code></td>
+        <td><code>/api/admin/users</code></td>
+        <td>administrator, hrd</td>
+        <td>Melihat daftar user dan mendaftarkan akun internal baru.</td>
+      </tr>
+      <tr>
+        <td><code>PUT / DELETE</code></td>
+        <td><code>/api/admin/users/:id</code></td>
+        <td>administrator, hrd</td>
+        <td>Memperbarui role/status user atau menghapus user.</td>
+      </tr>
+      <tr>
+        <td><code>PUT</code></td>
+        <td><code>/api/admin/company</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Memperbarui profil perusahaan dan unggah banner utama.</td>
+      </tr>
+      <tr>
+        <td><code>PUT</code></td>
+        <td><code>/api/admin/contact</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Memperbarui kontak, tautan sosial media, dan WhatsApp.</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/admin/upload</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Unggah berkas gambar multipart dengan pembersihan berkas lama.</td>
+      </tr>
+      <tr>
+        <td><code>GET / POST</code></td>
+        <td><code>/api/admin/jobs</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Mengambil semua status lowongan dan membuat lowongan baru.</td>
+      </tr>
+      <tr>
+        <td><code>PUT / DELETE</code></td>
+        <td><code>/api/admin/jobs/:id</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Memperbarui kualifikasi atau menghapus lowongan.</td>
+      </tr>
+      <tr>
+        <td><code>CRUD</code></td>
+        <td><code>/api/admin/products</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Manajemen spesifikasi produk otomasi dan headunit.</td>
+      </tr>
+      <tr>
+        <td><code>CRUD</code></td>
+        <td><code>/api/admin/benefits</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Manajemen data fasilitas benefit kerja.</td>
+      </tr>
+      <tr>
+        <td><code>CRUD</code></td>
+        <td><code>/api/admin/programs</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Manajemen informasi program magang dan pelatihan.</td>
+      </tr>
+      <tr>
+        <td><code>CRUD</code></td>
+        <td><code>/api/admin/faqs</code></td>
+        <td>administrator, hrd, staff</td>
+        <td>Manajemen daftar pertanyaan tanya-jawab rekrutmen.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/admin/activity-logs</code></td>
+        <td>administrator, hrd</td>
+        <td>Audit trail rekaman aktivitas modifikasi data oleh user.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

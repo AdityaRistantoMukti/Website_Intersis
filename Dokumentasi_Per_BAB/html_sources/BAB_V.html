@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB V: Dokumentasi Arsitektur Frontend & Antarmuka Pengguna</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB V</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB V</div>
+    <h1>Dokumentasi Arsitektur Frontend & Antarmuka Pengguna</h1>
+    <div class="chapter-sub">React SPA dengan Vite, Vanilla CSS Design Tokens, Code Splitting, & 3D Robot Canvas</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>5.1 Pemilihan Teknologi &amp; Filosofi Antarmuka</h2>
+  <p>
+    Pada sisi antarmuka, saya mengimplementasikan Single Page Application (SPA) berbasis <strong>React 18 / 19</strong> yang dikompilasi menggunakan <strong>Vite</strong>. Pendekatan ini memberikan pengalaman penjelajahan yang sangat cepat tanpa reload halaman (zero full-page refreshes). Berbeda dengan template WordPress lama yang sarat dependensi CSS berat, saya merancang sistem styling kustom berbasis <strong>Vanilla CSS murni dengan CSS Custom Properties (Design Tokens)</strong>. Pendekatan ini menjamin fleksibilitas penuh, performa rendering 60 FPS, ukuran bundle akhir yang sangat kecil, serta tampilan visual modern yang elegan.
+  </p>
+
+  <h2>5.2 Routing Dinamis &amp; Code Splitting (Lazy Loading)</h2>
+  <p>
+    Saya menggunakan <code>createBrowserRouter</code> dari <code>react-router-dom</code> dengan pemisahan bundel kode asinkron (Code Splitting) melalui <code>React.lazy()</code> dan <code>Suspense</code>. Halaman hanya diunduh saat pengguna menavigasikannya, memangkas waktu muat awal secara signifikan:
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Rute Halaman (Path)</th>
+        <th style="width: 30%;">Komponen Lazy</th>
+        <th style="width: 45%;">Tujuan &amp; Konten yang Ditampilkan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/</code></td>
+        <td><code>HomePage.jsx</code></td>
+        <td>Beranda utama, showcase keunggulan manufaktur, pilar otomasi, dan metrik industri.</td>
+      </tr>
+      <tr>
+        <td><code>/about</code></td>
+        <td><code>AboutPage.jsx</code></td>
+        <td>Profil PT. GPT &amp; PT. ISA, visi-misi, sejarah perkembangan, dan fasilitas Batam FTZ.</td>
+      </tr>
+      <tr>
+        <td><code>/automation</code></td>
+        <td><code>AutomationPage.jsx</code></td>
+        <td>Halaman khusus robotik industri (Welding, Handling, Cutting) dengan kanvas 3D interaktif.</td>
+      </tr>
+      <tr>
+        <td><code>/products</code></td>
+        <td><code>ProductsPage.jsx</code></td>
+        <td>Katalog interaktif 12 produk elektronik, modal spesifikasi teknik, dan formulir pemesanan RFQ.</td>
+      </tr>
+      <tr>
+        <td><code>/gallery</code></td>
+        <td><code>GalleryPage.jsx</code></td>
+        <td>Dokumentasi foto fasilitas perakitan SMT, ruang pengujian cleanroom, dan kegiatan tim.</td>
+      </tr>
+      <tr>
+        <td><code>/career</code></td>
+        <td><code>CareerPage.jsx</code></td>
+        <td>Portal karir publik, pencarian posisi kerja, filter kategori divisi, dan tautan pendaftaran.</td>
+      </tr>
+      <tr>
+        <td><code>/career/jobs/:id</code></td>
+        <td><code>JobDetailPage.jsx</code></td>
+        <td>Rincian spesifik posisi kerja, kualifikasi pelamar, tanggung jawab, dan tombol apply langsung.</td>
+      </tr>
+      <tr>
+        <td><code>/career/benefits</code></td>
+        <td><code>BenefitsPage.jsx</code></td>
+        <td>Informasi tunjangan, fasilitas kesehatan, asuransi, dan fasilitas lingkungan kerja karyawan.</td>
+      </tr>
+      <tr>
+        <td><code>/career/programs</code></td>
+        <td><code>ProgramsPage.jsx</code></td>
+        <td>Peluang magang bersertifikat, Management Trainee, dan vokasi On-the-Job Training.</td>
+      </tr>
+      <tr>
+        <td><code>/faq</code></td>
+        <td><code>FaqPage.jsx</code></td>
+        <td>Akordeon tanya-jawab interaktif seputar seleksi rekrutmen dan tahapan wawancara.</td>
+      </tr>
+      <tr>
+        <td><code>/contact</code></td>
+        <td><code>ContactPage.jsx</code></td>
+        <td>Alamat resmi pabrik Batam, peta lokasi, kontak email departemen, dan form inquiry cepat.</td>
+      </tr>
+      <tr>
+        <td><code>/admin/login</code></td>
+        <td><code>AdminLoginPage.jsx</code></td>
+        <td>Gerbang masuk otentikasi tim HRD dan administrator sistem internal.</td>
+      </tr>
+      <tr>
+        <td><code>/admin/*</code></td>
+        <td><code>AdminDashboard.jsx</code></td>
+        <td>Dasbor kendali terproteksi untuk mengelola seluruh data website publik secara dinamis.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5.3 Manajemen State Global &amp; Arsitektur Provider</h2>
+  <p>Untuk mengelola data yang diakses lintas komponen, saya membangun 3 Context Provider utama:</p>
+  <ul>
+    <li><strong>LanguageContext:</strong> Mengelola status bahasa aktif ('id' atau 'en'). Menyediakan fungsi <code>toggleLanguage()</code> dan kamus terjemahan untuk seluruh elemen UI statis. Pilihan bahasa pengguna disimpan secara persisten di <code>localStorage</code> sehingga tidak hilang saat tab ditutup.</li>
+    <li><strong>AdminAuthContext:</strong> Mengelola sesi login administrator, penyimpanan token JWT, parsing payload profil pengguna, serta fungsi otomatisasi pembersihan sesi (auto-logout) saat token dinyatakan kedaluwarsa oleh backend.</li>
+    <li><strong>BrandingContext:</strong> Mengambil konfigurasi visual terkini dari backend (logo perusahaan, nama instansi, tautan favicon dinamis, dan kontak darurat) dan mendistribusikannya ke Navbar serta Footer secara real-time.</li>
+  </ul>
+
+  <h2>5.4 Komponen Kunci Khusus (Inovasi Fitur)</h2>
+  <ol>
+    <li><strong>RobotCanvas3D (Halaman Automation):</strong> Komponen interaktif yang merender model representasi lengan robot multi-sumbu secara dinamis menggunakan HTML5 Canvas, memberikan kesan teknologi tinggi (Industry 4.0) kepada calon klien industri.</li>
+    <li><strong>Interactive RFQ Modal:</strong> Kotak dialog penawaran harga terintegrasi yang menghitung estimasi kebutuhan perakitan dan langsung mengirimkan draf inquiry ke server dan WhatsApp tim sales engineering.</li>
+    <li><strong>WhatsApp Floating Action Button:</strong> Tombol melayang cerdas yang menyertakan pelacakan halaman asal pengunjung (telemetri) untuk memudahkan tim sales mengetahui produk apa yang sedang dilihat calon pembeli saat menghubungi WhatsApp.</li>
+  </ol>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

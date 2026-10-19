@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB VII: Dokumentasi Function, Method, Middleware, & Helper Kunci</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB VII</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB VII</div>
+    <h1>Dokumentasi Function, Method, Middleware, & Helper Kunci</h1>
+    <div class="chapter-sub">Rincian Logika Controller, Filter Hak Akses RBAC, Centralized Error, & Custom Hooks</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>7.1 Fungsi Kunci Backend Controllers</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Nama Fungsi / Method</th>
+        <th style="width: 30%;">Berkas Lokasi</th>
+        <th style="width: 45%;">Tugas Logika &amp; Alur Eksekusi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>login()</code></td>
+        <td><code>controllers/admin/authController.js</code></td>
+        <td>Mencari username di database, membandingkan password via <code>bcrypt.compare()</code>, menerbitkan token JWT bertandatangan aman, dan mencatat log login.</td>
+      </tr>
+      <tr>
+        <td><code>getJobVacancies()</code></td>
+        <td><code>controllers/public/publicJobController.js</code></td>
+        <td>Menjalankan query SQL dengan filter dinamis (kategori, tipe kerja, kata kunci), menghitung total paginasi, dan menyesuaikan bahasa respon berdasarkan header klien.</td>
+      </tr>
+      <tr>
+        <td><code>createJob() / updateJob()</code></td>
+        <td><code>controllers/admin/adminJobVacancyController.js</code></td>
+        <td>Menyimpan atau memperbarui data lowongan. Menerapkan transaksi data, validasi tautan form pendaftaran, dan mencatat log mutasi ke tabel activity_logs.</td>
+      </tr>
+      <tr>
+        <td><code>submitRfq()</code></td>
+        <td><code>controllers/telemetryController.js</code></td>
+        <td>Menerima formulir penawaran harga manufaktur, memeriksa batasan rate limiter, memvalidasi email, dan menyiapkan teks pesan ringkasan transaksi.</td>
+      </tr>
+      <tr>
+        <td><code>translateContent()</code></td>
+        <td><code>controllers/admin/translateController.js</code></td>
+        <td>Mesin utilitas yang memproses teks Bahasa Indonesia menjadi draf terjemahan Bahasa Inggris untuk mempercepat kerja staf HRD saat menginput lowongan.</td>
+      </tr>
+      <tr>
+        <td><code>getProducts()</code></td>
+        <td><code>controllers/public/publicProductController.js</code></td>
+        <td>Mengambil data 12 produk dari tabel products, mem-parsing kolom spesifikasi berformat JSON string menjadi objek JavaScript, dan mengurutkannya.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>7.2 Middlewares &amp; Utilitas Keamanan</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Middleware / Helper</th>
+        <th style="width: 30%;">Berkas Lokasi</th>
+        <th style="width: 45%;">Mekanisme Kerja &amp; Fungsi Keamanan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>verifyToken</code></td>
+        <td><code>middlewares/authMiddleware.js</code></td>
+        <td>Mengekstrak token Bearer dari header Authorization, mendekripsi via <code>jwt.verify()</code>, dan menyematkan payload user ke dalam <code>req.user</code>.</td>
+      </tr>
+      <tr>
+        <td><code>restrictTo(...roles)</code></td>
+        <td><code>middlewares/authMiddleware.js</code></td>
+        <td>Mengecek apakah role user pada <code>req.user.role</code> terdaftar dalam parameter yang diizinkan. Mengembalikan 403 Forbidden jika tidak berwenang.</td>
+      </tr>
+      <tr>
+        <td><code>errorHandler</code></td>
+        <td><code>middlewares/errorHandler.js</code></td>
+        <td>Menangkap seluruh error tak tertangani, mencatat rincian ke konsol internal, dan menyajikan pesan aman kepada klien.</td>
+      </tr>
+      <tr>
+        <td><code>deleteFileIfLocal()</code></td>
+        <td><code>utils/fileCleanup.js</code></td>
+        <td>Menghapus berkas fisik lama di folder <code>uploads/</code> saat admin mengunggah berkas pengganti baru untuk mencegah pemborosan kapasitas harddisk server.</td>
+      </tr>
+      <tr>
+        <td><code>upload.single()</code></td>
+        <td><code>middlewares/uploadMiddleware.js</code></td>
+        <td>Konfigurasi Multer untuk menangani berkas gambar dengan filter mime-type ketat (JPEG, PNG, WEBP) dan batas ukuran maksimal 5 Megabytes.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>7.3 Custom Hooks &amp; State Management Frontend</h2>
+  <ul>
+    <li><strong><code>useLanguage()</code>:</strong> Mengembalikan nilai bahasa aktif saat ini (lang), fungsi pengubah bahasa (setLang), serta fungsi bantu terjemahan <code>t(key)</code> yang mengambil pasangan frasa dari berkas kamus <code>locales/</code>.</li>
+    <li><strong><code>useAuth()</code>:</strong> Menyediakan data sesi akun admin (nama, email, role, token), status pengecekan otentikasi (isAuthenticated), serta fungsi <code>login(credentials)</code> dan <code>logout()</code>.</li>
+    <li><strong><code>formatDate(dateString, lang)</code>:</strong> Mengubah format tanggal ISO dari database MySQL menjadi format bacaan formal manusia (contoh: "19 Oktober 2026" atau "October 19, 2026").</li>
+  </ul>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

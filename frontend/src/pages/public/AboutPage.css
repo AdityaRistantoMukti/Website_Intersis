@@ -964,20 +964,40 @@
 /* ── 4. MODERN TRACING BEAM TIMELINE (SKIPER UI INSPIRATION) ── */
 .about-milestones {
   padding: 7rem 0 7.5rem;
-  background: #09090b;
-  color: #ffffff;
+  background-color: #f8fafc;
+  color: #09090b;
   position: relative;
   overflow: hidden;
-  border-top: 1px solid #27272a;
-  border-bottom: 1px solid #27272a;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="light"] .about-milestones {
+  background-color: #f8fafc;
+  color: #09090b;
+  border-top-color: #e2e8f0;
+  border-bottom-color: #e2e8f0;
+}
+
+[data-theme="dark"] .about-milestones {
+  background-color: #09090b;
+  color: #ffffff;
+  border-top-color: #27272a;
+  border-bottom-color: #27272a;
 }
 
 .about-milestones::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.05) 0%, transparent 65%);
+  background: radial-gradient(circle at 50% 25%, rgba(0, 0, 0, 0.03) 0%, transparent 65%);
   pointer-events: none;
+  transition: background 0.25s ease;
+}
+
+[data-theme="dark"] .about-milestones::before {
+  background: radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.05) 0%, transparent 65%);
 }
 
 .about-section-header {
@@ -990,19 +1010,35 @@
   margin: 0 auto 4.5rem;
 }
 
-.about-section-header .about-kicker {
+.about-milestones .about-section-header .about-kicker {
+  color: #64748b;
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .about-milestones .about-section-header .about-kicker {
   color: #a1a1aa;
 }
 
-.about-section-header .about-heading {
+.about-milestones .about-section-header .about-heading {
+  color: #09090b;
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .about-milestones .about-section-header .about-heading {
   color: #ffffff;
 }
 
-.about-section-header p,
-.about-subtitle {
-  color: #a1a1aa;
+.about-milestones .about-section-header p,
+.about-milestones .about-subtitle {
+  color: #475569;
   font-size: 1rem;
   line-height: 1.6;
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .about-milestones .about-section-header p,
+[data-theme="dark"] .about-milestones .about-subtitle {
+  color: #cbd5e1;
 }
 
 /* Tracing Beam Container */
@@ -1020,14 +1056,30 @@
   bottom: 60px;
   width: 2px;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
   pointer-events: none;
   z-index: 1;
+  transition: background 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-beam-track {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .timeline-beam-line {
   position: absolute;
   inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(15, 23, 42, 0.75) 20%,
+    rgba(15, 23, 42, 0.75) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  transition: background 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-beam-line {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 0%,
@@ -1040,6 +1092,11 @@
 .timeline-beam-glow {
   position: absolute;
   inset: 0;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-beam-glow {
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
 }
 
@@ -1097,9 +1154,15 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.18);
   animation: radarPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-node-pulse {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 @keyframes radarPulse {
@@ -1118,12 +1181,19 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #09090b;
-  border: 2px solid #ffffff;
+  background: #ffffff;
+  border: 2px solid #09090b;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-node-core {
+  background: #09090b;
+  border-color: #ffffff;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
 }
 
@@ -1131,6 +1201,11 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  background: #09090b;
+  transition: background-color 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-node-dot {
   background: #ffffff;
 }
 
@@ -1141,13 +1216,22 @@
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: #a1a1aa;
-  background: #18181b;
-  border: 1px solid #27272a;
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   padding: 2px 7px;
   border-radius: 10px;
   white-space: nowrap;
   z-index: 3;
+  transition: all 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-node-year-chip {
+  color: #a1a1aa;
+  background: #18181b;
+  border-color: #27272a;
+  box-shadow: none;
 }
 
 /* Bento Milestone Card */
@@ -1156,11 +1240,11 @@
 }
 
 .timeline-bento-card {
-  background: #121215;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 18px;
   padding: 2rem;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
@@ -1172,6 +1256,17 @@
 
 .timeline-bento-card:hover {
   transform: translateY(-5px);
+  border-color: #cbd5e1;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.09);
+}
+
+[data-theme="dark"] .timeline-bento-card {
+  background: #121215;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .timeline-bento-card:hover {
   border-color: rgba(255, 255, 255, 0.35);
   box-shadow: 0 28px 64px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 255, 255, 0.08);
 }
@@ -1189,11 +1284,18 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #ffffff;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
   padding: 4px 11px;
   border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-bento-card__badge {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
 }
 
 .timeline-bento-card__era {
@@ -1201,6 +1303,11 @@
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.12em;
+  color: #64748b;
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-bento-card__era {
   color: #71717a;
 }
 
@@ -1209,15 +1316,25 @@
   font-weight: 800;
   line-height: 1.3;
   letter-spacing: -0.015em;
-  color: #ffffff;
+  color: #09090b;
   margin: 0;
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-bento-card__title {
+  color: #ffffff;
 }
 
 .timeline-bento-card__desc {
   font-size: 0.925rem;
   line-height: 1.65;
-  color: #cbd5e1;
+  color: #334155;
   margin: 0;
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-bento-card__desc {
+  color: #cbd5e1;
 }
 
 .timeline-bento-card__media {
@@ -1226,8 +1343,14 @@
   aspect-ratio: 16 / 9;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid #e2e8f0;
   margin-top: 0.25rem;
+  background: #f1f5f9;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-bento-card__media {
+  border-color: rgba(255, 255, 255, 0.12);
   background: #18181b;
 }
 
@@ -1246,8 +1369,13 @@
 .timeline-bento-card__media-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(9, 9, 11, 0.75) 100%);
+  background: linear-gradient(180deg, transparent 55%, rgba(15, 23, 42, 0.28) 100%);
   pointer-events: none;
+  transition: background 0.25s ease;
+}
+
+[data-theme="dark"] .timeline-bento-card__media-overlay {
+  background: linear-gradient(180deg, transparent 40%, rgba(9, 9, 11, 0.75) 100%);
 }
 
 /* Responsive Timeline on Mobile & Tablet */
@@ -1584,12 +1712,16 @@
 
 @media (max-width: 768px) {
   .about-hero {
-    padding: 6.5rem 0 3.5rem;
+    padding: 6.25rem 0 3rem;
+  }
+
+  .about-hero__title {
+    font-size: clamp(1.6rem, 5.5vw, 2.35rem);
   }
 
   .about-bento-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
   }
 
   .about-bento-col--3 {
@@ -1597,38 +1729,48 @@
   }
 
   .about-bento-card--photo-tall {
-    height: 280px;
+    height: 260px;
+  }
+
+  .about-narrative {
+    padding: 4.5rem 0;
   }
 
   .about-narrative__stats-row {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
   }
 
-  .about-values-deck {
-    grid-template-columns: 1fr;
+  .about-vm {
+    padding: 4.5rem 0;
   }
 
-  .timeline-bar {
-    grid-template-columns: 1fr;
+  .about-vm__panorama {
+    margin-bottom: 2.25rem;
   }
 
-  .timeline-card {
-    grid-template-columns: 1fr;
-    text-align: left;
-    gap: 1.5rem;
+  .about-vm__panorama-caption {
     padding: 1.75rem;
   }
 
-  .timeline-card__badge-wrap {
-    width: 90px;
-    height: 90px;
+  .vm-card {
+    padding: 1.75rem;
+  }
+
+  .about-facility {
+    padding: 4.5rem 0;
+  }
+
+  .facility-stage {
+    padding: 2rem 1.5rem;
+    gap: 2rem;
   }
 
   .about-cta__inner {
     flex-direction: column;
     text-align: center;
     align-items: center;
+    gap: 2rem;
   }
 
   .about-cta__actions {
@@ -1641,3 +1783,320 @@
     justify-content: center;
   }
 }
+
+/* ── Mobile Devices (≤ 480px) ── */
+@media (max-width: 480px) {
+  .about-hero {
+    padding: 5rem 0 2.25rem;
+  }
+
+  .about-hero__header {
+    margin: 0.75rem auto 1.5rem;
+  }
+
+  .about-hero__title {
+    font-size: clamp(1.35rem, 5.8vw, 1.75rem);
+    letter-spacing: -0.02em;
+  }
+
+  .about-hero__lead {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .about-bento-card {
+    border-radius: 16px;
+  }
+
+  .about-bento-card--photo-tall {
+    height: 220px;
+  }
+
+  .about-bento-card--photo-sm {
+    height: 155px;
+  }
+
+  .about-bento-card--stat {
+    height: auto;
+    padding: 1rem 0.95rem;
+  }
+
+  .about-bento-stat__num {
+    font-size: 1.85rem;
+  }
+
+  .about-bento-card--badge {
+    height: auto;
+    padding: 1.15rem 0.95rem;
+  }
+
+  .about-narrative {
+    padding: 3.5rem 0;
+  }
+
+  .about-heading {
+    font-size: clamp(1.35rem, 5.5vw, 1.85rem);
+  }
+
+  .about-narrative__quote {
+    padding: 0.85rem 1rem;
+    gap: 10px;
+  }
+
+  .about-narrative__quote-text {
+    font-size: 0.875rem;
+  }
+
+  .about-narrative__text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .about-company-photo-caption {
+    padding: 1.25rem 1rem;
+  }
+
+  .about-company-photo-title {
+    font-size: 1.15rem;
+  }
+
+  .about-company-photo-sub {
+    font-size: 0.8rem;
+  }
+
+  .about-narrative__stats-strip {
+    margin-top: 2.75rem;
+    padding-top: 2.25rem;
+  }
+
+  .about-stat-item__val {
+    font-size: clamp(1.85rem, 7vw, 2.5rem);
+  }
+
+  .about-stat-item__label {
+    font-size: 0.75rem;
+  }
+
+  .about-vm {
+    padding: 3.5rem 0;
+  }
+
+  .about-vm__panorama {
+    max-height: 230px;
+    margin-bottom: 1.75rem;
+    border-radius: 12px;
+  }
+
+  .about-vm__panorama-caption {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .about-vm__panorama-title {
+    font-size: 1.05rem;
+  }
+
+  .vm-card {
+    padding: 1.25rem 1rem;
+    border-radius: 12px;
+  }
+
+  .vm-card__title {
+    font-size: 1.15rem;
+  }
+
+  .vm-mission-item {
+    font-size: 0.825rem;
+    gap: 8px;
+  }
+
+  /* Timeline Tracing Beam Mobile Adaptation */
+  .timeline-beam-track {
+    left: 19px;
+  }
+
+  .timeline-node-row {
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+  }
+
+  .timeline-node-anchor {
+    width: 40px;
+    height: 40px;
+  }
+
+  .timeline-node-pulse {
+    width: 32px;
+    height: 32px;
+  }
+
+  .timeline-node-core {
+    width: 18px;
+    height: 18px;
+  }
+
+  .timeline-node-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .timeline-node-year-chip {
+    font-size: 0.62rem;
+    padding: 1px 5px;
+    bottom: -18px;
+  }
+
+  .timeline-bento-card {
+    padding: 1.25rem 0.95rem;
+    border-radius: 14px;
+    gap: 0.85rem;
+  }
+
+  .timeline-bento-card__title {
+    font-size: 1.1rem;
+  }
+
+  .timeline-bento-card__desc {
+    font-size: 0.825rem;
+    line-height: 1.55;
+  }
+
+  .timeline-bento-card__header {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .about-facility {
+    padding: 3.5rem 0;
+  }
+
+  .facility-nav {
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .facility-tab-btn {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+    border-radius: 20px;
+  }
+
+  .facility-stage {
+    padding: 1.25rem 0.85rem;
+    gap: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .facility-stage__info h3 {
+    font-size: 1.2rem;
+  }
+
+  .facility-stage__desc {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .facility-spec-item {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+
+  .about-cta {
+    padding: 3.5rem 0;
+  }
+
+  .about-cta__title {
+    font-size: 1.45rem;
+  }
+
+  .about-cta__subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+/* ── Small & Foldable Phones (≤ 360px & down to 300px) ── */
+@media (max-width: 360px) {
+  .about-hero {
+    padding: 4.5rem 0 1.75rem;
+  }
+
+  .about-hero__title {
+    font-size: 1.25rem;
+  }
+
+  .about-hero__lead {
+    font-size: 0.8rem;
+  }
+
+  .about-bento-stat__num {
+    font-size: 1.6rem;
+  }
+
+  .about-bento-focal__title {
+    font-size: 0.95rem;
+  }
+
+  .about-heading {
+    font-size: 1.25rem;
+  }
+
+  .about-narrative__quote-text {
+    font-size: 0.8rem;
+  }
+
+  .about-narrative__text {
+    font-size: 0.8rem;
+  }
+
+  .about-company-photo-title {
+    font-size: 1rem;
+  }
+
+  .about-stat-item__val {
+    font-size: 1.65rem;
+  }
+
+  .timeline-beam-track {
+    left: 15px;
+  }
+
+  .timeline-node-row {
+    gap: 0.6rem;
+  }
+
+  .timeline-node-anchor {
+    width: 32px;
+    height: 32px;
+  }
+
+  .timeline-node-pulse {
+    width: 26px;
+    height: 26px;
+  }
+
+  .timeline-bento-card {
+    padding: 1rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .timeline-bento-card__title {
+    font-size: 0.98rem;
+  }
+
+  .facility-tab-btn {
+    padding: 5px 9px;
+    font-size: 0.72rem;
+  }
+
+  .facility-stage {
+    padding: 1rem 0.7rem;
+  }
+
+  .facility-stage__info h3 {
+    font-size: 1.1rem;
+  }
+
+  .about-cta__title {
+    font-size: 1.25rem;
+  }
+}
+

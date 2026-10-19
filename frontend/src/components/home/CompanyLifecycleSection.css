@@ -901,3 +901,87 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ── Mobile Devices (≤ 480px) ── */
+@media (max-width: 480px) {
+  .lifecycle-stepper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+    margin-bottom: var(--space-6);
+  }
+
+  .lifecycle-stepper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lifecycle-stepper__bar {
+    min-width: 310px;
+    justify-content: space-between;
+  }
+
+  .lifecycle-node {
+    width: 68px;
+    gap: 6px;
+  }
+
+  .lifecycle-node__circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lifecycle-node__number {
+    font-size: 0.8rem;
+  }
+
+  .lifecycle-node__label {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+
+  .lifecycle-connector {
+    margin-top: 15px;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .lifecycle-stage {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .lifecycle-stage__content {
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .lifecycle-stage__title {
+    font-size: 1.2rem;
+  }
+
+  .lifecycle-stage__lead {
+    font-size: 0.85rem;
+  }
+}
+
+/* ── Small & Foldable Phones (≤ 360px & down to 300px) ── */
+@media (max-width: 360px) {
+  .lifecycle-node {
+    width: 62px;
+  }
+
+  .lifecycle-node__label {
+    font-size: 0.6rem;
+  }
+
+  .lifecycle-3d-card__telemetry {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .lifecycle-stage__content {
+    padding: 1rem 0.75rem;
+  }
+}
+

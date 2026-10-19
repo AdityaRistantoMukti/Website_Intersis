@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BAB VIII: Dokumentasi Struktur Berkas Proyek (File Catalog)</title>
+  <style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .chapter-title-box {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+  }
+  .chapter-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .chapter-sub {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    margin: 0;
+  }
+  .meta-box {
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    font-size: 9pt;
+    font-family: Arial, Helvetica, sans-serif;
+    page-break-inside: avoid;
+  }
+  .meta-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .meta-box td {
+    padding: 3px 0;
+    vertical-align: top;
+  }
+  .meta-box td.lbl {
+    font-weight: bold;
+    width: 160px;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    break-after: avoid;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #333333;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  table.data-table th {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+  }
+  pre {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.35;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .doc-footer {
+    margin-top: 35px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span>PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies</span>
+    <span>Dokumentasi Sistem Resmi &bull; BAB VIII</span>
+  </div>
+
+  <div class="chapter-title-box">
+    <div class="chapter-num">BAB VIII</div>
+    <h1>Dokumentasi Struktur Berkas Proyek (File Catalog)</h1>
+    <div class="chapter-sub">Katalog Lengkap File Backend, Frontend, Konfigurasi Lingkungan, & Modul Database</div>
+  </div>
+
+  <div class="meta-box">
+    <table>
+      <tr>
+        <td class="lbl">Penyusun / Penulis:</td>
+        <td>Saya (Fullstack Developer &amp; System Architect)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Entitas Perusahaan:</td>
+        <td>PT. Global Philsonic Technologies (GPT) &mdash; Unit Bisnis PT. Intersis Sejahtera Abadi (ISA)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kawasan Operasional:</td>
+        <td>Batam Free Trade Zone (FTZ), Kepulauan Riau, Indonesia</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal &amp; Status:</td>
+        <td>Oktober 2026 &bull; Dokumen Final Teknis (Monokrom Standar)</td>
+      </tr>
+    </table>
+  </div>
+
+  
+  <h2>8.1 Katalog Berkas Kunci Direktori Backend</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 30%;">Path &amp; Nama Berkas</th>
+        <th style="width: 70%;">Deskripsi Peran &amp; Tanggung Jawab Teknis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>backend/src/server.js</code></td>
+        <td>Titik masuk utama aplikasi Node.js. Menginisialisasi Express, mengaktifkan middleware keamanan (Helmet, CORS, Body Parser), menghubungkan rute publik dan admin, serta menangani error handler terpusat.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/config/db.js</code></td>
+        <td>Modul pool koneksi MySQL menggunakan <code>mysql2/promise</code>. Mengelola antrean koneksi, uji konektivitas awal, dan penanganan pemutusan jaringan database.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/routes/publicRoutes.js</code></td>
+        <td>Mendefinisikan 15 rute endpoint publik (profil perusahaan, produk, otomasi, lowongan kerja, form RFQ, telemetri) yang dapat diakses oleh publik tanpa otentikasi.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/routes/adminRoutes.js</code></td>
+        <td>Mendefinisikan seluruh rute terproteksi dashboard admin, menerapkan filter token JWT, pembatasan hak akses role, penanganan upload berkas, dan validator input.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/middlewares/authMiddleware.js</code></td>
+        <td>Berisi implementasi fungsi <code>verifyToken</code> dan <code>restrictTo</code> untuk pengamanan gerbang API administratif.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/middlewares/rateLimiter.js</code></td>
+        <td>Konfigurasi ambang batas permintaan IP untuk menangkal brute-force login dan spam formulir RFQ.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/validators/contentValidators.js</code></td>
+        <td>Aturan validasi field untuk modul profil perusahaan, kontak, nilai inti, produk, galeri, benefit, dan FAQ.</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/validators/jobVacancyValidator.js</code></td>
+        <td>Aturan validasi ketat untuk pembuatan lowongan pekerjaan (kategori, format tipe kerja, deskripsi kualifikasi).</td>
+      </tr>
+      <tr>
+        <td><code>backend/src/utils/fileCleanup.js</code></td>
+        <td>Utilitas penghapusan berkas fisik lokal di server ketika ada pergantian aset gambar oleh admin.</td>
+      </tr>
+      <tr>
+        <td><code>backend/.env</code></td>
+        <td>Berkas konfigurasi variabel lingkungan yang memuat port server, nama database, kredensial pengguna MySQL, dan kunci rahasia enkripsi JWT.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>8.2 Katalog Berkas Kunci Direktori Frontend</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 30%;">Path &amp; Nama Berkas</th>
+        <th style="width: 70%;">Deskripsi Peran &amp; Tanggung Jawab Teknis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>frontend/src/main.jsx</code></td>
+        <td>Titik masuk kompilasi React. Me-mount elemen virtual root ke elemen DOM <code>#root</code> di <code>index.html</code>.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/App.jsx</code></td>
+        <td>Konfigurasi router SPA (<code>createBrowserRouter</code>), pembungkusan context provider global, dan pemisahan modul lazy loading.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/index.css</code></td>
+        <td>Desain sistem global aplikasi: mendefinisikan variabel warna korporat (Teal, Slate, Navy, Gray), tipografi modern, reset CSS, dan kelas utilitas flex/grid.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/pages/public/HomePage.jsx</code></td>
+        <td>Halaman beranda utama dengan hero showcase, metrik kapasitas produksi pabrik Batam, dan cuplikan pilar robotik.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/pages/public/AutomationPage.jsx</code></td>
+        <td>Halaman pameran teknologi otomasi robotik GPT (Welding, Handling, Cutting) lengkap dengan visual canvas 3D.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/pages/public/ProductsPage.jsx</code></td>
+        <td>Katalog interaktif 12 produk elektronik manufaktur dengan modal popup spesifikasi teknis dan tombol order RFQ.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/pages/public/CareerPage.jsx</code></td>
+        <td>Halaman pencarian karir dan lowongan kerja dengan filter kategori divisi dan kotak pencarian real-time.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/pages/admin/AdminDashboard.jsx</code></td>
+        <td>Antarmuka dasbor manajemen internal terintegrasi untuk mengontrol seluruh konten website secara visual.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/components/layout/Navbar.jsx</code></td>
+        <td>Komponen navigasi atas responsif, dilengkapi tombol pengalih bahasa bilingual (ID/EN) dan menu seluler.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/components/layout/Footer.jsx</code></td>
+        <td>Bagian kaki website yang memuat informasi identitas PT. GPT, tautan navigasi cepat, dan hak cipta resmi.</td>
+      </tr>
+      <tr>
+        <td><code>frontend/src/context/LanguageContext.jsx</code></td>
+        <td>Pusat kendali bahasa antarmuka, menyediakan state aktif dan metode toggle bahasa dengan persistensi lokal.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="doc-footer">
+    <div>
+      <strong>Disahkan Oleh:</strong> Saya (Fullstack Developer &amp; System Architect)<br>
+      PT. Intersis Sejahtera Abadi &bull; PT. Global Philsonic Technologies
+    </div>
+    <div style="text-align: right;">
+      <strong>Lokasi:</strong> Batam Free Trade Zone, Indonesia<br>
+      Oktober 2026
+    </div>
+  </div>
+</body>
+</html>

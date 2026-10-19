@@ -178,6 +178,7 @@ export default function Navbar() {
               <NavLink
                 to={to}
                 end={to === '/'}
+                onClick={() => setMenuOpen(false)}
                 className={({ isActive }) =>
                   `navbar__mobile-link${isActive ? ' navbar__mobile-link--active' : ''}`
                 }
