@@ -22,16 +22,22 @@ const CATEGORIES = [
   { key: 'dash_camera_recorders',     label: 'Dash Camera Recorders' },
 ];
 
-const getCategoryLabel = (catKey) => {
-  const found = CATEGORIES.find(c => c.key === catKey);
-  if (found) return found.label;
+export const normalizeCategory = (catKey) => {
+  if (!catKey) return 'automation';
   const legacyMap = {
-    headunit: 'Android Headunit',
-    audio: 'Audio DSP & Amplifier',
-    dashcam: 'Dash Camera Recorders',
-    ems: 'Automation & EMS'
+    headunit: 'android_headunit',
+    infotainment: 'android_headunit',
+    audio: 'amplifier',
+    dashcam: 'dash_camera_recorders',
+    ems: 'automation',
   };
   return legacyMap[catKey] || catKey;
+};
+
+const getCategoryLabel = (catKey) => {
+  const norm = normalizeCategory(catKey);
+  const found = CATEGORIES.find(c => c.key === norm);
+  return found ? found.label : (catKey || 'Automation');
 };
 
 const BADGE_COLORS = ['teal', 'blue', 'purple', 'red', 'gold'];
@@ -275,7 +281,7 @@ function ProductFormModal({ product, onClose, onSaved }) {
     if (!product) return { ...EMPTY_PRODUCT, specs: EMPTY_PRODUCT.specs.map(s => ({ ...s })) };
     return {
       model_code:    product.model_code   || '',
-      category:      product.category     || 'automation',
+      category:      normalizeCategory(product.category),
       badge:         product.badge        || '',
       badge_color:   product.badge_color  || 'teal',
       title_id:      product.title_id     || '',
@@ -1671,7 +1677,7 @@ export default function ProductsModule() {
 
   // ─── Catalog State ───
   const [products, setProducts] = useState([]);
-  const [catFilter, setCatFilter] = useState('all');
+  const [catFilter, setCatFilter] = useState('automation');
   const [searchQuery, setSearchQuery] = useState('');
   const [modalProduct, setModalProduct] = useState(undefined); // undefined=closed, null=new, obj=edit
 
@@ -1787,10 +1793,11 @@ export default function ProductsModule() {
     }
   };
 
-  // Filtered products list
+  // Filtered products list - strictly filtered by active 1 of 7 categories
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
-      const matchCat = catFilter === 'all' || p.category === catFilter;
+      const pCat = normalizeCategory(p.category);
+      const matchCat = pCat === catFilter;
       if (!matchCat) return false;
       if (!searchQuery.trim()) return true;
       const q = searchQuery.toLowerCase();
@@ -1915,14 +1922,12 @@ export default function ProductsModule() {
             </div>
           </div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills - strictly 7 categories only */}
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: '1.25rem' }}>
-            {[{ key: 'all', label: `Semua (${products.length})` },
-              ...CATEGORIES.map(c => ({
-                key: c.key,
-                label: `${c.label} (${products.filter(p => p.category === c.key).length})`
-              }))
-            ].map(f => (
+            {CATEGORIES.map(c => ({
+              key: c.key,
+              label: `${c.label} (${products.filter(p => normalizeCategory(p.category) === c.key).length})`
+            })).map(f => (
               <button key={f.key} type="button"
                 onClick={() => setCatFilter(f.key)}
                 style={{
@@ -1943,8 +1948,8 @@ export default function ProductsModule() {
               <Package size={40} style={{ opacity: 0.3, margin: '0 auto 0.75rem' }} />
               <p>
                 {searchQuery
-                  ? `Tidak ada produk yang cocok dengan pencarian "${searchQuery}".`
-                  : 'Belum ada produk di kategori ini. Klik "Tambah Produk" untuk mulai.'}
+                  ? `Tidak ada produk yang cocok dengan pencarian "${searchQuery}" pada kategori ini.`
+                  : `Belum ada produk untuk kategori "${getCategoryLabel(catFilter)}". Klik "+ Tambah Produk" untuk mulai.`}
               </p>
             </div>
           ) : (

@@ -48,18 +48,13 @@
     "noProductsFound": "No engineering products match your search criteria.",
     "exploreAll": "Open Complete Product Catalog",
     "categories": {
-      "all": "All Product Lines",
       "automation": "Automation",
       "mobile_intelligent_device": "Mobile Intelligent Device",
       "amplifier": "Amplifier",
       "subwoofer": "Subwoofer",
       "dsp": "DSP",
       "android_headunit": "Android Headunit",
-      "dash_camera_recorders": "Dash Camera Recorders",
-      "headunit": "Headunits & Smart Displays",
-      "audio": "Audio DSPs & Amplifiers",
-      "dashcam": "Dashcams & ADAS Sensors",
-      "ems": "SMT & PCB Assembly"
+      "dash_camera_recorders": "Dash Camera Recorders"
     }
   },
   "globalTrade": {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import api, { getImageUrl } from '../../lib/api';
@@ -10,13 +10,28 @@ import ProductSpecsModal from '../../components/home/ProductSpecsModal';
 import './ProductsPage.css';
 
 /**
+ * Normalizes any legacy or variant category keys into strictly 1 of the 7 categories
+ */
+export const normalizeCategory = (catKey) => {
+  if (!catKey) return 'automation';
+  const legacyMap = {
+    headunit: 'android_headunit',
+    infotainment: 'android_headunit',
+    audio: 'amplifier',
+    dashcam: 'dash_camera_recorders',
+    ems: 'automation',
+  };
+  return legacyMap[catKey] || catKey;
+};
+
+/**
  * Transform API response row (snake_case) → frontend shape used by components
  */
 function transformProduct(row) {
   return {
     id:          String(row.id),
     modelCode:   row.model_code,
-    category:    row.category,
+    category:    normalizeCategory(row.category),
     badge:       row.badge,
     badgeColor:  row.badge_color,
     image:       row.image || null,
@@ -231,11 +246,9 @@ export default function ProductsPage() {
     return () => { isMounted = false; };
   }, []);
 
-  // Filters & View State
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
-  const [copiedId, setCopiedId] = useState(null);
+  // URL Params & Filter State
+  const [searchParams] = useSearchParams();
+  const urlCategory = searchParams.get('category');
 
   // Modals
   const [selectedSpecsProduct, setSelectedSpecsProduct] = useState(null);
@@ -243,7 +256,6 @@ export default function ProductsPage() {
 
   const rawCategories = useMemo(() => {
     const defaultList = [
-      { key: 'all',                       label: t('products:catalog.categories.all') || (isId ? 'Semua Produk' : 'All Products') },
       { key: 'automation',                label: t('products:catalog.categories.automation') || 'Automation' },
       { key: 'mobile_intelligent_device', label: t('products:catalog.categories.mobile_intelligent_device') || 'Mobile Intelligent Device' },
       { key: 'amplifier',                 label: t('products:catalog.categories.amplifier') || 'Amplifier' },
@@ -255,37 +267,42 @@ export default function ProductsPage() {
 
     if (Array.isArray(catSettings) && catSettings.length > 0) {
       return defaultList.map(item => {
-        if (item.key === 'all') return item;
         const found = catSettings.find(c => c.key === item.key);
         return found ? { ...item, label: found.name || item.label } : item;
       });
     }
 
     return defaultList;
-  }, [t, catSettings, isId]);
+  }, [t, catSettings]);
 
-  // Tampilkan 7 kategori utama berurutan serta sertakan kategori legacy jika masih ada data produknya
-  const categories = useMemo(() => {
-    const knownKeys = new Set(rawCategories.map(c => c.key));
-    const extraCats = [];
-    allProducts.forEach(p => {
-      if (p.category && !knownKeys.has(p.category)) {
-        knownKeys.add(p.category);
-        extraCats.push({
-          key: p.category,
-          label: t(`products:catalog.categories.${p.category}`) || p.category
-        });
+  // STRICTLY 7 CATEGORIES ONLY
+  const categories = rawCategories;
+
+  const validCategoryKeys = useMemo(() => categories.map(c => c.key), [categories]);
+
+  const [activeCategory, setActiveCategory] = useState(() => {
+    if (urlCategory) {
+      const norm = normalizeCategory(urlCategory);
+      if (['automation', 'mobile_intelligent_device', 'amplifier', 'subwoofer', 'dsp', 'android_headunit', 'dash_camera_recorders'].includes(norm)) {
+        return norm;
       }
-    });
-    return [...rawCategories, ...extraCats];
-  }, [rawCategories, allProducts, t]);
-
-  // Otomatis reset ke 'all' jika kategori yang aktif sudah tidak memiliki produk
-  useEffect(() => {
-    if (activeCategory !== 'all' && !categories.some((c) => c.key === activeCategory)) {
-      setActiveCategory('all');
     }
-  }, [categories, activeCategory]);
+    return 'automation';
+  });
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
+  const [copiedId, setCopiedId] = useState(null);
+
+  // Sync category if URL parameter changes
+  useEffect(() => {
+    if (urlCategory) {
+      const norm = normalizeCategory(urlCategory);
+      if (validCategoryKeys.includes(norm)) {
+        setActiveCategory(norm);
+      }
+    }
+  }, [urlCategory, validCategoryKeys]);
 
   // Quick SKU copy
   const handleCopySku = (e, code, id) => {
@@ -295,30 +312,30 @@ export default function ProductsPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  // Reset all filters
+  // Reset filters: reset search and set category back to 'automation'
   const handleResetFilters = () => {
-    setActiveCategory('all');
+    setActiveCategory('automation');
     setSearchQuery('');
   };
 
-  // Filtered products logic
+  // Filtered products logic - strictly 1 of 7 categories
   const filteredProducts = useMemo(() => {
     return allProducts.filter((prod) => {
-      const matchCat = activeCategory === 'all' || prod.category === activeCategory;
-      if (!matchCat) return false;
+      const prodCat = normalizeCategory(prod.category);
+      if (prodCat !== activeCategory) return false;
 
       if (!searchQuery.trim()) return true;
       const q = searchQuery.toLowerCase();
-      const title = (prod.title[isId ? 'id' : 'en'] || prod.title.en).toLowerCase();
-      const code = prod.modelCode.toLowerCase();
-      const desc = (prod.shortDesc[isId ? 'id' : 'en'] || prod.shortDesc.en).toLowerCase();
+      const title = (prod.title[isId ? 'id' : 'en'] || prod.title.en || '').toLowerCase();
+      const code = (prod.modelCode || '').toLowerCase();
+      const desc = (prod.shortDesc[isId ? 'id' : 'en'] || prod.shortDesc.en || '').toLowerCase();
       const specsMatch = (prod.specs || []).some(
         (s) => s.label.toLowerCase().includes(q) || s.value.toLowerCase().includes(q)
       );
 
       return title.includes(q) || code.includes(q) || desc.includes(q) || specsMatch;
     });
-  }, [activeCategory, searchQuery, isId, allProducts]);
+  }, [allProducts, activeCategory, searchQuery, isId]);
 
   // Stat chips data dengan jumlah produk dinamis sesuai database
   const heroChips = useMemo(() => {
@@ -518,12 +535,10 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          {/* Category Filter Pills (Clean text tabs, no unnecessary icons) */}
+          {/* Category Filter Pills (Clean text tabs, strictly 7 categories) */}
           <div className="catalog-pills" role="tablist">
             {categories.map(({ key, label }) => {
-              const count = key === 'all'
-                ? allProducts.length
-                : allProducts.filter(p => p.category === key).length;
+              const count = allProducts.filter(p => normalizeCategory(p.category) === key).length;
 
               return (
                 <button
@@ -546,14 +561,12 @@ export default function ProductsPage() {
             <div className="catalog-active-bar__info">
               <span className="catalog-active-bar__count">
                 {isId
-                  ? `Menampilkan ${filteredProducts.length} dari ${allProducts.length} produk`
-                  : `Showing ${filteredProducts.length} of ${allProducts.length} products`}
+                  ? `Menampilkan ${filteredProducts.length} produk untuk kategori "${categories.find(c => c.key === activeCategory)?.label || activeCategory}"`
+                  : `Showing ${filteredProducts.length} products in "${categories.find(c => c.key === activeCategory)?.label || activeCategory}"`}
               </span>
-              {activeCategory !== 'all' && (
-                <span className="catalog-active-bar__tag">
-                  {categories.find(c => c.key === activeCategory)?.label}
-                </span>
-              )}
+              <span className="catalog-active-bar__tag">
+                {categories.find(c => c.key === activeCategory)?.label}
+              </span>
               {searchQuery && (
                 <span className="catalog-active-bar__tag catalog-active-bar__tag--query">
                   &ldquo;{searchQuery}&rdquo;
@@ -561,7 +574,7 @@ export default function ProductsPage() {
               )}
             </div>
 
-            {(activeCategory !== 'all' || searchQuery) && (
+            {(activeCategory !== 'automation' || searchQuery) && (
               <button
                 type="button"
                 className="catalog-active-bar__reset"

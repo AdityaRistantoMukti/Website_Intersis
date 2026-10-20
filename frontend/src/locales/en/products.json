@@ -22,18 +22,13 @@
     "viewGrid": "Grid View",
     "viewTable": "Specs Table",
     "categories": {
-      "all": "All Products",
       "automation": "Automation",
       "mobile_intelligent_device": "Mobile Intelligent Device",
       "amplifier": "Amplifier",
       "subwoofer": "Subwoofer",
       "dsp": "DSP",
       "android_headunit": "Android Headunit",
-      "dash_camera_recorders": "Dash Camera Recorders",
-      "headunit": "Headunit / Infotainment",
-      "audio": "Audio DSP & Amplifiers",
-      "dashcam": "Dashcam & ADAS Safety",
-      "ems": "Contract EMS Manufacturing"
+      "dash_camera_recorders": "Dash Camera Recorders"
     },
     "btnSpecs": "Full Specifications",
     "btnRfq": "Request Quote (RFQ)",

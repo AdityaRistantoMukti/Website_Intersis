@@ -8,14 +8,13 @@ import './ProductCatalogSection.css';
 
 export default function ProductCatalogSection() {
   const { t, i18n } = useTranslation(['home', 'common']);
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('automation');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const isId = i18n.language === 'id';
 
   const categories = [
-    { key: 'all',                       label: t('home:productsCatalog.categories.all') },
     { key: 'automation',                label: t('home:productsCatalog.categories.automation') || 'Automation' },
     { key: 'mobile_intelligent_device', label: t('home:productsCatalog.categories.mobile_intelligent_device') || 'Mobile Intelligent Device' },
     { key: 'amplifier',                 label: t('home:productsCatalog.categories.amplifier') || 'Amplifier' },
@@ -25,10 +24,10 @@ export default function ProductCatalogSection() {
     { key: 'dash_camera_recorders',     label: t('home:productsCatalog.categories.dash_camera_recorders') || 'Dash Camera Recorders' },
   ];
 
-  // Filter products based on active category and search query
+  // Filter products strictly based on active category and search query
   const filteredProducts = useMemo(() => {
     return FEATURED_PRODUCTS.filter((prod) => {
-      const matchCategory = activeCategory === 'all' || prod.category === activeCategory;
+      const matchCategory = prod.category === activeCategory;
       if (!matchCategory) return false;
 
       if (!searchQuery.trim()) return true;
@@ -85,9 +84,7 @@ export default function ProductCatalogSection() {
           {/* Category Tabs / Pills */}
           <div className="catalog-tabs" role="tablist">
             {categories.map(({ key, label }) => {
-              const count = key === 'all'
-                ? FEATURED_PRODUCTS.length
-                : FEATURED_PRODUCTS.filter(p => p.category === key).length;
+              const count = FEATURED_PRODUCTS.filter(p => p.category === key).length;
 
               return (
                 <button

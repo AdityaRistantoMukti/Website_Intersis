@@ -465,8 +465,16 @@ const getAdminProducts = async (req, res, next) => {
               specs, full_specs, diagram_type, status, sort_order
        FROM products ORDER BY sort_order ASC, id ASC`
     );
+    const legacyMap = {
+      headunit: 'android_headunit',
+      infotainment: 'android_headunit',
+      audio: 'amplifier',
+      dashcam: 'dash_camera_recorders',
+      ems: 'automation',
+    };
     const parsed = rows.map(row => ({
       ...row,
+      category:   legacyMap[row.category] || row.category || 'automation',
       specs:      row.specs      ? (typeof row.specs      === 'string' ? JSON.parse(row.specs)      : row.specs)      : [],
       full_specs: row.full_specs ? (typeof row.full_specs === 'string' ? JSON.parse(row.full_specs) : row.full_specs) : {},
       gallery:    row.gallery    ? (typeof row.gallery    === 'string' ? JSON.parse(row.gallery)    : row.gallery)    : [],
@@ -519,6 +527,15 @@ const createProduct = async (req, res, next) => {
       fullSpecsJson = typeof full_specs === 'string' ? full_specs : JSON.stringify(full_specs);
     }
 
+    const legacyCatMap = {
+      headunit: 'android_headunit',
+      infotainment: 'android_headunit',
+      audio: 'amplifier',
+      dashcam: 'dash_camera_recorders',
+      ems: 'automation',
+    };
+    const cleanCategory = legacyCatMap[category] || category || 'automation';
+
     const [result] = await pool.execute(
       `INSERT INTO products
          (model_code, category, badge, badge_color, image, gallery,
@@ -526,7 +543,7 @@ const createProduct = async (req, res, next) => {
           specs, full_specs, diagram_type, status, sort_order)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        model_code, category || 'automation',
+        model_code, cleanCategory,
         badge || null, badge_color || null, image, galleryJson,
         title_id, title_en,
         short_desc_id || null, short_desc_en || null,
@@ -579,9 +596,18 @@ const updateProduct = async (req, res, next) => {
       fullSpecsJson = typeof full_specs === 'string' ? full_specs : JSON.stringify(full_specs);
     }
 
+    const legacyCatMap = {
+      headunit: 'android_headunit',
+      infotainment: 'android_headunit',
+      audio: 'amplifier',
+      dashcam: 'dash_camera_recorders',
+      ems: 'automation',
+    };
+    const cleanCategory = legacyCatMap[category] || category || 'automation';
+
     let extraUpdates = '';
     let params = [
-      model_code, category || 'automation',
+      model_code, cleanCategory,
       badge || null, badge_color || null,
       title_id, title_en,
       short_desc_id || null, short_desc_en || null,

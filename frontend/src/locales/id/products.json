@@ -22,18 +22,13 @@
     "viewGrid": "Tampilan Kartu",
     "viewTable": "Tabel Spesifikasi",
     "categories": {
-      "all": "Semua Produk",
       "automation": "Automation",
       "mobile_intelligent_device": "Mobile Intelligent Device",
       "amplifier": "Amplifier",
       "subwoofer": "Subwoofer",
       "dsp": "DSP",
       "android_headunit": "Android Headunit",
-      "dash_camera_recorders": "Dash Camera Recorders",
-      "headunit": "Headunit / Infotainment",
-      "audio": "Audio DSP & Amplifier",
-      "dashcam": "Dashcam & ADAS Safety",
-      "ems": "EMS / Manufaktur"
+      "dash_camera_recorders": "Dash Camera Recorders"
     },
     "btnSpecs": "Spesifikasi Lengkap",
     "btnRfq": "Minta Penawaran (RFQ)",
