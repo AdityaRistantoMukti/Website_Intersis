@@ -23,11 +23,17 @@
     "viewTable": "Tabel Spesifikasi",
     "categories": {
       "all": "Semua Produk",
-      "headunit": "Infotainment & Kokpit",
+      "automation": "Automation",
+      "mobile_intelligent_device": "Mobile Intelligent Device",
+      "amplifier": "Amplifier",
+      "subwoofer": "Subwoofer",
+      "dsp": "DSP",
+      "android_headunit": "Android Headunit",
+      "dash_camera_recorders": "Dash Camera Recorders",
+      "headunit": "Headunit / Infotainment",
       "audio": "Audio DSP & Amplifier",
-      "dashcam": "Safety & Vision Sensor",
-      "automation": "Otomasi & Test Jig",
-      "ems": "Kontrak Manufaktur EMS"
+      "dashcam": "Dashcam & ADAS Safety",
+      "ems": "EMS / Manufaktur"
     },
     "btnSpecs": "Spesifikasi Lengkap",
     "btnRfq": "Minta Penawaran (RFQ)",

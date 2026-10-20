@@ -241,21 +241,44 @@ export default function ProductsPage() {
   const [selectedSpecsProduct, setSelectedSpecsProduct] = useState(null);
   const [selectedRfqProduct, setSelectedRfqProduct] = useState(null);
 
-  const rawCategories = useMemo(() => [
-    { key: 'all',        label: t('products:catalog.categories.all') },
-    { key: 'headunit',   label: t('products:catalog.categories.headunit') },
-    { key: 'audio',      label: t('products:catalog.categories.audio') },
-    { key: 'dashcam',    label: t('products:catalog.categories.dashcam') },
-    { key: 'automation', label: t('products:catalog.categories.automation') },
-    { key: 'ems',        label: t('products:catalog.categories.ems') },
-  ], [t]);
+  const rawCategories = useMemo(() => {
+    const defaultList = [
+      { key: 'all',                       label: t('products:catalog.categories.all') || (isId ? 'Semua Produk' : 'All Products') },
+      { key: 'automation',                label: t('products:catalog.categories.automation') || 'Automation' },
+      { key: 'mobile_intelligent_device', label: t('products:catalog.categories.mobile_intelligent_device') || 'Mobile Intelligent Device' },
+      { key: 'amplifier',                 label: t('products:catalog.categories.amplifier') || 'Amplifier' },
+      { key: 'subwoofer',                 label: t('products:catalog.categories.subwoofer') || 'Subwoofer' },
+      { key: 'dsp',                       label: t('products:catalog.categories.dsp') || 'DSP' },
+      { key: 'android_headunit',          label: t('products:catalog.categories.android_headunit') || 'Android Headunit' },
+      { key: 'dash_camera_recorders',     label: t('products:catalog.categories.dash_camera_recorders') || 'Dash Camera Recorders' },
+    ];
 
-  // Hanya tampilkan kategori yang memiliki produk terdaftar (kategori kosong disembunyikan)
+    if (Array.isArray(catSettings) && catSettings.length > 0) {
+      return defaultList.map(item => {
+        if (item.key === 'all') return item;
+        const found = catSettings.find(c => c.key === item.key);
+        return found ? { ...item, label: found.name || item.label } : item;
+      });
+    }
+
+    return defaultList;
+  }, [t, catSettings, isId]);
+
+  // Tampilkan 7 kategori utama berurutan serta sertakan kategori legacy jika masih ada data produknya
   const categories = useMemo(() => {
-    return rawCategories.filter(
-      (c) => c.key === 'all' || allProducts.some((p) => p.category === c.key)
-    );
-  }, [rawCategories, allProducts]);
+    const knownKeys = new Set(rawCategories.map(c => c.key));
+    const extraCats = [];
+    allProducts.forEach(p => {
+      if (p.category && !knownKeys.has(p.category)) {
+        knownKeys.add(p.category);
+        extraCats.push({
+          key: p.category,
+          label: t(`products:catalog.categories.${p.category}`) || p.category
+        });
+      }
+    });
+    return [...rawCategories, ...extraCats];
+  }, [rawCategories, allProducts, t]);
 
   // Otomatis reset ke 'all' jika kategori yang aktif sudah tidak memiliki produk
   useEffect(() => {

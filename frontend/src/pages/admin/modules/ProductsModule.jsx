@@ -13,12 +13,26 @@ import './ProductsModule.css';
 
 // ─── Default Content Constants ────────────────────────────────────────────────
 const CATEGORIES = [
-  { key: 'headunit',   label: 'Headunit / Infotainment' },
-  { key: 'audio',      label: 'Audio DSP & Amplifier' },
-  { key: 'dashcam',    label: 'Dashcam & ADAS Safety' },
-  { key: 'automation', label: 'Automation & Test Jigs' },
-  { key: 'ems',        label: 'EMS / Contract Manufacturing' },
+  { key: 'automation',                label: 'Automation' },
+  { key: 'mobile_intelligent_device', label: 'Mobile Intelligent Device' },
+  { key: 'amplifier',                 label: 'Amplifier' },
+  { key: 'subwoofer',                 label: 'Subwoofer' },
+  { key: 'dsp',                       label: 'DSP' },
+  { key: 'android_headunit',          label: 'Android Headunit' },
+  { key: 'dash_camera_recorders',     label: 'Dash Camera Recorders' },
 ];
+
+const getCategoryLabel = (catKey) => {
+  const found = CATEGORIES.find(c => c.key === catKey);
+  if (found) return found.label;
+  const legacyMap = {
+    headunit: 'Android Headunit',
+    audio: 'Audio DSP & Amplifier',
+    dashcam: 'Dash Camera Recorders',
+    ems: 'Automation & EMS'
+  };
+  return legacyMap[catKey] || catKey;
+};
 
 const BADGE_COLORS = ['teal', 'blue', 'purple', 'red', 'gold'];
 const DIAGRAM_TYPES = [
@@ -74,56 +88,76 @@ const DEFAULT_HEADER = {
 const DEFAULT_CATEGORIES = {
   id: [
     {
-      key: 'headunit',
-      name: 'Headunit / Infotainment',
-      desc: 'Solusi headunit pintar layar sentuh QLED otomotif, konektivitas Apple CarPlay & Android Auto tanpa kabel, serta integrasi bus data CAN-Bus kendaraan.',
-    },
-    {
-      key: 'audio',
-      name: 'Audio DSP & Amplifier',
-      desc: 'Digital Signal Processor (DSP) resolusi tinggi dan amplifier multi-kanal performa tinggi dengan kontrol akustik presisi 32-bit DAC.',
-    },
-    {
-      key: 'dashcam',
-      name: 'Dashcam & ADAS Safety',
-      desc: 'Kamera pengawas berkendara sensor Sony STARVIS 2 4K UHD, radar sensor Blind-Spot 77GHz, dan modul keselamatan aktif ADAS.',
-    },
-    {
       key: 'automation',
-      name: 'Automation & Test Jigs',
-      desc: 'Mesin jig uji otomatis multi-stasiun ICT & FCT terintegrasi PLC, serta bangku pengujian kontinuitas wire harness 128-pin.',
+      name: 'Automation',
+      desc: 'Mesin jig uji otomatis multi-stasiun ICT & FCT terintegrasi PLC, serta bangku pengujian kontinuitas wire harness presisi.',
     },
     {
-      key: 'ems',
-      name: 'EMS / Contract Manufacturing',
-      desc: 'Layanan manufaktur kontrak elektronik (EMS) lini SMT berkecepatan 80.000 CPH, inspeksi 3D SPI/AOI, pelapisan konformal, hingga perakitan box-build.',
+      key: 'mobile_intelligent_device',
+      name: 'Mobile Intelligent Device',
+      desc: 'Modul AI Box pintar, telematics control unit (T-Box) 4G/IoT, dan perangkat pintar integrasi kokpit kendaraan nirkabel.',
+    },
+    {
+      key: 'amplifier',
+      name: 'Amplifier',
+      desc: 'Penguat daya audio mobil Class-D dan Class-AB multi-kanal efisiensi tinggi dengan proteksi termal andal.',
+    },
+    {
+      key: 'subwoofer',
+      name: 'Subwoofer',
+      desc: 'Subwoofer aktif kabin, downfire box, sparetire active sub, dan underseat subwoofer bertenaga bass tinggi.',
+    },
+    {
+      key: 'dsp',
+      name: 'DSP',
+      desc: 'Digital Signal Processor resolusi tinggi 32-bit floating point, multi-channel equalizer, dan penyesuaian akustik kabin.',
+    },
+    {
+      key: 'android_headunit',
+      name: 'Android Headunit',
+      desc: 'Headunit pintar layar sentuh QLED otomotif, konektivitas wireless Apple CarPlay & Android Auto, serta integrasi CAN-Bus kendaraan.',
+    },
+    {
+      key: 'dash_camera_recorders',
+      name: 'Dash Camera Recorders',
+      desc: 'Kamera perekam perjalanan sensor Sony STARVIS 4K UHD, smart mirror recorder, dan modul keselamatan aktif ADAS.',
     },
   ],
   en: [
     {
-      key: 'headunit',
-      name: 'Headunit / Infotainment',
-      desc: 'Smart automotive QLED touchscreen headunit solutions, wireless Apple CarPlay & Android Auto connectivity, and in-vehicle CAN-Bus telemetry integration.',
-    },
-    {
-      key: 'audio',
-      name: 'Audio DSP & Amplifier',
-      desc: 'High-resolution Digital Signal Processors (DSP) and high-performance multi-channel amplifiers featuring 32-bit DAC precision acoustic control.',
-    },
-    {
-      key: 'dashcam',
-      name: 'Dashcam & ADAS Safety',
-      desc: 'Sony STARVIS 2 4K UHD driving dashcams, 77GHz millimeter-wave blind-spot radar sensors, and active ADAS safety modules.',
-    },
-    {
       key: 'automation',
-      name: 'Automation & Test Jigs',
-      desc: 'PLC-integrated automated multi-station ICT & FCT test fixtures and 128-point automotive wire harness continuity test benches.',
+      name: 'Automation',
+      desc: 'PLC-integrated automated multi-station ICT & FCT test fixtures and precision automotive wire harness test benches.',
     },
     {
-      key: 'ems',
-      name: 'EMS / Contract Manufacturing',
-      desc: 'Turnkey electronics contract manufacturing (EMS) featuring 80,000 CPH high-speed SMT lines, 3D SPI/AOI inspection, conformal coating, and full box-build assembly.',
+      key: 'mobile_intelligent_device',
+      name: 'Mobile Intelligent Device',
+      desc: 'Smart AI Boxes, 4G/IoT telematics control units (T-Box), and wireless intelligent vehicle cockpit devices.',
+    },
+    {
+      key: 'amplifier',
+      name: 'Amplifier',
+      desc: 'High-efficiency multi-channel Class-D and Class-AB car audio power amplifiers with advanced thermal protection.',
+    },
+    {
+      key: 'subwoofer',
+      name: 'Subwoofer',
+      desc: 'Active cabin subwoofers, downfire subwoofer enclosures, spare tire active subs, and slim underseat subwoofers.',
+    },
+    {
+      key: 'dsp',
+      name: 'DSP',
+      desc: 'High-resolution 32-bit floating point Digital Signal Processors, multi-channel acoustic tuning, and time alignment.',
+    },
+    {
+      key: 'android_headunit',
+      name: 'Android Headunit',
+      desc: 'Automotive QLED touchscreen smart headunit solutions, wireless Apple CarPlay & Android Auto, and native CAN-Bus telemetry.',
+    },
+    {
+      key: 'dash_camera_recorders',
+      name: 'Dash Camera Recorders',
+      desc: 'Sony STARVIS 4K UHD driving dash cameras, smart mirror recorders, and active ADAS safety vision sensors.',
     },
   ],
 };
@@ -200,7 +234,7 @@ const DEFAULT_RFQ = {
 };
 
 const EMPTY_PRODUCT = {
-  model_code: '', category: 'headunit', badge: '', badge_color: 'teal',
+  model_code: '', category: 'automation', badge: '', badge_color: 'teal',
   title_id: '', title_en: '', short_desc_id: '', short_desc_en: '',
   specs: [
     { label: '', value: '' }, { label: '', value: '' },
@@ -241,7 +275,7 @@ function ProductFormModal({ product, onClose, onSaved }) {
     if (!product) return { ...EMPTY_PRODUCT, specs: EMPTY_PRODUCT.specs.map(s => ({ ...s })) };
     return {
       model_code:    product.model_code   || '',
-      category:      product.category     || 'headunit',
+      category:      product.category     || 'automation',
       badge:         product.badge        || '',
       badge_color:   product.badge_color  || 'teal',
       title_id:      product.title_id     || '',
@@ -338,7 +372,7 @@ function ProductFormModal({ product, onClose, onSaved }) {
   // Preset Template loader
   const loadPresetTemplate = (type) => {
     let preset = {};
-    if (type === 'headunit') {
+    if (type === 'android_headunit' || type === 'headunit') {
       preset = {
         operatingVoltage: '9V - 16V DC (Reverse Polarity & Load Dump Protected)',
         operatingTemp: '-30°C to +80°C (Automotive Cockpit Grade)',
@@ -348,16 +382,34 @@ function ProductFormModal({ product, onClose, onSaved }) {
         videoInput: 'AHD 1080p Reverse Camera & 360° AVM Support',
         certifications: 'IATF 16949 Compliant, ISO 9001:2015, CE, E-Mark',
       };
-    } else if (type === 'audio') {
+    } else if (type === 'amplifier') {
       preset = {
-        operatingVoltage: '9V - 16V DC',
-        operatingTemp: '-20°C to +75°C',
-        audioDsp: 'Analog Devices SHARC Dual-Core 32-bit Floating Point',
+        operatingVoltage: '9V - 16V DC with Auto-Sense Turn On',
+        operatingTemp: '-40°C to +85°C Automotive Grade',
+        dampingFactor: '> 180 @ 100 Hz',
         powerSupply: 'High-Current MOSFET PWM Switching Power Supply',
-        dimensions: '220 x 165 x 42 mm (Extruded Aluminum Heatsink)',
+        dimensions: '185 x 115 x 42 mm (Extruded Aluminum Heatsink)',
+        certifications: 'ISO 9001:2015, E-Mark, CE, RoHS',
+      };
+    } else if (type === 'subwoofer') {
+      preset = {
+        operatingVoltage: '10V - 16V DC',
+        operatingTemp: '-30°C to +80°C Underseat/Trunk Grade',
+        signalToNoise: '> 95 dB',
+        inputSensitivity: '0.2V - 6.0V Low Level / 0.5V - 12V High Level',
+        dimensions: '260 x 145 x 50 mm Heavy Duty Enclosure',
         certifications: 'ISO 9001:2015, CE, RoHS',
       };
-    } else if (type === 'dashcam') {
+    } else if (type === 'dsp' || type === 'audio') {
+      preset = {
+        operatingVoltage: '10V - 15.5V DC (Auto Turn-On)',
+        operatingTemp: '-20°C to +75°C',
+        audioDsp: 'Dual 32-Bit Floating Point DSP Engine (192 kHz)',
+        dynamicRange: '> 110 dB (A-Weighted)',
+        opticalInput: 'Toslink Optical SPDIF up to 24-bit/96kHz',
+        certifications: 'ISO 9001:2015, CE, RoHS',
+      };
+    } else if (type === 'dash_camera_recorders' || type === 'dashcam') {
       preset = {
         fieldOfView: '150° Ultra-Wide Diagonal Glass Lens (F/1.8 Aperture)',
         storageMedia: 'Dual Slot MicroSD (Up to 512GB Class 10 / U3 / V30)',
@@ -366,7 +418,16 @@ function ProductFormModal({ product, onClose, onSaved }) {
         operatingTemp: '-40°C to +85°C Extreme Heat Resilient',
         certifications: 'ISO 16750, E-Mark ECE R151, FCC, RoHS',
       };
-    } else {
+    } else if (type === 'mobile_intelligent_device') {
+      preset = {
+        operatingVoltage: '5V DC via USB Bus Power / 9V-16V DC Telematics',
+        operatingTemp: '-20°C to +75°C Vehicle Interior Grade',
+        memory: '4GB RAM + 64GB ROM (eMMC 5.1)',
+        dataInterface: 'Dual-Band Wi-Fi 5GHz + 4G LTE SIM Slot + CAN-Bus 2.0B',
+        dimensions: '78 x 78 x 16 mm Compact Pocket Size',
+        certifications: 'CE, FCC, RoHS, Telec, ISO 9001:2015',
+      };
+    } else { // automation
       preset = {
         operatingVoltage: '220V AC ±10%, 50/60Hz, 1.2 kW',
         operatingTemp: '10°C to +45°C Cleanroom Environment',
@@ -382,33 +443,54 @@ function ProductFormModal({ product, onClose, onSaved }) {
   // Quick 4-specs presets
   const loadQuickSpecsPreset = (type) => {
     let s = [];
-    if (type === 'headunit') {
+    if (type === 'android_headunit' || type === 'headunit') {
       s = [
         { label: 'Display', value: '10.1" QLED 1280x720 Optical Bonding' },
         { label: 'Processor', value: 'Octa-Core 2.0 GHz ARM 64-bit' },
         { label: 'Connectivity', value: 'Wireless CarPlay & Android Auto' },
         { label: 'CAN-Bus', value: 'Multi-Protocol Steering & OBD-II' },
       ];
-    } else if (type === 'audio') {
+    } else if (type === 'amplifier') {
       s = [
-        { label: 'Channels', value: '8-Channel In / 12-Channel Out DSP' },
-        { label: 'DAC Resolution', value: '32-bit / 192 kHz High-Res Audio' },
-        { label: 'Amplifier Power', value: '4 x 50W Max RMS MOSFET' },
-        { label: 'Tuning Interface', value: 'PC Windows & Bluetooth Tuning App' },
+        { label: 'RMS Output', value: '4 x 100W @ 4Ω (Bridgeable 2 x 200W)' },
+        { label: 'Topology', value: 'High-Efficiency Class-D (> 88%)' },
+        { label: 'Frequency Resp.', value: '10 Hz - 35 kHz (±1 dB)' },
+        { label: 'Chassis', value: 'Die-Cast Aluminum Heat-Sink' },
       ];
-    } else if (type === 'dashcam') {
+    } else if (type === 'subwoofer') {
+      s = [
+        { label: 'RMS Power', value: '1 x 1000W @ 1Ω / 650W @ 2Ω' },
+        { label: 'Low Pass Filter', value: '30 Hz - 250 Hz Variable' },
+        { label: 'Subsonic Filter', value: '10 Hz - 50 Hz Adjustable' },
+        { label: 'Remote Control', value: 'Wired Dashboard Bass Knob' },
+      ];
+    } else if (type === 'dsp' || type === 'audio') {
+      s = [
+        { label: 'Architecture', value: 'Dual 32-Bit Floating Point DSP Engine' },
+        { label: 'I/O Channels', value: '6 In / 8 Out RCA Active Outputs' },
+        { label: 'Sampling Rate', value: '192 kHz / 32-bit Native Hi-Res' },
+        { label: 'Equalizer', value: '31-Band PEQ / 0.02ms Time Alignment' },
+      ];
+    } else if (type === 'dash_camera_recorders' || type === 'dashcam') {
       s = [
         { label: 'Resolution', value: '4K UHD 3840x2160 @ 30fps' },
         { label: 'Sensor', value: 'Sony STARVIS 2 IMX678 HDR' },
-        { label: 'Radar Sensor', value: '77GHz Millimeter-Wave ADAS' },
-        { label: 'Power Backup', value: 'Ultra Supercapacitor (No Battery Swell)' },
+        { label: 'ADAS Features', value: 'Lane Departure & Forward Collision' },
+        { label: 'Power Backup', value: 'Dual Supercapacitor (-25°C ~ +80°C)' },
       ];
-    } else {
+    } else if (type === 'mobile_intelligent_device') {
       s = [
-        { label: 'Placement Speed', value: '80,000 CPH High-Speed SMT' },
-        { label: 'Inspection', value: 'Koh Young 3D SPI & Mirtec 3D AOI' },
-        { label: 'PCB Range', value: '50x50 mm up to 510x460 mm' },
-        { label: 'Quality Standard', value: 'IATF 16949 & ISO 9001:2015' },
+        { label: 'OS & CPU', value: 'Android 13 / Qualcomm Octa-Core' },
+        { label: 'Network', value: 'Dual-Band Wi-Fi 5GHz + 4G LTE SIM' },
+        { label: 'GPS', value: 'Integrated GNSS GPS, GLONASS, BeiDou' },
+        { label: 'Installation', value: 'USB Plug & Play Factory Port' },
+      ];
+    } else { // automation
+      s = [
+        { label: 'Control System', value: 'Omron/Mitsubishi PLC + Touch HMI' },
+        { label: 'Test Modules', value: 'ICT Resistance/Capacitance & FCT' },
+        { label: 'Cycle Time', value: '< 8.5 seconds / Unit throughput' },
+        { label: 'MES Logging', value: 'Automated 2D Barcode / Cloud MES' },
       ];
     }
     setForm(prev => ({ ...prev, specs: s }));
@@ -540,7 +622,7 @@ function ProductFormModal({ product, onClose, onSaved }) {
               </h3>
               <p className="prod-modal-header__subtitle">
                 {isEdit
-                  ? `SKU Database ID #${product.id} • Kategori: ${CATEGORIES.find(c => c.key === form.category)?.label}`
+                  ? `SKU Database ID #${product.id} • Kategori: ${getCategoryLabel(form.category)}`
                   : 'Daftarkan SKU produk baru ke katalog manufaktur PT. Global Philsonic Technologies.'}
               </p>
             </div>
@@ -583,7 +665,7 @@ function ProductFormModal({ product, onClose, onSaved }) {
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--adm-muted)' }}>•</span>
                     <span style={{ fontSize: '0.8rem', color: 'var(--adm-muted)' }}>
-                      {CATEGORIES.find(c => c.key === form.category)?.label || form.category}
+                      {getCategoryLabel(form.category)}
                     </span>
                     {form.badge && (
                       <span className={`prod-live-preview__badge prod-live-preview__badge--${form.badge_color || 'teal'}`}>
@@ -1200,25 +1282,57 @@ function ProductFormModal({ product, onClose, onSaved }) {
                       type="button"
                       className="admin-btn admin-btn-ghost"
                       style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('headunit')}
+                      onClick={() => loadQuickSpecsPreset('automation')}
                     >
-                      Preset Headunit
+                      Automation
                     </button>
                     <button
                       type="button"
                       className="admin-btn admin-btn-ghost"
                       style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('audio')}
+                      onClick={() => loadQuickSpecsPreset('android_headunit')}
                     >
-                      Preset Audio DSP
+                      Headunit
                     </button>
                     <button
                       type="button"
                       className="admin-btn admin-btn-ghost"
                       style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('dashcam')}
+                      onClick={() => loadQuickSpecsPreset('dsp')}
                     >
-                      Preset ADAS
+                      DSP
+                    </button>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn-ghost"
+                      style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                      onClick={() => loadQuickSpecsPreset('amplifier')}
+                    >
+                      Amplifier
+                    </button>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn-ghost"
+                      style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                      onClick={() => loadQuickSpecsPreset('subwoofer')}
+                    >
+                      Subwoofer
+                    </button>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn-ghost"
+                      style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                      onClick={() => loadQuickSpecsPreset('dash_camera_recorders')}
+                    >
+                      Dashcam
+                    </button>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn-ghost"
+                      style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                      onClick={() => loadQuickSpecsPreset('mobile_intelligent_device')}
+                    >
+                      Mobile / AI Box
                     </button>
                   </div>
                 </div>
@@ -1319,33 +1433,57 @@ function ProductFormModal({ product, onClose, onSaved }) {
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('headunit')}
+                    onClick={() => loadPresetTemplate('automation')}
                   >
-                    + Standar Headunit
+                    + Automation
                   </button>
                   <button
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('audio')}
+                    onClick={() => loadPresetTemplate('android_headunit')}
                   >
-                    + Audio DSP
+                    + Headunit
                   </button>
                   <button
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('dashcam')}
+                    onClick={() => loadPresetTemplate('dsp')}
                   >
-                    + Sensor ADAS
+                    + DSP
                   </button>
                   <button
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('ems')}
+                    onClick={() => loadPresetTemplate('amplifier')}
                   >
-                    + Mesin SMT / EMS
+                    + Amplifier
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-btn admin-btn-ghost"
+                    style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                    onClick={() => loadPresetTemplate('subwoofer')}
+                  >
+                    + Subwoofer
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-btn admin-btn-ghost"
+                    style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                    onClick={() => loadPresetTemplate('dash_camera_recorders')}
+                  >
+                    + Dashcam
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-btn admin-btn-ghost"
+                    style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                    onClick={() => loadPresetTemplate('mobile_intelligent_device')}
+                  >
+                    + Mobile / AI Box
                   </button>
                 </div>
 
@@ -1872,7 +2010,7 @@ export default function ProductsModule() {
                         borderRadius: 20, border: '1px solid var(--adm-border-visible)',
                         color: 'var(--adm-muted)',
                       }}>
-                        {CATEGORIES.find(c => c.key === prod.category)?.label || prod.category}
+                        {getCategoryLabel(prod.category)}
                       </span>
                       {prod.badge && (
                         <span className={`prod-live-preview__badge prod-live-preview__badge--${prod.badge_color || 'teal'}`}>
@@ -2021,7 +2159,7 @@ export default function ProductsModule() {
           <div className="admin-card-header">
             <div>
               <h3 className="admin-card-title">Deskripsi Kategori Produk</h3>
-              <p className="admin-card-subtitle">Nama dan penjelasan fungsi 5 kategori spesialisasi di halaman produk.</p>
+              <p className="admin-card-subtitle">Nama dan penjelasan fungsi 7 kategori spesialisasi di halaman produk.</p>
             </div>
             <button type="button" className="admin-btn admin-btn-primary"
               disabled={savingKey === 'products_categories'}

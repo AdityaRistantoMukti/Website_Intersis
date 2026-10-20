@@ -526,7 +526,7 @@ const createProduct = async (req, res, next) => {
           specs, full_specs, diagram_type, status, sort_order)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        model_code, category || 'headunit',
+        model_code, category || 'automation',
         badge || null, badge_color || null, image, galleryJson,
         title_id, title_en,
         short_desc_id || null, short_desc_en || null,
@@ -581,7 +581,7 @@ const updateProduct = async (req, res, next) => {
 
     let extraUpdates = '';
     let params = [
-      model_code, category || 'headunit',
+      model_code, category || 'automation',
       badge || null, badge_color || null,
       title_id, title_en,
       short_desc_id || null, short_desc_en || null,

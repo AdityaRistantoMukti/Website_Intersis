@@ -36,56 +36,76 @@ VALUES
   '{
     "id": [
       {
-        "key": "headunit",
-        "name": "Headunit / Infotainment",
-        "desc": "Solusi headunit pintar layar sentuh QLED otomotif, konektivitas Apple CarPlay & Android Auto tanpa kabel, serta integrasi bus data CAN-Bus kendaraan."
-      },
-      {
-        "key": "audio",
-        "name": "Audio DSP & Amplifier",
-        "desc": "Digital Signal Processor (DSP) resolusi tinggi dan amplifier multi-kanal performa tinggi dengan kontrol akustik presisi 32-bit DAC."
-      },
-      {
-        "key": "dashcam",
-        "name": "Dashcam & ADAS Safety",
-        "desc": "Kamera pengawas berkendara sensor Sony STARVIS 2 4K UHD, radar sensor Blind-Spot 77GHz, dan modul keselamatan aktif ADAS."
-      },
-      {
         "key": "automation",
-        "name": "Automation & Test Jigs",
-        "desc": "Mesin jig uji otomatis multi-stasiun ICT & FCT terintegrasi PLC, serta bangku pengujian kontinuitas wire harness 128-pin."
+        "name": "Automation",
+        "desc": "Mesin jig uji otomatis multi-stasiun ICT & FCT terintegrasi PLC, serta bangku pengujian kontinuitas wire harness presisi."
       },
       {
-        "key": "ems",
-        "name": "EMS / Contract Manufacturing",
-        "desc": "Layanan manufaktur kontrak elektronik (EMS) lini SMT berkecepatan 80.000 CPH, inspeksi 3D SPI/AOI, pelapisan konformal, hingga perakitan box-build."
+        "key": "mobile_intelligent_device",
+        "name": "Mobile Intelligent Device",
+        "desc": "Modul AI Box pintar, telematics control unit (T-Box) 4G/IoT, dan perangkat pintar integrasi kokpit kendaraan nirkabel."
+      },
+      {
+        "key": "amplifier",
+        "name": "Amplifier",
+        "desc": "Penguat daya audio mobil Class-D dan Class-AB multi-kanal efisiensi tinggi dengan proteksi termal andal."
+      },
+      {
+        "key": "subwoofer",
+        "name": "Subwoofer",
+        "desc": "Subwoofer aktif kabin, downfire box, sparetire active sub, dan underseat subwoofer bertenaga bass tinggi."
+      },
+      {
+        "key": "dsp",
+        "name": "DSP",
+        "desc": "Digital Signal Processor resolusi tinggi 32-bit floating point, multi-channel equalizer, dan penyesuaian akustik kabin."
+      },
+      {
+        "key": "android_headunit",
+        "name": "Android Headunit",
+        "desc": "Headunit pintar layar sentuh QLED otomotif, konektivitas wireless Apple CarPlay & Android Auto, serta integrasi CAN-Bus kendaraan."
+      },
+      {
+        "key": "dash_camera_recorders",
+        "name": "Dash Camera Recorders",
+        "desc": "Kamera perekam perjalanan sensor Sony STARVIS 4K UHD, smart mirror recorder, dan modul keselamatan aktif ADAS."
       }
     ],
     "en": [
       {
-        "key": "headunit",
-        "name": "Headunit / Infotainment",
-        "desc": "Smart automotive QLED touchscreen headunit solutions, wireless Apple CarPlay & Android Auto connectivity, and in-vehicle CAN-Bus telemetry integration."
-      },
-      {
-        "key": "audio",
-        "name": "Audio DSP & Amplifier",
-        "desc": "High-resolution Digital Signal Processors (DSP) and high-performance multi-channel amplifiers featuring 32-bit DAC precision acoustic control."
-      },
-      {
-        "key": "dashcam",
-        "name": "Dashcam & ADAS Safety",
-        "desc": "Sony STARVIS 2 4K UHD driving dashcams, 77GHz millimeter-wave blind-spot radar sensors, and active ADAS safety modules."
-      },
-      {
         "key": "automation",
-        "name": "Automation & Test Jigs",
-        "desc": "PLC-integrated automated multi-station ICT & FCT test fixtures and 128-point automotive wire harness continuity test benches."
+        "name": "Automation",
+        "desc": "PLC-integrated automated multi-station ICT & FCT test fixtures and precision automotive wire harness test benches."
       },
       {
-        "key": "ems",
-        "name": "EMS / Contract Manufacturing",
-        "desc": "Turnkey electronics contract manufacturing (EMS) featuring 80,000 CPH high-speed SMT lines, 3D SPI/AOI inspection, conformal coating, and full box-build assembly."
+        "key": "mobile_intelligent_device",
+        "name": "Mobile Intelligent Device",
+        "desc": "Smart AI Boxes, 4G/IoT telematics control units (T-Box), and wireless intelligent vehicle cockpit devices."
+      },
+      {
+        "key": "amplifier",
+        "name": "Amplifier",
+        "desc": "High-efficiency multi-channel Class-D and Class-AB car audio power amplifiers with advanced thermal protection."
+      },
+      {
+        "key": "subwoofer",
+        "name": "Subwoofer",
+        "desc": "Active cabin subwoofers, downfire subwoofer enclosures, spare tire active subs, and slim underseat subwoofers."
+      },
+      {
+        "key": "dsp",
+        "name": "DSP",
+        "desc": "High-resolution 32-bit floating point Digital Signal Processors, multi-channel acoustic tuning, and time alignment."
+      },
+      {
+        "key": "android_headunit",
+        "name": "Android Headunit",
+        "desc": "Automotive QLED touchscreen smart headunit solutions, wireless Apple CarPlay & Android Auto, and native CAN-Bus telemetry."
+      },
+      {
+        "key": "dash_camera_recorders",
+        "name": "Dash Camera Recorders",
+        "desc": "Sony STARVIS 4K UHD driving dash cameras, smart mirror recorders, and active ADAS safety vision sensors."
       }
     ]
   }',

@@ -49,9 +49,15 @@
     "exploreAll": "Open Complete Product Catalog",
     "categories": {
       "all": "All Product Lines",
+      "automation": "Automation",
+      "mobile_intelligent_device": "Mobile Intelligent Device",
+      "amplifier": "Amplifier",
+      "subwoofer": "Subwoofer",
+      "dsp": "DSP",
+      "android_headunit": "Android Headunit",
+      "dash_camera_recorders": "Dash Camera Recorders",
       "headunit": "Headunits & Smart Displays",
       "audio": "Audio DSPs & Amplifiers",
-      "automation": "Automation & Industrial Robotics",
       "dashcam": "Dashcams & ADAS Sensors",
       "ems": "SMT & PCB Assembly"
     }

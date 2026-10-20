@@ -15,12 +15,14 @@ export default function ProductCatalogSection() {
   const isId = i18n.language === 'id';
 
   const categories = [
-    { key: 'all', label: t('home:productsCatalog.categories.all') },
-    { key: 'headunit', label: t('home:productsCatalog.categories.headunit') },
-    { key: 'audio', label: t('home:productsCatalog.categories.audio') },
-    { key: 'automation', label: t('home:productsCatalog.categories.automation') },
-    { key: 'dashcam', label: t('home:productsCatalog.categories.dashcam') },
-    { key: 'ems', label: t('home:productsCatalog.categories.ems') },
+    { key: 'all',                       label: t('home:productsCatalog.categories.all') },
+    { key: 'automation',                label: t('home:productsCatalog.categories.automation') || 'Automation' },
+    { key: 'mobile_intelligent_device', label: t('home:productsCatalog.categories.mobile_intelligent_device') || 'Mobile Intelligent Device' },
+    { key: 'amplifier',                 label: t('home:productsCatalog.categories.amplifier') || 'Amplifier' },
+    { key: 'subwoofer',                 label: t('home:productsCatalog.categories.subwoofer') || 'Subwoofer' },
+    { key: 'dsp',                       label: t('home:productsCatalog.categories.dsp') || 'DSP' },
+    { key: 'android_headunit',          label: t('home:productsCatalog.categories.android_headunit') || 'Android Headunit' },
+    { key: 'dash_camera_recorders',     label: t('home:productsCatalog.categories.dash_camera_recorders') || 'Dash Camera Recorders' },
   ];
 
   // Filter products based on active category and search query

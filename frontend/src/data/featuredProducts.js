@@ -11,7 +11,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-hu9800',
     modelCode: 'GPT-HU9800 PRO',
-    category: 'headunit',
+    category: 'android_headunit',
     badge: 'OEM Flagship',
     badgeColor: 'teal',
     title: {
@@ -42,7 +42,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-hu7200',
     modelCode: 'GPT-HU7200 SLIM',
-    category: 'headunit',
+    category: 'android_headunit',
     badge: 'Double-DIN Slim',
     badgeColor: 'blue',
     title: {
@@ -72,7 +72,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-cp1200',
     modelCode: 'GPT-CP1200 AI-BOX',
-    category: 'headunit',
+    category: 'mobile_intelligent_device',
     badge: 'Smart Module',
     badgeColor: 'purple',
     title: {
@@ -105,7 +105,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-dsp8800',
     modelCode: 'GPT-DSP8800 HD',
-    category: 'audio',
+    category: 'dsp',
     badge: 'Audiophile Hi-Res',
     badgeColor: 'red',
     title: {
@@ -136,7 +136,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-amp4100',
     modelCode: 'GPT-AMP4100 D-CLASS',
-    category: 'audio',
+    category: 'amplifier',
     badge: 'Compact Power',
     badgeColor: 'gold',
     title: {
@@ -166,7 +166,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-amp11000',
     modelCode: 'GPT-AMP11000 MONO',
-    category: 'audio',
+    category: 'subwoofer',
     badge: 'Subwoofer Master',
     badgeColor: 'red',
     title: {
@@ -200,7 +200,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-dvr4k',
     modelCode: 'GPT-DVR4K PRO ADAS',
-    category: 'dashcam',
+    category: 'dash_camera_recorders',
     badge: 'Vision & Safety',
     badgeColor: 'teal',
     title: {
@@ -230,7 +230,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-bsm240',
     modelCode: 'GPT-BSM240 RADAR',
-    category: 'dashcam',
+    category: 'dash_camera_recorders',
     badge: 'ADAS Sensor',
     badgeColor: 'purple',
     title: {
@@ -326,7 +326,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-smt-ems',
     modelCode: 'GPT-SMT-BOX TURNKEY',
-    category: 'ems',
+    category: 'automation',
     badge: 'FTZ Manufacturing',
     badgeColor: 'purple',
     title: {
@@ -356,7 +356,7 @@ export const FEATURED_PRODUCTS = [
   {
     id: 'gpt-bms-48v',
     modelCode: 'GPT-BMS-48V ECU',
-    category: 'ems',
+    category: 'mobile_intelligent_device',
     badge: 'EV & Mobility',
     badgeColor: 'teal',
     title: {

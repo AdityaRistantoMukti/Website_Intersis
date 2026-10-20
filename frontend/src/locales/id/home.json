@@ -49,9 +49,15 @@
     "exploreAll": "Buka Katalog Lengkap Produk",
     "categories": {
       "all": "Semua Lini Produk",
+      "automation": "Automation",
+      "mobile_intelligent_device": "Mobile Intelligent Device",
+      "amplifier": "Amplifier",
+      "subwoofer": "Subwoofer",
+      "dsp": "DSP",
+      "android_headunit": "Android Headunit",
+      "dash_camera_recorders": "Dash Camera Recorders",
       "headunit": "Headunit & Display Pintar",
       "audio": "Audio DSP & Amplifier",
-      "automation": "Otomasi & Robot Industri",
       "dashcam": "Dashcam & Sensor ADAS",
       "ems": "SMT & Perakitan PCB"
     }
