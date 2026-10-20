@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 07 - Mengimplementasikan Pemrograman Berorientasi Objek (OOP)</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 07 &bull; TI.OO.07.2026</div>
+    <h1>Mengimplementasikan Pemrograman Berorientasi Objek (OOP)</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi penerapan prinsip Object-Oriented Programming (OOP) pada sistem, meliputi perancangan Class ES6, instansiasi Object DTO, Encapsulation pada enkripsi kata sandi, Inheritance pada kelas ApiError, Polimorfisme komponen UI adaptif, serta standarisasi Package dan API Contract.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Penerapan Class & Inheritance</td>
+      <td><code>backend/src/utils/ApiError.js</code></td>
+      <td>Perancangan kelas kustom ApiError yang mewarisi (extends) kelas bawaan JavaScript Error.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Object & Encapsulation</td>
+      <td><code>backend/src/controllers/admin/authController.js</code></td>
+      <td>Enkapsulasi password via Bcrypt hashing dan pemodelan objek respons DTO tanpa properti sensitif.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Polymorphism, Interface & Package</td>
+      <td><code>frontend/src/components/ui/InteractiveHoverButton.jsx & Package Modules</code></td>
+      <td>Komponen UI polimorfis adaptif (<Link> vs <button>) dan modularitas CommonJS/ESM.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>7.1 & 7.4. Penerapan Class ES6 & Pewarisan (Inheritance)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/utils/ApiError.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Pewarisan kelas diterapkan pada berkas <code>backend/src/utils/ApiError.js</code> untuk menciptakan struktur error terkelola yang mempertahankan stack trace bawaan engine V8:</p>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 85" width="100%" height="75" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000;">
+            <!-- Base Class -->
+            <rect x="30" y="15" width="220" height="55" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="140" y="32" fill="#000000" font-family="Courier New" font-size="8.5" font-weight="bold" text-anchor="middle">class Error (Native JS)</text>
+            <text x="40" y="48" fill="#333333" font-family="Courier New" font-size="7.5">+ message: String</text>
+            <text x="40" y="60" fill="#333333" font-family="Courier New" font-size="7.5">+ stack: String</text>
+
+            <line x1="250" y1="42" x2="350" y2="42" stroke="#000000" stroke-width="1.2"/>
+            <polygon points="350,42 340,36 340,48" fill="#000000"/>
+            <text x="300" y="35" fill="#000000" font-family="Arial" font-size="7.5" text-anchor="middle">extends</text>
+
+            <!-- Derived Class -->
+            <rect x="350" y="10" width="300" height="65" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="500" y="27" fill="#000000" font-family="Courier New" font-size="8.5" font-weight="bold" text-anchor="middle">class ApiError extends Error</text>
+            <text x="360" y="43" fill="#000000" font-family="Courier New" font-size="7.5">+ statusCode: Number</text>
+            <text x="360" y="55" fill="#000000" font-family="Courier New" font-size="7.5">+ isOperational: Boolean</text>
+            <text x="360" y="67" fill="#000000" font-family="Courier New" font-size="7.5">+ constructor(statusCode, message)</text>
+          </svg>
+        
+        </div>
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/utils/ApiError.js</span>
+            <pre>// Penerapan Class &amp; Inheritance: Mewarisi Kelas Induk &#039;Error&#039;
+class ApiError extends Error {
+  constructor(statusCode, message, isOperational = true, stack = &#039;&#039;) {
+    super(message); // Memanggil konstruktor kelas induk
+    this.statusCode = statusCode;
+    this.isOperational = isOperational;
+    this.status = `${statusCode}`.startsWith(&#039;4&#039;) ? &#039;fail&#039; : &#039;error&#039;;
+
+    if (stack) {
+      this.stack = stack;
+    } else {
+      Error.captureStackTrace(this, this.constructor);
+    }
+  }
+}
+
+module.exports = ApiError;</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>7.2 & 7.3. Pemodelan Objek DTO & Enkapsulasi Kredensial Pengguna</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/controllers/admin/authController.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Enkapsulasi diterapkan untuk menyembunyikan detail sensitif kata sandi melalui hashing Blowfish (Bcrypt) satu arah dan membuang password dari objek transfer data (DTO):</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/controllers/admin/authController.js</span>
+            <pre>// Enkapsulasi: Menyembunyikan Sandi Plaintext dengan Bcrypt Hash &amp; DTO Bersih
+const login = async (req, res, next) =&gt; {
+  try {
+    const { identity, password } = req.body;
+
+    const [rows] = await pool.execute(
+      &#039;SELECT id, name, username, email, password, role, status FROM users WHERE username = ? OR email = ? LIMIT 1&#039;,
+      [identity, identity]
+    );
+
+    if (rows.length === 0) {
+      return error(res, &#039;Kredensial login tidak ditemukan (Username/Email salah).&#039;, 401);
+    }
+
+    const user = rows[0];
+    if (user.status !== &#039;active&#039;) {
+      return error(res, &#039;Akun Anda dalam status nonaktif. Silakan hubungi Administrator.&#039;, 403);
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return error(res, &#039;Password yang Anda masukkan salah.&#039;, 401);
+    }
+
+    // Generate JWT Token (Payload DTO Bersih tanpa Properti Password)
+    const payload = {
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    };
+
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET || &#039;fallback_secret_key_change_in_production&#039;,
+      { expiresIn: process.env.JWT_EXPIRES_IN || &#039;8h&#039; }
+    );
+
+    await logActivity(user.id, &#039;LOGIN&#039;, &#039;auth&#039;, `User &#039;${user.username}&#039; berhasil login ke sistem`);
+
+    return success(res, &#039;Login berhasil.&#039;, { token, user: payload });
+  } catch (err) {
+    next(err);
+  }
+};</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>7.5 & 7.6. Polimorfisme Komponen UI & Adaptasi Antarmuka Interface</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>frontend/src/components/ui/InteractiveHoverButton.jsx</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Polimorfisme antarmuka diterapkan pada <code>InteractiveHoverButton.jsx</code> yang secara dinamis menyesuaikan elemen HTML yang dirender (menjadi tag <code>&lt;Link&gt;</code> bila menerima prop navigasi <code>to</code>, atau tag <code>&lt;button&gt;</code> bila berupa aksi event biasa):</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">frontend/src/components/ui/InteractiveHoverButton.jsx</span>
+            <pre>// Polimorfisme Komponen UI: Adaptasi Elemen Render (&lt;Link&gt; vs &lt;button&gt;) Berdasarkan Props
+export default function InteractiveHoverButton({
+  children,
+  text,
+  to,
+  onClick,
+  className = &#039;&#039;,
+  variant = &#039;light&#039;,
+  ...props
+}) {
+  const content = children || text;
+  const innerContent = (
+    &lt;&gt;
+      &lt;div className=&quot;ihb-content-rest&quot;&gt;
+        &lt;span className=&quot;ihb-dot&quot; aria-hidden=&quot;true&quot; /&gt;
+        &lt;span className=&quot;ihb-text-rest&quot;&gt;{content}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;ihb-content-hover&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;span className=&quot;ihb-text-hover&quot;&gt;{content}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+
+  const combinedClass = `interactive-hover-btn interactive-hover-btn--${variant} ${className}`;
+
+  // Wujud Polimorfis 1: Render sebagai Link navigasi Router jika prop &#039;to&#039; didefinisikan
+  if (to) {
+    return (
+      &lt;Link to={to} className={combinedClass} onClick={onClick} {...props}&gt;
+        {innerContent}
+      &lt;/Link&gt;
+    );
+  }
+
+  // Wujud Polimorfis 2: Render sebagai elemen button standar untuk aksi event klik
+  return (
+    &lt;button type=&quot;button&quot; className={combinedClass} onClick={onClick} {...props}&gt;
+      {innerContent}
+    &lt;/button&gt;
+  );
+}</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 07</div>
+    <p>Seluruh sub-judul pada unit 'Mengimplementasikan Pemrograman Berorientasi Objek (OOP)' telah terpenuhi melalui pewarisan kelas ApiError, enkapsulasi data, polimorfisme komponen UI, dan pemodelan DTO.</p>
+  </div>
+
+</body>
+</html>

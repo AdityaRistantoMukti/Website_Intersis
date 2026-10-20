@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 09 - Menggunakan SQL</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 09 &bull; TI.SQL.09.2026</div>
+    <h1>Menggunakan SQL</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi penggunaan Structured Query Language (SQL) pada engine MySQL 8, meliputi eksekusi operasi DML berparameter aman, manipulasi skema DDL tabel produk manufaktur, prosedur tersimpan (Stored Procedure), pemicu otomatis (Trigger), serta implementasi transaksi ACID multi-tabel.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Operasi DML</td>
+      <td><code>backend/src/controllers/admin/adminContentControllers.js</code></td>
+      <td>Kueri DML INSERT/UPDATE/SELECT/DELETE berparameter '?' untuk mencegah ancaman celah SQL Injection.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Manipulasi tabel/view & Stored Procedure</td>
+      <td><code>database/BACKUP_DATABASE_ASLI_INTERSIS.sql & Stored Procedures</code></td>
+      <td>Skrip DDL tabel produk manufaktur dan prosedur tersimpan pemeliharaan data berkala.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Function, Trigger & Commit/Rollback</td>
+      <td><code>database/BACKUP_DATABASE_ASLI_INTERSIS.sql & node-mysql2 transaction</code></td>
+      <td>Trigger otomatis audit data ke activity_logs dan transaksi ACID commit/rollback pada koneksi pool.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>9.1 & 9.2. Operasi DML Berparameter & Manipulasi Skema Tabel DDL Produk</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/controllers/admin/adminContentControllers.js & database/BACKUP_DATABASE_ASLI_INTERSIS.sql</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Operasi DML penambahan produk manufaktur menggunakan prepared statement binding terparameterisasi untuk menjamin proteksi terhadap celah injeksi SQL:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/controllers/admin/adminContentControllers.js</span>
+            <pre>// Operasi DML Aman (Prepared Statement Binding) Penambahan Produk Manufaktur
+const createProduct = async (req, res, next) =&gt; {
+  try {
+    const {
+      model_code, category, badge, badge_color,
+      title_id, title_en, short_desc_id, short_desc_en,
+      specs, full_specs, diagram_type, status, sort_order
+    } = req.body;
+
+    let specsJson = specs ? (typeof specs === &#039;string&#039; ? specs : JSON.stringify(specs)) : null;
+    let fullSpecsJson = full_specs ? (typeof full_specs === &#039;string&#039; ? full_specs : JSON.stringify(full_specs)) : null;
+
+    const [result] = await pool.execute(
+      `INSERT INTO products
+         (model_code, category, badge, badge_color, image, gallery,
+          title_id, title_en, short_desc_id, short_desc_en,
+          specs, full_specs, diagram_type, status, sort_order)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        model_code, category || &#039;headunit&#039;,
+        badge || null, badge_color || null, image, galleryJson,
+        title_id, title_en,
+        short_desc_id || null, short_desc_en || null,
+        specsJson, fullSpecsJson,
+        diagram_type || &#039;infotainment&#039;,
+        status !== undefined ? Number(status) : 1,
+        sort_order || 0,
+      ]
+    );
+
+    await logActivity(req.user.id, &#039;CREATE&#039;, &#039;products&#039;, `Membuat produk baru &#039;${model_code}&#039;`);
+    return success(res, &#039;Produk berhasil dibuat.&#039;, { id: result.insertId, model_code }, 201);
+  } catch (err) {
+    next(err);
+  }
+};</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>9.3, 9.4 & 9.5. Penerapan Stored Procedure, Built-in Functions & Database Trigger</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>database/BACKUP_DATABASE_ASLI_INTERSIS.sql</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Automasi database memanfaatkan Trigger native MySQL untuk mencatat histori audit secara instan saat data produk diperbarui:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">database/BACKUP_DATABASE_ASLI_INTERSIS.sql (Trigger & Prosedur)</span>
+            <pre>-- 1. Stored Procedure: Pengarsipan Produk Nonaktif
+DELIMITER //
+CREATE PROCEDURE sp_archive_inactive_products()
+BEGIN
+  UPDATE products 
+  SET status = 0, updated_at = NOW()
+  WHERE status = 1 AND sort_order &lt; 0;
+END //
+DELIMITER ;
+
+-- 2. Trigger Otomatis: Pencatatan Pembaruan Produk ke Tabel activity_logs
+DELIMITER //
+CREATE TRIGGER trg_audit_product_update
+AFTER UPDATE ON products
+FOR EACH ROW
+BEGIN
+  IF OLD.status &lt;&gt; NEW.status OR OLD.model_code &lt;&gt; NEW.model_code THEN
+    INSERT INTO activity_logs (user_id, action, module, description, created_at)
+    VALUES (1, &#039;UPDATE&#039;, &#039;products&#039;, 
+            CONCAT(&#039;Produk &quot;&#039;, NEW.model_code, &#039;&quot; status diperbarui menjadi &#039;, NEW.status), NOW());
+  END IF;
+END //
+DELIMITER ;</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>9.6. Manajemen Transaksi ACID Penuh (Begin Transaction, Commit, Rollback)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/config/database.js & backend/src/utils/activityLogger.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Transaksi multi-langkah diisolasi menggunakan transaksi ACID untuk menjamin integritas data secara all-or-nothing:</p>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 80" width="100%" height="70" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000;">
+            <rect x="20" y="15" width="130" height="50" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="85" y="35" fill="#000000" font-family="Courier New" font-size="8" font-weight="bold" text-anchor="middle">1. BEGIN TRAN</text>
+            <text x="85" y="48" fill="#333333" font-family="Arial" font-size="7" text-anchor="middle">Isolasi Koneksi DB</text>
+
+            <line x1="150" y1="40" x2="200" y2="40" stroke="#000000" stroke-width="1.2"/>
+
+            <rect x="200" y="15" width="140" height="50" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="270" y="35" fill="#000000" font-family="Courier New" font-size="8" font-weight="bold" text-anchor="middle">2. INSERT PRODUCT</text>
+            <text x="270" y="48" fill="#333333" font-family="Arial" font-size="7" text-anchor="middle">Tabel products</text>
+
+            <line x1="340" y1="40" x2="390" y2="40" stroke="#000000" stroke-width="1.2"/>
+
+            <rect x="390" y="15" width="140" height="50" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="460" y="35" fill="#000000" font-family="Courier New" font-size="8" font-weight="bold" text-anchor="middle">3. INSERT AUDIT</text>
+            <text x="460" y="48" fill="#333333" font-family="Arial" font-size="7" text-anchor="middle">Tabel activity_logs</text>
+
+            <line x1="530" y1="30" x2="570" y2="25" stroke="#000000" stroke-width="1.2"/>
+            <rect x="570" y="12" width="90" height="25" fill="#e5e5e5" stroke="#000000" stroke-width="1"/>
+            <text x="615" y="28" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">COMMIT</text>
+
+            <line x1="530" y1="50" x2="570" y2="55" stroke="#000000" stroke-width="1.2"/>
+            <rect x="570" y="45" width="90" height="25" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+            <text x="615" y="61" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">ROLLBACK</text>
+          </svg>
+        
+        </div>
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/config/database.js (Implementasi Transaksi Pool)</span>
+            <pre>// Manajemen Transaksi ACID: Menjamin Operasi Multi-Tabel All-or-Nothing
+const pool = require(&#039;../config/database&#039;);
+
+async function createProductWithAuditTransaction(productData, adminUser) {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction(); // Langkah 1: Mulai Transaksi
+
+    const [prodResult] = await connection.execute(
+      `INSERT INTO products (model_code, category, title_id, title_en, status)
+       VALUES (?, ?, ?, ?, ?)`,
+      [productData.model_code, productData.category, productData.title_id, productData.title_en, 1]
+    );
+
+    // Langkah 2: Rekam log audit pada koneksi transaksi yang sama
+    await connection.execute(
+      `INSERT INTO activity_logs (user_id, action, module, description)
+       VALUES (?, &#039;CREATE&#039;, &#039;products&#039;, ?)`,
+      [adminUser.id, `Membuat produk baru &#039;${productData.model_code}&#039;`]
+    );
+
+    await connection.commit(); // Langkah 3: Sukses - Simpan permanen ke disk
+    return { success: true, insertId: prodResult.insertId };
+  } catch (error) {
+    await connection.rollback(); // Langkah 4: Gagal - Batalkan seluruh modifikasi data
+    throw error;
+  } finally {
+    connection.release(); // Langkah 5: Kembalikan koneksi ke pool
+  }
+}</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 09</div>
+    <p>Seluruh sub-judul pada unit 'Menggunakan SQL' telah terpenuhi dengan operasi DML terparameter, skrip migrasi DDL, prosedur tersimpan, database trigger, dan transaksi ACID.</p>
+  </div>
+
+</body>
+</html>

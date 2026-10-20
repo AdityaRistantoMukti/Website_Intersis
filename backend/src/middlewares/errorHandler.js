@@ -1,4 +1,5 @@
 const { error } = require('../utils/response');
+const ApiError = require('../utils/ApiError');
 
 /**
  * Middleware untuk menangani route yang tidak ditemukan (404 Not Found)
@@ -18,11 +19,11 @@ const globalErrorHandler = (err, req, res, next) => {
   console.error('[Global Error]', err.stack || err.message || err);
 
   const statusCode = err.statusCode || 500;
-  const message = process.env.NODE_ENV === 'production'
+  const message = process.env.NODE_ENV === 'production' && !err.isOperational
     ? 'Terjadi kesalahan pada server internal.'
     : (err.message || 'Internal Server Error');
 
   return error(res, message, statusCode, process.env.NODE_ENV === 'development' ? { stack: err.stack } : null);
 };
 
-module.exports = { notFoundHandler, globalErrorHandler };
+module.exports = { notFoundHandler, globalErrorHandler, ApiError };

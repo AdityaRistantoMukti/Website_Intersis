@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>10 - Menerapkan Akses Basis Data</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #111827;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 3px solid #0f172a;
+      border-bottom: 1px solid #94a3b8;
+      padding: 6px 0;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #475569;
+    }
+    .title-banner {
+      border-left: 5px solid #1e40af;
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .unit-badge {
+      display: inline-block;
+      background: #1e3a8a;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14.5pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 4px 0 6px 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .project-subtitle {
+      font-size: 9.5pt;
+      color: #475569;
+      font-style: italic;
+      margin: 0;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f1f5f9;
+      width: 25%;
+      color: #1e293b;
+    }
+    .speech-box {
+      background: #f8fafc;
+      border: 1.5px solid #2563eb;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+    }
+    .speech-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px dashed #93c5fd;
+      padding-bottom: 4px;
+    }
+    .speech-content {
+      color: #0f172a;
+      font-size: 9.5pt;
+      line-height: 1.55;
+    }
+    .speech-content p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+    .speech-stage-cue {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      font-family: Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      font-weight: bold;
+      color: #0f172a;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 3px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    .tech-meta-badge {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      color: #475569;
+      margin-bottom: 8px;
+      background: #f1f5f9;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .tech-meta-badge code {
+      color: #0284c7;
+      font-weight: bold;
+    }
+    p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+      text-align: justify;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 5px 8px;
+      text-align: left;
+      border: 1px solid #1e293b;
+    }
+    .table-custom td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+    }
+    .table-custom tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.5pt;
+      line-height: 1.4;
+      margin: 8px 0 12px 0;
+      page-break-inside: avoid;
+      border-left: 3px solid #38bdf8;
+    }
+    .code-box .file-tag {
+      color: #94a3b8;
+      font-size: 7pt;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .qa-card {
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #10b981;
+      background: #fdfdfd;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      page-break-inside: avoid;
+    }
+    .qa-q {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #065f46;
+      margin-bottom: 3px;
+    }
+    .qa-a {
+      font-size: 8.5pt;
+      color: #1e293b;
+      line-height: 1.45;
+    }
+    .slide-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin: 12px 0 16px 0;
+      page-break-inside: avoid;
+    }
+    .slide-box-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #b45309;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .slide-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .slide-box li {
+      font-size: 8.5pt;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOSSIER PRESENTASI KOMPETENSI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES (INTERSIS) &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-badge">UNIT KOMPETENSI 10 &bull; TI.DA.10.2026</div>
+    <h1>Menerapkan Akses Basis Data</h1>
+    <div class="project-subtitle">Implementasi Riil pada Proyek: Portal Karir, Profil Industri & Modul Automation-GPT (Fullstack Web)</div>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Presenter / Mahasiswa</td>
+      <td>Aditya Ristanto Mukti (Fullstack Web Developer Intern)</td>
+      <td class="lbl">Repository</td>
+      <td><code>github.com/AdityaRistantoMukti/Website_Intersis</code></td>
+    </tr>
+    <tr>
+      <td class="lbl">Institusi / Mitra</td>
+      <td>PT Global Philsonic Technologies (Intersis) Batam</td>
+      <td class="lbl">Tech Stack Utama</td>
+      <td>React 19, Vite, Tailwind CSS v4, Node.js Express 5, MySQL2</td>
+    </tr>
+    <tr>
+      <td class="lbl">Cakupan Outline Sub-Title</td>
+      <td colspan="3">Koneksi database dari Node.js/React &bull; Penggunaan library database &bull; Pengujian query</td>
+    </tr>
+  </table>
+
+  <!-- OUTLINE SUB-TITLE OVERVIEW -->
+  <h2>I. Peta Outline & Struktur Pembahasan</h2>
+  <p>Unit kompetensi <strong>Menerapkan Akses Basis Data</strong> ini disusun secara berkesinambungan mencakup seluruh sub-judul yang didefinisikan pada diagram alur kompetensi, diaplikasikan langsung pada arsitektur website yang telah dibangun:</p>
+  <ul>
+    <li><strong>Koneksi database dari Node.js/React</strong>: Membangun arsitektur decoupled 3-tier: memisahkan antarmuka klien React dari akses langsung DB, mengamankan gateway via REST API Express.</li>
+<li><strong>Penggunaan library database</strong>: Mengonfigurasi pustaka 'mysql2/promise' dengan Connection Pooling, time-zone '+07:00', charset utf8mb4, serta konektivitas cloud Railway.</li>
+<li><strong>Pengujian query</strong>: Menjalankan skrip benchmarking latensi 'test_api_runner.js', query profiling (EXPLAIN), dan verifikasi indeks database.</li>
+  </ul>
+
+  <!-- SPEAKING SCRIPT RESMI PRESENTER -->
+  <h2>II. Naskah Wicara Lengkap Presenter (Verbatim Speech Script)</h2>
+  <div class="speech-box">
+    <div class="speech-header">
+      <span>🎤 PANDUAN NARASI WICARA PRESENTER (SPEAKING SCRIPT)</span>
+    </div>
+    <div class="speech-content">
+      
+      <p><span class="speech-stage-cue">[Pembukaan &amp; Sikap]</span> "Dewan Penguji yang saya hormati, jembatan penghubung antara logika aplikasi dan penyimpanan fisik data harus dirancang dengan prinsip keamanan dan efisiensi throughput yang tinggi. Pada unit kompetensi <strong>Menerapkan Akses Basis Data</strong>, saya akan menjelaskan bagaimana saluran data diintegrasikan dan diuji secara komprehensif."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 1: Koneksi Database dari Node.js / React]</span> "Pertama, mari kita tinjau <em>Koneksi Database dari Node.js dan React</em>. Kami secara sadar menerapkan arsitektur <strong>Decoupled 3-Tier</strong>. Frontend React yang berjalan di browser pengguna <strong>TIDAK PERNAH</strong> diberikan akses langsung untuk membuka socket TCP ke database MySQL. Mengizinkan koneksi langsung dari browser ke database adalah anti-pattern fatal yang membocorkan password database ke publik. Sebagai gantinya, React berkomunikasi secara eksklusif melalui protokol HTTP aman ke backend Node.js, dan backend Node.js bertindak sebagai gatekeeper terpercaya yang mengeksekusi koneksi ke database."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 2: Penggunaan Library Database]</span> "Kedua, dalam <em>Penggunaan Library Database</em>, kami memilih pustaka <code>mysql2/promise</code> yang mendukung sintaksis modern berbasis async/await. Konfigurasi kami terapkan menggunakan <strong>Connection Pool</strong> dengan kapasitas hingga 10 koneksi bersamaan, encoding <code>utf8mb4</code> untuk mendukung karakter internasional dan simbol, serta timezone <code>+07:00</code> (Waktu Indonesia Barat). Konfigurasi ini juga dirancang dinamis: dapat membaca kredensial lokal (XAMPP/MySQL) maupun connection string cloud Railway (<code>MYSQL_URL</code>) secara otomatis tanpa perlu mengubah baris kode."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 3: Pengujian Query]</span> "Ketiga, pada pilar <em>Pengujian Query</em>, kami tidak hanya menguji keberhasilan query di tahap pengembangan, melainkan membuat skrip otomatis <code>test_api_runner.js</code> yang menguji response time query di setiap endpoint. Kami juga melakukan profiling query menggunakan klausa <code>EXPLAIN SELECT</code> untuk memastikan query pencarian lowongan kerja memanfaatkan index (<code>idx_jobs_category</code> dan <code>idx_jobs_status</code>), sehingga tidak terjadi Full Table Scan saat data bertumbuh menjadi ribuan baris."</p>
+    
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS RINCI PER SUB-TITLE -->
+  <h2>III. Pembahasan Teknis Rinci & Bedah Kode Nyata Proyek</h2>
+  <p>Berikut adalah pembuktian implementasi teknis dari masing-masing sub-judul berdasarkan baris kode dan berkas nyata di dalam repository proyek:</p>
+  
+    <div class="tech-section">
+      <h3>10.1. Arsitektur Akses Decoupled 3-Tier (React - Express - MySQL)</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>Alur Data: Frontend Axios &rarr; Express Route &rarr; MySQL Pool</code></div>
+      
+          <p>Diagram alur arsitektur menunjukkan batas keamanan (trust boundary) antara browser client dan basis data:</p>
+          <div class="code-box">
+            <span class="file-tag">Alur Komunikasi Data 3-Tier</span>
+            <pre>[Client Browser / React 19]
+      |
+      | HTTP GET /api/public/jobs (JSON Payload via Axios)
+      v  [DMZ / Public Internet Boundary]
+[Backend Gateway / Express v5 Node.js]
+      |
+      | Validasi Token JWT, Sanitasi Param, Rate Limiting
+      v  [Private Network / VNet Boundary]
+[MySQL Database Pool / mysql2 Engine] (Port 3306 / Railway Cloud)</pre>
+          </div>
+        
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>10.2. Konfigurasi Connection Pool & Adaptabilitas Cloud Database</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/src/config/database.js</code></div>
+      
+          <p>Konfigurasi pool mendeteksi keberadaan URL koneksi cloud otomatis, memberikan fallback ke parameter localhost saat pengembangan offline:</p>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">backend/src/config/database.js</span>
+          <pre>const mysql = require(&#039;mysql2/promise&#039;);
+require(&#039;dotenv&#039;).config();
+
+// Konfigurasi Dinamis: Mendukung Railway Cloud URL &amp; Local XAMPP
+const poolConfig = process.env.MYSQL_URL || process.env.DATABASE_URL
+  ? {
+      uri: process.env.MYSQL_URL || process.env.DATABASE_URL,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+      timezone: &#039;+07:00&#039;,
+      charset: &#039;utf8mb4&#039;
+    }
+  : {
+      host: process.env.DB_HOST || &#039;localhost&#039;,
+      port: parseInt(process.env.DB_PORT || &#039;3306&#039;),
+      user: process.env.DB_USER || &#039;root&#039;,
+      password: process.env.DB_PASSWORD || &#039;&#039;,
+      database: process.env.DB_NAME || &#039;isa_career_hrd&#039;,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+      timezone: &#039;+07:00&#039;,
+      charset: &#039;utf8mb4&#039;
+    };
+
+const pool = mysql.createPool(poolConfig);
+
+// Validasi Konektivitas Saat Inisialisasi Server
+pool.getConnection()
+  .then(conn =&gt; {
+    console.log(&#039;[DB] MySQL Connected — Pool Ready&#039;);
+    conn.release();
+  })
+  .catch(err =&gt; console.error(&#039;[DB] Connection Error:&#039;, err.message));
+
+module.exports = pool;</pre>
+        </div>
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>10.3. Pengujian Query Otomatis & Profiling Kinerja Indeks</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/test_api_runner.js & Query EXPLAIN</code></div>
+      
+          <p>Pengujian profiling query SQL membuktikan bahwa filter pencarian memanfaatkan indeks B-Tree yang telah didefinisikan:</p>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">Terminal / MySQL Console: Query Profiling</span>
+          <pre>-- Profiling Query dengan EXPLAIN
+EXPLAIN SELECT j.id, j.title, c.name 
+FROM job_vacancies j 
+LEFT JOIN job_categories c ON j.category_id = c.id 
+WHERE j.status = &#039;published&#039;;
+
+-- Hasil Analisis Output:
+-- table: j | type: ref | possible_keys: idx_jobs_status | key: idx_jobs_status | rows: 12
+-- Status: OPTIMIZED (Tidak melakukan Full Table Scan, langsung membaca index b-tree)</pre>
+        </div>
+      
+    </div>
+  
+
+  <!-- SLIDE TALKING POINTS -->
+  <h2>IV. Poin Kunci Presentasi (Slide Talking Points)</h2>
+  <div class="slide-box">
+    <div class="slide-box-title">Pointer Ringkas untuk Tampilan Slide / Layar</div>
+    <ul>
+      <li>Decoupled 3-Tier Security: Mengisolasi database di balik REST API aman, browser tidak pernah memegang kredensial DB.</li>
+<li>Pustaka 'mysql2/promise': Mendukung penuh async/await modern dan transmisi biner teroptimasi.</li>
+<li>Connection Pool 10 Pekerja: Penanganan antrean request konkuren tanpa membebani memori server.</li>
+<li>Dual Environment Support: Mendukung koneksi Railway Cloud (MYSQL_URL) dan Localhost XAMPP otomatis.</li>
+<li>Pengujian & Profiling: Skrip otomatis test_api_runner.js dan verifikasi EXPLAIN index performance.</li>
+    </ul>
+  </div>
+
+  <!-- Q&A DEFENSE MATRIX -->
+  <h2>V. Matriks Tanya Jawab & Panduan Pembelaan Sidang (Q&A Defense)</h2>
+  <p>Prediksi pertanyaan evaluasi dari Penguji / Asesor / Pembimbing Industri beserta jawaban teknis yang siap dipertahankan:</p>
+  
+    <div class="qa-card">
+      <div class="qa-q">Q1: Mengapa tidak menghubungkan React langsung ke database menggunakan driver MySQL browser?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Database MySQL menggunakan protokol TCP berbasis socket mentah yang tidak didukung langsung oleh browser tanpa perantara, dan yang terpenting: menyematkan kredensial database pada kode JavaScript client-side akan memungkinkan siapa saja membuka DevTools browser untuk melihat password database dan memanipulasi seluruh tabel sesuka hati.</div>
+    </div>
+  
+
+    <div class="qa-card">
+      <div class="qa-q">Q2: Apa fungsi dari parameter queueLimit: 0 pada konfigurasi pool mysql2?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> queueLimit: 0 menandakan bahwa jumlah antrean permintaan koneksi tidak memiliki batas buatan. Jika ke-10 koneksi sedang sibuk, request baru akan mengantre secara tertib (FIFO) hingga ada koneksi yang selesai dan di-release, alih-alih langsung menolak request dengan pesan error 'Queue Limit Reached'.</div>
+    </div>
+  
+
+</body>
+</html>

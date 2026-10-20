@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 12 - Soft Skills / Design Thinking (Kelompok Penunjang)</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 12 &bull; TI.SK.12.2026</div>
+    <h1>Soft Skills / Design Thinking (Kelompok Penunjang)</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi penerapan kecakapan non-teknis pendukung rekayasa, meliputi implementasi metodologi 5 Tahap Design Thinking dalam merancang portal industri berorientasi pengguna, komunikasi teknis lintas bidang, etika rekayasa data, dan penyusunan dokumentasi transfer pengetahuan.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Pengembangan pemikiran inovatif</td>
+      <td><code>Penerapan 5 Tahap Design Thinking</code></td>
+      <td>Inovasi fitur 3D robot canvas interaktif, layout bento grid industrial, dan sistem bilingual.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Kemampuan interpersonal pengembang web</td>
+      <td><code>Kolaborasi Tim & Manajemen Stakeholder</code></td>
+      <td>Komunikasi persuasif dengan tim manajemen, active listening, dan etika privasi data.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>12.1. Penerapan Metodologi 5 Tahap Design Thinking pada Proyek Intersis</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>Metodologi Inovasi Produk Web</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Pemikiran inovatif diarahkan melalui kerangka kerja Design Thinking untuk memecahkan masalah operasional nyata:</p>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 80" width="100%" height="70" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000;">
+            <circle cx="65" cy="40" r="25" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="65" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">1. EMPATHIZE</text>
+            <text x="65" y="49" fill="#555555" font-family="Arial" font-size="6.5" text-anchor="middle">Riset Klien</text>
+
+            <line x1="90" y1="40" x2="160" y2="40" stroke="#000000" stroke-width="1"/>
+
+            <circle cx="185" cy="40" r="25" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="185" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">2. DEFINE</text>
+            <text x="185" y="49" fill="#555555" font-family="Arial" font-size="6.5" text-anchor="middle">Problem UI</text>
+
+            <line x1="210" y1="40" x2="280" y2="40" stroke="#000000" stroke-width="1"/>
+
+            <circle cx="305" cy="40" r="25" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="305" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">3. IDEATE</text>
+            <text x="305" y="49" fill="#555555" font-family="Arial" font-size="6.5" text-anchor="middle">3D &amp; Bento</text>
+
+            <line x1="330" y1="40" x2="400" y2="40" stroke="#000000" stroke-width="1"/>
+
+            <circle cx="425" cy="40" r="25" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="425" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">4. PROTOTYPE</text>
+            <text x="425" y="49" fill="#555555" font-family="Arial" font-size="6.5" text-anchor="middle">Vite + React</text>
+
+            <line x1="450" y1="40" x2="520" y2="40" stroke="#000000" stroke-width="1"/>
+
+            <circle cx="545" cy="40" r="25" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="545" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">5. TEST</text>
+            <text x="545" y="49" fill="#555555" font-family="Arial" font-size="6.5" text-anchor="middle">Uji Pengguna</text>
+          </svg>
+        
+        </div>
+      
+
+      
+
+      
+          <table class="table-custom">
+            <tr>
+              <th>Tahapan Design Thinking</th>
+              <th>Analisis Kebutuhan</th>
+              <th>Solusi Konkret pada Website</th>
+            </tr>
+            <tr>
+              <td>Empathize &amp; Define</td>
+              <td>Pengunjung industri membutuhkan pemahaman cepat terhadap kapabilitas perakitan elektronik dan sertifikasi mutu IATF 16949 pabrik.</td>
+              <td>Membangun showcase produk berteknologi tinggi dengan filter kategori dan rincian spesifikasi teknis.</td>
+            </tr>
+            <tr>
+              <td>Ideate &amp; Prototype</td>
+              <td>Klien internasional membutuhkan portal dengan bahasa ganda (Inggris dan Indonesia) yang responsif di ponsel.</td>
+              <td>Integrasi modul i18next bilingual dan visualisasi 3D robot canvas interaktif dengan performa 60 FPS.</td>
+            </tr>
+            <tr>
+              <td>Testing</td>
+              <td>Uji coba kontras tombol hero section dan responsivitas menu navigasi pada resolusi mobile.</td>
+              <td>Penyempurnaan tombol aksi langsung ke produk dan kontak dengan tingkat kejelasan visual tinggi.</td>
+            </tr>
+          </table>
+        
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>12.2. Kemampuan Interpersonal Pengembang Web & Etika Rekayasa</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>Dokumentasi Kolaborasi Stakeholder</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Kecakapan interpersonal yang diterapkan selama pelaksanaan proyek:</p>
+          <ul>
+            <li><strong>Komunikasi Bisnis Lintas Fungsi:</strong> Menjelaskan konsep teknis database 15 tabel dan REST API ke dalam bahasa fungsional yang mudah dipahami pihak manajemen korporat.</li>
+            <li><strong>Active Listening:</strong> Mengakomodasi umpan balik terkait penyesuaian tata letak tombol kontak dan perbaikan alur penawaran produk secara cepat.</li>
+            <li><strong>Etika Rekayasa &amp; Keamanan:</strong> Menjaga keamanan kredensial akun pengguna sistem melalui enkripsi password bcrypt dan proteksi token otorisasi.</li>
+            <li><strong>Dokumentasi Transfer Knowledge:</strong> Menyusun dokumen teknis komprehensif guna menjamin kelangsungan pemeliharaan sistem di masa mendatang.</li>
+          </ul>
+        
+      </div>
+
+      
+
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 12</div>
+    <p>Seluruh sub-judul pada unit 'Soft Skills / Design Thinking (Kelompok Penunjang)' telah terpenuhi melalui penerapan 5 tahap Design Thinking, komunikasi lintas fungsi, etika rekayasa data, dan penyusunan dokumentasi transfer pengetahuan.</p>
+  </div>
+
+</body>
+</html>

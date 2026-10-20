@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>06 - Mengimplementasikan Pemrograman Terstruktur</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #111827;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 3px solid #0f172a;
+      border-bottom: 1px solid #94a3b8;
+      padding: 6px 0;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #475569;
+    }
+    .title-banner {
+      border-left: 5px solid #1e40af;
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .unit-badge {
+      display: inline-block;
+      background: #1e3a8a;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14.5pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 4px 0 6px 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .project-subtitle {
+      font-size: 9.5pt;
+      color: #475569;
+      font-style: italic;
+      margin: 0;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f1f5f9;
+      width: 25%;
+      color: #1e293b;
+    }
+    .speech-box {
+      background: #f8fafc;
+      border: 1.5px solid #2563eb;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+    }
+    .speech-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px dashed #93c5fd;
+      padding-bottom: 4px;
+    }
+    .speech-content {
+      color: #0f172a;
+      font-size: 9.5pt;
+      line-height: 1.55;
+    }
+    .speech-content p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+    .speech-stage-cue {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      font-family: Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      font-weight: bold;
+      color: #0f172a;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 3px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    .tech-meta-badge {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      color: #475569;
+      margin-bottom: 8px;
+      background: #f1f5f9;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .tech-meta-badge code {
+      color: #0284c7;
+      font-weight: bold;
+    }
+    p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+      text-align: justify;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 5px 8px;
+      text-align: left;
+      border: 1px solid #1e293b;
+    }
+    .table-custom td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+    }
+    .table-custom tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.5pt;
+      line-height: 1.4;
+      margin: 8px 0 12px 0;
+      page-break-inside: avoid;
+      border-left: 3px solid #38bdf8;
+    }
+    .code-box .file-tag {
+      color: #94a3b8;
+      font-size: 7pt;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .qa-card {
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #10b981;
+      background: #fdfdfd;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      page-break-inside: avoid;
+    }
+    .qa-q {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #065f46;
+      margin-bottom: 3px;
+    }
+    .qa-a {
+      font-size: 8.5pt;
+      color: #1e293b;
+      line-height: 1.45;
+    }
+    .slide-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin: 12px 0 16px 0;
+      page-break-inside: avoid;
+    }
+    .slide-box-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #b45309;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .slide-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .slide-box li {
+      font-size: 8.5pt;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOSSIER PRESENTASI KOMPETENSI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES (INTERSIS) &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-badge">UNIT KOMPETENSI 06 &bull; TI.ST.06.2026</div>
+    <h1>Mengimplementasikan Pemrograman Terstruktur</h1>
+    <div class="project-subtitle">Implementasi Riil pada Proyek: Portal Karir, Profil Industri & Modul Automation-GPT (Fullstack Web)</div>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Presenter / Mahasiswa</td>
+      <td>Aditya Ristanto Mukti (Fullstack Web Developer Intern)</td>
+      <td class="lbl">Repository</td>
+      <td><code>github.com/AdityaRistantoMukti/Website_Intersis</code></td>
+    </tr>
+    <tr>
+      <td class="lbl">Institusi / Mitra</td>
+      <td>PT Global Philsonic Technologies (Intersis) Batam</td>
+      <td class="lbl">Tech Stack Utama</td>
+      <td>React 19, Vite, Tailwind CSS v4, Node.js Express 5, MySQL2</td>
+    </tr>
+    <tr>
+      <td class="lbl">Cakupan Outline Sub-Title</td>
+      <td colspan="3">Penguasaan tipe data &bull; Percabangan &bull; Perulangan &bull; Prosedur/Fungsi &bull; Array &bull; File I/O</td>
+    </tr>
+  </table>
+
+  <!-- OUTLINE SUB-TITLE OVERVIEW -->
+  <h2>I. Peta Outline & Struktur Pembahasan</h2>
+  <p>Unit kompetensi <strong>Mengimplementasikan Pemrograman Terstruktur</strong> ini disusun secara berkesinambungan mencakup seluruh sub-judul yang didefinisikan pada diagram alur kompetensi, diaplikasikan langsung pada arsitektur website yang telah dibangun:</p>
+  <ul>
+    <li><strong>Penguasaan tipe data</strong>: Mengelola tipe data primitif dan referensi (String, Number, Boolean, Array, Object) serta validasi skema payload.</li>
+<li><strong>Percabangan</strong>: Menerapkan logika kondisional if-else, guard clauses, switch-case evaluasi role, dan ternary expressions.</li>
+<li><strong>Perulangan</strong>: Mengoperasikan loop deklaratif dan imperatif (map, filter, reduce, forEach) untuk manipulasi koleksi data.</li>
+<li><strong>Prosedur/Fungsi</strong>: Menyusun pure functions, higher-order functions, fungsi asinkron (async/await), dan pipeline middleware.</li>
+<li><strong>Array</strong>: Melakukan transformasi data tak bermutasi (immutable), destructuring array, dan operasi spreading.</li>
+<li><strong>File I/O</strong>: Mengeksekusi pembacaan, penulisan, dan pembersihan berkas media asinkron melalui modul Node.js 'fs'.</li>
+  </ul>
+
+  <!-- SPEAKING SCRIPT RESMI PRESENTER -->
+  <h2>II. Naskah Wicara Lengkap Presenter (Verbatim Speech Script)</h2>
+  <div class="speech-box">
+    <div class="speech-header">
+      <span>🎤 PANDUAN NARASI WICARA PRESENTER (SPEAKING SCRIPT)</span>
+    </div>
+    <div class="speech-content">
+      
+      <p><span class="speech-stage-cue">[Pembukaan &amp; Sikap]</span> "Selamat pagi/siang Dewan Penguji yang terhormat. Fondasi dari setiap aplikasi perangkat lunak yang handal bertumpu pada algoritma terstruktur yang solid. Pada unit <strong>Mengimplementasikan Pemrograman Terstruktur</strong>, saya akan memaparkan penerapan 6 pilar pemrograman terstruktur pada proyek Website Intersis."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 1: Penguasaan Tipe Data]</span> "Pertama, <em>Penguasaan Tipe Data</em>. Kami membedakan secara ketat antara tipe data primitif (String, Number, Boolean) dan referensi (Array, Object). Di backend, kami menggunakan pustaka <code>express-validator</code> untuk memastikan tipe data yang masuk dari request body benar-benar valid, seperti sanitasi string email, konversi integer untuk limit pagination, dan validasi boolean untuk status aktif."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 2: Percabangan]</span> "Kedua, <em>Percabangan (Conditionals)</em>. Untuk menghindari 'callback hell' dan nesting kondisi yang berlebihan (arrow anti-pattern), kami menerapkan <strong>Guard Clauses</strong> (early return pattern). Contohnya pada autentikasi: jika token tidak ada, fungsi langsung mengembalikan status 401 dan berhenti mengeksekusi baris berikutnya. Kami juga menggunakan <code>switch-case</code> untuk pemetaan izin multi-role (administrator, HRD, staff) dan operator ternary pada rendering komponen JSX."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 3, 4, &amp; 5: Perulangan, Prosedur/Fungsi, dan Array]</span> "Ketiga, keempat, dan kelima adalah <em>Perulangan, Fungsi, dan Array</em>. Kami konsisten menggunakan paradigma fungsional modern. Kami memanfaatkan <code>Array.prototype.map()</code> untuk merender daftar kartu lowongan secara deklaratif di React, <code>.filter()</code> untuk menyaring data berdasarkan kategori yang dipilih, dan <code>async/await</code> pada setiap prosedur I/O untuk menjaga eksekusi asynchronous non-blocking."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 6: File I/O]</span> "Keenam, <em>File I/O (Input/Output)</em>. Saat admin memperbarui foto profil korporat atau menghapus item dari galeri, sistem kami tidak hanya menghapus referensi di database, tetapi juga mengeksekusi operasi file I/O menggunakan <code>fs.unlinkSync</code> untuk menghapus file fisik di disk server. Dengan demikian, kapasitas penyimpanan server tetap bersih dari sampah file yatim (orphan files)."</p>
+    
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS RINCI PER SUB-TITLE -->
+  <h2>III. Pembahasan Teknis Rinci & Bedah Kode Nyata Proyek</h2>
+  <p>Berikut adalah pembuktian implementasi teknis dari masing-masing sub-judul berdasarkan baris kode dan berkas nyata di dalam repository proyek:</p>
+  
+    <div class="tech-section">
+      <h3>6.1 & 6.2. Validasi Tipe Data & Pola Percabangan Guard Clauses</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/src/middlewares/authMiddleware.js</code></div>
+      
+          <p>Pola Guard Clause diterapkan untuk menyederhanakan alur percabangan dan menjamin keamanan rute sebelum data diproses lebih lanjut:</p>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">backend/src/middlewares/authMiddleware.js</span>
+          <pre>// Penerapan Guard Clauses: Mencegah Nested If Berlebihan
+const verifyToken = (req, res, next) =&gt; {
+  const authHeader = req.headers[&#039;authorization&#039;];
+  
+  // Guard 1: Periksa keberadaan header
+  if (!authHeader) {
+    return res.status(401).json({ success: false, message: &#039;Akses ditolak: Token tidak ditemukan.&#039; });
+  }
+
+  // Guard 2: Periksa format Bearer
+  const token = authHeader.split(&#039; &#039;)[1];
+  if (!token) {
+    return res.status(401).json({ success: false, message: &#039;Format token tidak valid.&#039; });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next(); // Lolos validasi, lanjutkan ke controller
+  } catch (err) {
+    return res.status(403).json({ success: false, message: &#039;Token kadaluarsa atau tidak sah.&#039; });
+  }
+};</pre>
+        </div>
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>6.3, 6.4 & 6.5. Manipulasi Array Fungsional & Rendering Deklaratif React</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>frontend/src/pages/public/CareerPage.jsx</code></div>
+      
+          <p>Operasi array immutable (map dan filter) digunakan secara terpadu untuk menyaring lowongan kerja berdasarkan pencarian teks dan kategori tanpa memutasi data asli:</p>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">frontend/src/pages/public/CareerPage.jsx</span>
+          <pre>// Filtering Multi-Parameter &amp; Transformasi Array Deklaratif
+const filteredJobs = useMemo(() =&gt; {
+  return jobs.filter((job) =&gt; {
+    const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          job.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === &#039;all&#039; || job.category_id === Number(selectedCategory);
+    return matchesSearch &amp;&amp; matchesCategory;
+  });
+}, [jobs, searchTerm, selectedCategory]);
+
+// Render Array ke Elemen JSX
+return (
+  &lt;div className=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6&quot;&gt;
+    {filteredJobs.map((job) =&gt; (
+      &lt;JobCard key={job.id} jobData={job} onSelect={() =&gt; setSelectedJob(job)} /&gt;
+    ))}
+  &lt;/div&gt;
+);</pre>
+        </div>
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>6.6. Operasi File I/O & Pembersihan Berkas Fisik di Server</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/src/controllers/admin/adminContentControllers.js</code></div>
+      
+          <p>Sistem mengelola berkas media fisik di storage lokal backend menggunakan modul inti <code>fs</code> dan <code>path</code>:</p>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">backend/src/controllers/admin/adminContentControllers.js</span>
+          <pre>const fs = require(&#039;fs&#039;);
+const path = require(&#039;path&#039;);
+
+// File I/O: Menghapus File Gambar Fisik dari Disk Saat Record Dihapus
+exports.deleteGalleryItem = async (req, res, next) =&gt; {
+  try {
+    const { id } = req.params;
+    const [rows] = await db.query(&#039;SELECT image FROM gallery WHERE id = ?&#039;, [id]);
+    
+    if (rows.length &gt; 0 &amp;&amp; rows[0].image) {
+      const filePath = path.join(__dirname, &#039;../../../uploads&#039;, rows[0].image);
+      // Validasi keberadaan file sebelum penghapusan
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath); // Eksekusi penghapusan file dari filesystem
+      }
+    }
+
+    await db.query(&#039;DELETE FROM gallery WHERE id = ?&#039;, [id]);
+    res.json({ success: true, message: &#039;Item galeri dan berkas fisik berhasil dihapus.&#039; });
+  } catch (err) {
+    next(err);
+  }
+};</pre>
+        </div>
+      
+    </div>
+  
+
+  <!-- SLIDE TALKING POINTS -->
+  <h2>IV. Poin Kunci Presentasi (Slide Talking Points)</h2>
+  <div class="slide-box">
+    <div class="slide-box-title">Pointer Ringkas untuk Tampilan Slide / Layar</div>
+    <ul>
+      <li>Tipe Data & Skema: Validasi ketat tipe primitif dan referensi dengan express-validator.</li>
+<li>Guard Clauses Pattern: Mengurangi nesting if-else untuk meningkatkan keterbacaan kode.</li>
+<li>Operasi Array Deklaratif: Pemanfaatan .filter() dan .map() immutable untuk reaktifitas UI.</li>
+<li>Fungsi Asinkron: Penggunaan async/await untuk penanganan I/O non-blocking.</li>
+<li>Manajemen File I/O: Otomasi penghapusan file fisik via fs.unlinkSync untuk mencegah storage leak.</li>
+    </ul>
+  </div>
+
+  <!-- Q&A DEFENSE MATRIX -->
+  <h2>V. Matriks Tanya Jawab & Panduan Pembelaan Sidang (Q&A Defense)</h2>
+  <p>Prediksi pertanyaan evaluasi dari Penguji / Asesor / Pembimbing Industri beserta jawaban teknis yang siap dipertahankan:</p>
+  
+    <div class="qa-card">
+      <div class="qa-q">Q1: Apa perbedaan manipulasi array imperatif (for loop biasa) dengan fungsional (.map/.filter) dalam konteks React?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Metode fungsional seperti .map() dan .filter() bersifat declarative dan immutable (menghasilkan array baru tanpa mengubah data asal), yang sangat krusial dalam siklus hidup React untuk memicu re-render secara akurat berdasarkan perbandingan referensi (shallow comparison).</div>
+    </div>
+  
+
+    <div class="qa-card">
+      <div class="qa-q">Q2: Mengapa Anda memeriksa fs.existsSync() sebelum menjalankan fs.unlinkSync()?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Jika kita memanggil fs.unlinkSync pada path file yang sudah tidak ada di disk (misalnya file terhapus manual oleh admin server), Node.js akan melempar ENOENT exception yang dapat menyebabkan kegagalan request. Validasi keberadaan file menjamin operasi penghapusan record database tetap sukses.</div>
+    </div>
+  
+
+</body>
+</html>

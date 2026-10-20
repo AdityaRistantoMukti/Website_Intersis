@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 03 - Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 03 &bull; TI.PG.03.2026</div>
+    <h1>Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi eksekusi runtime Node.js v24 dan bundler Vite 8.3, sistem debugging terpusat via HTTP logger Morgan, serta pengelolaan berkas multimedia melalui pipeline Multer dan automasi skrip Puppeteer.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Mekanisme running source code</td>
+      <td><code>backend/package.json & frontend/package.json</code></td>
+      <td>Eksekusi nodemon backend dev, bundler Vite HMR frontend, dan skrip kompilasi Rollup.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Debugging</td>
+      <td><code>backend/src/server.js & Chrome DevTools</code></td>
+      <td>Pencatatan HTTP traffic Morgan dan penanganan exception terpusat pada server.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Perintah bahasa pemrograman</td>
+      <td><code>backend/src/middlewares/uploadMiddleware.js & generate_handbook_pdf.js</code></td>
+      <td>Pemrosesan upload multipart/form-data Multer dan automasi kompilasi grafis Puppeteer.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>3.1. Mekanisme Running Source Code (Node.js & Vite HMR)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/package.json & frontend/package.json</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Mekanisme eksekusi memisahkan server API asinkron berbasis Event Loop dari server dev frontend berbasis Hot Module Replacement (HMR):</p>
+          <table class="table-custom">
+            <tr>
+              <th>Lingkungan</th>
+              <th>Perintah Eksekusi</th>
+              <th>Runtime / Bundler</th>
+              <th>Mekanisme Kerja</th>
+            </tr>
+            <tr>
+              <td>Backend Gateway</td>
+              <td><code>npm run dev</code></td>
+              <td>Node.js v24 + Nodemon</td>
+              <td>Memonitor perubahan berkas JS dan merestart server otomatis tanpa downtime panjang.</td>
+            </tr>
+            <tr>
+              <td>Frontend Client</td>
+              <td><code>npm run dev</code></td>
+              <td>Vite 8.3 + ESBuild</td>
+              <td>Menyajikan kode via ESM native dengan pembaruan modul instan (HMR &lt; 50ms).</td>
+            </tr>
+          </table>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/package.json</span>
+            <pre>{
+  &quot;name&quot;: &quot;backend&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node src/server.js&quot;,
+    &quot;dev&quot;: &quot;nodemon src/server.js&quot;,
+    &quot;test&quot;: &quot;node test_api_runner.js&quot;
+  }
+}</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>3.2. Teknik Debugging & Pencatatan Transaksi HTTP Terpusat</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/server.js & backend/src/middlewares/errorHandler.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Pencatatan diagnostik request-response menggunakan middleware <code>morgan('dev')</code>:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/server.js</span>
+            <pre>// Aktivasi HTTP Traffic Logger &amp; Penanganan Error Terpusat
+if (process.env.NODE_ENV !== &#039;test&#039;) {
+  app.use(morgan(&#039;dev&#039;)); // Output: METHOD STATUS RES_TIME CONTENT_LENGTH
+}
+
+// Global Exception Handler: Menangkap Error Tak Terduga
+const { notFoundHandler, globalErrorHandler } = require(&#039;./middlewares/errorHandler&#039;);
+app.use(notFoundHandler);
+app.use(globalErrorHandler);</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>3.3. Pemrosesan Upload Berkas Multimedia (Multer Storage Engine)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/middlewares/uploadMiddleware.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Penyimpanan gambar produk dan foto fasilitas dilakukan menggunakan <code>multer.diskStorage</code> dengan validasi MIME-type dan penamaan unik anti-collision:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/middlewares/uploadMiddleware.js</span>
+            <pre>const multer = require(&#039;multer&#039;);
+const path = require(&#039;path&#039;);
+const fs = require(&#039;fs&#039;);
+
+const uploadDir = path.join(__dirname, &#039;../../uploads&#039;);
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) =&gt; {
+    const subFolder = req.body.folder || &#039;general&#039;;
+    const targetPath = path.join(uploadDir, subFolder);
+    if (!fs.existsSync(targetPath)) {
+      fs.mkdirSync(targetPath, { recursive: true });
+    }
+    cb(null, targetPath);
+  },
+  filename: (req, file, cb) =&gt; {
+    const uniqueSuffix = Date.now() + &#039;-&#039; + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname).toLowerCase();
+    const cleanName = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9]/g, &#039;_&#039;);
+    cb(null, `${cleanName}_${uniqueSuffix}${ext}`);
+  },
+});
+
+const fileFilter = (req, file, cb) =&gt; {
+  const allowedTypes = /jpeg|jpg|png|webp|svg|ico/;
+  const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimeType = allowedTypes.test(file.mimetype) || file.mimetype === &#039;image/x-icon&#039;;
+
+  if (extName &amp;&amp; mimeType) {
+    return cb(null, true);
+  }
+  cb(new Error(&#039;Format file tidak didukung! Hanya file gambar (JPG, PNG, WEBP, SVG, ICO).&#039;));
+};
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Maksimal 5MB
+  fileFilter,
+});
+
+module.exports = upload;</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 03</div>
+    <p>Seluruh sub-judul pada unit 'Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia' telah terpenuhi dengan lingkungan Node.js, Vite HMR, logger Morgan, dan Multer.</p>
+  </div>
+
+</body>
+</html>

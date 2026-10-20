@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 01 - Mengimplementasikan User Interface</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 01 &bull; TI.UI.01.2026</div>
+    <h1>Mengimplementasikan User Interface</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi implementasi antarmuka pengguna website berbasis React 19, CSS Modern terstruktur, WebGL 3D Robot Canvas, sistem multi-bahasa bilingual (ID/EN), dual-theme (Gelap/Terang), dan sistem dialog multi-tingkat pada portal publik dan dashboard admin PT Global Philsonic Technologies.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Identifikasi mock-up</td>
+      <td><code>frontend/src/pages/public/HomePage.jsx & ProductsPage.jsx</code></td>
+      <td>Translasi wireframe bento-grid, Hero section dengan tombol direct redirection (/products & /contact), dan katalog produk industri.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Penyusunan hirarki dialog UI</td>
+      <td><code>frontend/src/pages/admin/modules/ProductsModule.jsx & GalleryModule.jsx</code></td>
+      <td>Penyusunan modal input multi-tab produk manufaktur, form upload galeri industri, dan dialog validasi transaksional.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Penerapan tampilan interaktif</td>
+      <td><code>frontend/src/components/automation/RobotCanvas3D.jsx & src/lib/i18n.js</code></td>
+      <td>Integrasi WebGL 3D Robot Canvas interaktif 60 FPS dengan telemetri 6-axis, toggle tema, dan lokalisasi multi-bahasa real-time.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>1.1. Identifikasi Mock-up & Translasi Wireframe ke Komponen Reaktif</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>frontend/src/pages/public/HomePage.jsx & ProductsPage.jsx</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Identifikasi mock-up dilakukan untuk menerjemahkan spesifikasi antarmuka industri elektronika otomotif dan rekayasa otomasi (Automation-GPT) ke dalam susunan komponen visual reaktif yang modular:</p>
+          <ul>
+            <li><strong>Hero Section Dinamis:</strong> Dilengkapi tombol aksi langsung (direct redirection) berukuran besar menuju katalog produk otomasi (<code>/products</code>) dan formulir penawaran RFQ (<code>/contact</code>).</li>
+            <li><strong>Bento Grid Architecture:</strong> Diterapkan pada <code>AboutPage.jsx</code> dan <code>HomePage.jsx</code> untuk menampilkan data sejarah pabrik Batam Free Trade Zone (FTZ), sertifikasi IATF 16949 / ISO 9001, dan nilai inti korporat.</li>
+            <li><strong>Katalog Produk Berfilter:</strong> Grid kartu produk responsif yang menampilkan kode SKU model, badge kategori (Headunit, Audio DSP, Dashcam, EMS), spesifikasi teknis ringkas, dan modal unduh skema diagram.</li>
+          </ul>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 150" width="100%" height="130" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000;">
+            <!-- Navbar -->
+            <rect x="15" y="15" width="650" height="24" fill="#f0f0f0" stroke="#000000" stroke-width="1"/>
+            <text x="25" y="31" fill="#000000" font-family="Arial" font-size="8.5" font-weight="bold">NAVBAR: Brand Logo | Beranda | Produk | Otomasi | Tentang Kami | Galeri | Kontak | ID/EN | Dark/Light</text>
+            
+            <!-- Hero Section -->
+            <rect x="15" y="45" width="410" height="90" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+            <text x="25" y="65" fill="#000000" font-family="Arial" font-size="9" font-weight="bold">HERO SECTION (Headline Industri &amp; Direct Redirection)</text>
+            <rect x="25" y="80" width="175" height="22" fill="#e5e5e5" stroke="#000000" stroke-width="0.8"/>
+            <text x="112" y="94" fill="#000000" font-family="Arial" font-size="7.5" text-anchor="middle" font-weight="bold">Jelajahi Katalog (/products)</text>
+            <rect x="210" y="80" width="175" height="22" fill="#ffffff" stroke="#000000" stroke-width="0.8"/>
+            <text x="297" y="94" fill="#000000" font-family="Arial" font-size="7.5" text-anchor="middle">Konsultasi RFQ (/contact)</text>
+
+            <!-- 3D Robot / Canvas Visual -->
+            <rect x="435" y="45" width="230" height="90" fill="#f9f9f9" stroke="#000000" stroke-width="1"/>
+            <circle cx="550" cy="90" r="30" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="550" y="93" fill="#000000" font-family="Arial" font-size="8" text-anchor="middle" font-weight="bold">3D WebGL Canvas</text>
+            <text x="550" y="105" fill="#555555" font-family="Arial" font-size="7" text-anchor="middle">(Robotika Manufaktur 60 FPS)</text>
+          </svg>
+        
+        </div>
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">frontend/src/pages/public/HomePage.jsx</span>
+            <pre>// Direct Redirection Action Buttons pada Hero Section HomePage.jsx
+&lt;div className=&quot;hero__actions&quot;&gt;
+  {(() =&gt; {
+    const primaryLink = (slide.actionLink &amp;&amp; slide.actionLink !== &#039;#products-catalog&#039;)
+      ? slide.actionLink
+      : &#039;/products&#039;;
+    const primaryText = slide.actionText || slide.ctaPrimary || 
+      (lang === &#039;id&#039; ? &#039;JELAJAHI KATALOG PRODUK&#039; : &#039;EXPLORE PRODUCT CATALOG&#039;);
+
+    const isPrimaryContact = primaryLink.includes(&#039;/contact&#039;);
+    const secondaryLink = slide.secondaryLink || (isPrimaryContact ? &#039;/products&#039; : &#039;/contact&#039;);
+    const secondaryText = slide.ctaSecondary || (isPrimaryContact
+      ? (lang === &#039;id&#039; ? &#039;LIHAT KATALOG PRODUK&#039; : &#039;VIEW PRODUCT CATALOG&#039;)
+      : (lang === &#039;id&#039; ? &#039;KONSULTASI TEKNIK RFQ&#039; : &#039;ENGINEERING RFQ INQUIRY&#039;));
+
+    return (
+      &lt;&gt;
+        &lt;Link to={primaryLink} className=&quot;btn btn--hero-primary btn--lg&quot;&gt;
+          {primaryText}
+          &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2.5&quot;&gt;
+            &lt;line x1=&quot;5&quot; y1=&quot;12&quot; x2=&quot;19&quot; y2=&quot;12&quot; /&gt;
+            &lt;polyline points=&quot;12 5 19 12 12 19&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/Link&gt;
+        &lt;Link to={secondaryLink} className=&quot;btn btn--hero-secondary btn--lg&quot;&gt;
+          {secondaryText}
+        &lt;/Link&gt;
+      &lt;/&gt;
+    );
+  })()}
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>1.2. Penyusunan Hirarki Dialog UI & Form Input Multi-Tab Transaksional</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>frontend/src/pages/admin/modules/ProductsModule.jsx & GalleryModule.jsx</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Hirarki dialog antarmuka memisahkan interaksi tampilan cepat, formulir berstruktur, dan konfirmasi aksi kritis:</p>
+          <ul>
+            <li><strong>Tingkat 1 (Modal Penampil Ringkas):</strong> Dialog pop-up spesifikasi produk lengkap (<code>ProductSpecsModal.jsx</code>) dan Lightbox foto galeri industri tanpa merubah state navigasi halaman.</li>
+            <li><strong>Tingkat 2 (Modal Form Input Multi-Tab):</strong> Dialog pengelolaan produk pada admin panel yang membagi formulir ke dalam 4 tab sekuensial (Identitas Model, Judul & Deskripsi Bilingual, Specs Singkat, dan JSON Spesifikasi Lengkap).</li>
+            <li><strong>Tingkat 3 (Dialog Konfirmasi Transaksional):</strong> Feedback aksi transaksional berbasis sistem toast notifikasi real-time dan dialog validasi schema sebelum pengiriman data via Axios.</li>
+          </ul>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">frontend/src/pages/admin/modules/ProductsModule.jsx</span>
+            <pre>// Hirarki Form Modal Multi-Tab &amp; Eksekusi Simpan Produk Manufaktur
+const handleSaveProduct = async (e) =&gt; {
+  e.preventDefault();
+  if (!form.model_code.trim()) {
+    addToast(&#039;Kode Model Produk wajib diisi.&#039;, &#039;error&#039;);
+    setModalTab(&#039;identity&#039;);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append(&#039;model_code&#039;, form.model_code);
+  formData.append(&#039;category&#039;, form.category);
+  formData.append(&#039;badge&#039;, form.badge || &#039;&#039;);
+  formData.append(&#039;title_id&#039;, form.title_id);
+  formData.append(&#039;title_en&#039;, form.title_en);
+  formData.append(&#039;specs&#039;, JSON.stringify(cleanSpecs));
+  formData.append(&#039;full_specs&#039;, JSON.stringify(form.full_specs || {}));
+
+  setSubmitting(true);
+  try {
+    if (isEdit) {
+      await api.put(`/admin/products/${product.id}`, formData);
+      addToast(`Produk &#039;${form.model_code}&#039; berhasil diperbarui!`, &#039;success&#039;);
+    } else {
+      await api.post(&#039;/admin/products&#039;, formData);
+      addToast(`Produk baru &#039;${form.model_code}&#039; berhasil ditambahkan!`, &#039;success&#039;);
+    }
+    onSaved();
+  } catch (err) {
+    addToast(extractErrorMessage(err), &#039;error&#039;);
+  } finally {
+    setSubmitting(false);
+  }
+};</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>1.3. Penerapan Tampilan Interaktif (WebGL 3D Robot Canvas & Multi-Bahasa)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>frontend/src/components/automation/RobotCanvas3D.jsx & src/lib/i18n.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Fitur interaktif dieksekusi secara teroptimasi pada thread grafis browser:</p>
+          <ol>
+            <li><strong>Interactive 3D Robot Canvas:</strong> Menggunakan Three.js pada <code>RobotCanvas3D.jsx</code> untuk merender model robotika manufaktur berkecepatan 60 FPS dengan kontrol rotasi, mode wireframe, pencahayaan directional spotlight, dan visualisasi telemetri sumbu (joint 1-6).</li>
+            <li><strong>Sistem Multi-Bahasa Bilingual:</strong> Integrasi <code>i18next</code> yang memungkinkan peralihan bahasa Indonesia dan Inggris secara instan tanpa memicu reload halaman web.</li>
+            <li><strong>Persistensi Tema Gelap/Terang:</strong> Pengendalian class <code>dark</code> pada elemen dokumen HTML dengan sinkronisasi ke <code>localStorage</code> peramban klien.</li>
+          </ol>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">frontend/src/components/automation/RobotCanvas3D.jsx</span>
+            <pre>// Inisialisasi Kanvas 3D WebGL dengan Three.js &amp; State Telemetri Sumbu Robot
+export default function RobotCanvas3D({ robotType = &#039;welding&#039;, activeStep = 0 }) {
+  const mountRef = useRef(null);
+  const [wireframe, setWireframe] = useState(false);
+  const [autoRotate, setAutoRotate] = useState(false);
+  const [telemetry, setTelemetry] = useState({ j1: 0, j2: 0, j3: 0, j4: 0, j5: 0, j6: 0 });
+
+  const stateRef = useRef({
+    cameraPos: new THREE.Vector3(5.2, 3.8, 6.0),
+    cameraTarget: new THREE.Vector3(0, 2.0, 0),
+    camera: null,
+    renderer: null,
+    materials: []
+  });
+
+  return (
+    &lt;div className=&quot;robot-canvas-container&quot; ref={mountRef}&gt;
+      {/* 3D WebGL Viewport, HUD Telemetri Sumbu, &amp; Tombol Kontrol Rotasi */}
+    &lt;/div&gt;
+  );
+}</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 01</div>
+    <p>Seluruh sub-judul pada unit 'Mengimplementasikan User Interface' telah terpenuhi secara fungsional pada modul publik dan dashboard manajemen sistem PT Global Philsonic Technologies.</p>
+  </div>
+
+</body>
+</html>

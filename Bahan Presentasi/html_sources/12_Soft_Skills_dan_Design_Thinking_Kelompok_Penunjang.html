@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>12 - Soft Skills / Design Thinking (Kelompok Penunjang)</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #111827;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 3px solid #0f172a;
+      border-bottom: 1px solid #94a3b8;
+      padding: 6px 0;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #475569;
+    }
+    .title-banner {
+      border-left: 5px solid #1e40af;
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .unit-badge {
+      display: inline-block;
+      background: #1e3a8a;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14.5pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 4px 0 6px 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .project-subtitle {
+      font-size: 9.5pt;
+      color: #475569;
+      font-style: italic;
+      margin: 0;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f1f5f9;
+      width: 25%;
+      color: #1e293b;
+    }
+    .speech-box {
+      background: #f8fafc;
+      border: 1.5px solid #2563eb;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+    }
+    .speech-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px dashed #93c5fd;
+      padding-bottom: 4px;
+    }
+    .speech-content {
+      color: #0f172a;
+      font-size: 9.5pt;
+      line-height: 1.55;
+    }
+    .speech-content p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+    .speech-stage-cue {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      font-family: Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      font-weight: bold;
+      color: #0f172a;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 3px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    .tech-meta-badge {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      color: #475569;
+      margin-bottom: 8px;
+      background: #f1f5f9;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .tech-meta-badge code {
+      color: #0284c7;
+      font-weight: bold;
+    }
+    p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+      text-align: justify;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 5px 8px;
+      text-align: left;
+      border: 1px solid #1e293b;
+    }
+    .table-custom td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+    }
+    .table-custom tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.5pt;
+      line-height: 1.4;
+      margin: 8px 0 12px 0;
+      page-break-inside: avoid;
+      border-left: 3px solid #38bdf8;
+    }
+    .code-box .file-tag {
+      color: #94a3b8;
+      font-size: 7pt;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .qa-card {
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #10b981;
+      background: #fdfdfd;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      page-break-inside: avoid;
+    }
+    .qa-q {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #065f46;
+      margin-bottom: 3px;
+    }
+    .qa-a {
+      font-size: 8.5pt;
+      color: #1e293b;
+      line-height: 1.45;
+    }
+    .slide-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin: 12px 0 16px 0;
+      page-break-inside: avoid;
+    }
+    .slide-box-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #b45309;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .slide-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .slide-box li {
+      font-size: 8.5pt;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOSSIER PRESENTASI KOMPETENSI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES (INTERSIS) &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-badge">UNIT KOMPETENSI 12 &bull; TI.SK.12.2026</div>
+    <h1>Soft Skills / Design Thinking (Kelompok Penunjang)</h1>
+    <div class="project-subtitle">Implementasi Riil pada Proyek: Portal Karir, Profil Industri & Modul Automation-GPT (Fullstack Web)</div>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Presenter / Mahasiswa</td>
+      <td>Aditya Ristanto Mukti (Fullstack Web Developer Intern)</td>
+      <td class="lbl">Repository</td>
+      <td><code>github.com/AdityaRistantoMukti/Website_Intersis</code></td>
+    </tr>
+    <tr>
+      <td class="lbl">Institusi / Mitra</td>
+      <td>PT Global Philsonic Technologies (Intersis) Batam</td>
+      <td class="lbl">Tech Stack Utama</td>
+      <td>React 19, Vite, Tailwind CSS v4, Node.js Express 5, MySQL2</td>
+    </tr>
+    <tr>
+      <td class="lbl">Cakupan Outline Sub-Title</td>
+      <td colspan="3">Pengembangan pemikiran inovatif &bull; Kemampuan interpersonal pengembang web</td>
+    </tr>
+  </table>
+
+  <!-- OUTLINE SUB-TITLE OVERVIEW -->
+  <h2>I. Peta Outline & Struktur Pembahasan</h2>
+  <p>Unit kompetensi <strong>Soft Skills / Design Thinking (Kelompok Penunjang)</strong> ini disusun secara berkesinambungan mencakup seluruh sub-judul yang didefinisikan pada diagram alur kompetensi, diaplikasikan langsung pada arsitektur website yang telah dibangun:</p>
+  <ul>
+    <li><strong>Pengembangan pemikiran inovatif</strong>: Menerapkan 5 tahapan Design Thinking (Empathize, Define, Ideate, Prototype, Test) untuk memecahkan problem nyata rekrutmen & branding industri.</li>
+<li><strong>Kemampuan interpersonal pengembang web</strong>: Mengasah komunikasi lintas fungsional (tim teknis & stakeholder HRD), etika rekayasa, manajemen waktu, dan presentasi persuasif.</li>
+  </ul>
+
+  <!-- SPEAKING SCRIPT RESMI PRESENTER -->
+  <h2>II. Naskah Wicara Lengkap Presenter (Verbatim Speech Script)</h2>
+  <div class="speech-box">
+    <div class="speech-header">
+      <span>🎤 PANDUAN NARASI WICARA PRESENTER (SPEAKING SCRIPT)</span>
+    </div>
+    <div class="speech-content">
+      
+      <p><span class="speech-stage-cue">[Pembukaan &amp; Sikap]</span> "Dewan Penguji dan Bapak/Ibu Pembimbing yang saya hormati. Keberhasilan seorang insinyur perangkat lunak tidak hanya ditentukan oleh kecakapan menulis sintaksis kode (hard skills), melainkan juga kepekaan dalam memahami masalah manusia dan kecakapan berkolaborasi (soft skills). Pada unit <strong>Soft Skills &amp; Design Thinking</strong>, saya akan memaparkan bagaimana pendekatan berbasis empati dan inovasi diterapkan dalam proyek ini."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 1: Pengembangan Pemikiran Inovatif &amp; Design Thinking]</span> "Dalam <em>Pengembangan Pemikiran Inovatif</em>, kami memandu seluruh rekayasa perangkat lunak melalui metodologi <strong>5 Tahap Design Thinking</strong>:
+      1. <strong>Empathize</strong>: Kami mengamati kendala tim HRD PT Global Philsonic Technologies yang kesulitan menerima berkas pelamar secara manual lewat email yang berceceran, serta calon kandidat yang sulit memahami profil teknologi perusahaan.
+      2. <strong>Define</strong>: Kami merumuskan masalah inti: 'Bagaimana menciptakan portal karir digital yang terpadu, bilingual, dan sekaligus memamerkan keunggulan manufaktur otomasi perusahaan?'.
+      3. <strong>Ideate</strong>: Kami menggagas ide inovatif: menghadirkan 3D interactive globe yang memukau calon pelamar internasional, sistem dual-theme (Dark/Light mode), dan dashboard CMS mandiri agar staf HRD dapat memperbarui lowongan tanpa ketergantungan programmer.
+      4. <strong>Prototype</strong>: Kami membangun purwarupa interaktif secara cepat menggunakan stack Vite, React, dan Tailwind CSS.
+      5. <strong>Test</strong>: Kami menguji purwarupa langsung kepada pengguna akhir di lingkungan mobile dan desktop untuk memastikan keterbacaan dan kecepatan akses."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 2: Kemampuan Interpersonal Pengembang Web]</span> "Selanjutnya, dalam <em>Kemampuan Interpersonal Pengembang Web</em>, proyek ini membuktikan kapasitas komunikasi lintas bidang. Saya secara aktif menjembatani jargon teknis (seperti database indexing, response time, dan API) menjadi bahasa bisnis yang mudah dipahami oleh manajemen HRD. Kami mengedepankan keterbukaan lewat dokumentasi transparan, mendengarkan umpan balik (active listening) saat ada revisi desain bento grid atau penyesuaian alur formulir kontak, serta disiplin dalam manajemen waktu (time management) sehingga proyek berhasil diselesaikan tepat waktu sesuai target magang."</p>
+      
+      <p><span class="speech-stage-cue">[Penutup Presentasi Seluruh Unit]</span> "Sebagai penutup, penguasaan 12 unit kompetensi yang telah saya paparkan—dari antarmuka, basis data, backend, pemrograman terstruktur, SQL, versioning, hingga soft skills—membuktikan kesiapan saya sebagai Fullstack Web Developer yang siap terjun dan berkontribusi secara nyata di industri teknologi. Terima kasih atas perhatian Dewan Penguji, dan saya siap untuk sesi tanya jawab."</p>
+    
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS RINCI PER SUB-TITLE -->
+  <h2>III. Pembahasan Teknis Rinci & Bedah Kode Nyata Proyek</h2>
+  <p>Berikut adalah pembuktian implementasi teknis dari masing-masing sub-judul berdasarkan baris kode dan berkas nyata di dalam repository proyek:</p>
+  
+    <div class="tech-section">
+      <h3>12.1. Penerapan 5 Tahapan Design Thinking pada Proyek Intersis</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>Metodologi Inovasi Produk Web</code></div>
+      
+          <p>Matriks implementasi tahapan Design Thinking dalam merancang fitur website:</p>
+          <table class="table-custom">
+            <tr>
+              <th>Tahap Design Thinking</th>
+              <th>Aktivitas Nyata Pengembang</th>
+              <th>Hasil / Solusi yang Diimplementasikan</th>
+            </tr>
+            <tr>
+              <td>1. Empathize (Empati)</td>
+              <td>Wawancara dengan staf HRD dan calon kandidat magang mengenai kendala website karir konvensional.</td>
+              <td>Mengetahui fakta bahwa kandidat enggan membaca teks panjang tanpa hierarki visual yang jelas.</td>
+            </tr>
+            <tr>
+              <td>2. Define (Definisi Masalah)</td>
+              <td>Memetakan pain point: data lowongan statis, tidak ada filter kategori, dan tidak ramah di ponsel pintar.</td>
+              <td>Rumusan User Story: 'Kandidat membutuhkan pencarian lowongan kerja instan dan visualisasi budaya kerja yang modern.'</td>
+            </tr>
+            <tr>
+              <td>3. Ideate (Gagasan Solusi)</td>
+              <td>Brainstorming fitur: visualisasi 3D WebGL, sistem kartu lowongan terfilter dinamis, dan sistem bilingual.</td>
+              <td>Rancangan arsitektur bento gallery 5-kolom dan modul Automation-GPT yang berkelas internasional.</td>
+            </tr>
+            <tr>
+              <td>4. Prototype (Purwarupa)</td>
+              <td>Pengembangan iteratif menggunakan React 19 dan Tailwind CSS v4.</td>
+              <td>Frontend reaktif dengan komponen reusable yang langsung tersambung ke mock REST API.</td>
+            </tr>
+            <tr>
+              <td>5. Test (Pengujian Pengguna)</td>
+              <td>Uji coba fungsionalitas formulir kontak, rotasi globe di perangkat mobile, dan keterbacaan teks kontras tinggi.</td>
+              <td>Penyesuaian responsivitas mobile nav drawer dan penyesuaian font monokrom agar nyaman dibaca.</td>
+            </tr>
+          </table>
+        
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>12.2. Kemampuan Interpersonal, Komunikasi Stakeholder & Etika Rekayasa</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>Dokumentasi Kolaborasi & Manajemen Proyek</code></div>
+      
+          <p>Aspek soft skills yang diasah dan dibuktikan selama pengerjaan proyek:</p>
+          <ul>
+            <li><strong>Komunikasi Efektif dengan Non-Teknis:</strong> Menerangkan konsep database relasional dan manajemen konten kepada pihak HRD tanpa menggunakan istilah teknis yang membingungkan.</li>
+            <li><strong>Active Listening & Adaptabilitas:</strong> Menampung feedback mengenai kebutuhan pengubahan warna background call-to-action pada mode terang dan gelap, lalu mengeksekusinya secara cepat.</li>
+            <li><strong>Integritas &amp; Keamanan Data:</strong> Menjaga etika profesi dengan menerapkan enkripsi password, tidak mengekspos data log pelamar ke area publik, dan melindungi hak cipta aset perusahaan.</li>
+            <li><strong>Penyusunan Dokumentasi Komprehensif:</strong> Menulis 10 Bab buku panduan teknis dan glosarium untuk menjamin kemudahan transfer pengetahuan bagi penerus proyek di perusahaan.</li>
+          </ul>
+        
+      
+    </div>
+  
+
+  <!-- SLIDE TALKING POINTS -->
+  <h2>IV. Poin Kunci Presentasi (Slide Talking Points)</h2>
+  <div class="slide-box">
+    <div class="slide-box-title">Pointer Ringkas untuk Tampilan Slide / Layar</div>
+    <ul>
+      <li>Metodologi 5 Tahap Design Thinking: Empathize, Define, Ideate, Prototype, dan Test.</li>
+<li>Inovasi Berorientasi Solusi: 3D interactive canvas, sistem bilingual otomatis, dan CMS dashboard mandiri.</li>
+<li>Komunikasi Stakeholder Lintas Bidang: Menerjemahkan kebutuhan bisnis HRD ke dalam arsitektur teknis.</li>
+<li>Active Listening & Feedback Iteration: Adaptabilitas tinggi terhadap masukan ergonomi antarmuka.</li>
+<li>Etika Rekayasa & Integritas: Penegakan privasi data kandidat dan penyusunan dokumentasi transfer knowledge.</li>
+    </ul>
+  </div>
+
+  <!-- Q&A DEFENSE MATRIX -->
+  <h2>V. Matriks Tanya Jawab & Panduan Pembelaan Sidang (Q&A Defense)</h2>
+  <p>Prediksi pertanyaan evaluasi dari Penguji / Asesor / Pembimbing Industri beserta jawaban teknis yang siap dipertahankan:</p>
+  
+    <div class="qa-card">
+      <div class="qa-q">Q1: Mengapa pemikiran inovatif dan Design Thinking sangat penting bagi seorang pengembang web, bukan hanya desainer UI/UX?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Pengembang web bukan sekadar juru ketik kode, melainkan problem solver. Tanpa Design Thinking, pengembang dapat menghabiskan waktu berminggu-minggu membangun fitur yang rumit secara teknis namun ternyata tidak dibutuhkan atau membingungkan bagi pengguna akhir. Dengan Design Thinking, setiap baris kode yang ditulis berakar kuat pada pemecahan masalah nyata pengguna.</div>
+    </div>
+  
+
+    <div class="qa-card">
+      <div class="qa-q">Q2: Bagaimana cara Anda menjelaskan masalah teknis yang rumit (seperti kegagalan query database) kepada pimpinan perusahaan atau HRD?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Kami menggunakan pendekatan analogi bisnis dan berorientasi solusi. Alih-alih menjelaskan tentang 'MySQL connection pool timeout', kami menjelaskan bahwa 'saat ini sistem sedang mengalami antrean akses data yang padat, dan solusi yang sedang kami terapkan adalah memperbesar jalur penampungan data agar form dapat diakses kembali dalam beberapa menit tanpa ada data yang hilang'.</div>
+    </div>
+  
+
+</body>
+</html>

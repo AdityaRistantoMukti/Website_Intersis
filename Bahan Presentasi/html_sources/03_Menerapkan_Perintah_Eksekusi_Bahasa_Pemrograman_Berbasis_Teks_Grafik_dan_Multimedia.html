@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>03 - Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #111827;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 3px solid #0f172a;
+      border-bottom: 1px solid #94a3b8;
+      padding: 6px 0;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #475569;
+    }
+    .title-banner {
+      border-left: 5px solid #1e40af;
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .unit-badge {
+      display: inline-block;
+      background: #1e3a8a;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14.5pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 4px 0 6px 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .project-subtitle {
+      font-size: 9.5pt;
+      color: #475569;
+      font-style: italic;
+      margin: 0;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f1f5f9;
+      width: 25%;
+      color: #1e293b;
+    }
+    .speech-box {
+      background: #f8fafc;
+      border: 1.5px solid #2563eb;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+    }
+    .speech-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px dashed #93c5fd;
+      padding-bottom: 4px;
+    }
+    .speech-content {
+      color: #0f172a;
+      font-size: 9.5pt;
+      line-height: 1.55;
+    }
+    .speech-content p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+    .speech-stage-cue {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      font-family: Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      font-weight: bold;
+      color: #0f172a;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 3px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    .tech-meta-badge {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      color: #475569;
+      margin-bottom: 8px;
+      background: #f1f5f9;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .tech-meta-badge code {
+      color: #0284c7;
+      font-weight: bold;
+    }
+    p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+      text-align: justify;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 5px 8px;
+      text-align: left;
+      border: 1px solid #1e293b;
+    }
+    .table-custom td {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+    }
+    .table-custom tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.5pt;
+      line-height: 1.4;
+      margin: 8px 0 12px 0;
+      page-break-inside: avoid;
+      border-left: 3px solid #38bdf8;
+    }
+    .code-box .file-tag {
+      color: #94a3b8;
+      font-size: 7pt;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .qa-card {
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #10b981;
+      background: #fdfdfd;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      page-break-inside: avoid;
+    }
+    .qa-q {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #065f46;
+      margin-bottom: 3px;
+    }
+    .qa-a {
+      font-size: 8.5pt;
+      color: #1e293b;
+      line-height: 1.45;
+    }
+    .slide-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin: 12px 0 16px 0;
+      page-break-inside: avoid;
+    }
+    .slide-box-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #b45309;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .slide-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .slide-box li {
+      font-size: 8.5pt;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOSSIER PRESENTASI KOMPETENSI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES (INTERSIS) &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-badge">UNIT KOMPETENSI 03 &bull; TI.PG.03.2026</div>
+    <h1>Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</h1>
+    <div class="project-subtitle">Implementasi Riil pada Proyek: Portal Karir, Profil Industri & Modul Automation-GPT (Fullstack Web)</div>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Presenter / Mahasiswa</td>
+      <td>Aditya Ristanto Mukti (Fullstack Web Developer Intern)</td>
+      <td class="lbl">Repository</td>
+      <td><code>github.com/AdityaRistantoMukti/Website_Intersis</code></td>
+    </tr>
+    <tr>
+      <td class="lbl">Institusi / Mitra</td>
+      <td>PT Global Philsonic Technologies (Intersis) Batam</td>
+      <td class="lbl">Tech Stack Utama</td>
+      <td>React 19, Vite, Tailwind CSS v4, Node.js Express 5, MySQL2</td>
+    </tr>
+    <tr>
+      <td class="lbl">Cakupan Outline Sub-Title</td>
+      <td colspan="3">Mekanisme running source code &bull; Debugging &bull; Pengelolaan executable files</td>
+    </tr>
+  </table>
+
+  <!-- OUTLINE SUB-TITLE OVERVIEW -->
+  <h2>I. Peta Outline & Struktur Pembahasan</h2>
+  <p>Unit kompetensi <strong>Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</strong> ini disusun secara berkesinambungan mencakup seluruh sub-judul yang didefinisikan pada diagram alur kompetensi, diaplikasikan langsung pada arsitektur website yang telah dibangun:</p>
+  <ul>
+    <li><strong>Mekanisme running source code</strong>: Mengonfigurasi dan mengoperasikan eksekusi runtime Node.js v18+, bundler Vite ESM, skrip npm, serta orkestrasi cloud hosting.</li>
+<li><strong>Debugging</strong>: Mendiagnosis kesalahan sintaksis, logika, network status, serta penggunaan middleware logger terpusat dan DevTools.</li>
+<li><strong>Pengelolaan executable files</strong>: Memproses stream upload media (gambar/dokumen), file system static serving, serta automasi CLI rendering headless Chrome via Puppeteer.</li>
+  </ul>
+
+  <!-- SPEAKING SCRIPT RESMI PRESENTER -->
+  <h2>II. Naskah Wicara Lengkap Presenter (Verbatim Speech Script)</h2>
+  <div class="speech-box">
+    <div class="speech-header">
+      <span>🎤 PANDUAN NARASI WICARA PRESENTER (SPEAKING SCRIPT)</span>
+    </div>
+    <div class="speech-content">
+      
+      <p><span class="speech-stage-cue">[Pembukaan &amp; Sikap]</span> "Selamat pagi/siang Dewan Penguji. Pada unit kompetensi <strong>Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</strong>, saya akan mendemonstrasikan bagaimana siklus hidup kode, dari proses eksekusi lokal hingga pemrosesan aset multimedia, dikelola secara profesional."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 1: Mekanisme Running Source Code]</span> "Dalam <em>Mekanisme Running Source Code</em>, proyek kami menerapkan arsitektur client-server dual-runtime. Di sisi backend, kami menjalankan runtime <strong>Node.js v24</strong> dengan framework <strong>Express v5</strong> melalui perintah <code>npm run dev</code> yang memanfaatkan <code>nodemon</code> untuk hot-reloading otomatis saat ada perubahan berkas. Di sisi frontend, kami mengeksekusi <strong>Vite</strong> berbasis Rollup ESM engine yang memproses Hot Module Replacement (HMR) dalam hitungan milidetik. Untuk fase produksi, perintah <code>vite build</code> mengompilasi kode JSX dan CSS menjadi static chunks yang sangat teroptimasi untuk di-deploy ke Vercel dan Railway."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 2: Debugging]</span> "Pada aspek <em>Debugging</em>, kami menerapkan pendekatan observabilitas berlapis. Di backend, kami mengintegrasikan middleware <code>morgan</code> untuk melacak setiap HTTP Request secara transparan dan membangun Global Error Handling Middleware yang menangkap exception database tanpa membiarkan server crash. Di frontend, kami memanfaatkan Chrome DevTools Network Tab untuk memvalidasi payload JSON dan header status HTTP (200 OK, 401 Unauthorized, 422 Unprocessable Entity), serta React DevTools untuk menginspeksi state component secara real-time."</p>
+      
+      <p><span class="speech-stage-cue">[Menjelaskan Sub 3: Pengelolaan Executable Files &amp; Multimedia]</span> "Pada sub-topik <em>Pengelolaan Executable Files</em>, kami menangani pemrosesan aset grafis dan multimedia secara ketat. Kami menggunakan <code>multer</code> untuk memfilter tipe file MIME (hanya mengizinkan JPEG, PNG, dan WebP) dengan batasan ukuran maksimum 5MB. Selain itu, kami juga merancang skrip automasi executable <code>generate_handbook_pdf.js</code> yang memanfaatkan Puppeteer headless browser untuk mengonversi dokumen HTML kompleks menjadi berkas PDF A4 berstandar resmi secara otomatis melalui baris perintah CLI."</p>
+    
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS RINCI PER SUB-TITLE -->
+  <h2>III. Pembahasan Teknis Rinci & Bedah Kode Nyata Proyek</h2>
+  <p>Berikut adalah pembuktian implementasi teknis dari masing-masing sub-judul berdasarkan baris kode dan berkas nyata di dalam repository proyek:</p>
+  
+    <div class="tech-section">
+      <h3>3.1. Mekanisme Eksekusi Runtime & Orkestrasi Skrip NPM</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/package.json & frontend/package.json</code></div>
+      
+          <p>Lingkungan eksekusi dibagi menjadi dua modul runtime independen yang dapat dijalankan secara bersamaan:</p>
+          <table class="table-custom">
+            <tr>
+              <th>Layer</th>
+              <th>Runtime &amp; Bundler</th>
+              <th>Perintah Eksekusi</th>
+              <th>Perilaku Runtime</th>
+            </tr>
+            <tr>
+              <td>Backend Service</td>
+              <td>Node.js v18+ (CommonJS) / Express 5</td>
+              <td><code>npm run dev</code> (Nodemon)</td>
+              <td>Memantau direktori <code>backend/src</code>, merestart server otomatis saat terjadi perubahan kode pada port 5000.</td>
+            </tr>
+            <tr>
+              <td>Frontend Client</td>
+              <td>Vite 8.3 / React 19 (ES Modules)</td>
+              <td><code>npm run dev</code> (Vite HMR)</td>
+              <td>Menyediakan dev-server instan berbasis native browser ESM pada port 5173 dengan pembaruan state tanpa refresh halaman.</td>
+            </tr>
+            <tr>
+              <td>Production Build</td>
+              <td>Rollup Bundler Engine</td>
+              <td><code>npm run build</code></td>
+              <td>Minifikasi JavaScript, tree-shaking CSS Tailwind, dan menghasilkan berkas static di direktori <code>frontend/dist</code>.</td>
+            </tr>
+          </table>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">backend/package.json</span>
+          <pre>&quot;scripts&quot;: {
+  &quot;dev&quot;: &quot;nodemon src/server.js&quot;,
+  &quot;start&quot;: &quot;node src/server.js&quot;,
+  &quot;seed&quot;: &quot;node src/seeders/seed.js&quot;,
+  &quot;test&quot;: &quot;node test_api_runner.js&quot;
+}</pre>
+        </div>
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>3.2. Strategi Debugging, HTTP Logging, dan Exception Handling</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/src/server.js & backend/src/middlewares/errorHandler.js</code></div>
+      
+          <p>Debugging dilakukan secara terpusat untuk memastikan tidak ada kesalahan internal yang membocorkan kredensial sistem ke publik:</p>
+          <ul>
+            <li><strong>HTTP Traffic Monitoring:</strong> Menggunakan <code>morgan('dev')</code> untuk mencatat method, URL rute, kode status response, dan response time milidetik pada konsol terminal backend.</li>
+            <li><strong>Centralized Error Interceptor:</strong> Middleware Express yang menangani error penolakan promise database, duplikasi key, dan kegagalan token autentikasi.</li>
+          </ul>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">backend/src/server.js</span>
+          <pre>// Global Error Handling Middleware untuk Debugging Terpusat
+app.use((err, req, res, next) =&gt; {
+  console.error(&#039;[SERVER EXCEPTION]&#039;, {
+    timestamp: new Date().toISOString(),
+    path: req.originalUrl,
+    method: req.method,
+    message: err.message,
+    stack: process.env.NODE_ENV === &#039;development&#039; ? err.stack : undefined
+  });
+
+  return res.status(err.status || 500).json({
+    success: false,
+    message: err.message || &#039;Terjadi kesalahan internal pada server.&#039;,
+    error_code: err.code || &#039;INTERNAL_ERROR&#039;
+  });
+});</pre>
+        </div>
+      
+    </div>
+  
+
+    <div class="tech-section">
+      <h3>3.3. Pengelolaan Upload Media & Automasi Executable PDF Generator</h3>
+      <div class="tech-meta-badge">Kaitkan ke Codebase: <code>backend/src/middlewares/upload.js & generate_handbook_pdf.js</code></div>
+      
+          <p>Pengelolaan file grafis multimedia dan skrip executable mencakup dua komponen utama:</p>
+          <ol>
+            <li><strong>Middleware Multer Storage:</strong> Mengelola stream file upload foto profil dan galeri industri. File diverifikasi ekstensinya, dinamai ulang menggunakan kombinasi timestamp acak, dan disimpan ke direktori publik <code>/uploads</code>.</li>
+            <li><strong>Headless Chrome Automation (Puppeteer):</strong> Skrip Node.js mandiri yang mengontrol browser Chrome secara programmatic untuk mem-print dokumen HTML teknis menjadi berkas PDF A4 beresolusi tinggi tanpa intervensi manual.</li>
+          </ol>
+        
+      
+        <div class="code-box">
+          <span class="file-tag">generate_handbook_pdf.js</span>
+          <pre>// Automasi Pembuatan Berkas PDF Menggunakan Puppeteer-Core
+const puppeteer = require(&#039;./frontend/node_modules/puppeteer-core&#039;);
+const browser = await puppeteer.launch({
+  executablePath: &#039;C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe&#039;,
+  headless: &#039;new&#039;,
+  args: [&#039;--no-sandbox&#039;, &#039;--disable-setuid-sandbox&#039;, &#039;--disable-gpu&#039;]
+});
+const page = await browser.newPage();
+await page.goto(&#039;file:///&#039; + htmlPath.replace(/\\/g, &#039;/&#039;), { waitUntil: &#039;networkidle0&#039; });
+await page.pdf({
+  path: outputPath,
+  format: &#039;A4&#039;,
+  margin: { top: &#039;16mm&#039;, bottom: &#039;16mm&#039;, left: &#039;16mm&#039;, right: &#039;16mm&#039; },
+  printBackground: true
+});
+await browser.close();</pre>
+        </div>
+      
+    </div>
+  
+
+  <!-- SLIDE TALKING POINTS -->
+  <h2>IV. Poin Kunci Presentasi (Slide Talking Points)</h2>
+  <div class="slide-box">
+    <div class="slide-box-title">Pointer Ringkas untuk Tampilan Slide / Layar</div>
+    <ul>
+      <li>Dual Runtime Ecosystem: Node.js v24 (Backend Express) dan Vite HMR Engine (Frontend React).</li>
+<li>Skrip Eksekusi Terstruktur: 'npm run dev', 'npm run build', dan 'npm run seed'.</li>
+<li>Debugging Observability: Logging HTTP otomatis dengan Morgan dan Centralized Error Handler.</li>
+<li>Multimedia Upload Pipeline: Validasi MIME-type dan proteksi ukuran file via Multer.</li>
+<li>Headless Browser Automation: Generator PDF otomatis menggunakan Puppeteer dan Chrome Binary Engine.</li>
+    </ul>
+  </div>
+
+  <!-- Q&A DEFENSE MATRIX -->
+  <h2>V. Matriks Tanya Jawab & Panduan Pembelaan Sidang (Q&A Defense)</h2>
+  <p>Prediksi pertanyaan evaluasi dari Penguji / Asesor / Pembimbing Industri beserta jawaban teknis yang siap dipertahankan:</p>
+  
+    <div class="qa-card">
+      <div class="qa-q">Q1: Mengapa Anda menggunakan 'puppeteer-core' dan mengarahkan executablePath ke Chrome lokal, bukan 'puppeteer' standar?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Penggunaan puppeteer-core menghindarkan pengunduhan binary Chromium tambahan sebesar 300MB ke dalam node_modules. Kami memanfaatkan executable Chrome resmi yang sudah terpasang di sistem operasi host, sehingga eksekusi lebih cepat, hemat bandwidth, dan hemat kapasitas penyimpanan.</div>
+    </div>
+  
+
+    <div class="qa-card">
+      <div class="qa-q">Q2: Bagaimana Anda mencegah celah keamanan saat pengguna mengunggah file media ke server?</div>
+      <div class="qa-a"><strong>Jawaban Pembelaan Presenter:</strong> Kami menerapkan fileFilter pada Multer untuk memeriksa header MIME type (hanya mengizinkan image/jpeg, image/png, image/webp), membatasi ukuran maksimal 5MB, serta mengubah nama asli file menjadi hash timestamp acak untuk mencegah penimpaan file sistem atau eksekusi remote script (.php/.sh).</div>
+    </div>
+  
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 11 - Menggunakan Source Code Versioning</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 11 &bull; TI.VC.11.2026</div>
+    <h1>Menggunakan Source Code Versioning</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi pemanfaatan sistem pengendali versi Git dan repositori GitHub, konfigurasi .gitignore, strategi alur kerja branching terisolasi, kedisiplinan Conventional Commits, sinkronisasi Push/Pull otomatis ke pipeline CI/CD, serta prosedur kloning proyek.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Penggunaan Git/Repository</td>
+      <td><code>github.com/AdityaRistantoMukti/Website_Intersis & .gitignore</code></td>
+      <td>Inisialisasi repositori terdistribusi dan proteksi pengabaian file kredensial .env.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Alur kerja branching, merging & commit</td>
+      <td><code>Git Workflow History</code></td>
+      <td>Pemisahan cabang fitur, fast-forward merge, dan pesan commit berstandar Conventional Commits.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Push/Pull & Cloning</td>
+      <td><code>GitHub Webhook & Auto Deploy Pipeline</code></td>
+      <td>Integrasi Continuous Deployment ke Railway/Vercel dan prosedur fresh clone terverifikasi.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>11.1 & 11.4. Konfigurasi Repositori Git & Standarisasi Conventional Commits</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>github.com/AdityaRistantoMukti/Website_Intersis</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Seluruh riwayat kode sumber dilacak secara terdistribusi pada repositori resmi: <code>https://github.com/AdityaRistantoMukti/Website_Intersis.git</code>.</p>
+          <p>Pesan commit dicatat secara atomik mengikuti konvensi Conventional Commits:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">Git Commit Log History (git log -n 5 --oneline)</span>
+            <pre>e31edd3 fix(home): dynamic redirection for hero action buttons to products and contact
+0ea54a5 docs: add technical handbook and glossary PDF for internship defense
+d05a057 fix(mobile): responsive fixes for hero controls, padding, monochrome stats, theme icon
+f4e15bd feat: track real product uploads, add database backup, and sync utilities
+467fc25 setup Vercel &amp; Railway</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>11.2 & 11.3. Alur Kerja Branching, Penggabungan Fitur & Resolusi Konflik</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>Git Branching Workflow</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Pengembangan modul fitur baru dikembangkan pada cabang terpisah sebelum digabungkan ke cabang utama <code>master</code>:</p>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 85" width="100%" height="75" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000;">
+            <!-- Master Line -->
+            <line x1="30" y1="25" x2="650" y2="25" stroke="#000000" stroke-width="1.5"/>
+            <text x="40" y="18" fill="#000000" font-family="Courier New" font-size="8" font-weight="bold">master (production)</text>
+            <circle cx="80" cy="25" r="4" fill="#000000"/>
+            <circle cx="420" cy="25" r="4" fill="#000000"/>
+            <circle cx="620" cy="25" r="5" fill="#000000"/>
+
+            <!-- Feature Line -->
+            <path d="M 80 25 C 130 60, 160 60, 200 60 L 370 60 C 390 60, 410 40, 420 25" stroke="#000000" stroke-width="1.2" fill="none" stroke-dasharray="3 2"/>
+            <text x="210" y="73" fill="#000000" font-family="Courier New" font-size="7.5">feat/products-module</text>
+            <circle cx="200" cy="60" r="3" fill="#000000"/>
+            <circle cx="320" cy="60" r="3" fill="#000000"/>
+
+            <text x="510" y="18" fill="#000000" font-family="Arial" font-size="7.5">Auto Deploy CI/CD</text>
+          </svg>
+        
+        </div>
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">Terminal Commands: Siklus Isolasi Cabang</span>
+            <pre># Pembuatan cabang fitur independen
+git checkout -b feat/products-module
+git add .
+git commit -m &quot;feat(products): create responsive bento product showcase&quot;
+
+# Penggabungan ke master produksi
+git checkout master
+git merge feat/products-module
+git push origin master</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>11.5 & 11.6. Integrasi CI/CD Cloud Push/Pull & Prosedur Replikasi Kloning</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>Deployment Railway & Vercel Webhook</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Setiap eksekusi <code>git push</code> ke remote master memicu pembangunan otomatis di Vercel dan Railway:</p>
+          <table class="table-custom">
+            <tr>
+              <th>Tahap Replikasi</th>
+              <th>Perintah Shell yang Dieksekusi</th>
+              <th>Keluaran Sistem</th>
+            </tr>
+            <tr>
+              <td>1. Kloning Repositori</td>
+              <td><code>git clone https://github.com/AdityaRistantoMukti/Website_Intersis.git</code></td>
+              <td>Mendapatkan seluruh riwayat commit dan source code.</td>
+            </tr>
+            <tr>
+              <td>2. Instalasi Paket</td>
+              <td><code>npm install (di backend &amp; frontend)</code></td>
+              <td>Mengunduh dependensi terkunci sesuai package-lock.json.</td>
+            </tr>
+            <tr>
+              <td>3. Eksekusi Dev</td>
+              <td><code>npm run dev</code></td>
+              <td>Website siap melayani permintaan pengguna di localhost.</td>
+            </tr>
+          </table>
+        
+      </div>
+
+      
+
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 11</div>
+    <p>Seluruh sub-judul pada unit 'Menggunakan Source Code Versioning' telah terpenuhi melalui repositori Git terstruktur, alur branching-merging, Conventional Commits, dan otomasi CI/CD.</p>
+  </div>
+
+</body>
+</html>

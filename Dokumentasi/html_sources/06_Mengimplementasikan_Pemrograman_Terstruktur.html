@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 06 - Mengimplementasikan Pemrograman Terstruktur</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 06 &bull; TI.ST.06.2026</div>
+    <h1>Mengimplementasikan Pemrograman Terstruktur</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi algoritma pemrograman terstruktur mencakup penguasaan tipe data, percabangan kondisional dengan pola Guard Clauses pada autentikasi, iterasi fungsional deklaratif (filter, map) pencarian produk, prosedur asinkron non-blocking, serta operasi File I/O untuk pembersihan berkas fisik disk server.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Penguasaan tipe data</td>
+      <td><code>backend validators & data sanitization</code></td>
+      <td>Validasi ketat tipe data masukan (string, number, boolean, array, object JSON) pada controller.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Percabangan</td>
+      <td><code>backend/src/middlewares/authMiddleware.js</code></td>
+      <td>Penerapan Guard Clauses (early return) untuk memangkas nesting kondisional if-else berlebihan.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Perulangan & Prosedur/Fungsi</td>
+      <td><code>frontend/src/pages/public/ProductsPage.jsx</code></td>
+      <td>Iterasi deklaratif Array.filter() dan Array.map() untuk pemfilteran multi-kriteria produk.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">4</td>
+      <td style="font-weight: bold;">Array & File I/O</td>
+      <td><code>backend/src/utils/fileCleanup.js</code></td>
+      <td>Pembersihan berkas fisik gambar tak terpakai dari storage disk dengan proteksi anti directory-traversal.</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>6.1 & 6.2. Validasi Tipe Data & Pola Percabangan Guard Clauses</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/middlewares/authMiddleware.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Pola Guard Clause memastikan validasi parameter token dilakukan secara berurutan dan menghentikan eksekusi sedini mungkin jika kondisi prasyarat tidak terpenuhi:</p>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 80" width="100%" height="70" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000;">
+            <rect x="20" y="15" width="120" height="50" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="80" y="35" fill="#000000" font-family="Arial" font-size="8.5" font-weight="bold" text-anchor="middle">REQUEST MASUK</text>
+            <text x="80" y="48" fill="#333333" font-family="Courier New" font-size="7.5" text-anchor="middle">Header Check</text>
+
+            <line x1="140" y1="40" x2="190" y2="40" stroke="#000000" stroke-width="1.2"/>
+
+            <polygon points="240,15 290,40 240,65 190,40" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+            <text x="240" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">Ada Header?</text>
+
+            <line x1="290" y1="40" x2="340" y2="40" stroke="#000000" stroke-width="1.2"/>
+            <text x="315" y="35" fill="#000000" font-family="Arial" font-size="7">YA</text>
+
+            <polygon points="390,15 440,40 390,65 340,40" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+            <text x="390" y="38" fill="#000000" font-family="Arial" font-size="7.5" font-weight="bold" text-anchor="middle">JWT Valid?</text>
+
+            <line x1="440" y1="40" x2="500" y2="40" stroke="#000000" stroke-width="1.2"/>
+            <text x="470" y="35" fill="#000000" font-family="Arial" font-size="7">YA</text>
+
+            <rect x="500" y="15" width="160" height="50" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="580" y="35" fill="#000000" font-family="Arial" font-size="8.5" font-weight="bold" text-anchor="middle">EKSEKUSI NEXT()</text>
+            <text x="580" y="48" fill="#333333" font-family="Courier New" font-size="7.5" text-anchor="middle">Lanjut ke Controller</text>
+          </svg>
+        
+        </div>
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/middlewares/authMiddleware.js</span>
+            <pre>// Penerapan Guard Clauses: Eliminasi Nested If Berlebihan pada Verifikasi Token
+const verifyToken = async (req, res, next) =&gt; {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith(&#039;Bearer &#039;)) {
+      return error(res, &#039;Akses ditolak. Token autentikasi tidak ditemukan.&#039;, 401);
+    }
+
+    const token = authHeader.split(&#039; &#039;)[1];
+    if (!token) {
+      return error(res, &#039;Token tidak valid.&#039;, 401);
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || &#039;fallback_secret_key_change_in_production&#039;);
+
+    // Verifikasi ketersediaan user di database
+    const [rows] = await pool.execute(
+      &#039;SELECT id, name, username, email, role, status FROM users WHERE id = ?&#039;,
+      [decoded.id]
+    );
+
+    if (rows.length === 0) {
+      return error(res, &#039;User pemilik token tidak lagi ditemukan.&#039;, 401);
+    }
+
+    const user = rows[0];
+    if (user.status !== &#039;active&#039;) {
+      return error(res, &#039;Akun Anda dalam status nonaktif. Hubungi Administrator.&#039;, 403);
+    }
+
+    req.user = user;
+    next();
+  } catch (err) {
+    if (err.name === &#039;TokenExpiredError&#039;) {
+      return error(res, &#039;Sesi login telah kadaluarsa. Silakan login kembali.&#039;, 401);
+    }
+    return error(res, &#039;Token autentikasi tidak valid atau telah dirusak.&#039;, 401);
+  }
+};</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>6.3, 6.4 & 6.5. Iterasi Array Deklaratif & Pemfilteran Multi-Kriteria Katalog Produk</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>frontend/src/pages/public/ProductsPage.jsx</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Operasi array immutable dilakukan menggunakan metode <code>.filter()</code> dan <code>.some()</code> untuk menyaring katalog produk manufaktur berdasarkan kategori aktif, kata kunci pencarian SKU, dan spesifikasi teknis:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">frontend/src/pages/public/ProductsPage.jsx</span>
+            <pre>// Filter Array Produk Manufaktur Secara Deklaratif Tanpa Mutasi
+const filteredProducts = useMemo(() =&gt; {
+  return allProducts.filter((prod) =&gt; {
+    const matchCat = activeCategory === &#039;all&#039; || prod.category === activeCategory;
+    if (!matchCat) return false;
+
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase();
+    const title = (prod.title[isId ? &#039;id&#039; : &#039;en&#039;] || prod.title.en).toLowerCase();
+    const code = prod.modelCode.toLowerCase();
+    const desc = (prod.shortDesc[isId ? &#039;id&#039; : &#039;en&#039;] || prod.shortDesc.en).toLowerCase();
+    const specsMatch = (prod.specs || []).some(
+      (s) =&gt; s.label.toLowerCase().includes(q) || s.value.toLowerCase().includes(q)
+    );
+
+    return title.includes(q) || code.includes(q) || desc.includes(q) || specsMatch;
+  });
+}, [activeCategory, searchQuery, isId, allProducts]);</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>6.6. Operasi File I/O & Pembersihan Berkas Fisik Disk Storage</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/utils/fileCleanup.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Saat produk atau foto fasilitas diperbarui/dihapus dari sistem, fungsi <code>deleteFileIfLocal</code> mengeksekusi operasi File I/O dengan validasi keamanan anti directory-traversal untuk menghapus file fisik:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/utils/fileCleanup.js</span>
+            <pre>const fs = require(&#039;fs&#039;);
+const path = require(&#039;path&#039;);
+
+const uploadDir = path.join(__dirname, &#039;../../../uploads&#039;);
+
+/**
+ * Pembersihan Berkas Fisik: Menghapus File Gambar Produk dari Storage Disk
+ */
+const deleteFileIfLocal = (filePath) =&gt; {
+  if (!filePath || typeof filePath !== &#039;string&#039;) return;
+
+  if (filePath.startsWith(&#039;/uploads/&#039;)) {
+    const relativePart = filePath.replace(/^\/uploads\//, &#039;&#039;);
+    const absolutePath = path.resolve(uploadDir, relativePart);
+
+    // Proteksi keamanan: pastikan path berada strictly di dalam uploadDir
+    if (!absolutePath.startsWith(path.resolve(uploadDir))) {
+      console.warn(`[FILE CLEANUP BLOCKED] Attempted traversal attack: ${filePath}`);
+      return;
+    }
+
+    if (fs.existsSync(absolutePath)) {
+      try {
+        fs.unlinkSync(absolutePath);
+        console.log(`[FILE CLEANUP] Successfully deleted unused asset: ${absolutePath}`);
+      } catch (err) {
+        console.error(`[FILE CLEANUP ERROR] Failed to delete ${absolutePath}:`, err.message);
+      }
+    }
+  }
+};
+
+module.exports = { deleteFileIfLocal };</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 06</div>
+    <p>Seluruh sub-judul pada unit 'Mengimplementasikan Pemrograman Terstruktur' telah terpenuhi dengan penguasaan tipe data, guard clauses, manipulasi array fungsional, dan pembersihan file I/O aman.</p>
+  </div>
+
+</body>
+</html>

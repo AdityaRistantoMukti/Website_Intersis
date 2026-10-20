@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 02 - Mengimplementasikan Rancangan Entitas dan Keterkaitan Antar Entitas</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 02 &bull; TI.DB.02.2026</div>
+    <h1>Mengimplementasikan Rancangan Entitas dan Keterkaitan Antar Entitas</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi perancangan dan implementasi skema basis data relasional sistem 'isa_career_hrd' yang mencakup total 15 tabel produksi terdaftar, dikelompokkan ke dalam 4 domain arsitektural (Katalog Produk & B2B RFQ, Profil CMS FTZ, Keamanan & Telemetri, serta Manajemen Organisasi Internal) dengan kepatuhan 3NF, integritas referensial Foreign Key, dan eksekusi kueri terindeks.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Perancangan ERD</td>
+      <td><code>database/BACKUP_DATABASE_ASLI_INTERSIS.sql & ERD.md</code></td>
+      <td>Perancangan skema relasional komprehensif mencakup total 15 tabel produksi sesuai kaidah Third Normal Form (3NF).</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Identifikasi hubungan antar entitas</td>
+      <td><code>database/DATABASE_DOCUMENTATION.md</code></td>
+      <td>Penetapan relasi One-to-Many (1:N), entitas Singleton ter-audit, serta integritas referensial ON DELETE SET NULL / CASCADE.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Eksekusi query dasar</td>
+      <td><code>backend/src/controllers/public/publicProductController.js</code></td>
+      <td>Eksekusi DDL fisik pembuatan tabel MySQL 8 dan kueri DQL penarikan data katalog produk berstatus aktif (status = 1).</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>2.1. Perancangan Diagram Hubungan Entitas (ERD) Komprehensif & Total 15 Tabel Terdaftar</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>database/BACKUP_DATABASE_ASLI_INTERSIS.sql & database/DATABASE_DOCUMENTATION.md</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p><strong>Pertanyaan Desain Basis Data:</strong> Apakah diagram basis data memang dirancang dengan jumlah tabel yang ada, dan berapa total tabel yang sebenarnya dibuat?</p>
+          <p><strong>Jawaban &amp; Penjelasan Arsitektural:</strong> Basis data sistem (<code>isa_career_hrd</code>) dirancang dan diimplementasikan dengan <strong>TOTAL 15 TABEL FISIK</strong> pada lingkungan produksi. Seluruh 15 tabel ini terbagi secara sistematis ke dalam <strong>4 Domain Fungsional</strong>:</p>
+          <ol>
+            <li><strong>Domain 1 — Solusi Industri &amp; B2B RFQ (2 Tabel):</strong>
+              <ul>
+                <li><code>products</code>: Menyimpan 19 SKU produk elektronika industri (Headunit, Audio DSP, Dashcam, EMS) lengkap dengan data bilingual, spesifikasi teknis JSON, dan galeri foto.</li>
+                <li><code>rfq_inquiries</code>: Menampung tiket formulir permintaan penawaran harga (Request for Quotation) B2B dari calon mitra internasional lengkap dengan audit IP, negara, dan skor anti-spam.</li>
+              </ul>
+            </li>
+            <li><strong>Domain 2 — Profil Perusahaan, CMS &amp; Pengaturan Konten Batam FTZ (6 Tabel):</strong>
+              <ul>
+                <li><code>company_profile</code>: Entitas <em>Singleton</em> (1 baris) penyimpan visi, misi, dan profil utama korporat.</li>
+                <li><code>core_values</code>: Menyimpan 4 nilai inti perusahaan (Inovasi, Mutu Presisi, Integritas, Keberlanjutan).</li>
+                <li><code>site_settings</code>: Sistem CMS semi-terstruktur berbasis JSON untuk mengelola timeline sejarah pabrik, sertifikasi mutu IATF 16949/ISO, narasi keunggulan Batam Free Trade Zone (FTZ), konfigurasi hero banner, dan statistik pabrik.</li>
+                <li><code>contact_recruitment</code>: Entitas <em>Singleton</em> penyimpan alamat pabrik, telepon resmi, WhatsApp sales, dan kanal media sosial.</li>
+                <li><code>gallery</code>: Dokumentasi visual fasilitas manufaktur, lini SMT, ruang cleanroom Class 100K, dan kegiatan industri.</li>
+                <li><code>faqs</code>: Daftar tanya jawab umum terkait kapabilitas produksi dan layanan OEM/ODM.</li>
+              </ul>
+            </li>
+            <li><strong>Domain 3 — Keamanan Sistem, Manajemen Akses &amp; Telemetri (3 Tabel):</strong>
+              <ul>
+                <li><code>users</code>: Akun pengguna internal sistem dengan pembagian hak akses Role-Based Access Control (RBAC: Administrator, HRD Manager, Staff).</li>
+                <li><code>activity_logs</code>: Audit trail otomatis pencatatan setiap aksi transaksi data (CREATE, UPDATE, DELETE, LOGIN) untuk transparansi operasional.</li>
+                <li><code>visitor_telemetry</code>: Pelacakan kunjungan pengunjung portal publik (session ID, alamat IP, URL halaman, dan browser user agent) untuk analitik trafik.</li>
+              </ul>
+            </li>
+            <li><strong>Domain 4 — Manajemen Fasilitas &amp; Organisasi Internal (4 Tabel):</strong>
+              <ul>
+                <li><code>job_categories</code>: Master kategori divisi operasional internal.</li>
+                <li><code>job_vacancies</code>: Data lowongan kerja internal yang berelasi dengan divisi (<code>category_id</code>) dan pembuat lowongan (<code>created_by</code>).</li>
+                <li><code>programs</code>: Program pengembangan SDM industri (Management Trainee, Magang Bersertifikat, Technical OJT).</li>
+                <li><code>benefits</code>: Fasilitas dan tunjangan kerja internal bagi karyawan.</li>
+              </ul>
+            </li>
+          </ol>
+          <p>Diagram di bawah ini menggambarkan seluruh keterkaitan antar entitas dari ke-15 tabel basis data secara utuh:</p>
+        
+      </div>
+
+      
+        <div class="diagram-wrapper">
+          <div class="diagram-caption">Diagram Alur / Arsitektur:</div>
+          
+          <svg viewBox="0 0 680 430" width="100%" height="390" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000; padding:4px;">
+            <!-- TITLE HEADER -->
+            <rect x="10" y="8" width="660" height="20" fill="#000000" stroke="#000000"/>
+            <text x="340" y="22" fill="#ffffff" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">ARSITEKTUR RELASIONAL LENGKAP — TOTAL 15 TABEL TERDAFTAR (DATABASE: isa_career_hrd)</text>
+
+            <!-- ================= DOMAIN 1: PRODUK & RFQ ================= -->
+            <rect x="15" y="36" width="155" height="118" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="92" y="49" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">products (19 SKU Aktif)</text>
+            <line x1="15" y1="53" x2="170" y2="53" stroke="#000000" stroke-width="0.8"/>
+            <text x="20" y="65" fill="#000000" font-family="Courier New" font-size="7">PK id (INT AUTO)</text>
+            <text x="20" y="76" fill="#000000" font-family="Courier New" font-size="7">model_code (VARCHAR)</text>
+            <text x="20" y="87" fill="#000000" font-family="Courier New" font-size="7">category (ENUM: audio,hu...)</text>
+            <text x="20" y="98" fill="#000000" font-family="Courier New" font-size="7">title_id, title_en (TEXT)</text>
+            <text x="20" y="109" fill="#000000" font-family="Courier New" font-size="7">specs, full_specs (JSON)</text>
+            <text x="20" y="120" fill="#000000" font-family="Courier New" font-size="7">diagram_type, image, gallery</text>
+            <text x="20" y="131" fill="#000000" font-family="Courier New" font-size="7">status (TINYINT), sort_order</text>
+            <text x="20" y="142" fill="#000000" font-family="Courier New" font-size="7">created_at, updated_at</text>
+
+            <rect x="15" y="162" width="155" height="85" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="92" y="175" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">rfq_inquiries (B2B Tickets)</text>
+            <line x1="15" y1="179" x2="170" y2="179" stroke="#000000" stroke-width="0.8"/>
+            <text x="20" y="191" fill="#000000" font-family="Courier New" font-size="7">PK id (INT AUTO)</text>
+            <text x="20" y="202" fill="#000000" font-family="Courier New" font-size="7">full_name, corporate_email</text>
+            <text x="20" y="213" fill="#000000" font-family="Courier New" font-size="7">company_name, phone</text>
+            <text x="20" y="224" fill="#000000" font-family="Courier New" font-size="7">inquiry_type, volume, message</text>
+            <text x="20" y="235" fill="#000000" font-family="Courier New" font-size="7">country_code, spam_score</text>
+            <text x="20" y="244" fill="#000000" font-family="Courier New" font-size="6.5">status, ip_address, created_at</text>
+
+            <!-- ================= DOMAIN 3: USERS, LOGS, TELEMETRI ================= -->
+            <rect x="185" y="36" width="150" height="90" fill="#e5e5e5" stroke="#000000" stroke-width="1.2"/>
+            <text x="260" y="49" fill="#000000" font-family="Arial" font-size="8.5" font-weight="bold" text-anchor="middle">users (Master Auth)</text>
+            <line x1="185" y1="53" x2="335" y2="53" stroke="#000000" stroke-width="0.8"/>
+            <text x="190" y="65" fill="#000000" font-family="Courier New" font-size="7">PK id (INT AUTO)</text>
+            <text x="190" y="76" fill="#000000" font-family="Courier New" font-size="7">name (VARCHAR 100)</text>
+            <text x="190" y="87" fill="#000000" font-family="Courier New" font-size="7">username (VARCHAR 50 UK)</text>
+            <text x="190" y="98" fill="#000000" font-family="Courier New" font-size="7">email (VARCHAR 100 UK)</text>
+            <text x="190" y="109" fill="#000000" font-family="Courier New" font-size="7">password (bcrypt hash)</text>
+            <text x="190" y="120" fill="#000000" font-family="Courier New" font-size="7">role (ENUM: admin,hrd,staff)</text>
+
+            <rect x="185" y="136" width="150" height="60" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="260" y="148" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">activity_logs (Audit Trail)</text>
+            <line x1="185" y1="152" x2="335" y2="152" stroke="#000000" stroke-width="0.8"/>
+            <text x="190" y="163" fill="#000000" font-family="Courier New" font-size="7">PK id (INT AUTO)</text>
+            <text x="190" y="174" fill="#000000" font-family="Courier New" font-size="7">FK user_id &rarr; users.id</text>
+            <text x="190" y="185" fill="#000000" font-family="Courier New" font-size="7">action, module, description</text>
+            <text x="190" y="193" fill="#000000" font-family="Courier New" font-size="6.5">created_at (TIMESTAMP)</text>
+
+            <rect x="185" y="206" width="150" height="42" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="260" y="217" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">visitor_telemetry (Analytics)</text>
+            <line x1="185" y1="220" x2="335" y2="220" stroke="#000000" stroke-width="0.8"/>
+            <text x="190" y="231" fill="#000000" font-family="Courier New" font-size="7">PK id | session_id | ip_address</text>
+            <text x="190" y="241" fill="#000000" font-family="Courier New" font-size="7">country_code | page_url | time</text>
+
+            <!-- ================= DOMAIN 2: CMS & PROFIL PERUSAHAAN ================= -->
+            <rect x="350" y="36" width="155" height="52" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="427" y="48" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">company_profile (Singleton)</text>
+            <line x1="350" y1="52" x2="505" y2="52" stroke="#000000" stroke-width="0.8"/>
+            <text x="355" y="63" fill="#000000" font-family="Courier New" font-size="7">PK id | title | description</text>
+            <text x="355" y="74" fill="#000000" font-family="Courier New" font-size="7">vision | mission | about_image</text>
+            <text x="355" y="84" fill="#000000" font-family="Courier New" font-size="7">FK updated_by &rarr; users.id</text>
+
+            <rect x="350" y="96" width="155" height="52" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="427" y="108" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">site_settings (JSON CMS)</text>
+            <line x1="350" y1="112" x2="505" y2="112" stroke="#000000" stroke-width="0.8"/>
+            <text x="355" y="123" fill="#000000" font-family="Courier New" font-size="7">PK key_name (VARCHAR 100)</text>
+            <text x="355" y="134" fill="#000000" font-family="Courier New" font-size="7">content_json (LONGTEXT JSON)</text>
+            <text x="355" y="144" fill="#000000" font-family="Courier New" font-size="7">FK updated_by &rarr; users.id</text>
+
+            <rect x="350" y="156" width="155" height="45" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="427" y="167" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">contact_recruitment (Singleton)</text>
+            <line x1="350" y1="170" x2="505" y2="170" stroke="#000000" stroke-width="0.8"/>
+            <text x="355" y="181" fill="#000000" font-family="Courier New" font-size="7">PK id | email | phone | address</text>
+            <text x="355" y="191" fill="#000000" font-family="Courier New" font-size="7">whatsapp | FK updated_by &rarr; users</text>
+
+            <rect x="520" y="36" width="145" height="52" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="592" y="48" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">gallery (Fasilitas &amp; SMT)</text>
+            <line x1="520" y1="52" x2="665" y2="52" stroke="#000000" stroke-width="0.8"/>
+            <text x="525" y="63" fill="#000000" font-family="Courier New" font-size="7">PK id | title | description</text>
+            <text x="525" y="74" fill="#000000" font-family="Courier New" font-size="7">image | category | status</text>
+            <text x="525" y="84" fill="#000000" font-family="Courier New" font-size="7">FK created_by &rarr; users.id</text>
+
+            <rect x="520" y="96" width="145" height="45" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="592" y="108" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">core_values (Nilai Budaya)</text>
+            <line x1="520" y1="112" x2="665" y2="112" stroke="#000000" stroke-width="0.8"/>
+            <text x="525" y="123" fill="#000000" font-family="Courier New" font-size="7">PK id | title | title_en</text>
+            <text x="525" y="133" fill="#000000" font-family="Courier New" font-size="7">description | icon | status</text>
+
+            <rect x="520" y="150" width="145" height="42" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="592" y="161" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">faqs (Tanya Jawab Layanan)</text>
+            <line x1="520" y1="164" x2="665" y2="164" stroke="#000000" stroke-width="0.8"/>
+            <text x="525" y="174" fill="#000000" font-family="Courier New" font-size="7">PK id | question | answer</text>
+            <text x="525" y="184" fill="#000000" font-family="Courier New" font-size="7">sort_order | status (TINYINT)</text>
+
+            <!-- ================= DOMAIN 4: ORGANISASI & FASILITAS INTERNAL ================= -->
+            <rect x="15" y="260" width="155" height="55" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="92" y="272" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">job_categories (Divisi)</text>
+            <line x1="15" y1="276" x2="170" y2="276" stroke="#000000" stroke-width="0.8"/>
+            <text x="20" y="288" fill="#000000" font-family="Courier New" font-size="7">PK id (INT AUTO)</text>
+            <text x="20" y="299" fill="#000000" font-family="Courier New" font-size="7">name (VARCHAR 100)</text>
+            <text x="20" y="309" fill="#000000" font-family="Courier New" font-size="7">description | status</text>
+
+            <rect x="185" y="260" width="165" height="70" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="267" y="272" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">job_vacancies (Lowongan)</text>
+            <line x1="185" y1="276" x2="350" y2="276" stroke="#000000" stroke-width="0.8"/>
+            <text x="190" y="288" fill="#000000" font-family="Courier New" font-size="7">PK id | title | location</text>
+            <text x="190" y="299" fill="#000000" font-family="Courier New" font-size="7">FK category_id &rarr; job_cat.id</text>
+            <text x="190" y="310" fill="#000000" font-family="Courier New" font-size="7">FK created_by &rarr; users.id</text>
+            <text x="190" y="321" fill="#000000" font-family="Courier New" font-size="7">employment_type | status</text>
+
+            <rect x="365" y="260" width="140" height="60" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="435" y="272" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">programs (Talenta/Magang)</text>
+            <line x1="365" y1="276" x2="505" y2="276" stroke="#000000" stroke-width="0.8"/>
+            <text x="370" y="288" fill="#000000" font-family="Courier New" font-size="7">PK id | title | slug (UK)</text>
+            <text x="370" y="299" fill="#000000" font-family="Courier New" font-size="7">description | requirements</text>
+            <text x="370" y="310" fill="#000000" font-family="Courier New" font-size="7">registration_url | status</text>
+
+            <rect x="520" y="260" width="145" height="55" fill="#f5f5f5" stroke="#000000" stroke-width="1"/>
+            <text x="592" y="272" fill="#000000" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">benefits (Fasilitas Kerja)</text>
+            <line x1="520" y1="276" x2="665" y2="276" stroke="#000000" stroke-width="0.8"/>
+            <text x="525" y="288" fill="#000000" font-family="Courier New" font-size="7">PK id | title | description</text>
+            <text x="525" y="299" fill="#000000" font-family="Courier New" font-size="7">icon | image | sort_order</text>
+            <text x="525" y="309" fill="#000000" font-family="Courier New" font-size="7">status (TINYINT 1)</text>
+
+            <!-- ================= RELATION LINES ================= -->
+            <!-- users -> activity_logs -->
+            <line x1="260" y1="126" x2="260" y2="136" stroke="#000000" stroke-width="1.2"/>
+            <!-- users -> company_profile -->
+            <line x1="335" y1="60" x2="350" y2="60" stroke="#000000" stroke-width="1.2"/>
+            <!-- users -> site_settings -->
+            <line x1="335" y1="115" x2="350" y2="115" stroke="#000000" stroke-width="1.2"/>
+            <!-- users -> gallery -->
+            <line x1="335" y1="45" x2="520" y2="45" stroke="#000000" stroke-width="1" stroke-dasharray="2 2"/>
+            <!-- job_categories -> job_vacancies -->
+            <line x1="170" y1="285" x2="185" y2="285" stroke="#000000" stroke-width="1.2"/>
+            <!-- users -> job_vacancies -->
+            <line x1="260" y1="196" x2="260" y2="260" stroke="#000000" stroke-width="1" stroke-dasharray="2 2"/>
+
+            <!-- BOTTOM FOOTER -->
+            <rect x="10" y="345" width="660" height="75" fill="#fafafa" stroke="#000000" stroke-width="0.8"/>
+            <text x="20" y="360" fill="#000000" font-family="Arial" font-size="8" font-weight="bold">RINGKASAN TOTAL 15 TABEL SKEMA isa_career_hrd:</text>
+            <text x="20" y="373" fill="#333333" font-family="Arial" font-size="7.5">&bull; Domain 1 (B2B &amp; Produk): products, rfq_inquiries &mdash; Menangani katalog manufaktur dan tiket penawaran harga klien Tier-1.</text>
+            <text x="20" y="385" fill="#333333" font-family="Arial" font-size="7.5">&bull; Domain 2 (CMS &amp; Profil FTZ): company_profile, core_values, site_settings, contact_recruitment, gallery, faqs &mdash; Mengelola narasi FTZ, sejarah, &amp; sertifikasi.</text>
+            <text x="20" y="397" fill="#333333" font-family="Arial" font-size="7.5">&bull; Domain 3 (Keamanan &amp; Telemetri): users, activity_logs, visitor_telemetry &mdash; RBAC login internal, audit trail 116 log, dan tracking sesi pengunjung.</text>
+            <text x="20" y="409" fill="#333333" font-family="Arial" font-size="7.5">&bull; Domain 4 (Organisasi Internal): job_categories, job_vacancies, programs, benefits &mdash; Fondasi tata kelola SDM dan fasilitas internal korporat.</text>
+          </svg>
+        
+        </div>
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">database/BACKUP_DATABASE_ASLI_INTERSIS.sql</span>
+            <pre>-- Skema DDL Fisik Tabel products (Engine MySQL 8 / InnoDB)
+CREATE TABLE products (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  model_code varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  category enum(&#039;headunit&#039;,&#039;audio&#039;,&#039;dashcam&#039;,&#039;automation&#039;,&#039;ems&#039;) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT &#039;headunit&#039;,
+  badge varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  badge_color varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  title_id text COLLATE utf8mb4_unicode_ci NOT NULL,
+  title_en text COLLATE utf8mb4_unicode_ci NOT NULL,
+  short_desc_id text COLLATE utf8mb4_unicode_ci,
+  short_desc_en text COLLATE utf8mb4_unicode_ci,
+  specs longtext COLLATE utf8mb4_unicode_ci COMMENT &#039;JSON array {label, value}&#039;,
+  full_specs longtext COLLATE utf8mb4_unicode_ci COMMENT &#039;JSON object key-value&#039;,
+  diagram_type varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT &#039;infotainment&#039;,
+  image varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  gallery longtext COLLATE utf8mb4_unicode_ci,
+  status tinyint(1) NOT NULL DEFAULT &#039;1&#039; COMMENT &#039;1=aktif, 0=nonaktif&#039;,
+  sort_order int(11) NOT NULL DEFAULT &#039;0&#039;,
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>2.2. Kamus Data Lengkap 15 Tabel & Spesifikasi Relasi Referensial</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>database/DATABASE_DOCUMENTATION.md</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Tabel kamus data berikut merangkum seluruh <strong>15 tabel</strong> yang beroperasi pada database produksi beserta peruntukan fungsional, tipe tabel, dan kardinalitas relasinya:</p>
+          <table class="table-custom">
+            <tr>
+              <th style="width: 4%;">No</th>
+              <th style="width: 18%;">Nama Tabel</th>
+              <th style="width: 14%;">Domain Arsitektur</th>
+              <th style="width: 12%;">Tipe Tabel</th>
+              <th style="width: 14%;">Primary Key</th>
+              <th style="width: 18%;">Foreign Key Relasi</th>
+              <th style="width: 20%;">Peruntukan Sistem</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><code>products</code></td>
+              <td>Katalog Produk</td>
+              <td>Master</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>19 SKU produk elektronika otomotif &amp; perakitan SMT.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>rfq_inquiries</code></td>
+              <td>Transaksi B2B</td>
+              <td>Transaksi</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>Formulir permintaan penawaran harga &amp; skor anti-spam.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>company_profile</code></td>
+              <td>CMS &amp; Profil FTZ</td>
+              <td>Singleton (1 Baris)</td>
+              <td><code>id (INT)</code></td>
+              <td><code>updated_by &rarr; users.id</code></td>
+              <td>Profil resmi, visi misi, &amp; foto pabrik Batam FTZ.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>core_values</code></td>
+              <td>CMS &amp; Profil FTZ</td>
+              <td>Konten</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>4 nilai budaya kerja dan standar mutu korporat.</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><code>site_settings</code></td>
+              <td>CMS Dinamis</td>
+              <td>Konfigurasi JSON</td>
+              <td><code>key_name</code></td>
+              <td><code>updated_by &rarr; users.id</code></td>
+              <td>12 konfigurasi JSON (timeline, sertifikasi IATF, hero).</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><code>contact_recruitment</code></td>
+              <td>CMS &amp; Profil FTZ</td>
+              <td>Singleton (1 Baris)</td>
+              <td><code>id (INT)</code></td>
+              <td><code>updated_by &rarr; users.id</code></td>
+              <td>Kontak pabrik, email sales, dan WhatsApp resmi.</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><code>gallery</code></td>
+              <td>CMS &amp; Profil FTZ</td>
+              <td>Konten</td>
+              <td><code>id (INT)</code></td>
+              <td><code>created_by &rarr; users.id</code></td>
+              <td>12 dokumentasi fasilitas cleanroom &amp; mesin SMT.</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><code>faqs</code></td>
+              <td>CMS &amp; Profil FTZ</td>
+              <td>Konten</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>6 daftar pertanyaan umum dan jawaban operasional.</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td><code>users</code></td>
+              <td>Keamanan &amp; Akses</td>
+              <td>Master User</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>3 akun pengguna internal dengan RBAC terenkripsi bcrypt.</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td><code>activity_logs</code></td>
+              <td>Keamanan &amp; Audit</td>
+              <td>Audit Trail</td>
+              <td><code>id (INT)</code></td>
+              <td><code>user_id &rarr; users.id</code></td>
+              <td>116 riwayat rekam jejak aksi CRUD dan login staf.</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td><code>visitor_telemetry</code></td>
+              <td>Telemetri &amp; Analitik</td>
+              <td>Log Sesi</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>66 sesi pelacakan kunjungan pengunjung dan peramban.</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td><code>job_categories</code></td>
+              <td>Organisasi Internal</td>
+              <td>Master</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>Master divisi/kategori rekrutmen internal.</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td><code>job_vacancies</code></td>
+              <td>Organisasi Internal</td>
+              <td>Transaksi</td>
+              <td><code>id (INT)</code></td>
+              <td><code>category_id, created_by</code></td>
+              <td>Perekaman lowongan kerja divisi internal perusahaan.</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td><code>programs</code></td>
+              <td>Organisasi Internal</td>
+              <td>Konten</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>3 program pelatihan (Management Trainee, Magang, OJT).</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td><code>benefits</code></td>
+              <td>Organisasi Internal</td>
+              <td>Konten</td>
+              <td><code>id (INT)</code></td>
+              <td>—</td>
+              <td>6 fasilitas tunjangan dan sarana penunjang kerja.</td>
+            </tr>
+          </table>
+        
+      </div>
+
+      
+
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>2.3. Eksekusi Query DQL Terindeks untuk Penarikan Data Katalog Produk</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/controllers/public/publicProductController.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Query DQL berikut dieksekusi secara teroptimasi menggunakan Connection Pool MySQL untuk menyajikan produk berstatus aktif (<code>status = 1</code>) terurut berdasarkan prioritas:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/controllers/public/publicProductController.js</span>
+            <pre>const pool = require(&#039;../../config/database&#039;);
+const { success } = require(&#039;../../utils/response&#039;);
+
+/**
+ * GET /api/public/products
+ * Mendapatkan daftar produk aktif untuk halaman publik
+ */
+const getProducts = async (req, res, next) =&gt; {
+  try {
+    const [rows] = await pool.execute(
+      `SELECT id, model_code, category, badge, badge_color, image, gallery,
+              title_id, title_en, short_desc_id, short_desc_en,
+              specs, full_specs, diagram_type, sort_order
+       FROM products
+       WHERE status = 1
+       ORDER BY sort_order ASC, id ASC`
+    );
+
+    // Parse LONGTEXT JSON strings &amp;rarr; JS objects (MariaDB/MySQL compat)
+    const parsed = rows.map(row =&gt; ({
+      ...row,
+      specs:      row.specs      ? (typeof row.specs      === &#039;string&#039; ? JSON.parse(row.specs)      : row.specs)      : [],
+      full_specs: row.full_specs ? (typeof row.full_specs === &#039;string&#039; ? JSON.parse(row.full_specs) : row.full_specs) : {},
+      gallery:    row.gallery    ? (typeof row.gallery    === &#039;string&#039; ? JSON.parse(row.gallery)    : row.gallery)    : [],
+    }));
+
+    return success(res, &#039;Daftar produk berhasil diambil.&#039;, parsed);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getProducts };</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 02</div>
+    <p>Seluruh sub-judul pada unit 'Mengimplementasikan Rancangan Entitas dan Keterkaitan Antar Entitas' telah terpenuhi secara utuh dengan skema basis data 15 tabel berstandar 3NF terverifikasi pada engine MySQL 8.</p>
+  </div>
+
+</body>
+</html>

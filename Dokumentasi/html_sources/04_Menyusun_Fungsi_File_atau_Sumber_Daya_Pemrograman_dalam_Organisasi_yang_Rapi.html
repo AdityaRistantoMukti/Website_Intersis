@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 04 - Menyusun Fungsi, File atau Sumber Daya Pemrograman dalam Organisasi yang Rapi</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .doc-header {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #000000;
+      padding: 5px 0;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+    }
+    .title-banner {
+      border-left: 3px solid #000000;
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+    .unit-title-num {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 0;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+    }
+    .meta-table td {
+      padding: 4px 8px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .meta-table td.lbl {
+      font-weight: bold;
+      background: #f0f0f0;
+      width: 20%;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 3px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 6px 0;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 3px;
+      text-align: justify;
+    }
+    .meta-file {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+    .meta-file code {
+      font-weight: bold;
+    }
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      page-break-inside: avoid;
+    }
+    .table-custom th {
+      background: #e5e5e5;
+      color: #000000;
+      padding: 5px 6px;
+      text-align: left;
+      border: 1px solid #000000;
+      font-weight: bold;
+    }
+    .table-custom td {
+      padding: 4px 6px;
+      border: 1px solid #000000;
+      vertical-align: top;
+      color: #000000;
+    }
+    .sub-section-block {
+      border: 1px solid #000000;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .diagram-wrapper {
+      border: 1px solid #000000;
+      background: #ffffff;
+      padding: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .code-wrapper {
+      margin: 8px 0 4px 0;
+    }
+    .code-caption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #000000;
+    }
+    .code-box {
+      background: #f9f9f9;
+      color: #000000;
+      border: 1px solid #000000;
+      padding: 6px 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 7.2pt;
+      line-height: 1.35;
+      page-break-inside: avoid;
+      text-align: left;
+    }
+    .code-box .file-tag {
+      font-weight: bold;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: block;
+      color: #333333;
+    }
+    .code-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .conclusion-box {
+      border: 1px solid #000000;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+    .conclusion-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .conclusion-box p {
+      font-size: 8.5pt;
+      color: #000000;
+      margin: 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">UNIT 04 &bull; TI.OR.04.2026</div>
+    <h1>Menyusun Fungsi, File atau Sumber Daya Pemrograman dalam Organisasi yang Rapi</h1>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Pengembang</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Deskripsi Unit</td>
+      <td colspan="3">Dokumentasi standarisasi struktur kode melalui penerapan konvensi penamaan baku (PascalCase, camelCase, snake_case), dokumentasi fungsi berstandar JSDoc, serta pengorganisasian pohon direktori backend dan frontend yang modular.</td>
+    </tr>
+  </table>
+
+  <!-- TABEL MATRIKS PEMENUHAN OUTLINE -->
+  <h2>I. Matriks Pemenuhan Sub-Title Outline</h2>
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 25%;">Sub-Title Outline</th>
+        <th style="width: 35%;">Berkas Implementasi</th>
+        <th style="width: 35%;">Deskripsi Teknis Hasil Pengerjaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td style="font-weight: bold;">Standarisasi penamaan</td>
+      <td><code>Aturan Penamaan Identifier Frontend & Backend</code></td>
+      <td>Penerapan PascalCase untuk komponen React, camelCase untuk method/variabel, dan snake_case untuk kolom database.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td style="font-weight: bold;">Dokumentasi internal</td>
+      <td><code>backend/src/controllers/public/publicProductController.js</code></td>
+      <td>Penyusunan blok komentar formal JSDoc pada setiap handler rute API.</td>
+    </tr>
+  
+
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td style="font-weight: bold;">Struktur folder rapi</td>
+      <td><code>Pohon Direktori Proyek /backend & /frontend</code></td>
+      <td>Pemisahan concerns modular (controllers/admin vs controllers/public, reusable components, context, locales).</td>
+    </tr>
+  
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- PEMBAHASAN TEKNIS INTI PER SUB-TITLE -->
+  <h2>II. Pembahasan Teknis Inti &amp; Bukti Konkret</h2>
+  
+    <div class="sub-section-block">
+      <h3>4.1. Matriks Standarisasi Konvensi Penamaan (Naming Conventions)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>Konvensi Kode Frontend & Backend</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Tabel standarisasi konvensi penamaan yang diterapkan pada seluruh berkas sistem:</p>
+          <table class="table-custom">
+            <tr>
+              <th>Cakupan Entitas</th>
+              <th>Standar Format</th>
+              <th>Contoh Konkret pada Proyek</th>
+              <th>Tujuan Rekayasa</th>
+            </tr>
+            <tr>
+              <td>Komponen &amp; Halaman React</td>
+              <td>PascalCase</td>
+              <td><code>HomePage.jsx</code>, <code>ProductsPage.jsx</code>, <code>RobotCanvas3D.jsx</code></td>
+              <td>Membedakan komponen pengembang dari tag elemen bawaan peramban web.</td>
+            </tr>
+            <tr>
+              <td>Variabel &amp; Fungsi JS</td>
+              <td>camelCase</td>
+              <td><code>getProducts()</code>, <code>handleSaveProduct()</code>, <code>filteredProducts</code></td>
+              <td>Kepatuhan standar ECMAScript untuk keterbacaan kode berorientasi fungsi.</td>
+            </tr>
+            <tr>
+              <td>Tabel &amp; Kolom Basis Data</td>
+              <td>snake_case</td>
+              <td><code>model_code</code>, <code>title_id</code>, <code>created_at</code>, <code>rfq_inquiries</code></td>
+              <td>Mencegah konflik case-sensitivity pada server sistem operasi Linux produksi.</td>
+            </tr>
+            <tr>
+              <td>Konfigurasi Environment</td>
+              <td>SCREAMING_SNAKE_CASE</td>
+              <td><code>JWT_SECRET</code>, <code>MYSQL_URL</code>, <code>ALLOWED_ORIGINS</code></td>
+              <td>Menegaskan status nilai sebagai konstanta immutable tingkat proses.</td>
+            </tr>
+          </table>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/controllers/admin/adminContentControllers.js</span>
+            <pre>// Penerapan Konvensi Penamaan camelCase &amp; Destructuring Terstruktur
+const updateProduct = async (req, res, next) =&gt; {
+  try {
+    const { id } = req.params;
+    const {
+      model_code, category, badge, badge_color,
+      title_id, title_en, short_desc_id, short_desc_en,
+      specs, full_specs, diagram_type, status, sort_order
+    } = req.body;
+
+    await pool.execute(
+      `UPDATE products SET
+          model_code = ?, category = ?, badge = ?, badge_color = ?,
+          title_id = ?, title_en = ?, short_desc_id = ?, short_desc_en = ?,
+          diagram_type = ?, status = ?, sort_order = ?
+       WHERE id = ?`,
+      [model_code, category, badge, badge_color, title_id, title_en, short_desc_id, short_desc_en, diagram_type, status, sort_order, id]
+    );
+
+    await logActivity(req.user.id, &#039;UPDATE&#039;, &#039;products&#039;, `Memperbarui produk ID: ${id} (${model_code})`);
+    return success(res, &#039;Produk berhasil diperbarui.&#039;);
+  } catch (err) { next(err); }
+};</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>4.2. Dokumentasi Internal Fungsi Berstandar JSDoc</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>backend/src/controllers/public/publicProductController.js</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Setiap fungsi handler dilengkapi dengan dokumentasi formal JSDoc untuk memfasilitasi audit kode dan integrasi IDE:</p>
+        
+      </div>
+
+      
+
+      
+        <div class="code-wrapper">
+          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
+          <div class="code-box">
+            <span class="file-tag">backend/src/controllers/public/publicProductController.js</span>
+            <pre>/**
+ * GET /api/public/products
+ * Mendapatkan daftar produk aktif untuk halaman publik
+ * 
+ * @param {import(&#039;express&#039;).Request} req - Express Request
+ * @param {import(&#039;express&#039;).Response} res - Express Response
+ * @param {import(&#039;express&#039;).NextFunction} next - Express Next Function
+ * @returns {Promise&lt;void&gt;} JSON array produk dengan status aktif (status = 1)
+ */
+const getProducts = async (req, res, next) =&gt; {
+  try {
+    const [rows] = await pool.execute(
+      `SELECT id, model_code, category, badge, badge_color, image, gallery,
+              title_id, title_en, short_desc_id, short_desc_en,
+              specs, full_specs, diagram_type, sort_order
+       FROM products
+       WHERE status = 1
+       ORDER BY sort_order ASC, id ASC`
+    );
+
+    // Parsing JSON specs &amp; full_specs
+    const parsed = rows.map(row =&gt; ({
+      ...row,
+      specs:      row.specs      ? (typeof row.specs      === &#039;string&#039; ? JSON.parse(row.specs)      : row.specs)      : [],
+      full_specs: row.full_specs ? (typeof row.full_specs === &#039;string&#039; ? JSON.parse(row.full_specs) : row.full_specs) : {},
+      gallery:    row.gallery    ? (typeof row.gallery    === &#039;string&#039; ? JSON.parse(row.gallery)    : row.gallery)    : [],
+    }));
+
+    return success(res, &#039;Daftar produk berhasil diambil.&#039;, parsed);
+  } catch (err) {
+    next(err);
+  }
+};</pre>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>4.3. Pemisahan Tanggung Jawab Struktur Folder (Separation of Concerns)</h3>
+      
+      
+        <div class="meta-file">
+          <strong>Lokasi Berkas:</strong> <code>Direktori backend/src & frontend/src</code>
+        </div>
+      
+
+      <div class="content-body">
+        
+          <p>Organisasi direktori memisahkan concern routing, controller bisnis, dan state antarmuka secara rapi:</p>
+          <div class="code-box">
+            <span class="file-tag">Pohon Berkas Proyek Aktual</span>
+            <pre>c:/Projek_Magang/website_intersis/
+├── backend/
+│   ├── src/
+│   │   ├── config/          # Pool database.js & konfigurasi MySQL
+│   │   ├── controllers/     # Logika bisnis (/admin dan /public)
+│   │   ├── middlewares/     # authMiddleware, uploadMiddleware, errorHandler
+│   │   ├── routes/          # Definisi rute Express adminRoutes & publicRoutes
+│   │   ├── utils/           # ApiError.js, response.js, activityLogger.js, fileCleanup.js
+│   │   └── server.js        # Server entry point Express v5
+├── frontend/
+│   ├── src/
+│   │   ├── components/      # UI widgets (ui, automation, home, layout)
+│   │   ├── context/         # AdminAuthContext, ThemeContext
+│   │   ├── locales/         # Kamus translasi id.json & en.json
+│   │   ├── pages/           # Public pages & Admin modules
+│   │   └── lib/             # api.js (Axios instance terpusat), translator.js, i18n.js
+└── database/
+    ├── BACKUP_DATABASE_ASLI_INTERSIS.sql # Master dump riil 15 tabel produksi
+    ├── DATABASE_DOCUMENTATION.md         # Dokumentasi skema lengkap
+    └── ERD.md                            # Kamus relasi entitas</pre>
+          </div>
+        
+      </div>
+
+      
+
+      
+
+      
+    </div>
+  
+
+  <!-- KESIMPULAN AKHIR -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">Kesimpulan Ketercapaian Unit 04</div>
+    <p>Seluruh sub-judul pada unit 'Menyusun Fungsi, File atau Sumber Daya Pemrograman dalam Organisasi yang Rapi' telah terpenuhi dengan standarisasi penamaan, JSDoc, dan arsitektur folder bersih.</p>
+  </div>
+
+</body>
+</html>
