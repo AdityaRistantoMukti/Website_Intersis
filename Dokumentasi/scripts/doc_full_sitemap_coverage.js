@@ -8,14 +8,14 @@ const docFullSitemapCoverage = {
   docCode: "TI.SM.15.2026",
   docTitle: "Cakupan Sitemap Lengkap & Rincian Fitur: Portal Publik dan Dashboard Admin",
   docSubtitle: "Inventarisasi Menyeluruh Struktur Halaman, Komponen Section, Fungsi Operasional, Fitur Interaktif, dan Tujuan Perancangan Sistem",
-  executiveSummary: "Laporan teknis arsitektur komprehensif yang memetakan seluruh hierarki halaman, komponen section, fitur interaktif, fungsi operasional, dan tujuan perancangan perangkat lunak PT Global Philsonic Technologies (website_intersis). Dokumen ini menguraikan 12 rute portal publik (client-facing Single Page Application) dan 11 modul portal administrasi (Headless CMS terproteksi JWT RBAC), menjadikannya rujukan tunggal (single source of truth) mengenai cakupan sistem end-to-end yang telah selesai dibangun dan dideploy.",
+  executiveSummary: "Laporan teknis arsitektur komprehensif yang memetakan seluruh hierarki halaman, komponen section, fitur interaktif, fungsi operasional, dan tujuan perancangan perangkat lunak PT Global Philsonic Technologies (website_intersis). Dokumen ini menguraikan seluruh rute portal publik (client-facing Single Page Application) dan modul portal administrasi (Headless CMS terproteksi JWT RBAC), menjadikannya rujukan tunggal (single source of truth) mengenai cakupan sistem end-to-end yang telah selesai dibangun dan dideploy.",
 
   sections: [
     {
       secNumber: "1",
       title: "Pendahuluan & Gambaran Arsitektur Sitemap Sistem Terpadu",
       contentHtml: `
-        <p>Pembangunan website resmi dan profil industri PT Global Philsonic Technologies (Automation-GPT) menerapkan paradigma arsitektur <strong>Decoupled Enterprise</strong> berbasis <em>Single Page Application (SPA)</em>. Sistem ini memisahkan secara tegas antara lapisan presentasi yang dapat diakses oleh publik (mitra bisnis, klien industri otomotif, investor, dan calon tenaga kerja) dengan lapisan manajemen data operasional yang hanya dapat diakses oleh staf internal perusahaan yang telah terverifikasi.</p>
+        <p>Pembangunan website resmi dan profil industri PT Global Philsonic Technologies (Automation-GPT) menerapkan paradigma arsitektur <strong>Decoupled Enterprise</strong> berbasis <em>Single Page Application (SPA)</em>. Sistem ini memisahkan secara tegas antara lapisan presentasi yang dapat diakses oleh publik (mitra bisnis, klien industri otomotif, investor, dan mitra manufaktur global) dengan lapisan manajemen data operasional yang hanya dapat diakses oleh staf internal perusahaan yang telah terverifikasi.</p>
         
         <p>Arsitektur sistem dibagi menjadi dua pilar utama:</p>
         <ol>
@@ -30,21 +30,16 @@ const docFullSitemapCoverage = {
           </div>
           <div class="sitemap-tree-body">
             <pre><code>c:/Projek_Magang/website_intersis/
-├── [1] PORTAL PUBLIK (Client-Facing Single Page Application - 12 Rute):
+├── [1] PORTAL PUBLIK (Client-Facing Single Page Application):
 │   ├── / ............................. Beranda (Home Page) &mdash; Hero Carousel 100vh, Typewriter Keywords, Stats Deck, Turnkey Lifecycle
 │   ├── /about ........................ Profil Perusahaan &amp; Fasilitas &mdash; Narasi Batam FTZ, 3D Tilt Card, Visi Misi, Cleanroom 100K, Timeline
 │   ├── /automation ................... Otomasi Industri &amp; Robotika &mdash; WebGL 3D Robot 60 FPS, Scrollytelling 3 Seri Robot, ICT/FCT Jigs, Cloud MES
 │   ├── /products ..................... Katalog Produk Terpadu &mdash; Filter 7 Kategori, Instant Search SKU, Modal Specs JSON, Skema Sirkuit, Modal RFQ
 │   ├── /gallery ...................... Dokumentasi Fasilitas Produksi &mdash; Cleanroom, SMT 80k CPH, 3D AOI &amp; X-Ray Lab, Tooling Center, Lightbox
-│   ├── /career ....................... Portal Karir &amp; Rekrutmen &mdash; Daftar Lowongan Buka, Filter Divisi, Budaya Kerja Batam FTZ
-│   ├── /career/jobs/:id .............. Detail Spesifikasi Pekerjaan &mdash; Kualifikasi Teknis, Tanggung Jawab, Paket Fasilitas, Form Lamar
-│   ├── /career/benefits .............. Fasilitas &amp; Tunjangan Karyawan &mdash; Asuransi Kesehatan, Akomodasi FTZ, Sertifikasi Pelatihan Standar IPC
-│   ├── /career/programs .............. Program Pelatihan &amp; Vokasi &mdash; Vocational Internship, Fast-Track Engineering, Transfer Teknologi
-│   ├── /faq .......................... Pusat Bantuan &amp; Tanya Jawab &mdash; Kapabilitas OEM/ODM, Regulasi Batam FTZ, ISO/IATF, Skema Pembayaran
 │   ├── /contact ...................... Kontak &amp; RFQ Inbound &mdash; Form Penawaran Anti-Spam, WhatsApp Direct, Google Maps Embed Batam
 │   └── /* ............................ Not Found Page (404) &mdash; Penanganan Rute Hilang Responsif &amp; Tombol Arah Balik
 │
-└── [2] PORTAL ADMINISTRASI (Headless Admin CMS &amp; Audit Trail - 11 Modul):
+└── [2] PORTAL ADMINISTRASI (Headless Admin CMS &amp; Audit Trail):
     ├── /admin/login .................. Gerbang Masuk &amp; Keamanan &mdash; Form Login JWT, 3 Akun Dummy Cepat (Admin, HRD, Staff), Brute-Force Shield
     └── /admin/* (Dashboard Modular Berbasis Tab URL ?tab=...):
         ├── ?tab=overview ............. Overview &amp; Telemetri &mdash; Metrik Pengunjung Live, Ringkasan RFQ, Status Server &amp; Database
@@ -54,7 +49,6 @@ const docFullSitemapCoverage = {
         ├── ?tab=products ............. Katalog Produk &mdash; Manajemen 7 Kategori, CRUD 19 SKU, JSON Specs Editor, Image Upload
         ├── ?tab=automation ........... Editor Fitur Otomasi &mdash; Pengaturan Konten Robotika, Test Fixtures Jigs, Smart Factory MES
         ├── ?tab=gallery .............. Manajemen Foto Fasilitas &mdash; Unggah Foto HD, Klasifikasi Kategori, Deskripsi Bilingual
-        ├── ?tab=career ............... Manajemen Karir &amp; Bantuan &mdash; Sub-Tab Lowongan, Kategori, Benefits, Programs, dan FAQs
         ├── ?tab=contact .............. Notifikasi Email &amp; CRM RFQ &mdash; Resend HTTPS API / SMTP Dual Provider, CRM Leads, Deteksi Spam
         ├── ?tab=users ................ Manajemen Staf &amp; RBAC &mdash; Kelola Akun Administrator, HRD, Staff (Role-Protected)
         └── ?tab=logs ................. Audit Trail Forensik &mdash; Rekaman Aktivitas Perubahan Data (Append-Only System Log)</code></pre>
@@ -418,101 +412,10 @@ const docFullSitemapCoverage = {
           </div>
         </div>
 
-        <!-- 2.6 CAREER & SUBPAGES -->
+        <!-- 2.6 CONTACT PAGE -->
         <div class="sitemap-tree-box" style="margin-top: 14px;">
           <div class="sitemap-tree-header">
-            <span>6. Portal Karir &amp; Sub-Halaman Rekrutmen &bull; Rute: <code>/career</code>, <code>/career/jobs/:id</code>, <code>/career/benefits</code>, <code>/career/programs</code></span>
-            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
-          </div>
-          <div class="sitemap-tree-body">
-            <table class="table-custom" style="margin: 0;">
-              <thead>
-                <tr>
-                  <th style="width: 20%;">Halaman / Sub-Rute</th>
-                  <th style="width: 30%;">Fungsi Operasional</th>
-                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
-                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>/career (Portal Utama Karir)</strong></td>
-                  <td>Menampilkan lowongan pekerjaan yang sedang dibuka serta budaya kerja industri manufaktur berteknologi tinggi.</td>
-                  <td>
-                    &bull; Filter kategori departemen (Engineering, SMT, QA, IT, Supply Chain)<br>
-                    &bull; Kartu lowongan dengan badge status rekrutmen aktif
-                  </td>
-                  <td>Menarik talenta teknik terbaik untuk mendukung pertumbuhan lini produksi dan rekayasa otomasi perusahaan.</td>
-                </tr>
-                <tr>
-                  <td><strong>/career/jobs/:id (Detail Lowongan)</strong></td>
-                  <td>Menyajikan spesifikasi kualifikasi teknis, tanggung jawab jabatan, dan paket fasilitas untuk posisi tertentu.</td>
-                  <td>
-                    &bull; Rincian deskripsi pekerjaan bilingual<br>
-                    &bull; Persyaratan minimum keahlian<br>
-                    &bull; Tombol kirim berkas lamaran / email HRD
-                  </td>
-                  <td>Menyaring pelamar kerja agar kualifikasi kandidat selaras dengan standar kompetensi industri otomotif presisi.</td>
-                </tr>
-                <tr>
-                  <td><strong>/career/benefits (Fasilitas Karyawan)</strong></td>
-                  <td>Menjelaskan skema tunjangan kesejahteraan bagi karyawan yang ditempatkan di Kawasan Batam FTZ.</td>
-                  <td>
-                    &bull; BPJS Kesehatan &amp; Ketenagakerjaan lengkap<br>
-                    &bull; Fasilitas akomodasi asrama &amp; transportasi antar-jemput<br>
-                    &bull; Program sertifikasi kompetensi standar IPC
-                  </td>
-                  <td>Meningkatkan retensi dan daya tarik perusahaan bagi tenaga ahli yang berasal dari luar pulau Batam.</td>
-                </tr>
-                <tr>
-                  <td><strong>/career/programs (Program Vokasi &amp; MT)</strong></td>
-                  <td>Menjelaskan inisiatif kolaborasi vokasi industri dan program pelatihan teknisi muda.</td>
-                  <td>
-                    &bull; Program Magang Vokasi Industri (Vocational Internship)<br>
-                    &bull; Fast-Track Engineering Academy &amp; Transfer Teknologi
-                  </td>
-                  <td>Membangun kesinambungan ketersediaan operator mesin SMT dan teknisi robotika yang terlatih secara berkesinambungan.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 2.7 FAQ PAGE -->
-        <div class="sitemap-tree-box" style="margin-top: 14px;">
-          <div class="sitemap-tree-header">
-            <span>7. Halaman Tanya Jawab &bull; Rute: <code>/faq</code></span>
-            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
-          </div>
-          <div class="sitemap-tree-body">
-            <table class="table-custom" style="margin: 0;">
-              <thead>
-                <tr>
-                  <th style="width: 20%;">Section / Komponen</th>
-                  <th style="width: 30%;">Fungsi Operasional</th>
-                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
-                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Pusat Bantuan Manufaktur (FAQ Accordion)</strong></td>
-                  <td>Menjawab pertanyaan umum seputar layanan OEM/ODM, perizinan FTZ, kepatuhan mutu, dan skema kontrak kerja sama.</td>
-                  <td>
-                    &bull; Filter kategori: Layanan Manufaktur, Fasilitas Batam FTZ, Sertifikasi ISO/IATF, Pembayaran &amp; NRE<br>
-                    &bull; Komponen akordion interaktif (expand/collapse)
-                  </td>
-                  <td>Mengurangi beban waktu tim sales dalam menjawab pertanyaan berulang mengenai perizinan kawasan berikat, MOQ, dan prosedur audit.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 2.8 CONTACT PAGE -->
-        <div class="sitemap-tree-box" style="margin-top: 14px;">
-          <div class="sitemap-tree-header">
-            <span>8. Halaman Kontak &amp; RFQ B2B &bull; Rute: <code>/contact</code></span>
+            <span>6. Halaman Kontak &amp; RFQ B2B &bull; Rute: <code>/contact</code></span>
             <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
           </div>
           <div class="sitemap-tree-body">
@@ -563,10 +466,10 @@ const docFullSitemapCoverage = {
           </div>
         </div>
 
-        <!-- 2.9 GLOBAL COMPONENTS & 404 -->
+        <!-- 2.7 GLOBAL COMPONENTS & 404 -->
         <div class="sitemap-tree-box" style="margin-top: 14px;">
           <div class="sitemap-tree-header">
-            <span>9. Komponen Navigasi Global &amp; Halaman Penanganan Error (404) &bull; Rute: <code>/*</code></span>
+            <span>7. Komponen Navigasi Global &amp; Halaman Penanganan Error (404) &bull; Rute: <code>/*</code></span>
             <span class="sitemap-tree-header-tag">GLOBAL FRAMEWORK</span>
           </div>
           <div class="sitemap-tree-body">
@@ -629,7 +532,7 @@ const docFullSitemapCoverage = {
       secNumber: "3",
       title: "Cakupan Rinci Halaman & Modul Portal Administrasi (Headless CMS)",
       contentHtml: `
-        <p>Portal administrasi merupakan sistem manajemen konten terpusat (Headless CMS) yang dirancang khusus untuk mempermudah staf internal mengelola seluruh konten dan menindaklanjuti permohonan penawaran harga. Berikut adalah rincian seluruh modul administrasi, struktur formulir di dalamnya, fungsi, fitur, dan tujuan pembuatannya:</p>
+        <p>Portal administrasi merupakan sistem manajemen konten terpusat (Headless CMS) yang dirancang khusus untuk mempermudah staf internal mengelola seluruh konten manufaktur dan menindaklanjuti permohonan penawaran harga. Berikut adalah rincian seluruh modul administrasi, struktur formulir di dalamnya, fungsi, fitur, dan tujuan pembuatannya:</p>
 
         <!-- 3.1 ADMIN LOGIN -->
         <div class="sitemap-tree-box" style="margin-top: 14px;">
@@ -804,10 +707,10 @@ const docFullSitemapCoverage = {
           </div>
         </div>
 
-        <!-- 3.5 GALLERY & CAREER MODULES -->
+        <!-- 3.5 GALLERY MODULE -->
         <div class="sitemap-tree-box" style="margin-top: 14px;">
           <div class="sitemap-tree-header">
-            <span>5. Modul Galeri Fasilitas &amp; Portal Karir &bull; Tab: <code>gallery</code> &amp; <code>career</code></span>
+            <span>5. Modul Galeri Fasilitas Manufaktur &bull; Tab: <code>gallery</code></span>
             <span class="sitemap-tree-header-tag">ADMIN MODULE</span>
           </div>
           <div class="sitemap-tree-body">
@@ -831,16 +734,6 @@ const docFullSitemapCoverage = {
                     &bull; Pengatur urutan tampil dan tombol hapus foto
                   </td>
                   <td>Memperbarui portofolio visual pabrik saat ada penambahan lini SMT baru atau sertifikasi cleanroom berkala.</td>
-                </tr>
-                <tr>
-                  <td><strong>Career Module (?tab=career)</strong></td>
-                  <td>Pusat kendali lowongan pekerjaan, kategori divisi, paket tunjangan, program magang, dan tanya jawab.</td>
-                  <td>
-                    &bull; 5 Sub-Tab Terintegrasi: Lowongan Kerja, Kategori Karir, Tunjangan Karyawan (Benefits), Program Vokasi (Programs), dan Tanya Jawab (FAQs)<br>
-                    &bull; Operasi CRUD lengkap untuk setiap lowongan (judul posisi, tipe kontrak, lokasi, kualifikasi, deskripsi tugas, batas lamaran)<br>
-                    &bull; Toggle status lowongan aktif / ditutup
-                  </td>
-                  <td>Memudahkan tim HRD mengumumkan kebutuhan tenaga kerja baru secara cepat dan menutup posisi yang telah terpenuhi.</td>
                 </tr>
               </tbody>
             </table>
@@ -997,18 +890,6 @@ const docFullSitemapCoverage = {
               <td>Memamerkan bukti visual otentik lini SMT berkecepatan 80.000 CPH, oven reflow nitrogen, dan laboratorium inspeksi 3D AOI &amp; X-Ray.</td>
             </tr>
             <tr>
-              <td><code>/career</code>, <code>/career/*</code> (Karir)</td>
-              <td>Modul Career (<code>?tab=career</code>)</td>
-              <td><code>job_vacancies</code>, <code>career_categories</code>, <code>career_benefits</code>, <code>career_programs</code></td>
-              <td>Mempublikasikan lowongan kerja teknik, tunjangan kesejahteraan karyawan Batam FTZ, dan program magang vokasi industri.</td>
-            </tr>
-            <tr>
-              <td><code>/faq</code> (Pusat Bantuan)</td>
-              <td>Modul Career &gt; Sub-Tab FAQs (<code>?tab=career</code>)</td>
-              <td><code>faqs</code></td>
-              <td>Menjawab pertanyaan umum seputar fasilitas kawasan berikat Batam, kuota pemesanan minimum (MOQ), dan prosedur pembayaran.</td>
-            </tr>
-            <tr>
               <td><code>/contact</code> (Kontak &amp; RFQ)</td>
               <td>Modul Contact (<code>?tab=contact</code>)</td>
               <td><code>site_settings</code> (key: email_smtp_settings, contact_header), <code>company_profile</code>, &amp; <code>rfq_inquiries</code></td>
@@ -1038,8 +919,8 @@ const docFullSitemapCoverage = {
 
         <p><strong>Pencapaian Kunci Rekayasa Sistem:</strong></p>
         <ol>
-          <li><strong>Cakupan Lengkap Sisi Publik (12 Rute):</strong> Seluruh aspek bisnis manufaktur modern &mdash; mulai dari etalase beranda, identitas kawasan berikat Batam FTZ, robotika 3D interaktif, katalog 19 SKU produk terpadu pada 7 kategori otentik, dokumentasi fasilitas perakitan, portal karir bertingkat, hingga gerbang RFQ aman &mdash; telah terakomodasi tanpa ada celah fungsional yang tertinggal.</li>
-          <li><strong>Pusat Kendali Mandiri Sisi Admin (11 Modul):</strong> Pengelola internal memiliki kemandirian mutlak untuk menyunting teks dwibahasa, mengunggah foto beresolusi tinggi, memodifikasi spesifikasi teknis produk berformat JSON, mengatur saluran komunikasi, hingga menindaklanjuti permohonan RFQ dengan dukungan sistem CRM internal.</li>
+          <li><strong>Cakupan Lengkap Sisi Publik:</strong> Seluruh aspek bisnis manufaktur modern &mdash; mulai dari etalase beranda, identitas kawasan berikat Batam FTZ, robotika 3D interaktif, katalog 19 SKU produk terpadu pada 7 kategori otentik, dokumentasi fasilitas perakitan dan ruang bersih, hingga gerbang RFQ aman anti-spam &mdash; telah terakomodasi tanpa ada celah fungsional yang tertinggal.</li>
+          <li><strong>Pusat Kendali Mandiri Sisi Admin:</strong> Pengelola internal memiliki kemandirian mutlak untuk menyunting teks dwibahasa, mengunggah foto beresolusi tinggi, memodifikasi spesifikasi teknis produk berformat JSON, mengatur saluran komunikasi, hingga menindaklanjuti permohonan RFQ dengan dukungan sistem CRM internal.</li>
           <li><strong>Keandalan Komunikasi Cloud (Resend HTTPS API via Port 443):</strong> Penerapan dual engine email pada modul kontak menjamin notifikasi bisnis tidak akan pernah terblokir oleh firewall hosting cloud (seperti Railway dan Vercel) yang memblokir port SMTP konvensional, sehingga notifikasi proyek selalu sampai ke tim penjualan komersial seketika.</li>
           <li><strong>Keamanan &amp; Kepatuhan Forensik:</strong> Proteksi otentikasi JWT, enkripsi kata sandi bcryptjs, otorisasi bertingkat RBAC, serta audit trail *append-only* menjamin keamanan operasional dan akuntabilitas data perusahaan dalam jangka panjang.</li>
         </ol>
@@ -1049,7 +930,7 @@ const docFullSitemapCoverage = {
     }
   ],
 
-  conclusion: "Seluruh cakupan sitemap dari portal publik (12 rute) hingga portal administrasi (11 modul terintegrasi) telah terdokumentasi secara lengkap dan detail beserta seluruh section di dalamnya, fungsi operasional, fitur teknis, matriks relasi basis data, serta tujuan rekayasanya. Sistem ini telah terverifikasi memenuhi standar arsitektur perangkat lunak enterprise modern yang aman, terukur, dan siap digunakan secara publik."
+  conclusion: "Seluruh cakupan sitemap dari portal publik hingga portal administrasi telah terdokumentasi secara lengkap dan detail beserta seluruh section di dalamnya, fungsi operasional, fitur teknis, matriks relasi basis data, serta tujuan rekayasanya. Sistem ini telah terverifikasi memenuhi standar arsitektur perangkat lunak enterprise modern yang aman, terukur, dan siap digunakan secara publik."
 };
 
 module.exports = docFullSitemapCoverage;
