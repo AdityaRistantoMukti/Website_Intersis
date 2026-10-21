@@ -23,36 +23,217 @@ const docFullSitemapCoverage = {
           <li><strong>Portal Administrasi (Headless CMS &amp; Audit Portal):</strong> Terisolasi pada rute <code>/admin</code> dengan perlindungan otentikasi berbasis <em>JSON Web Token (JWT)</em> dan otorisasi bertingkat <em>Role-Based Access Control (RBAC)</em>. Berfungsi sebagai pusat kendali mandiri bagi staf untuk memodifikasi konten bilingual secara langsung, mengunggah media, mengelola master data produk, mengonfigurasi gerbang pengiriman email (Resend HTTPS API / SMTP), menindaklanjuti permohonan RFQ, serta memantau riwayat perubahan melalui audit trail forensik.</li>
         </ol>
 
-        <div class="sitemap-tree-box">
-          <div class="sitemap-tree-header">
-            <span>Peta Struktur Hierarki Sitemap Lengkap (Full Route &amp; Module Tree)</span>
-            <span class="sitemap-tree-header-tag">SYSTEM SITEMAP &bull; END-TO-END</span>
+        <div style="margin: 14px 0 18px 0;">
+          <div style="font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: bold; color: #000000; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+            <span>Diagram Visual Peta Struktur Hierarki Sitemap Lengkap (Full Route &amp; Module Tree)</span>
+            <span style="font-size: 7.5pt; background: #e2e8f0; color: #0f172a; padding: 2px 8px; border-radius: 4px; font-weight: bold;">CONNECTED TREE DIAGRAM</span>
           </div>
-          <div class="sitemap-tree-body">
-            <pre><code>c:/Projek_Magang/website_intersis/
-├── [1] PORTAL PUBLIK (Client-Facing Single Page Application):
-│   ├── / ............................. Beranda (Home Page) &mdash; Hero Carousel 100vh, Typewriter Keywords, Stats Deck, Turnkey Lifecycle
-│   ├── /about ........................ Profil Perusahaan &amp; Fasilitas &mdash; Narasi Batam FTZ, 3D Tilt Card, Visi Misi, Cleanroom 100K, Timeline
-│   ├── /automation ................... Otomasi Industri &amp; Robotika &mdash; WebGL 3D Robot 60 FPS, Scrollytelling 3 Seri Robot, ICT/FCT Jigs, Cloud MES
-│   ├── /products ..................... Katalog Produk Terpadu &mdash; Filter 7 Kategori, Instant Search SKU, Modal Specs JSON, Skema Sirkuit, Modal RFQ
-│   ├── /gallery ...................... Dokumentasi Fasilitas Produksi &mdash; Cleanroom, SMT 80k CPH, 3D AOI &amp; X-Ray Lab, Tooling Center, Lightbox
-│   ├── /contact ...................... Kontak &amp; RFQ Inbound &mdash; Form Penawaran Anti-Spam, WhatsApp Direct, Google Maps Embed Batam
-│   └── /* ............................ Not Found Page (404) &mdash; Penanganan Rute Hilang Responsif &amp; Tombol Arah Balik
-│
-└── [2] PORTAL ADMINISTRASI (Headless Admin CMS &amp; Audit Trail):
-    ├── /admin/login .................. Gerbang Masuk &amp; Keamanan &mdash; Form Login JWT, 3 Akun Dummy Cepat (Admin, HRD, Staff), Brute-Force Shield
-    └── /admin/* (Dashboard Modular Berbasis Tab URL ?tab=...):
-        ├── ?tab=overview ............. Overview &amp; Telemetri &mdash; Metrik Pengunjung Live, Ringkasan RFQ, Status Server &amp; Database
-        ├── ?tab=branding ............. Identitas Visual &mdash; Konfigurasi Nama Perusahaan, Logo Header/Footer, Favicon, Meta SEO
-        ├── ?tab=home ................. Editor Beranda &mdash; Manajemen Slide Carousel, Keyword Animasi Typewriter, Angka Statistik FTZ
-        ├── ?tab=about ................ Editor Profil Perusahaan &mdash; Visi, Misi, 4 Pilar Nilai, 4 Zona Fasilitas, Sejarah Timeline
-        ├── ?tab=products ............. Katalog Produk &mdash; Manajemen 7 Kategori, CRUD 19 SKU, JSON Specs Editor, Image Upload
-        ├── ?tab=automation ........... Editor Fitur Otomasi &mdash; Pengaturan Konten Robotika, Test Fixtures Jigs, Smart Factory MES
-        ├── ?tab=gallery .............. Manajemen Foto Fasilitas &mdash; Unggah Foto HD, Klasifikasi Kategori, Deskripsi Bilingual
-        ├── ?tab=contact .............. Notifikasi Email &amp; CRM RFQ &mdash; Resend HTTPS API / SMTP Dual Provider, CRM Leads, Deteksi Spam
-        ├── ?tab=users ................ Manajemen Staf &amp; RBAC &mdash; Kelola Akun Administrator, HRD, Staff (Role-Protected)
-        └── ?tab=logs ................. Audit Trail Forensik &mdash; Rekaman Aktivitas Perubahan Data (Append-Only System Log)</code></pre>
-          </div>
+
+          <svg viewBox="0 0 740 525" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000000; border-radius:6px; display:block;">
+            <!-- DEFINITIONS -->
+            <defs>
+              <filter id="nodeShadow" x="-3%" y="-3%" width="106%" height="106%">
+                <feDropShadow dx="1" dy="1.5" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.08"/>
+              </filter>
+            </defs>
+
+            <!-- ════════ ROOT NODE (SYSTEM ROOT) ════════ -->
+            <g filter="url(#nodeShadow)">
+              <rect x="210" y="12" width="320" height="46" rx="6" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+              <text x="370" y="31" fill="#ffffff" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" letter-spacing="0.5">PT. GLOBAL PHILSONIC TECHNOLOGIES</text>
+              <text x="370" y="47" fill="#94a3b8" font-family="Arial, sans-serif" font-size="8" text-anchor="middle">Arsitektur Terpadu: Single Page App (SPA) + Headless CMS</text>
+            </g>
+
+            <!-- ROOT TRUNK & HORIZONTAL BUS -->
+            <line x1="370" y1="58" x2="370" y2="76" stroke="#334155" stroke-width="1.6"/>
+            <circle cx="370" cy="76" r="3" fill="#334155"/>
+            <line x1="185" y1="76" x2="555" y2="76" stroke="#334155" stroke-width="1.6"/>
+            <circle cx="185" cy="76" r="3" fill="#334155"/>
+            <circle cx="555" cy="76" r="3" fill="#334155"/>
+
+            <!-- VERTICAL DROPS TO BOTH BRANCHES -->
+            <line x1="185" y1="76" x2="185" y2="92" stroke="#334155" stroke-width="1.6"/>
+            <line x1="555" y1="76" x2="555" y2="92" stroke="#334155" stroke-width="1.6"/>
+
+            <!-- ════════ BRANCH 1: PORTAL PUBLIK (LEFT COLUMN) ════════ -->
+            <!-- Header Box Public -->
+            <g filter="url(#nodeShadow)">
+              <rect x="25" y="92" width="320" height="38" rx="5" fill="#f8fafc" stroke="#0d9488" stroke-width="1.5"/>
+              <rect x="25" y="92" width="6" height="38" rx="2" fill="#0d9488"/>
+              <text x="40" y="108" fill="#0f172a" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold">PORTAL PUBLIK (Client-Facing SPA)</text>
+              <text x="40" y="122" fill="#64748b" font-family="Arial, sans-serif" font-size="7.5">Akses Terbuka &bull; Profil Industri, Katalog Produk, Otomasi 3D &amp; RFQ</text>
+            </g>
+
+            <!-- Public Trunk Line -->
+            <line x1="45" y1="130" x2="45" y2="400" stroke="#0d9488" stroke-width="1.4"/>
+
+            <!-- Leaf 1: / (Beranda) -->
+            <line x1="45" y1="152" x2="62" y2="152" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="152" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="137" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="150" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/ (Beranda / Home)</text>
+            <text x="72" y="161" fill="#64748b" font-family="Arial, sans-serif" font-size="7">Hero 100vh Carousel &bull; Typewriter &bull; Stats FTZ &bull; Lifecycle 5-Stage</text>
+
+            <!-- Leaf 2: /about -->
+            <line x1="45" y1="192" x2="62" y2="192" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="192" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="177" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="190" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/about (Tentang Kami &amp; Fasilitas)</text>
+            <text x="72" y="201" fill="#64748b" font-family="Arial, sans-serif" font-size="7">Narasi FTZ &bull; 3D Tilt Card &bull; Visi Misi &bull; Cleanroom 100K &bull; Timeline</text>
+
+            <!-- Leaf 3: /automation -->
+            <line x1="45" y1="232" x2="62" y2="232" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="232" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="217" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="230" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/automation (Otomasi &amp; Robotika 3D)</text>
+            <text x="72" y="241" fill="#64748b" font-family="Arial, sans-serif" font-size="7">WebGL 3D 60 FPS &bull; Scrollytelling 3 Seri Robot &bull; Jigs ICT/FCT &bull; MES</text>
+
+            <!-- Leaf 4: /products -->
+            <line x1="45" y1="272" x2="62" y2="272" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="272" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="257" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="270" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/products (Katalog Produk Terpadu)</text>
+            <text x="72" y="281" fill="#64748b" font-family="Arial, sans-serif" font-size="7">Filter 7 Kategori &bull; Search SKU &bull; 19 Produk &bull; JSON Specs &bull; Modal RFQ</text>
+
+            <!-- Leaf 5: /gallery -->
+            <line x1="45" y1="312" x2="62" y2="312" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="312" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="297" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="310" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/gallery (Dokumentasi Fasilitas)</text>
+            <text x="72" y="321" fill="#64748b" font-family="Arial, sans-serif" font-size="7">Lini SMT 80k CPH &bull; Oven N2 &bull; 3D AOI/X-Ray Lab &bull; Lightbox Zoom</text>
+
+            <!-- Leaf 6: /contact -->
+            <line x1="45" y1="352" x2="62" y2="352" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="352" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="337" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="350" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/contact (Kontak &amp; RFQ Inbound)</text>
+            <text x="72" y="361" fill="#64748b" font-family="Arial, sans-serif" font-size="7">Form RFQ Anti-Spam &bull; Direct WA &bull; Google Maps Embed Batam</text>
+
+            <!-- Leaf 7: /* (404) -->
+            <line x1="45" y1="392" x2="62" y2="392" stroke="#0d9488" stroke-width="1.2"/>
+            <circle cx="45" cy="392" r="2.5" fill="#0d9488"/>
+            <rect x="62" y="377" width="283" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="72" y="390" fill="#0f172a" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold">/* (Penanganan Error 404)</text>
+            <text x="72" y="401" fill="#64748b" font-family="Arial, sans-serif" font-size="7">Fallback Halaman Responsif &bull; Tombol Navigasi Kembali ke Beranda</text>
+
+            <!-- Badge Fitur Global Publik -->
+            <rect x="62" y="417" width="283" height="36" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="3,2" stroke-width="1"/>
+            <text x="72" y="430" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">Komponen Navigasi &amp; Telemetri Global:</text>
+            <text x="72" y="442" fill="#475569" font-family="Arial, sans-serif" font-size="7">Bilingual ID/EN &bull; Dark/Light Cockpit Theme &bull; Visitor Telemetry</text>
+
+
+            <!-- ════════ BRANCH 2: PORTAL ADMINISTRASI (RIGHT COLUMN) ════════ -->
+            <!-- Header Box Admin -->
+            <g filter="url(#nodeShadow)">
+              <rect x="395" y="92" width="320" height="38" rx="5" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5"/>
+              <rect x="395" y="92" width="6" height="38" rx="2" fill="#2563eb"/>
+              <text x="410" y="108" fill="#0f172a" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold">PORTAL ADMINISTRASI (/admin)</text>
+              <text x="410" y="122" fill="#64748b" font-family="Arial, sans-serif" font-size="7.5">Headless CMS &bull; Otentikasi JWT &bull; RBAC &bull; Audit Trail</text>
+            </g>
+
+            <!-- Login Gate Dropdown -->
+            <line x1="555" y1="130" x2="555" y2="142" stroke="#2563eb" stroke-width="1.4"/>
+            <rect x="415" y="142" width="280" height="28" rx="4" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+            <text x="555" y="155" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">/admin/login (Gerbang Masuk &amp; Keamanan JWT)</text>
+            <text x="555" y="165" fill="#3b82f6" font-family="Arial, sans-serif" font-size="7" text-anchor="middle">Quick Demo: Administrator &bull; HRD Manager &bull; Staff Konten</text>
+
+            <!-- Connector to Tab Modules -->
+            <line x1="555" y1="170" x2="555" y2="182" stroke="#2563eb" stroke-width="1.4"/>
+            <circle cx="555" cy="182" r="3" fill="#2563eb"/>
+
+            <!-- Admin Sub-Bus for 2 Sub-Columns -->
+            <line x1="410" y1="182" x2="700" y2="182" stroke="#2563eb" stroke-width="1.2"/>
+
+            <!-- Sub-Column A Trunk (Left Admin: Config & CMS) -->
+            <line x1="410" y1="182" x2="410" y2="355" stroke="#2563eb" stroke-width="1.2"/>
+
+            <!-- Modul 1: ?tab=overview -->
+            <line x1="410" y1="202" x2="422" y2="202" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="410" cy="202" r="2" fill="#2563eb"/>
+            <rect x="422" y="190" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="430" y="201" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=overview</text>
+            <text x="430" y="210" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Telemetri &amp; Status DB</text>
+
+            <!-- Modul 2: ?tab=branding -->
+            <line x1="410" y1="237" x2="422" y2="237" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="410" cy="237" r="2" fill="#2563eb"/>
+            <rect x="422" y="225" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="430" y="236" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=branding</text>
+            <text x="430" y="245" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Identitas Visual &amp; Logo</text>
+
+            <!-- Modul 3: ?tab=home -->
+            <line x1="410" y1="272" x2="422" y2="272" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="410" cy="272" r="2" fill="#2563eb"/>
+            <rect x="422" y="260" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="430" y="271" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=home</text>
+            <text x="430" y="280" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Hero Slider &amp; Stats FTZ</text>
+
+            <!-- Modul 4: ?tab=about -->
+            <line x1="410" y1="307" x2="422" y2="307" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="410" cy="307" r="2" fill="#2563eb"/>
+            <rect x="422" y="295" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="430" y="306" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=about</text>
+            <text x="430" y="315" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Profil, Visi &amp; Fasilitas</text>
+
+            <!-- Modul 5: ?tab=automation -->
+            <line x1="410" y1="342" x2="422" y2="342" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="410" cy="342" r="2" fill="#2563eb"/>
+            <rect x="422" y="330" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="430" y="341" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=automation</text>
+            <text x="430" y="350" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Seri Robot &amp; Test Jigs</text>
+
+
+            <!-- Sub-Column B Trunk (Right Admin: Data & Ops) -->
+            <line x1="565" y1="182" x2="565" y2="355" stroke="#2563eb" stroke-width="1.2"/>
+
+            <!-- Modul 6: ?tab=products -->
+            <line x1="565" y1="202" x2="577" y2="202" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="565" cy="202" r="2" fill="#2563eb"/>
+            <rect x="577" y="190" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="585" y="201" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=products</text>
+            <text x="585" y="210" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Katalog 19 SKU &amp; Specs</text>
+
+            <!-- Modul 7: ?tab=gallery -->
+            <line x1="565" y1="237" x2="577" y2="237" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="565" cy="237" r="2" fill="#2563eb"/>
+            <rect x="577" y="225" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="585" y="236" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=gallery</text>
+            <text x="585" y="245" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Foto Fasilitas Produksi</text>
+
+            <!-- Modul 8: ?tab=contact -->
+            <line x1="565" y1="272" x2="577" y2="272" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="565" cy="272" r="2" fill="#2563eb"/>
+            <rect x="577" y="260" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="585" y="271" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=contact</text>
+            <text x="585" y="280" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Resend/SMTP &amp; CRM RFQ</text>
+
+            <!-- Modul 9: ?tab=users -->
+            <line x1="565" y1="307" x2="577" y2="307" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="565" cy="307" r="2" fill="#2563eb"/>
+            <rect x="577" y="295" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="585" y="306" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=users (RBAC)</text>
+            <text x="585" y="315" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Kelola Staf (Admin/HRD)</text>
+
+            <!-- Modul 10: ?tab=logs -->
+            <line x1="565" y1="342" x2="577" y2="342" stroke="#2563eb" stroke-width="1"/>
+            <circle cx="565" cy="342" r="2" fill="#2563eb"/>
+            <rect x="577" y="330" width="135" height="25" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="585" y="341" fill="#0f172a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">?tab=logs (Audit)</text>
+            <text x="585" y="350" fill="#64748b" font-family="Arial, sans-serif" font-size="6.5">Audit Trail Forensik Data</text>
+
+            <!-- Bottom Admin Security & Cloud Integration Badge -->
+            <rect x="422" y="375" width="290" height="42" rx="4" fill="#f8fafc" stroke="#93c5fd" stroke-dasharray="3,2" stroke-width="1"/>
+            <text x="432" y="390" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">Standar Keamanan &amp; Integrasi Cloud:</text>
+            <text x="432" y="401" fill="#475569" font-family="Arial, sans-serif" font-size="7">bcryptjs (10 salt) &bull; RestrictTo RBAC &bull; Append-Only Logs</text>
+            <text x="432" y="411" fill="#2563eb" font-family="Arial, sans-serif" font-size="6.8" font-weight="bold">Resend HTTPS API (Port 443 — Bebas Blokir Firewall Cloud)</text>
+
+            <!-- Footer Legend -->
+            <rect x="25" y="475" width="690" height="34" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <circle cx="45" cy="492" r="4" fill="#0d9488"/>
+            <text x="55" y="495" fill="#334155" font-family="Arial, sans-serif" font-size="7.5"><strong>Portal Publik:</strong> 6 Rute Inti + 404 Handler &bull; Responsif &amp; Terhubung Langsung ke WhatsApp / Email</text>
+            <circle cx="395" cy="492" r="4" fill="#2563eb"/>
+            <text x="405" y="495" fill="#334155" font-family="Arial, sans-serif" font-size="7.5"><strong>Portal Admin:</strong> 10 Modul CMS Berbasis Tab &bull; Terproteksi JWT Token &amp; Hak Akses Bertingkat</text>
+          </svg>
         </div>
       `
     },
