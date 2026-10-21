@@ -4,218 +4,309 @@
   <meta charset="UTF-8">
   <title>Unit 06 - Mengimplementasikan Pemrograman Terstruktur</title>
   <style>
-    @page {
-      size: A4 portrait;
-      margin: 20mm 18mm 20mm 18mm;
-    }
-    * {
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    body {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-size: 10pt;
-      line-height: 1.5;
-      color: #000000;
-      background: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    .doc-header {
-      border-top: 2px solid #000000;
-      border-bottom: 1px solid #000000;
-      padding: 5px 0;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #000000;
-    }
-    .title-banner {
-      border-left: 3px solid #000000;
-      padding-left: 12px;
-      margin-bottom: 14px;
-    }
-    .unit-title-num {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #000000;
-      margin-bottom: 3px;
-    }
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14pt;
-      font-weight: bold;
-      color: #000000;
-      margin: 0;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
-    .meta-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-    }
-    .meta-table td {
-      padding: 4px 8px;
-      border: 1px solid #000000;
-      color: #000000;
-    }
-    .meta-table td.lbl {
-      font-weight: bold;
-      background: #f0f0f0;
-      width: 20%;
-    }
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10.5pt;
-      font-weight: bold;
-      color: #000000;
-      border-bottom: 1px solid #000000;
-      padding-bottom: 3px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      page-break-after: avoid;
-      text-transform: uppercase;
-    }
-    h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-top: 12px;
-      margin-bottom: 4px;
-      page-break-after: avoid;
-    }
-    p {
-      margin: 0 0 6px 0;
-      text-align: justify;
-    }
-    ul, ol {
-      margin: 0 0 8px 0;
-      padding-left: 18px;
-    }
-    li {
-      margin-bottom: 3px;
-      text-align: justify;
-    }
-    .meta-file {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      margin-bottom: 6px;
-      color: #000000;
-    }
-    .meta-file code {
-      font-weight: bold;
-    }
-    .table-custom {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 8px 0 12px 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      page-break-inside: avoid;
-    }
-    .table-custom th {
-      background: #e5e5e5;
-      color: #000000;
-      padding: 5px 6px;
-      text-align: left;
-      border: 1px solid #000000;
-      font-weight: bold;
-    }
-    .table-custom td {
-      padding: 4px 6px;
-      border: 1px solid #000000;
-      vertical-align: top;
-      color: #000000;
-    }
-    .sub-section-block {
-      border: 1px solid #000000;
-      padding: 10px;
-      margin-bottom: 12px;
-      background: #ffffff;
-    }
-    .diagram-wrapper {
-      border: 1px solid #000000;
-      background: #ffffff;
-      padding: 8px;
-      margin: 8px 0;
-      page-break-inside: avoid;
-    }
-    .diagram-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      color: #000000;
-    }
-    .code-wrapper {
-      margin: 8px 0 4px 0;
-    }
-    .code-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 3px;
-      color: #000000;
-    }
-    .code-box {
-      background: #f9f9f9;
-      color: #000000;
-      border: 1px solid #000000;
-      padding: 6px 8px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 7.2pt;
-      line-height: 1.35;
-      page-break-inside: avoid;
-      text-align: left;
-    }
-    .code-box .file-tag {
-      font-weight: bold;
-      border-bottom: 1px solid #cccccc;
-      padding-bottom: 2px;
-      margin-bottom: 4px;
-      display: block;
-      color: #333333;
-    }
-    .code-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-    .conclusion-box {
-      border: 1px solid #000000;
-      background: #f5f5f5;
-      padding: 8px 10px;
-      margin-top: 14px;
-      page-break-inside: avoid;
-    }
-    .conclusion-title {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-    .conclusion-box p {
-      font-size: 8.5pt;
-      color: #000000;
-      margin: 0;
-    }
-    .page-break {
-      page-break-after: always;
-    }
+    
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+  .title-banner {
+    border-left: 3px solid #000000;
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .unit-title-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 3px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .meta-table td.lbl {
+    font-weight: bold;
+    background: #f0f0f0;
+    width: 20%;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+  .meta-file {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin-bottom: 6px;
+    color: #000000;
+  }
+  .meta-file code {
+    font-weight: bold;
+  }
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .table-custom th {
+    background: #e5e5e5;
+    color: #000000;
+    padding: 5px 6px;
+    text-align: left;
+    border: 1px solid #000000;
+    font-weight: bold;
+  }
+  .table-custom td {
+    padding: 4px 6px;
+    border: 1px solid #000000;
+    vertical-align: top;
+    color: #000000;
+  }
+  .sub-section-block {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .diagram-wrapper {
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 8px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .code-wrapper {
+    margin: 8px 0 4px 0;
+    page-break-inside: avoid;
+  }
+  .code-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #000000;
+  }
+  
+  /* VS Code IDE Code Block Theme */
+  .vscode-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 4px 0 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .vscode-titlebar {
+    background: #252526;
+    border-bottom: 1px solid #333333;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vscode-dots {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .vsc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vsc-dot-red { background: #ff5f56; }
+  .vsc-dot-yellow { background: #ffbd2e; }
+  .vsc-dot-green { background: #27c93f; }
+  .vscode-tab {
+    display: inline-flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 3px 12px;
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid #007acc;
+    color: #ffffff;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+  }
+  .vscode-lang {
+    color: #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.8pt;
+    letter-spacing: 0.5px;
+  }
+  .vscode-body {
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.2pt;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .vscode-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #d4d4d4;
+  }
+
+  /* Architectural Sitemap / Tree Diagram Theme (Clean & Formal, Non-VSCode) */
+  .sitemap-tree-box {
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+  .sitemap-tree-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000000;
+    padding: 6px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitemap-tree-header-tag {
+    font-size: 7pt;
+    font-weight: normal;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #334155;
+    font-family: monospace;
+  }
+  .sitemap-tree-body {
+    padding: 10px 14px;
+    background: #fcfcfc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.45;
+    color: #111827;
+    text-align: left;
+  }
+  .sitemap-tree-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .conclusion-box {
+    border: 1px solid #000000;
+    background: #f5f5f5;
+    padding: 8px 10px;
+    margin-top: 14px;
+    page-break-inside: avoid;
+  }
+  .conclusion-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .conclusion-box p {
+    font-size: 8.5pt;
+    color: #000000;
+    margin: 0;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+
   </style>
 </head>
 <body>
@@ -346,48 +437,64 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">backend/src/middlewares/authMiddleware.js</span>
-            <pre>// Penerapan Guard Clauses: Eliminasi Nested If Berlebihan pada Verifikasi Token
-const verifyToken = async (req, res, next) =&gt; {
-  try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith(&#039;Bearer &#039;)) {
-      return error(res, &#039;Akses ditolak. Token autentikasi tidak ditemukan.&#039;, 401);
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>backend/src/middlewares/authMiddleware.js</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">// Penerapan Guard Clauses: Eliminasi Nested If Berlebihan pada Verifikasi Token</span>
+<span style="color:#569cd6;font-weight:bold;">const</span> verifyToken = <span style="color:#569cd6;font-weight:bold;">async</span> (req, res, next) =&gt; {
+  <span style="color:#569cd6;font-weight:bold;">try</span> {
+    <span style="color:#569cd6;font-weight:bold;">const</span> authHeader = req.headers.authorization;
+    <span style="color:#569cd6;font-weight:bold;">if</span> (!authHeader || !authHeader.<span style="color:#dcdcaa;">startsWith</span>(<span style="color:#ce9178;">&#039;Bearer &#039;</span>)) {
+      <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">error</span>(res, <span style="color:#ce9178;">&#039;Akses ditolak. Token autentikasi tidak ditemukan.&#039;</span>, <span style="color:#b5cea8;">401</span>);
     }
 
-    const token = authHeader.split(&#039; &#039;)[1];
-    if (!token) {
-      return error(res, &#039;Token tidak valid.&#039;, 401);
+    <span style="color:#569cd6;font-weight:bold;">const</span> token = authHeader.<span style="color:#dcdcaa;">split</span>(<span style="color:#ce9178;">&#039; &#039;</span>)[<span style="color:#b5cea8;">1</span>];
+    <span style="color:#569cd6;font-weight:bold;">if</span> (!token) {
+      <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">error</span>(res, <span style="color:#ce9178;">&#039;Token tidak valid.&#039;</span>, <span style="color:#b5cea8;">401</span>);
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || &#039;fallback_secret_key_change_in_production&#039;);
+    <span style="color:#569cd6;font-weight:bold;">const</span> decoded = jwt.<span style="color:#dcdcaa;">verify</span>(token, process.env.JWT_SECRET || <span style="color:#ce9178;">&#039;fallback_secret_key_change_in_production&#039;</span>);
 
-    // Verifikasi ketersediaan user di database
-    const [rows] = await pool.execute(
-      &#039;SELECT id, name, username, email, role, status FROM users WHERE id = ?&#039;,
+    <span style="color:#6a9955;font-style:italic;">// Verifikasi ketersediaan user di database</span>
+    <span style="color:#569cd6;font-weight:bold;">const</span> [rows] = <span style="color:#569cd6;font-weight:bold;">await</span> pool.<span style="color:#dcdcaa;">execute</span>(
+      <span style="color:#ce9178;">&#039;SELECT id, name, username, email, role, status FROM users WHERE id = ?&#039;</span>,
       [decoded.id]
     );
 
-    if (rows.length === 0) {
-      return error(res, &#039;User pemilik token tidak lagi ditemukan.&#039;, 401);
+    <span style="color:#569cd6;font-weight:bold;">if</span> (rows.length === <span style="color:#b5cea8;">0</span>) {
+      <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">error</span>(res, <span style="color:#ce9178;">&#039;User pemilik token tidak lagi ditemukan.&#039;</span>, <span style="color:#b5cea8;">401</span>);
     }
 
-    const user = rows[0];
-    if (user.status !== &#039;active&#039;) {
-      return error(res, &#039;Akun Anda dalam status nonaktif. Hubungi Administrator.&#039;, 403);
+    <span style="color:#569cd6;font-weight:bold;">const</span> user = rows[<span style="color:#b5cea8;">0</span>];
+    <span style="color:#569cd6;font-weight:bold;">if</span> (user.status !== <span style="color:#ce9178;">&#039;active&#039;</span>) {
+      <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">error</span>(res, <span style="color:#ce9178;">&#039;Akun Anda dalam status nonaktif. Hubungi Administrator.&#039;</span>, <span style="color:#b5cea8;">403</span>);
     }
 
     req.user = user;
-    next();
-  } catch (err) {
-    if (err.name === &#039;TokenExpiredError&#039;) {
-      return error(res, &#039;Sesi login telah kadaluarsa. Silakan login kembali.&#039;, 401);
+    <span style="color:#dcdcaa;">next</span>();
+  } <span style="color:#569cd6;font-weight:bold;">catch</span> (err) {
+    <span style="color:#569cd6;font-weight:bold;">if</span> (err.name === <span style="color:#ce9178;">&#039;TokenExpiredError&#039;</span>) {
+      <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">error</span>(res, <span style="color:#ce9178;">&#039;Sesi login telah kadaluarsa. Silakan login kembali.&#039;</span>, <span style="color:#b5cea8;">401</span>);
     }
-    return error(res, &#039;Token autentikasi tidak valid atau telah dirusak.&#039;, 401);
+    <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">error</span>(res, <span style="color:#ce9178;">&#039;Token autentikasi tidak valid atau telah dirusak.&#039;</span>, <span style="color:#b5cea8;">401</span>);
   }
-};</pre>
+};</code></pre>
+            </div>
           </div>
         </div>
       
@@ -415,27 +522,43 @@ const verifyToken = async (req, res, next) =&gt; {
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">frontend/src/pages/public/ProductsPage.jsx</span>
-            <pre>// Filter Array Produk Manufaktur Secara Deklaratif Tanpa Mutasi
-const filteredProducts = useMemo(() =&gt; {
-  return allProducts.filter((prod) =&gt; {
-    const matchCat = activeCategory === &#039;all&#039; || prod.category === activeCategory;
-    if (!matchCat) return false;
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>frontend/src/pages/public/ProductsPage.jsx</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">// Filter Array Produk Manufaktur Secara Deklaratif Tanpa Mutasi</span>
+<span style="color:#569cd6;font-weight:bold;">const</span> filteredProducts = <span style="color:#dcdcaa;">useMemo</span>(() =&gt; {
+  <span style="color:#569cd6;font-weight:bold;">return</span> allProducts.<span style="color:#dcdcaa;">filter</span>((prod) =&gt; {
+    <span style="color:#569cd6;font-weight:bold;">const</span> matchCat = activeCategory === <span style="color:#ce9178;">&#039;all&#039;</span> || prod.category === activeCategory;
+    <span style="color:#569cd6;font-weight:bold;">if</span> (!matchCat) <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#569cd6;">false</span>;
 
-    if (!searchQuery.trim()) return true;
-    const q = searchQuery.toLowerCase();
-    const title = (prod.title[isId ? &#039;id&#039; : &#039;en&#039;] || prod.title.en).toLowerCase();
-    const code = prod.modelCode.toLowerCase();
-    const desc = (prod.shortDesc[isId ? &#039;id&#039; : &#039;en&#039;] || prod.shortDesc.en).toLowerCase();
-    const specsMatch = (prod.specs || []).some(
-      (s) =&gt; s.label.toLowerCase().includes(q) || s.value.toLowerCase().includes(q)
+    <span style="color:#569cd6;font-weight:bold;">if</span> (!searchQuery.<span style="color:#dcdcaa;">trim</span>()) <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#569cd6;">true</span>;
+    <span style="color:#569cd6;font-weight:bold;">const</span> q = searchQuery.<span style="color:#dcdcaa;">toLowerCase</span>();
+    <span style="color:#569cd6;font-weight:bold;">const</span> title = (prod.title[isId ? <span style="color:#ce9178;">&#039;id&#039;</span> : <span style="color:#ce9178;">&#039;en&#039;</span>] || prod.title.en).<span style="color:#dcdcaa;">toLowerCase</span>();
+    <span style="color:#569cd6;font-weight:bold;">const</span> code = prod.modelCode.<span style="color:#dcdcaa;">toLowerCase</span>();
+    <span style="color:#569cd6;font-weight:bold;">const</span> desc = (prod.shortDesc[isId ? <span style="color:#ce9178;">&#039;id&#039;</span> : <span style="color:#ce9178;">&#039;en&#039;</span>] || prod.shortDesc.en).<span style="color:#dcdcaa;">toLowerCase</span>();
+    <span style="color:#569cd6;font-weight:bold;">const</span> specsMatch = (prod.specs || []).<span style="color:#dcdcaa;">some</span>(
+      (s) =&gt; s.label.<span style="color:#dcdcaa;">toLowerCase</span>().<span style="color:#dcdcaa;">includes</span>(q) || s.value.<span style="color:#dcdcaa;">toLowerCase</span>().<span style="color:#dcdcaa;">includes</span>(q)
     );
 
-    return title.includes(q) || code.includes(q) || desc.includes(q) || specsMatch;
+    <span style="color:#569cd6;font-weight:bold;">return</span> title.<span style="color:#dcdcaa;">includes</span>(q) || code.<span style="color:#dcdcaa;">includes</span>(q) || desc.<span style="color:#dcdcaa;">includes</span>(q) || specsMatch;
   });
-}, [activeCategory, searchQuery, isId, allProducts]);</pre>
+}, [activeCategory, searchQuery, isId, allProducts]);</code></pre>
+            </div>
           </div>
         </div>
       
@@ -463,42 +586,58 @@ const filteredProducts = useMemo(() =&gt; {
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">backend/src/utils/fileCleanup.js</span>
-            <pre>const fs = require(&#039;fs&#039;);
-const path = require(&#039;path&#039;);
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>backend/src/utils/fileCleanup.js</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#569cd6;font-weight:bold;">const</span> fs = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;fs&#039;</span>);
+<span style="color:#569cd6;font-weight:bold;">const</span> path = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;path&#039;</span>);
 
-const uploadDir = path.join(__dirname, &#039;../../../uploads&#039;);
+<span style="color:#569cd6;font-weight:bold;">const</span> uploadDir = path.<span style="color:#dcdcaa;">join</span>(__dirname, <span style="color:#ce9178;">&#039;../../../uploads&#039;</span>);
 
-/**
+<span style="color:#6a9955;font-style:italic;">/**
  * Pembersihan Berkas Fisik: Menghapus File Gambar Produk dari Storage Disk
- */
-const deleteFileIfLocal = (filePath) =&gt; {
-  if (!filePath || typeof filePath !== &#039;string&#039;) return;
+ */</span>
+<span style="color:#569cd6;font-weight:bold;">const</span> deleteFileIfLocal = (filePath) =&gt; {
+  <span style="color:#569cd6;font-weight:bold;">if</span> (!filePath || <span style="color:#569cd6;font-weight:bold;">typeof</span> filePath !== <span style="color:#ce9178;">&#039;string&#039;</span>) <span style="color:#569cd6;font-weight:bold;">return</span>;
 
-  if (filePath.startsWith(&#039;/uploads/&#039;)) {
-    const relativePart = filePath.replace(/^\/uploads\//, &#039;&#039;);
-    const absolutePath = path.resolve(uploadDir, relativePart);
+  <span style="color:#569cd6;font-weight:bold;">if</span> (filePath.<span style="color:#dcdcaa;">startsWith</span>(<span style="color:#ce9178;">&#039;/uploads/&#039;</span>)) {
+    <span style="color:#569cd6;font-weight:bold;">const</span> relativePart = filePath.<span style="color:#dcdcaa;">replace</span>(/^\/uploads\<span style="color:#6a9955;font-style:italic;">//, &#039;&#039;);</span>
+    <span style="color:#569cd6;font-weight:bold;">const</span> absolutePath = path.<span style="color:#dcdcaa;">resolve</span>(uploadDir, relativePart);
 
-    // Proteksi keamanan: pastikan path berada strictly di dalam uploadDir
-    if (!absolutePath.startsWith(path.resolve(uploadDir))) {
-      console.warn(`[FILE CLEANUP BLOCKED] Attempted traversal attack: ${filePath}`);
-      return;
+    <span style="color:#6a9955;font-style:italic;">// Proteksi keamanan: pastikan path berada strictly di dalam uploadDir</span>
+    <span style="color:#569cd6;font-weight:bold;">if</span> (!absolutePath.<span style="color:#dcdcaa;">startsWith</span>(path.<span style="color:#dcdcaa;">resolve</span>(uploadDir))) {
+      console.<span style="color:#dcdcaa;">warn</span>(<span style="color:#ce9178;">`[FILE CLEANUP BLOCKED] Attempted traversal attack: ${filePath}`</span>);
+      <span style="color:#569cd6;font-weight:bold;">return</span>;
     }
 
-    if (fs.existsSync(absolutePath)) {
-      try {
-        fs.unlinkSync(absolutePath);
-        console.log(`[FILE CLEANUP] Successfully deleted unused asset: ${absolutePath}`);
-      } catch (err) {
-        console.error(`[FILE CLEANUP ERROR] Failed to delete ${absolutePath}:`, err.message);
+    <span style="color:#569cd6;font-weight:bold;">if</span> (fs.<span style="color:#dcdcaa;">existsSync</span>(absolutePath)) {
+      <span style="color:#569cd6;font-weight:bold;">try</span> {
+        fs.<span style="color:#dcdcaa;">unlinkSync</span>(absolutePath);
+        console.<span style="color:#dcdcaa;">log</span>(<span style="color:#ce9178;">`[FILE CLEANUP] Successfully deleted unused asset: ${absolutePath}`</span>);
+      } <span style="color:#569cd6;font-weight:bold;">catch</span> (err) {
+        console.<span style="color:#dcdcaa;">error</span>(<span style="color:#ce9178;">`[FILE CLEANUP ERROR] Failed to delete ${absolutePath}:`</span>, err.message);
       }
     }
   }
 };
 
-module.exports = { deleteFileIfLocal };</pre>
+module.exports = { deleteFileIfLocal };</code></pre>
+            </div>
           </div>
         </div>
       

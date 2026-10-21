@@ -6,7 +6,7 @@
 CREATE TABLE IF NOT EXISTS `products` (
   `id`            INT AUTO_INCREMENT PRIMARY KEY,
   `model_code`    VARCHAR(100)  NOT NULL,
-  `category`      ENUM('headunit','audio','dashcam','automation','ems') NOT NULL DEFAULT 'headunit',
+  `category`      VARCHAR(100)  NOT NULL DEFAULT 'automation',
   `badge`         VARCHAR(100)  DEFAULT NULL,
   `badge_color`   VARCHAR(50)   DEFAULT NULL,
   `image`         VARCHAR(255)  DEFAULT NULL,
@@ -26,6 +26,9 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 -- ──────────────────────────────────────────────────────────────────────────────
 --  SEED DATA — 12 produk resmi PT. Global Philsonic Technologies (GPT)
+--  Kategori strictly 7 kategori:
+--  automation, mobile_intelligent_device, amplifier, subwoofer, dsp,
+--  android_headunit, dash_camera_recorders
 -- ──────────────────────────────────────────────────────────────────────────────
 
 INSERT INTO `products`
@@ -33,9 +36,9 @@ INSERT INTO `products`
    `short_desc_id`, `short_desc_en`, `specs`, `full_specs`, `diagram_type`, `status`, `sort_order`)
 VALUES
 
--- ── HEADUNIT ────────────────────────────────────────────────────────────────
+-- ── 1. ANDROID HEADUNIT ───────────────────────────────────────────────────────
 (
-  'GPT-HU9800 PRO', 'headunit', 'OEM Flagship', 'teal',
+  'GPT-HU9800 PRO', 'android_headunit', 'OEM Flagship', 'teal',
   'Sistem Infotainment Otomotif Pintar 10.1" QLED Optical Bonding',
   'Smart Android Automotive Infotainment System 10.1" QLED',
   'Headunit standar OEM dengan prosesor Octa-Core 2.0 GHz, panel QLED 1280x720 optical bonding anti-glare, DSP 32-band terintegrasi, dan integrasi penuh CAN-Bus multi-protokol.',
@@ -45,7 +48,7 @@ VALUES
   'infotainment', 1, 10
 ),
 (
-  'GPT-HU7200 SLIM', 'headunit', 'Double-DIN Slim', 'blue',
+  'GPT-HU7200 SLIM', 'android_headunit', 'Double-DIN Slim', 'blue',
   'Receiver Multimedia Double-DIN 7" IPS Mechless',
   'Double-DIN 7" IPS Mechless Multimedia Receiver',
   'Unit penerima multimedia sasis ultra-slim (kedalaman instalasi hanya 65mm) dengan layar IPS 7 inci kapasitif, Apple CarPlay & Android Auto nirkabel, dan DAC 24-bit audio.',
@@ -54,8 +57,10 @@ VALUES
   '{"operatingVoltage":"10.8V - 14.8V DC","operatingTemp":"-20°C to +70°C","usbPorts":"Dual Front & Rear USB 2.0 (Fast Charging 2.1A)","bluetooth":"Qualcomm Bluetooth 5.0 with aptX Audio","preouts":"3 Pairs (Front, Rear, Subwoofer) 4V RMS High-Volt","certifications":"ISO 9001:2015, RoHS, FCC Part 15"}',
   'infotainment', 1, 20
 ),
+
+-- ── 2. MOBILE INTELLIGENT DEVICE ──────────────────────────────────────────────
 (
-  'GPT-CP1200 AI-BOX', 'headunit', 'Smart Module', 'purple',
+  'GPT-CP1200 AI-BOX', 'mobile_intelligent_device', 'Smart Module', 'purple',
   'Modul Pintar Wireless CarPlay & Android Auto AI Box',
   'Wireless CarPlay & Android Auto AI Smart Adapter Box',
   'Modul plug-and-play mandiri berbasis Android 13 untuk mengonversi headunit pabrikan OEM kabel menjadi sistem pintar nirkabel dengan slot kartu SIM 4G dan GPS mandiri.',
@@ -64,10 +69,20 @@ VALUES
   '{"operatingVoltage":"5V DC via USB Bus Power (< 1.5A)","operatingTemp":"-20°C to +75°C","internalStorage":"4GB RAM + 64GB ROM (MicroSD expandable up to 256GB)","dimensions":"78 x 78 x 16 mm (Compact Pocket Size)","certifications":"CE, FCC, RoHS, Telec"}',
   'infotainment', 1, 30
 ),
-
--- ── AUDIO ────────────────────────────────────────────────────────────────────
 (
-  'GPT-DSP8800 HD', 'audio', 'Audiophile Hi-Res', 'red',
+  'GPT-BMS-48V ECU', 'mobile_intelligent_device', 'EV & Mobility', 'teal',
+  'PCBA Modul Battery Management System (BMS) 48V Otomotif EV',
+  'Automotive 48V EV Battery Management System (BMS) PCBA Module',
+  'Perakitan papan sirkuit PCBA BMS 48V densitas tinggi untuk kendaraan listrik ringan dan modul baterai otomotif, dilengkapi monitoring tegangan sel presisi tinggi dan komunikasi CAN-Bus 2.0B.',
+  'High-density 48V automotive BMS PCBA module for light electric vehicles and energy storage, featuring precision cell voltage monitoring and CAN-Bus 2.0B.',
+  '[{"label":"Voltage Range","value":"12S - 16S Li-Ion / LiFePO4 (36V - 60V DC)"},{"label":"Continuous Current","value":"100A Continuous / 250A Peak Discharge"},{"label":"Cell Accuracy","value":"±1.5 mV Precision Cell Voltage Telemetry"},{"label":"Communication","value":"Isolated CAN-Bus 2.0B, RS485, UART"}]',
+  '{"balancingCurrent":"150 mA Passive Cell Balancing per Channel","temperatureSensors":"4x External NTC Thermistors for Pack Health","protectionLevels":"Over/Under Voltage, Over Current, Short Circuit, Overtemp","pcbConstruction":"4-Layer 2oz Heavy Copper with Conformal Coating","certifications":"ISO 26262 ASIL-B Ready, UN38.3, RoHS"}',
+  'ems', 1, 120
+),
+
+-- ── 3. DSP (DIGITAL SIGNAL PROCESSOR) ─────────────────────────────────────────
+(
+  'GPT-DSP8800 HD', 'dsp', 'Audiophile Hi-Res', 'red',
   'Prosesor Sinyal Digital Otomotif 8-Channel Resolusi Tinggi',
   'High-Resolution 8-Channel Automotive Digital Sound Processor',
   'Prosesor audio digital presisi tinggi dengan dual 32-bit floating-point DSP engine, 6 input / 8 output aktif, konverter AKM 192 kHz, dan kalibrasi akustik via software PC & Bluetooth.',
@@ -76,8 +91,10 @@ VALUES
   '{"operatingVoltage":"10V - 15.5V DC (Auto Turn-On on High-Level Signal)","operatingTemp":"-20°C to +75°C","dynamicRange":"> 110 dB (A-Weighted)","thd":"< 0.003% @ 1 kHz, 1V RMS","opticalInput":"Toslink Optical SPDIF up to 24-bit/96kHz","softwareSupport":"Windows PC Suite Tuning + iOS/Android App (BT 5.0)","certifications":"ISO 9001:2015, FCC, CE, RoHS"}',
   'dsp', 1, 40
 ),
+
+-- ── 4. AMPLIFIER ──────────────────────────────────────────────────────────────
 (
-  'GPT-AMP4100 D-CLASS', 'audio', 'Compact Power', 'gold',
+  'GPT-AMP4100 D-CLASS', 'amplifier', 'Compact Power', 'gold',
   'Amplifier Otomotif Kelas-D 4-Channel Efisiensi Tinggi',
   'Ultra-Compact 4-Channel Automotive Class-D Power Amplifier',
   'Penguat daya Class-D efisiensi tinggi (>88%) dengan sasis die-cast aluminium kompak, disipasi termal optimal, dan proteksi sirkuit pintar terhadap kelebihan beban dan panas.',
@@ -86,8 +103,10 @@ VALUES
   '{"operatingVoltage":"9V - 16V DC with Auto-Sense High-Level Turn On","operatingTemp":"-40°C to +85°C (Automotive Underseat/Trunk Grade)","dampingFactor":"> 180 @ 100 Hz","protectionCircuit":"Thermal Shutdown, Output Short-Circuit, DC Offset","dimensions":"185 x 115 x 42 mm","certifications":"ISO 9001:2015, E-Mark, CE"}',
   'amplifier', 1, 50
 ),
+
+-- ── 5. SUBWOOFER ──────────────────────────────────────────────────────────────
 (
-  'GPT-AMP11000 MONO', 'audio', 'Subwoofer Master', 'red',
+  'GPT-AMP11000 MONO', 'subwoofer', 'Subwoofer Master', 'red',
   'Amplifier Monoblock Subwoofer 1000W RMS Kelas-D',
   'Monoblock 1000W RMS Class-D Subwoofer Power Amplifier',
   'Penguat monoblock bertenaga 1000W RMS @ 1Ω untuk sistem subwoofer kabin mobil dengan kontrol subsonic filter, remote bass knob, dan efisiensi catu daya PWM MOSFET ganda.',
@@ -97,9 +116,9 @@ VALUES
   'amplifier', 1, 60
 ),
 
--- ── DASHCAM ──────────────────────────────────────────────────────────────────
+-- ── 6. DASH CAMERA RECORDERS ──────────────────────────────────────────────────
 (
-  'GPT-DVR4K PRO ADAS', 'dashcam', 'Vision & Safety', 'teal',
+  'GPT-DVR4K PRO ADAS', 'dash_camera_recorders', 'Vision & Safety', 'teal',
   'Dashcam Dual-Channel 4K UHD Sensor Sony STARVIS™ 2',
   'Dual-Channel 4K UHD Dashcam with Sony STARVIS™ 2 & ADAS',
   'Kamera pengawas berkendara sensor Sony STARVIS 2 IMX678 dengan resolusi 4K sejati, algoritma ADAS (peringatan tabrakan depan & keluar jalur), serta superkapasitor tahan panas tropis.',
@@ -109,7 +128,7 @@ VALUES
   'dashcam', 1, 70
 ),
 (
-  'GPT-BSM240 RADAR', 'dashcam', 'ADAS Sensor', 'purple',
+  'GPT-BSM240 RADAR', 'dash_camera_recorders', 'ADAS Sensor', 'purple',
   'Sistem Radar Blind Spot Detection 77GHz Otomotif',
   'Automotive 77GHz Millimeter-Wave Blind Spot Detection System',
   'Modul sensor radar gelombang milimeter 77GHz untuk pemantauan titik buta (BSD), bantuan pindah lajur (LCA), dan peringatan lalu lintas lintas belakang (RCTA) dengan akurasi segala cuaca.',
@@ -119,7 +138,7 @@ VALUES
   'dashcam', 1, 80
 ),
 
--- ── AUTOMATION ───────────────────────────────────────────────────────────────
+-- ── 7. AUTOMATION ─────────────────────────────────────────────────────────────
 (
   'GPT-JIG4000 AUTO', 'automation', 'Turnkey Solution', 'blue',
   'Jig Uji Otomatis Multi-Stasiun ICT & FCT Terintegrasi PLC',
@@ -140,10 +159,8 @@ VALUES
   '{"continuityThreshold":"0.1Ω - 100Ω Programmable","insulationResistance":"1MΩ - 500MΩ @ 500V/1000V DC","clampingMechanism":"Pneumatic Quick-Lock Connector Blocks","traceability":"Pass/Fail Barcode Label Printing Integration","certifications":"ISO 9001:2015, CE"}',
   'automation', 1, 100
 ),
-
--- ── EMS ──────────────────────────────────────────────────────────────────────
 (
-  'GPT-SMT-BOX TURNKEY', 'ems', 'FTZ Manufacturing', 'purple',
+  'GPT-SMT-BOX TURNKEY', 'automation', 'FTZ Manufacturing', 'purple',
   'Layanan Kontrak Manufaktur EMS SMT Presisi & Perakitan Box-Build',
   'High-Precision SMT & Box-Build EMS Contract Manufacturing',
   'Fasilitas manufaktur EMS kontrak lengkap di Batam FTZ: lini SMT kecepatan tinggi Panasonic/Yamaha (80K CPH), inspeksi 3D SPI/AOI, pelapisan konformal, hingga perakitan produk jadi siap ekspor.',
@@ -151,14 +168,4 @@ VALUES
   '[{"label":"Placement Speed","value":"Up to 80,000 Components / Hour per Line"},{"label":"Micro Capability","value":"01005 (0402 Metric) Chips & 0.3mm BGA Pitch"},{"label":"Reflow Process","value":"10-Zone Nitrogen (N2) Convection Oven"},{"label":"Cleanroom","value":"Class 100K ESD Protected Workshop"}]',
   '{"pcbSizeRange":"50 x 50 mm to 510 x 460 mm (Up to 16 Layers)","componentHeight":"Up to 25 mm with 3D Component Verification","solderPasteInspection":"Koh Young 3D SPI Inline Closed-Loop Inspection","opticalInspection":"Mirtec 3D AOI (100% Component & Joint Check)","conformalCoating":"Automated Selective Spray & UV Curing Oven","certifications":"ISO 9001:2015, IATF 16949 Process Compliant, ANSI/ESD S20.20"}',
   'ems', 1, 110
-),
-(
-  'GPT-BMS-48V ECU', 'ems', 'EV & Mobility', 'teal',
-  'PCBA Modul Battery Management System (BMS) 48V Otomotif EV',
-  'Automotive 48V EV Battery Management System (BMS) PCBA Module',
-  'Perakitan papan sirkuit PCBA BMS 48V densitas tinggi untuk kendaraan listrik ringan dan modul baterai otomotif, dilengkapi monitoring tegangan sel presisi tinggi dan komunikasi CAN-Bus 2.0B.',
-  'High-density 48V automotive BMS PCBA module for light electric vehicles and energy storage, featuring precision cell voltage monitoring and CAN-Bus 2.0B.',
-  '[{"label":"Voltage Range","value":"12S - 16S Li-Ion / LiFePO4 (36V - 60V DC)"},{"label":"Continuous Current","value":"100A Continuous / 250A Peak Discharge"},{"label":"Cell Accuracy","value":"±1.5 mV Precision Cell Voltage Telemetry"},{"label":"Communication","value":"Isolated CAN-Bus 2.0B, RS485, UART"}]',
-  '{"balancingCurrent":"150 mA Passive Cell Balancing per Channel","temperatureSensors":"4x External NTC Thermistors for Pack Health","protectionLevels":"Over/Under Voltage, Over Current, Short Circuit, Overtemp","pcbConstruction":"4-Layer 2oz Heavy Copper with Conformal Coating","certifications":"ISO 26262 ASIL-B Ready, UN38.3, RoHS"}',
-  'ems', 1, 120
 );

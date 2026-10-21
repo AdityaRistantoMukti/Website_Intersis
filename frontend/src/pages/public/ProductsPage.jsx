@@ -21,7 +21,17 @@ export const normalizeCategory = (catKey) => {
     dashcam: 'dash_camera_recorders',
     ems: 'automation',
   };
-  return legacyMap[catKey] || catKey;
+  const valid = [
+    'automation',
+    'mobile_intelligent_device',
+    'amplifier',
+    'subwoofer',
+    'dsp',
+    'android_headunit',
+    'dash_camera_recorders',
+  ];
+  const mapped = legacyMap[catKey] || catKey;
+  return valid.includes(mapped) ? mapped : 'automation';
 };
 
 /**
@@ -265,10 +275,27 @@ export default function ProductsPage() {
       { key: 'dash_camera_recorders',     label: t('products:catalog.categories.dash_camera_recorders') || 'Dash Camera Recorders' },
     ];
 
+    const legacyTitleMap = {
+      'headunit': 'Android Headunit',
+      'headunit / infotainment': 'Android Headunit',
+      'infotainment': 'Android Headunit',
+      'audio': 'Amplifier',
+      'audio dsp & amplifier': 'Amplifier',
+      'dashcam': 'Dash Camera Recorders',
+      'dashcam & adas safety': 'Dash Camera Recorders',
+      'automation & test jigs': 'Automation',
+      'ems': 'Automation',
+      'ems / contract manufacturing': 'Automation',
+    };
+
     if (Array.isArray(catSettings) && catSettings.length > 0) {
       return defaultList.map(item => {
-        const found = catSettings.find(c => c.key === item.key);
-        return found ? { ...item, label: found.name || item.label } : item;
+        const found = catSettings.find(c => normalizeCategory(c.key) === item.key);
+        if (!found) return item;
+        const rawName = (found.name || '').trim();
+        const lowerRaw = rawName.toLowerCase();
+        const cleanName = legacyTitleMap[lowerRaw] || rawName || item.label;
+        return { ...item, label: cleanName };
       });
     }
 
@@ -619,7 +646,7 @@ export default function ProductsPage() {
                 className="btn btn--outline prod-empty-state__btn"
                 onClick={handleResetFilters}
               >
-                {isId ? 'Tampilkan Semua Produk' : 'Show All Products'}
+                {isId ? 'Reset Filter' : 'Reset Filter'}
               </button>
             </div>
           ) : viewMode === 'grid' ? (
@@ -736,7 +763,7 @@ export default function ProductsPage() {
                   <tbody>
                     {filteredProducts.map((prod) => {
                       const title = prod.title[isId ? 'id' : 'en'] || prod.title.en;
-                      const catObj = categories.find(c => c.key === prod.category);
+                      const catObj = categories.find(c => c.key === normalizeCategory(prod.category));
                       const isCopied = copiedId === prod.id;
 
                       return (

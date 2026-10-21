@@ -22,6 +22,8 @@ import {
   BookOpen,
   HelpCircle,
   AlertTriangle,
+  Zap,
+  Key,
 } from 'lucide-react';
 import api, { extractErrorMessage } from '../../../lib/api';
 import { translateContent } from '../../../lib/translator';
@@ -102,6 +104,9 @@ export default function ContactModule() {
   // ─── 3. EMAIL NOTIFICATION & SMTP CONFIG STATE ───
   const [emailSettings, setEmailSettings] = useState({
     enabled: true,
+    provider: 'resend',
+    resend_api_key: '',
+    resend_from: 'PT. Global Philsonic Technologies <onboarding@resend.dev>',
     smtp_host: '',
     smtp_port: 587,
     smtp_secure: false,
@@ -117,6 +122,7 @@ export default function ContactModule() {
     auto_reply_footer_note: 'Jika Anda memiliki lampiran berkas teknis (Gerber Files, BOM, diagram 3D CAD), Anda dapat langsung membalas email ini dengan melampirkan dokumen terkait agar kami dapat mempercepat penyusunan estimasi biaya (Cost Estimation).',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showResendApiKey, setShowResendApiKey] = useState(false);
   const [testEmailAddress, setTestEmailAddress] = useState('');
   const [testingEmail, setTestingEmail] = useState(false);
   const [testResult, setTestResult] = useState(null);
@@ -184,6 +190,7 @@ export default function ContactModule() {
             setEmailSettings((prev) => ({
               ...prev,
               ...es,
+              provider: es.provider || (es.resend_api_key ? 'resend' : 'resend'),
             }));
             if (es.notify_emails && !testEmailAddress) {
               setTestEmailAddress(es.notify_emails.split(',')[0].trim());
@@ -231,8 +238,18 @@ export default function ContactModule() {
   const handleSaveEmailSettings = async () => {
     setSavingKey('email_smtp_settings');
     try {
-      await api.put('/admin/site-settings/email_smtp_settings', emailSettings);
-      addToast('Pengaturan notifikasi email dan SMTP berhasil disimpan!', 'success');
+      const sanitizedSettings = {
+        ...emailSettings,
+        provider: emailSettings.provider || 'resend',
+        resend_api_key: (emailSettings.resend_api_key || '').trim(),
+        resend_from: (emailSettings.resend_from || '').trim(),
+        smtp_pass: (emailSettings.smtp_pass || '').replace(/\s+/g, ''),
+        smtp_user: (emailSettings.smtp_user || '').trim(),
+        smtp_host: (emailSettings.smtp_host || '').trim(),
+      };
+      await api.put('/admin/site-settings/email_smtp_settings', sanitizedSettings);
+      setEmailSettings(sanitizedSettings);
+      addToast('Pengaturan notifikasi email dan provider berhasil disimpan!', 'success');
     } catch (err) {
       addToast(extractErrorMessage(err), 'error');
     } finally {
@@ -249,10 +266,19 @@ export default function ContactModule() {
     setTestingEmail(true);
     setTestResult(null);
     try {
+      const sanitizedConfig = {
+        ...emailSettings,
+        provider: emailSettings.provider || 'resend',
+        resend_api_key: (emailSettings.resend_api_key || '').trim(),
+        resend_from: (emailSettings.resend_from || '').trim(),
+        smtp_pass: (emailSettings.smtp_pass || '').replace(/\s+/g, ''),
+        smtp_user: (emailSettings.smtp_user || '').trim(),
+        smtp_host: (emailSettings.smtp_host || '').trim(),
+      };
       const res = await api.post('/admin/email/test', {
         targetEmail: testEmailAddress.trim(),
-        config: emailSettings,
-      });
+        config: sanitizedConfig,
+      }, { timeout: 25000 });
       setTestResult({
         success: true,
         message: res.data?.message || 'Email uji coba berhasil dikirimkan!',
@@ -977,134 +1003,383 @@ export default function ContactModule() {
                 </span>
               </div>
 
-              {/* SMTP Credentials Form */}
+              {/* Email Provider Selector & Credentials Form */}
               <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--adm-border)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: '0.75rem' }}>
-                  <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)', margin: 0 }}>
-                    Konfigurasi Server SMTP Pengirim
-                  </h4>
-                  <button
-                    type="button"
-                    onClick={() => setShowSmtpGuideModal(true)}
-                    className="admin-btn admin-btn-secondary"
+                <label className="admin-label" style={{ marginBottom: 8, display: 'block' }}>
+                  Penyedia Layanan Pengiriman Email (Provider Engine)
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.85rem', marginBottom: '1.25rem' }}>
+                  {/* Resend HTTPS API Option */}
+                  <div
+                    onClick={() => setEmailSettings({ ...emailSettings, provider: 'resend' })}
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      fontSize: '0.8rem',
-                      padding: '5px 12px',
-                      color: 'var(--adm-text)',
-                      border: '1.5px solid var(--adm-border-visible)',
-                      borderRadius: 6,
+                      border: emailSettings.provider === 'resend' ? '2px solid #0d9488' : '1.5px solid var(--adm-border-visible)',
+                      background: emailSettings.provider === 'resend' ? 'rgba(13, 148, 136, 0.08)' : 'var(--adm-card-inner)',
+                      borderRadius: 10,
+                      padding: '1rem',
                       cursor: 'pointer',
-                      fontWeight: 600,
+                      transition: 'all 0.2s',
+                      position: 'relative',
                     }}
-                    title="Buka panduan langkah demi langkah setup SMTP & tips pencegahan error"
                   >
-                    <BookOpen size={15} style={{ color: '#0d9488' }} />
-                    <span>Panduan Setup SMTP & Pencegahan Error</span>
-                  </button>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
-                  <div className="admin-form-group">
-                    <label className="admin-label">Host SMTP</label>
-                    <input
-                      type="text"
-                      className="admin-input"
-                      value={emailSettings.smtp_host || ''}
-                      onChange={(e) => setEmailSettings({ ...emailSettings, smtp_host: e.target.value })}
-                      placeholder="smtp.gmail.com atau mail.globalphilsonic.com"
-                    />
-                  </div>
-
-                  <div className="admin-form-group">
-                    <label className="admin-label">Port SMTP</label>
-                    <input
-                      type="number"
-                      className="admin-input"
-                      value={emailSettings.smtp_port || 587}
-                      onChange={(e) => setEmailSettings({ ...emailSettings, smtp_port: parseInt(e.target.value, 10) || 587 })}
-                      placeholder="587 atau 465"
-                    />
-                  </div>
-
-                  <div className="admin-form-group">
-                    <label className="admin-label">Username / Akun Email SMTP</label>
-                    <input
-                      type="text"
-                      className="admin-input"
-                      value={emailSettings.smtp_user || ''}
-                      onChange={(e) => setEmailSettings({ ...emailSettings, smtp_user: e.target.value })}
-                      placeholder="sales@globalphilsonic.com"
-                    />
-                  </div>
-
-                  <div className="admin-form-group">
-                    <label className="admin-label">Password SMTP / App Password</label>
-                    <div style={{ position: 'relative' }}>
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        className="admin-input"
-                        value={emailSettings.smtp_pass || ''}
-                        onChange={(e) => setEmailSettings({ ...emailSettings, smtp_pass: e.target.value })}
-                        placeholder="••••••••••••"
-                        style={{ paddingRight: 40 }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <div
+                          style={{
+                            width: 28,
+                            height: 28,
+                            borderRadius: '50%',
+                            background: '#0d9488',
+                            color: '#ffffff',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <Zap size={16} />
+                        </div>
+                        <div style={{ fontWeight: 700, color: 'var(--adm-text)', fontSize: '0.92rem' }}>
+                          Resend HTTPS API
+                        </div>
+                      </div>
+                      <span
                         style={{
-                          position: 'absolute',
-                          right: 10,
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          background: 'none',
-                          border: 'none',
-                          color: 'var(--adm-muted)',
-                          cursor: 'pointer',
+                          fontSize: '0.7rem',
+                          background: '#0d9488',
+                          color: '#ffffff',
+                          fontWeight: 700,
+                          padding: '2px 8px',
+                          borderRadius: 12,
                         }}
                       >
-                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                      </button>
+                        Rekomendasi Cloud
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--adm-muted)', lineHeight: 1.4 }}>
+                      Menggunakan REST API resmi (Port 443). Kebal blokir firewall Railway / Vercel, instan tanpa timeout. Kuota gratis 3.000 email/bulan.
+                    </p>
+                  </div>
+
+                  {/* Traditional SMTP Option */}
+                  <div
+                    onClick={() => setEmailSettings({ ...emailSettings, provider: 'smtp' })}
+                    style={{
+                      border: emailSettings.provider === 'smtp' ? '2px solid #0d9488' : '1.5px solid var(--adm-border-visible)',
+                      background: emailSettings.provider === 'smtp' ? 'rgba(13, 148, 136, 0.08)' : 'var(--adm-card-inner)',
+                      borderRadius: 10,
+                      padding: '1rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      position: 'relative',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <div
+                          style={{
+                            width: 28,
+                            height: 28,
+                            borderRadius: '50%',
+                            background: '#64748b',
+                            color: '#ffffff',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <Mail size={16} />
+                        </div>
+                        <div style={{ fontWeight: 700, color: 'var(--adm-text)', fontSize: '0.92rem' }}>
+                          SMTP Konvensional
+                        </div>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: '0.7rem',
+                          background: 'rgba(100, 116, 139, 0.2)',
+                          color: 'var(--adm-text)',
+                          fontWeight: 600,
+                          padding: '2px 8px',
+                          borderRadius: 12,
+                        }}
+                      >
+                        Port 465 / 587
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--adm-muted)', lineHeight: 1.4 }}>
+                      Koneksi soket TCP langsung (Google App Password / cPanel). Berisiko timeout jika port keluar diblokir hosting cloud.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Sub-form 1: Resend HTTPS API Configuration */}
+                {emailSettings.provider === 'resend' ? (
+                  <div
+                    style={{
+                      background: 'var(--adm-card-inner)',
+                      border: '1.5px solid var(--adm-border-visible)',
+                      borderRadius: 10,
+                      padding: '1.25rem',
+                      marginBottom: '1rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: '1rem' }}>
+                      <div>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--adm-text)', margin: 0 }}>
+                          Konfigurasi Kredensial Resend API
+                        </h4>
+                        <p style={{ margin: '3px 0 0', fontSize: '0.78rem', color: 'var(--adm-muted)' }}>
+                          Pengiriman email dilakukan via HTTPS Port 443 sehingga 100% aman dan lancar di server Railway & Vercel.
+                        </p>
+                      </div>
+                      <a
+                        href="https://resend.com/api-keys"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="admin-btn admin-btn-secondary"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          fontSize: '0.8rem',
+                          padding: '6px 12px',
+                          textDecoration: 'none',
+                          fontWeight: 600,
+                        }}
+                      >
+                        <ExternalLink size={14} style={{ color: '#0d9488' }} />
+                        <span>Dapatkan API Key di Resend.com</span>
+                      </a>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                      <div className="admin-form-group">
+                        <label className="admin-label">
+                          Resend API Key <span style={{ color: '#ef4444' }}>*</span>
+                        </label>
+                        <div style={{ position: 'relative' }}>
+                          <input
+                            type={showResendApiKey ? 'text' : 'password'}
+                            className="admin-input"
+                            value={emailSettings.resend_api_key || ''}
+                            onChange={(e) => setEmailSettings({ ...emailSettings, resend_api_key: e.target.value })}
+                            placeholder="re_123456789_abcdefghijklmnopqrstuvwxyz"
+                            style={{ paddingRight: 40, fontFamily: 'monospace' }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowResendApiKey(!showResendApiKey)}
+                            style={{
+                              position: 'absolute',
+                              right: 10,
+                              top: '50%',
+                              transform: 'translateY(-50%)',
+                              background: 'none',
+                              border: 'none',
+                              color: 'var(--adm-muted)',
+                              cursor: 'pointer',
+                            }}
+                          >
+                            {showResendApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                          </button>
+                        </div>
+                        <span style={{ fontSize: '0.73rem', color: 'var(--adm-muted)', marginTop: 4, display: 'block' }}>
+                          Awali dengan <code>re_</code>. Buat API Key baru di dashboard Resend &amp; beri hak akses &apos;Full Access&apos;.
+                        </span>
+                      </div>
+
+                      <div className="admin-form-group">
+                        <label className="admin-label">Email Pengirim (Sender From)</label>
+                        <input
+                          type="text"
+                          className="admin-input"
+                          value={emailSettings.resend_from || 'PT. Global Philsonic Technologies <onboarding@resend.dev>'}
+                          onChange={(e) => setEmailSettings({ ...emailSettings, resend_from: e.target.value })}
+                          placeholder="PT. Global Philsonic Technologies <onboarding@resend.dev>"
+                        />
+                        <span style={{ fontSize: '0.73rem', color: 'var(--adm-muted)', marginTop: 4, display: 'block' }}>
+                          Default akun baru: <code>PT. Global Philsonic Technologies &lt;onboarding@resend.dev&gt;</code>. Atau gunakan email domain Anda jika sudah diverifikasi di Resend.
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style={{ marginTop: '0.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                      <div className="admin-form-group" style={{ marginBottom: 0 }}>
+                        <label className="admin-label">Nama Pengirim Tampilan</label>
+                        <input
+                          type="text"
+                          className="admin-input"
+                          value={emailSettings.sender_name || ''}
+                          onChange={(e) => setEmailSettings({ ...emailSettings, sender_name: e.target.value })}
+                          placeholder="PT. Global Philsonic Technologies"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Panduan Ringkas Resend */}
+                    <div
+                      style={{
+                        marginTop: '1rem',
+                        padding: '0.85rem 1rem',
+                        background: 'rgba(13, 148, 136, 0.05)',
+                        border: '1px solid rgba(13, 148, 136, 0.3)',
+                        borderRadius: 8,
+                        fontSize: '0.8rem',
+                        color: 'var(--adm-text)',
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      <strong>Tips Pengujian Cepat:</strong> Dengan domain gratis <code>onboarding@resend.dev</code>, Resend mengizinkan pengiriman email ke alamat email yang Anda pakai saat mendaftar akun di Resend. Masukkan email akun Resend Anda pada kolom uji coba di bawah untuk melakukan live test.
                     </div>
                   </div>
-                </div>
+                ) : (
+                  /* Sub-form 2: SMTP Configuration */
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: '0.75rem' }}>
+                      <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--adm-text)', margin: 0 }}>
+                        Konfigurasi Server SMTP Pengirim
+                      </h4>
+                      <button
+                        type="button"
+                        onClick={() => setShowSmtpGuideModal(true)}
+                        className="admin-btn admin-btn-secondary"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          fontSize: '0.8rem',
+                          padding: '5px 12px',
+                          color: 'var(--adm-text)',
+                          border: '1.5px solid var(--adm-border-visible)',
+                          borderRadius: 6,
+                          cursor: 'pointer',
+                          fontWeight: 600,
+                        }}
+                        title="Buka panduan langkah demi langkah setup SMTP & tips pencegahan error"
+                      >
+                        <BookOpen size={15} style={{ color: '#0d9488' }} />
+                        <span>Panduan Setup SMTP & Pencegahan Error</span>
+                      </button>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                      <div className="admin-form-group">
+                        <label className="admin-label">Host SMTP</label>
+                        <input
+                          type="text"
+                          className="admin-input"
+                          value={emailSettings.smtp_host || ''}
+                          onChange={(e) => setEmailSettings({ ...emailSettings, smtp_host: e.target.value })}
+                          placeholder="smtp.gmail.com atau mail.globalphilsonic.com"
+                        />
+                      </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
-                  <div className="admin-form-group">
-                    <label className="admin-label">Nama Pengirim Tampilan</label>
-                    <input
-                      type="text"
-                      className="admin-input"
-                      value={emailSettings.sender_name || ''}
-                      onChange={(e) => setEmailSettings({ ...emailSettings, sender_name: e.target.value })}
-                      placeholder="PT. Global Philsonic Technologies"
-                    />
-                  </div>
+                      <div className="admin-form-group">
+                        <label className="admin-label">Port SMTP</label>
+                        <input
+                          type="number"
+                          className="admin-input"
+                          value={emailSettings.smtp_port || 587}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value, 10) || 587;
+                            setEmailSettings({
+                              ...emailSettings,
+                              smtp_port: val,
+                              smtp_secure: val === 465 ? true : (val === 587 ? false : emailSettings.smtp_secure),
+                            });
+                          }}
+                          placeholder="587 atau 465"
+                        />
+                        <span style={{ fontSize: '0.73rem', color: '#0d9488', marginTop: 3, display: 'block' }}>
+                          Rekomendasi Vercel/Cloud: <strong>Port 465</strong> (SSL)
+                        </span>
+                      </div>
 
-                  <div className="admin-form-group">
-                    <label className="admin-label">Email Pengirim Tampilan</label>
-                    <input
-                      type="email"
-                      className="admin-input"
-                      value={emailSettings.sender_email || ''}
-                      onChange={(e) => setEmailSettings({ ...emailSettings, sender_email: e.target.value })}
-                      placeholder="noreply@globalphilsonic.com"
-                    />
-                  </div>
+                      <div className="admin-form-group">
+                        <label className="admin-label">Username / Akun Email SMTP</label>
+                        <input
+                          type="text"
+                          className="admin-input"
+                          value={emailSettings.smtp_user || ''}
+                          onChange={(e) => setEmailSettings({ ...emailSettings, smtp_user: e.target.value })}
+                          placeholder="sales@globalphilsonic.com"
+                        />
+                      </div>
 
-                  <div className="admin-form-group" style={{ display: 'flex', alignItems: 'center', marginTop: 24 }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: '0.85rem', color: 'var(--adm-text)' }}>
-                      <input
-                        type="checkbox"
-                        checked={emailSettings.smtp_secure}
-                        onChange={(e) => setEmailSettings({ ...emailSettings, smtp_secure: e.target.checked })}
-                        style={{ width: 16, height: 16 }}
-                      />
-                      <span>Gunakan SSL/TLS Secure (Port 465)</span>
-                    </label>
+                      <div className="admin-form-group">
+                        <label className="admin-label">Password SMTP / App Password</label>
+                        <div style={{ position: 'relative' }}>
+                          <input
+                            type={showPassword ? 'text' : 'password'}
+                            className="admin-input"
+                            value={emailSettings.smtp_pass || ''}
+                            onChange={(e) => setEmailSettings({ ...emailSettings, smtp_pass: e.target.value })}
+                            placeholder="••••••••••••"
+                            style={{ paddingRight: 40 }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{
+                              position: 'absolute',
+                              right: 10,
+                              top: '50%',
+                              transform: 'translateY(-50%)',
+                              background: 'none',
+                              border: 'none',
+                              color: 'var(--adm-muted)',
+                              cursor: 'pointer',
+                            }}
+                          >
+                            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
+                      <div className="admin-form-group">
+                        <label className="admin-label">Nama Pengirim Tampilan</label>
+                        <input
+                          type="text"
+                          className="admin-input"
+                          value={emailSettings.sender_name || ''}
+                          onChange={(e) => setEmailSettings({ ...emailSettings, sender_name: e.target.value })}
+                          placeholder="PT. Global Philsonic Technologies"
+                        />
+                      </div>
+
+                      <div className="admin-form-group">
+                        <label className="admin-label">Email Pengirim Tampilan</label>
+                        <input
+                          type="email"
+                          className="admin-input"
+                          value={emailSettings.sender_email || ''}
+                          onChange={(e) => setEmailSettings({ ...emailSettings, sender_email: e.target.value })}
+                          placeholder="noreply@globalphilsonic.com"
+                        />
+                      </div>
+
+                      <div className="admin-form-group" style={{ display: 'flex', alignItems: 'center', marginTop: 24 }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: '0.85rem', color: 'var(--adm-text)' }}>
+                          <input
+                            type="checkbox"
+                            checked={emailSettings.smtp_secure}
+                            onChange={(e) => {
+                              const checked = e.target.checked;
+                              setEmailSettings({
+                                ...emailSettings,
+                                smtp_secure: checked,
+                                smtp_port: checked && emailSettings.smtp_port === 587 ? 465 : (!checked && emailSettings.smtp_port === 465 ? 587 : emailSettings.smtp_port),
+                              });
+                            }}
+                            style={{ width: 16, height: 16 }}
+                          />
+                          <span>Gunakan SSL/TLS Secure (Port 465)</span>
+                        </label>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {/* ── KUSTOMISASI KATA-KATA AUTO-REPLY KE KLIEN ── */}

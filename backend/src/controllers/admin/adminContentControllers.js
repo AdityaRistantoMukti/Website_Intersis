@@ -472,13 +472,26 @@ const getAdminProducts = async (req, res, next) => {
       dashcam: 'dash_camera_recorders',
       ems: 'automation',
     };
-    const parsed = rows.map(row => ({
-      ...row,
-      category:   legacyMap[row.category] || row.category || 'automation',
-      specs:      row.specs      ? (typeof row.specs      === 'string' ? JSON.parse(row.specs)      : row.specs)      : [],
-      full_specs: row.full_specs ? (typeof row.full_specs === 'string' ? JSON.parse(row.full_specs) : row.full_specs) : {},
-      gallery:    row.gallery    ? (typeof row.gallery    === 'string' ? JSON.parse(row.gallery)    : row.gallery)    : [],
-    }));
+    const validCategories = [
+      'automation',
+      'mobile_intelligent_device',
+      'amplifier',
+      'subwoofer',
+      'dsp',
+      'android_headunit',
+      'dash_camera_recorders',
+    ];
+    const parsed = rows.map(row => {
+      const mapped = legacyMap[row.category] || row.category || 'automation';
+      const cleanCat = validCategories.includes(mapped) ? mapped : 'automation';
+      return {
+        ...row,
+        category:   cleanCat,
+        specs:      row.specs      ? (typeof row.specs      === 'string' ? JSON.parse(row.specs)      : row.specs)      : [],
+        full_specs: row.full_specs ? (typeof row.full_specs === 'string' ? JSON.parse(row.full_specs) : row.full_specs) : {},
+        gallery:    row.gallery    ? (typeof row.gallery    === 'string' ? JSON.parse(row.gallery)    : row.gallery)    : [],
+      };
+    });
     return success(res, 'Daftar produk berhasil diambil.', parsed);
   } catch (err) { next(err); }
 };
@@ -534,7 +547,19 @@ const createProduct = async (req, res, next) => {
       dashcam: 'dash_camera_recorders',
       ems: 'automation',
     };
-    const cleanCategory = legacyCatMap[category] || category || 'automation';
+    const validCategories = [
+      'automation',
+      'mobile_intelligent_device',
+      'amplifier',
+      'subwoofer',
+      'dsp',
+      'android_headunit',
+      'dash_camera_recorders',
+    ];
+    let cleanCategory = legacyCatMap[category] || category || 'automation';
+    if (!validCategories.includes(cleanCategory)) {
+      cleanCategory = 'automation';
+    }
 
     const [result] = await pool.execute(
       `INSERT INTO products
@@ -596,14 +621,10 @@ const updateProduct = async (req, res, next) => {
       fullSpecsJson = typeof full_specs === 'string' ? full_specs : JSON.stringify(full_specs);
     }
 
-    const legacyCatMap = {
-      headunit: 'android_headunit',
-      infotainment: 'android_headunit',
-      audio: 'amplifier',
-      dashcam: 'dash_camera_recorders',
-      ems: 'automation',
-    };
-    const cleanCategory = legacyCatMap[category] || category || 'automation';
+    let cleanCategory = legacyCatMap[category] || category || 'automation';
+    if (!validCategories.includes(cleanCategory)) {
+      cleanCategory = 'automation';
+    }
 
     let extraUpdates = '';
     let params = [

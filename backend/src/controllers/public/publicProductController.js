@@ -10,7 +10,17 @@ const normalizeCategory = (cat) => {
     dashcam: 'dash_camera_recorders',
     ems: 'automation',
   };
-  return legacyMap[cat] || cat;
+  const valid = [
+    'automation',
+    'mobile_intelligent_device',
+    'amplifier',
+    'subwoofer',
+    'dsp',
+    'android_headunit',
+    'dash_camera_recorders',
+  ];
+  const mapped = legacyMap[cat] || cat;
+  return valid.includes(mapped) ? mapped : 'automation';
 };
 
 /**

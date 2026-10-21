@@ -4,218 +4,309 @@
   <meta charset="UTF-8">
   <title>Unit 03 - Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia</title>
   <style>
-    @page {
-      size: A4 portrait;
-      margin: 20mm 18mm 20mm 18mm;
-    }
-    * {
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    body {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-size: 10pt;
-      line-height: 1.5;
-      color: #000000;
-      background: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    .doc-header {
-      border-top: 2px solid #000000;
-      border-bottom: 1px solid #000000;
-      padding: 5px 0;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #000000;
-    }
-    .title-banner {
-      border-left: 3px solid #000000;
-      padding-left: 12px;
-      margin-bottom: 14px;
-    }
-    .unit-title-num {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #000000;
-      margin-bottom: 3px;
-    }
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14pt;
-      font-weight: bold;
-      color: #000000;
-      margin: 0;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
-    .meta-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-    }
-    .meta-table td {
-      padding: 4px 8px;
-      border: 1px solid #000000;
-      color: #000000;
-    }
-    .meta-table td.lbl {
-      font-weight: bold;
-      background: #f0f0f0;
-      width: 20%;
-    }
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10.5pt;
-      font-weight: bold;
-      color: #000000;
-      border-bottom: 1px solid #000000;
-      padding-bottom: 3px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      page-break-after: avoid;
-      text-transform: uppercase;
-    }
-    h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-top: 12px;
-      margin-bottom: 4px;
-      page-break-after: avoid;
-    }
-    p {
-      margin: 0 0 6px 0;
-      text-align: justify;
-    }
-    ul, ol {
-      margin: 0 0 8px 0;
-      padding-left: 18px;
-    }
-    li {
-      margin-bottom: 3px;
-      text-align: justify;
-    }
-    .meta-file {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      margin-bottom: 6px;
-      color: #000000;
-    }
-    .meta-file code {
-      font-weight: bold;
-    }
-    .table-custom {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 8px 0 12px 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      page-break-inside: avoid;
-    }
-    .table-custom th {
-      background: #e5e5e5;
-      color: #000000;
-      padding: 5px 6px;
-      text-align: left;
-      border: 1px solid #000000;
-      font-weight: bold;
-    }
-    .table-custom td {
-      padding: 4px 6px;
-      border: 1px solid #000000;
-      vertical-align: top;
-      color: #000000;
-    }
-    .sub-section-block {
-      border: 1px solid #000000;
-      padding: 10px;
-      margin-bottom: 12px;
-      background: #ffffff;
-    }
-    .diagram-wrapper {
-      border: 1px solid #000000;
-      background: #ffffff;
-      padding: 8px;
-      margin: 8px 0;
-      page-break-inside: avoid;
-    }
-    .diagram-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      color: #000000;
-    }
-    .code-wrapper {
-      margin: 8px 0 4px 0;
-    }
-    .code-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 3px;
-      color: #000000;
-    }
-    .code-box {
-      background: #f9f9f9;
-      color: #000000;
-      border: 1px solid #000000;
-      padding: 6px 8px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 7.2pt;
-      line-height: 1.35;
-      page-break-inside: avoid;
-      text-align: left;
-    }
-    .code-box .file-tag {
-      font-weight: bold;
-      border-bottom: 1px solid #cccccc;
-      padding-bottom: 2px;
-      margin-bottom: 4px;
-      display: block;
-      color: #333333;
-    }
-    .code-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-    .conclusion-box {
-      border: 1px solid #000000;
-      background: #f5f5f5;
-      padding: 8px 10px;
-      margin-top: 14px;
-      page-break-inside: avoid;
-    }
-    .conclusion-title {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-    .conclusion-box p {
-      font-size: 8.5pt;
-      color: #000000;
-      margin: 0;
-    }
-    .page-break {
-      page-break-after: always;
-    }
+    
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+  .title-banner {
+    border-left: 3px solid #000000;
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .unit-title-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 3px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .meta-table td.lbl {
+    font-weight: bold;
+    background: #f0f0f0;
+    width: 20%;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+  .meta-file {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin-bottom: 6px;
+    color: #000000;
+  }
+  .meta-file code {
+    font-weight: bold;
+  }
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .table-custom th {
+    background: #e5e5e5;
+    color: #000000;
+    padding: 5px 6px;
+    text-align: left;
+    border: 1px solid #000000;
+    font-weight: bold;
+  }
+  .table-custom td {
+    padding: 4px 6px;
+    border: 1px solid #000000;
+    vertical-align: top;
+    color: #000000;
+  }
+  .sub-section-block {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .diagram-wrapper {
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 8px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .code-wrapper {
+    margin: 8px 0 4px 0;
+    page-break-inside: avoid;
+  }
+  .code-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #000000;
+  }
+  
+  /* VS Code IDE Code Block Theme */
+  .vscode-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 4px 0 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .vscode-titlebar {
+    background: #252526;
+    border-bottom: 1px solid #333333;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vscode-dots {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .vsc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vsc-dot-red { background: #ff5f56; }
+  .vsc-dot-yellow { background: #ffbd2e; }
+  .vsc-dot-green { background: #27c93f; }
+  .vscode-tab {
+    display: inline-flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 3px 12px;
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid #007acc;
+    color: #ffffff;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+  }
+  .vscode-lang {
+    color: #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.8pt;
+    letter-spacing: 0.5px;
+  }
+  .vscode-body {
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.2pt;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .vscode-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #d4d4d4;
+  }
+
+  /* Architectural Sitemap / Tree Diagram Theme (Clean & Formal, Non-VSCode) */
+  .sitemap-tree-box {
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+  .sitemap-tree-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000000;
+    padding: 6px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitemap-tree-header-tag {
+    font-size: 7pt;
+    font-weight: normal;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #334155;
+    font-family: monospace;
+  }
+  .sitemap-tree-body {
+    padding: 10px 14px;
+    background: #fcfcfc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.45;
+    color: #111827;
+    text-align: left;
+  }
+  .sitemap-tree-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .conclusion-box {
+    border: 1px solid #000000;
+    background: #f5f5f5;
+    padding: 8px 10px;
+    margin-top: 14px;
+    page-break-inside: avoid;
+  }
+  .conclusion-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .conclusion-box p {
+    font-size: 8.5pt;
+    color: #000000;
+    margin: 0;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+
   </style>
 </head>
 <body>
@@ -329,18 +420,34 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">backend/package.json</span>
-            <pre>{
-  &quot;name&quot;: &quot;backend&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node src/server.js&quot;,
-    &quot;dev&quot;: &quot;nodemon src/server.js&quot;,
-    &quot;test&quot;: &quot;node test_api_runner.js&quot;
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>backend/package.json</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code>{
+  <span style="color:#ce9178;">&quot;name&quot;</span>: <span style="color:#ce9178;">&quot;backend&quot;</span>,
+  <span style="color:#ce9178;">&quot;version&quot;</span>: <span style="color:#ce9178;">&quot;1.0.0&quot;</span>,
+  <span style="color:#ce9178;">&quot;scripts&quot;</span>: {
+    <span style="color:#ce9178;">&quot;start&quot;</span>: <span style="color:#ce9178;">&quot;node src/server.js&quot;</span>,
+    <span style="color:#ce9178;">&quot;dev&quot;</span>: <span style="color:#ce9178;">&quot;nodemon src/server.js&quot;</span>,
+    <span style="color:#ce9178;">&quot;test&quot;</span>: <span style="color:#ce9178;">&quot;node test_api_runner.js&quot;</span>
   }
-}</pre>
+}</code></pre>
+            </div>
           </div>
         </div>
       
@@ -368,18 +475,34 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">backend/src/server.js</span>
-            <pre>// Aktivasi HTTP Traffic Logger &amp; Penanganan Error Terpusat
-if (process.env.NODE_ENV !== &#039;test&#039;) {
-  app.use(morgan(&#039;dev&#039;)); // Output: METHOD STATUS RES_TIME CONTENT_LENGTH
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>backend/src/server.js</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">// Aktivasi HTTP Traffic Logger &amp; Penanganan Error Terpusat</span>
+<span style="color:#569cd6;font-weight:bold;">if</span> (process.env.NODE_ENV !== <span style="color:#ce9178;">&#039;test&#039;</span>) {
+  app.<span style="color:#dcdcaa;">use</span>(<span style="color:#dcdcaa;">morgan</span>(<span style="color:#ce9178;">&#039;dev&#039;</span>)); <span style="color:#6a9955;font-style:italic;">// Output: METHOD STATUS RES_TIME CONTENT_LENGTH</span>
 }
 
-// Global Exception Handler: Menangkap Error Tak Terduga
-const { notFoundHandler, globalErrorHandler } = require(&#039;./middlewares/errorHandler&#039;);
-app.use(notFoundHandler);
-app.use(globalErrorHandler);</pre>
+<span style="color:#6a9955;font-style:italic;">// Global Exception Handler: Menangkap Error Tak Terduga</span>
+<span style="color:#569cd6;font-weight:bold;">const</span> { notFoundHandler, globalErrorHandler } = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;./middlewares/errorHandler&#039;</span>);
+app.<span style="color:#dcdcaa;">use</span>(notFoundHandler);
+app.<span style="color:#dcdcaa;">use</span>(globalErrorHandler);</code></pre>
+            </div>
           </div>
         </div>
       
@@ -407,50 +530,66 @@ app.use(globalErrorHandler);</pre>
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">backend/src/middlewares/uploadMiddleware.js</span>
-            <pre>const multer = require(&#039;multer&#039;);
-const path = require(&#039;path&#039;);
-const fs = require(&#039;fs&#039;);
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>backend/src/middlewares/uploadMiddleware.js</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#569cd6;font-weight:bold;">const</span> multer = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;multer&#039;</span>);
+<span style="color:#569cd6;font-weight:bold;">const</span> path = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;path&#039;</span>);
+<span style="color:#569cd6;font-weight:bold;">const</span> fs = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;fs&#039;</span>);
 
-const uploadDir = path.join(__dirname, &#039;../../uploads&#039;);
+<span style="color:#569cd6;font-weight:bold;">const</span> uploadDir = path.<span style="color:#dcdcaa;">join</span>(__dirname, <span style="color:#ce9178;">&#039;../../uploads&#039;</span>);
 
-const storage = multer.diskStorage({
+<span style="color:#569cd6;font-weight:bold;">const</span> storage = multer.<span style="color:#dcdcaa;">diskStorage</span>({
   destination: (req, file, cb) =&gt; {
-    const subFolder = req.body.folder || &#039;general&#039;;
-    const targetPath = path.join(uploadDir, subFolder);
-    if (!fs.existsSync(targetPath)) {
-      fs.mkdirSync(targetPath, { recursive: true });
+    <span style="color:#569cd6;font-weight:bold;">const</span> subFolder = req.body.folder || <span style="color:#ce9178;">&#039;general&#039;</span>;
+    <span style="color:#569cd6;font-weight:bold;">const</span> targetPath = path.<span style="color:#dcdcaa;">join</span>(uploadDir, subFolder);
+    <span style="color:#569cd6;font-weight:bold;">if</span> (!fs.<span style="color:#dcdcaa;">existsSync</span>(targetPath)) {
+      fs.<span style="color:#dcdcaa;">mkdirSync</span>(targetPath, { recursive: <span style="color:#569cd6;">true</span> });
     }
-    cb(null, targetPath);
+    <span style="color:#dcdcaa;">cb</span>(<span style="color:#569cd6;">null</span>, targetPath);
   },
   filename: (req, file, cb) =&gt; {
-    const uniqueSuffix = Date.now() + &#039;-&#039; + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname).toLowerCase();
-    const cleanName = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9]/g, &#039;_&#039;);
-    cb(null, `${cleanName}_${uniqueSuffix}${ext}`);
+    <span style="color:#569cd6;font-weight:bold;">const</span> uniqueSuffix = Date.<span style="color:#dcdcaa;">now</span>() + <span style="color:#ce9178;">&#039;-&#039;</span> + Math.<span style="color:#dcdcaa;">round</span>(Math.<span style="color:#dcdcaa;">random</span>() * 1e9);
+    <span style="color:#569cd6;font-weight:bold;">const</span> ext = path.<span style="color:#dcdcaa;">extname</span>(file.originalname).<span style="color:#dcdcaa;">toLowerCase</span>();
+    <span style="color:#569cd6;font-weight:bold;">const</span> cleanName = path.<span style="color:#dcdcaa;">basename</span>(file.originalname, ext).<span style="color:#dcdcaa;">replace</span>(/[^a-zA-Z0-<span style="color:#b5cea8;">9</span>]/g, <span style="color:#ce9178;">&#039;_&#039;</span>);
+    <span style="color:#dcdcaa;">cb</span>(<span style="color:#569cd6;">null</span>, <span style="color:#ce9178;">`${cleanName}_${uniqueSuffix}${ext}`</span>);
   },
 });
 
-const fileFilter = (req, file, cb) =&gt; {
-  const allowedTypes = /jpeg|jpg|png|webp|svg|ico/;
-  const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimeType = allowedTypes.test(file.mimetype) || file.mimetype === &#039;image/x-icon&#039;;
+<span style="color:#569cd6;font-weight:bold;">const</span> fileFilter = (req, file, cb) =&gt; {
+  <span style="color:#569cd6;font-weight:bold;">const</span> allowedTypes = /jpeg|jpg|png|webp|svg|ico/;
+  <span style="color:#569cd6;font-weight:bold;">const</span> extName = allowedTypes.<span style="color:#dcdcaa;">test</span>(path.<span style="color:#dcdcaa;">extname</span>(file.originalname).<span style="color:#dcdcaa;">toLowerCase</span>());
+  <span style="color:#569cd6;font-weight:bold;">const</span> mimeType = allowedTypes.<span style="color:#dcdcaa;">test</span>(file.mimetype) || file.mimetype === <span style="color:#ce9178;">&#039;image/x-icon&#039;</span>;
 
-  if (extName &amp;&amp; mimeType) {
-    return cb(null, true);
+  <span style="color:#569cd6;font-weight:bold;">if</span> (extName &amp;&amp; mimeType) {
+    <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">cb</span>(<span style="color:#569cd6;">null</span>, <span style="color:#569cd6;">true</span>);
   }
-  cb(new Error(&#039;Format file tidak didukung! Hanya file gambar (JPG, PNG, WEBP, SVG, ICO).&#039;));
+  <span style="color:#dcdcaa;">cb</span>(<span style="color:#569cd6;font-weight:bold;">new</span> <span style="color:#dcdcaa;">Error</span>(<span style="color:#ce9178;">&#039;Format file tidak didukung! Hanya file gambar (JPG, PNG, WEBP, SVG, ICO).&#039;</span>));
 };
 
-const upload = multer({
+<span style="color:#569cd6;font-weight:bold;">const</span> upload = <span style="color:#dcdcaa;">multer</span>({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Maksimal 5MB
+  limits: { fileSize: <span style="color:#b5cea8;">5</span> * <span style="color:#b5cea8;">1024</span> * <span style="color:#b5cea8;">1024</span> }, <span style="color:#6a9955;font-style:italic;">// Maksimal 5MB</span>
   fileFilter,
 });
 
-module.exports = upload;</pre>
+module.exports = upload;</code></pre>
+            </div>
           </div>
         </div>
       

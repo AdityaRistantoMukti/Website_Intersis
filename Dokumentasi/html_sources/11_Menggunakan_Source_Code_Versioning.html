@@ -4,218 +4,309 @@
   <meta charset="UTF-8">
   <title>Unit 11 - Menggunakan Source Code Versioning</title>
   <style>
-    @page {
-      size: A4 portrait;
-      margin: 20mm 18mm 20mm 18mm;
-    }
-    * {
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    body {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-size: 10pt;
-      line-height: 1.5;
-      color: #000000;
-      background: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    .doc-header {
-      border-top: 2px solid #000000;
-      border-bottom: 1px solid #000000;
-      padding: 5px 0;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #000000;
-    }
-    .title-banner {
-      border-left: 3px solid #000000;
-      padding-left: 12px;
-      margin-bottom: 14px;
-    }
-    .unit-title-num {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #000000;
-      margin-bottom: 3px;
-    }
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14pt;
-      font-weight: bold;
-      color: #000000;
-      margin: 0;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
-    .meta-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-    }
-    .meta-table td {
-      padding: 4px 8px;
-      border: 1px solid #000000;
-      color: #000000;
-    }
-    .meta-table td.lbl {
-      font-weight: bold;
-      background: #f0f0f0;
-      width: 20%;
-    }
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10.5pt;
-      font-weight: bold;
-      color: #000000;
-      border-bottom: 1px solid #000000;
-      padding-bottom: 3px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      page-break-after: avoid;
-      text-transform: uppercase;
-    }
-    h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-top: 12px;
-      margin-bottom: 4px;
-      page-break-after: avoid;
-    }
-    p {
-      margin: 0 0 6px 0;
-      text-align: justify;
-    }
-    ul, ol {
-      margin: 0 0 8px 0;
-      padding-left: 18px;
-    }
-    li {
-      margin-bottom: 3px;
-      text-align: justify;
-    }
-    .meta-file {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      margin-bottom: 6px;
-      color: #000000;
-    }
-    .meta-file code {
-      font-weight: bold;
-    }
-    .table-custom {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 8px 0 12px 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      page-break-inside: avoid;
-    }
-    .table-custom th {
-      background: #e5e5e5;
-      color: #000000;
-      padding: 5px 6px;
-      text-align: left;
-      border: 1px solid #000000;
-      font-weight: bold;
-    }
-    .table-custom td {
-      padding: 4px 6px;
-      border: 1px solid #000000;
-      vertical-align: top;
-      color: #000000;
-    }
-    .sub-section-block {
-      border: 1px solid #000000;
-      padding: 10px;
-      margin-bottom: 12px;
-      background: #ffffff;
-    }
-    .diagram-wrapper {
-      border: 1px solid #000000;
-      background: #ffffff;
-      padding: 8px;
-      margin: 8px 0;
-      page-break-inside: avoid;
-    }
-    .diagram-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      color: #000000;
-    }
-    .code-wrapper {
-      margin: 8px 0 4px 0;
-    }
-    .code-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 3px;
-      color: #000000;
-    }
-    .code-box {
-      background: #f9f9f9;
-      color: #000000;
-      border: 1px solid #000000;
-      padding: 6px 8px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 7.2pt;
-      line-height: 1.35;
-      page-break-inside: avoid;
-      text-align: left;
-    }
-    .code-box .file-tag {
-      font-weight: bold;
-      border-bottom: 1px solid #cccccc;
-      padding-bottom: 2px;
-      margin-bottom: 4px;
-      display: block;
-      color: #333333;
-    }
-    .code-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-    .conclusion-box {
-      border: 1px solid #000000;
-      background: #f5f5f5;
-      padding: 8px 10px;
-      margin-top: 14px;
-      page-break-inside: avoid;
-    }
-    .conclusion-title {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-    .conclusion-box p {
-      font-size: 8.5pt;
-      color: #000000;
-      margin: 0;
-    }
-    .page-break {
-      page-break-after: always;
-    }
+    
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+  .title-banner {
+    border-left: 3px solid #000000;
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .unit-title-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 3px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .meta-table td.lbl {
+    font-weight: bold;
+    background: #f0f0f0;
+    width: 20%;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+  .meta-file {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin-bottom: 6px;
+    color: #000000;
+  }
+  .meta-file code {
+    font-weight: bold;
+  }
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .table-custom th {
+    background: #e5e5e5;
+    color: #000000;
+    padding: 5px 6px;
+    text-align: left;
+    border: 1px solid #000000;
+    font-weight: bold;
+  }
+  .table-custom td {
+    padding: 4px 6px;
+    border: 1px solid #000000;
+    vertical-align: top;
+    color: #000000;
+  }
+  .sub-section-block {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .diagram-wrapper {
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 8px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .code-wrapper {
+    margin: 8px 0 4px 0;
+    page-break-inside: avoid;
+  }
+  .code-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #000000;
+  }
+  
+  /* VS Code IDE Code Block Theme */
+  .vscode-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 4px 0 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .vscode-titlebar {
+    background: #252526;
+    border-bottom: 1px solid #333333;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vscode-dots {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .vsc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vsc-dot-red { background: #ff5f56; }
+  .vsc-dot-yellow { background: #ffbd2e; }
+  .vsc-dot-green { background: #27c93f; }
+  .vscode-tab {
+    display: inline-flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 3px 12px;
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid #007acc;
+    color: #ffffff;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+  }
+  .vscode-lang {
+    color: #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.8pt;
+    letter-spacing: 0.5px;
+  }
+  .vscode-body {
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.2pt;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .vscode-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #d4d4d4;
+  }
+
+  /* Architectural Sitemap / Tree Diagram Theme (Clean & Formal, Non-VSCode) */
+  .sitemap-tree-box {
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+  .sitemap-tree-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000000;
+    padding: 6px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitemap-tree-header-tag {
+    font-size: 7pt;
+    font-weight: normal;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #334155;
+    font-family: monospace;
+  }
+  .sitemap-tree-body {
+    padding: 10px 14px;
+    background: #fcfcfc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.45;
+    color: #111827;
+    text-align: left;
+  }
+  .sitemap-tree-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .conclusion-box {
+    border: 1px solid #000000;
+    background: #f5f5f5;
+    padding: 8px 10px;
+    margin-top: 14px;
+    page-break-inside: avoid;
+  }
+  .conclusion-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .conclusion-box p {
+    font-size: 8.5pt;
+    color: #000000;
+    margin: 0;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+
   </style>
 </head>
 <body>
@@ -310,14 +401,30 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">Git Commit Log History (git log -n 5 --oneline)</span>
-            <pre>e31edd3 fix(home): dynamic redirection for hero action buttons to products and contact
-0ea54a5 docs: add technical handbook and glossary PDF for internship defense
-d05a057 fix(mobile): responsive fixes for hero controls, padding, monochrome stats, theme icon
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Git Commit Log History (git log -n 5 --oneline)</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code>e31edd3 <span style="color:#dcdcaa;">fix</span>(home): dynamic redirection <span style="color:#569cd6;font-weight:bold;">for</span> hero action buttons to products and contact
+0ea54a5 docs: add technical handbook and glossary PDF <span style="color:#569cd6;font-weight:bold;">for</span> internship defense
+d05a057 <span style="color:#dcdcaa;">fix</span>(mobile): responsive fixes <span style="color:#569cd6;font-weight:bold;">for</span> hero controls, padding, monochrome stats, theme icon
 f4e15bd feat: track real product uploads, add database backup, and sync utilities
-467fc25 setup Vercel &amp; Railway</pre>
+467fc25 setup Vercel &amp; Railway</code></pre>
+            </div>
           </div>
         </div>
       
@@ -367,18 +474,34 @@ f4e15bd feat: track real product uploads, add database backup, and sync utilitie
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">Terminal Commands: Siklus Isolasi Cabang</span>
-            <pre># Pembuatan cabang fitur independen
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Terminal Commands: Siklus Isolasi Cabang</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code># Pembuatan cabang fitur independen
 git checkout -b feat/products-module
 git add .
-git commit -m &quot;feat(products): create responsive bento product showcase&quot;
+git commit -m <span style="color:#ce9178;">&quot;feat(products): create responsive bento product showcase&quot;</span>
 
 # Penggabungan ke master produksi
 git checkout master
 git merge feat/products-module
-git push origin master</pre>
+git push origin master</code></pre>
+            </div>
           </div>
         </div>
       

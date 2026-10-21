@@ -4,218 +4,309 @@
   <meta charset="UTF-8">
   <title>Unit 01 - Mengimplementasikan User Interface</title>
   <style>
-    @page {
-      size: A4 portrait;
-      margin: 20mm 18mm 20mm 18mm;
-    }
-    * {
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    body {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-size: 10pt;
-      line-height: 1.5;
-      color: #000000;
-      background: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    .doc-header {
-      border-top: 2px solid #000000;
-      border-bottom: 1px solid #000000;
-      padding: 5px 0;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #000000;
-    }
-    .title-banner {
-      border-left: 3px solid #000000;
-      padding-left: 12px;
-      margin-bottom: 14px;
-    }
-    .unit-title-num {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #000000;
-      margin-bottom: 3px;
-    }
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14pt;
-      font-weight: bold;
-      color: #000000;
-      margin: 0;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
-    .meta-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-    }
-    .meta-table td {
-      padding: 4px 8px;
-      border: 1px solid #000000;
-      color: #000000;
-    }
-    .meta-table td.lbl {
-      font-weight: bold;
-      background: #f0f0f0;
-      width: 20%;
-    }
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10.5pt;
-      font-weight: bold;
-      color: #000000;
-      border-bottom: 1px solid #000000;
-      padding-bottom: 3px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      page-break-after: avoid;
-      text-transform: uppercase;
-    }
-    h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-top: 12px;
-      margin-bottom: 4px;
-      page-break-after: avoid;
-    }
-    p {
-      margin: 0 0 6px 0;
-      text-align: justify;
-    }
-    ul, ol {
-      margin: 0 0 8px 0;
-      padding-left: 18px;
-    }
-    li {
-      margin-bottom: 3px;
-      text-align: justify;
-    }
-    .meta-file {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      margin-bottom: 6px;
-      color: #000000;
-    }
-    .meta-file code {
-      font-weight: bold;
-    }
-    .table-custom {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 8px 0 12px 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      page-break-inside: avoid;
-    }
-    .table-custom th {
-      background: #e5e5e5;
-      color: #000000;
-      padding: 5px 6px;
-      text-align: left;
-      border: 1px solid #000000;
-      font-weight: bold;
-    }
-    .table-custom td {
-      padding: 4px 6px;
-      border: 1px solid #000000;
-      vertical-align: top;
-      color: #000000;
-    }
-    .sub-section-block {
-      border: 1px solid #000000;
-      padding: 10px;
-      margin-bottom: 12px;
-      background: #ffffff;
-    }
-    .diagram-wrapper {
-      border: 1px solid #000000;
-      background: #ffffff;
-      padding: 8px;
-      margin: 8px 0;
-      page-break-inside: avoid;
-    }
-    .diagram-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      color: #000000;
-    }
-    .code-wrapper {
-      margin: 8px 0 4px 0;
-    }
-    .code-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 3px;
-      color: #000000;
-    }
-    .code-box {
-      background: #f9f9f9;
-      color: #000000;
-      border: 1px solid #000000;
-      padding: 6px 8px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 7.2pt;
-      line-height: 1.35;
-      page-break-inside: avoid;
-      text-align: left;
-    }
-    .code-box .file-tag {
-      font-weight: bold;
-      border-bottom: 1px solid #cccccc;
-      padding-bottom: 2px;
-      margin-bottom: 4px;
-      display: block;
-      color: #333333;
-    }
-    .code-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-    .conclusion-box {
-      border: 1px solid #000000;
-      background: #f5f5f5;
-      padding: 8px 10px;
-      margin-top: 14px;
-      page-break-inside: avoid;
-    }
-    .conclusion-title {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-    .conclusion-box p {
-      font-size: 8.5pt;
-      color: #000000;
-      margin: 0;
-    }
-    .page-break {
-      page-break-after: always;
-    }
+    
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+  .title-banner {
+    border-left: 3px solid #000000;
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .unit-title-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 3px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .meta-table td.lbl {
+    font-weight: bold;
+    background: #f0f0f0;
+    width: 20%;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+  .meta-file {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin-bottom: 6px;
+    color: #000000;
+  }
+  .meta-file code {
+    font-weight: bold;
+  }
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .table-custom th {
+    background: #e5e5e5;
+    color: #000000;
+    padding: 5px 6px;
+    text-align: left;
+    border: 1px solid #000000;
+    font-weight: bold;
+  }
+  .table-custom td {
+    padding: 4px 6px;
+    border: 1px solid #000000;
+    vertical-align: top;
+    color: #000000;
+  }
+  .sub-section-block {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .diagram-wrapper {
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 8px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .code-wrapper {
+    margin: 8px 0 4px 0;
+    page-break-inside: avoid;
+  }
+  .code-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #000000;
+  }
+  
+  /* VS Code IDE Code Block Theme */
+  .vscode-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 4px 0 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .vscode-titlebar {
+    background: #252526;
+    border-bottom: 1px solid #333333;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vscode-dots {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .vsc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vsc-dot-red { background: #ff5f56; }
+  .vsc-dot-yellow { background: #ffbd2e; }
+  .vsc-dot-green { background: #27c93f; }
+  .vscode-tab {
+    display: inline-flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 3px 12px;
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid #007acc;
+    color: #ffffff;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+  }
+  .vscode-lang {
+    color: #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.8pt;
+    letter-spacing: 0.5px;
+  }
+  .vscode-body {
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.2pt;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .vscode-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #d4d4d4;
+  }
+
+  /* Architectural Sitemap / Tree Diagram Theme (Clean & Formal, Non-VSCode) */
+  .sitemap-tree-box {
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+  .sitemap-tree-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000000;
+    padding: 6px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitemap-tree-header-tag {
+    font-size: 7pt;
+    font-weight: normal;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #334155;
+    font-family: monospace;
+  }
+  .sitemap-tree-body {
+    padding: 10px 14px;
+    background: #fcfcfc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.45;
+    color: #111827;
+    text-align: left;
+  }
+  .sitemap-tree-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .conclusion-box {
+    border: 1px solid #000000;
+    background: #f5f5f5;
+    padding: 8px 10px;
+    margin-top: 14px;
+    page-break-inside: avoid;
+  }
+  .conclusion-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .conclusion-box p {
+    font-size: 8.5pt;
+    color: #000000;
+    margin: 0;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+
   </style>
 </head>
 <body>
@@ -339,40 +430,56 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">frontend/src/pages/public/HomePage.jsx</span>
-            <pre>// Direct Redirection Action Buttons pada Hero Section HomePage.jsx
-&lt;div className=&quot;hero__actions&quot;&gt;
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>frontend/src/pages/public/HomePage.jsx</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">// Direct Redirection Action Buttons pada Hero Section HomePage.jsx</span>
+&lt;div className=<span style="color:#ce9178;">&quot;hero__actions&quot;</span>&gt;
   {(() =&gt; {
-    const primaryLink = (slide.actionLink &amp;&amp; slide.actionLink !== &#039;#products-catalog&#039;)
+    <span style="color:#569cd6;font-weight:bold;">const</span> primaryLink = (slide.actionLink &amp;&amp; slide.actionLink !== <span style="color:#ce9178;">&#039;#products-catalog&#039;</span>)
       ? slide.actionLink
-      : &#039;/products&#039;;
-    const primaryText = slide.actionText || slide.ctaPrimary || 
-      (lang === &#039;id&#039; ? &#039;JELAJAHI KATALOG PRODUK&#039; : &#039;EXPLORE PRODUCT CATALOG&#039;);
+      : <span style="color:#ce9178;">&#039;/products&#039;</span>;
+    <span style="color:#569cd6;font-weight:bold;">const</span> primaryText = slide.actionText || slide.ctaPrimary || 
+      (lang === <span style="color:#ce9178;">&#039;id&#039;</span> ? <span style="color:#ce9178;">&#039;JELAJAHI KATALOG PRODUK&#039;</span> : <span style="color:#ce9178;">&#039;EXPLORE PRODUCT CATALOG&#039;</span>);
 
-    const isPrimaryContact = primaryLink.includes(&#039;/contact&#039;);
-    const secondaryLink = slide.secondaryLink || (isPrimaryContact ? &#039;/products&#039; : &#039;/contact&#039;);
-    const secondaryText = slide.ctaSecondary || (isPrimaryContact
-      ? (lang === &#039;id&#039; ? &#039;LIHAT KATALOG PRODUK&#039; : &#039;VIEW PRODUCT CATALOG&#039;)
-      : (lang === &#039;id&#039; ? &#039;KONSULTASI TEKNIK RFQ&#039; : &#039;ENGINEERING RFQ INQUIRY&#039;));
+    <span style="color:#569cd6;font-weight:bold;">const</span> isPrimaryContact = primaryLink.<span style="color:#dcdcaa;">includes</span>(<span style="color:#ce9178;">&#039;/contact&#039;</span>);
+    <span style="color:#569cd6;font-weight:bold;">const</span> secondaryLink = slide.secondaryLink || (isPrimaryContact ? <span style="color:#ce9178;">&#039;/products&#039;</span> : <span style="color:#ce9178;">&#039;/contact&#039;</span>);
+    <span style="color:#569cd6;font-weight:bold;">const</span> secondaryText = slide.ctaSecondary || (isPrimaryContact
+      ? (lang === <span style="color:#ce9178;">&#039;id&#039;</span> ? <span style="color:#ce9178;">&#039;LIHAT KATALOG PRODUK&#039;</span> : <span style="color:#ce9178;">&#039;VIEW PRODUCT CATALOG&#039;</span>)
+      : (lang === <span style="color:#ce9178;">&#039;id&#039;</span> ? <span style="color:#ce9178;">&#039;KONSULTASI TEKNIK RFQ&#039;</span> : <span style="color:#ce9178;">&#039;ENGINEERING RFQ INQUIRY&#039;</span>));
 
-    return (
+    <span style="color:#569cd6;font-weight:bold;">return</span> (
       &lt;&gt;
-        &lt;Link to={primaryLink} className=&quot;btn btn--hero-primary btn--lg&quot;&gt;
+        &lt;Link to={primaryLink} className=<span style="color:#ce9178;">&quot;btn btn--hero-primary btn--lg&quot;</span>&gt;
           {primaryText}
-          &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2.5&quot;&gt;
-            &lt;line x1=&quot;5&quot; y1=&quot;12&quot; x2=&quot;19&quot; y2=&quot;12&quot; /&gt;
-            &lt;polyline points=&quot;12 5 19 12 12 19&quot; /&gt;
+          &lt;svg width=<span style="color:#ce9178;">&quot;16&quot;</span> height=<span style="color:#ce9178;">&quot;16&quot;</span> viewBox=<span style="color:#ce9178;">&quot;0 0 24 24&quot;</span> fill=<span style="color:#ce9178;">&quot;none&quot;</span> stroke=<span style="color:#ce9178;">&quot;currentColor&quot;</span> strokeWidth=<span style="color:#ce9178;">&quot;2.5&quot;</span>&gt;
+            &lt;line x1=<span style="color:#ce9178;">&quot;5&quot;</span> y1=<span style="color:#ce9178;">&quot;12&quot;</span> x2=<span style="color:#ce9178;">&quot;19&quot;</span> y2=<span style="color:#ce9178;">&quot;12&quot;</span> /&gt;
+            &lt;polyline points=<span style="color:#ce9178;">&quot;12 5 19 12 12 19&quot;</span> /&gt;
           &lt;/svg&gt;
         &lt;/Link&gt;
-        &lt;Link to={secondaryLink} className=&quot;btn btn--hero-secondary btn--lg&quot;&gt;
+        &lt;Link to={secondaryLink} className=<span style="color:#ce9178;">&quot;btn btn--hero-secondary btn--lg&quot;</span>&gt;
           {secondaryText}
         &lt;/Link&gt;
       &lt;/&gt;
     );
   })()}
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
+            </div>
           </div>
         </div>
       
@@ -405,43 +512,59 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">frontend/src/pages/admin/modules/ProductsModule.jsx</span>
-            <pre>// Hirarki Form Modal Multi-Tab &amp; Eksekusi Simpan Produk Manufaktur
-const handleSaveProduct = async (e) =&gt; {
-  e.preventDefault();
-  if (!form.model_code.trim()) {
-    addToast(&#039;Kode Model Produk wajib diisi.&#039;, &#039;error&#039;);
-    setModalTab(&#039;identity&#039;);
-    return;
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>frontend/src/pages/admin/modules/ProductsModule.jsx</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">// Hirarki Form Modal Multi-Tab &amp; Eksekusi Simpan Produk Manufaktur</span>
+<span style="color:#569cd6;font-weight:bold;">const</span> handleSaveProduct = <span style="color:#569cd6;font-weight:bold;">async</span> (e) =&gt; {
+  e.<span style="color:#dcdcaa;">preventDefault</span>();
+  <span style="color:#569cd6;font-weight:bold;">if</span> (!form.model_code.<span style="color:#dcdcaa;">trim</span>()) {
+    <span style="color:#dcdcaa;">addToast</span>(<span style="color:#ce9178;">&#039;Kode Model Produk wajib diisi.&#039;</span>, <span style="color:#ce9178;">&#039;error&#039;</span>);
+    <span style="color:#dcdcaa;">setModalTab</span>(<span style="color:#ce9178;">&#039;identity&#039;</span>);
+    <span style="color:#569cd6;font-weight:bold;">return</span>;
   }
 
-  const formData = new FormData();
-  formData.append(&#039;model_code&#039;, form.model_code);
-  formData.append(&#039;category&#039;, form.category);
-  formData.append(&#039;badge&#039;, form.badge || &#039;&#039;);
-  formData.append(&#039;title_id&#039;, form.title_id);
-  formData.append(&#039;title_en&#039;, form.title_en);
-  formData.append(&#039;specs&#039;, JSON.stringify(cleanSpecs));
-  formData.append(&#039;full_specs&#039;, JSON.stringify(form.full_specs || {}));
+  <span style="color:#569cd6;font-weight:bold;">const</span> formData = <span style="color:#569cd6;font-weight:bold;">new</span> <span style="color:#dcdcaa;">FormData</span>();
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;model_code&#039;</span>, form.model_code);
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;category&#039;</span>, form.category);
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;badge&#039;</span>, form.badge || <span style="color:#ce9178;">&#039;&#039;</span>);
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;title_id&#039;</span>, form.title_id);
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;title_en&#039;</span>, form.title_en);
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;specs&#039;</span>, JSON.<span style="color:#dcdcaa;">stringify</span>(cleanSpecs));
+  formData.<span style="color:#dcdcaa;">append</span>(<span style="color:#ce9178;">&#039;full_specs&#039;</span>, JSON.<span style="color:#dcdcaa;">stringify</span>(form.full_specs || {}));
 
-  setSubmitting(true);
-  try {
-    if (isEdit) {
-      await api.put(`/admin/products/${product.id}`, formData);
-      addToast(`Produk &#039;${form.model_code}&#039; berhasil diperbarui!`, &#039;success&#039;);
-    } else {
-      await api.post(&#039;/admin/products&#039;, formData);
-      addToast(`Produk baru &#039;${form.model_code}&#039; berhasil ditambahkan!`, &#039;success&#039;);
+  <span style="color:#dcdcaa;">setSubmitting</span>(<span style="color:#569cd6;">true</span>);
+  <span style="color:#569cd6;font-weight:bold;">try</span> {
+    <span style="color:#569cd6;font-weight:bold;">if</span> (isEdit) {
+      <span style="color:#569cd6;font-weight:bold;">await</span> api.<span style="color:#dcdcaa;">put</span>(<span style="color:#ce9178;">`/admin/products/${product.id}`</span>, formData);
+      <span style="color:#dcdcaa;">addToast</span>(<span style="color:#ce9178;">`Produk &#039;${form.model_code}&#039; berhasil diperbarui!`</span>, <span style="color:#ce9178;">&#039;success&#039;</span>);
+    } <span style="color:#569cd6;font-weight:bold;">else</span> {
+      <span style="color:#569cd6;font-weight:bold;">await</span> api.<span style="color:#dcdcaa;">post</span>(<span style="color:#ce9178;">&#039;/admin/products&#039;</span>, formData);
+      <span style="color:#dcdcaa;">addToast</span>(<span style="color:#ce9178;">`Produk baru &#039;${form.model_code}&#039; berhasil ditambahkan!`</span>, <span style="color:#ce9178;">&#039;success&#039;</span>);
     }
-    onSaved();
-  } catch (err) {
-    addToast(extractErrorMessage(err), &#039;error&#039;);
-  } finally {
-    setSubmitting(false);
+    <span style="color:#dcdcaa;">onSaved</span>();
+  } <span style="color:#569cd6;font-weight:bold;">catch</span> (err) {
+    <span style="color:#dcdcaa;">addToast</span>(<span style="color:#dcdcaa;">extractErrorMessage</span>(err), <span style="color:#ce9178;">&#039;error&#039;</span>);
+  } <span style="color:#569cd6;font-weight:bold;">finally</span> {
+    <span style="color:#dcdcaa;">setSubmitting</span>(<span style="color:#569cd6;">false</span>);
   }
-};</pre>
+};</code></pre>
+            </div>
           </div>
         </div>
       
@@ -474,30 +597,46 @@ const handleSaveProduct = async (e) =&gt; {
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">frontend/src/components/automation/RobotCanvas3D.jsx</span>
-            <pre>// Inisialisasi Kanvas 3D WebGL dengan Three.js &amp; State Telemetri Sumbu Robot
-export default function RobotCanvas3D({ robotType = &#039;welding&#039;, activeStep = 0 }) {
-  const mountRef = useRef(null);
-  const [wireframe, setWireframe] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(false);
-  const [telemetry, setTelemetry] = useState({ j1: 0, j2: 0, j3: 0, j4: 0, j5: 0, j6: 0 });
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>frontend/src/components/automation/RobotCanvas3D.jsx</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">// Inisialisasi Kanvas 3D WebGL dengan Three.js &amp; State Telemetri Sumbu Robot</span>
+<span style="color:#569cd6;font-weight:bold;">export</span> <span style="color:#569cd6;font-weight:bold;">default</span> <span style="color:#569cd6;font-weight:bold;">function</span> <span style="color:#dcdcaa;">RobotCanvas3D</span>({ robotType = <span style="color:#ce9178;">&#039;welding&#039;</span>, activeStep = <span style="color:#b5cea8;">0</span> }) {
+  <span style="color:#569cd6;font-weight:bold;">const</span> mountRef = <span style="color:#dcdcaa;">useRef</span>(<span style="color:#569cd6;">null</span>);
+  <span style="color:#569cd6;font-weight:bold;">const</span> [wireframe, setWireframe] = <span style="color:#dcdcaa;">useState</span>(<span style="color:#569cd6;">false</span>);
+  <span style="color:#569cd6;font-weight:bold;">const</span> [autoRotate, setAutoRotate] = <span style="color:#dcdcaa;">useState</span>(<span style="color:#569cd6;">false</span>);
+  <span style="color:#569cd6;font-weight:bold;">const</span> [telemetry, setTelemetry] = <span style="color:#dcdcaa;">useState</span>({ j1: <span style="color:#b5cea8;">0</span>, j2: <span style="color:#b5cea8;">0</span>, j3: <span style="color:#b5cea8;">0</span>, j4: <span style="color:#b5cea8;">0</span>, j5: <span style="color:#b5cea8;">0</span>, j6: <span style="color:#b5cea8;">0</span> });
 
-  const stateRef = useRef({
-    cameraPos: new THREE.Vector3(5.2, 3.8, 6.0),
-    cameraTarget: new THREE.Vector3(0, 2.0, 0),
-    camera: null,
-    renderer: null,
+  <span style="color:#569cd6;font-weight:bold;">const</span> stateRef = <span style="color:#dcdcaa;">useRef</span>({
+    cameraPos: <span style="color:#569cd6;font-weight:bold;">new</span> THREE.<span style="color:#dcdcaa;">Vector3</span>(<span style="color:#b5cea8;">5</span>.<span style="color:#b5cea8;">2</span>, <span style="color:#b5cea8;">3</span>.<span style="color:#b5cea8;">8</span>, <span style="color:#b5cea8;">6</span>.<span style="color:#b5cea8;">0</span>),
+    cameraTarget: <span style="color:#569cd6;font-weight:bold;">new</span> THREE.<span style="color:#dcdcaa;">Vector3</span>(<span style="color:#b5cea8;">0</span>, <span style="color:#b5cea8;">2</span>.<span style="color:#b5cea8;">0</span>, <span style="color:#b5cea8;">0</span>),
+    camera: <span style="color:#569cd6;">null</span>,
+    renderer: <span style="color:#569cd6;">null</span>,
     materials: []
   });
 
-  return (
-    &lt;div className=&quot;robot-canvas-container&quot; ref={mountRef}&gt;
-      {/* 3D WebGL Viewport, HUD Telemetri Sumbu, &amp; Tombol Kontrol Rotasi */}
+  <span style="color:#569cd6;font-weight:bold;">return</span> (
+    &lt;div className=<span style="color:#ce9178;">&quot;robot-canvas-container&quot;</span> ref={mountRef}&gt;
+      {<span style="color:#6a9955;font-style:italic;">/* 3D WebGL Viewport, HUD Telemetri Sumbu, &amp; Tombol Kontrol Rotasi */</span>}
     &lt;/div&gt;
   );
-}</pre>
+}</code></pre>
+            </div>
           </div>
         </div>
       

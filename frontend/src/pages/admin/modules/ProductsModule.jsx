@@ -31,13 +31,68 @@ export const normalizeCategory = (catKey) => {
     dashcam: 'dash_camera_recorders',
     ems: 'automation',
   };
-  return legacyMap[catKey] || catKey;
+  const valid = [
+    'automation',
+    'mobile_intelligent_device',
+    'amplifier',
+    'subwoofer',
+    'dsp',
+    'android_headunit',
+    'dash_camera_recorders',
+  ];
+  const mapped = legacyMap[catKey] || catKey;
+  return valid.includes(mapped) ? mapped : 'automation';
 };
 
 const getCategoryLabel = (catKey) => {
   const norm = normalizeCategory(catKey);
   const found = CATEGORIES.find(c => c.key === norm);
-  return found ? found.label : (catKey || 'Automation');
+  return found ? found.label : 'Automation';
+};
+
+const sanitizeCategoryData = (data) => {
+  if (!data) return DEFAULT_CATEGORIES;
+  const legacyMap = {
+    headunit: 'android_headunit',
+    infotainment: 'android_headunit',
+    audio: 'amplifier',
+    dashcam: 'dash_camera_recorders',
+    ems: 'automation',
+  };
+  const legacyTitleMap = {
+    'headunit': 'Android Headunit',
+    'headunit / infotainment': 'Android Headunit',
+    'infotainment': 'Android Headunit',
+    'audio': 'Amplifier',
+    'audio dsp & amplifier': 'Amplifier',
+    'dashcam': 'Dash Camera Recorders',
+    'dashcam & adas safety': 'Dash Camera Recorders',
+    'automation & test jigs': 'Automation',
+    'ems': 'Automation',
+    'ems / contract manufacturing': 'Automation',
+  };
+  const sanitizeList = (list, defaultList) => {
+    return CATEGORIES.map(cat => {
+      const found = (Array.isArray(list) ? list : []).find(item => {
+        const k = legacyMap[item.key] || item.key;
+        return k === cat.key;
+      });
+      const def = defaultList.find(c => c.key === cat.key);
+      const rawName = (found?.name || def?.name || cat.label).trim();
+      const lowerRaw = rawName.toLowerCase();
+      const cleanName = legacyTitleMap[lowerRaw] || rawName || cat.label;
+      return {
+        key: cat.key,
+        name: cleanName,
+        desc: found?.desc || def?.desc || '',
+      };
+    });
+  };
+
+  return {
+    id: sanitizeList(data.id, DEFAULT_CATEGORIES.id),
+    en: sanitizeList(data.en, DEFAULT_CATEGORIES.en),
+  };
 };
 
 const BADGE_COLORS = ['teal', 'blue', 'purple', 'red', 'gold'];
@@ -1296,17 +1351,9 @@ function ProductFormModal({ product, onClose, onSaved }) {
                       type="button"
                       className="admin-btn admin-btn-ghost"
                       style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('android_headunit')}
+                      onClick={() => loadQuickSpecsPreset('mobile_intelligent_device')}
                     >
-                      Headunit
-                    </button>
-                    <button
-                      type="button"
-                      className="admin-btn admin-btn-ghost"
-                      style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('dsp')}
-                    >
-                      DSP
+                      Mobile Intelligent Device
                     </button>
                     <button
                       type="button"
@@ -1328,17 +1375,25 @@ function ProductFormModal({ product, onClose, onSaved }) {
                       type="button"
                       className="admin-btn admin-btn-ghost"
                       style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('dash_camera_recorders')}
+                      onClick={() => loadQuickSpecsPreset('dsp')}
                     >
-                      Dashcam
+                      DSP
                     </button>
                     <button
                       type="button"
                       className="admin-btn admin-btn-ghost"
                       style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                      onClick={() => loadQuickSpecsPreset('mobile_intelligent_device')}
+                      onClick={() => loadQuickSpecsPreset('android_headunit')}
                     >
-                      Mobile / AI Box
+                      Android Headunit
+                    </button>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn-ghost"
+                      style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                      onClick={() => loadQuickSpecsPreset('dash_camera_recorders')}
+                    >
+                      Dash Camera Recorders
                     </button>
                   </div>
                 </div>
@@ -1447,17 +1502,9 @@ function ProductFormModal({ product, onClose, onSaved }) {
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('android_headunit')}
+                    onClick={() => loadPresetTemplate('mobile_intelligent_device')}
                   >
-                    + Headunit
-                  </button>
-                  <button
-                    type="button"
-                    className="admin-btn admin-btn-ghost"
-                    style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('dsp')}
-                  >
-                    + DSP
+                    + Mobile Intelligent Device
                   </button>
                   <button
                     type="button"
@@ -1479,17 +1526,25 @@ function ProductFormModal({ product, onClose, onSaved }) {
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('dash_camera_recorders')}
+                    onClick={() => loadPresetTemplate('dsp')}
                   >
-                    + Dashcam
+                    + DSP
                   </button>
                   <button
                     type="button"
                     className="admin-btn admin-btn-ghost"
                     style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
-                    onClick={() => loadPresetTemplate('mobile_intelligent_device')}
+                    onClick={() => loadPresetTemplate('android_headunit')}
                   >
-                    + Mobile / AI Box
+                    + Android Headunit
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-btn admin-btn-ghost"
+                    style={{ fontSize: '0.72rem', padding: '3px 8px', height: 'auto' }}
+                    onClick={() => loadPresetTemplate('dash_camera_recorders')}
+                  >
+                    + Dash Camera Recorders
                   </button>
                 </div>
 
@@ -1714,8 +1769,7 @@ export default function ProductsModule() {
             if (d.id && d.en) setHeaderData(d);
           }
           if (catRes.status === 'fulfilled' && catRes.value.data?.data) {
-            const d = catRes.value.data.data;
-            if (Array.isArray(d.id) && Array.isArray(d.en)) setCategoryData(d);
+            setCategoryData(sanitizeCategoryData(catRes.value.data.data));
           }
           if (rfqRes.status === 'fulfilled' && rfqRes.value.data?.data) {
             const d = rfqRes.value.data.data;

@@ -4,218 +4,309 @@
   <meta charset="UTF-8">
   <title>Unit 02 - Mengimplementasikan Rancangan Entitas dan Keterkaitan Antar Entitas</title>
   <style>
-    @page {
-      size: A4 portrait;
-      margin: 20mm 18mm 20mm 18mm;
-    }
-    * {
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    body {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-size: 10pt;
-      line-height: 1.5;
-      color: #000000;
-      background: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    .doc-header {
-      border-top: 2px solid #000000;
-      border-bottom: 1px solid #000000;
-      padding: 5px 0;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #000000;
-    }
-    .title-banner {
-      border-left: 3px solid #000000;
-      padding-left: 12px;
-      margin-bottom: 14px;
-    }
-    .unit-title-num {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #000000;
-      margin-bottom: 3px;
-    }
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14pt;
-      font-weight: bold;
-      color: #000000;
-      margin: 0;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
-    .meta-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-    }
-    .meta-table td {
-      padding: 4px 8px;
-      border: 1px solid #000000;
-      color: #000000;
-    }
-    .meta-table td.lbl {
-      font-weight: bold;
-      background: #f0f0f0;
-      width: 20%;
-    }
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10.5pt;
-      font-weight: bold;
-      color: #000000;
-      border-bottom: 1px solid #000000;
-      padding-bottom: 3px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      page-break-after: avoid;
-      text-transform: uppercase;
-    }
-    h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-top: 12px;
-      margin-bottom: 4px;
-      page-break-after: avoid;
-    }
-    p {
-      margin: 0 0 6px 0;
-      text-align: justify;
-    }
-    ul, ol {
-      margin: 0 0 8px 0;
-      padding-left: 18px;
-    }
-    li {
-      margin-bottom: 3px;
-      text-align: justify;
-    }
-    .meta-file {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      margin-bottom: 6px;
-      color: #000000;
-    }
-    .meta-file code {
-      font-weight: bold;
-    }
-    .table-custom {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 8px 0 12px 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      page-break-inside: avoid;
-    }
-    .table-custom th {
-      background: #e5e5e5;
-      color: #000000;
-      padding: 5px 6px;
-      text-align: left;
-      border: 1px solid #000000;
-      font-weight: bold;
-    }
-    .table-custom td {
-      padding: 4px 6px;
-      border: 1px solid #000000;
-      vertical-align: top;
-      color: #000000;
-    }
-    .sub-section-block {
-      border: 1px solid #000000;
-      padding: 10px;
-      margin-bottom: 12px;
-      background: #ffffff;
-    }
-    .diagram-wrapper {
-      border: 1px solid #000000;
-      background: #ffffff;
-      padding: 8px;
-      margin: 8px 0;
-      page-break-inside: avoid;
-    }
-    .diagram-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      color: #000000;
-    }
-    .code-wrapper {
-      margin: 8px 0 4px 0;
-    }
-    .code-caption {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      font-weight: bold;
-      margin-bottom: 3px;
-      color: #000000;
-    }
-    .code-box {
-      background: #f9f9f9;
-      color: #000000;
-      border: 1px solid #000000;
-      padding: 6px 8px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 7.2pt;
-      line-height: 1.35;
-      page-break-inside: avoid;
-      text-align: left;
-    }
-    .code-box .file-tag {
-      font-weight: bold;
-      border-bottom: 1px solid #cccccc;
-      padding-bottom: 2px;
-      margin-bottom: 4px;
-      display: block;
-      color: #333333;
-    }
-    .code-box pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-    .conclusion-box {
-      border: 1px solid #000000;
-      background: #f5f5f5;
-      padding: 8px 10px;
-      margin-top: 14px;
-      page-break-inside: avoid;
-    }
-    .conclusion-title {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8.5pt;
-      font-weight: bold;
-      color: #000000;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-    .conclusion-box p {
-      font-size: 8.5pt;
-      color: #000000;
-      margin: 0;
-    }
-    .page-break {
-      page-break-after: always;
-    }
+    
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+  .title-banner {
+    border-left: 3px solid #000000;
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .unit-title-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 3px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .meta-table td.lbl {
+    font-weight: bold;
+    background: #f0f0f0;
+    width: 20%;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+  .meta-file {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin-bottom: 6px;
+    color: #000000;
+  }
+  .meta-file code {
+    font-weight: bold;
+  }
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .table-custom th {
+    background: #e5e5e5;
+    color: #000000;
+    padding: 5px 6px;
+    text-align: left;
+    border: 1px solid #000000;
+    font-weight: bold;
+  }
+  .table-custom td {
+    padding: 4px 6px;
+    border: 1px solid #000000;
+    vertical-align: top;
+    color: #000000;
+  }
+  .sub-section-block {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .diagram-wrapper {
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 8px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .code-wrapper {
+    margin: 8px 0 4px 0;
+    page-break-inside: avoid;
+  }
+  .code-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #000000;
+  }
+  
+  /* VS Code IDE Code Block Theme */
+  .vscode-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 4px 0 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .vscode-titlebar {
+    background: #252526;
+    border-bottom: 1px solid #333333;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vscode-dots {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .vsc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vsc-dot-red { background: #ff5f56; }
+  .vsc-dot-yellow { background: #ffbd2e; }
+  .vsc-dot-green { background: #27c93f; }
+  .vscode-tab {
+    display: inline-flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 3px 12px;
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid #007acc;
+    color: #ffffff;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+  }
+  .vscode-lang {
+    color: #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.8pt;
+    letter-spacing: 0.5px;
+  }
+  .vscode-body {
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.2pt;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .vscode-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #d4d4d4;
+  }
+
+  /* Architectural Sitemap / Tree Diagram Theme (Clean & Formal, Non-VSCode) */
+  .sitemap-tree-box {
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+  .sitemap-tree-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000000;
+    padding: 6px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitemap-tree-header-tag {
+    font-size: 7pt;
+    font-weight: normal;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #334155;
+    font-family: monospace;
+  }
+  .sitemap-tree-body {
+    padding: 10px 14px;
+    background: #fcfcfc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.45;
+    color: #111827;
+    text-align: left;
+  }
+  .sitemap-tree-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .conclusion-box {
+    border: 1px solid #000000;
+    background: #f5f5f5;
+    padding: 8px 10px;
+    margin-top: 14px;
+    page-break-inside: avoid;
+  }
+  .conclusion-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .conclusion-box p {
+    font-size: 8.5pt;
+    color: #000000;
+    margin: 0;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+
   </style>
 </head>
 <body>
@@ -495,31 +586,47 @@
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">database/BACKUP_DATABASE_ASLI_INTERSIS.sql</span>
-            <pre>-- Skema DDL Fisik Tabel products (Engine MySQL 8 / InnoDB)
-CREATE TABLE products (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  model_code varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  category enum(&#039;headunit&#039;,&#039;audio&#039;,&#039;dashcam&#039;,&#039;automation&#039;,&#039;ems&#039;) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT &#039;headunit&#039;,
-  badge varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  badge_color varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  title_id text COLLATE utf8mb4_unicode_ci NOT NULL,
-  title_en text COLLATE utf8mb4_unicode_ci NOT NULL,
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>database/BACKUP_DATABASE_ASLI_INTERSIS.sql</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#6a9955;font-style:italic;">-- Skema DDL Fisik Tabel products (Engine MySQL 8 / InnoDB)</span>
+<span style="color:#569cd6;font-weight:bold;">CREATE</span> <span style="color:#569cd6;font-weight:bold;">TABLE</span> <span style="color:#dcdcaa;">products</span> (
+  id <span style="color:#dcdcaa;">int</span>(<span style="color:#b5cea8;">11</span>) <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">AUTO_INCREMENT</span>,
+  model_code <span style="color:#dcdcaa;">varchar</span>(<span style="color:#b5cea8;">100</span>) COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span>,
+  category <span style="color:#dcdcaa;">enum</span>(<span style="color:#ce9178;">&#039;headunit&#039;</span>,<span style="color:#ce9178;">&#039;audio&#039;</span>,<span style="color:#ce9178;">&#039;dashcam&#039;</span>,<span style="color:#ce9178;">&#039;automation&#039;</span>,<span style="color:#ce9178;">&#039;ems&#039;</span>) COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#ce9178;">&#039;headunit&#039;</span>,
+  badge <span style="color:#dcdcaa;">varchar</span>(<span style="color:#b5cea8;">100</span>) COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span>,
+  badge_color <span style="color:#dcdcaa;">varchar</span>(<span style="color:#b5cea8;">50</span>) COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span>,
+  title_id text COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span>,
+  title_en text COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span>,
   short_desc_id text COLLATE utf8mb4_unicode_ci,
   short_desc_en text COLLATE utf8mb4_unicode_ci,
-  specs longtext COLLATE utf8mb4_unicode_ci COMMENT &#039;JSON array {label, value}&#039;,
-  full_specs longtext COLLATE utf8mb4_unicode_ci COMMENT &#039;JSON object key-value&#039;,
-  diagram_type varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT &#039;infotainment&#039;,
-  image varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  specs longtext COLLATE utf8mb4_unicode_ci COMMENT <span style="color:#ce9178;">&#039;JSON array {label, value}&#039;</span>,
+  full_specs longtext COLLATE utf8mb4_unicode_ci COMMENT <span style="color:#ce9178;">&#039;JSON object key-value&#039;</span>,
+  diagram_type <span style="color:#dcdcaa;">varchar</span>(<span style="color:#b5cea8;">50</span>) COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#ce9178;">&#039;infotainment&#039;</span>,
+  image <span style="color:#dcdcaa;">varchar</span>(<span style="color:#b5cea8;">255</span>) COLLATE utf8mb4_unicode_ci <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span>,
   gallery longtext COLLATE utf8mb4_unicode_ci,
-  status tinyint(1) NOT NULL DEFAULT &#039;1&#039; COMMENT &#039;1=aktif, 0=nonaktif&#039;,
-  sort_order int(11) NOT NULL DEFAULT &#039;0&#039;,
-  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;</pre>
+  status <span style="color:#dcdcaa;">tinyint</span>(<span style="color:#b5cea8;">1</span>) <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#ce9178;">&#039;1&#039;</span> COMMENT <span style="color:#ce9178;">&#039;1=aktif, 0=nonaktif&#039;</span>,
+  sort_order <span style="color:#dcdcaa;">int</span>(<span style="color:#b5cea8;">11</span>) <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> <span style="color:#ce9178;">&#039;0&#039;</span>,
+  created_at timestamp <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> CURRENT_TIMESTAMP,
+  updated_at timestamp <span style="color:#569cd6;font-weight:bold;">NOT</span> <span style="color:#569cd6;font-weight:bold;">NULL</span> <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> CURRENT_TIMESTAMP <span style="color:#569cd6;font-weight:bold;">ON</span> <span style="color:#569cd6;font-weight:bold;">UPDATE</span> CURRENT_TIMESTAMP,
+  <span style="color:#569cd6;font-weight:bold;">PRIMARY</span> <span style="color:#569cd6;font-weight:bold;">KEY</span> (id)
+) ENGINE=InnoDB <span style="color:#569cd6;font-weight:bold;">DEFAULT</span> CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;</code></pre>
+            </div>
           </div>
         </div>
       
@@ -716,42 +823,58 @@ CREATE TABLE products (
 
       
         <div class="code-wrapper">
-          <div class="code-caption">Bukti Implementasi Kode Sumber:</div>
-          <div class="code-box">
-            <span class="file-tag">backend/src/controllers/public/publicProductController.js</span>
-            <pre>const pool = require(&#039;../../config/database&#039;);
-const { success } = require(&#039;../../utils/response&#039;);
+          <div class="code-caption">Bukti Implementasi Kode Sumber (Visual Studio Code):</div>
+          <div class="code-box vscode-box">
+            <div class="vscode-titlebar">
+              <div class="vscode-dots">
+                <span class="vsc-dot vsc-dot-red"></span>
+                <span class="vsc-dot vsc-dot-yellow"></span>
+                <span class="vsc-dot vsc-dot-green"></span>
+              </div>
+              <div class="vscode-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#75beff" stroke-width="2.5" style="vertical-align:middle;margin-right:5px;">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>backend/src/controllers/public/publicProductController.js</span>
+              </div>
+              <div class="vscode-lang">VS CODE &bull; UTF-8</div>
+            </div>
+            <div class="vscode-body">
+              <pre><code><span style="color:#569cd6;font-weight:bold;">const</span> pool = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;../../config/database&#039;</span>);
+<span style="color:#569cd6;font-weight:bold;">const</span> { success } = <span style="color:#dcdcaa;">require</span>(<span style="color:#ce9178;">&#039;../../utils/response&#039;</span>);
 
-/**
+<span style="color:#6a9955;font-style:italic;">/**
  * GET /api/public/products
  * Mendapatkan daftar produk aktif untuk halaman publik
- */
-const getProducts = async (req, res, next) =&gt; {
-  try {
-    const [rows] = await pool.execute(
-      `SELECT id, model_code, category, badge, badge_color, image, gallery,
+ */</span>
+<span style="color:#569cd6;font-weight:bold;">const</span> getProducts = <span style="color:#569cd6;font-weight:bold;">async</span> (req, res, next) =&gt; {
+  <span style="color:#569cd6;font-weight:bold;">try</span> {
+    <span style="color:#569cd6;font-weight:bold;">const</span> [rows] = <span style="color:#569cd6;font-weight:bold;">await</span> pool.<span style="color:#dcdcaa;">execute</span>(
+      <span style="color:#ce9178;">`SELECT id, model_code, category, badge, badge_color, image, gallery,
               title_id, title_en, short_desc_id, short_desc_en,
               specs, full_specs, diagram_type, sort_order
        FROM products
        WHERE status = 1
-       ORDER BY sort_order ASC, id ASC`
+       ORDER BY sort_order ASC, id ASC`</span>
     );
 
-    // Parse LONGTEXT JSON strings &amp;rarr; JS objects (MariaDB/MySQL compat)
-    const parsed = rows.map(row =&gt; ({
+    <span style="color:#6a9955;font-style:italic;">// Parse LONGTEXT JSON strings &amp;rarr; JS objects (MariaDB/MySQL compat)</span>
+    <span style="color:#569cd6;font-weight:bold;">const</span> parsed = rows.<span style="color:#dcdcaa;">map</span>(row =&gt; ({
       ...row,
-      specs:      row.specs      ? (typeof row.specs      === &#039;string&#039; ? JSON.parse(row.specs)      : row.specs)      : [],
-      full_specs: row.full_specs ? (typeof row.full_specs === &#039;string&#039; ? JSON.parse(row.full_specs) : row.full_specs) : {},
-      gallery:    row.gallery    ? (typeof row.gallery    === &#039;string&#039; ? JSON.parse(row.gallery)    : row.gallery)    : [],
+      specs:      row.specs      ? (<span style="color:#569cd6;font-weight:bold;">typeof</span> row.specs      === <span style="color:#ce9178;">&#039;string&#039;</span> ? JSON.<span style="color:#dcdcaa;">parse</span>(row.specs)      : row.specs)      : [],
+      full_specs: row.full_specs ? (<span style="color:#569cd6;font-weight:bold;">typeof</span> row.full_specs === <span style="color:#ce9178;">&#039;string&#039;</span> ? JSON.<span style="color:#dcdcaa;">parse</span>(row.full_specs) : row.full_specs) : {},
+      gallery:    row.gallery    ? (<span style="color:#569cd6;font-weight:bold;">typeof</span> row.gallery    === <span style="color:#ce9178;">&#039;string&#039;</span> ? JSON.<span style="color:#dcdcaa;">parse</span>(row.gallery)    : row.gallery)    : [],
     }));
 
-    return success(res, &#039;Daftar produk berhasil diambil.&#039;, parsed);
-  } catch (err) {
-    next(err);
+    <span style="color:#569cd6;font-weight:bold;">return</span> <span style="color:#dcdcaa;">success</span>(res, <span style="color:#ce9178;">&#039;Daftar produk berhasil diambil.&#039;</span>, parsed);
+  } <span style="color:#569cd6;font-weight:bold;">catch</span> (err) {
+    <span style="color:#dcdcaa;">next</span>(err);
   }
 };
 
-module.exports = { getProducts };</pre>
+module.exports = { getProducts };</code></pre>
+            </div>
           </div>
         </div>
       
