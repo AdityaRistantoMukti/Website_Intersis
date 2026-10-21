@@ -36,14 +36,14 @@ Seluruh berkas dokumen di folder ini telah direvisi dan digenerate ulang dalam f
 | **13** | [`13_Sitemap_dan_Fitur_Website_Referensi_vs_Website_Terbangun.pdf`](./13_Sitemap_dan_Fitur_Website_Referensi_vs_Website_Terbangun.pdf) | **Analisis Komparasi Sitemap & Fitur: Referensi vs Terbangun** | **Studi Komparasi Mendalam**: Sitemap WordPress Multi-Page (`globalphilsonics.com/isa/`) vs Sitemap React 19 Decoupled SPA, perbandingan fitur per kategori (Headunit, Audio, Otomasi), arsitektur bilingual instan, 3D WebGL, RFQ anti-spam, dan diagram visual alur navigasi SVG. |
 | **14** | [`14_Panduan_Penggunaan_dan_Alur_Pengeditan_Website_Admin.pdf`](./14_Panduan_Penggunaan_dan_Alur_Pengeditan_Website_Admin.pdf) | **Buku Panduan Penggunaan & Alur Pengeditan Portal Admin** | **Buku Petunjuk Operasional Lengkap**: 3 Akun Dummy Pengujian (Administrator, HRD Manager, Staff Konten) & Fitur Tombol Akses Cepat (Quick Demo Chips), Orientasi Layout Dashboard, Panduan Multi-Tab Pengeditan Produk (SKU, Badge, Gambar, Specs Singkat, JSON Editor), Alur Pembaruan Beranda (Hero & Batam FTZ Stats), Profil Perusahaan, Galeri Fasilitas, Tindak Lanjut RFQ Masuk (WhatsApp direct & Email), Manajemen User RBAC, dan Audit Trail. |
 | **15** | [`15_Cakupan_Sitemap_Lengkap_Website_Publik_dan_Dashboard_Admin.pdf`](./15_Cakupan_Sitemap_Lengkap_Website_Publik_dan_Dashboard_Admin.pdf) | **Cakupan Sitemap Lengkap: Portal Publik dan Dashboard Admin** | **Inventarisasi End-to-End Menyeluruh**: Rincian 12 rute halaman publik dan 11 modul admin dashboard, setiap section di dalamnya, fungsi operasional, fitur teknis, tujuan rekayasa ("untuk apa dibuat"), serta diagram hierarki sitemap visual SVG. |
-| **16** | [`16_Bedah_Visual_dan_Analisis_Fitur_Website_Publik_dan_Admin.pdf`](./16_Bedah_Visual_dan_Analisis_Fitur_Website_Publik_dan_Admin.pdf) | **Bedah Visual & Analisis Strategis Seluruh Fitur Website Publik dan Dashboard Admin** | **Panduan Presentasi Eksekutif Visual**: 23 kartu showcase visual berdampingan (*side-by-side*) dilengkapi screenshot riil website dan analisis 3 pilar: (1) Fungsi Utama & Mekanisme Kerja, (2) Dampak Bisnis & Nilai Operasional, dan (3) Alasan Pembuatan & Nilai Strategis untuk Presentasi. |
+| **16** | [`16_Bedah_Visual_dan_Analisis_Fitur_Website_Publik_dan_Admin.pdf`](./16_Bedah_Visual_dan_Analisis_Fitur_Website_Publik_dan_Admin.pdf) | **Bedah Visual & Analisis Fitur Website Publik dan Dashboard Admin** | **Spesifikasi Fungsional & Verifikasi Visual**: 23 kartu evaluasi antarmuka berdampingan (*side-by-side*) dilengkapi tangkapan layar (*screenshot*) riil website dan analisis 2 pilar utama: (1) Fungsi Utama & Mekanisme Kerja, serta (2) Dampak Bisnis & Nilai Operasional. |
 
 ---
 
 ### 📂 Struktur Direktori
 
 ```text
-c:/Projek_Magang/website_intersis/Dokumentasi/
+c:/Projek_Magang/website_intersis/Dokumentasi_Outline_Sinkronisasi/
 ├── 01_Mengimplementasikan_User_Interface.pdf
 ├── 02_Mengimplementasikan_Rancangan_Entitas_dan_Keterkaitan_Antar_Entitas.pdf
 ├── 03_Menerapkan_Perintah_Eksekusi_Bahasa_Pemrograman_Berbasis_Teks_Grafik_dan_Multimedia.pdf

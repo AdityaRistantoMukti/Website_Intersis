@@ -3,11 +3,10 @@
  * 16_Bedah_Visual_dan_Analisis_Fitur_Website_Publik_dan_Admin.pdf
  * 
  * PT. GLOBAL PHILSONIC TECHNOLOGIES (Automation GPT)
- * Showcase komprehensif 23 section (Portal Publik & Dashboard Admin)
- * Dilengkapi Screenshot Riil Website & Analisis 3 Pilar:
- * 1. Fungsi Utama (Core Functionality)
- * 2. Dampak Bisnis & Operasional (Business & Operational Impact)
- * 3. Alasan Pembuatan & Nilai Presentasi (Presentation Rationale & Strategic Value)
+ * Dokumentasi Fungsional & Verifikasi Visual 23 Section (Portal Publik & Dashboard Admin)
+ * Dilengkapi Screenshot Riil Website & Analisis 2 Pilar:
+ * 1. Fungsi Utama & Mekanisme Kerja (Core Functionality)
+ * 2. Dampak Bisnis & Nilai Operasional (Business & Operational Impact)
  */
 
 const fs = require('fs');
@@ -38,8 +37,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_01_hero.jpg",
     caption: "Tampilan Layar Penuh Hero Carousel, Headline Typewriter Dinamis, dan Kartu Statistik Kunci Batam FTZ",
     fungsi: "Menampilkan visual landing page imersif berskala penuh (100vh) yang dilengkapi slider gambar otomatis beresolusi tinggi, efek teks animasi mesin ketik (typewriter tagline) industri presisi, tombol Call-to-Action instan 'Minta Penawaran (RFQ)', serta kartu metrik kilat mengenai keunggulan operasional kawasan perdagangan bebas Batam (Free Trade Zone).",
-    dampak: "Menciptakan *golden 3-second first impression* yang memukau bagi calon investor dan mitra multinasional. Membangun persepsi instan bahwa PT Global Philsonic Technologies adalah fasilitas manufaktur otomasi kelas dunia, sehingga secara drastis menurunkan rasio pentalan (*bounce rate*) pengunjung baru.",
-    alasan: "Website manufaktur konvensional umumnya kaku, statis, dan membosankan. Bagian ini dirancang untuk menunjukkan keunggulan antarmuka modern (*industrial cockpit aesthetic*) yang dinamis dan berenergi tinggi saat dipresentasikan di hadapan dewan penguji maupun klien korporat."
+    dampak: "Menciptakan impresi awal yang kuat bagi calon investor dan mitra multinasional. Membangun persepsi bahwa PT Global Philsonic Technologies adalah fasilitas manufaktur otomasi kelas dunia, sehingga secara signifikan menurunkan rasio pentalan (*bounce rate*) pengunjung baru."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -50,8 +48,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_02_capabilities.jpg",
     caption: "Empat Pilar Kapabilitas Utama: Lini SMT 80.000 CPH, Cleanroom 100K, Perakitan Presisi, dan Quality Control",
     fungsi: "Menyajikan ringkasan 4 pilar kompetensi teknis inti pabrik dalam bentuk kartu interaktif: (1) Surface Mount Technology (SMT) dengan kecepatan hingga 80.000 CPH, (2) Ruang Bersih (Cleanroom) ISO Class 100K/10K, (3) Perakitan Mekatronika Presisi Tinggi, dan (4) Penjaminan Mutu Terpadu melalui inspeksi optik otomatis 3D AOI & X-Ray.",
-    dampak: "Menghilangkan keraguan teknis dari *procurement engineer* klien luar negeri mengenai kesiapan kapasitas dan sertifikasi pabrik. Membantu mempercepat proses verifikasi kualifikasi vendor (*vendor qualification stage*) sebelum tender proyek manufaktur dimulai.",
-    alasan: "Penting dipresentasikan untuk mendemonstrasikan kemampuan merancang tata letak informasi industri yang padat parameter teknis namun tetap nyaman dibaca, terstruktur, dan memberikan bukti kompetensi yang konkrit (*tangible credibility*)."
+    dampak: "Menjawab kebutuhan teknis *procurement engineer* klien luar negeri mengenai kesiapan kapasitas dan sertifikasi pabrik. Membantu mempercepat proses verifikasi kualifikasi vendor (*vendor qualification stage*) sebelum tender proyek manufaktur dimulai."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -62,8 +59,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_03_lifecycle.jpg",
     caption: "Diagram Visualisasi Tahapan Produksi dari R&D Prototyping hingga Pengemasan Akhir Anti-ESD",
     fungsi: "Memvisualisasikan alur produksi manufaktur terintegrasi mulai dari: (1) R&D & Prototyping Rekayasa Elektronika, (2) Pencetakan Pasta Solder Stencil Presisi, (3) Pemasangan Komponen Berkecepatan Tinggi (Pick & Place), (4) Penyolderan Oven Reflow Nitrogen Terkendali, hingga (5) Pengujian Fungsional dan Pengemasan Standar ESD.",
-    dampak: "Memberikan transparansi rantai pasok (*supply chain visibility*) dan metodologi kendali proses kepada klien B2B. Memudahkan estimasi *lead-time* produksi dan memastikan setiap unit PCBA diproduksi dengan kepatuhan standar zero-defect IATF 16949.",
-    alasan: "Menunjukkan kepada penguji bahwa pengembang web memahami alur operasional riil manufaktur elektronika dan berhasil mengonversinya menjadi visualisasi interaktif yang mudah dipahami oleh audiens lintas disiplin ilmu."
+    dampak: "Memberikan transparansi rantai pasok (*supply chain visibility*) dan metodologi kendali proses kepada klien B2B. Memudahkan estimasi *lead-time* produksi dan memastikan setiap unit PCBA diproduksi dengan kepatuhan standar zero-defect IATF 16949."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -74,8 +70,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_04_about_profile.jpg",
     caption: "Narasi Profil Perusahaan, Pernyataan Visi Misi, Sertifikasi Mutu, dan Kartu Efek Gyroscope 3D",
     fungsi: "Menyajikan rekam jejak resmi PT Global Philsonic Technologies, nilai-nilai filosofi kerja perusahaan, komitmen keberlanjutan lingkungan, serta kartu interaktif dengan efek kedalaman 3D tilt yang bereaksi dinamis terhadap pergerakan kursor pengguna.",
-    dampak: "Memperkuat profil hukum dan kredibilitas korporat dalam rangka audit legal dan *compliance* internasional. Memberikan kejelasan arah strategis perusahaan kepada mitra bisnis jangka panjang.",
-    alasan: "Menghadirkan sentuhan mikro-interaksi (*delightful micro-interactions*) yang membuktikan keahlian *front-end engineering* tingkat lanjut. Bagian ini sangat efektif menarik perhatian audiens saat sesi demonstrasi langsung."
+    dampak: "Memperkuat profil hukum dan kredibilitas korporat dalam rangka audit legal dan *compliance* internasional. Memberikan kejelasan arah strategis perusahaan kepada mitra bisnis jangka panjang."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -86,8 +81,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_05_about_cleanroom.jpg",
     caption: "Spesifikasi Teknis Ruang Bersih: Suhu 22±2°C, Kelembaban 50±5% RH, dan Proteksi Lantai Konduktif ESD",
     fungsi: "Menjabarkan spesifikasi ketat ruang produksi bebas debu: batas konsentrasi partikel mikro (<100.000 partikel/kaki kubik), sistem tata udara bertekanan positif bertingkat (HEPA Filter H14), lantai epoksi konduktif ESD, dan regulasi pakaian steril personil.",
-    dampak: "Sangat krusial untuk memenangkan tender pembuatan perangkat medis sensitif dan modul komunikasi otomotif yang rentan mengalami kerusakan fatal akibat lonjakan elektrostatik (*Electrostatic Discharge*) dan kontaminasi partikulat.",
-    alasan: "Menegaskan bahwa sistem dokumentasi website ini tidak hanya memuat aspek pemasaran umum, tetapi juga menyajikan data spesifikasi engineering yang akurat dan memenuhi ekspektasi insinyur manufaktur profesional."
+    dampak: "Sangat krusial untuk memenuhi kualifikasi pembuatan perangkat medis sensitif dan modul komunikasi otomotif yang rentan mengalami kerusakan fatal akibat lonjakan elektrostatik (*Electrostatic Discharge*) dan kontaminasi partikulat."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -98,8 +92,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_06_automation_3d.jpg",
     caption: "Simulasi 3D Real-time Lengan Robot Industri (Three.js/WebGL 60 FPS) dengan Kontrol Eksplorasi 360 Derajat",
     fungsi: "Merender objek 3D lengan robot industri secara *real-time* di peramban tanpa memerlukan plugin tambahan. Pengguna dapat memutar, memperbesar, dan mengamati persendian kinematika robot, didukung navigasi *scrollytelling* untuk 3 seri robot (SCARA, 6-Axis, dan Kolaboratif Cobot).",
-    dampak: "Mendongkrak daya tawar (*brand equity*) perusahaan di mata mitra global, membuktikan bahwa perusahaan telah mengadopsi teknologi Industri 4.0 secara menyeluruh baik di lini perakitan fisik maupun antarmuka digitalnya.",
-    alasan: "Merupakan fitur puncak (*showstopper*) dalam presentasi proyek. Membuktikan kompetensi rekayasa grafis mutakhir (WebGL/Three.js) dengan performa stabil 60 FPS di berbagai perangkat peramban modern."
+    dampak: "Mendongkrak daya tawar (*brand equity*) perusahaan di mata mitra global, mengonfirmasi bahwa perusahaan telah mengadopsi teknologi Industri 4.0 secara menyeluruh baik di lini perakitan fisik maupun antarmuka digitalnya."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -110,8 +103,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_07_automation_jigs.jpg",
     caption: "Spesifikasi Perlengkapan Uji Otomatis Bed-of-Nails dan Diagram Integrasi Sistem Eksekusi Manufaktur (MES)",
     fungsi: "Memperkenalkan kapabilitas perakitan jig pengujian kustom (In-Circuit Testing & Functional Circuit Testing) berkecepatan siklus <8.5 detik per papan sirkuit, serta integrasi telemetri ke sistem perangkat lunak pabrik cerdas (MES) berbasis IoT.",
-    dampak: "Menjamin tingkat *yield rate* produk di atas 99.8% dan ketertelusuran penuh data pengujian (*end-to-end unit traceability*), meminimalkan risiko penarikan produk (*recall*) di pasar konsumen akhir.",
-    alasan: "Menunjukkan pemahaman integrasi sistem cyber-fisik (Cyber-Physical Systems) yang menghubungkan otomasi perangkat keras di lantai pabrik dengan sistem pelaporan digital."
+    dampak: "Menjamin tingkat *yield rate* produk di atas 99.8% dan ketertelusuran penuh data pengujian (*end-to-end unit traceability*), meminimalkan risiko penarikan produk (*recall*) di pasar konsumen akhir."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -122,8 +114,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_08_products_catalog.jpg",
     caption: "Penyaringan 19+ Model SKU berdasarkan 7 Kategori Industri dengan Pencarian Cepat dan Alur Pilihan View",
     fungsi: "Menyediakan katalog terstruktur untuk 19+ SKU siap produksi yang dapat difilter berdasarkan 7 kategori (Automotive, Mobile Devices, Amplifier, Subwoofer, DSP, Headunit, Dashcam), lengkap dengan fitur pencarian instan nama/kode SKU dan pemilihan tata letak (Grid/Specs Table).",
-    dampak: "Menghemat waktu pencarian produk bagi manajer pengadaan B2B hingga 70%. Mempermudah distributor dalam menemukan referensi spesifikasi teknis dan ketersediaan layanan OEM/ODM.",
-    alasan: "Membuktikan penguasaan teknik *state management* dan penyaringan data di sisi klien secara instan tanpa perlu memuat ulang (*reloading*) seluruh halaman web."
+    dampak: "Menghemat waktu pencarian produk bagi manajer pengadaan B2B hingga 70%. Mempermudah distributor dalam menemukan referensi spesifikasi teknis dan ketersediaan layanan OEM/ODM."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -134,8 +125,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_09_products_modal.jpg",
     caption: "Jendela Pop-up Rincian Parameter Spesifikasi JSON Produk dan Tombol Aksi Penawaran Harga Terarah",
     fungsi: "Membuka jendela pop-up interaktif yang membedah detail spesifikasi teknik lengkap berbasis atribut JSON terstruktur (tegangan operasional, rasio daya, toleransi dimensi, antarmuka sinyal) beserta tombol langsung untuk memicu permintaan penawaran harga (*RFQ Action*).",
-    dampak: "Memperpendek siklus pra-penjualan (*pre-sales engineering inquiry*) dan mengarahkan calon klien langsung ke corong konversi penawaran resmi dengan konteks produk yang telah terkunci.",
-    alasan: "Menunjukkan rancangan pengalaman pengguna (*User Experience / UX*) yang berorientasi pada konversi bisnis nyata (Conversion-Centric B2B Architecture) dalam demo presentasi."
+    dampak: "Memperpendek siklus pra-penjualan (*pre-sales engineering inquiry*) dan mengarahkan calon klien langsung ke corong konversi penawaran resmi dengan konteks produk yang telah terkunci."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -146,8 +136,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_10_gallery.jpg",
     caption: "Dokumentasi Riil Fasilitas SMT Line, Ruang Oven Nitrogen, dan Laboratorium X-Ray dengan Modal Zoom HD",
     fungsi: "Menampilkan portofolio visual fasilitas manufaktur riil yang dikelompokkan dalam kategori (Lini SMT, Ruang Bersih, Lab QC, Perakitan) serta fitur pembesar gambar resolusi tinggi (Lightbox) untuk inspeksi detail mesin.",
-    dampak: "Memberikan bukti otentik (*tangible validation*) bagi klien internasional yang belum sempat melakukan inspeksi fisik ke pulau Batam, meningkatkan rasa percaya dan reputasi integritas perusahaan.",
-    alasan: "Memastikan penguji melihat bahwa website ini menggunakan dokumentasi aset riil fasilitas pabrik yang dirancang secara profesional, bukan sekadar *mockup* atau gambar template generik."
+    dampak: "Memberikan bukti otentik (*tangible validation*) bagi klien internasional yang belum sempat melakukan inspeksi fisik ke pulau Batam, meningkatkan rasa percaya dan reputasi integritas perusahaan."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -158,8 +147,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_11_contact.jpg",
     caption: "Formulir Pengajuan RFQ Terstruktur, Peta Google Maps Kawasan Batamindo, dan Tautan WhatsApp Bisnis",
     fungsi: "Menyediakan formulir kontak dan pengajuan RFQ dengan validasi data masukan (nama, email, volume produksi, catatan teknis), peta interaktif Google Maps lokasi pabrik di Batamindo Industrial Park, serta tombol pintas komunikasi instan WhatsApp.",
-    dampak: "Berfungsi sebagai pintu masuk utama penangkapan prospek bisnis B2B (*inbound lead generation*). Data yang dikirimkan langsung tersimpan di basis data backend dan memicu notifikasi email konfirmasi otomatis.",
-    alasan: "Menunjukkan kelengkapan alur kerja bisnis secara menyeluruh dari sisi klien hingga ke sistem pemrosesan data backend dan integrasi API pihak ketiga (Google Maps & Cloud Email)."
+    dampak: "Berfungsi sebagai pintu masuk utama penangkapan prospek bisnis B2B (*inbound lead generation*). Data yang dikirimkan langsung tersimpan di basis data backend dan memicu notifikasi email konfirmasi otomatis."
   },
   {
     category: "PORTAL PUBLIK (CLIENT-FACING)",
@@ -170,8 +158,7 @@ const SECTIONS_DATA = [
     imageFile: "pub_12_footer.jpg",
     caption: "Penyesuaian Tema Gelap/Terang, Pengalihan Bahasa Real-time (ID/EN), dan Navigasi Footer Lengkap",
     fungsi: "Menyediakan navigasi global yang mendukung peralihan bahasa instan Bahasa Indonesia dan Bahasa Inggris, pemilihan tema tampilan (Cockpit Dark Mode / Clean Light Mode) yang tersimpan di `localStorage`, serta footer korporat informatif.",
-    dampak: "Memastikan website dapat diakses dengan nyaman oleh delegasi luar negeri (Singapura, Jepang, Eropa) serta memberikan ergonomi visual bagi staf teknis yang terbiasa bekerja di lingkungan monitor redup.",
-    alasan: "Menunjukkan kepatuhan terhadap standar aksesibilitas web internasional dan internasionalisasi (i18n), aspek esensial yang kerap terlewatkan pada proyek mahasiswa biasa."
+    dampak: "Memastikan website dapat diakses dengan optimal oleh delegasi luar negeri (Singapura, Jepang, Eropa) serta memberikan ergonomi visual bagi staf teknis yang terbiasa bekerja di lingkungan monitor redup."
   },
 
   // ═════════════════════════════════════════════════════════════
@@ -185,9 +172,8 @@ const SECTIONS_DATA = [
     badgeColor: "#2563eb",
     imageFile: "adm_01_login.jpg",
     caption: "Antarmuka Login Admin Terenkripsi JWT dengan Pilihan Akun Cepat untuk Uji Coba Peran Multi-Level",
-    fungsi: "Memproteksi seluruh modul manajemen internal melalui otentikasi berbasis token JWT, pencegahan serangan brute-force, serta penyediaan tombol *Quick Demo Access* untuk menguji peran (Administrator, HRD Manager, Staff Konten) dalam 1 klik.",
-    dampak: "Menjaga keamanan data strategis perusahaan dari akses pihak luar yang tidak berwenang, memastikan kepatuhan terhadap tata kelola teknologi informasi (IT Governance).",
-    alasan: "Fitur *Quick Demo Access* sangat diapresiasi saat presentasi karena memungkinkan evaluator mencoba berbagai tingkat hak akses tanpa perlu mengetik kredensial secara berulang-ulang."
+    fungsi: "Memproteksi seluruh modul manajemen internal melalui otentikasi berbasis token JWT, pencegahan serangan brute-force, serta penyediaan tombol *Quick Demo Access* untuk verifikasi peran (Administrator, HRD Manager, Staff Konten) secara instan.",
+    dampak: "Menjaga keamanan data strategis perusahaan dari akses pihak luar yang tidak berwenang, memastikan kepatuhan terhadap tata kelola teknologi informasi (IT Governance)."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -198,8 +184,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_02_overview.jpg",
     caption: "Kartu KPI Statistik Konten, Grafik Kunjungan Unik Pengunjung, dan Status Koneksi Database Pool",
     fungsi: "Menampilkan kartu ringkasan eksekutif (Total Produk, Foto Fasilitas, Total Kunjungan, RFQ Masuk), grafik telemetri analitik lalu lintas pengunjung, status konektivitas basis data MySQL, dan daftar pintasan cepat ke modul CMS.",
-    dampak: "Memberikan visibilitas instan kepada pihak manajemen atas kesehatan operasional website dan volume prospek RFQ yang masuk setiap harinya tanpa perlu membuka perangkat lunak analitik pihak ketiga.",
-    alasan: "Menampilkan estetika antarmuka panel kontrol modern (*sleek dark dashboard UI*) yang membuktikan bahwa website ini bukan sekadar halaman publik, tetapi memiliki ekosistem backend yang sangat aktif."
+    dampak: "Memberikan visibilitas instan kepada pihak manajemen atas kesehatan operasional website dan volume prospek RFQ yang masuk setiap harinya tanpa perlu membuka perangkat lunak analitik pihak ketiga."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -210,8 +195,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_03_branding.jpg",
     caption: "Editor Logo Resmi (Mode Gelap/Terang), URL Favicon, Slogan Manufaktur, dan Nomor Kontak Hotline",
     fungsi: "Menyediakan formulir pengelolaan terpusat untuk logo perusahaan versi mode terang dan gelap, ikon tab peramban (favicon), nama resmi perseroan, slogan korporat, alamat kantor operasional, dan nomor kontak resmi.",
-    dampak: "Memungkinkan staf non-teknis memperbarui identitas visual perusahaan secara mandiri tanpa perlu menyunting baris kode sumber ataupun melakukan proses *deploy* ulang aplikasi.",
-    alasan: "Menunjukkan implementasi prinsip *Single Source of Truth* (SSOT) di mana perubahan satu parameter di database langsung memperbarui seluruh tampilan website publik secara instan."
+    dampak: "Memungkinkan staf operasional memperbarui identitas visual perusahaan secara mandiri tanpa perlu menyunting baris kode sumber ataupun melakukan proses *deploy* ulang aplikasi."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -222,8 +206,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_04_home.jpg",
     caption: "Pengelolaan Slider Spanduk Utama, Teks Berjalan, dan Angka Pencapaian Kapasitas Produksi",
     fungsi: "Memungkinkan admin mengubah urutan slide spanduk beranda, teks judul promosi, kalimat bergerak (*running ticker*), dan angka metrik performa pabrik (kecepatan CPH SMT, target zero defect, persentase pengiriman tepat waktu).",
-    dampak: "Menjamin informasi kapasitas produksi yang ditampilkan kepada calon klien selalu akurat dan selaras dengan peningkatan fasilitas perakitan terbaru di pabrik.",
-    alasan: "Mencontohkan fleksibilitas sistem CMS kustom yang dirancang sesuai kebutuhan aktual industri manufaktur, bukan CMS generik yang kaku."
+    dampak: "Menjamin informasi kapasitas produksi yang ditampilkan kepada calon klien selalu akurat dan selaras dengan peningkatan fasilitas perakitan terbaru di pabrik."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -234,8 +217,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_05_about.jpg",
     caption: "Editor Sejarah Perseroan, Poin Misi Strategis, Pilar Budaya Kerja, dan Dokumen Sertifikat Standar Mutu",
     fungsi: "Menyediakan antarmuka editor teks untuk narasi perjalanan industri perseroan, butir-butir visi-misi, nilai budaya kerja unggul, dan pembaharuan status akreditasi sertifikat ISO 9001/14001/IATF 16949.",
-    dampak: "Mempermudah staf sekretariat perusahaan dalam memperbarui masa berlaku sertifikat audit tahunan sehingga klien selalu melihat bukti kepatuhan yang sah dan terkini.",
-    alasan: "Membuktikan pemisahan yang bersih antara lapisan penyajian antarmuka (*presentation layer*) dan lapisan data (*data persistence layer*)."
+    dampak: "Mempermudah staf sekretariat perusahaan dalam memperbarui masa berlaku sertifikat audit tahunan sehingga klien selalu melihat bukti kepatuhan yang sah dan terkini."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -246,8 +228,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_06_automation.jpg",
     caption: "Editor Parameter Seri Robot (Payload, Jangkauan Lengan, Presisi), Dokumentasi Test Jigs, dan MES",
     fungsi: "Mengelola spesifikasi teknis untuk masing-masing lini robot industri (kapasitas beban angkut, jangkauan kerja, tingkat repetisi akurasi), deskripsi kemampuan perakitan test jigs, dan diagram alur sistem MES pabrik.",
-    dampak: "Memberikan keleluasaan bagi tim teknis otomasi untuk mempublikasikan inovasi lini robot terbaru saat perusahaan berinvestasi pada mesin baru.",
-    alasan: "Menegaskan keunikan sistem ini sebagai CMS terintegrasi yang mampu menangani data teknis spesifik otomasi industri berteknologi tinggi."
+    dampak: "Memberikan keleluasaan bagi tim teknis otomasi untuk mempublikasikan inovasi lini robot terbaru saat perusahaan berinvestasi pada mesin baru."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -258,8 +239,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_07_products.jpg",
     caption: "Tabel Kelola 19+ SKU Produk, Unggah Foto Komponen, dan Editor Spesifikasi Dinamis Format JSON",
     fungsi: "Menyediakan tabel manajemen lengkap (Create, Read, Update, Delete) untuk seluruh inventaris 19+ SKU produk, pengunggahan foto resolusi tinggi, penentuan kategori, status ketersediaan, serta editor spesifikasi teknis berbasis JSON dinamis.",
-    dampak: "Memberikan kemandirian 100% kepada departemen pemasaran produk untuk mendaftarkan SKU baru atau merevisi spesifikasi teknis komponen dalam hitungan menit.",
-    alasan: "Menunjukkan kapabilitas rekayasa data tingkat tinggi dalam menangani skema atribut dinamis (Dynamic JSON Schema) di basis data relasional MySQL secara elegan."
+    dampak: "Memberikan kemandirian penuh kepada departemen pemasaran produk untuk mendaftarkan SKU baru atau merevisi spesifikasi teknis komponen dalam hitungan menit."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -270,8 +250,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_08_gallery.jpg",
     caption: "Pengunggahan Foto Dokumentasi Pabrik, Kategorisasi Album (SMT, Cleanroom, Lab), dan Status Visibilitas",
     fungsi: "Mengatur kurasi foto-foto dokumentasi fasilitas manufaktur, proses pengunggahan berkas gambar dengan validasi keamanan format/ukuran, pengelompokan album, dan pengubahan status tampil/arsip.",
-    dampak: "Menjaga etalase visual fasilitas perusahaan tetap mutakhir, profesional, dan mencerminkan modernitas lini produksi fisik yang sesungguhnya di Batam.",
-    alasan: "Menjelaskan implementasi *safe file upload pipeline* di backend Node.js (validasi MIME type, penamaan berkas kriptografis acak, sanitasi path)."
+    dampak: "Menjaga etalase visual fasilitas perusahaan tetap mutakhir, profesional, dan mencerminkan modernitas lini produksi fisik yang sesungguhnya di Batam."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -281,9 +260,8 @@ const SECTIONS_DATA = [
     badgeColor: "#2563eb",
     imageFile: "adm_09_contact.jpg",
     caption: "Tabel Pelacakan Pesan Masuk dan Permintaan RFQ, Status Penanganan Prospek, dan Integrasi Email",
-    fungsi: "Berfungsi sebagai mini-CRM untuk memantau pesan masuk dari formulir kontak publik, meninjau rincian permintaan penawaran harga (RFQ), memperbarui status penanganan prospek, serta melihat riwayat komunikasi klien.",
-    dampak: "Mempercepat waktu tanggap (*response time*) tim penjualan B2B terhadap calon pembeli potensial dari hitungan hari menjadi hitungan jam, melipatgandakan peluang penutupan kontrak manufaktur.",
-    alasan: "Membuktikan bahwa website ini bukan sekadar brosur digital pasif, melainkan sebuah instrumen operasional bisnis aktif yang terintegrasi langsung dengan layanan cloud Resend API."
+    fungsi: "Berfungsi sebagai sistem CRM untuk memantau pesan masuk dari formulir kontak publik, meninjau rincian permintaan penawaran harga (RFQ), memperbarui status penanganan prospek, serta melihat riwayat komunikasi klien.",
+    dampak: "Mempercepat waktu tanggap (*response time*) tim penjualan B2B terhadap calon pembeli potensial dari hitungan hari menjadi hitungan jam, melipatgandakan peluang penutupan kontrak manufaktur."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -293,9 +271,8 @@ const SECTIONS_DATA = [
     badgeColor: "#2563eb",
     imageFile: "adm_10_users.jpg",
     caption: "Pengaturan Akun Pengguna Admin, Pembagian Peran (Admin/Manager/Staff), dan Enkripsi Sandi bcrypt",
-    fungsi: "Mengelola akun pengguna sistem dengan pembagian izin bertingkat (*Role-Based Access Control*): Administrator (akses tanpa batas), HRD Manager (akses pengguna & log), dan Staff Konten (akses konten terbatas), dilindungi algoritma *hashing* kata sandi bcrypt 10 salt.",
-    dampak: "Mencegah terjadinya kesalahan operasional tak disengaja maupun insiden manipulasi data internal (*Principle of Least Privilege*), menjamin akuntabilitas setiap personil pengelola.",
-    alasan: "Menunjukkan implementasi standar keamanan perangkat lunak industri enterprise (*Enterprise Authorization Matrix*) yang sangat diapresiasi dalam sidang evaluasi teknis."
+    fungsi: "Mengelola akun pengguna sistem dengan pembagian izin bertingkat (*Role-Based Access Control*): Administrator (akses penuh), HRD Manager (akses pengguna & log), dan Staff Konten (akses konten terbatas), dilindungi algoritma *hashing* kata sandi bcrypt 10 salt.",
+    dampak: "Mencegah terjadinya kesalahan operasional tak disengaja maupun insiden manipulasi data internal (*Principle of Least Privilege*), menjamin akuntabilitas setiap personil pengelola."
   },
   {
     category: "PORTAL ADMINISTRASI (MANAGEMENT CMS)",
@@ -306,8 +283,7 @@ const SECTIONS_DATA = [
     imageFile: "adm_11_logs.jpg",
     caption: "Daftar Rekam Jejak Sistem Append-Only: Identitas Pengguna, Alamat IP, Waktu Presisi, dan Catatan Aksi",
     fungsi: "Mencatat setiap mutasi data yang terjadi di dalam portal admin secara otomatis (*append-only activity log*), meliputi stempel waktu presisi, ID dan nama pengguna, modul yang disentuh, jenis tindakan (CREATE/UPDATE/DELETE), dan alamat IP pemohon.",
-    dampak: "Memenuhi prasyarat ketat audit kepatuhan IT korporat internasional dan memudahkan penyelidikan forensik digital apabila terjadi anomali atau sengketa perubahan data inventaris.",
-    alasan: "Menjadi bukti pamungkas bahwa sistem dirancang dengan kedewasaan arsitektural penuh (*production-ready architecture*), siap diadopsi langsung pada lingkungan pabrik riil."
+    dampak: "Memenuhi prasyarat ketat audit kepatuhan IT korporat internasional dan memudahkan penyelidikan forensik digital apabila terjadi anomali atau sengketa perubahan data inventaris."
   }
 ];
 
@@ -347,7 +323,7 @@ function generateDocument16Html() {
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -368,17 +344,6 @@ function generateDocument16Html() {
               </div>
               <div class="pillar-desc">
                 ${sec.dampak}
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                ${sec.alasan}
               </div>
             </div>
           </div>
@@ -585,38 +550,39 @@ function generateDocument16Html() {
       font-style: italic;
     }
 
-    /* 3 PILAR PENJELASAN */
+    /* 2 PILAR PENJELASAN */
     .showcase-text-col {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
+      justify-content: center;
     }
     .pillar-box {
       border-radius: 4px;
-      padding: 6px 8px;
+      padding: 8px 10px;
       border: 1px solid transparent;
     }
     .pillar-header {
       display: flex;
       align-items: center;
       gap: 5px;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .pillar-icon {
-      font-size: 8pt;
+      font-size: 8.5pt;
     }
     .pillar-title {
-      font-size: 7.2pt;
+      font-size: 7.4pt;
       font-weight: bold;
       letter-spacing: 0.3px;
     }
     .pillar-desc {
-      font-size: 7.6pt;
-      line-height: 1.35;
+      font-size: 7.8pt;
+      line-height: 1.4;
       text-align: justify;
     }
 
-    /* COLOR THEMES FOR 3 PILLARS */
+    /* COLOR THEMES FOR 2 PILLARS */
     .pillar-fungsi {
       background: #f8fafc;
       border-color: #cbd5e1;
@@ -639,17 +605,6 @@ function generateDocument16Html() {
       color: #14532d;
     }
 
-    .pillar-alasan {
-      background: #eff6ff;
-      border-color: #bfdbfe;
-    }
-    .pillar-alasan .pillar-title {
-      color: #1d4ed8;
-    }
-    .pillar-alasan .pillar-desc {
-      color: #1e3a8a;
-    }
-
     /* FOOTER */
     .doc-footer {
       border-top: 1px solid #cbd5e1;
@@ -667,12 +622,12 @@ function generateDocument16Html() {
   <!-- HEADER FORMAL -->
   <div class="doc-header">
     <span>PT. GLOBAL PHILSONIC TECHNOLOGIES &bull; BATAM FTZ</span>
-    <span>DOKUMEN TEKNIS &amp; PRESENTASI SISTEM &bull; UNIT 16</span>
+    <span>DOKUMEN TEKNIS &amp; SPESIFIKASI SISTEM &bull; UNIT 16</span>
   </div>
 
   <div class="title-banner">
-    <div class="unit-title-num">DOKUMEN RESMI 16 &bull; PRESENTASI EKSEKUTIF FITUR SISTEM TERPADU</div>
-    <h1>BEDAH VISUAL &amp; ANALISIS STRATEGIS SELURUH FITUR WEBSITE PUBLIK DAN DASHBOARD ADMIN</h1>
+    <div class="unit-title-num">DOKUMEN RESMI 16 &bull; SPESIFIKASI FUNGSIONAL &amp; VERIFIKASI SISTEM TERPADU</div>
+    <h1>BEDAH VISUAL &amp; ANALISIS FITUR WEBSITE PUBLIK DAN DASHBOARD ADMIN</h1>
   </div>
 
   <!-- TABEL METADATA SISTEM -->
@@ -685,7 +640,7 @@ function generateDocument16Html() {
     </tr>
     <tr>
       <td class="lbl">Tujuan Dokumen</td>
-      <td>Panduan Presentasi Eksekutif, Analisis Dampak Bisnis, &amp; Rationale Desain</td>
+      <td>Spesifikasi Teknis Fungsional, Analisis Operasional, &amp; Verifikasi Antarmuka Riil</td>
       <td class="lbl">Cakupan Evaluasi</td>
       <td>23 Section Riil (12 Fitur Portal Publik &amp; 11 Modul Dashboard Admin)</td>
     </tr>
@@ -697,9 +652,9 @@ function generateDocument16Html() {
     </tr>
   </table>
 
-  <!-- KOTAK PENGANTAR PRESENTASI -->
+  <!-- KOTAK PENGANTAR -->
   <div class="intro-box">
-    <strong>Ringkasan Eksekutif untuk Presentasi:</strong> Dokumen ini membedah secara visual dan strategis seluruh komponen antarmuka yang telah dibangun pada website <em>PT. Global Philsonic Technologies</em>. Setiap section dilengkapi tangkapan layar riil (*live high-resolution screenshot*) yang disandingkan langsung dengan tiga parameter evaluasi utama: <strong>(1) Fungsi Utama &amp; Mekanisme Kerja</strong>, <strong>(2) Dampak Bisnis &amp; Nilai Operasional</strong>, serta <strong>(3) Alasan Pembuatan &amp; Nilai Strategis untuk Presentasi</strong>. Dokumen ini dirancang sebagai pegangan presentasi komprehensif guna menunjukkan kepada evaluator, dewan direksi, dan klien industri bahwa setiap elemen antarmuka dibangun dengan tujuan teknis dan nilai bisnis yang terukur.
+    <strong>Ringkasan Eksekutif:</strong> Dokumen ini membedah secara komprehensif seluruh komponen antarmuka yang telah diimplementasikan pada website <em>PT. Global Philsonic Technologies</em>. Setiap section dilengkapi tangkapan layar aktual (*live high-resolution screenshot*) yang disandingkan langsung dengan dua parameter evaluasi teknis utama: <strong>(1) Fungsi Utama &amp; Mekanisme Kerja</strong>, serta <strong>(2) Dampak Bisnis &amp; Nilai Operasional</strong>. Penyajian ini memfokuskan dokumentasi pada kegunaan riil sistem dalam mendukung operasional manufaktur, otomasi industri, dan tata kelola administrasi perusahaan.
   </div>
 
   <!-- DAFTAR KARTU SHOWCASE SECTION -->
@@ -708,7 +663,7 @@ function generateDocument16Html() {
   <!-- FOOTER DOKUMEN -->
   <div class="doc-footer">
     <span>Dokumen Resmi 16 &bull; PT. Global Philsonic Technologies (Automated Live Capture)</span>
-    <span>Halaman Presentasi Eksekutif Arsitektur Sistem Web Manufaktur &amp; Admin CMS</span>
+    <span>Spesifikasi Fungsional &amp; Verifikasi Visual Sistem Web Manufaktur dan Admin CMS</span>
   </div>
 
 </body>

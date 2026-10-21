@@ -196,38 +196,39 @@
       font-style: italic;
     }
 
-    /* 3 PILAR PENJELASAN */
+    /* 2 PILAR PENJELASAN */
     .showcase-text-col {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
+      justify-content: center;
     }
     .pillar-box {
       border-radius: 4px;
-      padding: 6px 8px;
+      padding: 8px 10px;
       border: 1px solid transparent;
     }
     .pillar-header {
       display: flex;
       align-items: center;
       gap: 5px;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .pillar-icon {
-      font-size: 8pt;
+      font-size: 8.5pt;
     }
     .pillar-title {
-      font-size: 7.2pt;
+      font-size: 7.4pt;
       font-weight: bold;
       letter-spacing: 0.3px;
     }
     .pillar-desc {
-      font-size: 7.6pt;
-      line-height: 1.35;
+      font-size: 7.8pt;
+      line-height: 1.4;
       text-align: justify;
     }
 
-    /* COLOR THEMES FOR 3 PILLARS */
+    /* COLOR THEMES FOR 2 PILLARS */
     .pillar-fungsi {
       background: #f8fafc;
       border-color: #cbd5e1;
@@ -250,17 +251,6 @@
       color: #14532d;
     }
 
-    .pillar-alasan {
-      background: #eff6ff;
-      border-color: #bfdbfe;
-    }
-    .pillar-alasan .pillar-title {
-      color: #1d4ed8;
-    }
-    .pillar-alasan .pillar-desc {
-      color: #1e3a8a;
-    }
-
     /* FOOTER */
     .doc-footer {
       border-top: 1px solid #cbd5e1;
@@ -278,12 +268,12 @@
   <!-- HEADER FORMAL -->
   <div class="doc-header">
     <span>PT. GLOBAL PHILSONIC TECHNOLOGIES &bull; BATAM FTZ</span>
-    <span>DOKUMEN TEKNIS &amp; PRESENTASI SISTEM &bull; UNIT 16</span>
+    <span>DOKUMEN TEKNIS &amp; SPESIFIKASI SISTEM &bull; UNIT 16</span>
   </div>
 
   <div class="title-banner">
-    <div class="unit-title-num">DOKUMEN RESMI 16 &bull; PRESENTASI EKSEKUTIF FITUR SISTEM TERPADU</div>
-    <h1>BEDAH VISUAL &amp; ANALISIS STRATEGIS SELURUH FITUR WEBSITE PUBLIK DAN DASHBOARD ADMIN</h1>
+    <div class="unit-title-num">DOKUMEN RESMI 16 &bull; SPESIFIKASI FUNGSIONAL &amp; VERIFIKASI SISTEM TERPADU</div>
+    <h1>BEDAH VISUAL &amp; ANALISIS FITUR WEBSITE PUBLIK DAN DASHBOARD ADMIN</h1>
   </div>
 
   <!-- TABEL METADATA SISTEM -->
@@ -296,7 +286,7 @@
     </tr>
     <tr>
       <td class="lbl">Tujuan Dokumen</td>
-      <td>Panduan Presentasi Eksekutif, Analisis Dampak Bisnis, &amp; Rationale Desain</td>
+      <td>Spesifikasi Teknis Fungsional, Analisis Operasional, &amp; Verifikasi Antarmuka Riil</td>
       <td class="lbl">Cakupan Evaluasi</td>
       <td>23 Section Riil (12 Fitur Portal Publik &amp; 11 Modul Dashboard Admin)</td>
     </tr>
@@ -308,9 +298,9 @@
     </tr>
   </table>
 
-  <!-- KOTAK PENGANTAR PRESENTASI -->
+  <!-- KOTAK PENGANTAR -->
   <div class="intro-box">
-    <strong>Ringkasan Eksekutif untuk Presentasi:</strong> Dokumen ini membedah secara visual dan strategis seluruh komponen antarmuka yang telah dibangun pada website <em>PT. Global Philsonic Technologies</em>. Setiap section dilengkapi tangkapan layar riil (*live high-resolution screenshot*) yang disandingkan langsung dengan tiga parameter evaluasi utama: <strong>(1) Fungsi Utama &amp; Mekanisme Kerja</strong>, <strong>(2) Dampak Bisnis &amp; Nilai Operasional</strong>, serta <strong>(3) Alasan Pembuatan &amp; Nilai Strategis untuk Presentasi</strong>. Dokumen ini dirancang sebagai pegangan presentasi komprehensif guna menunjukkan kepada evaluator, dewan direksi, dan klien industri bahwa setiap elemen antarmuka dibangun dengan tujuan teknis dan nilai bisnis yang terukur.
+    <strong>Ringkasan Eksekutif:</strong> Dokumen ini membedah secara komprehensif seluruh komponen antarmuka yang telah diimplementasikan pada website <em>PT. Global Philsonic Technologies</em>. Setiap section dilengkapi tangkapan layar aktual (*live high-resolution screenshot*) yang disandingkan langsung dengan dua parameter evaluasi teknis utama: <strong>(1) Fungsi Utama &amp; Mekanisme Kerja</strong>, serta <strong>(2) Dampak Bisnis &amp; Nilai Operasional</strong>. Penyajian ini memfokuskan dokumentasi pada kegunaan riil sistem dalam mendukung operasional manufaktur, otomasi industri, dan tata kelola administrasi perusahaan.
   </div>
 
   <!-- DAFTAR KARTU SHOWCASE SECTION -->
@@ -342,7 +332,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -362,18 +352,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Menciptakan *golden 3-second first impression* yang memukau bagi calon investor dan mitra multinasional. Membangun persepsi instan bahwa PT Global Philsonic Technologies adalah fasilitas manufaktur otomasi kelas dunia, sehingga secara drastis menurunkan rasio pentalan (*bounce rate*) pengunjung baru.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Website manufaktur konvensional umumnya kaku, statis, dan membosankan. Bagian ini dirancang untuk menunjukkan keunggulan antarmuka modern (*industrial cockpit aesthetic*) yang dinamis dan berenergi tinggi saat dipresentasikan di hadapan dewan penguji maupun klien korporat.
+                Menciptakan impresi awal yang kuat bagi calon investor dan mitra multinasional. Membangun persepsi bahwa PT Global Philsonic Technologies adalah fasilitas manufaktur otomasi kelas dunia, sehingga secara signifikan menurunkan rasio pentalan (*bounce rate*) pengunjung baru.
               </div>
             </div>
           </div>
@@ -407,7 +386,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -427,18 +406,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Menghilangkan keraguan teknis dari *procurement engineer* klien luar negeri mengenai kesiapan kapasitas dan sertifikasi pabrik. Membantu mempercepat proses verifikasi kualifikasi vendor (*vendor qualification stage*) sebelum tender proyek manufaktur dimulai.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Penting dipresentasikan untuk mendemonstrasikan kemampuan merancang tata letak informasi industri yang padat parameter teknis namun tetap nyaman dibaca, terstruktur, dan memberikan bukti kompetensi yang konkrit (*tangible credibility*).
+                Menjawab kebutuhan teknis *procurement engineer* klien luar negeri mengenai kesiapan kapasitas dan sertifikasi pabrik. Membantu mempercepat proses verifikasi kualifikasi vendor (*vendor qualification stage*) sebelum tender proyek manufaktur dimulai.
               </div>
             </div>
           </div>
@@ -472,7 +440,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -493,17 +461,6 @@
               </div>
               <div class="pillar-desc">
                 Memberikan transparansi rantai pasok (*supply chain visibility*) dan metodologi kendali proses kepada klien B2B. Memudahkan estimasi *lead-time* produksi dan memastikan setiap unit PCBA diproduksi dengan kepatuhan standar zero-defect IATF 16949.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan kepada penguji bahwa pengembang web memahami alur operasional riil manufaktur elektronika dan berhasil mengonversinya menjadi visualisasi interaktif yang mudah dipahami oleh audiens lintas disiplin ilmu.
               </div>
             </div>
           </div>
@@ -537,7 +494,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -558,17 +515,6 @@
               </div>
               <div class="pillar-desc">
                 Memperkuat profil hukum dan kredibilitas korporat dalam rangka audit legal dan *compliance* internasional. Memberikan kejelasan arah strategis perusahaan kepada mitra bisnis jangka panjang.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menghadirkan sentuhan mikro-interaksi (*delightful micro-interactions*) yang membuktikan keahlian *front-end engineering* tingkat lanjut. Bagian ini sangat efektif menarik perhatian audiens saat sesi demonstrasi langsung.
               </div>
             </div>
           </div>
@@ -602,7 +548,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -622,18 +568,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Sangat krusial untuk memenangkan tender pembuatan perangkat medis sensitif dan modul komunikasi otomotif yang rentan mengalami kerusakan fatal akibat lonjakan elektrostatik (*Electrostatic Discharge*) dan kontaminasi partikulat.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menegaskan bahwa sistem dokumentasi website ini tidak hanya memuat aspek pemasaran umum, tetapi juga menyajikan data spesifikasi engineering yang akurat dan memenuhi ekspektasi insinyur manufaktur profesional.
+                Sangat krusial untuk memenuhi kualifikasi pembuatan perangkat medis sensitif dan modul komunikasi otomotif yang rentan mengalami kerusakan fatal akibat lonjakan elektrostatik (*Electrostatic Discharge*) dan kontaminasi partikulat.
               </div>
             </div>
           </div>
@@ -667,7 +602,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -687,18 +622,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Mendongkrak daya tawar (*brand equity*) perusahaan di mata mitra global, membuktikan bahwa perusahaan telah mengadopsi teknologi Industri 4.0 secara menyeluruh baik di lini perakitan fisik maupun antarmuka digitalnya.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Merupakan fitur puncak (*showstopper*) dalam presentasi proyek. Membuktikan kompetensi rekayasa grafis mutakhir (WebGL/Three.js) dengan performa stabil 60 FPS di berbagai perangkat peramban modern.
+                Mendongkrak daya tawar (*brand equity*) perusahaan di mata mitra global, mengonfirmasi bahwa perusahaan telah mengadopsi teknologi Industri 4.0 secara menyeluruh baik di lini perakitan fisik maupun antarmuka digitalnya.
               </div>
             </div>
           </div>
@@ -732,7 +656,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -753,17 +677,6 @@
               </div>
               <div class="pillar-desc">
                 Menjamin tingkat *yield rate* produk di atas 99.8% dan ketertelusuran penuh data pengujian (*end-to-end unit traceability*), meminimalkan risiko penarikan produk (*recall*) di pasar konsumen akhir.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan pemahaman integrasi sistem cyber-fisik (Cyber-Physical Systems) yang menghubungkan otomasi perangkat keras di lantai pabrik dengan sistem pelaporan digital.
               </div>
             </div>
           </div>
@@ -797,7 +710,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -818,17 +731,6 @@
               </div>
               <div class="pillar-desc">
                 Menghemat waktu pencarian produk bagi manajer pengadaan B2B hingga 70%. Mempermudah distributor dalam menemukan referensi spesifikasi teknis dan ketersediaan layanan OEM/ODM.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Membuktikan penguasaan teknik *state management* dan penyaringan data di sisi klien secara instan tanpa perlu memuat ulang (*reloading*) seluruh halaman web.
               </div>
             </div>
           </div>
@@ -862,7 +764,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -883,17 +785,6 @@
               </div>
               <div class="pillar-desc">
                 Memperpendek siklus pra-penjualan (*pre-sales engineering inquiry*) dan mengarahkan calon klien langsung ke corong konversi penawaran resmi dengan konteks produk yang telah terkunci.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan rancangan pengalaman pengguna (*User Experience / UX*) yang berorientasi pada konversi bisnis nyata (Conversion-Centric B2B Architecture) dalam demo presentasi.
               </div>
             </div>
           </div>
@@ -927,7 +818,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -948,17 +839,6 @@
               </div>
               <div class="pillar-desc">
                 Memberikan bukti otentik (*tangible validation*) bagi klien internasional yang belum sempat melakukan inspeksi fisik ke pulau Batam, meningkatkan rasa percaya dan reputasi integritas perusahaan.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Memastikan penguji melihat bahwa website ini menggunakan dokumentasi aset riil fasilitas pabrik yang dirancang secara profesional, bukan sekadar *mockup* atau gambar template generik.
               </div>
             </div>
           </div>
@@ -992,7 +872,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1013,17 +893,6 @@
               </div>
               <div class="pillar-desc">
                 Berfungsi sebagai pintu masuk utama penangkapan prospek bisnis B2B (*inbound lead generation*). Data yang dikirimkan langsung tersimpan di basis data backend dan memicu notifikasi email konfirmasi otomatis.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan kelengkapan alur kerja bisnis secara menyeluruh dari sisi klien hingga ke sistem pemrosesan data backend dan integrasi API pihak ketiga (Google Maps & Cloud Email).
               </div>
             </div>
           </div>
@@ -1057,7 +926,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1077,18 +946,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Memastikan website dapat diakses dengan nyaman oleh delegasi luar negeri (Singapura, Jepang, Eropa) serta memberikan ergonomi visual bagi staf teknis yang terbiasa bekerja di lingkungan monitor redup.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan kepatuhan terhadap standar aksesibilitas web internasional dan internasionalisasi (i18n), aspek esensial yang kerap terlewatkan pada proyek mahasiswa biasa.
+                Memastikan website dapat diakses dengan optimal oleh delegasi luar negeri (Singapura, Jepang, Eropa) serta memberikan ergonomi visual bagi staf teknis yang terbiasa bekerja di lingkungan monitor redup.
               </div>
             </div>
           </div>
@@ -1122,7 +980,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1131,7 +989,7 @@
                 <span class="pillar-title">1. FUNGSI UTAMA &amp; MEKANISME KERJA</span>
               </div>
               <div class="pillar-desc">
-                Memproteksi seluruh modul manajemen internal melalui otentikasi berbasis token JWT, pencegahan serangan brute-force, serta penyediaan tombol *Quick Demo Access* untuk menguji peran (Administrator, HRD Manager, Staff Konten) dalam 1 klik.
+                Memproteksi seluruh modul manajemen internal melalui otentikasi berbasis token JWT, pencegahan serangan brute-force, serta penyediaan tombol *Quick Demo Access* untuk verifikasi peran (Administrator, HRD Manager, Staff Konten) secara instan.
               </div>
             </div>
 
@@ -1143,17 +1001,6 @@
               </div>
               <div class="pillar-desc">
                 Menjaga keamanan data strategis perusahaan dari akses pihak luar yang tidak berwenang, memastikan kepatuhan terhadap tata kelola teknologi informasi (IT Governance).
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Fitur *Quick Demo Access* sangat diapresiasi saat presentasi karena memungkinkan evaluator mencoba berbagai tingkat hak akses tanpa perlu mengetik kredensial secara berulang-ulang.
               </div>
             </div>
           </div>
@@ -1187,7 +1034,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1208,17 +1055,6 @@
               </div>
               <div class="pillar-desc">
                 Memberikan visibilitas instan kepada pihak manajemen atas kesehatan operasional website dan volume prospek RFQ yang masuk setiap harinya tanpa perlu membuka perangkat lunak analitik pihak ketiga.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menampilkan estetika antarmuka panel kontrol modern (*sleek dark dashboard UI*) yang membuktikan bahwa website ini bukan sekadar halaman publik, tetapi memiliki ekosistem backend yang sangat aktif.
               </div>
             </div>
           </div>
@@ -1252,7 +1088,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1272,18 +1108,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Memungkinkan staf non-teknis memperbarui identitas visual perusahaan secara mandiri tanpa perlu menyunting baris kode sumber ataupun melakukan proses *deploy* ulang aplikasi.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan implementasi prinsip *Single Source of Truth* (SSOT) di mana perubahan satu parameter di database langsung memperbarui seluruh tampilan website publik secara instan.
+                Memungkinkan staf operasional memperbarui identitas visual perusahaan secara mandiri tanpa perlu menyunting baris kode sumber ataupun melakukan proses *deploy* ulang aplikasi.
               </div>
             </div>
           </div>
@@ -1317,7 +1142,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1338,17 +1163,6 @@
               </div>
               <div class="pillar-desc">
                 Menjamin informasi kapasitas produksi yang ditampilkan kepada calon klien selalu akurat dan selaras dengan peningkatan fasilitas perakitan terbaru di pabrik.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Mencontohkan fleksibilitas sistem CMS kustom yang dirancang sesuai kebutuhan aktual industri manufaktur, bukan CMS generik yang kaku.
               </div>
             </div>
           </div>
@@ -1382,7 +1196,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1403,17 +1217,6 @@
               </div>
               <div class="pillar-desc">
                 Mempermudah staf sekretariat perusahaan dalam memperbarui masa berlaku sertifikat audit tahunan sehingga klien selalu melihat bukti kepatuhan yang sah dan terkini.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Membuktikan pemisahan yang bersih antara lapisan penyajian antarmuka (*presentation layer*) dan lapisan data (*data persistence layer*).
               </div>
             </div>
           </div>
@@ -1447,7 +1250,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1468,17 +1271,6 @@
               </div>
               <div class="pillar-desc">
                 Memberikan keleluasaan bagi tim teknis otomasi untuk mempublikasikan inovasi lini robot terbaru saat perusahaan berinvestasi pada mesin baru.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menegaskan keunikan sistem ini sebagai CMS terintegrasi yang mampu menangani data teknis spesifik otomasi industri berteknologi tinggi.
               </div>
             </div>
           </div>
@@ -1512,7 +1304,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1532,18 +1324,7 @@
                 <span class="pillar-title">2. DAMPAK BISNIS &amp; NILAI OPERASIONAL</span>
               </div>
               <div class="pillar-desc">
-                Memberikan kemandirian 100% kepada departemen pemasaran produk untuk mendaftarkan SKU baru atau merevisi spesifikasi teknis komponen dalam hitungan menit.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan kapabilitas rekayasa data tingkat tinggi dalam menangani skema atribut dinamis (Dynamic JSON Schema) di basis data relasional MySQL secara elegan.
+                Memberikan kemandirian penuh kepada departemen pemasaran produk untuk mendaftarkan SKU baru atau merevisi spesifikasi teknis komponen dalam hitungan menit.
               </div>
             </div>
           </div>
@@ -1577,7 +1358,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1598,17 +1379,6 @@
               </div>
               <div class="pillar-desc">
                 Menjaga etalase visual fasilitas perusahaan tetap mutakhir, profesional, dan mencerminkan modernitas lini produksi fisik yang sesungguhnya di Batam.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menjelaskan implementasi *safe file upload pipeline* di backend Node.js (validasi MIME type, penamaan berkas kriptografis acak, sanitasi path).
               </div>
             </div>
           </div>
@@ -1642,7 +1412,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1651,7 +1421,7 @@
                 <span class="pillar-title">1. FUNGSI UTAMA &amp; MEKANISME KERJA</span>
               </div>
               <div class="pillar-desc">
-                Berfungsi sebagai mini-CRM untuk memantau pesan masuk dari formulir kontak publik, meninjau rincian permintaan penawaran harga (RFQ), memperbarui status penanganan prospek, serta melihat riwayat komunikasi klien.
+                Berfungsi sebagai sistem CRM untuk memantau pesan masuk dari formulir kontak publik, meninjau rincian permintaan penawaran harga (RFQ), memperbarui status penanganan prospek, serta melihat riwayat komunikasi klien.
               </div>
             </div>
 
@@ -1663,17 +1433,6 @@
               </div>
               <div class="pillar-desc">
                 Mempercepat waktu tanggap (*response time*) tim penjualan B2B terhadap calon pembeli potensial dari hitungan hari menjadi hitungan jam, melipatgandakan peluang penutupan kontrak manufaktur.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Membuktikan bahwa website ini bukan sekadar brosur digital pasif, melainkan sebuah instrumen operasional bisnis aktif yang terintegrasi langsung dengan layanan cloud Resend API.
               </div>
             </div>
           </div>
@@ -1707,7 +1466,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1716,7 +1475,7 @@
                 <span class="pillar-title">1. FUNGSI UTAMA &amp; MEKANISME KERJA</span>
               </div>
               <div class="pillar-desc">
-                Mengelola akun pengguna sistem dengan pembagian izin bertingkat (*Role-Based Access Control*): Administrator (akses tanpa batas), HRD Manager (akses pengguna & log), dan Staff Konten (akses konten terbatas), dilindungi algoritma *hashing* kata sandi bcrypt 10 salt.
+                Mengelola akun pengguna sistem dengan pembagian izin bertingkat (*Role-Based Access Control*): Administrator (akses penuh), HRD Manager (akses pengguna & log), dan Staff Konten (akses konten terbatas), dilindungi algoritma *hashing* kata sandi bcrypt 10 salt.
               </div>
             </div>
 
@@ -1728,17 +1487,6 @@
               </div>
               <div class="pillar-desc">
                 Mencegah terjadinya kesalahan operasional tak disengaja maupun insiden manipulasi data internal (*Principle of Least Privilege*), menjamin akuntabilitas setiap personil pengelola.
-              </div>
-            </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menunjukkan implementasi standar keamanan perangkat lunak industri enterprise (*Enterprise Authorization Matrix*) yang sangat diapresiasi dalam sidang evaluasi teknis.
               </div>
             </div>
           </div>
@@ -1772,7 +1520,7 @@
             </div>
           </div>
 
-          <!-- KOLOM KANAN: ANALISIS 3 PILAR -->
+          <!-- KOLOM KANAN: ANALISIS 2 PILAR UTAMA -->
           <div class="showcase-text-col">
             <!-- PILAR 1: FUNGSI UTAMA -->
             <div class="pillar-box pillar-fungsi">
@@ -1795,17 +1543,6 @@
                 Memenuhi prasyarat ketat audit kepatuhan IT korporat internasional dan memudahkan penyelidikan forensik digital apabila terjadi anomali atau sengketa perubahan data inventaris.
               </div>
             </div>
-
-            <!-- PILAR 3: ALASAN PEMBUATAN UNTUK PRESENTASI -->
-            <div class="pillar-box pillar-alasan">
-              <div class="pillar-header">
-                <span class="pillar-icon">🎯</span>
-                <span class="pillar-title">3. ALASAN DIBUAT &amp; NILAI STRATEGIS PRESENTASI</span>
-              </div>
-              <div class="pillar-desc">
-                Menjadi bukti pamungkas bahwa sistem dirancang dengan kedewasaan arsitektural penuh (*production-ready architecture*), siap diadopsi langsung pada lingkungan pabrik riil.
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1814,7 +1551,7 @@
   <!-- FOOTER DOKUMEN -->
   <div class="doc-footer">
     <span>Dokumen Resmi 16 &bull; PT. Global Philsonic Technologies (Automated Live Capture)</span>
-    <span>Halaman Presentasi Eksekutif Arsitektur Sistem Web Manufaktur &amp; Admin CMS</span>
+    <span>Spesifikasi Fungsional &amp; Verifikasi Visual Sistem Web Manufaktur dan Admin CMS</span>
   </div>
 
 </body>
