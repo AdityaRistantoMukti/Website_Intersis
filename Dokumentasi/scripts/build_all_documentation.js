@@ -16,6 +16,7 @@ const docModules05to08 = require('./doc_module_05_08');
 const docModules09to12 = require('./doc_module_09_12');
 const docSitemapComparison = require('./doc_sitemap_comparison');
 const docAdminGuide = require('./doc_admin_guide');
+const docFullSitemapCoverage = require('./doc_full_sitemap_coverage');
 
 const allCompetencyUnits = [
   ...docModules01to04,
@@ -33,10 +34,11 @@ function sanitizeFilename(title) {
 
 async function run() {
   console.log('====================================================');
-  console.log('🚀 MEMULAI GENERASI DOKUMENTASI LENGKAP (14 BERKAS PDF)');
+  console.log('🚀 MEMULAI GENERASI DOKUMENTASI LENGKAP (15 BERKAS PDF)');
   console.log('   - 12 Unit Pemenuhan Standar Kompetensi');
   console.log('   - 1 Laporan Komparasi Sitemap & Fitur');
   console.log('   - 1 Buku Panduan Penggunaan & Alur Pengeditan Admin');
+  console.log('   - 1 Laporan Cakupan Sitemap Lengkap Publik & Admin');
   console.log('====================================================');
 
   const baseDir = path.join(__dirname, '..');
@@ -116,8 +118,30 @@ async function run() {
     });
   }
 
-  // 4. Launch Puppeteer & Convert to PDF
-  console.log('\n🖨️  Mengonversi seluruh 14 berkas HTML ke PDF Standar A4 via Headless Chrome...');
+  // 4. Generate Special Document 15 (Full Sitemap & Feature Coverage)
+  console.log('\n📄 [4/4] Membuat berkas HTML Dokumen 15 (Cakupan Sitemap Lengkap Publik & Admin)...');
+  {
+    const filenamePrefix = `15_Cakupan_Sitemap_Lengkap_Website_Publik_dan_Dashboard_Admin`;
+    const htmlFilename = `${filenamePrefix}.html`;
+    const pdfFilename = `${filenamePrefix}.pdf`;
+    const htmlPath = path.join(htmlDir, htmlFilename);
+    const pdfPath = path.join(pdfOutputDir, pdfFilename);
+
+    const fullHtml = generateReportHtmlShell(docFullSitemapCoverage);
+    fs.writeFileSync(htmlPath, fullHtml, 'utf8');
+    console.log(`  ✓ HTML dibuat: ${htmlFilename}`);
+
+    moduleFileMap.push({
+      unit: '15',
+      title: docFullSitemapCoverage.docTitle,
+      htmlPath,
+      pdfPath,
+      pdfFilename
+    });
+  }
+
+  // 5. Launch Puppeteer & Convert to PDF
+  console.log('\n🖨️  Mengonversi seluruh 15 berkas HTML ke PDF Standar A4 via Headless Chrome...');
   const chromeExecutable = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
   if (!fs.existsSync(chromeExecutable)) {
@@ -169,7 +193,7 @@ async function run() {
   await browser.close();
 
   console.log('\n====================================================');
-  console.log('🎉 SELURUH 14 BERKAS PDF DOKUMENTASI RESMI SELESAI!');
+  console.log('🎉 SELURUH 15 BERKAS PDF DOKUMENTASI RESMI SELESAI!');
   console.log('====================================================');
   console.table(results);
   console.log(`\n📁 Direktori Output: ${pdfOutputDir}`);

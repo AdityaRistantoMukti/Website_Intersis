@@ -17,7 +17,7 @@ Seluruh berkas dokumen di folder ini telah direvisi dan digenerate ulang dalam f
 
 ---
 
-### 📑 Daftar Lengkap 14 Berkas PDF Laporan & Panduan
+### 📑 Daftar Lengkap 15 Berkas PDF Laporan & Panduan
 
 | No | Berkas PDF Dokumen | Judul Dokumen | Fokus Pembahasan & Diagram Teknis |
 |---|---|---|---|
@@ -35,6 +35,7 @@ Seluruh berkas dokumen di folder ini telah direvisi dan digenerate ulang dalam f
 | **12** | [`12_Soft_Skills_dan_Design_Thinking_Kelompok_Penunjang.pdf`](./12_Soft_Skills_dan_Design_Thinking_Kelompok_Penunjang.pdf) | **Soft Skills / Design Thinking (Kelompok Penunjang)** | Diagram visual siklus 5 Tahap Design Thinking & tabel pemecahan masalah kebutuhan klien industri. |
 | **13** | [`13_Sitemap_dan_Fitur_Website_Referensi_vs_Website_Terbangun.pdf`](./13_Sitemap_dan_Fitur_Website_Referensi_vs_Website_Terbangun.pdf) | **Analisis Komparasi Sitemap & Fitur: Referensi vs Terbangun** | **Studi Komparasi Mendalam**: Sitemap WordPress Multi-Page (`globalphilsonics.com/isa/`) vs Sitemap React 19 Decoupled SPA, perbandingan fitur per kategori (Headunit, Audio, Otomasi), arsitektur bilingual instan, 3D WebGL, RFQ anti-spam, dan diagram visual alur navigasi SVG. |
 | **14** | [`14_Panduan_Penggunaan_dan_Alur_Pengeditan_Website_Admin.pdf`](./14_Panduan_Penggunaan_dan_Alur_Pengeditan_Website_Admin.pdf) | **Buku Panduan Penggunaan & Alur Pengeditan Portal Admin** | **Buku Petunjuk Operasional Lengkap**: 3 Akun Dummy Pengujian (Administrator, HRD Manager, Staff Konten) & Fitur Tombol Akses Cepat (Quick Demo Chips), Orientasi Layout Dashboard, Panduan Multi-Tab Pengeditan Produk (SKU, Badge, Gambar, Specs Singkat, JSON Editor), Alur Pembaruan Beranda (Hero & Batam FTZ Stats), Profil Perusahaan, Galeri Fasilitas, Tindak Lanjut RFQ Masuk (WhatsApp direct & Email), Manajemen User RBAC, dan Audit Trail. |
+| **15** | [`15_Cakupan_Sitemap_Lengkap_Website_Publik_dan_Dashboard_Admin.pdf`](./15_Cakupan_Sitemap_Lengkap_Website_Publik_dan_Dashboard_Admin.pdf) | **Cakupan Sitemap Lengkap: Portal Publik dan Dashboard Admin** | **Inventarisasi End-to-End Menyeluruh**: Rincian 12 rute halaman publik dan 11 modul admin dashboard, setiap section di dalamnya, fungsi operasional, fitur teknis, tujuan rekayasa ("untuk apa dibuat"), serta matriks relasi basis data MySQL 8. |
 
 ---
 
@@ -56,6 +57,7 @@ c:/Projek_Magang/website_intersis/Dokumentasi/
 ├── 12_Soft_Skills_dan_Design_Thinking_Kelompok_Penunjang.pdf
 ├── 13_Sitemap_dan_Fitur_Website_Referensi_vs_Website_Terbangun.pdf
 ├── 14_Panduan_Penggunaan_dan_Alur_Pengeditan_Website_Admin.pdf
+├── 15_Cakupan_Sitemap_Lengkap_Website_Publik_dan_Dashboard_Admin.pdf
 ├── README_DOKUMENTASI_CAPAIAN.md
 ├── html_sources/                # Berkas sumber HTML resmi
 └── scripts/                     # Generator PDF Puppeteer & template script

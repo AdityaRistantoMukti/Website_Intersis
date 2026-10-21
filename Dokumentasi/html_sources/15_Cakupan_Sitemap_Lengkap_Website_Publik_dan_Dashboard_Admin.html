@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dokumen 15 - Cakupan Sitemap Lengkap & Rincian Fitur: Portal Publik dan Dashboard Admin</title>
+  <style>
+    
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  .doc-header {
+    border-top: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+  .title-banner {
+    border-left: 3px solid #000000;
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .unit-title-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 3px;
+  }
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .meta-table td.lbl {
+    font-weight: bold;
+    background: #f0f0f0;
+    width: 20%;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+  .meta-file {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin-bottom: 6px;
+    color: #000000;
+  }
+  .meta-file code {
+    font-weight: bold;
+  }
+  .table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+  .table-custom th {
+    background: #e5e5e5;
+    color: #000000;
+    padding: 5px 6px;
+    text-align: left;
+    border: 1px solid #000000;
+    font-weight: bold;
+  }
+  .table-custom td {
+    padding: 4px 6px;
+    border: 1px solid #000000;
+    vertical-align: top;
+    color: #000000;
+  }
+  .sub-section-block {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .diagram-wrapper {
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 8px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .diagram-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .code-wrapper {
+    margin: 8px 0 4px 0;
+    page-break-inside: avoid;
+  }
+  .code-caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #000000;
+  }
+  
+  /* VS Code IDE Code Block Theme */
+  .vscode-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 4px 0 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .vscode-titlebar {
+    background: #252526;
+    border-bottom: 1px solid #333333;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vscode-dots {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .vsc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vsc-dot-red { background: #ff5f56; }
+  .vsc-dot-yellow { background: #ffbd2e; }
+  .vsc-dot-green { background: #27c93f; }
+  .vscode-tab {
+    display: inline-flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 3px 12px;
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid #007acc;
+    color: #ffffff;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+  }
+  .vscode-lang {
+    color: #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.8pt;
+    letter-spacing: 0.5px;
+  }
+  .vscode-body {
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.2pt;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .vscode-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #d4d4d4;
+  }
+
+  /* Architectural Sitemap / Tree Diagram Theme (Clean & Formal, Non-VSCode) */
+  .sitemap-tree-box {
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+  .sitemap-tree-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000000;
+    padding: 6px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitemap-tree-header-tag {
+    font-size: 7pt;
+    font-weight: normal;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #334155;
+    font-family: monospace;
+  }
+  .sitemap-tree-body {
+    padding: 10px 14px;
+    background: #fcfcfc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.45;
+    color: #111827;
+    text-align: left;
+  }
+  .sitemap-tree-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .conclusion-box {
+    border: 1px solid #000000;
+    background: #f5f5f5;
+    padding: 8px 10px;
+    margin-top: 14px;
+    page-break-inside: avoid;
+  }
+  .conclusion-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .conclusion-box p {
+    font-size: 8.5pt;
+    color: #000000;
+    margin: 0;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DOKUMEN RESMI -->
+  <div class="doc-header">
+    <div>DOKUMENTASI REKAYASA PERANGKAT LUNAK</div>
+    <div>PT GLOBAL PHILSONIC TECHNOLOGIES &bull; 2026</div>
+  </div>
+
+  <!-- TITLE BANNER -->
+  <div class="title-banner">
+    <div class="unit-title-num">DOKUMEN 15 &bull; TI.SM.15.2026</div>
+    <h1>Cakupan Sitemap Lengkap & Rincian Fitur: Portal Publik dan Dashboard Admin</h1>
+    <div style="font-family: Arial, sans-serif; font-size: 8.5pt; color: #444444; margin-top: 4px; font-style: italic;">Inventarisasi Menyeluruh Struktur Halaman, Komponen Section, Fungsi Operasional, Fitur Interaktif, dan Tujuan Perancangan Sistem</div>
+  </div>
+
+  <!-- METADATA TABEL -->
+  <table class="meta-table">
+    <tr>
+      <td class="lbl">Penyusun</td>
+      <td>Aditya Ristanto Mukti</td>
+      <td class="lbl">Proyek</td>
+      <td>Website Resmi &amp; Profil Industri PT Global Philsonic Technologies</td>
+    </tr>
+    <tr>
+      <td class="lbl">Ringkasan Dokumen</td>
+      <td colspan="3">Laporan teknis arsitektur komprehensif yang memetakan seluruh hierarki halaman, komponen section, fitur interaktif, fungsi operasional, dan tujuan perancangan perangkat lunak PT Global Philsonic Technologies (website_intersis). Dokumen ini menguraikan 12 rute portal publik (client-facing Single Page Application) dan 11 modul portal administrasi (Headless CMS terproteksi JWT RBAC), menjadikannya rujukan tunggal (single source of truth) mengenai cakupan sistem end-to-end yang telah selesai dibangun dan dideploy.</td>
+    </tr>
+  </table>
+
+  <!-- PEMBAHASAN MATERI -->
+  <h2>Pembahasan &amp; Petunjuk Teknis</h2>
+  
+    <div class="sub-section-block">
+      <h3>1. Pendahuluan & Gambaran Arsitektur Sitemap Sistem Terpadu</h3>
+      <div class="content-body">
+        
+        <p>Pembangunan website resmi dan profil industri PT Global Philsonic Technologies (Automation-GPT) menerapkan paradigma arsitektur <strong>Decoupled Enterprise</strong> berbasis <em>Single Page Application (SPA)</em>. Sistem ini memisahkan secara tegas antara lapisan presentasi yang dapat diakses oleh publik (mitra bisnis, klien industri otomotif, investor, dan calon tenaga kerja) dengan lapisan manajemen data operasional yang hanya dapat diakses oleh staf internal perusahaan yang telah terverifikasi.</p>
+        
+        <p>Arsitektur sistem dibagi menjadi dua pilar utama:</p>
+        <ol>
+          <li><strong>Portal Publik (Client-Facing Portal):</strong> Dibangun menggunakan framework modern React 19, Vite, dan pustaka animasi performa tinggi. Berfungsi sebagai etalase industri berstandar Tier-1 internasional untuk memperkenalkan kapabilitas manufaktur di Kawasan Perdagangan Bebas Batam (Batam Free Trade Zone), katalog 19 SKU produk terpadu, visualisasi robotika 3D interaktif, serta gerbang pengajuan penawaran harga (Request for Quotation / RFQ) yang aman dari serangan bot spam.</li>
+          <li><strong>Portal Administrasi (Headless CMS &amp; Audit Portal):</strong> Terisolasi pada rute <code>/admin</code> dengan perlindungan otentikasi berbasis <em>JSON Web Token (JWT)</em> dan otorisasi bertingkat <em>Role-Based Access Control (RBAC)</em>. Berfungsi sebagai pusat kendali mandiri bagi staf untuk memodifikasi konten bilingual secara langsung, mengunggah media, mengelola master data produk, mengonfigurasi gerbang pengiriman email (Resend HTTPS API / SMTP), menindaklanjuti permohonan RFQ, serta memantau riwayat perubahan melalui audit trail forensik.</li>
+        </ol>
+
+        <div class="sitemap-tree-box">
+          <div class="sitemap-tree-header">
+            <span>Peta Struktur Hierarki Sitemap Lengkap (Full Route &amp; Module Tree)</span>
+            <span class="sitemap-tree-header-tag">SYSTEM SITEMAP &bull; END-TO-END</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <pre><code>c:/Projek_Magang/website_intersis/
+├── [1] PORTAL PUBLIK (Client-Facing Single Page Application - 12 Rute):
+│   ├── / ............................. Beranda (Home Page) &mdash; Hero Carousel 100vh, Typewriter Keywords, Stats Deck, Turnkey Lifecycle
+│   ├── /about ........................ Profil Perusahaan &amp; Fasilitas &mdash; Narasi Batam FTZ, 3D Tilt Card, Visi Misi, Cleanroom 100K, Timeline
+│   ├── /automation ................... Otomasi Industri &amp; Robotika &mdash; WebGL 3D Robot 60 FPS, Scrollytelling 3 Seri Robot, ICT/FCT Jigs, Cloud MES
+│   ├── /products ..................... Katalog Produk Terpadu &mdash; Filter 7 Kategori, Instant Search SKU, Modal Specs JSON, Skema Sirkuit, Modal RFQ
+│   ├── /gallery ...................... Dokumentasi Fasilitas Produksi &mdash; Cleanroom, SMT 80k CPH, 3D AOI &amp; X-Ray Lab, Tooling Center, Lightbox
+│   ├── /career ....................... Portal Karir &amp; Rekrutmen &mdash; Daftar Lowongan Buka, Filter Divisi, Budaya Kerja Batam FTZ
+│   ├── /career/jobs/:id .............. Detail Spesifikasi Pekerjaan &mdash; Kualifikasi Teknis, Tanggung Jawab, Paket Fasilitas, Form Lamar
+│   ├── /career/benefits .............. Fasilitas &amp; Tunjangan Karyawan &mdash; Asuransi Kesehatan, Akomodasi FTZ, Sertifikasi Pelatihan Standar IPC
+│   ├── /career/programs .............. Program Pelatihan &amp; Vokasi &mdash; Vocational Internship, Fast-Track Engineering, Transfer Teknologi
+│   ├── /faq .......................... Pusat Bantuan &amp; Tanya Jawab &mdash; Kapabilitas OEM/ODM, Regulasi Batam FTZ, ISO/IATF, Skema Pembayaran
+│   ├── /contact ...................... Kontak &amp; RFQ Inbound &mdash; Form Penawaran Anti-Spam, WhatsApp Direct, Google Maps Embed Batam
+│   └── /* ............................ Not Found Page (404) &mdash; Penanganan Rute Hilang Responsif &amp; Tombol Arah Balik
+│
+└── [2] PORTAL ADMINISTRASI (Headless Admin CMS &amp; Audit Trail - 11 Modul):
+    ├── /admin/login .................. Gerbang Masuk &amp; Keamanan &mdash; Form Login JWT, 3 Akun Dummy Cepat (Admin, HRD, Staff), Brute-Force Shield
+    └── /admin/* (Dashboard Modular Berbasis Tab URL ?tab=...):
+        ├── ?tab=overview ............. Overview &amp; Telemetri &mdash; Metrik Pengunjung Live, Ringkasan RFQ, Status Server &amp; Database
+        ├── ?tab=branding ............. Identitas Visual &mdash; Konfigurasi Nama Perusahaan, Logo Header/Footer, Favicon, Meta SEO
+        ├── ?tab=home ................. Editor Beranda &mdash; Manajemen Slide Carousel, Keyword Animasi Typewriter, Angka Statistik FTZ
+        ├── ?tab=about ................ Editor Profil Perusahaan &mdash; Visi, Misi, 4 Pilar Nilai, 4 Zona Fasilitas, Sejarah Timeline
+        ├── ?tab=products ............. Katalog Produk &mdash; Manajemen 7 Kategori, CRUD 19 SKU, JSON Specs Editor, Image Upload
+        ├── ?tab=automation ........... Editor Fitur Otomasi &mdash; Pengaturan Konten Robotika, Test Fixtures Jigs, Smart Factory MES
+        ├── ?tab=gallery .............. Manajemen Foto Fasilitas &mdash; Unggah Foto HD, Klasifikasi Kategori, Deskripsi Bilingual
+        ├── ?tab=career ............... Manajemen Karir &amp; Bantuan &mdash; Sub-Tab Lowongan, Kategori, Benefits, Programs, dan FAQs
+        ├── ?tab=contact .............. Notifikasi Email &amp; CRM RFQ &mdash; Resend HTTPS API / SMTP Dual Provider, CRM Leads, Deteksi Spam
+        ├── ?tab=users ................ Manajemen Staf &amp; RBAC &mdash; Kelola Akun Administrator, HRD, Staff (Role-Protected)
+        └── ?tab=logs ................. Audit Trail Forensik &mdash; Rekaman Aktivitas Perubahan Data (Append-Only System Log)</code></pre>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>2. Cakupan Rinci Halaman & Komponen Section Portal Publik</h3>
+      <div class="content-body">
+        
+        <p>Portal publik dirancang untuk memberikan pengalaman navigasi yang intuitif, informatif, dan meyakinkan bagi mitra industri internasional. Berikut adalah rincian seluruh halaman publik, struktur section internal, fungsi operasional, fitur-fitur, dan tujuan rekayasanya:</p>
+
+        <!-- 2.1 HOME PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>1. Halaman Beranda (Home Page) &bull; Rute: <code>/</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Hero Carousel Fullscreen (100vh)</strong></td>
+                  <td>Menyajikan impresi visual pertama (first impression) berstandar industri dengan background fasilitas manufaktur berskala penuh.</td>
+                  <td>
+                    &bull; Multi-slide carousel otomatis (6,5 detik)<br>
+                    &bull; Pause on hover &amp; kontrol dash progress<br>
+                    &bull; Animasi typewriter keyword dinamis<br>
+                    &bull; Tombol CTA interaktif (RFQ &amp; Kapabilitas)
+                  </td>
+                  <td>Membangun kredibilitas instan bahwa PT Global Philsonic Technologies adalah manufaktur elektronik presisi kelas dunia di Batam FTZ.</td>
+                </tr>
+                <tr>
+                  <td><strong>Stats Deck (Telemetri Angka Kunci)</strong></td>
+                  <td>Menampilkan 4 metrik performa operasional pabrik yang terukur dan kredibel secara kuantitatif.</td>
+                  <td>
+                    &bull; Animasi penghitung angka (CountUp observer)<br>
+                    &bull; 80.000 CPH SMT Placement Speed<br>
+                    &bull; 0% Bea Masuk Batam Free Trade Zone<br>
+                    &bull; 100% IPC-A-610 Class 3 Inspection<br>
+                    &bull; &lt;24 Jam Respons B2B Inquiry
+                  </td>
+                  <td>Memberikan bukti konkret atas kapasitas dan kecepatan produksi perusahaan kepada calon pembeli (buyer) industri.</td>
+                </tr>
+                <tr>
+                  <td><strong>About &amp; Product Portfolio Section</strong></td>
+                  <td>Memperkenalkan ringkasan identitas korporat dan memandu pengunjung langsung ke lini produk utama.</td>
+                  <td>
+                    &bull; Split grid layout responsif<br>
+                    &bull; Tautan langsung ke kategori produk<br>
+                    &bull; Efek transisi kartu dengan micro-interaction
+                  </td>
+                  <td>Menjembatani alur navigasi dari pengenalan awal menuju eksplorasi produk yang lebih mendalam.</td>
+                </tr>
+                <tr>
+                  <td><strong>Company Turnkey Lifecycle (5-Stage)</strong></td>
+                  <td>Memvisualisasikan alur kerja manufaktur menyeluruh dari perancangan hingga pengiriman logistik.</td>
+                  <td>
+                    &bull; 5 Tahapan: Engineering Design &rarr; SMT PCBA &rarr; Box-Build &rarr; Automated Testing &rarr; Global Logistics<br>
+                    &bull; Indikator progres bernomor dengan garis alir
+                  </td>
+                  <td>Menunjukkan kapabilitas *turnkey contract manufacturing* penuh di mana klien dapat menyerahkan proyek dari konsep awal hingga produk jadi siap kirim.</td>
+                </tr>
+                <tr>
+                  <td><strong>Global Footprint &amp; Batam FTZ Logistics</strong></td>
+                  <td>Menjelaskan posisi strategis pabrik Batam yang hanya berjarak 45 menit dari Pelabuhan Singapura.</td>
+                  <td>
+                    &bull; Diagram rute multimoda (Laut &amp; Udara via Changi)<br>
+                    &bull; Ringkasan keunggulan bonded warehouse FTZ
+                  </td>
+                  <td>Meyakinkan mitra multinasional bahwa rantai pasok (supply chain) dan pengiriman ekspor sangat efisien dan bebas hambatan tarif.</td>
+                </tr>
+                <tr>
+                  <td><strong>Call to Action (CTA) Banner</strong></td>
+                  <td>Ajakan bertindak penutup halaman untuk mengonversi pengunjung menjadi prospek bisnis riil.</td>
+                  <td>
+                    &bull; Tombol pintas pengajuan RFQ langsung<br>
+                    &bull; Tautan penjadwalan audit fasilitas pabrik
+                  </td>
+                  <td>Meningkatkan rasio konversi (conversion rate) prospek bisnis B2B secara terukur.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.2 ABOUT PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>2. Halaman Profil Perusahaan &bull; Rute: <code>/about</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Hero Profil Perusahaan</strong></td>
+                  <td>Membuka halaman tentang perusahaan dengan visualisasi gedung fasilitas pabrik Batam Industrial Park.</td>
+                  <td>
+                    &bull; Dynamic badge sertifikasi mutu<br>
+                    &bull; Judul dan subjudul bilingual
+                  </td>
+                  <td>Menegaskan status legalitas dan eksistensi fisik pabrik manufaktur di Batam.</td>
+                </tr>
+                <tr>
+                  <td><strong>Narasi Korporat &amp; 3D Tilt Card</strong></td>
+                  <td>Menceritakan fondasi rekayasa perusahaan dan dedikasi pada industri otomotif presisi tinggi.</td>
+                  <td>
+                    &bull; Kartu foto fasilitas dengan interaksi perspektif miring 3D (card tilt mengikuti kursor mouse)<br>
+                    &bull; Dynamic glare lighting effect
+                  </td>
+                  <td>Memberikan sentuhan modernitas teknologi tinggi (high-tech aesthetics) yang membedakan website dari profil kompetitor tradisional.</td>
+                </tr>
+                <tr>
+                  <td><strong>Visi, Misi, &amp; 4 Pilar Nilai Inti</strong></td>
+                  <td>Menegaskan komitmen strategis perusahaan dan budaya kerja profesional.</td>
+                  <td>
+                    &bull; 4 Kartu Pilar: Presisi Teknis, Integritas Kemitraan, Inovasi Otomasi, dan Kepuasan Mitra Tier-1
+                  </td>
+                  <td>Memenuhi kriteria audit korporat internasional dalam hal tata kelola perusahaan (good corporate governance).</td>
+                </tr>
+                <tr>
+                  <td><strong>Manufacturing Facilities &amp; Cleanroom Zones</strong></td>
+                  <td>Memamerkan zona-zona kritis di dalam pabrik manufaktur secara transparan.</td>
+                  <td>
+                    &bull; Pemilih tab 4 Zona: Cleanroom ESD Class 100K, Lini SMT 80k CPH, Lab 3D AOI &amp; X-Ray, Tooling Workshop<br>
+                    &bull; Pergantian foto resolusi tinggi seketika
+                  </td>
+                  <td>Memberikan bukti visual otentik bahwa pabrik memiliki ruang bersih dan mesin perakitan yang memenuhi standar otomotif internasional.</td>
+                </tr>
+                <tr>
+                  <td><strong>Historical Milestones Timeline</strong></td>
+                  <td>Menyajikan rekam jejak pertumbuhan perusahaan dari tahun ke tahun (2018 s/d 2026).</td>
+                  <td>
+                    &bull; Linimasa vertikal dengan penanda tahun dan pencapaian ekspansi kapasitas
+                  </td>
+                  <td>Membuktikan stabilitas bisnis dan perkembangan teknologi perusahaan secara berkelanjutan.</td>
+                </tr>
+                <tr>
+                  <td><strong>Batam FTZ Strategic Advantage (Bento Grid)</strong></td>
+                  <td>Menjabarkan keuntungan komparatif lokasi manufaktur di Kawasan Perdagangan Bebas Batam.</td>
+                  <td>
+                    &bull; Bento grid modern multi-dimensi<br>
+                    &bull; 0% Bea Masuk Komponen, Pajak Pertambahan Nilai 0%, Bebas Pajak Penjualan Barang Mewah
+                  </td>
+                  <td>Menjelaskan secara transparan mengapa biaya produksi di Batam jauh lebih kompetitif dibandingkan kawasan lain di Asia Tenggara.</td>
+                </tr>
+                <tr>
+                  <td><strong>Sertifikasi Kepatuhan &amp; Mutu</strong></td>
+                  <td>Menampilkan daftar akreditasi dan sertifikat internasional yang telah diraih.</td>
+                  <td>
+                    &bull; ISO 9001:2015, IATF 16949 (Standar Otomotif), ISO 14001, Kepatuhan Bahan Kimia RoHS &amp; REACH
+                  </td>
+                  <td>Menjadi syarat mutlak (pre-requisite) bagi calon pembeli OEM otomotif dalam meloloskan tahap vendor qualification.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.3 AUTOMATION PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>3. Halaman Otomasi Industri &bull; Rute: <code>/automation</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>WebGL 3D Robot Canvas Simulation</strong></td>
+                  <td>Simulasi real-time interaktif lengan robot 6-sumbu berkecepatan 60 FPS langsung di peramban tanpa plugin.</td>
+                  <td>
+                    &bull; Rotasi 360&deg;, tilt, dan zoom orbit control<br>
+                    &bull; Telemetri dinamis sudut sumbu Joint 1 s/d 6<br>
+                    &bull; Mode Wireframe (tampilan geometris rekayasa)<br>
+                    &bull; Tombol uji simulasi Emergency Stop (E-Stop)
+                  </td>
+                  <td>Menjadi fitur pamer teknologi (showstopper) yang membuktikan keunggulan rekayasa sistem otomatisasi perusahaan kepada klien teknik.</td>
+                </tr>
+                <tr>
+                  <td><strong>Scrollytelling 3 Seri Robot Industri</strong></td>
+                  <td>Eksplorasi mendalam 3 lini robot manufaktur otentik: Robot Welding, Robot Handling, dan Robot Laser Cutting.</td>
+                  <td>
+                    &bull; 4 Bab terstruktur per robot: Ikhtisar, Kinematika, Perkakas Proses, dan Spesifikasi Teknis<br>
+                    &bull; Foto otentik aset robotika beresolusi tinggi<br>
+                    &bull; Filter tag material dan protokol bus
+                  </td>
+                  <td>Menyajikan informasi teknis mendalam yang dibutuhkan oleh manajer pabrik dan insinyur otomasi dalam memilih solusi perakitan.</td>
+                </tr>
+                <tr>
+                  <td><strong>Automated Testing Fixtures (ICT/FCT)</strong></td>
+                  <td>Menjelaskan layanan perancangan jig uji fungsional elektronik khusus pesanan (custom-built).</td>
+                  <td>
+                    &bull; Pogo-pin test bed, pneumatik vacuum clamping, pengujian sirkuit terpadu otomatis
+                  </td>
+                  <td>Menghilangkan risiko cacat tersembunyi (zero defect) pada produk elektronik otomotif sebelum dikirim ke pelanggan.</td>
+                </tr>
+                <tr>
+                  <td><strong>Smart Factory 4.0 &amp; Cloud MES</strong></td>
+                  <td>Menerangkan konektivitas data produksi secara real-time dari lantai pabrik ke cloud dashboard.</td>
+                  <td>
+                    &bull; Protokol EtherCAT, PROFINET, pelacakan OEE (Overall Equipment Effectiveness), dan barcode traceability
+                  </td>
+                  <td>Menjamin ketertelusuran penuh komponen (part traceability) sesuai standar audit otomotif IATF 16949.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.4 PRODUCTS PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>4. Halaman Katalog Produk Terpadu &bull; Rute: <code>/products</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Filter 7 Kategori Produk Terpadu</strong></td>
+                  <td>Memfilter 19 SKU produk ke dalam 7 kategori manufaktur otentik secara instan tanpa reload halaman.</td>
+                  <td>
+                    &bull; 7 Kategori: Otomasi, Mobile Intelligent Device, Amplifier, Subwoofer, DSP, Android Headunit, Dashcam<br>
+                    &bull; Penghitung jumlah SKU aktif per kategori
+                  </td>
+                  <td>Menyatukan seluruh ragam produk manufaktur ke dalam satu antarmuka terpadu agar calon pembeli dapat menelusuri portofolio secara efisien.</td>
+                </tr>
+                <tr>
+                  <td><strong>Pencarian Realtime SKU &amp; Kata Kunci</strong></td>
+                  <td>Memudahkan pencarian instan berdasarkan kode model (misal: "GPT-MID-901") atau spesifikasi teknis.</td>
+                  <td>
+                    &bull; Input pencarian asinkron dengan filter instan<br>
+                    &bull; Respons rendering dalam hitungan milidetik
+                  </td>
+                  <td>Mempercepat insinyur pengadaan dalam menemukan SKU spesifik tanpa harus membaca seluruh daftar.</td>
+                </tr>
+                <tr>
+                  <td><strong>Grid Kartu Produk (19 SKU)</strong></td>
+                  <td>Menampilkan ringkasan visual dan parameter teknis utama untuk setiap produk elektronik dan otomasi.</td>
+                  <td>
+                    &bull; Foto produk berkualitas tinggi<br>
+                    &bull; Badge model code dan kategori<br>
+                    &bull; Chip spesifikasi kunci (Daya, Tegangan, Resolusi)<br>
+                    &bull; Tombol ganda: Spesifikasi Lengkap &amp; Minta Penawaran
+                  </td>
+                  <td>Memberikan perbandingan cepat antar produk sebelum masuk ke rincian spesifikasi mendalam.</td>
+                </tr>
+                <tr>
+                  <td><strong>Modal Spesifikasi Teknis Interaktif</strong></td>
+                  <td>Jendela popup yang menampilkan lembar data teknis komprehensif (datasheet JSON) dari produk terpilih.</td>
+                  <td>
+                    &bull; Tabel JSON spesifikasi lengkap (THD, SNR, Frekuensi)<br>
+                    &bull; Galeri multi-foto dengan switcher thumbnail<br>
+                    &bull; Tombol unduh datasheet teknis berformat PDF
+                  </td>
+                  <td>Menyediakan dokumen spesifikasi teknis setingkat lembar data pabrikan resmi untuk keperluan evaluasi engineering klien.</td>
+                </tr>
+                <tr>
+                  <td><strong>Skema Sirkuit &amp; Blok Arsitektur</strong></td>
+                  <td>Visualisasi diagram blok internal yang menjelaskan alur sinyal elektronik produk.</td>
+                  <td>
+                    &bull; Diagram blok interaktif (Power Stage, DSP Architecture, MCU Control)<br>
+                    &bull; Tata letak skematik standar industri
+                  </td>
+                  <td>Membuktikan transparansi arsitektur elektronik dan kapabilitas rekayasa sirkuit internal perusahaan.</td>
+                </tr>
+                <tr>
+                  <td><strong>Modal RFQ Terhubung WhatsApp &amp; Email</strong></td>
+                  <td>Formulir pemesanan penawaran harga langsung dari kartu produk dengan data SKU yang terisi otomatis.</td>
+                  <td>
+                    &bull; Pilihan skala volume produksi: Prototipe (10-50 unit), Volume Sedang (1k-10k), Produksi Massal (&gt;10k unit)<br>
+                    &bull; Integrasi langsung ke obrolan WhatsApp sales B2B
+                  </td>
+                  <td>Memangkas birokrasi komunikasi sehingga calon pembeli dapat langsung berinteraksi dengan tim penjualan komersial.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.5 GALLERY PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>5. Halaman Galeri Fasilitas Manufaktur &bull; Rute: <code>/gallery</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Filter Kategori Fasilitas</strong></td>
+                  <td>Memilah dokumentasi foto berdasarkan area kerja pabrik.</td>
+                  <td>
+                    &bull; Kategori: Semua, Lini SMT, Cleanroom 100K, Workshop Otomasi, Kualitas &amp; Lab NDT, Plant Batam FTZ
+                  </td>
+                  <td>Memudahkan auditor manufaktur melihat bukti fisik kesiapan mesin pada bidang spesifik yang sedang dievaluasi.</td>
+                </tr>
+                <tr>
+                  <td><strong>Grid Foto Fasilitas Beresolusi Tinggi</strong></td>
+                  <td>Menyajikan dokumentasi visual peralatan produksi dengan badge lokasi teluk pabrik (bay location).</td>
+                  <td>
+                    &bull; Hover overlay efek industri<br>
+                    &bull; Label spesifikasi mesin (misal: 80k CPH, KIC thermal profiler, 160kV X-Ray microfocus)
+                  </td>
+                  <td>Memberikan bukti transparansi operasional dan kemutakhiran mesin pabrik.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lightbox Modal Zoom &amp; Inspeksi Detail</strong></td>
+                  <td>Jendela pembesar foto untuk melihat rincian presisi mesin perakitan dan ruang bersih.</td>
+                  <td>
+                    &bull; Tampilan gambar layar penuh<br>
+                    &bull; Rincian parameter teknis dan standar pengoperasian
+                  </td>
+                  <td>Memungkinkan tim teknis klien memeriksa kerapian dan standar sanitasi/ESD fasilitas perakitan secara visual.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.6 CAREER & SUBPAGES -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>6. Portal Karir &amp; Sub-Halaman Rekrutmen &bull; Rute: <code>/career</code>, <code>/career/jobs/:id</code>, <code>/career/benefits</code>, <code>/career/programs</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Halaman / Sub-Rute</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>/career (Portal Utama Karir)</strong></td>
+                  <td>Menampilkan lowongan pekerjaan yang sedang dibuka serta budaya kerja industri manufaktur berteknologi tinggi.</td>
+                  <td>
+                    &bull; Filter kategori departemen (Engineering, SMT, QA, IT, Supply Chain)<br>
+                    &bull; Kartu lowongan dengan badge status rekrutmen aktif
+                  </td>
+                  <td>Menarik talenta teknik terbaik untuk mendukung pertumbuhan lini produksi dan rekayasa otomasi perusahaan.</td>
+                </tr>
+                <tr>
+                  <td><strong>/career/jobs/:id (Detail Lowongan)</strong></td>
+                  <td>Menyajikan spesifikasi kualifikasi teknis, tanggung jawab jabatan, dan paket fasilitas untuk posisi tertentu.</td>
+                  <td>
+                    &bull; Rincian deskripsi pekerjaan bilingual<br>
+                    &bull; Persyaratan minimum keahlian<br>
+                    &bull; Tombol kirim berkas lamaran / email HRD
+                  </td>
+                  <td>Menyaring pelamar kerja agar kualifikasi kandidat selaras dengan standar kompetensi industri otomotif presisi.</td>
+                </tr>
+                <tr>
+                  <td><strong>/career/benefits (Fasilitas Karyawan)</strong></td>
+                  <td>Menjelaskan skema tunjangan kesejahteraan bagi karyawan yang ditempatkan di Kawasan Batam FTZ.</td>
+                  <td>
+                    &bull; BPJS Kesehatan &amp; Ketenagakerjaan lengkap<br>
+                    &bull; Fasilitas akomodasi asrama &amp; transportasi antar-jemput<br>
+                    &bull; Program sertifikasi kompetensi standar IPC
+                  </td>
+                  <td>Meningkatkan retensi dan daya tarik perusahaan bagi tenaga ahli yang berasal dari luar pulau Batam.</td>
+                </tr>
+                <tr>
+                  <td><strong>/career/programs (Program Vokasi &amp; MT)</strong></td>
+                  <td>Menjelaskan inisiatif kolaborasi vokasi industri dan program pelatihan teknisi muda.</td>
+                  <td>
+                    &bull; Program Magang Vokasi Industri (Vocational Internship)<br>
+                    &bull; Fast-Track Engineering Academy &amp; Transfer Teknologi
+                  </td>
+                  <td>Membangun kesinambungan ketersediaan operator mesin SMT dan teknisi robotika yang terlatih secara berkesinambungan.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.7 FAQ PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>7. Halaman Tanya Jawab &bull; Rute: <code>/faq</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pusat Bantuan Manufaktur (FAQ Accordion)</strong></td>
+                  <td>Menjawab pertanyaan umum seputar layanan OEM/ODM, perizinan FTZ, kepatuhan mutu, dan skema kontrak kerja sama.</td>
+                  <td>
+                    &bull; Filter kategori: Layanan Manufaktur, Fasilitas Batam FTZ, Sertifikasi ISO/IATF, Pembayaran &amp; NRE<br>
+                    &bull; Komponen akordion interaktif (expand/collapse)
+                  </td>
+                  <td>Mengurangi beban waktu tim sales dalam menjawab pertanyaan berulang mengenai perizinan kawasan berikat, MOQ, dan prosedur audit.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.8 CONTACT PAGE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>8. Halaman Kontak &amp; RFQ B2B &bull; Rute: <code>/contact</code></span>
+            <span class="sitemap-tree-header-tag">PUBLIC ROUTE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Saluran Komunikasi Resmi</strong></td>
+                  <td>Menyajikan kontak resmi perusahaan untuk komunikasi cepat.</td>
+                  <td>
+                    &bull; Email resmi: sales@globalphilsonic.com<br>
+                    &bull; Telepon kantor hunting Batam: +62 778 408 8888<br>
+                    &bull; WhatsApp B2B Sales &amp; tautan profil LinkedIn
+                  </td>
+                  <td>Memberikan saluran resmi multi-kanal yang mudah dihubungi oleh klien domestik maupun internasional.</td>
+                </tr>
+                <tr>
+                  <td><strong>Formulir RFQ B2B Anti-Spam Terpadu</strong></td>
+                  <td>Gerbang pengajuan penawaran harga resmi dengan parameter spesifik kebutuhan industri.</td>
+                  <td>
+                    &bull; Input: Nama, Perusahaan, Email Korporat, Telepon/WhatsApp, Kategori Proyek, Estimasi Target Volume, Pesan Teknis<br>
+                    &bull; Perangkap Honeypot (silent drop untuk bot spam)<br>
+                    &bull; Algoritma Evaluator Skor Spam otomatis<br>
+                    &bull; Notifikasi Email Asinkron (Resend HTTPS API / SMTP)<br>
+                    &bull; Auto-Reply tanda terima resmi otomatis ke pemohon<br>
+                    &bull; Direct WhatsApp redirect dengan draf pesan otomatis
+                  </td>
+                  <td>Mengumpulkan data kebutuhan proyek klien secara terstruktur, mencegah database dipenuhi spam bot, dan memastikan tim sales menerima notifikasi detik itu juga.</td>
+                </tr>
+                <tr>
+                  <td><strong>Titik Lokasi Google Maps Batam Interaktif</strong></td>
+                  <td>Peta interaktif yang menunjukkan posisi fisik fasilitas pabrik di Batam Industrial Park.</td>
+                  <td>
+                    &bull; Google Maps Iframe Embed dengan koordinat lintang/bujur presisi<br>
+                    &bull; Tombol "Buka di Google Maps" eksternal
+                  </td>
+                  <td>Mempermudah klien dan auditor asing dalam merencanakan rute kunjungan lapangan saat mendarat di Batam.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.9 GLOBAL COMPONENTS & 404 -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>9. Komponen Navigasi Global &amp; Halaman Penanganan Error (404) &bull; Rute: <code>/*</code></span>
+            <span class="sitemap-tree-header-tag">GLOBAL FRAMEWORK</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Global Navbar (Header)</strong></td>
+                  <td>Navigasi utama yang melayang (sticky) pada bagian atas seluruh halaman portal publik.</td>
+                  <td>
+                    &bull; Switcher Bahasa Bilingual (ID / EN) via pustaka i18next<br>
+                    &bull; Switcher Tema Tampilan (Dark Cockpit / Clean Light Mode)<br>
+                    &bull; Indikator rute aktif &amp; Mobile hamburger drawer menu
+                  </td>
+                  <td>Memastikan pengguna internasional dapat berpindah bahasa dan halaman secara instan tanpa kehilangan konteks visual.</td>
+                </tr>
+                <tr>
+                  <td><strong>Global Footer</strong></td>
+                  <td>Navigasi sekunder penutup pada bagian bawah seluruh halaman publik.</td>
+                  <td>
+                    &bull; Peta situs tautan cepat (quick links)<br>
+                    &bull; Alamat pabrik Batam FTZ &amp; nomor kontak resmi<br>
+                    &bull; Badge sertifikasi ISO 9001:2015 &amp; IATF 16949<br>
+                    &bull; Tautan hak cipta dan portal admin internal
+                  </td>
+                  <td>Menyediakan informasi penutup yang kredibel dan memudahkan pengunjung mengakses halaman penting dari ujung bawah halaman.</td>
+                </tr>
+                <tr>
+                  <td><strong>Visitor Telemetry Tracker</strong></td>
+                  <td>Pencatat telemetri kunjungan pengunjung yang berjalan secara asinkron di latar belakang.</td>
+                  <td>
+                    &bull; Mencatat session ID, IP, negara asal (CF-IPCountry), user-agent, dan halaman yang dikunjungi<br>
+                    &bull; 100% bebas cookie pihak ketiga (GDPR compliant)
+                  </td>
+                  <td>Memberikan data statistik kepada manajemen mengenai dari negara mana saja calon mitra mengakses website perusahaan.</td>
+                </tr>
+                <tr>
+                  <td><strong>NotFoundPage (404 Handler)</strong></td>
+                  <td>Menangani seluruh permintaan rute URL yang tidak terdaftar pada sistem perutean React.</td>
+                  <td>
+                    &bull; Tampilan responsif dengan ilustrasi geometris industri<br>
+                    &bull; Tombol arah balik ke Beranda (Back to Home)
+                  </td>
+                  <td>Mencegah layar putih (blank screen) jika pengguna salah mengetik URL dan menjaga kenyamanan navigasi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>3. Cakupan Rinci Halaman & Modul Portal Administrasi (Headless CMS)</h3>
+      <div class="content-body">
+        
+        <p>Portal administrasi merupakan sistem manajemen konten terpusat (Headless CMS) yang dirancang khusus untuk mempermudah staf internal mengelola seluruh konten dan menindaklanjuti permohonan penawaran harga. Berikut adalah rincian seluruh modul administrasi, struktur formulir di dalamnya, fungsi, fitur, dan tujuan pembuatannya:</p>
+
+        <!-- 3.1 ADMIN LOGIN -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>1. Halaman Masuk Admin &bull; Rute: <code>/admin/login</code></span>
+            <span class="sitemap-tree-header-tag">AUTH GATE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Section / Komponen</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Formulir Otentikasi JWT</strong></td>
+                  <td>Memverifikasi identitas pengguna sebelum mengizinkan akses ke dalam dasbor manajemen data.</td>
+                  <td>
+                    &bull; Validasi format email/username dan kata sandi<br>
+                    &bull; Enkripsi sandi via bcryptjs (10 salt rounds)<br>
+                    &bull; Penerbitan token JWT tersimpan aman di localStorage<br>
+                    &bull; Proteksi brute force login rate-limiter
+                  </td>
+                  <td>Melindungi integritas data perusahaan dari akses pihak luar yang tidak memiliki wewenang.</td>
+                </tr>
+                <tr>
+                  <td><strong>Panel Quick Demo Access (3 Akun Dummy)</strong></td>
+                  <td>Fitur kemudahan demonstrasi untuk menguji sistem dengan 3 tingkatan peran kerja berbeda.</td>
+                  <td>
+                    &bull; 3 Tombol Chip: Administrator, HRD Manager, dan Staff Konten<br>
+                    &bull; Sekali klik mengisi otomatis email dan kata sandi
+                  </td>
+                  <td>Mempermudah penguji, asesor, dan manajemen dalam mendemonstrasikan sistem tanpa repot menghafal kredensial.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.2 OVERVIEW & BRANDING MODULES -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>2. Modul Ringkasan &amp; Identitas Visual &bull; Tab: <code>overview</code> &amp; <code>branding</code></span>
+            <span class="sitemap-tree-header-tag">ADMIN MODULE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Modul / Tab</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Overview (?tab=overview)</strong></td>
+                  <td>Pusat kendali eksekutif yang merangkum kesehatan sistem dan metrik aktivitas dalam satu layar.</td>
+                  <td>
+                    &bull; 4 Kartu Metrik: Pengunjung Hari Ini, Total RFQ Baru, Total SKU Aktif, Total Catatan Audit Log<br>
+                    &bull; Status koneksi server Express API &amp; MySQL Database<br>
+                    &bull; Tombol navigasi cepat ke modul-modul lain
+                  </td>
+                  <td>Memberikan informasi kondisi operasional sistem secara sekilas kepada pengelola saat pertama kali masuk dasbor.</td>
+                </tr>
+                <tr>
+                  <td><strong>Branding (?tab=branding)</strong></td>
+                  <td>Mengatur identitas visual perusahaan yang diterapkan seragam pada seluruh portal publik.</td>
+                  <td>
+                    &bull; Editor nama resmi perusahaan dan slogan korporat<br>
+                    &bull; Pengunggah logo header (navbar), logo footer, dan favicon browser<br>
+                    &bull; Pratinjau logo live sebelum disimpan
+                  </td>
+                  <td>Menjaga konsistensi identitas merek (brand identity) tanpa perlu menyunting kode sumber aplikasi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.3 CONTENT EDITING MODULES: HOME & ABOUT -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>3. Modul Pengeditan Konten: Beranda &amp; Tentang Kami &bull; Tab: <code>home</code> &amp; <code>about</code></span>
+            <span class="sitemap-tree-header-tag">ADMIN MODULE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Modul / Tab</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Home Module (?tab=home)</strong></td>
+                  <td>Mengatur seluruh elemen dinamis pada halaman Beranda utama.</td>
+                  <td>
+                    &bull; Editor multi-slide carousel (tambah/hapus slide, unggah gambar background, edit judul/subjudul)<br>
+                    &bull; Editor daftar kata kunci animasi typewriter<br>
+                    &bull; Editor angka statistik performa pabrik Batam FTZ<br>
+                    &bull; Tombol Auto-Translate terjemahan otomatis ID &rarr; EN
+                  </td>
+                  <td>Memungkinkan tim pemasaran memperbarui promosi dan pencapaian kapasitas pabrik secara mandiri kapan saja.</td>
+                </tr>
+                <tr>
+                  <td><strong>About Module (?tab=about)</strong></td>
+                  <td>Mengatur narasi korporat, visi misi, fasilitas ruang bersih, dan linimasa sejarah.</td>
+                  <td>
+                    &bull; Editor teks narasi perusahaan dwibahasa<br>
+                    &bull; Editor visi, misi, dan nilai-nilai inti<br>
+                    &bull; Pengelola 4 zona fasilitas manufaktur (nama zona, badge, foto, deskripsi mesin)<br>
+                    &bull; Editor linimasa sejarah (tambah/hapus milestone tahunan)<br>
+                    &bull; Terjemahan otomatis berbasis Google Translation API
+                  </td>
+                  <td>Menjaga data profil pabrik dan sertifikasi mutu selalu mutakhir sesuai perkembangan audit fasilitas terbaru.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.4 PRODUCTS & AUTOMATION MODULES -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>4. Modul Manajemen Produk &amp; Otomasi Industri &bull; Tab: <code>products</code> &amp; <code>automation</code></span>
+            <span class="sitemap-tree-header-tag">ADMIN MODULE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Modul / Tab</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Products Module (?tab=products)</strong></td>
+                  <td>Pusat manajemen master data 19 SKU produk terpadu dalam 7 kategori manufaktur.</td>
+                  <td>
+                    &bull; Formulir multi-tab: Data Utama, Spesifikasi Teknis JSON, dan Galeri Foto Produk<br>
+                    &bull; Editor format JSON spesifikasi lengkap dengan validasi sintaks otomatis<br>
+                    &bull; Pengunggah foto produk utama dan foto galeri tambahan<br>
+                    &bull; Pengubah status publikasi (Published / Draft)<br>
+                    &bull; Fitur pencarian produk cepat dan tombol hapus aman dengan dialog konfirmasi
+                  </td>
+                  <td>Memberikan fleksibilitas penuh bagi staf teknik produk dalam meluncurkan SKU baru, mengubah spesifikasi daya/tegangan, dan mengarsipkan produk lawas.</td>
+                </tr>
+                <tr>
+                  <td><strong>Automation Module (?tab=automation)</strong></td>
+                  <td>Mengatur konten halaman otomasi, spesifikasi seri robot, dan kapabilitas jig pengujian.</td>
+                  <td>
+                    &bull; Editor judul dan parameter 3 seri robot (Welding, Handling, Cutting)<br>
+                    &bull; Manajemen rincian jig uji ICT/FCT dan integrasi Cloud MES<br>
+                    &bull; Sinkronisasi data ke tampilan publik
+                  </td>
+                  <td>Menyelaraskan informasi kapabilitas robotika di website dengan mesin otomatisasi aktual yang terpasang di lantai pabrik.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.5 GALLERY & CAREER MODULES -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>5. Modul Galeri Fasilitas &amp; Portal Karir &bull; Tab: <code>gallery</code> &amp; <code>career</code></span>
+            <span class="sitemap-tree-header-tag">ADMIN MODULE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Modul / Tab</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Gallery Module (?tab=gallery)</strong></td>
+                  <td>Mengunggah dan mengorganisir dokumentasi foto fasilitas manufaktur dan ruang bersih.</td>
+                  <td>
+                    &bull; Pengunggah foto resolusi tinggi dengan pratinjau instan<br>
+                    &bull; Pengelompokan kategori zona fasilitas (SMT, Cleanroom, Quality, Tooling)<br>
+                    &bull; Input teks judul, lokasi teluk pabrik, dan spesifikasi mesin dwibahasa<br>
+                    &bull; Pengatur urutan tampil dan tombol hapus foto
+                  </td>
+                  <td>Memperbarui portofolio visual pabrik saat ada penambahan lini SMT baru atau sertifikasi cleanroom berkala.</td>
+                </tr>
+                <tr>
+                  <td><strong>Career Module (?tab=career)</strong></td>
+                  <td>Pusat kendali lowongan pekerjaan, kategori divisi, paket tunjangan, program magang, dan tanya jawab.</td>
+                  <td>
+                    &bull; 5 Sub-Tab Terintegrasi: Lowongan Kerja, Kategori Karir, Tunjangan Karyawan (Benefits), Program Vokasi (Programs), dan Tanya Jawab (FAQs)<br>
+                    &bull; Operasi CRUD lengkap untuk setiap lowongan (judul posisi, tipe kontrak, lokasi, kualifikasi, deskripsi tugas, batas lamaran)<br>
+                    &bull; Toggle status lowongan aktif / ditutup
+                  </td>
+                  <td>Memudahkan tim HRD mengumumkan kebutuhan tenaga kerja baru secara cepat dan menutup posisi yang telah terpenuhi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.6 CONTACT, EMAIL ENGINE, & CRM RFQ MODULE -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>6. Modul Kontak, Email Engine &amp; CRM RFQ Leads &bull; Tab: <code>contact</code></span>
+            <span class="sitemap-tree-header-tag">ADMIN MODULE</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Bagian / Fitur</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Saluran Kontak &amp; Google Maps</strong></td>
+                  <td>Mengatur informasi alamat pabrik, telepon kantor, nomor WhatsApp sales, dan pin peta Google Maps.</td>
+                  <td>
+                    &bull; Editor email resmi dan nomor WhatsApp format internasional (+62)<br>
+                    &bull; Editor alamat pabrik dwibahasa<br>
+                    &bull; Pengatur titik koordinat lintang &amp; bujur Google Maps dengan pratinjau peta live embed
+                  </td>
+                  <td>Memastikan data saluran kontak dan lokasi pabrik pada website selalu akurat dan terhubung ke perwakilan penjualan.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dual Engine Email Notification (Resend HTTPS &amp; SMTP)</strong></td>
+                  <td>Mengonfigurasi pengiriman notifikasi email peringatan RFQ ke tim sales dan tanda terima otomatis ke klien.</td>
+                  <td>
+                    &bull; <strong>Pemilih Mesin Pengiriman (Dual Engine):</strong><br>
+                    1. <em>Resend HTTPS API (Rekomendasi Cloud / Port 443):</em> Kebal blokir port firewall Railway/Vercel, pengiriman instan (~300ms) tanpa timeout.<br>
+                    2. <em>SMTP Konvensional (Port 465/587):</em> Koneksi socket TCP langsung (Google App Password/cPanel).<br>
+                    &bull; Input Resend API Key dengan toggle show/hide kata sandi<br>
+                    &bull; Kustomisasi template pesan Auto-Reply resmi ke klien (Subjek, Salam Pembuka, Komitmen Respon &lt;24 Jam, Instruksi Lampiran Gerber/CAD)<br>
+                    &bull; Kotak Uji Coba Pengiriman Langsung (Live Test Email)
+                  </td>
+                  <td>Menjamin keandalan pengiriman email notifikasi bisnis di lingkungan hosting cloud publik tanpa pernah mengalami kendala timeout firewall.</td>
+                </tr>
+                <tr>
+                  <td><strong>CRM Permohonan Penawaran Masuk (Inbound RFQ Leads)</strong></td>
+                  <td>Dasbor penanganan permohonan penawaran harga dari calon mitra industri secara terstruktur.</td>
+                  <td>
+                    &bull; Filter Status: Semua, Baru (New), Dihubungi (Contacted), Penawaran Diberikan (Quoted), Selesai (Closed), dan Spam<br>
+                    &bull; Pencarian realtime berdasarkan nama pemohon, perusahaan, email, atau no telepon<br>
+                    &bull; Pencatatan telemetri: Tanggal/jam, IP pengirim, dan negara asal<br>
+                    &bull; Input catatan internal tindak lanjut proyek per RFQ<br>
+                    &bull; Tombol aksi cepat: Balas via Email resmi &amp; Hubungi via WhatsApp<br>
+                    &bull; Tombol hapus data RFQ aman dengan modal konfirmasi
+                  </td>
+                  <td>Mengubah pesan formulir kontak biasa menjadi sistem CRM penjualan B2B profesional sehingga tidak ada permohonan proyek yang terlewatkan.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.7 USERS & AUDIT LOGS MODULES -->
+        <div class="sitemap-tree-box" style="margin-top: 14px;">
+          <div class="sitemap-tree-header">
+            <span>7. Modul Manajemen Pengguna &amp; Audit Trail &bull; Tab: <code>users</code> &amp; <code>logs</code></span>
+            <span class="sitemap-tree-header-tag">ADMIN MODULE &bull; RBAC PROTECTED</span>
+          </div>
+          <div class="sitemap-tree-body">
+            <table class="table-custom" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Modul / Tab</th>
+                  <th style="width: 30%;">Fungsi Operasional</th>
+                  <th style="width: 25%;">Fitur Interaktif &amp; Teknis</th>
+                  <th style="width: 25%;">Tujuan Pembuatan (Untuk Apa)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Users Module (?tab=users)</strong></td>
+                  <td>Mengelola akun staf pengelola sistem dan pembagian wewenang hak akses (RBAC).</td>
+                  <td>
+                    &bull; Khusus peran <em>Administrator</em> dan <em>HRD Manager</em><br>
+                    &bull; Formulir pembuatan akun baru (Nama, Email, Username, Password, Role: Administrator, HRD, Staff)<br>
+                    &bull; Reset password akun dan pengubahan status aktif pengguna<br>
+                    &bull; Proteksi diri: pengguna tidak dapat menghapus akunnya sendiri
+                  </td>
+                  <td>Menerapkan prinsip hak akses terendah (principle of least privilege) agar staf hanya memiliki wewenang pada modul yang relevan.</td>
+                </tr>
+                <tr>
+                  <td><strong>Logs Module (?tab=logs)</strong></td>
+                  <td>Memantau rekaman audit trail sistem atas setiap tindakan penambahan, pengubahan, atau penghapusan data.</td>
+                  <td>
+                    &bull; Khusus peran <em>Administrator</em> dan <em>HRD Manager</em><br>
+                    &bull; Mencatat stempel waktu presisi (timestamp), nama staf, peran, modul yang diubah, tipe aksi (CREATE, UPDATE, DELETE), alamat IP, dan rincian perubahan<br>
+                    &bull; Filter berdasarkan tipe aksi dan pengguna<br>
+                    &bull; Sifat rekaman bersifat *append-only* (tidak dapat diubah atau dihapus)
+                  </td>
+                  <td>Memenuhi standar kepatuhan tata kelola TI dan mempermudah investigasi forensik apabila terjadi kesalahan operasional data.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>4. Matriks Relasi Antara Halaman Publik, Modul Admin, dan Tabel Basis Data</h3>
+      <div class="content-body">
+        
+        <p>Arsitektur sistem dibangun secara terpadu di mana setiap halaman portal publik dikontrol secara langsung oleh modul yang bersesuaian pada portal administrasi, serta dipersistensikan ke dalam tabel basis data relasional MySQL 8. Tabel matriks berikut merangkum integrasi end-to-end tersebut:</p>
+
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th style="width: 18%;">Halaman Publik</th>
+              <th style="width: 22%;">Modul Admin Pengontrol</th>
+              <th style="width: 22%;">Tabel Database MySQL</th>
+              <th style="width: 38%;">Tujuan Fungsional &amp; Nilai Bisnis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>/</code> (Beranda)</td>
+              <td>Modul Home (<code>?tab=home</code>) &amp; Branding (<code>?tab=branding</code>)</td>
+              <td><code>site_settings</code> (key: home_hero, home_stats, home_cta) &amp; <code>company_profile</code></td>
+              <td>Memperbarui slide promosi manufaktur, teks typewriter, logo, dan angka kapasitas pabrik Batam FTZ secara instan.</td>
+            </tr>
+            <tr>
+              <td><code>/about</code> (Tentang Kami)</td>
+              <td>Modul About (<code>?tab=about</code>)</td>
+              <td><code>site_settings</code> (key: about_header, about_narrative, about_facilities, about_timeline) &amp; <code>company_profile</code></td>
+              <td>Menyajikan profil legalitas, foto fasilitas ruang bersih ESD Class 100K, dan sertifikasi otomotif IATF 16949 untuk audit buyer.</td>
+            </tr>
+            <tr>
+              <td><code>/automation</code> (Otomasi)</td>
+              <td>Modul Automation (<code>?tab=automation</code>)</td>
+              <td><code>site_settings</code> (key: automation_settings, automation_robots)</td>
+              <td>Menampilkan simulasi WebGL 3D robotika 6-sumbu, parameter 3 seri robot industri, dan spesifikasi jig uji fungsional ICT/FCT.</td>
+            </tr>
+            <tr>
+              <td><code>/products</code> (Katalog Produk)</td>
+              <td>Modul Products (<code>?tab=products</code>)</td>
+              <td><code>products</code> &amp; <code>product_categories</code> (19 SKU pada 7 Kategori)</td>
+              <td>Menyediakan katalog terpadu 19 SKU elektronik &amp; otomasi dengan lembar spesifikasi JSON lengkap dan modal RFQ instan.</td>
+            </tr>
+            <tr>
+              <td><code>/gallery</code> (Dokumentasi Fasilitas)</td>
+              <td>Modul Gallery (<code>?tab=gallery</code>)</td>
+              <td><code>facility_gallery</code></td>
+              <td>Memamerkan bukti visual otentik lini SMT berkecepatan 80.000 CPH, oven reflow nitrogen, dan laboratorium inspeksi 3D AOI &amp; X-Ray.</td>
+            </tr>
+            <tr>
+              <td><code>/career</code>, <code>/career/*</code> (Karir)</td>
+              <td>Modul Career (<code>?tab=career</code>)</td>
+              <td><code>job_vacancies</code>, <code>career_categories</code>, <code>career_benefits</code>, <code>career_programs</code></td>
+              <td>Mempublikasikan lowongan kerja teknik, tunjangan kesejahteraan karyawan Batam FTZ, dan program magang vokasi industri.</td>
+            </tr>
+            <tr>
+              <td><code>/faq</code> (Pusat Bantuan)</td>
+              <td>Modul Career &gt; Sub-Tab FAQs (<code>?tab=career</code>)</td>
+              <td><code>faqs</code></td>
+              <td>Menjawab pertanyaan umum seputar fasilitas kawasan berikat Batam, kuota pemesanan minimum (MOQ), dan prosedur pembayaran.</td>
+            </tr>
+            <tr>
+              <td><code>/contact</code> (Kontak &amp; RFQ)</td>
+              <td>Modul Contact (<code>?tab=contact</code>)</td>
+              <td><code>site_settings</code> (key: email_smtp_settings, contact_header), <code>company_profile</code>, &amp; <code>rfq_inquiries</code></td>
+              <td>Menerima permohonan penawaran harga B2B dengan filter anti-spam, dispatching email Resend HTTPS API / SMTP, dan CRM tindak lanjut sales.</td>
+            </tr>
+            <tr>
+              <td>Telemetri Global</td>
+              <td>Modul Overview (<code>?tab=overview</code>)</td>
+              <td><code>visitor_telemetry</code></td>
+              <td>Merekam asal negara pengunjung dan halaman yang diakses untuk analisis pasar ekspor tanpa melanggar privasi pengguna.</td>
+            </tr>
+            <tr>
+              <td>Keamanan &amp; Tata Kelola</td>
+              <td>Modul Users (<code>?tab=users</code>) &amp; Logs (<code>?tab=logs</code>)</td>
+              <td><code>admin_users</code> &amp; <code>activity_logs</code></td>
+              <td>Mengatur kontrol akses bertingkat (RBAC: Admin, HRD, Staff) dan merekam audit trail forensik atas setiap perubahan data sistem.</td>
+            </tr>
+          </tbody>
+        </table>
+      
+      </div>
+      
+    </div>
+  
+
+    <div class="sub-section-block">
+      <h3>5. Kesimpulan Arsitektur Informasi & Panduan Pemeliharaan Sistem</h3>
+      <div class="content-body">
+        
+        <p>Berdasarkan inventarisasi menyeluruh di atas, website resmi dan profil industri PT Global Philsonic Technologies (<code>website_intersis</code>) telah berhasil mengimplementasikan arsitektur informasi yang lengkap, kohesif, dan siap beroperasi secara publik (*production-grade*).</p>
+
+        <p><strong>Pencapaian Kunci Rekayasa Sistem:</strong></p>
+        <ol>
+          <li><strong>Cakupan Lengkap Sisi Publik (12 Rute):</strong> Seluruh aspek bisnis manufaktur modern &mdash; mulai dari etalase beranda, identitas kawasan berikat Batam FTZ, robotika 3D interaktif, katalog 19 SKU produk terpadu pada 7 kategori otentik, dokumentasi fasilitas perakitan, portal karir bertingkat, hingga gerbang RFQ aman &mdash; telah terakomodasi tanpa ada celah fungsional yang tertinggal.</li>
+          <li><strong>Pusat Kendali Mandiri Sisi Admin (11 Modul):</strong> Pengelola internal memiliki kemandirian mutlak untuk menyunting teks dwibahasa, mengunggah foto beresolusi tinggi, memodifikasi spesifikasi teknis produk berformat JSON, mengatur saluran komunikasi, hingga menindaklanjuti permohonan RFQ dengan dukungan sistem CRM internal.</li>
+          <li><strong>Keandalan Komunikasi Cloud (Resend HTTPS API via Port 443):</strong> Penerapan dual engine email pada modul kontak menjamin notifikasi bisnis tidak akan pernah terblokir oleh firewall hosting cloud (seperti Railway dan Vercel) yang memblokir port SMTP konvensional, sehingga notifikasi proyek selalu sampai ke tim penjualan komersial seketika.</li>
+          <li><strong>Keamanan &amp; Kepatuhan Forensik:</strong> Proteksi otentikasi JWT, enkripsi kata sandi bcryptjs, otorisasi bertingkat RBAC, serta audit trail *append-only* menjamin keamanan operasional dan akuntabilitas data perusahaan dalam jangka panjang.</li>
+        </ol>
+
+        <p>Sistem ini telah siap dipublikasikan secara global untuk mendukung ekspansi bisnis manufaktur elektronik presisi dan otomasi industri PT Global Philsonic Technologies di pasar Tier-1 internasional.</p>
+      
+      </div>
+      
+    </div>
+  
+
+  
+    <div class="conclusion-box">
+      <div class="conclusion-title">Kesimpulan Dokumen 15</div>
+      <p>Seluruh cakupan sitemap dari portal publik (12 rute) hingga portal administrasi (11 modul terintegrasi) telah terdokumentasi secara lengkap dan detail beserta seluruh section di dalamnya, fungsi operasional, fitur teknis, matriks relasi basis data, serta tujuan rekayasanya. Sistem ini telah terverifikasi memenuhi standar arsitektur perangkat lunak enterprise modern yang aman, terukur, dan siap digunakan secara publik.</p>
+    </div>
+  
+
+</body>
+</html>
